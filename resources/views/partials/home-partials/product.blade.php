@@ -237,7 +237,7 @@
                                 <a href="shop-details-2.html">
                                     <img src="{{ asset('img/product/home-one/product-15.jpg') }}" alt="product-thumb">
                                     <img class="product-thumb-secondary"
-                                        src="{{ asset('img/product/home-one/product-16.jpg') }}') }}" alt="">
+                                        src="{{ asset('img/product/home-one/product-16.jpg') }}" alt="">
                                 </a>
                                 <div class="tpproduct__thumb-action">
                                     <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>

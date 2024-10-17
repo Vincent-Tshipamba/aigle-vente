@@ -9,7 +9,7 @@
                     <li>
                         <div class="tpcart__item">
                             <div class="tpcart__img">
-                                <img src="assets/img/banner/banner-2-03.jpg" alt="">
+                                <img src="{{ asset('img/banner/banner-2-03.jpg') }}" alt="">
                                 <div class="tpcart__del">
                                     <a href="#"><i class="far fa-times-circle"></i></a>
                                 </div>
@@ -28,7 +28,7 @@
                     <li>
                         <div class="tpcart__item">
                             <div class="tpcart__img">
-                                <img src="assets/img/banner/banner-2-04.jpg" alt="">
+                                <img src="{{ asset('img/banner/banner-2-04.jpg') }}" alt="">
                                 <div class="tpcart__del">
                                     <a href="#"><i class="far fa-times-circle"></i></a>
                                 </div>

@@ -65,7 +65,7 @@
         {{ $slot }}
     </main>
 
-    @include('partials.footer')
+    @yield('footer')
 
     <!-- JS here -->
     <script src="{{ asset('js/jquery.js') }}"></script>

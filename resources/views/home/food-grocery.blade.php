@@ -2114,4 +2114,9 @@
         </div>
     </section>
     <!-- blog-area-end -->
+
+    <!-- footer-area-start -->
+    @section('footer')
+        @include('partials.footer-2')
+    @endsection
 </x-app-layout>

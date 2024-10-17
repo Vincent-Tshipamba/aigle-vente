@@ -208,7 +208,8 @@
                         <div class="tpratingitem tpproduct text-center">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details.html">
-                                    <img src="{{ asset('img/product/home-four/product-1.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-four/product-1.jpg') }}"
+                                        alt="product-thumb">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-four/product-2.jpg') }}" alt="">
                                 </a>
@@ -237,7 +238,8 @@
                         <div class="tpratingitem tpproduct text-center">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details.html">
-                                    <img src="{{ asset('img/product/home-four/product-3.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-four/product-3.jpg') }}"
+                                        alt="product-thumb">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-four/product-4.jpg') }}" alt="">
                                 </a>
@@ -268,7 +270,8 @@
                         <div class="tpratingitem tpproduct text-center">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details.html">
-                                    <img src="{{ asset('img/product/home-four/product-9.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-four/product-9.jpg') }}"
+                                        alt="product-thumb">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-four/product-10.jpg') }}" alt="">
                                 </a>
@@ -293,7 +296,8 @@
                         <div class="tpratingitem tpproduct text-center">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details.html">
-                                    <img src="{{ asset('img/product/home-four/product-7.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-four/product-7.jpg') }}"
+                                        alt="product-thumb">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-four/product-8.jpg') }}" alt="">
                                 </a>
@@ -322,7 +326,8 @@
                         <div class="tpratingitem tpproduct text-center">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details.html">
-                                    <img src="{{ asset('img/product/home-four/product-5.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-four/product-5.jpg') }}"
+                                        alt="product-thumb">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-four/product-6.jpg') }}" alt="">
                                 </a>
@@ -593,8 +598,8 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 tpblogborder mb-20">
                     <div class="blogitem">
                         <div class="blogitem__thumb fix mb-20">
-                            <a href="{{ route('blog-details') }}"><img src="{{ asset('img/blog/blog-thumb-05.jpg') }}"
-                                    alt="blog-bg"></a>
+                            <a href="{{ route('blog-details') }}"><img
+                                    src="{{ asset('img/blog/blog-thumb-05.jpg') }}" alt="blog-bg"></a>
                         </div>
                         <div class="blogitem__content">
                             <div class="blogitem__contetn-date mb-10">
@@ -616,8 +621,8 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 tpblogborder mb-20">
                     <div class="blogitem">
                         <div class="blogitem__thumb fix mb-20">
-                            <a href="{{ route('blog-details') }}"><img src="{{ asset('img/blog/blog-thumb-06.jpg') }}"
-                                    alt="blog-bg"></a>
+                            <a href="{{ route('blog-details') }}"><img
+                                    src="{{ asset('img/blog/blog-thumb-06.jpg') }}" alt="blog-bg"></a>
                         </div>
                         <div class="blogitem__content">
                             <div class="blogitem__contetn-date mb-10">
@@ -639,8 +644,8 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 tpblogborder mb-20">
                     <div class="blogitem">
                         <div class="blogitem__thumb fix mb-20">
-                            <a href="{{ route('blog-details') }}"><img src="{{ asset('img/blog/blog-thumb-07.jpg') }}"
-                                    alt="blog-bg"></a>
+                            <a href="{{ route('blog-details') }}"><img
+                                    src="{{ asset('img/blog/blog-thumb-07.jpg') }}" alt="blog-bg"></a>
                         </div>
                         <div class="blogitem__content">
                             <div class="blogitem__contetn-date mb-10">
@@ -662,8 +667,8 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 mb-20">
                     <div class="blogitem">
                         <div class="blogitem__thumb fix mb-20">
-                            <a href="{{ route('blog-details') }}"><img src="{{ asset('img/blog/blog-thumb-08.jpg') }}"
-                                    alt="blog-bg"></a>
+                            <a href="{{ route('blog-details') }}"><img
+                                    src="{{ asset('img/blog/blog-thumb-08.jpg') }}" alt="blog-bg"></a>
                         </div>
                         <div class="blogitem__content">
                             <div class="blogitem__contetn-date mb-10">
@@ -686,4 +691,8 @@
         </div>
     </section>
     <!-- blog-area-end -->
+
+    @section('footer')
+        @include('partials.footer-2')
+    @endsection
 </x-app-layout>

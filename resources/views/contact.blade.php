@@ -107,4 +107,8 @@
         </div>
     </div>
     <!-- map-area-end -->
+
+    @section('footer')
+        @include('partials.footer')
+    @endsection
 </x-app-layout>

@@ -33,39 +33,51 @@
 </head>
 
 <body>
-    <!-- preloader -->
-    @include('partials.preloader')
-    <!-- preloader end  -->
-
-    <!-- Scroll-top -->
-    @include('partials.scroll-top')
-    <!-- Scroll-top-end-->
-
     <!-- header-area-start -->
-    @include('partials.header')
+    @include('partials.home-partials.header')
     <!-- header-area-end -->
 
     <!-- header-xl-sticky-area -->
-    @include('partials.header-xl')
+    @include('partials.home-partials.header-xl')
     <!-- header-xl-sticky-end -->
 
     <!-- header-md-lg-area -->
-    @include('partials.header-md-lg')
+    @include('partials.home-partials.header-md-lg')
     <!-- header-md-lg-area -->
 
     <!-- sidebar-menu-area -->
-    @include('partials.sidebar-menu')
+    @include('partials.home-partials.sidebar-menu')
     <!-- sidebar-menu-area-end -->
 
     <!-- header-cart-start -->
-    @include('partials.header-cart')
+    @include('partials.home-partials.header-cart')
     <!-- header-cart-end -->
 
     <main>
-        {{ $slot }}
+        <!-- slider-area-start -->
+        @include('partials.home-partials.slider')
+        <!-- slider-area-end -->
+
+        <!-- category-area-start -->
+        @include('partials.home-partials.category')
+        <!-- category-area-end -->
+
+        <!-- product-area-start -->
+        @include('partials.home-partials.product')
+        <!-- product-area-end -->
+
+        <!-- deal-product-area-start -->
+        @include('partials.home-partials.deal-product')
+        <!-- deal-product-area-end -->
+
+        <!-- shop-area-start -->
+        @include('partials.home-partials.shop')
+        <!-- shop-area-end -->
     </main>
 
-    @include('partials.footer')
+    <!-- footer-area-start -->
+    @include('partials.home-partials.footer')
+    <!-- footer-area-end -->
 
     <!-- JS here -->
     <script src="{{ asset('js/jquery.js') }}"></script>
@@ -84,7 +96,6 @@
     <script src="{{ asset('js/meanmenu.js') }}"></script>
     <script src="{{ asset('js/jquery.knob.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-    @yield('script')
 </body>
 
 </html>

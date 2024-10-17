@@ -7,7 +7,7 @@
                     <button class="tp-menu-toggle"><i class="far fa-bars"></i></button>
                 </div>
                 <div class="logo">
-                    <a href="/"><img src="assets/img/logo/logo.png" alt="logo"></a>
+                    <a href="/"><img src="{{ asset('img/logo/logo.png') }}" alt="logo"></a>
                 </div>
             </div>
             <div class="col-lg-9 col-md-8">

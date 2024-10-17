@@ -9,7 +9,26 @@
                     <li>
                         <div class="tpcart__item">
                             <div class="tpcart__img">
-                                <img src="assets/img/banner/banner-2-03.jpg" alt="">
+                                <img src="{{ asset('img/product/home-one/product-1.jpg') }}" alt="">
+                                <div class="tpcart__del">
+                                    <a href="#"><i class="far fa-times-circle"></i></a>
+                                </div>
+                            </div>
+                            <div class="tpcart__content">
+                                <span class="tpcart__content-title"><a href="shop-details.html">Miko Wooden
+                                        Bluetooth Speaker</a>
+                                </span>
+                                <div class="tpcart__cart-price">
+                                    <span class="quantity">1 x</span>
+                                    <span class="new-price">$162.80</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="tpcart__item">
+                            <div class="tpcart__img">
+                                <img src="{{ asset('img/product/home-one/product-3.jpg') }}" alt="">
                                 <div class="tpcart__del">
                                     <a href="#"><i class="far fa-times-circle"></i></a>
                                 </div>
@@ -21,25 +40,6 @@
                                 <div class="tpcart__cart-price">
                                     <span class="quantity">1 x</span>
                                     <span class="new-price">$138.00</span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="tpcart__item">
-                            <div class="tpcart__img">
-                                <img src="assets/img/banner/banner-2-04.jpg" alt="">
-                                <div class="tpcart__del">
-                                    <a href="#"><i class="far fa-times-circle"></i></a>
-                                </div>
-                            </div>
-                            <div class="tpcart__content">
-                                <span class="tpcart__content-title"><a href="shop-details.html">Purab Enormous
-                                        Miranda Bottle</a>
-                                </span>
-                                <div class="tpcart__cart-price">
-                                    <span class="quantity">1 x</span>
-                                    <span class="new-price">$162.8</span>
                                 </div>
                             </div>
                         </div>

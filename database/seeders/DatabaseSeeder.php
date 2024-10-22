@@ -24,7 +24,9 @@ class DatabaseSeeder extends Seeder
             PhotoSeeder::class,
             FactureSeeder::class,
             OrderProductSeeder::class,
-            DeliverySeeder::class
+            DeliverySeeder::class,
+            PanierSeeder::class,
+            PanierItemSeeder::class,
         ]);
 
     }

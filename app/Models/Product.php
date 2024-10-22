@@ -46,4 +46,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Order::class, 'order_products', 'product_id', 'order_id');
     }
+
+    public function paniers(): BelongsToMany
+    {
+        return $this->belongsToMany(Panier::class, 'panier_items', 'product_id', 'panier_id')->withPivot('quantity');
+    }
 }

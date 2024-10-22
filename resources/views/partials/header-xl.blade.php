@@ -28,7 +28,7 @@
                                 <li><a href="shop-details-2.html">Détails Boutique 2</a></li>
                                 <li><a href="shop-location.html">Localisation Boutique</a></li>
                                 <li><a href="cart.html">Panier</a></li>
-                                <li><a href="sign-in.html">Se Connecter</a></li>
+                                <li><a href="{{ route('login') }}">Se Connecter</a></li>
                                 <li><a href="checkout.html">Paiement</a></li>
                                 <li><a href="wishlist.html">Liste de Souhaits</a></li>
                                 <li><a href="track.html">Suivi Produit</a></li>
@@ -53,8 +53,8 @@
                                         <li><a href="about.html">À Propos</a></li>
                                         <li><a href="cart.html">Panier</a></li>
                                         <li><a href="checkout.html">Paiement</a></li>
-                                        <li><a href="sign-in.html">Se Connecter</a></li>
-                                        <li><a href="sign-in.html">Connexion</a></li>
+                                        <li><a href="{{ route('login') }}">Se Connecter</a></li>
+                                        <li><a href="{{ route('login') }}">Connexion</a></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -82,7 +82,7 @@
                             <i class="fal fa-shopping-cart"></i>
                             <span class="tp-product-count">2</span>
                         </button>
-                        <a href="sign-in.html"><i class="fal fa-user"></i></a>
+                        <a href="{{ route('login') }}"><i class="fal fa-user"></i></a>
                         <a href="wishlist.html"><i class="fal fa-heart"></i></a>
                     </div>
                     <div class="header-meta__search-5 ml-25">

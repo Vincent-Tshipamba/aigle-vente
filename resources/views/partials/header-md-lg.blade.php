@@ -22,10 +22,10 @@
                     </div>
                     <div class="header-meta__social d-flex align-items-center ml-25">
                         <button class="header-cart p-relative tp-cart-toggle"></button>
-                            <i class="fal fa-shopping-cart"></i>
-                            <span>2</span>
+                        <i class="fal fa-shopping-cart"></i>
+                        <span>2</span>
                         </button>
-                        <a href="sign-in.html"><i class="fal fa-user"></i></a>
+                        <a href="{{ route('login') }}"><i class="fal fa-user"></i></a>
                         <a href="wishlist.html"><i class="fal fa-heart"></i></a>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                                 <i class="fal fa-shopping-cart"></i>
                                 <span>2</span>
                             </button>
-                            <a href="sign-in.html"><i class="fal fa-user"></i></a>
+                            <a href="{{ route('login') }}"><i class="fal fa-user"></i></a>
                         </div>
                     </div>
                 </div>

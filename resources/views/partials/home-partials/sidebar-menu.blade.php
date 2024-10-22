@@ -40,7 +40,7 @@
         </div>
     </div>
     <div class="tpsideinfo__account-link">
-        <a href="sign-in.html"><i class="fal fa-user"></i> Connexion / Inscription</a>
+        <a href="{{ route('login') }}"><i class="fal fa-user"></i> Connexion / Inscription</a>
     </div>
     <div class="tpsideinfo__wishlist-link">
         <a href="wishlist.html" target="_parent"><i class="fal fa-heart"></i> Liste de Souhaits</a>

@@ -5,7 +5,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="header-welcome-text text-start ">
-                        <span>Bienvenue dans notre boutique internationale ! Profitez de la livraison gratuite pour les commandes de 100 $ et plus.</span>
+                        <span>Bienvenue dans notre boutique internationale ! Profitez de la livraison gratuite pour les
+                            commandes de 100 $ et plus.</span>
                         <a href="shop.html">Achetez maintenant <i class="fal fa-long-arrow-right"></i> </a>
                     </div>
                 </div>
@@ -64,7 +65,7 @@
                                     <i class="fal fa-shopping-cart"></i>
                                     <span class="tp-product-count">2</span>
                                 </button>
-                                <a href="sign-in.html"><i class="fal fa-user"></i></a>
+                                <a href="{{ route('login') }}"><i class="fal fa-user"></i></a>
                                 <a href="wishlist.html"><i class="fal fa-heart"></i></a>
                             </div>
                         </div>
@@ -134,7 +135,7 @@
                                             <li><a href="shop-details-2.html">Détails de la boutique 2</a></li>
                                             <li><a href="shop-location.html">Localisation de la boutique</a></li>
                                             <li><a href="cart.html">Panier</a></li>
-                                            <li><a href="sign-in.html">Se connecter</a></li>
+                                            <li><a href="{{ route('login') }}">Se connecter</a></li>
                                             <li><a href="checkout.html">Paiement</a></li>
                                             <li><a href="wishlist.html">Liste de souhaits</a></li>
                                             <li><a href="track.html">Suivi de produit</a></li>
@@ -149,7 +150,8 @@
                                                     <li><a href="shop.html">Filtres de boutique v1</a></li>
                                                     <li><a href="shop-2.html">Filtres de boutique v2</a></li>
                                                     <li><a href="shop-details.html">Barre latérale de boutique</a></li>
-                                                    <li><a href="shop-details-2.html">Barre latérale droite de boutique</a></li>
+                                                    <li><a href="shop-details-2.html">Barre latérale droite de
+                                                            boutique</a></li>
                                                     <li><a href="shop-location.html">Vue en liste de boutique</a></li>
                                                 </ul>
                                             </li>
@@ -159,8 +161,8 @@
                                                     <li><a href="about.html">À propos</a></li>
                                                     <li><a href="cart.html">Panier</a></li>
                                                     <li><a href="checkout.html">Paiement</a></li>
-                                                    <li><a href="sign-in.html">Se connecter</a></li>
-                                                    <li><a href="sign-in.html">Connexion</a></li>
+                                                    <li><a href="{{ route('login') }}">Se connecter</a></li>
+                                                    <li><a href="{{ route('login') }}">Connexion</a></li>
                                                 </ul>
                                             </li>
                                             <li>

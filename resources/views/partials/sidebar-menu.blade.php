@@ -1,10 +1,10 @@
 <!-- sidebar-menu-area -->
 <div class="tpsideinfo">
-    <button class="tpsideinfo__close">Close<i class="fal fa-times ml-10"></i></button>
+    <button class="tpsideinfo__close">Fermer<i class="fal fa-times ml-10"></i></button>
     <div class="tpsideinfo__search text-center pt-35">
-        <span class="tpsideinfo__search-title mb-20">What Are You Looking For?</span>
+        <span class="tpsideinfo__search-title mb-20">Que cherchez-vous ?</span>
         <form action="#">
-            <input type="text" placeholder="Search Products...">
+            <input type="text" placeholder="Rechercher des produits...">
             <button><i class="fal fa-search"></i></button>
         </form>
     </div>
@@ -17,7 +17,7 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
                     type="button" role="tab" aria-controls="pills-profile"
-                    aria-selected="false">Categories</button>
+                    aria-selected="false">Catégories</button>
             </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
@@ -29,21 +29,21 @@
                 tabindex="0">
                 <div class="tpsidebar-categories">
                     <ul>
-                        <li><a href="shop.html">Furniture</a></li>
-                        <li><a href="shop.html">Wooden</a></li>
-                        <li><a href="shop.html">Lifestyle</a></li>
+                        <li><a href="shop.html">Meubles</a></li>
+                        <li><a href="shop.html">Bois</a></li>
+                        <li><a href="shop.html">Style de vie</a></li>
                         <li><a href="shop-2.html">Shopping</a></li>
-                        <li><a href="track.html">Track Product</a></li>
+                        <li><a href="track.html">Suivi Produit</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
     <div class="tpsideinfo__account-link">
-        <a href="sign-in.html"><i class="fal fa-user"></i> Login / Register</a>
+        <a href="sign-in.html"><i class="fal fa-user"></i> Connexion / Inscription</a>
     </div>
     <div class="tpsideinfo__wishlist-link">
-        <a href="wishlist.html" target="_parent"><i class="fal fa-heart"></i> Wishlist</a>
+        <a href="wishlist.html" target="_parent"><i class="fal fa-heart"></i> Liste de Souhaits</a>
     </div>
 </div>
 <div class="body-overlay"></div>

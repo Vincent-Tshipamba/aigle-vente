@@ -10,6 +10,7 @@ class CategoryProductFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
+            'image' => $this->faker->imageUrl(),
             'description' => $this->faker->sentence
         ];
     }

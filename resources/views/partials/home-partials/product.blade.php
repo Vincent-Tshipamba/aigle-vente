@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-6 col-12">
                 <div class="tpsection mb-40">
-                    <h4 class="tpsection__title">Popular <span> Products <img src="{{ asset('img/icon/title-shape-01.jpg') }}"
+                    <h4 class="tpsection__title">Produits <span> Populaires <img src="{{ asset('img/icon/title-shape-01.jpg') }}"
                                 alt=""></span></h4>
                 </div>
             </div>
@@ -14,16 +14,16 @@
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-all-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-all" type="button" role="tab" aria-controls="nav-all"
-                                aria-selected="true">All</button>
+                                aria-selected="true">Tous</button>
                             <button class="nav-link" id="nav-popular-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-popular" type="button" role="tab" aria-controls="nav-popular"
-                                aria-selected="false">Popular</button>
+                                aria-selected="false">Populaires</button>
                             <button class="nav-link" id="nav-sale-tab" data-bs-toggle="tab" data-bs-target="#nav-sale"
-                                type="button" role="tab" aria-controls="nav-sale" aria-selected="false">On
-                                Sale</button>
+                                type="button" role="tab" aria-controls="nav-sale" aria-selected="false">En
+                                Promotion</button>
                             <button class="nav-link" id="nav-rate-tab" data-bs-toggle="tab" data-bs-target="#nav-rate"
-                                type="button" role="tab" aria-controls="nav-rate" aria-selected="false">Best
-                                Rated</button>
+                                type="button" role="tab" aria-controls="nav-rate" aria-selected="false">Les Mieux
+                                Notés</button>
                         </div>
                     </nav>
                 </div>
@@ -36,7 +36,7 @@
                         <div class="tpproduct pb-15 mb-30">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details-2.html">
-                                    <img src="{{ asset('img/product/home-one/product-1.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-one/product-1.jpg') }}" alt="vignette-produit">
                                     <img class="product-thumb-secondary" src="{{ asset('img/product/home-one/product-2.jpg') }}"
                                         alt="">
                                 </a>
@@ -47,14 +47,13 @@
                                 </div>
                             </div>
                             <div class="tpproduct__content">
-                                <h3 class="tpproduct__title"><a href="shop-details.html">Miko Wooden Bluetooth
-                                        Speaker</a></h3>
+                                <h3 class="tpproduct__title"><a href="shop-details.html">Enceinte Bluetooth en Bois Miko</a></h3>
                                 <div class="tpproduct__priceinfo p-relative">
                                     <div class="tpproduct__priceinfo-list">
-                                        <span>$31.00</span>
+                                        <span>31,00 €</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +63,7 @@
                         <div class="tpproduct pb-15 mb-30">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details.html">
-                                    <img src="{{ asset('img/product/home-one/product-3.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-one/product-3.jpg') }}" alt="vignette-produit">
                                     <img class="product-thumb-secondary" src="{{ asset('img/product/home-one/product-4.jpg') }}"
                                         alt="">
                                 </a>
@@ -75,14 +74,14 @@
                                 </div>
                             </div>
                             <div class="tpproduct__content">
-                                <h3 class="tpproduct__title"><a href="shop-details-2.html">Gorgeous Wooden Gloves</a>
+                                <h3 class="tpproduct__title"><a href="shop-details-2.html">Gants en Bois Élégants</a>
                                 </h3>
                                 <div class="tpproduct__priceinfo p-relative">
                                     <div class="tpproduct__priceinfo-list">
-                                        <span>$31.00</span>
+                                        <span>31,00 €</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +91,7 @@
                         <div class="tpproduct pb-15 mb-30">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details-2.html">
-                                    <img src="{{ asset('img/product/home-one/product-5.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-one/product-5.jpg') }}" alt="vignette-produit">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-one/product-6.jpg') }}" alt="">
                                 </a>
@@ -103,14 +102,13 @@
                                 </div>
                             </div>
                             <div class="tpproduct__content">
-                                <h3 class="tpproduct__title"><a href="shop-details.html">Pinkol Enormous Granite
-                                        Bottle</a></h3>
+                                <h3 class="tpproduct__title"><a href="shop-details.html">Bouteille Énorme en Granit de Pinkol</a></h3>
                                 <div class="tpproduct__priceinfo p-relative">
                                     <div class="tpproduct__priceinfo-list">
-                                        <span>$31.00</span>
+                                        <span>31,00 €</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -119,9 +117,9 @@
                     <div class="col">
                         <div class="tpproduct pb-15 mb-30">
                             <div class="tpproduct__thumb p-relative">
-                                <span class="tpproduct__thumb-topsall">On Sale</span>
+                                <span class="tpproduct__thumb-topsall">En Promotion</span>
                                 <a href="shop-details-2.html">
-                                    <img src="{{ asset('img/product/home-one/product-7.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-one/product-7.jpg') }}" alt="vignette-produit">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-one/product-8.jpg') }}" alt="">
                                 </a>
@@ -132,14 +130,14 @@
                                 </div>
                             </div>
                             <div class="tpproduct__content">
-                                <h3 class="tpproduct__title"><a href="shop-details-2.html">Gorgeous Aluminum Table</a>
+                                <h3 class="tpproduct__title"><a href="shop-details-2.html">Table Élégante en Aluminium</a>
                                 </h3>
                                 <div class="tpproduct__priceinfo p-relative">
                                     <div class="tpproduct__priceinfo-list">
-                                        <span>$31.00</span>
+                                        <span>31,00 €</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -149,7 +147,7 @@
                         <div class="tpproduct pb-15 mb-30">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details-2.html">
-                                    <img src="{{ asset('img/product/home-one/product-9.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-one/product-9.jpg') }}" alt="vignette-produit">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-one/product-10.jpg') }}" alt="">
                                 </a>
@@ -160,15 +158,14 @@
                                 </div>
                             </div>
                             <div class="tpproduct__content">
-                                <h3 class="tpproduct__title"><a href="shop-details.html">Evo Lightweight Granite
-                                        Shirt</a></h3>
+                                <h3 class="tpproduct__title"><a href="shop-details.html">Chemise Légère en Granit Evo</a></h3>
                                 <div class="tpproduct__priceinfo p-relative">
                                     <div class="tpproduct__priceinfo-list">
-                                        <span>$31.00</span>
-                                        <span class="tpproduct__priceinfo-list-oldprice">$39.00</span>
+                                        <span>31,00 €</span>
+                                        <span class="tpproduct__priceinfo-list-oldprice">39,00 €</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -179,7 +176,7 @@
                             <div class="tpproduct__thumb p-relative">
                                 <span class="tpproduct__thumb-volt"><i class="fas fa-bolt"></i></span>
                                 <a href="shop-details-2.html">
-                                    <img src="{{ asset('img/product/home-one/product-11.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-one/product-11.jpg') }}" alt="vignette-produit">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-one/product-12.jpg') }}" alt="">
                                 </a>
@@ -190,14 +187,13 @@
                                 </div>
                             </div>
                             <div class="tpproduct__content">
-                                <h3 class="tpproduct__title"><a href="shop-details.html">CLCo. Incredible Paper
-                                        Car</a></h3>
+                                <h3 class="tpproduct__title"><a href="shop-details.html">Voiture Incroyable en Papier de CLCo.</a></h3>
                                 <div class="tpproduct__priceinfo p-relative">
                                     <div class="tpproduct__priceinfo-list">
-                                        <span>$31.00</span>
+                                        <span>31,00 €</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -207,7 +203,7 @@
                         <div class="tpproduct pb-15 mb-30">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details-2.html">
-                                    <img src="{{ asset('img/product/home-one/product-13.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-one/product-13.jpg') }}" alt="vignette-produit">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-one/product-14.jpg') }}" alt="">
                                 </a>
@@ -218,14 +214,13 @@
                                 </div>
                             </div>
                             <div class="tpproduct__content">
-                                <h3 class="tpproduct__title"><a href="shop-details-2.html">Progash Durable Granite
-                                        Hat</a></h3>
+                                <h3 class="tpproduct__title"><a href="shop-details-2.html">Chapeau Durable en Granit de Progash</a></h3>
                                 <div class="tpproduct__priceinfo p-relative">
                                     <div class="tpproduct__priceinfo-list">
-                                        <span>$31.00</span>
+                                        <span>31,00 €</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -235,7 +230,7 @@
                         <div class="tpproduct pb-15 mb-30">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details-2.html">
-                                    <img src="{{ asset('img/product/home-one/product-15.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-one/product-15.jpg') }}" alt="vignette-produit">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-one/product-16.jpg') }}" alt="">
                                 </a>
@@ -272,14 +267,13 @@
                                 </div>
                             </div>
                             <div class="tpproduct__content">
-                                <h3 class="tpproduct__title"><a href="shop-details.html">Purab Enormous Miranda
-                                        Bottle</a></h3>
+                                <h3 class="tpproduct__title"><a href="shop-details.html">Bouteille Miranda Énorme de Purab</a></h3>
                                 <div class="tpproduct__priceinfo p-relative">
                                     <div class="tpproduct__priceinfo-list">
-                                        <span>$31.00</span>
+                                        <span>31,00 €</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -289,7 +283,7 @@
                         <div class="tpproduct pb-15 mb-30">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details-2.html">
-                                    <img src="{{ asset('img/product/home-one/product-17.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-one/product-17.jpg') }}" alt="vignette-produit">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-one/product-18.jpg') }}" alt="">
                                 </a>
@@ -300,15 +294,14 @@
                                 </div>
                             </div>
                             <div class="tpproduct__content">
-                                <h3 class="tpproduct__title"><a href="shop-details-2.html">Miklonda Co. Crafted
-                                        Candles</a></h3>
+                                <h3 class="tpproduct__title"><a href="shop-details-2.html">Bougies Artisanales de Miklonda Co.</a></h3>
                                 <div class="tpproduct__priceinfo p-relative">
                                     <div class="tpproduct__priceinfo-list">
-                                        <span>$31.00</span>
-                                        <span class="tpproduct__priceinfo-list-oldprice">$39.00</span>
+                                        <span>31,00 €</span>
+                                        <span class="tpproduct__priceinfo-list-oldprice">39,00 €</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -318,7 +311,7 @@
                         <div class="tpproduct pb-15 mb-30">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details-2.html">
-                                    <img src="{{ asset('img/product/home-one/product-19.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-one/product-19.jpg') }}" alt="vignette-produit">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-one/product-20.jpg') }}" alt="">
                                 </a>
@@ -329,14 +322,13 @@
                                 </div>
                             </div>
                             <div class="tpproduct__content">
-                                <h3 class="tpproduct__title"><a href="shop-details.html">Pinkol Enormous Granite
-                                        Bottle</a></h3>
+                                <h3 class="tpproduct__title"><a href="shop-details.html">Bouteille Énorme en Granit de Pinkol</a></h3>
                                 <div class="tpproduct__priceinfo p-relative">
                                     <div class="tpproduct__priceinfo-list">
-                                        <span>$31.00</span>
+                                        <span>31,00 €</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -351,7 +343,7 @@
                             <div class="tpproduct__thumb p-relative">
                                 <span class="tpproduct__thumb-volt"><i class="fas fa-bolt"></i></span>
                                 <a href="shop-details-2.html">
-                                    <img src="{{ asset('img/product/home-one/product-11.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-one/product-11.jpg') }}" alt="vignette-produit">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-one/product-12.jpg') }}" alt="">
                                 </a>
@@ -362,14 +354,13 @@
                                 </div>
                             </div>
                             <div class="tpproduct__content">
-                                <h3 class="tpproduct__title"><a href="shop-details.html">CLCo. Incredible Paper
-                                        Car</a></h3>
+                                <h3 class="tpproduct__title"><a href="shop-details.html">Voiture Incroyable en Papier de CLCo.</a></h3>
                                 <div class="tpproduct__priceinfo p-relative">
                                     <div class="tpproduct__priceinfo-list">
-                                        <span>$31.00</span>
+                                        <span>31,00 €</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -379,7 +370,7 @@
                         <div class="tpproduct pb-15 mb-30">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details-2.html">
-                                    <img src="{{ asset('img/product/home-one/product-13.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-one/product-13.jpg') }}" alt="vignette-produit">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-one/product-14.jpg') }}" alt="">
                                 </a>
@@ -390,14 +381,13 @@
                                 </div>
                             </div>
                             <div class="tpproduct__content">
-                                <h3 class="tpproduct__title"><a href="shop-details-2.html">Progash Durable Granite
-                                        Hat</a></h3>
+                                <h3 class="tpproduct__title"><a href="shop-details-2.html">Chapeau Durable en Granit de Progash</a></h3>
                                 <div class="tpproduct__priceinfo p-relative">
                                     <div class="tpproduct__priceinfo-list">
-                                        <span>$31.00</span>
+                                        <span>31,00 €</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -407,7 +397,7 @@
                         <div class="tpproduct pb-15 mb-30">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details-2.html">
-                                    <img src="{{ asset('img/product/home-one/product-15.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-one/product-15.jpg') }}" alt="vignette-produit">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-one/product-16.jpg') }}" alt="">
                                 </a>
@@ -444,14 +434,13 @@
                                 </div>
                             </div>
                             <div class="tpproduct__content">
-                                <h3 class="tpproduct__title"><a href="shop-details.html">Purab Enormous Miranda
-                                        Bottle</a></h3>
+                                <h3 class="tpproduct__title"><a href="shop-details.html">Bouteille Miranda Énorme de Purab</a></h3>
                                 <div class="tpproduct__priceinfo p-relative">
                                     <div class="tpproduct__priceinfo-list">
-                                        <span>$31.00</span>
+                                        <span>31,00 €</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -461,7 +450,7 @@
                         <div class="tpproduct pb-15 mb-30">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details-2.html">
-                                    <img src="{{ asset('img/product/home-one/product-17.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-one/product-17.jpg') }}" alt="vignette-produit">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-one/product-18.jpg') }}" alt="">
                                 </a>
@@ -472,15 +461,14 @@
                                 </div>
                             </div>
                             <div class="tpproduct__content">
-                                <h3 class="tpproduct__title"><a href="shop-details-2.html">Miklonda Co. Crafted
-                                        Candles</a></h3>
+                                <h3 class="tpproduct__title"><a href="shop-details-2.html">Bougies Artisanales de Miklonda Co.</a></h3>
                                 <div class="tpproduct__priceinfo p-relative">
                                     <div class="tpproduct__priceinfo-list">
-                                        <span>$31.00</span>
-                                        <span class="tpproduct__priceinfo-list-oldprice">$39.00</span>
+                                        <span>31,00 €</span>
+                                        <span class="tpproduct__priceinfo-list-oldprice">39,00 €</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -490,7 +478,7 @@
                         <div class="tpproduct pb-15 mb-30">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details-2.html">
-                                    <img src="{{ asset('img/product/home-one/product-19.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-one/product-19.jpg') }}" alt="vignette-produit">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-one/product-20.jpg') }}" alt="">
                                 </a>
@@ -501,14 +489,13 @@
                                 </div>
                             </div>
                             <div class="tpproduct__content">
-                                <h3 class="tpproduct__title"><a href="shop-details.html">Pinkol Enormous Granite
-                                        Bottle</a></h3>
+                                <h3 class="tpproduct__title"><a href="shop-details.html">Bouteille Énorme en Granit de Pinkol</a></h3>
                                 <div class="tpproduct__priceinfo p-relative">
                                     <div class="tpproduct__priceinfo-list">
-                                        <span>$31.00</span>
+                                        <span>31,00 €</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -518,7 +505,7 @@
                         <div class="tpproduct pb-15 mb-30">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details-2.html">
-                                    <img src="{{ asset('img/product/home-one/product-1.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-one/product-1.jpg') }}" alt="vignette-produit">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-one/product-2.jpg') }}" alt="">
                                 </a>
@@ -529,14 +516,13 @@
                                 </div>
                             </div>
                             <div class="tpproduct__content">
-                                <h3 class="tpproduct__title"><a href="shop-details.html">Miko Wooden Bluetooth
-                                        Speaker</a></h3>
+                                <h3 class="tpproduct__title"><a href="shop-details.html">Enceinte Bluetooth en Bois Miko</a></h3>
                                 <div class="tpproduct__priceinfo p-relative">
                                     <div class="tpproduct__priceinfo-list">
-                                        <span>$31.00</span>
+                                        <span>31,00 €</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -546,7 +532,7 @@
                         <div class="tpproduct pb-15 mb-30">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details.html">
-                                    <img src="{{ asset('img/product/home-one/product-3.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-one/product-3.jpg') }}" alt="vignette-produit">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-one/product-4.jpg') }}" alt="">
                                 </a>
@@ -557,14 +543,14 @@
                                 </div>
                             </div>
                             <div class="tpproduct__content">
-                                <h3 class="tpproduct__title"><a href="shop-details-2.html">Gorgeous Wooden Gloves</a>
+                                <h3 class="tpproduct__title"><a href="shop-details-2.html">Gants en Bois Élégants</a>
                                 </h3>
                                 <div class="tpproduct__priceinfo p-relative">
                                     <div class="tpproduct__priceinfo-list">
-                                        <span>$31.00</span>
+                                        <span>31,00 €</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -574,7 +560,7 @@
                         <div class="tpproduct pb-15 mb-30">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details-2.html">
-                                    <img src="{{ asset('img/product/home-one/product-5.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-one/product-5.jpg') }}" alt="vignette-produit">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-one/product-6.jpg') }}" alt="">
                                 </a>
@@ -585,14 +571,13 @@
                                 </div>
                             </div>
                             <div class="tpproduct__content">
-                                <h3 class="tpproduct__title"><a href="shop-details.html">Pinkol Enormous Granite
-                                        Bottle</a></h3>
+                                <h3 class="tpproduct__title"><a href="shop-details.html">Bouteille Énorme en Granit de Pinkol</a></h3>
                                 <div class="tpproduct__priceinfo p-relative">
                                     <div class="tpproduct__priceinfo-list">
-                                        <span>$31.00</span>
+                                        <span>31,00 €</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -601,9 +586,9 @@
                     <div class="col">
                         <div class="tpproduct pb-15 mb-30">
                             <div class="tpproduct__thumb p-relative">
-                                <span class="tpproduct__thumb-topsall">On Sale</span>
+                                <span class="tpproduct__thumb-topsall">En Promotion</span>
                                 <a href="shop-details-2.html">
-                                    <img src="{{ asset('img/product/home-one/product-7.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-one/product-7.jpg') }}" alt="vignette-produit">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-one/product-8.jpg') }}" alt="">
                                 </a>
@@ -614,14 +599,14 @@
                                 </div>
                             </div>
                             <div class="tpproduct__content">
-                                <h3 class="tpproduct__title"><a href="shop-details-2.html">Gorgeous Aluminum Table</a>
+                                <h3 class="tpproduct__title"><a href="shop-details-2.html">Table Élégante en Aluminium</a>
                                 </h3>
                                 <div class="tpproduct__priceinfo p-relative">
                                     <div class="tpproduct__priceinfo-list">
-                                        <span>$31.00</span>
+                                        <span>31,00 €</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -631,7 +616,7 @@
                         <div class="tpproduct pb-15 mb-30">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details-2.html">
-                                    <img src="{{ asset('img/product/home-one/product-9.jpg') }}" alt="product-thumb">
+                                    <img src="{{ asset('img/product/home-one/product-9.jpg') }}" alt="vignette-produit">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-one/product-10.jpg') }}" alt="">
                                 </a>
@@ -642,15 +627,14 @@
                                 </div>
                             </div>
                             <div class="tpproduct__content">
-                                <h3 class="tpproduct__title"><a href="shop-details.html">Evo Lightweight Granite
-                                        Shirt</a></h3>
+                                <h3 class="tpproduct__title"><a href="shop-details.html">Chemise Légère en Granit Evo</a></h3>
                                 <div class="tpproduct__priceinfo p-relative">
                                     <div class="tpproduct__priceinfo-list">
-                                        <span>$31.00</span>
-                                        <span class="tpproduct__priceinfo-list-oldprice">$39.00</span>
+                                        <span>31,00 €</span>
+                                        <span class="tpproduct__priceinfo-list-oldprice">39,00 €</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -683,7 +667,7 @@
                                         <span class="tpproduct__priceinfo-list-oldprice">$39.00</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -711,7 +695,7 @@
                                         <span>$31.00</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -739,7 +723,7 @@
                                         <span>$31.00</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -767,7 +751,7 @@
                                         <span>$31.00</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -795,7 +779,7 @@
                                         <span>$31.00</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -824,7 +808,7 @@
                                         <span>$31.00</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -852,7 +836,7 @@
                                         <span>$31.00</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -906,7 +890,7 @@
                                         <span>$31.00</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -935,7 +919,7 @@
                                         <span>$31.00</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -964,7 +948,7 @@
                                         <span class="tpproduct__priceinfo-list-oldprice">$39.00</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -995,7 +979,7 @@
                                         <span>$31.00</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -1024,7 +1008,7 @@
                                         <span>$31.00</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -1053,7 +1037,7 @@
                                         <span>$31.00</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -1082,7 +1066,7 @@
                                         <span class="tpproduct__priceinfo-list-oldprice">$39.00</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -1112,7 +1096,7 @@
                                         <span>$31.00</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -1140,7 +1124,7 @@
                                         <span class="tpproduct__priceinfo-list-oldprice">$39.00</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -1195,7 +1179,7 @@
                                         <span>$31.00</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -1224,7 +1208,7 @@
                                         <span class="tpproduct__priceinfo-list-oldprice">$39.00</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -1252,7 +1236,7 @@
                                         <span>$31.00</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -1279,7 +1263,7 @@
                                         <span>$31.00</span>
                                     </div>
                                     <div class="tpproduct__cart">
-                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                        <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
                                     </div>
                                 </div>
                             </div>

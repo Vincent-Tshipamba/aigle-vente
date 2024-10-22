@@ -5,8 +5,8 @@
             <div class="row align-items-center">
                 <div class="col-xl-8 col-lg-12 col-md-12">
                     <div class="header-welcome-text ">
-                        <span>Welcome to our international shop! Enjoy free shipping on orders $100 & up.</span>
-                        <a href="#">Shop Now<i class="fal fa-long-arrow-right"></i></a>
+                        <span>Bienvenue dans notre boutique internationale ! Profitez de la livraison gratuite pour les commandes de 100 $ et plus.</span>
+                        <a href="#">Achetez maintenant<i class="fal fa-long-arrow-right"></i></a>
                     </div>
                 </div>
                 <div class="col-xl-4 d-none d-xl-block">
@@ -15,15 +15,15 @@
                             <ul>
                                 <li>
                                     <a href="#">
-                                        English
+                                        Anglais
                                         <span><i class="fal fa-angle-down"></i></span>
                                     </a>
                                     <ul class="header-meta__lang-submenu">
                                         <li>
-                                            <a href="#">Arabic</a>
+                                            <a href="#">Arabe</a>
                                         </li>
                                         <li>
-                                            <a href="#">Spanish</a>
+                                            <a href="#">Espagnol</a>
                                         </li>
                                         <li>
                                             <a href="#">Mandarin</a>
@@ -53,7 +53,7 @@
                             <form action="#">
                                 <div class="mainmenu__search-bar p-relative">
                                     <button class="mainmenu__search-icon"><i class="fal fa-search"></i></button>
-                                    <input type="text" placeholder="Search products...">
+                                    <input type="text" placeholder="Rechercher des produits...">
                                 </div>
                             </form>
                         </div>
@@ -62,61 +62,60 @@
                                 <nav id="mobile-menu">
                                     <ul>
                                         <li class="has-dropdown">
-                                            <a href="/">Home</a>
+                                            <a href="/">Accueil</a>
                                             <ul class="submenu">
-
-                                                <li><a href="{{ route('home.fashion') }}">Fashion Home</a></li>
-                                                <li><a href="{{ route('home.furniture') }}">Furniture Home</a></li>
-                                                <li><a href="{{ route('home.cosmetic') }}">Cosmetics Home</a></li>
-                                                <li><a href="{{ route('home.food-grocery') }}">Food Grocery</a></li>
+                                                <li><a href="{{ route('home.fashion') }}">Accueil Mode</a></li>
+                                                <li><a href="{{ route('home.furniture') }}">Accueil Meubles</a></li>
+                                                <li><a href="{{ route('home.cosmetic') }}">Accueil Cosmétiques</a></li>
+                                                <li><a href="{{ route('home.food-grocery') }}">Accueil Épicerie</a></li>
                                             </ul>
                                         </li>
                                         <li class="has-dropdown">
                                             <a href="shop.html">Shop</a>
                                             <ul class="submenu">
-                                                <li><a href="shop.html">Shop</a></li>
-                                                <li><a href="shop-2.html">Shop 2</a></li>
-                                                <li><a href="shop-details.html">Shop Details </a></li>
-                                                <li><a href="shop-details-2.html">Shop Details 2</a></li>
-                                                <li><a href="shop-location.html">Shop Location</a></li>
-                                                <li><a href="cart.html">Cart</a></li>
-                                                <li><a href="sign-in.html">Sign In</a></li>
-                                                <li><a href="checkout.html">Checkout</a></li>
-                                                <li><a href="wishlist.html">Wishlist</a></li>
-                                                <li><a href="track.html">Product Track</a></li>
+                                                <li><a href="shop.html">Boutique</a></li>
+                                                <li><a href="shop-2.html">Boutique 2</a></li>
+                                                <li><a href="shop-details.html">Détails de la boutique</a></li>
+                                                <li><a href="shop-details-2.html">Détails de la boutique 2</a></li>
+                                                <li><a href="shop-location.html">Emplacement de la boutique</a></li>
+                                                <li><a href="cart.html">Panier</a></li>
+                                                <li><a href="sign-in.html">Se connecter</a></li>
+                                                <li><a href="checkout.html">Paiement</a></li>
+                                                <li><a href="wishlist.html">Liste de souhaits</a></li>
+                                                <li><a href="track.html">Suivi de produit</a></li>
                                             </ul>
                                         </li>
                                         <li class="has-dropdown has-megamenu">
                                             <a href="about.html">Pages</a>
                                             <ul class="submenu mega-menu">
                                                 <li>
-                                                    <a class="mega-menu-title">Page layout</a>
+                                                    <a class="mega-menu-title">Mise en page</a>
                                                     <ul>
-                                                        <li><a href="shop.html">Shop filters v1</a></li>
-                                                        <li><a href="shop-2.html">Shop filters v2</a></li>
-                                                        <li><a href="shop-details.html">Shop sidebar</a></li>
-                                                        <li><a href="shop-details-2.html">Shop Right sidebar</a>
+                                                        <li><a href="shop.html">Filtres de boutique v1</a></li>
+                                                        <li><a href="shop-2.html">Filtres de boutique v2</a></li>
+                                                        <li><a href="shop-details.html">Barre latérale de la boutique</a></li>
+                                                        <li><a href="shop-details-2.html">Barre latérale droite de la boutique</a>
                                                         </li>
-                                                        <li><a href="shop-location.html">Shop List view</a></li>
+                                                        <li><a href="shop-location.html">Vue en liste de la boutique</a></li>
                                                     </ul>
                                                 </li>
                                                 <li>
-                                                    <a class="mega-menu-title">Page layout</a>
+                                                    <a class="mega-menu-title">Mise en page</a>
                                                     <ul>
-                                                        <li><a href="about.html">About</a></li>
-                                                        <li><a href="cart.html">Cart</a></li>
-                                                        <li><a href="checkout.html">Checkout</a></li>
-                                                        <li><a href="sign-in.html">Sign In</a></li>
-                                                        <li><a href="sign-in.html">Log In</a></li>
+                                                        <li><a href="about.html">À propos</a></li>
+                                                        <li><a href="cart.html">Panier</a></li>
+                                                        <li><a href="checkout.html">Paiement</a></li>
+                                                        <li><a href="sign-in.html">Se connecter</a></li>
+                                                        <li><a href="sign-in.html">Connexion</a></li>
                                                     </ul>
                                                 </li>
                                                 <li>
-                                                    <a class="mega-menu-title">Page type</a>
+                                                    <a class="mega-menu-title">Type de page</a>
                                                     <ul>
-                                                        <li><a href="track.html">Product Track</a></li>
-                                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                                        <li><a href="error.html">404 / Error</a></li>
-                                                        <li><a href="coming-soon.html">Coming Soon</a></li>
+                                                        <li><a href="track.html">Suivi de produit</a></li>
+                                                        <li><a href="wishlist.html">Liste de souhaits</a></li>
+                                                        <li><a href="error.html">404 / Erreur</a></li>
+                                                        <li><a href="coming-soon.html">Bientôt disponible</a></li>
                                                     </ul>
                                                 </li>
                                             </ul>

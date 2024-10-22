@@ -10,44 +10,44 @@
                                 <a href="/"><img src="{{ asset('img/logo/logo-white.png') }}" alt="logo"></a>
                             </div>
                             <div class="footer-content">
-                                <p>Elegant pink origami design three <br> dimensional view and decoration co-exist.
+                                <p>Design origami rose élégant en trois <br> dimensions et décoration coexistent.
                                     <br>
-                                    Great for adding a decorative touch to <br> any room’s decor.
+                                    Idéal pour ajouter une touche décorative à <br> la décoration de n'importe quelle pièce.
                                 </p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 col-sm-6">
                         <div class="footer-widget footer-col-2 ml-30 mb-40">
-                            <h4 class="footer-widget__title mb-30">Information</h4>
+                            <h4 class="footer-widget__title mb-30">Informations</h4>
                             <div class="footer-widget__links">
                                 <ul>
-                                    <li><a href="#">Custom Service</a></li>
+                                    <li><a href="#">Service Client</a></li>
                                     <li><a href="#">FAQs</a></li>
-                                    <li><a href="track.html">Ordering Tracking</a></li>
+                                    <li><a href="track.html">Suivi de Commande</a></li>
                                     <li><a href="contact.html">Contacts</a></li>
-                                    <li><a href="#">Events</a></li>
+                                    <li><a href="#">Événements</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 col-sm-6">
                         <div class="footer-widget footer-col-3 mb-40">
-                            <h4 class="footer-widget__title mb-30">My Account</h4>
+                            <h4 class="footer-widget__title mb-30">Mon Compte</h4>
                             <div class="footer-widget__links">
                                 <ul>
-                                    <li><a href="contact.html">Delivery Infomation</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Discount</a></li>
-                                    <li><a href="#">Custom Service</a></li>
-                                    <li><a href="#">Terms & Condition</a></li>
+                                    <li><a href="contact.html">Informations de Livraison</a></li>
+                                    <li><a href="#">Politique de Confidentialité</a></li>
+                                    <li><a href="#">Remise</a></li>
+                                    <li><a href="#">Service Client</a></li>
+                                    <li><a href="#">Termes & Conditions</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 col-sm-6">
                         <div class="footer-widget footer-col-4 mb-40">
-                            <h4 class="footer-widget__title mb-30">Social Network</h4>
+                            <h4 class="footer-widget__title mb-30">Réseaux Sociaux</h4>
                             <div class="footer-widget__links">
                                 <ul>
                                     <li><a href="#"><i class="fab fa-facebook-f"></i>Facebook</a></li>
@@ -61,25 +61,25 @@
                     </div>
                     <div class="col-lg-3 col-md-8">
                         <div class="footer-widget footer-col-5 mb-40">
-                            <h4 class="footer-widget__title mb-30">Popular Keywords</h4>
+                            <h4 class="footer-widget__title mb-30">Mots-clés Populaires</h4>
                             <div class="footer-widget__links keyword">
-                                <a href="shop.html">Makeup</a>
-                                <a href="shop.html">Dresses For Girls</a>
+                                <a href="shop.html">Maquillage</a>
+                                <a href="shop.html">Robes pour Filles</a>
                                 <a href="shop.html">T-Shirts</a>
-                                <a href="shop.html">Sandals</a>
-                                <a href="shop.html">Headphones</a>
-                                <a href="shop.html">Baby dolls</a>
+                                <a href="shop.html">Sandales</a>
+                                <a href="shop.html">Casques</a>
+                                <a href="shop.html">Nuisettes</a>
                                 <a href="shop.html">Blazers</a>
-                                <a href="shop.html">For Men</a>
-                                <a href="shop.html">Handbags</a>
-                                <a href="shop.html">Ladies Watches</a>
-                                <a href="shop.html">Bags</a>
-                                <a href="shop.html">Sport Shoes</a>
-                                <a href="shop.html">Reebok Shoes</a>
-                                <a href="shop.html">Puma Shoes</a>
+                                <a href="shop.html">Pour Hommes</a>
+                                <a href="shop.html">Sacs à Main</a>
+                                <a href="shop.html">Montres pour Dames</a>
+                                <a href="shop.html">Sacs</a>
+                                <a href="shop.html">Chaussures de Sport</a>
+                                <a href="shop.html">Chaussures Reebok</a>
+                                <a href="shop.html">Chaussures Puma</a>
                                 <a href="shop.html">Boxers</a>
-                                <a href="shop.html">Wallets</a>
-                                <a href="shop.html">Tops</a>
+                                <a href="shop.html">Portefeuilles</a>
+                                <a href="shop.html">Hauts</a>
                             </div>
                         </div>
                     </div>
@@ -94,15 +94,15 @@
                             </div>
                             <div class="footer-cta__text">
                                 <a href="tel:0123456">980. 029. 666. 99</a>
-                                <span>Working 8:00 - 22:00</span>
+                                <span>Ouvert de 8:00 à 22:00</span>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-8 col-md-8 col-sm-6">
                         <div class="footer-cta__source">
                             <div class="footer-cta__source-content">
-                                <h4 class="footer-cta__source-title">Download App on Mobile</h4>
-                                <p>15% discount on your first purchase</p>
+                                <h4 class="footer-cta__source-title">Téléchargez l'App sur Mobile</h4>
+                                <p>15% de réduction sur votre premier achat</p>
                             </div>
                             <div class="footer-cta__source-thumb">
                                 <a href="#"><img src="{{ asset('img/footer/f-google.jpg') }}" alt="google"></a>
@@ -118,13 +118,13 @@
                 <div class="row align-items-center">
                     <div class="col-xl-6 col-lg-7 col-md-5">
                         <div class="footer-copyright__content">
-                            <span>Copyright 2022 <a href="/">©Ninico</a>. All rights reserved. Powered by
+                            <span>Droit d'auteur 2022 <a href="/">©Ninico</a>. Tous droits réservés. Propulsé par
                                 <a href="https://themeforest.net/user/theme_pure/portfolio">Theme_Pure</a>.</span>
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-5 col-md-7">
                         <div class="footer-copyright__brand">
-                            <img src="{{ asset('img/footer/f-brand-icon-01.png') }}" alt="footer-brand">
+                            <img src="{{ asset('img/footer/f-brand-icon-01.png') }}" alt="marque-footer">
                         </div>
                     </div>
                 </div>

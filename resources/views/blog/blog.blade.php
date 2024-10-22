@@ -7,10 +7,10 @@
                 <div class="col-xl-7 col-lg-12 col-md-12 col-12">
                     <div class="tp-breadcrumb">
                         <div class="tp-breadcrumb__link mb-10">
-                            <span class="breadcrumb-item-active"><a href="/">Home</a></span>
-                            <span>Checkout</span>
+                            <span class="breadcrumb-item-active"><a href="/">Accueil</a></span>
+                            <span>Validation</span>
                         </div>
-                        <h2 class="tp-breadcrumb__title">Checkout Page</h2>
+                        <h2 class="tp-breadcrumb__title">Page de Validation</h2>
                     </div>
                 </div>
             </div>
@@ -33,23 +33,19 @@
                             <div class="postbox__content">
                                 <div class="postbox__meta mb-15">
                                     <span><a href="#"><i class="fal fa-user-alt"></i> Alextina</a></span>
-                                    <span><i class="fal fa-clock"></i> Dec 28, 2022</span>
-                                    <span><a href="#"><i class="far fa-comment-alt"></i> (04) Comments</a></span>
+                                    <span><i class="fal fa-clock"></i> 28 Déc 2022</span>
+                                    <span><a href="#"><i class="far fa-comment-alt"></i> (04) Commentaires</a></span>
                                 </div>
                                 <h3 class="postbox__title mb-20">
-                                    <a href="{{ route('blog-details') }}">Lavoratories used for scientic reseach take
-                                        many
-                                        froms.</a>
+                                    <a href="{{ route('blog-details') }}">Les laboratoires utilisés pour la recherche scientifique prennent de nombreuses formes.</a>
                                 </h3>
                                 <div class="postbox__text mb-30">
-                                    <p>Laboratories used for scientific research take many forms because of the
-                                        differing requirements of specialists in the various fields of science and
-                                        engineering. A physics laboratory</p>
+                                    <p>Les laboratoires utilisés pour la recherche scientifique prennent de nombreuses formes en raison des exigences différentes des spécialistes dans les divers domaines de la science et de l'ingénierie. Un laboratoire de physique</p>
                                 </div>
                                 <div class="postbox__read-more">
                                     <a href="{{ route('blog-details') }}"
-                                        class="tp-btn tp-color-btn banner-animation">Reade
-                                        More</a>
+                                        class="tp-btn tp-color-btn banner-animation">Lire
+                                        Plus</a>
                                 </div>
                             </div>
                         </article>
@@ -76,23 +72,19 @@
                             <div class="postbox__content">
                                 <div class="postbox__meta mb-15">
                                     <span><a href="#"><i class="fal fa-user-alt"></i> Alextina</a></span>
-                                    <span><i class="fal fa-clock"></i> Dec 28, 2022</span>
-                                    <span><a href="#"><i class="far fa-comment-alt"></i> (04) Comments</a></span>
+                                    <span><i class="fal fa-clock"></i> 28 Déc 2022</span>
+                                    <span><a href="#"><i class="far fa-comment-alt"></i> (04) Commentaires</a></span>
                                 </div>
                                 <h3 class="postbox__title mb-20">
-                                    <a href="{{ route('blog-details') }}">Lavoratories used for scientic reseach take
-                                        many
-                                        froms.</a>
+                                    <a href="{{ route('blog-details') }}">Les laboratoires utilisés pour la recherche scientifique prennent de nombreuses formes.</a>
                                 </h3>
                                 <div class="postbox__text mb-30">
-                                    <p>Laboratories used for scientific research take many forms because of the
-                                        differing requirements of specialists in the various fields of science and
-                                        engineering. A physics laboratory</p>
+                                    <p>Les laboratoires utilisés pour la recherche scientifique prennent de nombreuses formes en raison des exigences différentes des spécialistes dans les divers domaines de la science et de l'ingénierie. Un laboratoire de physique</p>
                                 </div>
                                 <div class="postbox__read-more">
                                     <a href="{{ route('blog-details') }}"
-                                        class="tp-btn tp-color-btn banner-animation">Read
-                                        More</a>
+                                        class="tp-btn tp-color-btn banner-animation">Lire
+                                        Plus</a>
                                 </div>
                             </div>
                         </article>
@@ -107,25 +99,19 @@
                             <div class="postbox__content">
                                 <div class="postbox__meta mb-15">
                                     <span><a href="#"><i class="fal fa-user-alt"></i> Alextina</a></span>
-                                    <span><i class="fal fa-clock"></i> Dec 28, 2022</span>
-                                    <span><a href="#"><i class="far fa-comment-alt"></i> (04) Comments</a></span>
+                                    <span><i class="fal fa-clock"></i> 28 Déc 2022</span>
+                                    <span><a href="#"><i class="far fa-comment-alt"></i> (04) Commentaires</a></span>
                                 </div>
                                 <h3 class="postbox__title mb-20">
-                                    <a href="{{ route('blog-details') }}">Four Ways to Fullfill Your Task For Makes
-                                        House
-                                        Beautiful.</a>
+                                    <a href="{{ route('blog-details') }}">Quatre façons de remplir votre tâche pour rendre la maison belle.</a>
                                 </h3>
                                 <div class="postbox__text mb-30">
-                                    <p>Compellingly exploit B2B vortals with emerging total linkage. Appropriately
-                                        pursue strategic leadership whe intermandated ideas. Proactively
-                                        revolutionize interoperable "outside the box" thinking with fully researched
-                                        innovation. Dramatically facilitate exceptional architectures and
-                                        bricks-and-clicks data. Progressively genera extensible e-services for.</p>
+                                    <p>Exploitez de manière convaincante les portails B2B avec un lien total émergent. Poursuivez de manière appropriée le leadership stratégique avec des idées intermandatées. Révolutionnez de manière proactive la pensée "hors des sentiers battus" interopérable avec une innovation entièrement recherchée. Facilitez de manière spectaculaire des architectures exceptionnelles et des données bricks-and-clicks. Générez progressivement des e-services extensibles pour.</p>
                                 </div>
                                 <div class="postbox__read-more">
                                     <a href="{{ route('blog-details') }}"
-                                        class="tp-btn tp-color-btn banner-animation">Read
-                                        More</a>
+                                        class="tp-btn tp-color-btn banner-animation">Lire
+                                        Plus</a>
                                 </div>
                             </div>
                         </article>
@@ -166,11 +152,11 @@
                     <div class="sidebar__wrapper pl-25 pb-50">
                         <div class="sidebar__widget mb-45">
                             <div class="sidebar__widget-content">
-                                <h3 class="sidebar__widget-title mb-25">Search</h3>
+                                <h3 class="sidebar__widget-title mb-25">Recherche</h3>
                                 <div class="sidebar__search">
                                     <form action="#">
                                         <div class="sidebar__search-input-2 p-relative">
-                                            <input type="text" placeholder="Search post">
+                                            <input type="text" placeholder="Rechercher un article">
                                             <button type="submit"><i class="far fa-search"></i></button>
                                         </div>
                                     </form>
@@ -178,21 +164,21 @@
                             </div>
                         </div>
                         <div class="sidebar__widget mb-40">
-                            <h3 class="sidebar__widget-title mb-25">Category</h3>
+                            <h3 class="sidebar__widget-title mb-25">Catégorie</h3>
                             <div class="sidebar__widget-content">
                                 <ul>
-                                    <li><a href="{{ route('blog-details') }}">Chemistry<span>03</span></a></li>
-                                    <li><a href="{{ route('blog-details') }}">Forensic science <span>07</span></a>
+                                    <li><a href="{{ route('blog-details') }}">Chimie<span>03</span></a></li>
+                                    <li><a href="{{ route('blog-details') }}">Science médico-légale <span>07</span></a>
                                     </li>
-                                    <li><a href="{{ route('blog-details') }}">Gemological <span>09</span></a></li>
-                                    <li><a href="{{ route('blog-details') }}">COvid Analysis <span>01</span></a></li>
-                                    <li><a href="{{ route('blog-details') }}">Becteriology <span>00</span></a></li>
-                                    <li><a href="{{ route('blog-details') }}">Angiosperm <span>26</span></a></li>
+                                    <li><a href="{{ route('blog-details') }}">Gemmologie <span>09</span></a></li>
+                                    <li><a href="{{ route('blog-details') }}">Analyse COVID <span>01</span></a></li>
+                                    <li><a href="{{ route('blog-details') }}">Bactériologie <span>00</span></a></li>
+                                    <li><a href="{{ route('blog-details') }}">Angiosperme <span>26</span></a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="sidebar__widget mb-55">
-                            <h3 class="sidebar__widget-title mb-25">Recent Post</h3>
+                            <h3 class="sidebar__widget-title mb-25">Article Récent</h3>
                             <div class="sidebar__widget-content">
                                 <div class="sidebar__post rc__post">
                                     <div class="rc__post mb-20 d-flex align-items-center">
@@ -203,11 +189,10 @@
                                         </div>
                                         <div class="rc__post-content">
                                             <div class="rc__meta">
-                                                <span>4 March. 2022</span>
+                                                <span>4 Mars. 2022</span>
                                             </div>
                                             <h3 class="rc__post-title">
-                                                <a href="{{ route('blog-details') }}">Don't Underestimate Tree for
-                                                    Furniture</a>
+                                                <a href="{{ route('blog-details') }}">Ne sous-estimez pas l'arbre pour les meubles</a>
                                             </h3>
                                         </div>
                                     </div>
@@ -219,12 +204,10 @@
                                         </div>
                                         <div class="rc__post-content">
                                             <div class="rc__meta">
-                                                <span>12 February. 2022</span>
+                                                <span>12 Février. 2022</span>
                                             </div>
                                             <h3 class="rc__post-title">
-                                                <a href="{{ route('blog-details') }}">Equipping Researchers in the
-                                                    Developing
-                                                    World</a>
+                                                <a href="{{ route('blog-details') }}">Équiper les chercheurs dans le monde en développement</a>
                                             </h3>
                                         </div>
                                     </div>
@@ -236,10 +219,10 @@
                                         </div>
                                         <div class="rc__post-content">
                                             <div class="rc__meta">
-                                                <span>14 January. 2022</span>
+                                                <span>14 Janvier. 2022</span>
                                             </div>
                                             <h3 class="rc__post-title">
-                                                <a href="{{ route('blog-details') }}">Things to do before shopping</a>
+                                                <a href="{{ route('blog-details') }}">Choses à faire avant de faire du shopping</a>
                                             </h3>
                                         </div>
                                     </div>
@@ -251,11 +234,10 @@
                                         </div>
                                         <div class="rc__post-content">
                                             <div class="rc__meta">
-                                                <span>18 March. 2021</span>
+                                                <span>18 Mars. 2021</span>
                                             </div>
                                             <h3 class="rc__post-title">
-                                                <a href="{{ route('blog-details') }}">Research And Verify of a Quality
-                                                    Product</a>
+                                                <a href="{{ route('blog-details') }}">Rechercher et vérifier un produit de qualité</a>
                                             </h3>
                                         </div>
                                     </div>
@@ -263,21 +245,21 @@
                             </div>
                         </div>
                         <div class="sidebar__widget mb-55">
-                            <h3 class="sidebar__widget-title mb-25">Popular Tag</h3>
+                            <h3 class="sidebar__widget-title mb-25">Tag Populaire</h3>
                             <div class="sidebar__widget-content">
                                 <div class="tagcloud">
-                                    <a href="{{ route('blog-details') }}">Furniture</a>
+                                    <a href="{{ route('blog-details') }}">Meubles</a>
                                     <a href="{{ route('blog-details') }}">Table</a>
-                                    <a href="{{ route('blog-details') }}">Chair</a>
-                                    <a href="{{ route('blog-details') }}">Cloths</a>
-                                    <a href="{{ route('blog-details') }}">Toy</a>
-                                    <a href="{{ route('blog-details') }}">Suit</a>
+                                    <a href="{{ route('blog-details') }}">Chaise</a>
+                                    <a href="{{ route('blog-details') }}">Vêtements</a>
+                                    <a href="{{ route('blog-details') }}">Jouet</a>
+                                    <a href="{{ route('blog-details') }}">Costume</a>
                                     <a href="{{ route('blog-details') }}">T-Shirt </a>
-                                    <a href="{{ route('blog-details') }}">Dress</a>
-                                    <a href="{{ route('blog-details') }}">Wooden</a>
-                                    <a href="{{ route('blog-details') }}">Clock</a>
-                                    <a href="{{ route('blog-details') }}">Craft</a>
-                                    <a href="{{ route('blog-details') }}">Gift</a>
+                                    <a href="{{ route('blog-details') }}">Robe</a>
+                                    <a href="{{ route('blog-details') }}">Bois</a>
+                                    <a href="{{ route('blog-details') }}">Horloge</a>
+                                    <a href="{{ route('blog-details') }}">Artisanat</a>
+                                    <a href="{{ route('blog-details') }}">Cadeau</a>
                                 </div>
                             </div>
                         </div>

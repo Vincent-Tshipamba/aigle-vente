@@ -16,12 +16,12 @@
                         <form action="#">
                             <div class="search-info p-relative">
                                 <button class="header-search-icon"><i class="fal fa-search"></i></button>
-                                <input type="text" placeholder="Search products...">
+                                <input type="text" placeholder="Rechercher des produits...">
                             </div>
                         </form>
                     </div>
                     <div class="header-meta__social d-flex align-items-center ml-25">
-                        <button class="header-cart p-relative tp-cart-toggle">
+                        <button class="header-cart p-relative tp-cart-toggle"></button>
                             <i class="fal fa-shopping-cart"></i>
                             <span>2</span>
                         </button>

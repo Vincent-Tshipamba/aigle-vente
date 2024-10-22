@@ -1,16 +1,16 @@
 <x-app-layout>
     <!-- breadcrumb-area -->
     <section class="breadcrumb__area pt-60 pb-60 tp-breadcrumb__bg"
-        data-background="{{ asset('img/banner/breadcrumb-01.jpg') }}') }}">
+        data-background="{{ asset('img/banner/breadcrumb-01.jpg') }}">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-xl-7 col-lg-12 col-md-12 col-12">
                     <div class="tp-breadcrumb">
                         <div class="tp-breadcrumb__link mb-10">
-                            <span class="breadcrumb-item-active"><a href="index.html">Home</a></span>
-                            <span>Blog Details</span>
+                            <span class="breadcrumb-item-active"><a href="index.html">Accueil</a></span>
+                            <span>Détails du Blog</span>
                         </div>
-                        <h2 class="tp-breadcrumb__title">Blog Details</h2>
+                        <h2 class="tp-breadcrumb__title">Détails du Blog</h2>
                     </div>
                 </div>
             </div>
@@ -35,12 +35,12 @@
                                             <div class="postbox__meta mb-15">
                                                 <span><a href="#"><i class="fal fa-user-alt"></i>
                                                         Alextina</a></span>
-                                                <span><i class="fal fa-clock"></i> Dec 28, 2022</span>
+                                                <span><i class="fal fa-clock"></i> 28 Déc 2022</span>
                                                 <span><a href="#"><i class="far fa-comment-alt"></i> (04)
-                                                        Comments</a></span>
+                                                        Commentaires</a></span>
                                             </div>
                                             <h4 class="mb-35">
-                                                Lavoratories used for scientic reseach take many froms.
+                                                Les laboratoires utilisés pour la recherche scientifique prennent de nombreuses formes.
                                             </h4>
                                             <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
                                                 accusantium doloremque laudantium, aperiam ipsquae ab illo inventore
@@ -57,15 +57,13 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6">
                                         <div class="postbox__content-area mb-60">
-                                            <h4>Our Approach</h4>
+                                            <h4>Notre Approche</h4>
                                             <div class="postbox__text mb-30">
-                                                <p>Must explain to you how all praising uts pain was born and I will
-                                                    gives you a itself completed account of the system, and sed expounds
-                                                    the ut actual teachings of that greater </p>
+                                                <p>Doit vous expliquer comment toute la louange de la douleur est née et je vous donnerai un compte rendu complet du système, et sed expounds les enseignements réels de ce plus grand </p>
                                                 <div class="postbox__text-list">
                                                     <ul>
-                                                        <li><i class="fal fa-check"></i>Extramural Funding</li>
-                                                        <li><i class="fal fa-check"></i>Bacteria Markers</li>
+                                                        <li><i class="fal fa-check"></i>Financement Extramural</li>
+                                                        <li><i class="fal fa-check"></i>Marqueurs Bactériens</li>
                                                         <li><i class="fal fa-check"></i>Nam nec mi euismod euismod</li>
                                                     </ul>
                                                 </div>
@@ -80,14 +78,10 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="postbox__content-area mb-40">
-                                            <h4 class="mb-25">What Is A Business Technology Roadmap?</h4>
-                                            <p>Unlike detailed blueprints that lay out all tasks, deadlines, bug
-                                                reports, and more along the way, technology roadmaps are high-level
-                                                visual summaries highlighting a company’s vision or plans.
+                                            <h4 class="mb-25">Qu'est-ce qu'une feuille de route technologique d'entreprise ?</h4>
+                                            <p>Contrairement aux plans détaillés qui énumèrent toutes les tâches, les délais, les rapports de bogues, et plus encore, les feuilles de route technologiques sont des résumés visuels de haut niveau mettant en évidence la vision ou les plans d'une entreprise.
                                             </p>
-                                            <p>In an Agile approach, a technology roadmap feeds the sprint and grooming
-                                                processes, providing insight into how the product will travel from start
-                                                to finish. It makes it easier for development teams to:</p>
+                                            <p>Dans une approche Agile, une feuille de route technologique alimente les processus de sprint et de toilettage, fournissant un aperçu de la façon dont le produit passera du début à la fin. Cela facilite pour les équipes de développement de :</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
@@ -106,16 +100,16 @@
                                         <div class="col-xl-7 col-md-12">
                                             <div class="postbox__tag">
                                                 <div class="postbox__tag-list tagcloud">
-                                                    <span>Tag</span>
-                                                    <a href="blog.html">Furniture</a>
+                                                    <span>Étiquette</span>
+                                                    <a href="blog.html">Meubles</a>
                                                     <a href="blog.html">Table</a>
-                                                    <a href="blog.html">Fashion</a>
+                                                    <a href="blog.html">Mode</a>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-xl-5 col-md-12">
                                             <div class="postbox__social-tag">
-                                                <span>Share</span>
+                                                <span>Partager</span>
                                                 <a class="blog-d-lnkd" href="#"><i
                                                         class="fab fa-linkedin-in"></i></a>
                                                 <a class="blog-d-pin" href="#"><i
@@ -131,7 +125,7 @@
                             </div>
                         </article>
                         <div class="postbox__comment mb-65">
-                            <h3 class="postbox__comment-title">(04) Comment</h3>
+                            <h3 class="postbox__comment-title">(04) Commentaire</h3>
                             <ul>
                                 <li>
                                     <div class="postbox__comment-box d-flex">
@@ -144,10 +138,9 @@
                                         <div class="postbox__comment-text">
                                             <div class="postbox__comment-name">
                                                 <h5>Kristin Watson</h5>
-                                                <span class="post-meta">MARCH 10, 2020</span>
+                                                <span class="post-meta">10 MARS 2020</span>
                                             </div>
-                                            <p>Patient Comments are a collection of comments submitted by viewers in
-                                                response to <br> a question posed by a MedicineNet doctor.</p>
+                                            <p>Les commentaires des patients sont une collection de commentaires soumis par les téléspectateurs en réponse à <br> une question posée par un médecin de MedicineNet.</p>
                                             <div class="postbox__comment-reply">
                                                 <a href="#"><i class="fas fa-reply-all"></i></a>
                                             </div>
@@ -165,10 +158,9 @@
                                         <div class="postbox__comment-text">
                                             <div class="postbox__comment-name">
                                                 <h5>Brooklyn Simmons</h5>
-                                                <span class="post-meta">MARCH 10, 2020</span>
+                                                <span class="post-meta">10 MARS 2020</span>
                                             </div>
-                                            <p>Include anecdotal examples of your experience, or things you took notice
-                                                of that you <br> feel others would find useful.</p>
+                                            <p>Incluez des exemples anecdotiques de votre expérience, ou des choses que vous avez remarquées <br> que vous pensez que d'autres trouveraient utiles.</p>
                                             <div class="postbox__comment-reply">
                                                 <a href="#"><i class="fas fa-reply-all"></i></a>
                                             </div>
@@ -178,39 +170,39 @@
                             </ul>
                         </div>
                         <div class="postbox__comment-form">
-                            <h3 class="postbox__comment-form-title">Leave a Reply</h3>
-                            <p>Your email address will not be published. Required fields are marked *</p>
+                            <h3 class="postbox__comment-form-title">Laisser un commentaire</h3>
+                            <p>Votre adresse e-mail ne sera pas publiée. Les champs obligatoires sont indiqués *</p>
                             <form action="#">
                                 <div class="row">
                                     <div class="col-xxl-6 col-xl-6 col-lg-6">
                                         <div class="postbox__comment-input">
-                                            <input type="text" placeholder="Enter your Name">
+                                            <input type="text" placeholder="Entrez votre nom">
                                         </div>
                                     </div>
                                     <div class="col-xxl-6 col-xl-6 col-lg-6">
                                         <div class="postbox__comment-input">
-                                            <input type="email" placeholder="Enter your email">
+                                            <input type="email" placeholder="Entrez votre e-mail">
                                         </div>
                                     </div>
                                     <div class="col-xxl-6 col-xl-6 col-lg-6">
                                         <div class="postbox__comment-input">
-                                            <input type="text" placeholder="Enter your number">
+                                            <input type="text" placeholder="Entrez votre numéro">
                                         </div>
                                     </div>
                                     <div class="col-xxl-6 col-xl-6 col-lg-6">
                                         <div class="postbox__comment-input">
-                                            <input type="text" placeholder="Enter your website">
+                                            <input type="text" placeholder="Entrez votre site web">
                                         </div>
                                     </div>
                                     <div class="col-xxl-12">
                                         <div class="postbox__comment-input">
-                                            <textarea placeholder="Type your comment"></textarea>
+                                            <textarea placeholder="Tapez votre commentaire"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-xxl-12">
                                         <div class="postbox__comment-btn ">
-                                            <button type="submit" class="tp-color-btn tp-btn banner-animation">Post
-                                                Comment</button>
+                                            <button type="submit" class="tp-color-btn tp-btn banner-animation">Poster
+                                                Commentaire</button>
                                         </div>
                                     </div>
                                 </div>
@@ -222,11 +214,11 @@
                     <div class="sidebar__wrapper pl-25 pb-50">
                         <div class="sidebar__widget mb-45">
                             <div class="sidebar__widget-content">
-                                <h3 class="sidebar__widget-title mb-25">Search</h3>
+                                <h3 class="sidebar__widget-title mb-25">Recherche</h3>
                                 <div class="sidebar__search">
                                     <form action="#">
                                         <div class="sidebar__search-input-2 p-relative">
-                                            <input type="text" placeholder="Search post">
+                                            <input type="text" placeholder="Rechercher un article">
                                             <button type="submit"><i class="far fa-search"></i></button>
                                         </div>
                                     </form>
@@ -234,20 +226,20 @@
                             </div>
                         </div>
                         <div class="sidebar__widget mb-40">
-                            <h3 class="sidebar__widget-title mb-25">Category</h3>
+                            <h3 class="sidebar__widget-title mb-25">Catégorie</h3>
                             <div class="sidebar__widget-content">
                                 <ul>
-                                    <li><a href="{{ route('blog-details') }}">Chemistry<span>03</span></a></li>
-                                    <li><a href="{{ route('blog-details') }}">Forensic science <span>07</span></a></li>
-                                    <li><a href="{{ route('blog-details') }}">Gemological <span>09</span></a></li>
-                                    <li><a href="{{ route('blog-details') }}">COvid Analysis <span>01</span></a></li>
-                                    <li><a href="{{ route('blog-details') }}">Becteriology <span>00</span></a></li>
-                                    <li><a href="{{ route('blog-details') }}">Angiosperm <span>26</span></a></li>
+                                    <li><a href="{{ route('blog-details') }}">Chimie<span>03</span></a></li>
+                                    <li><a href="{{ route('blog-details') }}">Science médico-légale <span>07</span></a></li>
+                                    <li><a href="{{ route('blog-details') }}">Gemmologie <span>09</span></a></li>
+                                    <li><a href="{{ route('blog-details') }}">Analyse COVID <span>01</span></a></li>
+                                    <li><a href="{{ route('blog-details') }}">Bactériologie <span>00</span></a></li>
+                                    <li><a href="{{ route('blog-details') }}">Angiosperme <span>26</span></a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="sidebar__widget mb-55">
-                            <h3 class="sidebar__widget-title mb-25">Recent Post</h3>
+                            <h3 class="sidebar__widget-title mb-25">Article Récent</h3>
                             <div class="sidebar__widget-content">
                                 <div class="sidebar__post rc__post">
                                     <div class="rc__post mb-20 d-flex align-items-center">
@@ -258,11 +250,10 @@
                                         </div>
                                         <div class="rc__post-content">
                                             <div class="rc__meta">
-                                                <span>4 March. 2022</span>
+                                                <span>4 Mars. 2022</span>
                                             </div>
                                             <h3 class="rc__post-title">
-                                                <a href="{{ route('blog-details') }}">Don't Underestimate Tree for
-                                                    Furniture</a>
+                                                <a href="{{ route('blog-details') }}">Ne sous-estimez pas l'arbre pour les meubles</a>
                                             </h3>
                                         </div>
                                     </div>
@@ -274,12 +265,10 @@
                                         </div>
                                         <div class="rc__post-content">
                                             <div class="rc__meta">
-                                                <span>12 February. 2022</span>
+                                                <span>12 Février. 2022</span>
                                             </div>
                                             <h3 class="rc__post-title">
-                                                <a href="{{ route('blog-details') }}">Equipping Researchers in the
-                                                    Developing
-                                                    World</a>
+                                                <a href="{{ route('blog-details') }}">Équiper les chercheurs dans le monde en développement</a>
                                             </h3>
                                         </div>
                                     </div>
@@ -291,10 +280,10 @@
                                         </div>
                                         <div class="rc__post-content">
                                             <div class="rc__meta">
-                                                <span>14 January. 2022</span>
+                                                <span>14 Janvier. 2022</span>
                                             </div>
                                             <h3 class="rc__post-title">
-                                                <a href="{{ route('blog-details') }}">Things to do before shopping</a>
+                                                <a href="{{ route('blog-details') }}">Choses à faire avant de faire du shopping</a>
                                             </h3>
                                         </div>
                                     </div>
@@ -306,11 +295,10 @@
                                         </div>
                                         <div class="rc__post-content">
                                             <div class="rc__meta">
-                                                <span>18 March. 2021</span>
+                                                <span>18 Mars. 2021</span>
                                             </div>
                                             <h3 class="rc__post-title">
-                                                <a href="{{ route('blog-details') }}">Research And Verify of a Quality
-                                                    Product</a>
+                                                <a href="{{ route('blog-details') }}">Rechercher et vérifier un produit de qualité</a>
                                             </h3>
                                         </div>
                                     </div>
@@ -318,21 +306,21 @@
                             </div>
                         </div>
                         <div class="sidebar__widget mb-55">
-                            <h3 class="sidebar__widget-title mb-25">Popular Tag</h3>
+                            <h3 class="sidebar__widget-title mb-25">Tag Populaire</h3>
                             <div class="sidebar__widget-content">
                                 <div class="tagcloud">
-                                    <a href="{{ route('blog-details') }}">Furniture</a>
+                                    <a href="{{ route('blog-details') }}">Meubles</a>
                                     <a href="{{ route('blog-details') }}">Table</a>
-                                    <a href="{{ route('blog-details') }}">Chair</a>
-                                    <a href="{{ route('blog-details') }}">Cloths</a>
-                                    <a href="{{ route('blog-details') }}">Toy</a>
-                                    <a href="{{ route('blog-details') }}">Suit</a>
+                                    <a href="{{ route('blog-details') }}">Chaise</a>
+                                    <a href="{{ route('blog-details') }}">Vêtements</a>
+                                    <a href="{{ route('blog-details') }}">Jouet</a>
+                                    <a href="{{ route('blog-details') }}">Costume</a>
                                     <a href="{{ route('blog-details') }}">T-Shirt </a>
-                                    <a href="{{ route('blog-details') }}">Dress</a>
-                                    <a href="{{ route('blog-details') }}">Wooden</a>
-                                    <a href="{{ route('blog-details') }}">Clock</a>
-                                    <a href="{{ route('blog-details') }}">Craft</a>
-                                    <a href="{{ route('blog-details') }}">Gift</a>
+                                    <a href="{{ route('blog-details') }}">Robe</a>
+                                    <a href="{{ route('blog-details') }}">Bois</a>
+                                    <a href="{{ route('blog-details') }}">Horloge</a>
+                                    <a href="{{ route('blog-details') }}">Artisanat</a>
+                                    <a href="{{ route('blog-details') }}">Cadeau</a>
                                 </div>
                             </div>
                         </div>

@@ -11,13 +11,13 @@
                                     <div class="col-xl-5 col-lg-6 col-md-6 d-flex align-self-center">
                                         <div class="tpslidertwo__item">
                                             <div class="tpslidertwo__content">
-                                                <h4 class="tpslidertwo__sub-title">Winter</h4>
-                                                <h3 class="tpslidertwo__title mb-10">Exclusive <br> Winter Collection
+                                                <h4 class="tpslidertwo__sub-title">Hiver</h4>
+                                                <h3 class="tpslidertwo__title mb-10">Collection Exclusive <br> d'Hiver
                                                 </h3>
-                                                <p>New Modern Stylist Fashionable Women's Wear holder</p>
+                                                <p>Nouveau Porte-Bouteille Moderne et Élégant pour Femmes</p>
                                                 <div class="tpslidertwo__slide-btn">
-                                                    <a class="tp-btn banner-animation" href="shop.html">Shop Now <i
-                                                            class="fal fa-long-arrow-right"></i>
+                                                    <a class="tp-btn banner-animation" href="shop.html">Achetez
+                                                        Maintenant <i class="fal fa-long-arrow-right"></i>
                                                     </a>
                                                 </div>
                                             </div>
@@ -42,12 +42,13 @@
                                     <div class="col-xl-5 col-lg-6 col-md-6 d-flex align-self-center">
                                         <div class="tpslidertwo__item">
                                             <div class="tpslidertwo__content">
-                                                <h4 class="tpslidertwo__sub-title">Winter</h4>
-                                                <h3 class="tpslidertwo__title mb-10">Exclusive <br> Women's Fashion</h3>
-                                                <p>New Modern Stylist Fashionable Women's Wear holder</p>
+                                                <h4 class="tpslidertwo__sub-title">Hiver</h4>
+                                                <h3 class="tpslidertwo__title mb-10">Mode Exclusive <br> pour Femmes
+                                                </h3>
+                                                <p>Nouveau Porte-Vêtements Moderne et Élégant pour Femmes</p>
                                                 <div class="tpslidertwo__slide-btn">
-                                                    <a class="tp-btn banner-animation" href="shop.html">Shop Now <i
-                                                            class="fal fa-long-arrow-right"></i>
+                                                    <a class="tp-btn banner-animation" href="shop.html">Achetez
+                                                        Maintenant <i class="fal fa-long-arrow-right"></i>
                                                     </a>
                                                 </div>
                                             </div>
@@ -72,13 +73,13 @@
                                     <div class="col-xl-5 col-lg-6 col-md-6 d-flex align-self-center">
                                         <div class="tpslidertwo__item">
                                             <div class="tpslidertwo__content">
-                                                <h4 class="tpslidertwo__sub-title">Winter</h4>
-                                                <h3 class="tpslidertwo__title mb-10">Exclusive <br> Summer Collection
+                                                <h4 class="tpslidertwo__sub-title">Hiver</h4>
+                                                <h3 class="tpslidertwo__title mb-10">Collection Exclusive <br> d'Été
                                                 </h3>
-                                                <p>New Modern Stylist Fashionable Women's Wear holder</p>
+                                                <p>Nouveau Porte-Vêtements Moderne et Élégant pour Femmes</p>
                                                 <div class="tpslidertwo__slide-btn">
-                                                    <a class="tp-btn banner-animation" href="shop.html">Shop Now <i
-                                                            class="fal fa-long-arrow-right"></i>
+                                                    <a class="tp-btn banner-animation" href="shop.html">Achetez
+                                                        Maintenant <i class="fal fa-long-arrow-right"></i>
                                                     </a>
                                                 </div>
                                             </div>
@@ -118,16 +119,16 @@
                         <img src="{{ asset('img/banner/banner-2-01.jpg') }}" alt="">
                         <div class="banneritem__content">
                             <a href="shop.html"><i class="far fa-long-arrow-right"></i></a>
-                            <p>19 Items</p>
-                            <h4 class="banneritem__content-tiele"><a href="shop.html">Pro Glasses</a></h4>
+                            <p>19 Articles</p>
+                            <h4 class="banneritem__content-tiele"><a href="shop.html">Lunettes de Pro</a></h4>
                         </div>
                     </div>
                     <div class="banneritem__thumb banner-animation text-center p-relative">
                         <img src="{{ asset('img/banner/banner-2-02.jpg') }}" alt="">
                         <div class="banneritem__content">
                             <a href="shop-2.html"><i class="far fa-long-arrow-right"></i></a>
-                            <p>22 Items</p>
-                            <h4 class="banneritem__content-tiele"><a href="shop.html">Casual Shoes</a></h4>
+                            <p>22 Articles</p>
+                            <h4 class="banneritem__content-tiele"><a href="shop.html">Chaussures Casual</a></h4>
                         </div>
                     </div>
                 </div>
@@ -136,8 +137,8 @@
                         <img src="{{ asset('img/banner/banner-2-03.jpg') }}" alt="">
                         <div class="banneritem__content banner-center">
                             <a href="shop-2.html"><i class="far fa-long-arrow-right"></i></a>
-                            <p>30 Items</p>
-                            <h4 class="banneritem__content-tiele"><a href="shop.html">Winter Jacket</a></h4>
+                            <p>30 Articles</p>
+                            <h4 class="banneritem__content-tiele"><a href="shop.html">Veste d'Hiver</a></h4>
                         </div>
                     </div>
                 </div>
@@ -146,8 +147,8 @@
                         <img src="{{ asset('img/banner/banner-2-04.jpg') }}" alt="">
                         <div class="banneritem__content">
                             <a href="shop-2.html"><i class="far fa-long-arrow-right"></i></a>
-                            <p>13 Items</p>
-                            <h4 class="banneritem__content-tiele"><a href="shop.html">New Added</a></h4>
+                            <p>13 Articles</p>
+                            <h4 class="banneritem__content-tiele"><a href="shop.html">Nouveautés</a></h4>
                         </div>
                     </div>
                 </div>
@@ -162,7 +163,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4">
                     <div class="tpsection mb-40">
-                        <h4 class="tpsection__title">Popular Products</h4>
+                        <h4 class="tpsection__title">Produits Populaires</h4>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
@@ -171,24 +172,23 @@
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 <button class="nav-link active" id="nav-all-tab" data-bs-toggle="tab"
                                     data-bs-target="#nav-all" type="button" role="tab" aria-controls="nav-all"
-                                    aria-selected="true">All</button>
+                                    aria-selected="true">Tous</button>
                                 <button class="nav-link" id="nav-popular-tab" data-bs-toggle="tab"
                                     data-bs-target="#nav-popular" type="button" role="tab"
-                                    aria-controls="nav-popular" aria-selected="false">Popular</button>
+                                    aria-controls="nav-popular" aria-selected="false">Populaires</button>
                                 <button class="nav-link" id="nav-sale-tab" data-bs-toggle="tab"
                                     data-bs-target="#nav-sale" type="button" role="tab"
-                                    aria-controls="nav-sale" aria-selected="false">On Sale</button>
+                                    aria-controls="nav-sale" aria-selected="false">En Solde</button>
                                 <button class="nav-link" id="nav-rate-tab" data-bs-toggle="tab"
                                     data-bs-target="#nav-rate" type="button" role="tab"
-                                    aria-controls="nav-rate" aria-selected="false">Best
-                                    Rated</button>
+                                    aria-controls="nav-rate" aria-selected="false">Les Mieux Notés</button>
                             </div>
                         </nav>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-2">
                     <div class="tpproductall">
-                        <a href="shop.html">View All<i class="far fa-long-arrow-right"></i></a>
+                        <a href="shop.html">Voir Tout<i class="far fa-long-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -218,11 +218,12 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Purab Enormous
-                                            Miranda Bottle</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Bouteille Enorme
+                                            Purab
+                                            Miranda</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
-                                            <span>$31.00</span>
+                                            <span>31,00 €</span>
                                         </div>
                                     </div>
                                 </div>
@@ -297,11 +298,11 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Pinkol Enormous
-                                            Granite Bottle</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Bouteille Enorme
+                                            Pinkol Granite</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
-                                            <span>$31.00</span>
+                                            <span>31,00 €</span>
                                         </div>
                                     </div>
                                 </div>
@@ -376,11 +377,11 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Gorgeous Aluminum
-                                            Table</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Table en Aluminium
+                                            Magnifique</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
-                                            <span>$31.00</span>
+                                            <span>31,00 €</span>
                                         </div>
                                     </div>
                                 </div>
@@ -455,11 +456,11 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Evo Lightweight
-                                            Granite Shirt</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Chemise Légère Evo
+                                            Granite</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
-                                            <span>$31.00</span>
+                                            <span>31,00 €</span>
                                         </div>
                                     </div>
                                 </div>
@@ -534,11 +535,11 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">CLCo. Incredible
-                                            Paper Car</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Voiture en Papier
+                                            Incroyable CLCo.</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
-                                            <span>$31.00</span>
+                                            <span>31,00 €</span>
                                         </div>
                                     </div>
                                 </div>
@@ -613,11 +614,12 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Purab Enormous
-                                            Miranda Bottle</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Bouteille Enorme
+                                            Purab
+                                            Miranda</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
-                                            <span>$31.00</span>
+                                            <span>31,00 €</span>
                                         </div>
                                     </div>
                                 </div>
@@ -692,11 +694,11 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Progash Durable
-                                            Granite Hat</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Chapeau Durable
+                                            Progash Granite</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
-                                            <span>$31.00</span>
+                                            <span>31,00 €</span>
                                         </div>
                                     </div>
                                 </div>
@@ -771,11 +773,11 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Miklonda Co. Crafted
-                                            Candles</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Bougies Artisanales
+                                            Miklonda Co.</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
-                                            <span>$31.00</span>
+                                            <span>31,00 €</span>
                                         </div>
                                     </div>
                                 </div>
@@ -850,11 +852,12 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Purab Enormous
-                                            Miranda Bottle</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Bouteille Enorme
+                                            Purab
+                                            Miranda</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
-                                            <span>$31.00</span>
+                                            <span>31,00 €</span>
                                         </div>
                                     </div>
                                 </div>
@@ -929,11 +932,11 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Pinkol Enormous
-                                            Granite Bottle</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Bouteille Enorme
+                                            Pinkol Granite</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
-                                            <span>$31.00</span>
+                                            <span>31,00 €</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1013,11 +1016,12 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Purab Enormous
-                                            Miranda Bottle</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Bouteille Enorme
+                                            Purab
+                                            Miranda</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
-                                            <span>$31.00</span>
+                                            <span>31,00 €</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1092,11 +1096,11 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Progash Durable
-                                            Granite Hat</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Chapeau Durable
+                                            Progash Granite</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
-                                            <span>$31.00</span>
+                                            <span>31,00 €</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1171,11 +1175,11 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Miklonda Co. Crafted
-                                            Candles</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Bougies Artisanales
+                                            Miklonda Co.</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
-                                            <span>$31.00</span>
+                                            <span>31,00 €</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1250,11 +1254,12 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Purab Enormous
-                                            Miranda Bottle</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Bouteille Enorme
+                                            Purab
+                                            Miranda</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
-                                            <span>$31.00</span>
+                                            <span>31,00 €</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1329,11 +1334,11 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Pinkol Enormous
-                                            Granite Bottle</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Bouteille Enorme
+                                            Pinkol Granite</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
-                                            <span>$31.00</span>
+                                            <span>31,00 €</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1408,11 +1413,12 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Purab Enormous
-                                            Miranda Bottle</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Bouteille Enorme
+                                            Purab
+                                            Miranda</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
-                                            <span>$31.00</span>
+                                            <span>31,00 €</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1487,11 +1493,11 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Pinkol Enormous
-                                            Granite Bottle</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Bouteille Enorme
+                                            Pinkol Granite</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
-                                            <span>$31.00</span>
+                                            <span>31,00 €</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1544,6 +1550,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col">
                             <div class="tpproduct tpproductitem mb-15 p-relative">
                                 <div class="tpproduct__thumb">
@@ -1566,11 +1573,11 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Gorgeous Aluminum
-                                            Table</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Table en Aluminium
+                                            Magnifique</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
-                                            <span>$31.00</span>
+                                            <span>31,00 €</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1645,11 +1652,11 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Evo Lightweight
-                                            Granite Shirt</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Chemise en Granite
+                                            Légère Evo</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
-                                            <span>$31.00</span>
+                                            <span>31,00 €</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1724,11 +1731,11 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">CLCo. Incredible
-                                            Paper Car</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Voiture en Papier
+                                            Incroyable CLCo.</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
-                                            <span>$31.00</span>
+                                            <span>31,00 €</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1808,8 +1815,8 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Miklonda Co.
-                                            Crafted Candles</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Bougies
+                                            Artisanales Miklonda Co.</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
                                             <span>$31.00</span>
@@ -1887,8 +1894,8 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Purab Enormous
-                                            Miranda Bottle</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Bougies
+                                            Artisanales Miklonda Co.</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
                                             <span>$31.00</span>
@@ -1966,8 +1973,8 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Pinkol Enormous
-                                            Granite Bottle</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Bougies
+                                            Artisanales Miklonda Co.</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
                                             <span>$31.00</span>
@@ -2045,8 +2052,8 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Purab Enormous
-                                            Miranda Bottle</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Bougies
+                                            Artisanales Miklonda Co.</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
                                             <span>$31.00</span>
@@ -2124,8 +2131,8 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Pinkol Enormous
-                                            Granite Bottle</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Bougies
+                                            Artisanales Miklonda Co.</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
                                             <span>$31.00</span>
@@ -2203,8 +2210,8 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Purab Enormous
-                                            Miranda Bottle</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Bougies
+                                            Artisanales Miklonda Co.</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
                                             <span>$31.00</span>
@@ -2282,8 +2289,8 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Progash Durable
-                                            Granite Hat</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Chapeau en Granite
+                                            Durable Progash</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
                                             <span>$31.00</span>
@@ -2361,8 +2368,8 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Gorgeous Aluminum
-                                            Table</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Table en Aluminium
+                                            Magnifique</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
                                             <span>$31.00</span>
@@ -2440,8 +2447,8 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Evo Lightweight
-                                            Granite Shirt</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Table en Aluminium
+                                            Magnifique</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
                                             <span>$31.00</span>
@@ -2603,8 +2610,8 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Purab Enormous
-                                            Miranda Bottle</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Bougies
+                                            Artisanales Miklonda Co.</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
                                             <span>$31.00</span>
@@ -2682,8 +2689,8 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Progash Durable
-                                            Granite Hat</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Chapeau en Granite
+                                            Durable Progash</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
                                             <span>$31.00</span>
@@ -2761,8 +2768,8 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Gorgeous Aluminum
-                                            Table</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Table en Aluminium
+                                            Magnifique</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
                                             <span>$31.00</span>
@@ -2840,8 +2847,8 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Evo Lightweight
-                                            Granite Shirt</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Table en Aluminium
+                                            Magnifique</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
                                             <span>$31.00</span>
@@ -2919,8 +2926,8 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">CLCo. Incredible
-                                            Paper Car</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Table en Aluminium
+                                            Magnifique</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
                                             <span>$31.00</span>
@@ -2998,8 +3005,8 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Pinkol Enormous
-                                            Granite Bottle</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Bougies
+                                            Artisanales Miklonda Co.</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
                                             <span>$31.00</span>
@@ -3077,8 +3084,8 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Purab Enormous
-                                            Miranda Bottle</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Bougies
+                                            Artisanales Miklonda Co.</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
                                             <span>$31.00</span>
@@ -3156,8 +3163,8 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Pinkol Enormous
-                                            Granite Bottle</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Bougies
+                                            Artisanales Miklonda Co.</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
                                             <span>$31.00</span>
@@ -3235,8 +3242,8 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Miklonda Co.
-                                            Crafted Candles</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Table en Aluminium
+                                            Magnifique</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
                                             <span>$31.00</span>
@@ -3314,8 +3321,8 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content-area">
-                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Purab Enormous
-                                            Miranda Bottle</a></h3>
+                                    <h3 class="tpproduct__title mb-5"><a href="shop-details.html">Bougies
+                                            Artisanales Miklonda Co.</a></h3>
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__ammount">
                                             <span>$31.00</span>
@@ -3389,9 +3396,9 @@
                         </div>
                         <div class="tpexclusive__content">
                             <h4 class="tpexclusive__subtitle">Collection</h4>
-                            <h3 class="tpexclusive__title mb-30">Winter <br> Exclusive In</h3>
+                            <h3 class="tpexclusive__title mb-30">Exclusivité <br> Hiver</h3>
                             <div class="tpexclusive__btn">
-                                <a href="shop.html" class="tp-btn banner-animation">Shop Now</a>
+                                <a href="shop.html" class="tp-btn banner-animation">Achetez Maintenant</a>
                             </div>
                         </div>
                     </div>
@@ -3402,9 +3409,9 @@
                             <img src="{{ asset('img/banner/banner-offer-02.jpg') }}" alt="">
                         </div>
                         <div class="tpexclusive__contentarea text-center">
-                            <h4 class="tpexclusive__subtitle subcolor">Discount</h4>
-                            <h3 class="tpexclusive__title mb-10">50% Offer</h3>
-                            <p>New Modern Stylist Fashionable <br> Women's Wear holder</p>
+                            <h4 class="tpexclusive__subtitle subcolor">Remise</h4>
+                            <h3 class="tpexclusive__title mb-10">Offre de 50%</h3>
+                            <p>Nouveau Porte-Vêtements Moderne et Élégant <br> pour Femmes</p>
                         </div>
                     </div>
                 </div>
@@ -3423,10 +3430,10 @@
                             <div class="col-md-12 col-12">
                                 <div class="blogheader mb-20 d-flex align-items-center justify-content-between">
                                     <div class="tpsection mb-20">
-                                        <h4 class="tpsection__title">Popular Products</h4>
+                                        <h4 class="tpsection__title">Produits Populaires</h4>
                                     </div>
                                     <div class="tpallblog mb-20">
-                                        <h4 class="blog-btn"><a href="{{ route('blog-details') }}">All Blog <i
+                                        <h4 class="blog-btn"><a href="{{ route('blog-details') }}">Tous le blog <i
                                                     class="far fa-long-arrow-right"></i></a>
                                         </h4>
                                     </div>
@@ -3444,15 +3451,15 @@
                                         <div class="blogitem__contetn-date mb-10">
                                             <ul>
                                                 <li>
-                                                    <a class="date-color" href="#">Jan 21, 2022</a>
+                                                    <a class="date-color" href="#">21 Jan, 2022</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ route('blog-details') }}">Fashion</a>
+                                                    <a href="{{ route('blog-details') }}">Mode</a>
                                                 </li>
                                             </ul>
                                         </div>
-                                        <h4 class="blogitem__title"><a href="{{ route('blog-details') }}">Here is
-                                                why you cannot miss EORS 15</a></h4>
+                                        <h4 class="blogitem__title"><a href="{{ route('blog-details') }}">Voici
+                                                pourquoi vous ne pouvez pas manquer EORS 15</a></h4>
                                     </div>
                                 </div>
                             </div>
@@ -3466,15 +3473,15 @@
                                         <div class="blogitem__contetn-date mb-10">
                                             <ul>
                                                 <li>
-                                                    <a class="date-color" href="#">Jan 21, 2022</a>
+                                                    <a class="date-color" href="#">21 Jan, 2022</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ route('blog-details') }}">Fashion</a>
+                                                    <a href="{{ route('blog-details') }}">Mode</a>
                                                 </li>
                                             </ul>
                                         </div>
-                                        <h4 class="blogitem__title"><a href="{{ route('blog-details') }}">Myntra
-                                                launches international brand DeFacto</a>
+                                        <h4 class="blogitem__title"><a href="{{ route('blog-details') }}">
+                                            Myntra lance la marque internationale DeFacto</a>
                                         </h4>
                                     </div>
                                 </div>
@@ -3489,15 +3496,15 @@
                                         <div class="blogitem__contetn-date mb-10">
                                             <ul>
                                                 <li>
-                                                    <a class="date-color" href="#">Jan 21, 2022</a>
+                                                    <a class="date-color" href="#">21 Jan, 2022</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ route('blog-details') }}">Fashion</a>
+                                                    <a href="{{ route('blog-details') }}">Mode</a>
                                                 </li>
                                             </ul>
                                         </div>
                                         <h4 class="blogitem__title"><a href="{{ route('blog-details') }}">Ruskin
-                                                Bond Shares His Life Experiences</a>
+                                                Bond Shares Son Expérience de vie</a>
                                         </h4>
                                     </div>
                                 </div>
@@ -3507,64 +3514,25 @@
                 </div>
                 <div class="col-lg-4 col-md-12 text-md-center">
                     <div class="tpcta slider-bg text-center">
-                        <h5 class="tpcta__subtitle">Subscribe</h5>
-                        <h4 class="tpcta__title mb-30">Get Newsletter Update</h4>
-                        <div class="tpcta__input p-relative mb-10">
-                            <form action="#">
-                                <input type="email" placeholder="Enter email address">
-                                <span class="tpcta__input-icon"><i class="far fa-envelope"></i></span>
-                                <div class="tpcta__btn banner-animation mt-10">
-                                    <button>Subscribe Now <span><i
-                                                class="far fa-long-arrow-right"></i></span></button>
-                                </div>
-                            </form>
-                        </div>
-                        <p>We will not share your email anywhere</p>
-                    </div>
+    <h5 class="tpcta__subtitle">S'abonner</h5>
+    <h4 class="tpcta__title mb-30">Recevez la Mise à Jour de la Newsletter</h4>
+    <div class="tpcta__input p-relative mb-10">
+        <form action="#">
+            <input type="email" placeholder="Entrez l'adresse e-mail">
+            <span class="tpcta__input-icon"><i class="far fa-envelope"></i></span>
+            <div class="tpcta__btn banner-animation mt-10">
+                <button>S'abonner Maintenant <span><i class="far fa-long-arrow-right"></i></span></button>
+            </div>
+        </form>
+    </div>
+    <p>Nous ne partagerons pas votre e-mail ailleurs</p>
+</div>
                 </div>
             </div>
         </div>
     </section>
     <!-- blog-area-end -->
 
-    <!-- brand-area-start -->
-    <section class="brand-area theme-bg pt-110 pb-90">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-12">
-                    <div class="tpsection solid-line text-center mb-45">
-                        <h4 class="tpsection__title ">Happy Sponsors</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="swiper-container brand-active">
-                <div class="swiper-wrapper brand-items black-bg-brand">
-                    <div class="swiper-slide">
-                        <img src="{{ asset('img/brand/brand-01.png') }}" alt="brand">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{{ asset('img/brand/brand-02.png') }}" alt="brand">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{{ asset('img/brand/brand-03.png') }}" alt="brand">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{{ asset('img/brand/brand-04.png') }}" alt="brand">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{{ asset('img/brand/brand-05.png') }}" alt="brand">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{{ asset('img/brand/brand-06.png') }}" alt="brand">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{{ asset('img/brand/brand-04.png') }}" alt="brand">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- brand-area-end -->
 
     @section('footer')
         @include('partials.footer')

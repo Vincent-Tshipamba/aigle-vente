@@ -2,22 +2,20 @@
 
 namespace Database\Factories;
 
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Facture>
- */
 class FactureFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            //
+            'date_facture' => $this->faker->date,
+            'order_id' => Order::factory(),
+            'total_tva' => $this->faker->randomFloat(2, 0, 100),
+            'total_ht' => $this->faker->randomFloat(2, 0, 100),
+            'total_ttc' => $this->faker->randomFloat(2, 0, 100),
+            'status' => $this->faker->randomElement(['Non payée', 'Payée'])
         ];
     }
 }

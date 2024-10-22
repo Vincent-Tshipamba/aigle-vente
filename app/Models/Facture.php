@@ -49,7 +49,7 @@ class Facture extends Model
             $facture->daily_counter = $compteurJournalier;
 
             // Générer le numéro de facture
-            $facture->numero_facture = 'AIGV-' . $currentDate . '-' . str_pad($compteurJournalier, 6, '0', STR_PAD_LEFT);
+            $facture->facture_number = 'AIGV-' . $currentDate . '-' . str_pad($compteurJournalier, 6, '0', STR_PAD_LEFT);
         });
     }
 

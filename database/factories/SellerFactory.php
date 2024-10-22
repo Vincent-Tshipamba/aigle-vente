@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\City;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,15 +11,18 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class SellerFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            //
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
+            'phone' => $this->faker->phoneNumber,
+            'sexe' => $this->faker->randomElement(['Masculin', 'Féminin']),
+            'picture' => $this->faker->imageUrl,
+            'address' => $this->faker->address,
+            'city_id' => City::factory(),
+            'user_id' => User::factory()
+            
         ];
     }
 }

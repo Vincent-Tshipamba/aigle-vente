@@ -12,27 +12,6 @@
                 </div>
                 <div class="col-xl-4 d-none d-xl-block">
                     <div class="headertoplag d-flex align-items-center justify-content-end">
-                        <div class="headertoplag__lang">
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        Anglais
-                                        <span><i class="fal fa-angle-down"></i></span>
-                                    </a>
-                                    <ul class="header-meta__lang-submenu">
-                                        <li>
-                                            <a href="#">Arabe</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Espagnol</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Mandarin</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
                         <div class="menu-top-social">
                             <a href="#"><i class="fab fa-facebook-f"></i></a>
                             <a href="#"><i class="fab fa-twitter"></i></a>
@@ -139,13 +118,6 @@
                 </div>
                 <div class="col-xl-3 col-lg-3">
                     <div class="header-meta d-flex align-items-center justify-content-end">
-                        <div class="header-meta__value mr-15">
-                            <select>
-                                <option>USD</option>
-                                <option>YEAN</option>
-                                <option>EURO</option>
-                            </select>
-                        </div>
                         <div class="header-meta__social d-flex align-items-center ml-25">
                             <button class="header-cart p-relative tp-cart-toggle">
                                 <i class="fal fa-shopping-cart"></i>

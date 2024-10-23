@@ -18,7 +18,7 @@ class ClientFactory extends Factory
             'picture' => $this->faker->imageUrl,
             'address' => $this->faker->address,
             'delivery_address' => $this->faker->address,
-            'city_id' => City::factory(),
+            'city_id' => $this->faker->randomElement(City::pluck('id')),
             'user_id' => User::factory(),
         ];
     }

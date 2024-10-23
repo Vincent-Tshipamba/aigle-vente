@@ -20,9 +20,9 @@ class SellerFactory extends Factory
             'sexe' => $this->faker->randomElement(['Masculin', 'Féminin']),
             'picture' => $this->faker->imageUrl,
             'address' => $this->faker->address,
-            'city_id' => City::factory(),
+            'city_id' => $this->faker->randomElement(City::pluck('id')),
             'user_id' => User::factory()
-            
+
         ];
     }
 }

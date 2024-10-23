@@ -32,34 +32,6 @@
                             </form>
                         </div>
                         <div class="header-meta header-language d-flex align-items-center">
-                            <div class="header-meta__lang">
-                                <ul>
-                                    <li>
-                                        <a href="#">
-                                            Anglais
-                                            <span><i class="fal fa-angle-down"></i></span>
-                                        </a>
-                                        <ul class="header-meta__lang-submenu">
-                                            <li>
-                                                <a href="#">Arabe</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Espagnol</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Mandarin</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="header-meta__value mr-15">
-                                <select>
-                                    <option>USD</option>
-                                    <option>FC</option>
-                                    <option>EURO</option>
-                                </select>
-                            </div>
                             <div class="header-meta__social d-flex align-items-center ml-25">
                                 <button class="header-cart p-relative tp-cart-toggle">
                                     <i class="fal fa-shopping-cart"></i>

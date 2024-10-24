@@ -7,7 +7,7 @@
                 <div class="col-xl-7 col-lg-12 col-md-12 col-12">
                     <div class="tp-breadcrumb">
                         <div class="tp-breadcrumb__link mb-10">
-                            <span class="breadcrumb-item-active"><a href="/">Accueil</a></span>
+                            <span class="breadcrumb-item-active"><a href="{{ route('home') }}">Accueil</a></span>
                             <span>Contact</span>
                         </div>
                         <h2 class="tp-breadcrumb__title">Entrer en Contact</h2>
@@ -54,7 +54,8 @@
                     <div class="tpcontact__form">
                         <div class="tpcontact__info mb-35">
                             <h4 class="tpcontact__title">Faire une Demande Personnalisée</h4>
-                            <p>Des pièces incontournables sélectionnées chaque mois, envie d'idées de style et de friandises ?</p>
+                            <p>Des pièces incontournables sélectionnées chaque mois, envie d'idées de style et de
+                                friandises ?</p>
                         </div>
                         <form action="assets/mail.php" id="contact-form" method="POST">
                             <div class="row">

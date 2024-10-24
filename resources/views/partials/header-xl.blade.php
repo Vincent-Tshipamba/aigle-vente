@@ -4,14 +4,14 @@
         <div class="row align-items-center">
             <div class="col-xl-2 col-lg-3">
                 <div class="logo">
-                    <a href="/"><img src="{{ asset('img/logo/logo.png') }}" alt="logo"></a>
+                    <a href="{{ route('home') }}"><img src="{{ asset('img/logo/logo.png') }}" alt="logo"></a>
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6">
                 <div class="main-menu">
                     <ul>
                         <li class="has-dropdown">
-                            <a href="/">Accueil</a>
+                            <a href="{{ route('home') }}">Accueil</a>
                             <ul class="submenu">
                                 <li><a href="{{ route('home.fashion') }}">Mode</a></li>
                                 <li><a href="{{ route('home.furniture') }}">Meubles</a></li>

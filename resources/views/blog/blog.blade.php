@@ -7,7 +7,7 @@
                 <div class="col-xl-7 col-lg-12 col-md-12 col-12">
                     <div class="tp-breadcrumb">
                         <div class="tp-breadcrumb__link mb-10">
-                            <span class="breadcrumb-item-active"><a href="/">Accueil</a></span>
+                            <span class="breadcrumb-item-active"><a href="{{ route('home') }}">Accueil</a></span>
                             <span>Validation</span>
                         </div>
                         <h2 class="tp-breadcrumb__title">Page de Validation</h2>
@@ -34,13 +34,17 @@
                                 <div class="postbox__meta mb-15">
                                     <span><a href="#"><i class="fal fa-user-alt"></i> Alextina</a></span>
                                     <span><i class="fal fa-clock"></i> 28 Déc 2022</span>
-                                    <span><a href="#"><i class="far fa-comment-alt"></i> (04) Commentaires</a></span>
+                                    <span><a href="#"><i class="far fa-comment-alt"></i> (04)
+                                            Commentaires</a></span>
                                 </div>
                                 <h3 class="postbox__title mb-20">
-                                    <a href="{{ route('blog-details') }}">Les laboratoires utilisés pour la recherche scientifique prennent de nombreuses formes.</a>
+                                    <a href="{{ route('blog-details') }}">Les laboratoires utilisés pour la recherche
+                                        scientifique prennent de nombreuses formes.</a>
                                 </h3>
                                 <div class="postbox__text mb-30">
-                                    <p>Les laboratoires utilisés pour la recherche scientifique prennent de nombreuses formes en raison des exigences différentes des spécialistes dans les divers domaines de la science et de l'ingénierie. Un laboratoire de physique</p>
+                                    <p>Les laboratoires utilisés pour la recherche scientifique prennent de nombreuses
+                                        formes en raison des exigences différentes des spécialistes dans les divers
+                                        domaines de la science et de l'ingénierie. Un laboratoire de physique</p>
                                 </div>
                                 <div class="postbox__read-more">
                                     <a href="{{ route('blog-details') }}"
@@ -73,13 +77,17 @@
                                 <div class="postbox__meta mb-15">
                                     <span><a href="#"><i class="fal fa-user-alt"></i> Alextina</a></span>
                                     <span><i class="fal fa-clock"></i> 28 Déc 2022</span>
-                                    <span><a href="#"><i class="far fa-comment-alt"></i> (04) Commentaires</a></span>
+                                    <span><a href="#"><i class="far fa-comment-alt"></i> (04)
+                                            Commentaires</a></span>
                                 </div>
                                 <h3 class="postbox__title mb-20">
-                                    <a href="{{ route('blog-details') }}">Les laboratoires utilisés pour la recherche scientifique prennent de nombreuses formes.</a>
+                                    <a href="{{ route('blog-details') }}">Les laboratoires utilisés pour la recherche
+                                        scientifique prennent de nombreuses formes.</a>
                                 </h3>
                                 <div class="postbox__text mb-30">
-                                    <p>Les laboratoires utilisés pour la recherche scientifique prennent de nombreuses formes en raison des exigences différentes des spécialistes dans les divers domaines de la science et de l'ingénierie. Un laboratoire de physique</p>
+                                    <p>Les laboratoires utilisés pour la recherche scientifique prennent de nombreuses
+                                        formes en raison des exigences différentes des spécialistes dans les divers
+                                        domaines de la science et de l'ingénierie. Un laboratoire de physique</p>
                                 </div>
                                 <div class="postbox__read-more">
                                     <a href="{{ route('blog-details') }}"
@@ -100,13 +108,20 @@
                                 <div class="postbox__meta mb-15">
                                     <span><a href="#"><i class="fal fa-user-alt"></i> Alextina</a></span>
                                     <span><i class="fal fa-clock"></i> 28 Déc 2022</span>
-                                    <span><a href="#"><i class="far fa-comment-alt"></i> (04) Commentaires</a></span>
+                                    <span><a href="#"><i class="far fa-comment-alt"></i> (04)
+                                            Commentaires</a></span>
                                 </div>
                                 <h3 class="postbox__title mb-20">
-                                    <a href="{{ route('blog-details') }}">Quatre façons de remplir votre tâche pour rendre la maison belle.</a>
+                                    <a href="{{ route('blog-details') }}">Quatre façons de remplir votre tâche pour
+                                        rendre la maison belle.</a>
                                 </h3>
                                 <div class="postbox__text mb-30">
-                                    <p>Exploitez de manière convaincante les portails B2B avec un lien total émergent. Poursuivez de manière appropriée le leadership stratégique avec des idées intermandatées. Révolutionnez de manière proactive la pensée "hors des sentiers battus" interopérable avec une innovation entièrement recherchée. Facilitez de manière spectaculaire des architectures exceptionnelles et des données bricks-and-clicks. Générez progressivement des e-services extensibles pour.</p>
+                                    <p>Exploitez de manière convaincante les portails B2B avec un lien total émergent.
+                                        Poursuivez de manière appropriée le leadership stratégique avec des idées
+                                        intermandatées. Révolutionnez de manière proactive la pensée "hors des sentiers
+                                        battus" interopérable avec une innovation entièrement recherchée. Facilitez de
+                                        manière spectaculaire des architectures exceptionnelles et des données
+                                        bricks-and-clicks. Générez progressivement des e-services extensibles pour.</p>
                                 </div>
                                 <div class="postbox__read-more">
                                     <a href="{{ route('blog-details') }}"
@@ -168,7 +183,8 @@
                             <div class="sidebar__widget-content">
                                 <ul>
                                     <li><a href="{{ route('blog-details') }}">Chimie<span>03</span></a></li>
-                                    <li><a href="{{ route('blog-details') }}">Science médico-légale <span>07</span></a>
+                                    <li><a href="{{ route('blog-details') }}">Science médico-légale
+                                            <span>07</span></a>
                                     </li>
                                     <li><a href="{{ route('blog-details') }}">Gemmologie <span>09</span></a></li>
                                     <li><a href="{{ route('blog-details') }}">Analyse COVID <span>01</span></a></li>
@@ -192,7 +208,8 @@
                                                 <span>4 Mars. 2022</span>
                                             </div>
                                             <h3 class="rc__post-title">
-                                                <a href="{{ route('blog-details') }}">Ne sous-estimez pas l'arbre pour les meubles</a>
+                                                <a href="{{ route('blog-details') }}">Ne sous-estimez pas l'arbre pour
+                                                    les meubles</a>
                                             </h3>
                                         </div>
                                     </div>
@@ -207,7 +224,8 @@
                                                 <span>12 Février. 2022</span>
                                             </div>
                                             <h3 class="rc__post-title">
-                                                <a href="{{ route('blog-details') }}">Équiper les chercheurs dans le monde en développement</a>
+                                                <a href="{{ route('blog-details') }}">Équiper les chercheurs dans le
+                                                    monde en développement</a>
                                             </h3>
                                         </div>
                                     </div>
@@ -222,7 +240,8 @@
                                                 <span>14 Janvier. 2022</span>
                                             </div>
                                             <h3 class="rc__post-title">
-                                                <a href="{{ route('blog-details') }}">Choses à faire avant de faire du shopping</a>
+                                                <a href="{{ route('blog-details') }}">Choses à faire avant de faire du
+                                                    shopping</a>
                                             </h3>
                                         </div>
                                     </div>
@@ -237,7 +256,8 @@
                                                 <span>18 Mars. 2021</span>
                                             </div>
                                             <h3 class="rc__post-title">
-                                                <a href="{{ route('blog-details') }}">Rechercher et vérifier un produit de qualité</a>
+                                                <a href="{{ route('blog-details') }}">Rechercher et vérifier un
+                                                    produit de qualité</a>
                                             </h3>
                                         </div>
                                     </div>

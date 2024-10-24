@@ -7,7 +7,7 @@
                     <button class="tp-menu-toggle"><i class="far fa-bars"></i></button>
                 </div>
                 <div class="logo">
-                    <a href="/"><img src="{{ asset('img/logo/logo.png') }}" alt="logo"></a>
+                    <a href="{{ route('home') }}"><img src="{{ asset('img/logo/logo.png') }}" alt="logo"></a>
                 </div>
             </div>
             <div class="col-lg-9 col-md-8">
@@ -43,7 +43,7 @@
             </div>
             <div class="col-6 mx-auto flex justify-center">
                 <div class="logo text-center">
-                    <a href="/"><img src="{{ asset('img/logo/logo.png') }}" alt="logo"></a>
+                    <a href="{{ route('home') }}"><img src="{{ asset('img/logo/logo.png') }}" alt="logo"></a>
                 </div>
             </div>
             <div class="col-3">

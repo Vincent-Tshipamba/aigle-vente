@@ -7,12 +7,14 @@
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="footer-widget footer-col-1 mb-40">
                             <div class="footer-logo mb-30">
-                                <a href="/"><img src="{{ asset('img/logo/logo-white.png') }}" alt="logo"></a>
+                                <a href="{{ route('home') }}"><img src="{{ asset('img/logo/logo-white.png') }}"
+                                        alt="logo"></a>
                             </div>
                             <div class="footer-content">
                                 <p>Design origami rose élégant en trois <br> dimensions et décoration coexistent.
                                     <br>
-                                    Idéal pour ajouter une touche décorative à <br> la décoration de n'importe quelle pièce.
+                                    Idéal pour ajouter une touche décorative à <br> la décoration de n'importe quelle
+                                    pièce.
                                 </p>
                             </div>
                         </div>
@@ -118,7 +120,8 @@
                 <div class="row align-items-center">
                     <div class="col-xl-6 col-lg-7 col-md-5">
                         <div class="footer-copyright__content">
-                            <span>Droit d'auteur 2022 <a href="/">©Ninico</a>. Tous droits réservés. Propulsé par
+                            <span>Droit d'auteur 2022 <a href="{{ route('home') }}">©Ninico</a>. Tous droits réservés.
+                                Propulsé par
                                 <a href="https://themeforest.net/user/theme_pure/portfolio">Theme_Pure</a>.</span>
                         </div>
                     </div>

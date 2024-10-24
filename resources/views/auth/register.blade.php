@@ -70,7 +70,7 @@
                                 <div class="mb-10">
                                     <div class="relative">
                                         <select id="city" name="city"
-                                            class="z-50 select-custom text-gray-900 border border-gray-300 rounded-lg">
+                                            class=" z-40 select-custom text-gray-900 border border-gray-300 rounded-lg">
                                             <option value="" disabled selected>Sélectionnez votre ville</option>
                                             @foreach ($cities as $city)
                                                 <option value="{{ $city->id }}">{{ $city->name }}</option>

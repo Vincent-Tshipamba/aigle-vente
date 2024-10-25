@@ -29,6 +29,8 @@
             </div>
         </div>
     </div>
+    <script src="{{ Vite::asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ Vite::asset('node_modules/sweetalert2/dist/sweetalert2.min.js') }}"></script>
     <script>
         const sidebar = document.querySelector("aside");
         const maxSidebar = document.querySelector(".max")

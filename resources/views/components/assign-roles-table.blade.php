@@ -1,3 +1,16 @@
-<div>
-    <!-- If you do not have a consistent goal in life, you can not live it in a consistent way. - Marcus Aurelius -->
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="usersRolesTable" class="table table-bordered w-full">
+                <thead>
+                    <tr class="bg-bg-chart">
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will be populated here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

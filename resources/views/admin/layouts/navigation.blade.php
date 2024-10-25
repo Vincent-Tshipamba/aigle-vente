@@ -2,7 +2,7 @@
     <div
         class="flex items-center justify-center flex-none h-full ml-12 duration-500 ease-in-out transform logo dark:text-white">
         <a href="{{ route('dashboard') }}" class="flex ms-2 md:me-24">
-            <img src="{{ asset('img/logo/logo-white.png') }}" class="h-8 me-3" alt="Logo de Aigle Vente" />
+            <img src="{{ asset('img\logo\logo_sans_bg.png') }}" class="h-8 me-3" alt="Logo de Aigle Vente" />
             <span class="self-center font-semibold text-white text-1xl sm:text-1xl whitespace-nowrap">
                 Aigle Vente
             </span>
@@ -88,7 +88,7 @@
                     </svg>
                 </div>
                 <div onclick="setDark('light')"
-                    class="sun hidden text-gray-700 dark:text-white hover:text-[#f34e83] dark:hover:text-[#f34e83]">
+                    class="sun hidden text-gray-700 dark:text-white hover:text-[#e38407] dark:hover:text-[#e38407]">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-4 h-4">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -100,7 +100,7 @@
 
     </div>
     <div onclick="openNav()"
-        class="-right-6 transition transform ease-in-out duration-500 flex border-4 border-white dark:border-[#0F172A] dark:bg-[#1E293B]  bg-[#f34e83]  dark:text-white dark:hover:bg-[#0F172A] hover:bg-[#0F172A] absolute top-2 p-3 rounded-full text-white hover:rotate-45">
+        class="-right-6 transition transform ease-in-out duration-500 flex border-4 border-white dark:border-[#0F172A] dark:bg-[#1E293B]  bg-[#e38407]  dark:text-white dark:hover:bg-[#0F172A] hover:bg-[#0F172A] absolute top-2 p-3 rounded-full text-white hover:rotate-45">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor"
             class="w-4 h-4">
             <path strokeLinecap="round" strokeLinejoin="round"
@@ -111,10 +111,10 @@
     <!-- MAX SIDEBAR-->
     <div class="max hidden text-white mt-20 flex-col space-y-2 w-full h-[calc(100vh)]">
         <div
-            class="hover:ml-4 w-full text-white  hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+            class="hover:ml-4 w-full text-white  hover:text-[#e38407] dark:hover:text-[#e38407]  p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
 
             <a href="{{ route('dashboard') }}"
-                class="hover:ml-4 justify-end pr-5  hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('dashboard') ? ' text-[#f34e83] ' : 'text-white' }}">
+                class="hover:ml-4 justify-end pr-5  hover:text-[#e38407] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('dashboard') ? ' text-[#e38407] ' : 'text-white' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <path fill="currentColor"
                         d="m15.943 10.498l-4.055 4.505A2 2 0 0 0 10 17h4a2 2 0 0 0-.603-1.431l3.66-4.067a.75.75 0 1 0-1.114-1.004M5 15.25a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5zm14.75.75a.75.75 0 0 0-.75-.75h-1.5a.75.75 0 0 0 0 1.5H19a.75.75 0 0 0 .75-.75" />
@@ -127,9 +127,9 @@
             </a>
         </div>
         <div
-            class="hover:ml-4 w-full hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+            class="hover:ml-4 w-full hover:text-[#e38407] dark:hover:text-[#e38407]  p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
             <a href="{{ route('users.index') }}"
-                class="hover:ml-4 justify-end pr-5   hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('users.index') ? ' text-[#f34e83] ' : 'text-white' }}">
+                class="hover:ml-4 justify-end pr-5   hover:text-[#e38407] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('users.index') ? ' text-[#e38407] ' : 'text-white' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16">
                     <path fill="white" fill-rule="evenodd"
                         d="M5.482 4.344a2 2 0 1 0-2.963 0q-.12.063-.23.136c-.457.305-.75.704-.933 1.073A3.5 3.5 0 0 0 1 6.978V9a1 1 0 0 0 1 1h2.5a3.7 3.7 0 0 1 .684-.962L5.171 9H2V7s0-2 2-2c1.007 0 1.507.507 1.755 1.01c.225-.254.493-.47.793-.636a2.7 2.7 0 0 0-1.066-1.03M4 4a1 1 0 1 0 0-2a1 1 0 0 0 0 2m10 6h-2.5a3.7 3.7 0 0 0-.684-.962L10.829 9H14V7s0-2-2-2c-1.007 0-1.507.507-1.755 1.01a3 3 0 0 0-.793-.636a2.7 2.7 0 0 1 1.066-1.03a2 2 0 1 1 2.963 0q.12.063.23.136c.457.305.75.704.933 1.073A3.45 3.45 0 0 1 15 6.944V9a1 1 0 0 1-1 1m-2-6a1 1 0 1 0 0-2a1 1 0 0 0 0 2" />
@@ -140,9 +140,9 @@
             </a>
         </div>
         <div
-            class="hover:ml-4 w-full hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+            class="hover:ml-4 w-full hover:text-[#e38407] dark:hover:text-[#e38407]  p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
             <a href=""
-                class="hover:ml-4 justify-end pr-5   hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('clients.index') ? ' text-[#f34e83] ' : 'text-white' }}">
+                class="hover:ml-4 justify-end pr-5   hover:text-[#e38407] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('clients.index') ? ' text-[#e38407] ' : 'text-white' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 14 14">
                     <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M9.284 3.503a1.621 1.621 0 1 0 3.242 0a1.621 1.621 0 1 0-3.242 0" />
@@ -155,9 +155,9 @@
             </a>
         </div>
         <div
-            class="hover:ml-4 w-full   hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+            class="hover:ml-4 w-full   hover:text-[#e38407] dark:hover:text-[#e38407]  p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
             <a href=""
-                class="hover:ml-4 justify-end pr-5   hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('activites.index') ? ' text-[#f34e83] ' : 'text-white' }}">
+                class="hover:ml-4 justify-end pr-5   hover:text-[#e38407] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('activites.index') ? ' text-[#e38407] ' : 'text-white' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
                     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                         d="M24 31.68V16.319m-3.936 12.479c.775.98 1.746 1.346 3.098 1.346h1.87c1.741 0 3.152-1.375 3.152-3.072h0c0-1.697-1.41-3.072-3.152-3.072h-2.066c-1.74 0-3.152-1.375-3.152-3.072h0c0-1.697 1.41-3.072 3.152-3.072h1.87c1.353 0 2.324.365 3.099 1.346m-3.874 14.96v7.592m19.44-30.21v19.27L24.965 41.517a1.81 1.81 0 0 1-1.81 0L4.5 30.745V11.474m26.448 7.318L43.5 11.545l-9.12-5.266h0l-6.426 3.71c-2.183 1.26-5.732 1.254-7.929-.014L13.56 6.242L4.5 11.474l12.552 7.247" />
@@ -166,9 +166,9 @@
             </a>
         </div>
         <div
-            class="hover:ml-4 w-full hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+            class="hover:ml-4 w-full hover:text-[#e38407] dark:hover:text-[#e38407]  p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
             <a href=""
-                class="hover:ml-4 justify-end pr-5   hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('odcusers.index') ? ' text-[#f34e83] ' : 'text-white' }}">
+                class="hover:ml-4 justify-end pr-5   hover:text-[#e38407] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('odcusers.index') ? ' text-[#e38407] ' : 'text-white' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <path fill="currentColor" fill-rule="evenodd"
                         d="M6.066 5.5a.5.5 0 0 0-.43.243L3.383 9.5h17.234l-2.254-3.757a.5.5 0 0 0-.429-.243zm-2.684 5H4v8A1.5 1.5 0 0 0 5.5 20H6a1.5 1.5 0 0 0 1.5-1.5v-5H10v5a1.5 1.5 0 0 0 1.5 1.5h7a1.5 1.5 0 0 0 1.5-1.5v-8h.616a1 1 0 0 0 .858-1.514l-2.255-3.758a1.5 1.5 0 0 0-1.286-.728H6.066a1.5 1.5 0 0 0-1.287.728L2.525 8.986a1 1 0 0 0 .857 1.514M5 18.5v-8h14v8a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-5.3a.7.7 0 0 0-.7-.7H7.2a.7.7 0 0 0-.7.7v5.3a.5.5 0 0 1-.5.5h-.5a.5.5 0 0 1-.5-.5m8-2.5v-2.75h4V16zm-.083-3.75a.917.917 0 0 0-.917.917v2.916c0 .507.41.917.917.917h4.166c.507 0 .917-.41.917-.917v-2.916a.917.917 0 0 0-.917-.917z"
@@ -179,9 +179,9 @@
         </div>
 
         <div
-            class="hover:ml-4 w-full   hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+            class="hover:ml-4 w-full   hover:text-[#e38407] dark:hover:text-[#e38407]  p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
             <a href=""
-                class="hover:ml-4 justify-end pr-5   hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('employabilites.index') ? ' text-[#f34e83] ' : 'text-white' }}">
+                class="hover:ml-4 justify-end pr-5   hover:text-[#e38407] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('employabilites.index') ? ' text-[#e38407] ' : 'text-white' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 1024 1024">
                     <path fill="white" fill-rule="evenodd"
                         d="M464 144c8.837 0 16 7.163 16 16v304c0 8.836-7.163 16-16 16H160c-8.837 0-16-7.164-16-16V160c0-8.837 7.163-16 16-16zm-52 68H212v200h200zm493.333 87.686c6.248 6.248 6.248 16.379 0 22.627l-181.02 181.02c-6.248 6.248-16.378 6.248-22.627 0l-181.019-181.02c-6.248-6.248-6.248-16.379 0-22.627l181.02-181.02c6.248-6.248 16.378-6.248 22.627 0zm-84.853 11.313L713 203.52L605.52 311L713 418.48zM464 544c8.837 0 16 7.164 16 16v304c0 8.837-7.163 16-16 16H160c-8.837 0-16-7.163-16-16V560c0-8.836 7.163-16 16-16zm-52 68H212v200h200zm452-68c8.837 0 16 7.164 16 16v304c0 8.837-7.163 16-16 16H560c-8.837 0-16-7.163-16-16V560c0-8.836 7.163-16 16-16zm-52 68H612v200h200z" />
@@ -191,9 +191,9 @@
         </div>
 
         <div
-            class="hover:ml-4 w-full  hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+            class="hover:ml-4 w-full  hover:text-[#e38407] dark:hover:text-[#e38407]  p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
             <a href=""
-                class="hover:ml-4 justify-end pr-5 hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('evaluations.index') ? ' text-[#f34e83] ' : 'text-white' }}">
+                class="hover:ml-4 justify-end pr-5 hover:text-[#e38407] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('evaluations.index') ? ' text-[#e38407] ' : 'text-white' }}">
                 <svg class="w-6 h-6 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                     height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -209,7 +209,7 @@
     <div class="mini mt-20 flex flex-col space-y-2 w-full h-[calc(100vh)]">
         <!-- Dashboard -->
         <a href="{{ route('dashboard') }}"
-            class="hover:ml-4 justify-end pr-5   hover:text-[#ce4e76] dark:hover:text-[#f34e83]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('dashboard') ? ' text-[#f34e83] ' : 'text-white' }}">
+            class="hover:ml-4 justify-end pr-5   hover:text-[#ce4e76] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('dashboard') ? ' text-[#e38407] ' : 'text-white' }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path fill="currentColor"
                     d="m15.943 10.498l-4.055 4.505A2 2 0 0 0 10 17h4a2 2 0 0 0-.603-1.431l3.66-4.067a.75.75 0 1 0-1.114-1.004M5 15.25a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5zm14.75.75a.75.75 0 0 0-.75-.75h-1.5a.75.75 0 0 0 0 1.5H19a.75.75 0 0 0 .75-.75" />
@@ -221,7 +221,7 @@
         </a>
         <!-- Utilisateurs -->
         <a href="{{ route('users.index') }}"
-            class="hover:ml-4 justify-end pr-5   hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('users.index') ? ' text-[#f34e83] ' : 'text-white' }}">
+            class="hover:ml-4 justify-end pr-5   hover:text-[#e38407] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('users.index') ? ' text-[#e38407] ' : 'text-white' }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16">
                 <path fill="currentColor" fill-rule="evenodd"
                     d="M5.482 4.344a2 2 0 1 0-2.963 0q-.12.063-.23.136c-.457.305-.75.704-.933 1.073A3.5 3.5 0 0 0 1 6.978V9a1 1 0 0 0 1 1h2.5a3.7 3.7 0 0 1 .684-.962L5.171 9H2V7s0-2 2-2c1.007 0 1.507.507 1.755 1.01c.225-.254.493-.47.793-.636a2.7 2.7 0 0 0-1.066-1.03M4 4a1 1 0 1 0 0-2a1 1 0 0 0 0 2m10 6h-2.5a3.7 3.7 0 0 0-.684-.962L10.829 9H14V7s0-2-2-2c-1.007 0-1.507.507-1.755 1.01a3 3 0 0 0-.793-.636a2.7 2.7 0 0 1 1.066-1.03a2 2 0 1 1 2.963 0q.12.063.23.136c.457.305.75.704.933 1.073A3.45 3.45 0 0 1 15 6.944V9a1 1 0 0 1-1 1m-2-6a1 1 0 1 0 0-2a1 1 0 0 0 0 2" />
@@ -232,7 +232,7 @@
 
         <!-- Clients -->
         <a href=""
-            class="hover:ml-4 justify-end pr-5  hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('activites.index') ? ' text-[#f34e83] ' : 'text-white' }}">
+            class="hover:ml-4 justify-end pr-5  hover:text-[#e38407] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('activites.index') ? ' text-[#e38407] ' : 'text-white' }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 14 14">
                 <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M9.284 3.503a1.621 1.621 0 1 0 3.242 0a1.621 1.621 0 1 0-3.242 0" />
@@ -244,7 +244,7 @@
         </a>
         <!-- Vendeurs -->
         <a href=""
-            class="hover:ml-4 justify-end pr-5   hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('odcusers.index') ? ' text-[#f34e83] ' : 'text-white' }}">
+            class="hover:ml-4 justify-end pr-5   hover:text-[#e38407] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('odcusers.index') ? ' text-[#e38407] ' : 'text-white' }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
                 <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                     d="M24 31.68V16.319m-3.936 12.479c.775.98 1.746 1.346 3.098 1.346h1.87c1.741 0 3.152-1.375 3.152-3.072h0c0-1.697-1.41-3.072-3.152-3.072h-2.066c-1.74 0-3.152-1.375-3.152-3.072h0c0-1.697 1.41-3.072 3.152-3.072h1.87c1.353 0 2.324.365 3.099 1.346m-3.874 14.96v7.592m19.44-30.21v19.27L24.965 41.517a1.81 1.81 0 0 1-1.81 0L4.5 30.745V11.474m26.448 7.318L43.5 11.545l-9.12-5.266h0l-6.426 3.71c-2.183 1.26-5.732 1.254-7.929-.014L13.56 6.242L4.5 11.474l12.552 7.247" />
@@ -252,7 +252,7 @@
         </a>
         <!-- Boutiques -->
         <a href=""
-            class="hover:ml-4 justify-end pr-5   hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('evaluations.index') ? ' text-[#f34e83] ' : 'text-white' }}">
+            class="hover:ml-4 justify-end pr-5   hover:text-[#e38407] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('evaluations.index') ? ' text-[#e38407] ' : 'text-white' }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path fill="currentColor" fill-rule="evenodd"
                     d="M6.066 5.5a.5.5 0 0 0-.43.243L3.383 9.5h17.234l-2.254-3.757a.5.5 0 0 0-.429-.243zm-2.684 5H4v8A1.5 1.5 0 0 0 5.5 20H6a1.5 1.5 0 0 0 1.5-1.5v-5H10v5a1.5 1.5 0 0 0 1.5 1.5h7a1.5 1.5 0 0 0 1.5-1.5v-8h.616a1 1 0 0 0 .858-1.514l-2.255-3.758a1.5 1.5 0 0 0-1.286-.728H6.066a1.5 1.5 0 0 0-1.287.728L2.525 8.986a1 1 0 0 0 .857 1.514M5 18.5v-8h14v8a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-5.3a.7.7 0 0 0-.7-.7H7.2a.7.7 0 0 0-.7.7v5.3a.5.5 0 0 1-.5.5h-.5a.5.5 0 0 1-.5-.5m8-2.5v-2.75h4V16zm-.083-3.75a.917.917 0 0 0-.917.917v2.916c0 .507.41.917.917.917h4.166c.507 0 .917-.41.917-.917v-2.916a.917.917 0 0 0-.917-.917z"
@@ -262,7 +262,7 @@
 
         <!-- Produits -->
         <a href=""
-            class="hover:ml-4 justify-end pr-5   hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('evaluations.index') ? ' text-[#f34e83] ' : 'text-white' }}">
+            class="hover:ml-4 justify-end pr-5   hover:text-[#e38407] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('evaluations.index') ? ' text-[#e38407] ' : 'text-white' }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 1024 1024">
                 <path fill="white" fill-rule="evenodd"
                     d="M464 144c8.837 0 16 7.163 16 16v304c0 8.836-7.163 16-16 16H160c-8.837 0-16-7.164-16-16V160c0-8.837 7.163-16 16-16zm-52 68H212v200h200zm493.333 87.686c6.248 6.248 6.248 16.379 0 22.627l-181.02 181.02c-6.248 6.248-16.378 6.248-22.627 0l-181.019-181.02c-6.248-6.248-6.248-16.379 0-22.627l181.02-181.02c6.248-6.248 16.378-6.248 22.627 0zm-84.853 11.313L713 203.52L605.52 311L713 418.48zM464 544c8.837 0 16 7.164 16 16v304c0 8.837-7.163 16-16 16H160c-8.837 0-16-7.163-16-16V560c0-8.836 7.163-16 16-16zm-52 68H212v200h200zm452-68c8.837 0 16 7.164 16 16v304c0 8.837-7.163 16-16 16H560c-8.837 0-16-7.163-16-16V560c0-8.836 7.163-16 16-16zm-52 68H612v200h200z" />
@@ -271,7 +271,7 @@
 
         <!-- Commandes -->
         <a href=""
-            class="hover:ml-4 justify-end pr-5   hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('evaluations.index') ? ' text-[#f34e83] ' : 'text-white' }}">
+            class="hover:ml-4 justify-end pr-5   hover:text-[#e38407] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('evaluations.index') ? ' text-[#e38407] ' : 'text-white' }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <g fill="none" stroke="white">
                     <rect width="14" height="17" x="5" y="4" rx="2" />

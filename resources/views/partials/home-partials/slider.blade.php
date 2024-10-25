@@ -9,14 +9,14 @@
                             <div class="swiper-slide">
                                 <div class="tp-slide-item">
                                     <div class="tp-slide-item__content">
-                                        <h4 class="tp-slide-item__sub-title">Accessories</h4>
-                                        <h3 class="tp-slide-item__title mb-25">Up To
-                                            <i>40% Off
+                                        <h4 class="tp-slide-item__sub-title">Accessoires</h4>
+                                        <h3 class="tp-slide-item__title mb-25">Jusqu'à
+                                            <i>40% de Réduction
                                                 <img src="{{ asset('img/icon/title-shape-02.jpg') }}" alt="">
                                             </i>
-                                            latest Creations
+                                            sur les Dernières Créations
                                         </h3>
-                                        <a class="tp-slide-item__slide-btn tp-btn" href="shop.html">Shop Now <i
+                                        <a class="tp-slide-item__slide-btn tp-btn" href="shop.html">Achetez Maintenant <i
                                                 class="fal fa-long-arrow-right"></i></a>
                                     </div>
                                     <div class="tp-slide-item__img">
@@ -27,12 +27,11 @@
                             <div class="swiper-slide">
                                 <div class="tp-slide-item">
                                     <div class="tp-slide-item__content">
-                                        <h4 class="tp-slide-item__sub-title">Accessories</h4>
-                                        <h3 class="tp-slide-item__title mb-25">Up To <i>35% Off <img
+                                        <h4 class="tp-slide-item__sub-title">Accessoires</h4>
+                                        <h3 class="tp-slide-item__title mb-25">Jusqu'à <i>35% de Réduction <img
                                                     src="{{ asset('img/icon/title-shape-02.jpg') }}" alt=""></i>
-                                            latest
-                                            Creations</h3>
-                                        <a class="tp-slide-item__slide-btn tp-btn" href="shop.html">Shop Now <i
+                                            sur les Dernières Créations</h3>
+                                        <a class="tp-slide-item__slide-btn tp-btn" href="shop.html">Achetez Maintenant <i
                                                 class="fal fa-long-arrow-right"></i></a>
                                     </div>
                                     <div class="tp-slide-item__img">
@@ -43,12 +42,11 @@
                             <div class="swiper-slide">
                                 <div class="tp-slide-item">
                                     <div class="tp-slide-item__content">
-                                        <h4 class="tp-slide-item__sub-title">Accessories</h4>
-                                        <h3 class="tp-slide-item__title mb-25">Up To <i>45% Off <img
+                                        <h4 class="tp-slide-item__sub-title">Accessoires</h4>
+                                        <h3 class="tp-slide-item__title mb-25">Jusqu'à <i>45% de Réduction <img
                                                     src="{{ asset('img/icon/title-shape-02.jpg') }}" alt=""></i>
-                                            latest
-                                            Creations</h3>
-                                        <a class="tp-slide-item__slide-btn tp-btn" href="shop.html">Shop Now <i
+                                            sur les Dernières Créations</h3>
+                                        <a class="tp-slide-item__slide-btn tp-btn" href="shop.html">Achetez Maintenant <i
                                                 class="fal fa-long-arrow-right"></i></a>
                                     </div>
                                     <div class="tp-slide-item__img">
@@ -69,8 +67,8 @@
                                 <div class="tpslider-banner__img">
                                     <img src="{{ asset('img/slider/banner-slider-01.jpg') }}" alt="">
                                     <div class="tpslider-banner__content">
-                                        <span class="tpslider-banner__sub-title">Hand made</span>
-                                        <h4 class="tpslider-banner__title">New Modern & Stylist <br> Crafts</h4>
+                                        <span class="tpslider-banner__sub-title">Fait Main</span>
+                                        <h4 class="tpslider-banner__title">Nouveau Moderne & Styliste <br> Artisanat</h4>
                                     </div>
                                 </div>
                             </a>
@@ -82,8 +80,8 @@
                                 <div class="tpslider-banner__img">
                                     <img src="{{ asset('img/slider/banner-slider-02.jpg') }}" alt="">
                                     <div class="tpslider-banner__content">
-                                        <span class="tpslider-banner__sub-title">Popular</span>
-                                        <h4 class="tpslider-banner__title">Energy with our <br> newest collection</h4>
+                                        <span class="tpslider-banner__sub-title">Populaire</span>
+                                        <h4 class="tpslider-banner__title">Énergie avec notre <br> nouvelle collection</h4>
                                     </div>
                                 </div>
                             </a>

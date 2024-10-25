@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Models\City;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
-use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Auth\Events\Registered;
+use App\Models\Client;
 
 class RegisteredUserController extends Controller
 {
@@ -19,7 +21,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $cities = City::all();
+        return view('auth.register', compact('cities'));
     }
 
     /**
@@ -30,21 +33,37 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'firstname' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'sexe' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'exists:cities,id'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        // Concaténer firstname et lastname pour former name
+        $name = $request->firstname . '-' . $request->lastname;
+
         $user = User::create([
-            'name' => $request->name,
+            'name' => $name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+        ]);
+
+        // Sauvegarder les autres informations dans la table clients
+        $client = Client::firstOrCreate([
+            'first_name' => $request->firstname,
+            'last_name' => $request->lastname,
+            'sexe' => $request->sexe,
+            'city_id' => $request->city,
+            'user_id' => $user->id,
+            'phone' => $request->phone
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('home', absolute: false));
     }
 }

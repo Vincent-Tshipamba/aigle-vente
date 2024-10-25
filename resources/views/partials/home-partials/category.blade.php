@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="tpsection mb-40">
-                    <h4 class="tpsection__title">Top <span> Categories <img
+                    <h4 class="tpsection__title">Top <span> Catégories <img
                                 src="{{ asset('img/icon/title-shape-01.jpg') }}" alt=""></span></h4>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                     <span>20</span>
                 </div>
                 <div class="tpcategory__content">
-                    <h5 class="tpcategory__title"><a href="shop.html">Driftwood <br> Table Decor</a></h5>
+                    <h5 class="tpcategory__title"><a href="shop.html">Décoration de Table <br> en Bois Flotté</a></h5>
                 </div>
             </div>
             <div class="tpcategory mb-40">
@@ -33,7 +33,7 @@
                     <span>12</span>
                 </div>
                 <div class="tpcategory__content">
-                    <h5 class="tpcategory__title"><a href="shop.html">Floor Driftwood <br> Sculpture</a></h5>
+                    <h5 class="tpcategory__title"><a href="shop.html">Sculpture <br> en Bois Flotté</a></h5>
                 </div>
             </div>
             <div class="tpcategory mb-40">
@@ -46,7 +46,7 @@
                     <span>03</span>
                 </div>
                 <div class="tpcategory__content">
-                    <h5 class="tpcategory__title"><a href="shop.html">Driftwood <br> Christmas Tree </a></h5>
+                    <h5 class="tpcategory__title"><a href="shop.html">Arbre de Noël <br> en Bois Flotté</a></h5>
                 </div>
             </div>
             <div class="tpcategory mb-40">
@@ -59,7 +59,7 @@
                     <span>09</span>
                 </div>
                 <div class="tpcategory__content">
-                    <h5 class="tpcategory__title"><a href="shop.html"> Wooden <br> Bluetooth Speaker </a></h5>
+                    <h5 class="tpcategory__title"><a href="shop.html">Enceinte Bluetooth <br> en Bois</a></h5>
                 </div>
             </div>
             <div class="tpcategory mb-40">
@@ -72,7 +72,7 @@
                     <span>10</span>
                 </div>
                 <div class="tpcategory__content">
-                    <h5 class="tpcategory__title"><a href="shop.html">Receivers <br> & Amplifiers</a></h5>
+                    <h5 class="tpcategory__title"><a href="shop.html">Récepteurs <br> & Amplificateurs</a></h5>
                 </div>
             </div>
             <div class="tpcategory mb-40">
@@ -92,7 +92,7 @@
                     <span>05</span>
                 </div>
                 <div class="tpcategory__content">
-                    <h5 class="tpcategory__title"><a href="shop.html">Appetizer <br> Plate Set </a></h5>
+                    <h5 class="tpcategory__title"><a href="shop.html">Ensemble de <br> Plats Apéritifs</a></h5>
                 </div>
             </div>
         </div>

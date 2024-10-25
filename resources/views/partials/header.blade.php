@@ -130,21 +130,22 @@
                                     $client = App\Models\Client::where('user_id', $user->id)->first();
                                 @endphp
 
-                                <div class="flex items-center px-3 space-x-3 " data-dropdown-toggle="dropdown-user">
+                                <div class="flex items-center px-3 space-x-3 "
+                                    data-dropdown-toggle="dropdown-user-header-1">
                                     <div>
                                         <button type="button"
                                             class="flex text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                                            aria-expanded="false" data-dropdown-toggle="dropdown-user">
+                                            aria-expanded="false" data-dropdown-toggle="dropdown-user-header-1">
                                             <span class="sr-only">Open user menu</span>
-                                            <img class="w-8 h-8 rounded-full border mx-2"
-                                                src="{{ asset('img/profil.jpeg') }}" alt="user photo">
+                                            <img class="w-14 rounded-full border mx-2" src="{{ asset('img/profil.jpeg') }}"
+                                                alt="user photo">
 
                                         </button>
                                     </div>
 
 
                                     <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
-                                        id="dropdown-user">
+                                        id="dropdown-user-header-1">
                                         <div class="px-4 py-3" role="none">
                                             <p class="text-sm text-gray-900 dark:text-white" role="none">
                                                 {{ Auth::user()->name }}
@@ -154,13 +155,17 @@
                                                 {{ Auth::user()->email }}
                                             </p>
                                         </div>
-                                        <ul class="py-1" role="none">
+                                        <ul class="py-2" role="none">
                                             <li>
                                                 <a href="{{ route('profile.edit') }}"
                                                     class="block text-xs py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                                     role="menuitem">Profil</a>
                                             </li>
-
+                                            <li>
+                                                <a href="{{ route('profile.edit') }}"
+                                                    class="block text-xs py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                                    role="menuitem">Mes commandes</a>
+                                            </li>
                                             <li>
                                                 <!-- Authentication -->
                                                 <form id="logout-form" method="POST" action="{{ route('logout') }}"
@@ -173,16 +178,17 @@
                                             </li>
                                         </ul>
                                     </div>
-                                @else
-                                    <a href="{{ route('login') }}"><i class="fal fa-user"></i></a>
-                                    <!-- Lien vers le formulaire de connexion -->
-                                @endauth
-                                <a href="wishlist.html"><i class="fal fa-heart"></i></a>
-                            </div>
+                                </div>
+                            @else
+                                <a href="{{ route('login') }}"><i class="fal fa-user"></i></a>
+                                <!-- Lien vers le formulaire de connexion -->
+                            @endauth
+                            <a href="wishlist.html"><i class="fal fa-heart"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </header>
 <!-- header-area-end -->

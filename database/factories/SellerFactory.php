@@ -22,7 +22,6 @@ class SellerFactory extends Factory
             'address' => $this->faker->address,
             'city_id' => $this->faker->randomElement(City::pluck('id')),
             'user_id' => User::factory()
-
         ];
     }
 }

@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" id="search-table">
     <div class="card-body">
         <div class="table-responsive">
             <table id="usersRolesTable" class="table table-bordered w-full">

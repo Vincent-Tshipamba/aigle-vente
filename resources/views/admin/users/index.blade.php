@@ -114,9 +114,59 @@
 
 @section('script')
     <script>
-        function remove(event) {
+        if (document.getElementById("search-table") && typeof simpleDatatables.DataTable !== 'undefined') {
+            const dataTable = new simpleDatatables.DataTable("#search-table", {
+                searchable: true,
+                sortable: false
+            });
+        }
+    </script>
+    <script>
+        function remove(event, userId, userName) {
             event.preventDefault();
-
+            var urlUserDestroy = "{{ route('users.delete', ':userId') }}"
+                .replace(':userId', userId)
+            Swal.fire({
+                title: 'Utilisateur : ' + userName,
+                text: 'Etes-vous sûr de vouloir supprimer cet utilisateur?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Oui, suprimer',
+                cancelButtonText: 'Non, annuler',
+                background: '#132329', // Fond sombre
+                color: '#fff', // Couleur du texte blanche
+                iconColor: '#ffdd57',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: urlUserDestroy,
+                        method: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            console.log(
+                                'User deleted successfully');
+                            Swal.fire({
+                                title: 'Succès!',
+                                text: response.message,
+                                icon: 'success',
+                                timer: 2000,
+                                timerProgressBar: true,
+                                background: '#132329', // Fond sombre
+                                color: '#fff', // Couleur du texte blanche
+                                iconColor: '#ffdd57',
+                            });
+                            getUsersRoles();
+                            userRoles.splice(userId, 1);
+                        },
+                        error: function(error) {
+                            console.error('Error deleting user:',
+                                error);
+                        }
+                    });
+                }
+            });
         }
     </script>
 
@@ -362,7 +412,7 @@
                     var header = '<tr class="bg-bg-chart"><th style="background-color: #d1d5db;"></th>';
                     roles.forEach(function(role) {
                         header +=
-                            '<th class="text-center"><a href="#" class="text-black dark:text-white p-2 bg-bg-chart hover:bg-gray-600" data-role-id="' +
+                            '<th class="text-center"><a href="#" class="text-black dark:text-white p-2 hover:bg-[#f9b544]" data-role-id="' +
                             role.id + '" data-role-name="' + role.name + '">' + role.name + '</a></th>';
                     });
                     header += '</tr>';
@@ -406,7 +456,7 @@
                         var rowClass = isManageAll ? 'manage-all-permission' : '';
 
                         body += '<tr class="' + rowClass +
-                            '"><th class="text-md" style="background-color:#132329;"><a href="#" class="hover:bg-custom-dark p-2" data-permission-id="' +
+                            '"><th class="text-md" ><a href="#" class="hover:bg-[#f9b544] p-2" data-permission-id="' +
                             permission.id + '" data-permission-name="' + permission.name + '">' +
                             permission.name + '</a></th>';
                         roles.forEach(function(role) {
@@ -768,7 +818,7 @@
                     // Initial rendering of the table
                     users.forEach(function(user) {
                         body +=
-                            '<tr><th class="text-md" style="background-color:#132329;"><a href="#" class="hover:bg-custom-dark p-2" data-user-id="' +
+                            '<tr><th class="text-md"><a href="#" class="hover:bg-[#f9b544] text-start p-2" data-user-id="' +
                             user.id + '" data-user-name="' + user.name + '">' + user.name + '</a></th>';
                         roles.forEach(function(role) {
                             var checked = userRoles[user.id] && userRoles[user.id].includes(role
@@ -787,7 +837,7 @@
                         event.preventDefault();
                         var userId = $(this).data('user-id');
                         var userName = $(this).text();
-                        var urlUserDestroy = "{{ route('users.destroy', ':userId') }}"
+                        var urlUserDestroy = "{{ route('users.delete', ':userId') }}"
                             .replace(':userId', userId)
 
                         Swal.fire({

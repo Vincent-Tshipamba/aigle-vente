@@ -11,6 +11,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('users', UserController::class);
+
+Route::delete('/users/delete/{user}', [UserController::class, 'destroyUser'])->name('users.delete');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('admin.profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('admin.profile.update');

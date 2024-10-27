@@ -4,7 +4,7 @@
         <div class="row align-items-center">
             <div class="col-xl-2 col-lg-3">
                 <div class="logo">
-                    <a href="{{ route('home') }}"><img src="{{ asset('img/logo/logo.png') }}" alt="logo"></a>
+                    <a href="{{ route('home') }}"><img src="{{ asset('img/logo/logo_sans_bg.png') }}" width="25%" alt="logo"></a>
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6">

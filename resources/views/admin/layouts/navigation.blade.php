@@ -1,7 +1,7 @@
 <div class="fixed w-full z-30 flex bg-gray-900 dark:bg-[#0F172A] p-2 items-center justify-center h-16 px-10">
     <div
         class="flex items-center justify-center flex-none h-full ml-12 duration-500 ease-in-out transform logo dark:text-white">
-        <a href="{{ route('dashboard') }}" class="flex ms-2 md:me-24">
+        <a href="{{ route('admin.dashboard') }}" class="flex ms-2 md:me-24">
             <img src="{{ asset('img\logo\logo_sans_bg.png') }}" class="h-8 me-3" alt="Logo de Aigle Vente" />
             <span class="self-center font-semibold text-white text-1xl sm:text-1xl whitespace-nowrap">
                 Aigle Vente
@@ -113,7 +113,7 @@
         <div
             class="hover:ml-4 w-full text-white  hover:text-[#e38407] dark:hover:text-[#e38407]  p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
 
-            <a href="{{ route('dashboard') }}"
+            <a href="{{ route('admin.dashboard') }}"
                 class="hover:ml-4 justify-end pr-5  hover:text-[#e38407] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('dashboard') ? ' text-[#e38407] ' : 'text-white' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <path fill="currentColor"
@@ -128,7 +128,7 @@
         </div>
         <div
             class="hover:ml-4 w-full hover:text-[#e38407] dark:hover:text-[#e38407]  p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
-            <a href="{{ route('users.index') }}"
+            <a href="{{ route('admin.users.index') }}"
                 class="hover:ml-4 justify-end pr-5   hover:text-[#e38407] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('users.index') ? ' text-[#e38407] ' : 'text-white' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16">
                     <path fill="white" fill-rule="evenodd"
@@ -208,7 +208,7 @@
     <!-- MINI SIDEBAR-->
     <div class="mini mt-20 flex flex-col space-y-2 w-full h-[calc(100vh)]">
         <!-- Dashboard -->
-        <a href="{{ route('dashboard') }}"
+        <a href="{{ route('admin.dashboard') }}"
             class="hover:ml-4 justify-end pr-5   hover:text-[#ce4e76] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('dashboard') ? ' text-[#e38407] ' : 'text-white' }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path fill="currentColor"
@@ -220,7 +220,7 @@
             </svg>
         </a>
         <!-- Utilisateurs -->
-        <a href="{{ route('users.index') }}"
+        <a href="{{ route('admin.users.index') }}"
             class="hover:ml-4 justify-end pr-5   hover:text-[#e38407] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('users.index') ? ' text-[#e38407] ' : 'text-white' }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16">
                 <path fill="currentColor" fill-rule="evenodd"

@@ -6,11 +6,12 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolePermissionController;
 
-Route::get('/dashboard', function () {
+Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->middleware('checkRole:superadmin')->name('admin.dashboard');
 
 Route::resource('users', UserController::class);
+Route::get('admin/users', [UserController::class, 'index'])->middleware('checkRole:superadmin')->name('admin.users.index');
 
 Route::delete('/users/delete/{user}', [UserController::class, 'destroyUser'])->name('users.delete');
 

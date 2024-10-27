@@ -1027,52 +1027,54 @@
                     // Attach change event listeners to checkboxes
                     var requestInProgress = false;
 
-                    $('#usersRolesTable').on('change', 'input.user-checkbox', function() {
-                        if (requestInProgress) {
-                            return;
-                        }
-
-                        requestInProgress = true;
-
-                        var roleId = $(this).data('role-id');
-                        var userId = $(this).data('user-id');
-                        var checked = $(this).is(':checked');
-                        // Your existing AJAX logic to update user's roles on the server
-                        $.ajax({
-                            url: "{{ route('users.roles.update') }}",
-                            method: 'POST',
-                            data: {
-                                _token: '{{ csrf_token() }}',
-                                role_id: roleId,
-                                user_id: userId,
-                                assign: checked
-                            },
-                            success: function(response) {
-                                Swal.fire({
-                                    title: 'Succès!',
-                                    text: response.message,
-                                    icon: 'success',
-                                    timer: 2000,
-                                    timerProgressBar: true,
-                                    background: '#132329', // Fond sombre
-                                    color: '#fff', // Couleur du texte blanche
-                                    iconColor: '#ffdd57',
-                                });
-                                requestInProgress = false;
-                            },
-                            error: function(error) {
-                                Swal.fire({
-                                    title: 'Erreur!',
-                                    text: 'Il y a eu une erreur lors de l\'assignation du rôle.',
-                                    icon: 'error',
-                                    confirmButtonText: 'OK',
-                                    background: '#132329', // Fond sombre
-                                    color: '#fff', // Couleur du texte blanche
-                                    iconColor: '#ffdd57',
-                                });
-                                requestInProgress = false;
+                        $('#usersRolesTable').on('change', 'input.user-checkbox', function() {
+                            if (requestInProgress) {
+                                return;
                             }
+
+                            requestInProgress = true;
+
+                            var roleId = $(this).data('role-id');
+                            var userId = $(this).data('user-id');
+                            var checked = $(this).is(':checked');
+                            // Your existing AJAX logic to update user's roles on the server
+                            $.ajax({
+                                url: "{{ route('users.roles.update') }}",
+                                method: 'POST',
+                                data: {
+                                    _token: '{{ csrf_token() }}',
+                                    role_id: roleId,
+                                    user_id: userId,
+                                    assign: checked
+                                },
+                                success: function(response) {
+                                    Swal.fire({
+                                        title: 'Succès!',
+                                        text: response.message,
+                                        icon: 'success',
+                                        timer: 2000,
+                                        timerProgressBar: true,
+                                        background: '#132329', // Fond sombre
+                                        color: '#fff', // Couleur du texte blanche
+                                        iconColor: '#ffdd57',
+                                    });
+                                    requestInProgress = false;
+                                },
+                                error: function(error) {
+                                    Swal.fire({
+                                        title: 'Erreur!',
+                                        text: 'Il y a eu une erreur lors de l\'assignation du rôle.',
+                                        icon: 'error',
+                                        confirmButtonText: 'OK',
+                                        background: '#132329', // Fond sombre
+                                        color: '#fff', // Couleur du texte blanche
+                                        iconColor: '#ffdd57',
+                                    });
+                                    requestInProgress = false;
+                                }
+                            });
                         });
+
                     });
                 },
                 error: function(error) {

@@ -161,14 +161,11 @@
                             userRoles.splice(userId, 1);
                         },
                         error: function(error) {
-                            console.error('Error deleting user:',
-                                error);
+                            console.error('Error deleting user:', error);
                         }
                     });
                 }
             });
-        function remove(event) {
-            event.preventDefault();
         }
     </script>
 
@@ -435,11 +432,12 @@
                                 if (!$(this).is(':checked')) {
                                     allChecked = false;
                                 }
-                        }
-                    });
+                            }
+                        });
+                    }
                 }
             });
-        });
+        }
 
         $('#newRoleButton').click(function(e) {
             e.preventDefault();
@@ -573,19 +571,15 @@
                         var rowClass = isManageAll ? 'manage-all-permission' : '';
 
                         body += '<tr class="' + rowClass +
-                            '"><th class="text-md" ><a href="#" class="hover:bg-[#f9b544] p-2" data-permission-id="' +
-                    // Initial rendering of the table
-                    permissions.forEach(function(permission) {
-                        var isManageAll = (permission.name === 'gérer tout');
-                        var rowClass = isManageAll ? 'manage-all-permission' : '';
-
-                        body += '<tr class="' + rowClass +
                             '"><th class="text-md" style="background-color:#132329;"><a href="#" class="hover:bg-custom-dark p-2" data-permission-id="' +
-                            permission.id + '" data-permission-name="' + permission.name + '">' +
+                            permission.id + '" data-permission-name="' + permission.name +
+                            '">' +
                             permission.name + '</a></th>';
                         roles.forEach(function(role) {
-                            var checked = rolePermissions[role.id] && rolePermissions[
-                                role.id].includes(permission.id) ? 'checked' : '';
+                            var checked = rolePermissions[role.id] &&
+                                rolePermissions[
+                                    role.id].includes(permission.id) ? 'checked' :
+                                '';
                             body +=
                                 '<td class="text-center"><input type="checkbox" class="permission-checkbox" data-role-id="' +
                                 role.id + '" data-permission-id="' + permission.id +
@@ -600,7 +594,8 @@
                         event.preventDefault();
                         var permissionId = $(this).data('permission-id');
                         var permissionName = $(this).text();
-                        var urlPermissionUpdate = "{{ route('permissions.update', ':permissionId') }}"
+                        var urlPermissionUpdate =
+                            "{{ route('permissions.update', ':permissionId') }}"
                             .replace(':permissionId', permissionId)
                         var urlPermissionDestroy =
                             "{{ route('permissions.destroy', ':permissionId') }}"
@@ -632,10 +627,12 @@
                                     },
                                     success: function(response) {
                                         console.log(
-                                            'Permission updated successfully');
+                                            'Permission updated successfully'
+                                        );
                                         Swal.fire({
                                             title: 'Succès!',
-                                            text: response.message,
+                                            text: response
+                                                .message,
                                             icon: 'success',
                                             timer: 2000,
                                             timerProgressBar: true,
@@ -646,11 +643,13 @@
                                         getRolesAndPermissions();
                                     },
                                     error: function(error) {
-                                        console.error('Error updating permission:',
+                                        console.error(
+                                            'Error updating permission:',
                                             error);
                                     }
                                 });
-                            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                            } else if (result.dismiss === Swal.DismissReason
+                                .cancel) {
                                 // Send AJAX request to delete permission
                                 $.ajax({
                                     url: urlPermissionDestroy,
@@ -660,10 +659,12 @@
                                     },
                                     success: function(response) {
                                         console.log(
-                                            'Permission deleted successfully');
+                                            'Permission deleted successfully'
+                                        );
                                         Swal.fire({
                                             title: 'Succès!',
-                                            text: response.message,
+                                            text: response
+                                                .message,
                                             icon: 'success',
                                             timer: 2000,
                                             timerProgressBar: true,
@@ -674,7 +675,8 @@
                                         getRolesAndPermissions();
                                     },
                                     error: function(error) {
-                                        console.error('Error deleting permission:',
+                                        console.error(
+                                            'Error deleting permission:',
                                             error);
                                     }
                                 });
@@ -686,10 +688,12 @@
                         event.preventDefault();
                         var roleId = $(this).data('role-id');
                         var roleName = $(this).text();
-                        var urlRoleUpdate = "{{ route('roles.update', ':roleId') }}".replace(':roleId',
-                            roleId)
-                        var urlRoleDestroy = "{{ route('roles.destroy', ':roleId') }}".replace(
-                            ':roleId', roleId)
+                        var urlRoleUpdate = "{{ route('roles.update', ':roleId') }}"
+                            .replace(':roleId',
+                                roleId)
+                        var urlRoleDestroy = "{{ route('roles.destroy', ':roleId') }}"
+                            .replace(
+                                ':roleId', roleId)
 
                         Swal.fire({
                             title: 'Role : ' + roleName,
@@ -716,10 +720,13 @@
                                         name: newRoleName,
                                     },
                                     success: function(response) {
-                                        console.log('Role updated successfully');
+                                        console.log(
+                                            'Role updated successfully'
+                                        );
                                         Swal.fire({
                                             title: 'Succès!',
-                                            text: response.message,
+                                            text: response
+                                                .message,
                                             icon: 'success',
                                             timer: 2000,
                                             timerProgressBar: true,
@@ -730,11 +737,13 @@
                                         getRolesAndPermissions();
                                     },
                                     error: function(error) {
-                                        console.error('Error updating role:',
+                                        console.error(
+                                            'Error updating role:',
                                             error);
                                     }
                                 });
-                            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                            } else if (result.dismiss === Swal.DismissReason
+                                .cancel) {
                                 // Send AJAX request to delete role
                                 $.ajax({
                                     url: urlRoleDestroy,
@@ -743,10 +752,13 @@
                                         _token: '{{ csrf_token() }}'
                                     },
                                     success: function(response) {
-                                        console.log('Role deleted successfully');
+                                        console.log(
+                                            'Role deleted successfully'
+                                        );
                                         Swal.fire({
                                             title: 'Succès!',
-                                            text: response.message,
+                                            text: response
+                                                .message,
                                             icon: 'success',
                                             timer: 2000,
                                             timerProgressBar: true,
@@ -757,7 +769,8 @@
                                         getRolesAndPermissions();
                                     },
                                     error: function(error) {
-                                        console.error('Error deleting role:',
+                                        console.error(
+                                            'Error deleting role:',
                                             error);
                                     }
                                 });
@@ -767,7 +780,6 @@
 
                     // Attach change event listeners to checkboxes
                     var requestInProgress = false;
-
 
                     // Attach change event listeners to checkboxes
                     var requestInProgress = false;
@@ -832,7 +844,7 @@
                 error: function(error) {
                     console.error("There was an error fetching roles and permissions:", error);
                 }
-            });
+            })
         }
     </script>
 
@@ -946,7 +958,6 @@
                     // Initial rendering of the table
                     users.forEach(function(user) {
                         body +=
-                            '<tr><th class="text-md"><a href="#" class="hover:bg-[#f9b544] text-start p-2" data-user-id="' +
                             '<tr><th class="text-md" style="background-color:#132329;"><a href="#" class="hover:bg-custom-dark p-2" data-user-id="' +
                             user.id + '" data-user-name="' + user.name + '">' + user.name + '</a></th>';
                         roles.forEach(function(role) {
@@ -1026,20 +1037,6 @@
                         var roleId = $(this).data('role-id');
                         var userId = $(this).data('user-id');
                         var checked = $(this).is(':checked');
-
-                    // Attach change event listeners to checkboxes
-                    var requestInProgress = false;
-
-                    $('#usersRolesTable').on('change', 'input.user-checkbox', function() {
-                        if (requestInProgress) {
-                            return;
-                        }
-
-                        requestInProgress = true;
-
-                        var roleId = $(this).data('role-id');
-                        var userId = $(this).data('user-id');
-                        var checked = $(this).is(':checked');
                         // Your existing AJAX logic to update user's roles on the server
                         $.ajax({
                             url: "{{ route('users.roles.update') }}",
@@ -1081,7 +1078,7 @@
                 error: function(error) {
                     console.error("There was an error fetching roles and permissions:", error);
                 }
-            });
+            })
         }
     </script>
 

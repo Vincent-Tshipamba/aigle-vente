@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Shop;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreShopRequest;
 use App\Http\Requests\UpdateShopRequest;
-use App\Models\Shop;
 
 class ShopController extends Controller
 {
@@ -13,54 +14,48 @@ class ShopController extends Controller
      */
     public function index()
     {
-        //
+        $shops = Shop::all();
+        return response()->json($shops);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'seller_id' => 'required|exists:sellers,_id',
+            'description' => 'nullable|string'
+        ]);
+
+        $shop = Shop::create($validated);
+        return response()->json($shop, 201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreShopRequest $request)
+    public function show($id)
     {
-        //
+        $shop = Shop::findOrFail($id);
+        return response()->json($shop);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Shop $shop)
+    public function update(Request $request, $id)
     {
-        //
+        $shop = Shop::findOrFail($id);
+
+        $validated = $request->validate([
+            'name' => 'string|max:255',
+            'address' => 'string|max:255',
+            'seller_id' => 'exists:sellers,_id',
+            'description' => 'string'
+        ]);
+
+        $shop->update($validated);
+        return response()->json($shop);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Shop $shop)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateShopRequest $request, Shop $shop)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Shop $shop)
-    {
-        //
+        $shop = Shop::findOrFail($id);
+        $shop->delete();
+        return response()->json(['message' => 'Shop deleted successfully']);
     }
 }

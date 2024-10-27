@@ -25,7 +25,7 @@
                             </td>
                             <td>
                                 <a href="{{ route('users.destroy', $user->id) }}"
-                                    onclick="remove(event)">
+                                    onclick="remove(event, '{{$user->id}}', '{{ $user->name }}')">
                                     <svg class="w-6 h-6 text-black dark:text-white hover:text-red-500 dark:hover:text-red-500" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         fill="currentColor" viewBox="0 0 24 24">

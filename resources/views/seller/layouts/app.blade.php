@@ -19,7 +19,7 @@
 
 <body class="body bg-white dark:bg-[#1E293B] text-black">
     <div class=" bg-gray-100 dark:bg-[#1E293B] ">
-        @include('admin.layouts.navigation')
+        @include('seller.layouts.navigation')
         <div class="duration-500 ease-in-out transform content ">
             <div class=" dark:bg-[#1e293bf3] bg-white pt-20 px-2 md:px-5 pb-4 ml-12  backdrop-blur-2xl">
                 <!-- Page Content -->
@@ -29,9 +29,6 @@
             </div>
         </div>
     </div>
-    <script src="{{ Vite::asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ Vite::asset('node_modules/sweetalert2/dist/sweetalert2.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script>
     <script>
         const sidebar = document.querySelector("aside");
         const maxSidebar = document.querySelector(".max")

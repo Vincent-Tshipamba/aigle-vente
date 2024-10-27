@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreCityRequest;
 use App\Http\Requests\UpdateCityRequest;
 
@@ -13,54 +14,44 @@ class CityController extends Controller
      */
     public function index()
     {
-        //
+        $cities = City::all();
+        return response()->json($cities);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string'
+        ]);
+
+        $city = City::create($validated);
+        return response()->json($city, 201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreCityRequest $request)
+    public function show($id)
     {
-        //
+        $city = City::findOrFail($id);
+        return response()->json($city);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(City $city)
+    public function update(Request $request, $id)
     {
-        //
+        $city = City::findOrFail($id);
+
+        $validated = $request->validate([
+            'name' => 'string|max:255',
+            'description' => 'string'
+        ]);
+
+        $city->update($validated);
+        return response()->json($city);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(City $city)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateCityRequest $request, City $city)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(City $city)
-    {
-        //
+        $city = City::findOrFail($id);
+        $city->delete();
+        return response()->json(['message' => 'City deleted successfully']);
     }
 }

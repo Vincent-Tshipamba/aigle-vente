@@ -24,7 +24,8 @@ class UserController extends Controller
         $roleId = $request->input('role_id');
         $assign = $request->input('assign');
         $user = User::find($userId);
-        if ($assign === true) {
+      
+        if ($assign === "true") {
             $user->roles()->attach($roleId);
         } else {
             $user->roles()->detach($roleId);

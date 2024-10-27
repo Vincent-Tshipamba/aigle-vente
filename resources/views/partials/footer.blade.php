@@ -7,7 +7,7 @@
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="footer-widget footer-col-1 mb-40">
                             <div class="footer-logo mb-30">
-                                <a href="{{ route('home') }}"><img src="{{ asset('img/logo/logo-white.png') }}"
+                                <a href="{{ route('home') }}"><img src="{{ asset('img/logo/logo_sans_bg.png') }}"
                                         alt="logo"></a>
                             </div>
                             <div class="footer-content">

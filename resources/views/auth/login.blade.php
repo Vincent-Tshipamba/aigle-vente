@@ -1,8 +1,6 @@
 <x-app-layout>
-
-
     <!-- track-area-start -->
-    <section class="track-area pt-80 pb-40">
+    <section class="track-area pt-60 pb-40">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-6 col-sm-12">
@@ -77,9 +75,13 @@
                                         </div>
                                     </div>
 
-                                    <div class="tptrack__btn">
+                                    <div class="tptrack__btn flex flex-col space-y-2">
                                         <button type="submit" class="tptrack__submition">
                                             Connectez-vous maintenant<i class="fal fa-long-arrow-right"></i>
+                                        </button>
+                                        <button type="button" onclick="window.location.href='/register'" class="rounded-full border text-white hover:font-bold bg-gray-400 hover:bg-[#040404] px-10 py-3 space-x-3">
+                                            <span>Je n'ai pas de compte</span>
+                                            <i class="fal fa-long-arrow-right"></i>
                                         </button>
                                     </div>
                                 </form>

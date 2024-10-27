@@ -7,39 +7,29 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('sellers')->group(function () {
-    Route::get('/', [SellerController::class, 'index']);
-    Route::post('/', [SellerController::class, 'store']);
-    Route::get('/{id}', [SellerController::class, 'show']);
-    Route::put('/{id}', [SellerController::class, 'update']);
-    Route::delete('/{id}', [SellerController::class, 'destroy']);
+Route::prefix('sellers/{seller}')->group(function () {
+    Route::get('/shops', [ShopController::class, 'index']);
+    Route::post('/shops', [ShopController::class, 'store']);
+    Route::put('/shops/{shop}', [ShopController::class, 'update']);
+    Route::delete('/shops/{shop}', [ShopController::class, 'destroy']);
 });
 
-// Route::prefix('products')->group(function () {
-// Route::get('/', [ProductController::class, 'index']);
-// Route::post('/', [ProductController::class, 'store']);
-// Route::get('/{id}', [ProductController::class, 'show']);
-// Route::put('/{id}', [ProductController::class, 'update']);
-// Route::delete('/{id}', [ProductController::class, 'destroy']);
-// });
-
-Route::resource('products', ProductController::class);
-
-Route::prefix('shops')->group(function () {
-    Route::get('/', [ShopController::class, 'index']);
-    Route::post('/', [ShopController::class, 'store']);
-    Route::get('/{id}', [ShopController::class, 'show']);
-    Route::put('/{id}', [ShopController::class, 'update']);
-    Route::delete('/{id}', [ShopController::class, 'destroy']);
+Route::prefix('shops/{shop}')->group(function () {
+    Route::get('/products', [ProductController::class, 'index']);
+    Route::post('/products', [ProductController::class, 'store']);
+    Route::put('/products/{product}', [ProductController::class, 'update']);
+    Route::delete('/products/{product}', [ProductController::class, 'destroy']);
 });
 
-
-Route::prefix('cities')->group(function () {
-    Route::get('/', [CityController::class, 'index']);
-    Route::post('/', [CityController::class, 'store']);
-    Route::get('/{id}', [CityController::class, 'show']);
-    Route::put('/{id}', [CityController::class, 'update']);
-    Route::delete('/{id}', [CityController::class, 'destroy']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/seller/dashboard', [DashboardController::class, 'index'])->name('seller.dashboard');
+    Route::get('/dashboard/sales-statistics/{seller}', [DashboardController::class, 'salesStatistics'])->name('dashboard.salesStatistics');
+    Route::get('/dashboard/order-statistics/{seller}', [DashboardController::class, 'orderStatistics'])->name('dashboard.orderStatistics');
+    Route::get('/sellers/create', [SellerController::class, 'create'])->name('sellers.create');
+    Route::post('/sellers', [SellerController::class, 'store'])->name('sellers.store');
+    Route::get('/sellers', [SellerController::class, 'index'])->name('sellers.index');
+    Route::get('/sellers/{id}', [SellerController::class, 'show'])->name('sellers.show');
+    Route::get('/sellers/{id}/edit', [SellerController::class, 'edit'])->name('sellers.edit');
+    Route::put('/sellers/{id}', [SellerController::class, 'update'])->name('sellers.update');
+    Route::delete('/sellers/{id}', [SellerController::class, 'destroy'])->name('sellers.destroy');
 });
-
-Route::get('seller/dashboard', [DashboardController::class, 'index']);

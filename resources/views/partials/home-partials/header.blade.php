@@ -56,6 +56,22 @@
                                             </button>
                                         </div>
 
+                                        @if (Auth::check() && !Auth::user()->isSeller())
+                                            <a href="{{ route('sellers.create') }}" class="tptrack__submition">Devenir
+                                                vendeur</a>
+                                        @else
+                                            <a href="{{ route("seller.dashboard") }}">
+                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    fill="currentColor" viewBox="0 0 24 24">
+                                                    <path fill-rule="evenodd"
+                                                        d="M4 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4Zm16 7H4v7h16v-7ZM5 8a1 1 0 0 1 1-1h.01a1 1 0 0 1 0 2H6a1 1 0 0 1-1-1Zm4-1a1 1 0 0 0 0 2h.01a1 1 0 0 0 0-2H9Zm2 1a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2H12a1 1 0 0 1-1-1Z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </a>
+                                        @endif
+
+
 
                                         <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
                                             id="dropdown-user-header">
@@ -128,9 +144,11 @@
                                             <li><a href="shop.html">Artisanat</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="shop.html"><i class="fal fa-shoe-prints"></i> Coffrets cadeaux</a></li>
+                                    <li><a href="shop.html"><i class="fal fa-shoe-prints"></i> Coffrets cadeaux</a>
+                                    </li>
                                     <li><a href="shop.html"><i class="fal fa-smile"></i> Cadeaux en plastique</a></li>
-                                    <li><a href="shop.html"><i class="fal fa-futbol"></i> Crème pour les mains</a></li>
+                                    <li><a href="shop.html"><i class="fal fa-futbol"></i> Crème pour les mains</a>
+                                    </li>
                                     <li><a href="shop.html"><i class="fal fa-crown"></i> Cosmétiques</a></li>
                                     <li><a href="shop.html"><i class="fal fa-gift"></i> Accessoires en soie</a></li>
                                 </ul>

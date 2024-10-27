@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Seller::class);
     }
+
+    public function isSeller(): bool
+    {
+        return $this->sellers()->exists();
+    }
 }

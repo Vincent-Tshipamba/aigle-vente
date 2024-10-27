@@ -2,95 +2,78 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Shop;
 use App\Models\Product;
-use Illuminate\Support\Str;
+use App\Models\Shop;
 use Illuminate\Http\Request;
-use App\Models\CategoryProduct;
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    // Afficher les produits d'une boutique pour le vendeur connecté
+    public function index(Shop $shop)
     {
-        $products = Product::with('category_product', 'shop')->paginate(5); // Ajustez la pagination selon vos besoins
-        return view('seller.produits.index', compact('products'));
+        $seller = Auth::user()->seller;
+
+        if (!$seller || !$seller->shops->contains($shop)) {
+            return response()->json(['error' => 'Accès non autorisé à cette boutique.'], 403);
+        }
+
+        $products = $shop->products;
+        return response()->json($products);
     }
 
-    
-
-    public function show($id)
+    // Créer un nouveau produit pour une boutique spécifique du vendeur connecté
+    public function store(Request $request, Shop $shop)
     {
-        $product = Product::findOrFail($id);
-        return view("seller.produits.show", compact('product'));
+        $seller = Auth::user()->seller;
+
+        if (!$seller || !$seller->shops->contains($shop)) {
+            return response()->json(['error' => 'Accès non autorisé à cette boutique.'], 403);
+        }
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'stock_quantity' => 'required|integer',
+            'unit_price' => 'required|numeric',
+            'category_produit_id' => 'required|exists:category_products,_id',
+            'description' => 'nullable|string',
+        ]);
+
+        $product = $shop->products()->create($validated);
+        return response()->json($product, 201);
     }
 
-    public function update(Request $request, $id)
+    // Mettre à jour un produit si le produit appartient à une boutique du vendeur connecté
+    public function update(Request $request, Product $product)
     {
-        $product = Product::findOrFail($id);
+        $seller = Auth::user()->seller;
+
+        if (!$seller || !$seller->shops->contains($product->shop)) {
+            return response()->json(['error' => 'Accès non autorisé à ce produit.'], 403);
+        }
 
         $validated = $request->validate([
             'name' => 'string|max:255',
-            'stock_quantity' => 'integer|min:0',
-            'unit_price' => 'numeric|min:0',
+            'stock_quantity' => 'integer',
+            'unit_price' => 'numeric',
             'category_produit_id' => 'exists:category_products,_id',
-            'shop_id' => 'exists:shops,_id',
-            'description' => 'string'
+            'description' => 'nullable|string',
         ]);
 
         $product->update($validated);
         return response()->json($product);
     }
 
-    public function destroy($id)
+    // Supprimer un produit si le produit appartient à une boutique du vendeur connecté
+    public function destroy(Product $product)
     {
-        $product = Product::findOrFail($id);
-        $product->delete();
-        return response()->json(['message' => 'Product deleted successfully']);
-    }
+        $seller = Auth::user()->seller;
 
-    public function create()
-    {
-        $categories = CategoryProduct::all();
-        $shops = Shop::all();
-        return view('seller.produits.create', compact('categories', 'shops'));
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'stock_quantity' => 'required|integer|min:0',
-            'unit_price' => 'required|numeric|min:0',
-            'category_produit_id' => 'required|exists:category_products,id',
-            'shop_id' => 'required|exists:shops,id',
-            'picture' => 'nullable|image|max:2048'
-        ]);
-
-        $product = new Product($request->only([
-            'name',
-            'description',
-            'stock_quantity',
-            'unit_price',
-            'category_produit_id',
-            'shop_id'
-        ]));
-        $product->_id = (string) Str::uuid();
-
-        if ($request->hasFile('picture')) {
-            $imagePath = $request->file('picture')->store('products', 'public');
-            $product->picture = $imagePath;
+        if (!$seller || !$seller->shops->contains($product->shop)) {
+            return response()->json(['error' => 'Accès non autorisé à ce produit.'], 403);
         }
 
-        $product->save();
-
-        return redirect()->route('products.index')->with('success', 'Produit créé avec succès!');
+        $product->delete();
+        return response()->json(['message' => 'Produit supprimé']);
     }
-
-    
 }

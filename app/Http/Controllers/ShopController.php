@@ -4,58 +4,71 @@ namespace App\Http\Controllers;
 
 use App\Models\Shop;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreShopRequest;
-use App\Http\Requests\UpdateShopRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Afficher toutes les boutiques du vendeur connecté
     public function index()
     {
-        $shops = Shop::all();
+        $seller = Auth::user()->seller;
+
+        if (!$seller) {
+            return response()->json(['error' => 'Vendeur non trouvé.'], 404);
+        }
+
+        $shops = $seller->shops;
         return response()->json($shops);
     }
 
+    // Créer une nouvelle boutique pour le vendeur connecté
     public function store(Request $request)
     {
+        $seller = Auth::user()->seller;
+
+        if (!$seller) {
+            return response()->json(['error' => 'Vendeur non trouvé.'], 404);
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'seller_id' => 'required|exists:sellers,_id',
-            'description' => 'nullable|string'
+            'address' => 'required|string',
+            'description' => 'nullable|string',
         ]);
 
-        $shop = Shop::create($validated);
+        $shop = $seller->shops()->create($validated);
         return response()->json($shop, 201);
     }
 
-    public function show($id)
+    // Mettre à jour une boutique si elle appartient au vendeur connecté
+    public function update(Request $request, Shop $shop)
     {
-        $shop = Shop::findOrFail($id);
-        return response()->json($shop);
-    }
+        $seller = Auth::user()->seller;
 
-    public function update(Request $request, $id)
-    {
-        $shop = Shop::findOrFail($id);
+        if (!$seller || !$seller->shops->contains($shop)) {
+            return response()->json(['error' => 'Accès non autorisé à cette boutique.'], 403);
+        }
 
         $validated = $request->validate([
             'name' => 'string|max:255',
-            'address' => 'string|max:255',
-            'seller_id' => 'exists:sellers,_id',
-            'description' => 'string'
+            'address' => 'string',
+            'description' => 'nullable|string',
         ]);
 
         $shop->update($validated);
         return response()->json($shop);
     }
 
-    public function destroy($id)
+    // Supprimer une boutique si elle appartient au vendeur connecté
+    public function destroy(Shop $shop)
     {
-        $shop = Shop::findOrFail($id);
+        $seller = Auth::user()->seller;
+
+        if (!$seller || !$seller->shops->contains($shop)) {
+            return response()->json(['error' => 'Accès non autorisé à cette boutique.'], 403);
+        }
+
         $shop->delete();
-        return response()->json(['message' => 'Shop deleted successfully']);
+        return response()->json(['message' => 'Boutique supprimée']);
     }
 }

@@ -15,7 +15,7 @@ class CheckUserRole
         if ($user = Auth::user()) {
             if (!$user->hasAnyRole($roles)) {
                 // Rediriger vers la page d'accueil
-                return redirect()->route('dashboard')->with('error', 'Vous n\'avez pas accès à cette page.');
+                return redirect()->route('home')->with('error', 'Vous n\'avez pas accès à cette page.');
             }
         } else {
             // Si l'utilisateur n'est pas connecté, le rediriger vers la page de connexion

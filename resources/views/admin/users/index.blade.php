@@ -8,7 +8,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('dashboard') }}"><i class="bx bx-home-alt"></i></a>
+                            <a href="{{ route('admin.dashboard') }}"><i class="bx bx-home-alt"></i></a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">Liste des utilisateurs</li>
                     </ol>
@@ -958,7 +958,7 @@
                     // Initial rendering of the table
                     users.forEach(function(user) {
                         body +=
-                            '<tr><th class="text-md" style="background-color:#132329;"><a href="#" class="hover:bg-custom-dark p-2" data-user-id="' +
+                            '<tr><th class="text-md"><a href="#" class="hover:bg-[#] p-2" data-user-id="' +
                             user.id + '" data-user-name="' + user.name + '">' + user.name + '</a></th>';
                         roles.forEach(function(role) {
                             var checked = userRoles[user.id] && userRoles[user.id].includes(role
@@ -1027,54 +1027,52 @@
                     // Attach change event listeners to checkboxes
                     var requestInProgress = false;
 
-                        $('#usersRolesTable').on('change', 'input.user-checkbox', function() {
-                            if (requestInProgress) {
-                                return;
+                    $('#usersRolesTable').on('change', 'input.user-checkbox', function() {
+                        if (requestInProgress) {
+                            return;
+                        }
+
+                        requestInProgress = true;
+
+                        var roleId = $(this).data('role-id');
+                        var userId = $(this).data('user-id');
+                        var checked = $(this).is(':checked');
+                        // Your existing AJAX logic to update user's roles on the server
+                        $.ajax({
+                            url: "{{ route('users.roles.update') }}",
+                            method: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                role_id: roleId,
+                                user_id: userId,
+                                assign: checked
+                            },
+                            success: function(response) {
+                                Swal.fire({
+                                    title: 'Succès!',
+                                    text: response.message,
+                                    icon: 'success',
+                                    timer: 2000,
+                                    timerProgressBar: true,
+                                    background: '#132329', // Fond sombre
+                                    color: '#fff', // Couleur du texte blanche
+                                    iconColor: '#ffdd57',
+                                });
+                                requestInProgress = false;
+                            },
+                            error: function(error) {
+                                Swal.fire({
+                                    title: 'Erreur!',
+                                    text: 'Il y a eu une erreur lors de l\'assignation du rôle.',
+                                    icon: 'error',
+                                    confirmButtonText: 'OK',
+                                    background: '#132329', // Fond sombre
+                                    color: '#fff', // Couleur du texte blanche
+                                    iconColor: '#ffdd57',
+                                });
+                                requestInProgress = false;
                             }
-
-                            requestInProgress = true;
-
-                            var roleId = $(this).data('role-id');
-                            var userId = $(this).data('user-id');
-                            var checked = $(this).is(':checked');
-                            // Your existing AJAX logic to update user's roles on the server
-                            $.ajax({
-                                url: "{{ route('users.roles.update') }}",
-                                method: 'POST',
-                                data: {
-                                    _token: '{{ csrf_token() }}',
-                                    role_id: roleId,
-                                    user_id: userId,
-                                    assign: checked
-                                },
-                                success: function(response) {
-                                    Swal.fire({
-                                        title: 'Succès!',
-                                        text: response.message,
-                                        icon: 'success',
-                                        timer: 2000,
-                                        timerProgressBar: true,
-                                        background: '#132329', // Fond sombre
-                                        color: '#fff', // Couleur du texte blanche
-                                        iconColor: '#ffdd57',
-                                    });
-                                    requestInProgress = false;
-                                },
-                                error: function(error) {
-                                    Swal.fire({
-                                        title: 'Erreur!',
-                                        text: 'Il y a eu une erreur lors de l\'assignation du rôle.',
-                                        icon: 'error',
-                                        confirmButtonText: 'OK',
-                                        background: '#132329', // Fond sombre
-                                        color: '#fff', // Couleur du texte blanche
-                                        iconColor: '#ffdd57',
-                                    });
-                                    requestInProgress = false;
-                                }
-                            });
                         });
-
                     });
                 },
                 error: function(error) {

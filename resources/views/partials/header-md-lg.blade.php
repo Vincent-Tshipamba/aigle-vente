@@ -109,6 +109,8 @@
                                         </ul>
                                     </div>
                                 </div>
+
+                               
                             @else
                                 <a href="{{ route('login') }}"><i class="fal fa-user"></i></a>
                                 <!-- Lien vers le formulaire de connexion -->

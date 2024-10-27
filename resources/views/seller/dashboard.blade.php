@@ -7,7 +7,7 @@
             <a href="">
                 <div class="col bg-custom-dark p-4 rounded-lg shadow hover:bg-gray-900">
                     <div class="flex items-center">
-                        <h5 class="text-white text-lg">{{ $totalRevenue }}</h5>
+                        <h5 class="text-white text-lg"></h5>
                         <div class="ml-auto">
                             <i class='bx bx-group text-3xl text-white'></i>
                         </div>
@@ -23,7 +23,7 @@
             <a href="">
                 <div class="col hover:bg-gray-900 p-4 rounded-lg shadow bg-custom-dark">
                     <div class="flex items-center">
-                        <h5 class="text-white text-lg">{{ $totalShops }}</h5>
+                        <h5 class="text-white text-lg"></h5>
                         <div class="ml-auto">
                             <i class='bx bx-dollar text-3xl text-white'></i>
                         </div>
@@ -39,7 +39,7 @@
             <a href="">
                 <div class="col hover:bg-gray-900 p-4 rounded-lg shadow bg-custom-dark">
                     <div class="flex items-center">
-                        <h5 class="text-white text-lg">{{ $totalSellers }}</h5>
+                        <h5 class="text-white text-lg"></h5>
                         <div class="ml-auto">
                             <i class='bx bx-group text-3xl text-white'></i>
                         </div>
@@ -55,7 +55,7 @@
             <a href="">
                 <div class="col hover:bg-gray-900 p-4 rounded-lg shadow bg-custom-dark">
                     <div class="flex items-center">
-                        <h5 class="text-white text-lg">{{ $totalOrders }}</h5>
+                        <h5 class="text-white text-lg"></h5>
                         <div class="ml-auto">
                             <i class='bx bx-group text-3xl text-white'></i>
                         </div>
@@ -70,4 +70,50 @@
             </a>
         </div>
     </div>
+
+
+    <div class="card bg-bg-chart rounded-lg shadow-lg p-4 my-4">
+        <canvas id="monthlySalesChart"></canvas>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const monthlySalesData = @json($monthlySales);
+
+        const months = monthlySalesData.map(data => data.month);
+        const totalSales = monthlySalesData.map(data => data.total_sales);
+        const monthlyRevenue = monthlySalesData.map(data => data.monthly_revenue);
+
+        const ctx = document.getElementById('monthlySalesChart').getContext('2d');
+        const monthlySalesChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: months,
+                datasets: [{
+                        label: 'Ventes mensuelles',
+                        data: totalSales,
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Revenu mensuel',
+                        data: monthlyRevenue,
+                        backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 @endsection

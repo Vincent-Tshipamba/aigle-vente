@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Seller extends Model
 {
-    /** @use HasFactory<\Database\Factories\SellerFactory> */
     use HasFactory;
 
     protected $fillable = [
@@ -25,6 +24,18 @@ class Seller extends Model
         'user_id'
     ];
 
+    /**
+     * Ajout de types de conversion pour les attributs
+     */
+    protected $casts = [
+        'phone' => 'string',
+        'sexe' => 'string',
+        'city_id' => 'string',
+    ];
+
+    /**
+     * Initialisation de l'ID UUID
+     */
     protected static function boot()
     {
         parent::boot();
@@ -34,18 +45,43 @@ class Seller extends Model
         });
     }
 
+    /**
+     * Relation avec l'utilisateur (User)
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Relation avec la ville (City)
+     */
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);
     }
 
+    /**
+     * Relation avec les boutiques (Shops)
+     */
     public function shops(): HasMany
     {
         return $this->hasMany(Shop::class);
+    }
+
+    /**
+     * Méthode pour récupérer le nom complet
+     */
+    public function getFullNameAttribute(): string
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
+    /**
+     * Méthode pour vérifier si le vendeur a une photo de profil
+     */
+    public function hasProfilePicture(): bool
+    {
+        return !is_null($this->picture);
     }
 }

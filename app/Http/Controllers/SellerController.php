@@ -2,66 +2,55 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\Seller;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreSellerRequest;
-use App\Http\Requests\UpdateSellerRequest;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class SellerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function create()
     {
-        $sellers = Seller::all();
-        return response()->json($sellers);
+        $cities = City::all();
+
+        return view('seller.sellers.create', compact('cities'));
     }
 
+    // Créer un nouveau vendeur
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
-            'sexe' => 'required|string|max:10',
-            'address' => 'required|string|max:255',
-            'city_id' => 'required|exists:cities,_id',
-            'user_id' => 'required|exists:users,id'
-        ]);
+        try {
+            $validated = $request->validate([
+                'phone' => 'required|string|max:20',
+                'sexe' => 'required|string|in:Masculin,Féminin',
+                'address' => 'required|string|max:255',
+                'city_id' => 'required|exists:cities,id',
+                'picture' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            ]);
 
-        $seller = Seller::create($validated);
-        return response()->json($seller, 201);
-    }
+            $seller = new Seller($validated);
+            $seller->user_id = Auth::id();
 
-    public function show($id)
-    {
-        $seller = Seller::findOrFail($id);
-        return response()->json($seller);
-    }
+            // Gérer l'upload de l'image si présent
+            if ($request->hasFile('picture')) {
+                $filename = time() . '.' . $request->picture->extension();
+                $request->picture->move(public_path('images/sellers'), $filename);
+                $seller->picture = $filename;
+            }
 
-    public function update(Request $request, $id)
-    {
-        $seller = Seller::findOrFail($id);
+            // Extraire le nom et le sexe de l'utilisateur
+            $userName = Auth::user()->name;
+            [$firstName, $lastName] = explode('-', $userName);
 
-        $validated = $request->validate([
-            'first_name' => 'string|max:255',
-            'last_name' => 'string|max:255',
-            'phone' => 'string|max:20',
-            'sexe' => 'string|max:10',
-            'address' => 'string|max:255',
-            'city_id' => 'exists:cities,_id',
-            'user_id' => 'exists:users,id'
-        ]);
+            $seller->first_name = $firstName;
+            $seller->last_name = $lastName;
 
-        $seller->update($validated);
-        return response()->json($seller);
-    }
+            $seller->save();
 
-    public function destroy($id)
-    {
-        $seller = Seller::findOrFail($id);
-        $seller->delete();
-        return response()->json(['message' => 'Seller deleted successfully']);
+            return redirect()->route('seller.dashboard')->with('success', 'Vendeur créé avec succès!');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Une erreur s\'est produite lors de la création du vendeur.' . $e])->withInput();
+        }
     }
 }

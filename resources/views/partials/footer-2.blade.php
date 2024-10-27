@@ -7,7 +7,7 @@
                     <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
                         <div class="footer-widget footer-col-1 mb-40">
                             <div class="footer-logo mb-30">
-                                <a href="index.html"><img src="{{ asset('img/logo/logo.png') }}" alt="logo"></a>
+                                <a href="{{ route('home') }}"><img src="{{ asset('img/logo/logo_sans_bg.png') }}" alt="logo"></a>
                             </div>
                             <div class="footer-content">
                                 <p>Design origami rose élégant en trois <br> dimensions et décoration coexistent. <br>

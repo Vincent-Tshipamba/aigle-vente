@@ -111,7 +111,7 @@
                                 </nav>
                             </div>
                             <div class="mainmenu__logo">
-                                <a href="{{ route('home') }}"><img src="{{ asset('img/logo/logo.png') }}"
+                                <a href="{{ route('home') }}"><img src="{{ asset('img/logo/logo_sans_bg.png') }}" width="25%"
                                         alt=""></a>
                             </div>
                         </div>

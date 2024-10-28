@@ -14,7 +14,7 @@ class OrderFactory extends Factory
     {
         return [
             'order_date' => $this->faker->date,
-            'client_id' => Client::factory(),
+            'client_id' => $this->faker->randomElement(Client::pluck('id')),
             'status' => $this->faker->randomElement(['En cours', 'Terminée', 'Annulée']),
             'frais_livraison' => $this->faker->randomFloat(2, 0, 100)
         ];

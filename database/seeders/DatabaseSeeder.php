@@ -27,6 +27,8 @@ class DatabaseSeeder extends Seeder
             DeliverySeeder::class,
             PanierSeeder::class,
             PanierItemSeeder::class,
+            StockSeeder::class,
+            RolesPermissionsSeeder::class,
         ]);
 
     }

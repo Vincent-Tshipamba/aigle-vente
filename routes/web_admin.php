@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\ShopController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\SellerController;
@@ -26,7 +26,7 @@ Route::middleware(['auth', 'userOnline', 'checkRole:superadmin'])->group(functio
     Route::get('/profile', [ProfileController::class, 'edit'])->name('admin.profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('admin.profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('admin.profile.destroy');
-
+    Route::post('admin/users/change-status', [UserController::class, 'changeUserStatus'])->name('admin.users.change-status');
 
     // Roles and Permissions
     Route::post('/users/roles/update', [UserController::class, 'updateUserRole'])->name('users.roles.update');

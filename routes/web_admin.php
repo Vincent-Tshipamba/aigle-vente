@@ -2,8 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\ShopController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\SellerController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\Admin\DashboardController;
 
@@ -42,5 +46,20 @@ Route::middleware('auth')->group(function () {
     Route::delete('/permissions/{permission}', [RolePermissionController::class, 'destroyPermission'])->name('permissions.destroy');
 
     // Clients
-    Route::resource('clients', ClientController::class);
+    Route::get('admin/clients', [ClientController::class, 'index'])->middleware('checkRole:superadmin')->name('admin.clients.index');
+    Route::delete('admin/clients/delete/{client}', [ClientController::class, 'destroyClient'])->name('admin.clients.delete');
+
+    // Sellers
+    Route::get('admin/sellers', [SellerController::class, 'index'])->middleware('checkRole:superadmin')->name('admin.sellers.index');
+    Route::get('admin/sellers/{seller}', [SellerController::class, 'show'])->name('admin.sellers.show');
+
+    // Products
+    Route::get('admin/products', [ProductController::class, 'index'])->middleware('checkRole:superadmin')->name('admin.products.index');
+
+    // Orders
+    Route::get('admin/orders', [OrderController::class, 'index'])->middleware('checkRole:superadmin')->name('admin.orders.index');
+
+    // Shops
+    Route::get('admin/shops', [ShopController::class, 'index'])->middleware('checkRole:superadmin')->name('admin.shops.index');
+    Route::get('admin/shops/{shop}', [ShopController::class, 'show'])->name('admin.shops.show');
 })->middleware('checkRole:superadmin');

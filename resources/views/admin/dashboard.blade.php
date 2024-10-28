@@ -309,7 +309,7 @@
         let myChart;
 
         function fetchChartData(year, month) {
-            let url = `/admin/clients/?year=${year}`;
+            let url = `/admin/api/clients?year=${year}`;
             if (month !== "all") {
                 url += `&month=${month}`;
             }

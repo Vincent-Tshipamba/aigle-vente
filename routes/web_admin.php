@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin\CategoryProductController;
 Route::middleware('auth')->group(function () {
     // Dashboard
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('/admin/clients', [DashboardController::class, 'getClientsByPeriod'])->name('admin.clients.index');
+    Route::get('/admin/api/clients', [DashboardController::class, 'getClientsByPeriod']);
 
 
     // Users
@@ -47,25 +47,25 @@ Route::middleware('auth')->group(function () {
     Route::delete('/permissions/{permission}', [RolePermissionController::class, 'destroyPermission'])->name('permissions.destroy');
 
     // Clients
-    Route::get('admin/clients', [ClientController::class, 'index'])->middleware('checkRole:superadmin')->name('admin.clients.index');
+    Route::get('admin/clients', [ClientController::class, 'index'])->name('admin.clients.index');
     Route::delete('admin/clients/delete/{client}', [ClientController::class, 'destroyClient'])->name('admin.clients.delete');
 
     // Sellers
-    Route::get('admin/sellers', [SellerController::class, 'index'])->middleware('checkRole:superadmin')->name('admin.sellers.index');
+    Route::get('admin/sellers', [SellerController::class, 'index'])->name('admin.sellers.index');
     Route::get('admin/sellers/{seller}', [SellerController::class, 'show'])->name('admin.sellers.show');
 
     // Products
-    Route::get('admin/products', [ProductController::class, 'index'])->middleware('checkRole:superadmin')->name('admin.products.index');
+    Route::get('admin/products', [ProductController::class, 'index'])->name('admin.products.index');
     Route::get('admin/products/{product}', [ProductController::class, 'show'])->name('admin.products.show');
     // Orders
     Route::get('admin/orders/{order}', [OrderController::class, 'show'])->name('admin.orders.show');
-    Route::get('admin/orders', [OrderController::class, 'index'])->middleware('checkRole:superadmin')->name('admin.orders.index');
+    Route::get('admin/orders', [OrderController::class, 'index'])->name('admin.orders.index');
 
     // Categories
-    Route::get('admin/categories', [CategoryProductController::class, 'index'])->middleware('checkRole:superadmin')->name('admin.categories.index');
+    Route::get('admin/categories', [CategoryProductController::class, 'index'])->name('admin.categories.index');
     Route::get('admin/categories/{category}', [CategoryProductController::class, 'show'])->name('admin.categories.show');
 
     // Shops
-    Route::get('admin/shops', [ShopController::class, 'index'])->middleware('checkRole:superadmin')->name('admin.shops.index');
+    Route::get('admin/shops', [ShopController::class, 'index'])->name('admin.shops.index');
     Route::get('admin/shops/{shop}', [ShopController::class, 'show'])->name('admin.shops.show');
 })->middleware('checkRole:superadmin');

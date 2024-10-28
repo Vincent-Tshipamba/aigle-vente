@@ -37,7 +37,7 @@
         </a>
 
         <!-- Total des vendeurs -->
-        <a href=""
+        <a href="{{ route('admin.sellers.index') }}"
             class="  p-2 h-36 w-full items-center  rounded-lg shadow-lg  dark:shadow-gray-500/20 backdrop-blur-xl bg-[#fcdab40a] dark:bg-gray-800 dark:bg-[#1e293b62] hover:scale-105 transition duration-700 ease-in-out hover:bg-[#f8f0e7] hover:text-black border-l-8 border-[#ff9822] hover:border-l-10 ">
             <div class="flex gap-4 items-center mb-4">
                 <svg class=" w-12 h-12 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +60,7 @@
         </a>
 
         <!-- Total des clients -->
-        <a href=""
+        <a href="{{ route('admin.clients.index') }}"
             class="rounded-xl items-center  p-2 h-36 w-full shadow-lg dark:shadow-lg dark:shadow-gray-500/20 backdrop-blur-xl bg-cover bg-[#fcdab40a] dark:bg-[#1e293b62] dark:hover:bg-gray-700   hover:bg-[#f8f0e7]  hover:scale-105 transition duration-700 ease-in-out border-l-8 border-[#ff9822] hover:border-l-10 ">
             <div>
 
@@ -86,7 +86,7 @@
         </a>
 
         <!-- Total des produits -->
-        <a href=""
+        <a href="{{ route('admin.products.index') }}"
             class="rounded-xl items-center  p-2 h-36 w-full shadow-lg dark:shadow-lg dark:shadow-gray-500/20 backdrop-blur-xl bg-cover bg-[#fcdab40a] dark:bg-[#1e293b62] dark:hover:bg-gray-700   hover:bg-[#f8f0e7]  hover:scale-105 transition duration-700 ease-in-out border-l-8 border-[#ff9822] hover:border-l-10 ">
             <div>
                 <div class=" flex gap-4 items-center mb-4">

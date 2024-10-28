@@ -1,5 +1,4 @@
 
-<div class="card" id="search-table">
 <div class="card">
     <div class="card-body">
         <div class="table-responsive">

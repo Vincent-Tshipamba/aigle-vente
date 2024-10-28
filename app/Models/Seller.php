@@ -21,7 +21,8 @@ class Seller extends Model
         'picture',
         'address',
         'city_id',
-        'user_id'
+        'user_id',
+        'is_active'
     ];
 
     /**

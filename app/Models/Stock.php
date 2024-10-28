@@ -4,23 +4,18 @@ namespace App\Models;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Shop extends Model
+class Stock extends Model
 {
-    /** @use HasFactory<\Database\Factories\ShopFactory> */
+    /** @use HasFactory<\Database\Factories\StockFactory> */
     use HasFactory;
 
     protected $fillable = [
         '_id',
-        'name',
-        'address',
-        'seller_id',
-        'description',
-        'image',
-        'is_active'
+        'product_id',
+        'quantity'
     ];
 
     protected static function boot()
@@ -32,13 +27,8 @@ class Shop extends Model
         });
     }
 
-    public function seller(): BelongsTo
+    public function product(): BelongsTo
     {
-        return $this->belongsTo(Seller::class);
-    }
-
-    public function products(): HasMany
-    {
-        return $this->hasMany(Product::class);
+        return $this->belongsTo(Product::class);
     }
 }

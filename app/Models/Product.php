@@ -16,7 +16,6 @@ class Product extends Model
     protected $fillable = [
         '_id',
         'name',
-        'stock_quantity',
         'unit_price',
         'category_produit_id',
         'shop_id',
@@ -35,6 +34,11 @@ class Product extends Model
     public function shop(): BelongsTo
     {
         return $this->belongsTo(Shop::class);
+    }
+
+    public function stocks(): HasMany
+    {
+        return $this->hasMany(Stock::class);
     }
 
     public function category_product(): BelongsTo

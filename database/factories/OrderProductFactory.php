@@ -12,8 +12,8 @@ class OrderProductFactory extends Factory
     {
         return [
             'quantity' => $this->faker->numberBetween(1, 10),
-            'order_id' => Order::factory(),
-            'product_id' => Product::factory()
+            'order_id' => $this->faker->randomElement(Order::pluck('id')),
+            'product_id' => $this->faker->randomElement(Product::pluck('id'))
         ];
     }
 }

@@ -10,7 +10,7 @@ class PanierFactory extends Factory
     public function definition(): array
     {
         return [
-            'client_id' => Client::factory(),
+            'client_id' => $this->faker->randomElement(Client::pluck('id')),
             'creation_date' => now(),
             'status' => $this->faker->randomElement(['active', 'inactive']),
         ];

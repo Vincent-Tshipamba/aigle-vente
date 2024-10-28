@@ -23,7 +23,8 @@ class Client extends Model
         'address',
         'delivery_address',
         'city_id',
-        'user_id'
+        'user_id',
+        'is_active'
     ];
 
     protected static function boot()

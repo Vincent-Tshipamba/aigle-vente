@@ -12,7 +12,7 @@ class DeliveryFactory extends Factory
         return [
             'date' => $this->faker->date,
             'delivery_address' => $this->faker->address,
-            'order_id' => Order::factory()
+            'order_id' => $this->faker->randomElement(Order::pluck('id'))
         ];
     }
 }

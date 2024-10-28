@@ -131,6 +131,38 @@
 @endsection
 @section('script')
     <script>
+        function changeUserStatus(userId) {
+            event.preventDefault();
+            var isActive = event.target.checked;
+            $.ajax({
+                type: "post",
+                url: "{{ route('admin.users.change-status') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    userId: userId,
+                    isActive: isActive
+                },
+                dataType: "json",
+                success: function(response) {
+                    Swal.fire({
+                        title: 'Succès',
+                        text: response.message,
+                        icon: 'success',
+                        timer: 1500,
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        position: 'top-end'
+                    });
+                },
+                error: function(error) {
+                    console.error(
+                        'Error deleting permission:',
+                        error);
+                }
+            });
+        }
+    </script>
+    <script>
         if (document.getElementById("users-table") && typeof simpleDatatables.DataTable !== 'undefined') {
             const exportCustomCSV = function(dataTable, userOptions = {}) {
                 // A modified CSV export that includes a row of minuses at the start and end.
@@ -276,7 +308,7 @@
             })
         }
     </script>
- 
+
 
     <script>
         $(document).ready(function() {

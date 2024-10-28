@@ -57,6 +57,7 @@ Route::middleware('auth')->group(function () {
     Route::get('admin/products', [ProductController::class, 'index'])->middleware('checkRole:superadmin')->name('admin.products.index');
 
     // Orders
+    Route::get('admin/orders/{order}', [OrderController::class, 'show'])->name('admin.orders.show');
     Route::get('admin/orders', [OrderController::class, 'index'])->middleware('checkRole:superadmin')->name('admin.orders.index');
 
     // Shops

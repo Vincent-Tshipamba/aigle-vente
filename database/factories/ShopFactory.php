@@ -13,7 +13,8 @@ class ShopFactory extends Factory
             'name' => $this->faker->name,
             'description' => $this->faker->sentence,
             'address' => $this->faker->address,
-            'seller_id' => Seller::factory()
+            'seller_id' => $this->faker->randomElement(Seller::pluck('id')),
+            'is_active' => $this->faker->boolean
         ];
     }
 }

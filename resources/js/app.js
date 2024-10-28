@@ -1,8 +1,6 @@
 import './bootstrap';
-
 import Alpine from 'alpinejs';
 import 'flowbite';
-
 import $ from 'jquery';
 import Swal from 'sweetalert2'
 

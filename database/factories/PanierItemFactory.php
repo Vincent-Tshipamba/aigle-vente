@@ -11,8 +11,8 @@ class PanierItemFactory extends Factory
     public function definition(): array
     {
         return [
-            'panier_id' => Panier::factory(),
-            'product_id' => Product::factory(),
+            'panier_id' => $this->faker->randomElement(Panier::pluck('id')),
+            'product_id' => $this->faker->randomElement(Product::pluck('id')),
             'quantity' => $this->faker->numberBetween(1, 10),
         ];
     }

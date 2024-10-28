@@ -11,7 +11,7 @@ class FactureFactory extends Factory
     {
         return [
             'date_facture' => $this->faker->date,
-            'order_id' => Order::factory(),
+            'order_id' => $this->faker->randomElement(Order::pluck('id')),
             'total_tva' => $this->faker->randomFloat(2, 0, 100),
             'total_ht' => $this->faker->randomFloat(2, 0, 100),
             'total_ttc' => $this->faker->randomFloat(2, 0, 100),

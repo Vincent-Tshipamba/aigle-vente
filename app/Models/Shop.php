@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Shop extends Model
 {
@@ -17,7 +18,9 @@ class Shop extends Model
         'name',
         'address',
         'seller_id',
-        'description'
+        'description',
+        'image',
+        'is_active'
     ];
 
     protected static function boot()
@@ -34,10 +37,17 @@ class Shop extends Model
         return $this->belongsTo(Seller::class);
     }
 
+
     // Dans le modèle Seller
     public function shops()
     {
         return $this->hasMany(Shop::class);
+    }
+
+
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class);
     }
 
 }

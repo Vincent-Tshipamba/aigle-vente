@@ -12,7 +12,7 @@ class PhotoFactory extends Factory
         return [
             'image' => $this->faker->imageUrl,
             'description' => $this->faker->sentence,
-            'product_id' => Product::factory()
+            'product_id' => $this->faker->randomElement(Product::pluck('id'))
         ];
     }
 }

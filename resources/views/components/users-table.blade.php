@@ -63,9 +63,7 @@
                         <tr class="hover:bg-[#f0e6d9] hover:scale-100 transition-all duration-300 ease-in-out">
                             <td>{{ $key + 1 }}</td>
                             <td class="flex items-center px-6 py-4 hover:cursor-pointer"
-                                @if ($user->client)
-                                    onclick="window.location.href='{{ route('admin.clients.show', $user->client->id) }}'"
-                                @endif>
+                                @if ($user->client) onclick="window.location.href='{{ route('admin.clients.show', $user->client->id) }}'" @endif>
                                 <img class="w-10 h-10 rounded-full"
                                     src="{{ $user->client->image ?? asset('img/profil.jpeg') }}" alt="">
                                 <div class="ps-3">
@@ -89,7 +87,9 @@
                             </td>
                             <td>
                                 <label class="inline-flex items-center cursor-pointer">
-                                    <input type="checkbox" value="" class="sr-only peer" checked>
+                                    <input type="checkbox" value="" class="sr-only peer"
+                                        onchange="changeUserStatus({{ $user->id }})"
+                                        {{ $user->is_active ? 'checked' : '' }}>
                                     <div
                                         class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#e38407]">
                                     </div>

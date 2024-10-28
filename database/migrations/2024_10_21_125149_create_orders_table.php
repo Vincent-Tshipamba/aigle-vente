@@ -14,6 +14,7 @@ return new class extends Migration
             $table->integer('daily_counter')->default(1);
             $table->string('order_number')->unique();
             $table->date('order_date');
+            $table->foreignId('seller_id')->nullable()->constrained('sellers')->onDelete('cascade');
             $table->decimal('frais_livraison', 10, 2)->default(0);
             $table->string('status')->default('En attente');
             $table->foreignId('client_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();

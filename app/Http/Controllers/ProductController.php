@@ -2,27 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\CategoryProduct;
 use App\Models\Shop;
+use App\Models\Seller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    // Afficher les produits d'une boutique pour le vendeur connecté
+ 
     public function index(Shop $shop)
     {
-        $seller = Auth::user()->seller;
+        $userId = Auth::id();
 
-        if (!$seller || !$seller->shops->contains($shop)) {
+        // Récupérer le vendeur lié à cet utilisateur
+        $seller = Seller::where('user_id', $userId)->first();
+
+        if (!$seller || !$seller->shops()->where('id', $shop->id)->exists()) {
             return response()->json(['error' => 'Accès non autorisé à cette boutique.'], 403);
         }
 
         $products = $shop->products;
-        return response()->json($products);
+
+        $categories= CategoryProduct::All();
+         
+        return view('seller.produits.index', compact('products', 'categories'));
     }
 
-    // Créer un nouveau produit pour une boutique spécifique du vendeur connecté
+
+  
     public function store(Request $request, Shop $shop)
     {
         $seller = Auth::user()->seller;
@@ -34,7 +43,7 @@ class ProductController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'stock_quantity' => 'required|integer',
-            'unit_price' => 'required|numeric',
+            'price' => 'required|numeric',
             'category_produit_id' => 'required|exists:category_products,_id',
             'description' => 'nullable|string',
         ]);

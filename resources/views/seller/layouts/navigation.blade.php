@@ -1,7 +1,7 @@
 <div class="fixed w-full z-30 flex bg-gray-900 dark:bg-[#0F172A] p-2 items-center justify-center h-16 px-10">
     <div
         class="flex items-center justify-center flex-none h-full ml-12 duration-500 ease-in-out transform logo dark:text-white">
-        <a href="{{ route('dashboard') }}" class="flex ms-2 md:me-24">
+        <a href="{{ route('seller.dashboard') }}" class="flex ms-2 md:me-24">
             <img src="{{ asset('img/logo/logo-white.png') }}" class="h-8 me-3" alt="Logo de Aigle Vente" />
             <span class="self-center font-semibold text-white text-1xl sm:text-1xl whitespace-nowrap">
                 Aigle Vente
@@ -113,7 +113,7 @@
         <div
             class="hover:ml-4 w-full text-white  hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
 
-            <a href="{{ route('dashboard') }}"
+            <a href="{{ route('seller.dashboard') }}"
                 class="hover:ml-4 justify-end pr-5  hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('dashboard') ? ' text-[#f34e83] ' : 'text-white' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <path fill="currentColor"
@@ -128,15 +128,14 @@
         </div>
         <div
             class="hover:ml-4 w-full hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
-            <a href="{{ route('products.index') }}"
-                class="hover:ml-4 justify-end pr-5   hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('products.index') ? ' text-[#f34e83] ' : 'text-white' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16">
-                    <path fill="white" fill-rule="evenodd"
-                        d="M5.482 4.344a2 2 0 1 0-2.963 0q-.12.063-.23.136c-.457.305-.75.704-.933 1.073A3.5 3.5 0 0 0 1 6.978V9a1 1 0 0 0 1 1h2.5a3.7 3.7 0 0 1 .684-.962L5.171 9H2V7s0-2 2-2c1.007 0 1.507.507 1.755 1.01c.225-.254.493-.47.793-.636a2.7 2.7 0 0 0-1.066-1.03M4 4a1 1 0 1 0 0-2a1 1 0 0 0 0 2m10 6h-2.5a3.7 3.7 0 0 0-.684-.962L10.829 9H14V7s0-2-2-2c-1.007 0-1.507.507-1.755 1.01a3 3 0 0 0-.793-.636a2.7 2.7 0 0 1 1.066-1.03a2 2 0 1 1 2.963 0q.12.063.23.136c.457.305.75.704.933 1.073A3.45 3.45 0 0 1 15 6.944V9a1 1 0 0 1-1 1m-2-6a1 1 0 1 0 0-2a1 1 0 0 0 0 2" />
-                    <path fill="white" fill-rule="evenodd"
-                        d="M10 8c0 .517-.196.989-.518 1.344a2.76 2.76 0 0 1 1.163 1.21A3.45 3.45 0 0 1 11 11.977V14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-2.022a2 2 0 0 1 .006-.135a3.5 3.5 0 0 1 .35-1.29a2.76 2.76 0 0 1 1.162-1.21A2 2 0 1 1 10 8m-4 4v2h4v-2s0-2-2-2s-2 2-2 2m3-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0" />
+            <a href="{{route('shops.index')}}"
+                class="hover:ml-4 justify-end pr-5   hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('shops.index') ? ' text-[#f34e83] ' : 'text-white' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor" fill-rule="evenodd"
+                        d="M6.066 5.5a.5.5 0 0 0-.43.243L3.383 9.5h17.234l-2.254-3.757a.5.5 0 0 0-.429-.243zm-2.684 5H4v8A1.5 1.5 0 0 0 5.5 20H6a1.5 1.5 0 0 0 1.5-1.5v-5H10v5a1.5 1.5 0 0 0 1.5 1.5h7a1.5 1.5 0 0 0 1.5-1.5v-8h.616a1 1 0 0 0 .858-1.514l-2.255-3.758a1.5 1.5 0 0 0-1.286-.728H6.066a1.5 1.5 0 0 0-1.287.728L2.525 8.986a1 1 0 0 0 .857 1.514M5 18.5v-8h14v8a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-5.3a.7.7 0 0 0-.7-.7H7.2a.7.7 0 0 0-.7.7v5.3a.5.5 0 0 1-.5.5h-.5a.5.5 0 0 1-.5-.5m8-2.5v-2.75h4V16zm-.083-3.75a.917.917 0 0 0-.917.917v2.916c0 .507.41.917.917.917h4.166c.507 0 .917-.41.917-.917v-2.916a.917.917 0 0 0-.917-.917z"
+                        clip-rule="evenodd" />
                 </svg>
-                <span>Product</span>
+                <span>Boutiques</span>
             </a>
         </div>
         <div
@@ -165,26 +164,15 @@
                 <span>Chat</span>
             </a>
         </div>
-        <div
-            class="hover:ml-4 w-full hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
-            <a href=""
-                class="hover:ml-4 justify-end pr-5   hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('odcusers.index') ? ' text-[#f34e83] ' : 'text-white' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="currentColor" fill-rule="evenodd"
-                        d="M6.066 5.5a.5.5 0 0 0-.43.243L3.383 9.5h17.234l-2.254-3.757a.5.5 0 0 0-.429-.243zm-2.684 5H4v8A1.5 1.5 0 0 0 5.5 20H6a1.5 1.5 0 0 0 1.5-1.5v-5H10v5a1.5 1.5 0 0 0 1.5 1.5h7a1.5 1.5 0 0 0 1.5-1.5v-8h.616a1 1 0 0 0 .858-1.514l-2.255-3.758a1.5 1.5 0 0 0-1.286-.728H6.066a1.5 1.5 0 0 0-1.287.728L2.525 8.986a1 1 0 0 0 .857 1.514M5 18.5v-8h14v8a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-5.3a.7.7 0 0 0-.7-.7H7.2a.7.7 0 0 0-.7.7v5.3a.5.5 0 0 1-.5.5h-.5a.5.5 0 0 1-.5-.5m8-2.5v-2.75h4V16zm-.083-3.75a.917.917 0 0 0-.917.917v2.916c0 .507.41.917.917.917h4.166c.507 0 .917-.41.917-.917v-2.916a.917.917 0 0 0-.917-.917z"
-                        clip-rule="evenodd" />
-                </svg>
-                <span>Boutiques</span>
-            </a>
-        </div>
+
 
 
     </div>
     <!-- MINI SIDEBAR-->
     <div class="mini mt-20 flex flex-col space-y-2 w-full h-[calc(100vh)]">
         <!-- Dashboard -->
-        <a href="{{ route('dashboard') }}"
-            class="hover:ml-4 justify-end pr-5   hover:text-[#ce4e76] dark:hover:text-[#f34e83]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('dashboard') ? ' text-[#f34e83] ' : 'text-white' }}">
+        <a href="{{ route('seller.dashboard') }}"
+            class="hover:ml-4 justify-end pr-5   hover:text-[#ce4e76] dark:hover:text-[#f34e83]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('seller.dashboard') ? ' text-[#f34e83] ' : 'text-white' }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path fill="currentColor"
                     d="m15.943 10.498l-4.055 4.505A2 2 0 0 0 10 17h4a2 2 0 0 0-.603-1.431l3.66-4.067a.75.75 0 1 0-1.114-1.004M5 15.25a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5zm14.75.75a.75.75 0 0 0-.75-.75h-1.5a.75.75 0 0 0 0 1.5H19a.75.75 0 0 0 .75-.75" />
@@ -195,13 +183,12 @@
             </svg>
         </a>
         <!-- Utilisateurs -->
-        <a href="{{ route('users.index') }}"
-            class="hover:ml-4 justify-end pr-5   hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('users.index') ? ' text-[#f34e83] ' : 'text-white' }}">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16">
+        <a href="{{route('shops.index')}}"
+            class="hover:ml-4 justify-end pr-5   hover:text-[#f34e83] dark:hover:text-[#f34e83]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('shops.index') ? ' text-[#f34e83] ' : 'text-white' }}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path fill="currentColor" fill-rule="evenodd"
-                    d="M5.482 4.344a2 2 0 1 0-2.963 0q-.12.063-.23.136c-.457.305-.75.704-.933 1.073A3.5 3.5 0 0 0 1 6.978V9a1 1 0 0 0 1 1h2.5a3.7 3.7 0 0 1 .684-.962L5.171 9H2V7s0-2 2-2c1.007 0 1.507.507 1.755 1.01c.225-.254.493-.47.793-.636a2.7 2.7 0 0 0-1.066-1.03M4 4a1 1 0 1 0 0-2a1 1 0 0 0 0 2m10 6h-2.5a3.7 3.7 0 0 0-.684-.962L10.829 9H14V7s0-2-2-2c-1.007 0-1.507.507-1.755 1.01a3 3 0 0 0-.793-.636a2.7 2.7 0 0 1 1.066-1.03a2 2 0 1 1 2.963 0q.12.063.23.136c.457.305.75.704.933 1.073A3.45 3.45 0 0 1 15 6.944V9a1 1 0 0 1-1 1m-2-6a1 1 0 1 0 0-2a1 1 0 0 0 0 2" />
-                <path fill="currentColor" fill-rule="evenodd"
-                    d="M10 8c0 .517-.196.989-.518 1.344a2.76 2.76 0 0 1 1.163 1.21A3.45 3.45 0 0 1 11 11.977V14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-2.022a2 2 0 0 1 .006-.135a3.5 3.5 0 0 1 .35-1.29a2.76 2.76 0 0 1 1.162-1.21A2 2 0 1 1 10 8m-4 4v2h4v-2s0-2-2-2s-2 2-2 2m3-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0" />
+                    d="M6.066 5.5a.5.5 0 0 0-.43.243L3.383 9.5h17.234l-2.254-3.757a.5.5 0 0 0-.429-.243zm-2.684 5H4v8A1.5 1.5 0 0 0 5.5 20H6a1.5 1.5 0 0 0 1.5-1.5v-5H10v5a1.5 1.5 0 0 0 1.5 1.5h7a1.5 1.5 0 0 0 1.5-1.5v-8h.616a1 1 0 0 0 .858-1.514l-2.255-3.758a1.5 1.5 0 0 0-1.286-.728H6.066a1.5 1.5 0 0 0-1.287.728L2.525 8.986a1 1 0 0 0 .857 1.514M5 18.5v-8h14v8a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-5.3a.7.7 0 0 0-.7-.7H7.2a.7.7 0 0 0-.7.7v5.3a.5.5 0 0 1-.5.5h-.5a.5.5 0 0 1-.5-.5m8-2.5v-2.75h4V16zm-.083-3.75a.917.917 0 0 0-.917.917v2.916c0 .507.41.917.917.917h4.166c.507 0 .917-.41.917-.917v-2.916a.917.917 0 0 0-.917-.917z"
+                    clip-rule="evenodd" />
             </svg>
         </a>
 

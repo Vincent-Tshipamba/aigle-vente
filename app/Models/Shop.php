@@ -33,4 +33,11 @@ class Shop extends Model
     {
         return $this->belongsTo(Seller::class);
     }
+
+    // Dans le modèle Seller
+    public function shops()
+    {
+        return $this->hasMany(Shop::class);
+    }
+
 }

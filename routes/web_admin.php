@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\SellerController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\CategoryProductController;
 
 // Dashboard
 Route::middleware('auth')->group(function () {
@@ -55,10 +56,14 @@ Route::middleware('auth')->group(function () {
 
     // Products
     Route::get('admin/products', [ProductController::class, 'index'])->middleware('checkRole:superadmin')->name('admin.products.index');
-
+    Route::get('admin/products/{product}', [ProductController::class, 'show'])->name('admin.products.show');
     // Orders
     Route::get('admin/orders/{order}', [OrderController::class, 'show'])->name('admin.orders.show');
     Route::get('admin/orders', [OrderController::class, 'index'])->middleware('checkRole:superadmin')->name('admin.orders.index');
+
+    // Categories
+    Route::get('admin/categories', [CategoryProductController::class, 'index'])->middleware('checkRole:superadmin')->name('admin.categories.index');
+    Route::get('admin/categories/{category}', [CategoryProductController::class, 'show'])->name('admin.categories.show');
 
     // Shops
     Route::get('admin/shops', [ShopController::class, 'index'])->middleware('checkRole:superadmin')->name('admin.shops.index');

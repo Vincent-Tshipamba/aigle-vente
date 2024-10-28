@@ -3,11 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Cache;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -25,6 +27,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function isOnline()
+    {
+        return Cache::has('user-is-online-' . $this->id);
+    }
+
 
     protected function casts(): array
     {
@@ -39,14 +46,14 @@ class User extends Authenticatable
         return $this->roles()->whereIn('name', $roles)->exists();
     }
 
-    public function clients(): HasMany
+    public function client(): HasOne
     {
-        return $this->hasMany(Client::class);
+        return $this->hasOne(Client::class);
     }
 
-    public function sellers(): HasMany
+    public function seller(): HasOne
     {
-        return $this->hasMany(Seller::class);
+        return $this->hasOne(Seller::class);
     }
 
     public function isSeller(): bool

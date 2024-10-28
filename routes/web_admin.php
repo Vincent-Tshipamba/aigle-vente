@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryProductController;
 
 // Dashboard
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'userOnline', 'checkRole:superadmin'])->group(function () {
     // Dashboard
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/api/clients', [DashboardController::class, 'getClientsByPeriod']);
@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
 
     // Clients
     Route::get('admin/clients', [ClientController::class, 'index'])->name('admin.clients.index');
+    Route::get('admin/clients/{client}', [ClientController::class, 'show'])->name('admin.clients.show');
     Route::delete('admin/clients/delete/{client}', [ClientController::class, 'destroyClient'])->name('admin.clients.delete');
 
     // Sellers
@@ -68,4 +69,4 @@ Route::middleware('auth')->group(function () {
     // Shops
     Route::get('admin/shops', [ShopController::class, 'index'])->name('admin.shops.index');
     Route::get('admin/shops/{shop}', [ShopController::class, 'show'])->name('admin.shops.show');
-})->middleware('checkRole:superadmin');
+});

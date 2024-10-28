@@ -45,19 +45,47 @@
                                 </svg>
                             </span>
                         </th>
+                        <th>
+                            <span class="flex items-center">
+                                Statut
+                                <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                                </svg>
+                            </span>
+                        </th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($users as $key => $user)
-                        <tr>
+                        <tr class="hover:bg-[#f0e6d9] hover:scale-100 transition-all duration-300 ease-in-out">
                             <td>{{ $key + 1 }}</td>
-                            <td>{{ $user->name }}</td>
+                            <td class="flex items-center px-6 py-4 hover:cursor-pointer"
+                                @if ($user->client)
+                                    onclick="window.location.href='{{ route('admin.clients.show', $user->client->id) }}'"
+                                @endif>
+                                <img class="w-10 h-10 rounded-full"
+                                    src="{{ $user->client->image ?? asset('img/profil.jpeg') }}" alt="">
+                                <div class="ps-3">
+                                    <div class="text-base font-semibold">{{ $user->name }}</div>
+                                </div>
+                            </td>
                             <td>{{ $user->email }}</td>
                             <td class="">
                                 @foreach ($roles as $role)
                                     {{ $user->roles->contains($role) ? $role->name : '' }}
                                 @endforeach
+                            </td>
+                            <td>
+                                <div class="flex items-center">
+                                    @if (Cache::has('user-is-online-' . $user->id))
+                                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Online
+                                    @else
+                                        <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Offline
+                                    @endif
+                                </div>
                             </td>
                             <td>
                                 <label class="inline-flex items-center cursor-pointer">

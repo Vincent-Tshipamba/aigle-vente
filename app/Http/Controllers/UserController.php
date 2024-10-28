@@ -24,7 +24,7 @@ class UserController extends Controller
         $roleId = $request->input('role_id');
         $assign = $request->input('assign');
         $user = User::find($userId);
-      
+
         if ($assign === "true") {
             $user->roles()->attach($roleId);
         } else {
@@ -65,12 +65,12 @@ class UserController extends Controller
             $mail->addAddress($email); // Adresse du destinataire
             // Contenu
             $mail->isHTML(true); // Format d'email HTML
-            $mail->Subject = 'Bienvenue en tant qu\'utilisateur sur le Sogebox Dashboard !';
+            $mail->Subject = 'Bienvenue en tant qu\'utilisateur sur le tableau de bord Aigle Vente !';
             $mail->Body = '
             <section style="max-width: 32rem; padding: 2rem 1.5rem; margin: auto; background-color: #ffffff; color: #333;">
                 <header>
                     <a href="#">
-                        SOGEREF
+                        Aigle Vente
                     </a>
                 </header>
 
@@ -78,7 +78,7 @@ class UserController extends Controller
                     <h2 style="margin-top: 1rem; color: #4a5568;">Bonjour ' . $username . '🤗</h2>
 
                     <p style="margin-top: 0.5rem; text-align: justify; line-height: 1.75; color: #4a5568; ">
-                        Félicitations ! Vous êtes maintenant un administrateur sur notre plateforme d\'administration. Vous pouvez vous connecter à votre compte en utilisant les informations suivantes :
+                        Félicitations ! Vous êtes maintenant un administrateur sur notre plateforme de gestion. Vous pouvez vous connecter à votre compte en utilisant les informations suivantes :
                     </p>
 
                     <p style="margin-top: 0.5rem; line-height: 1.75; color: #4a5568;">
@@ -88,12 +88,12 @@ class UserController extends Controller
                     </p>
 
                     <p style="margin-top: 0.5rem; text-align: justify; line-height: 1.75; color: #4a5568; ">
-                        Surtout, n\'hésitez pas à nous contacter en cas de difficultés de connexion 😊
+                        N\'hésitez pas à nous contacter en cas de difficultés de connexion 😊
                     </p>
 
                     <p style="margin-top: 1rem; color: #4a5568;">
                         Merci, <br>
-                        L\'équipe Sogeref
+                        L\'équipe Aigle Vente
                     </p>
                 </main>
 
@@ -102,7 +102,7 @@ class UserController extends Controller
                         Ce courriel a été envoyé à <a href="#" class="text-blue-600 hover:underline dark:text-blue-400" target="_blank">' . $email . '</a>.
                         Si vous préférez ne pas recevoir ce type d\'e-mail, vous pouvez <a href="#" style="color: #1c64f2; ">gérer vos préférences en matière d\'e-mail.</a>.
                     </p>
-                    <p style="margin-top: 0.75rem; color: #6b7280">© ' . date('Y') . ' Sogeref. Tous les droits sont réservés.</p>
+                    <p style="margin-top: 0.75rem; color: #6b7280">© ' . date('Y') . ' Aigle Vente. Tous les droits sont réservés.</p>
                 </footer>
             </section>
             ';

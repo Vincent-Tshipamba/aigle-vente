@@ -7,7 +7,7 @@
             <a href="">
                 <div class="col bg-custom-dark p-4 rounded-lg shadow hover:bg-gray-900">
                     <div class="flex items-center">
-                        <h5 class="text-white text-lg"></h5>
+                        <h5 class="text-white text-lg">{{$totalRevenue}}</h5>
                         <div class="ml-auto">
                             <i class='bx bx-group text-3xl text-white'></i>
                         </div>
@@ -39,7 +39,7 @@
             <a href="">
                 <div class="col hover:bg-gray-900 p-4 rounded-lg shadow bg-custom-dark">
                     <div class="flex items-center">
-                        <h5 class="text-white text-lg"></h5>
+                        <h5 class="text-white text-lg">{{$totalOrders}}</h5>
                         <div class="ml-auto">
                             <i class='bx bx-group text-3xl text-white'></i>
                         </div>
@@ -55,7 +55,7 @@
             <a href="">
                 <div class="col hover:bg-gray-900 p-4 rounded-lg shadow bg-custom-dark">
                     <div class="flex items-center">
-                        <h5 class="text-white text-lg"></h5>
+                        <h5 class="text-white text-lg">{{$totalProducts}}</h5>
                         <div class="ml-auto">
                             <i class='bx bx-group text-3xl text-white'></i>
                         </div>

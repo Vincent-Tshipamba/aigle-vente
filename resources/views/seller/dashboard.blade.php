@@ -20,18 +20,18 @@
                     </div>
                 </div>
             </a>
-            <a href="">
+            <a href="{{route('shops.index')}}">
                 <div class="col hover:bg-gray-900 p-4 rounded-lg shadow bg-custom-dark">
                     <div class="flex items-center">
-                        <h5 class="text-white text-lg"></h5>
+                        <h5 class="dark:text-white text-4xl text-black">{{$totalShops}}</h5>
                         <div class="ml-auto">
-                            <i class='bx bx-dollar text-3xl text-white'></i>
+                            <i class='bx bx-dollar text-3xl dark:text-white text-black'></i>
                         </div>
                     </div>
                     <div class="w-full bg-gray-700 rounded-full h-1.5 my-3">
                         <div class="bg-green-500 h-1.5 rounded-full" style="width: 55%"></div>
                     </div>
-                    <div class="flex items-center text-white">
+                    <div class="flex items-center dark:text-white text-black">
                         <p class="text-sm">Total Shops</p>
                     </div>
                 </div>

@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="{{ asset('img/orange.webp') }}" type="image/x-icon">
 
-    <title>{{ $title ?? 'Dashboard Admin Aigle Vente' }}</title>
+    <title>{{ $title ?? 'AigleVente' }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -29,6 +29,8 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script>
+
     <script>
         const sidebar = document.querySelector("aside");
         const maxSidebar = document.querySelector(".max")
@@ -81,6 +83,7 @@
         }
     </script>
     @yield('script')
+    @yield('modal')
 </body>
 
 </html>

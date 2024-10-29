@@ -14,62 +14,57 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Obtenir le vendeur connecté
-        $seller = Auth::user()->seller;
+        // Obtenir l'utilisateur connecté
+        $userId = Auth::id();
 
+        // Récupérer le vendeur lié à cet utilisateur
+        $seller = Seller::where('user_id', $userId)->first();
         if (!$seller) {
             return redirect()->back()->withErrors('Vendeur non trouvé.');
         }
 
-        
-        $shopIds = $seller->shops->pluck('_id');
+        // Récupérer les boutiques associées à ce vendeur
+        $shopIds = $seller->shops()->pluck('_id'); // Assurez-vous que cela correspond aux boutiques
+
+        // Compter les produits du vendeur
         $totalProducts = Product::whereIn('shop_id', $shopIds)->count();
 
-        // Nombre total de commandes pour ce vendeur
+        // Compter les commandes associées au vendeur en utilisant le `seller_id` dans `orders`
         $totalOrders = DB::table('orders')
-            ->whereIn('shop_id', $shopIds)
+        ->where('seller_id', $seller->id) // Remplacez `shop_id` par `seller_id` ou la clé correcte
             ->count();
 
-        // Revenu total pour le vendeur
+        // Calcul du revenu total basé sur les produits du vendeur
         $totalRevenue = DB::table('order_products')
-            ->join('products', 'products._id', '=', 'order_products.product_id')
-            ->whereIn('products.shop_id', $shopIds)
+        ->join('products', 'products._id', '=', 'order_products.product_id')
+        ->whereIn('products.shop_id', $shopIds)
             ->sum(DB::raw('order_products.quantity * products.unit_price'));
 
-        // Revenu moyen par commande pour ce vendeur
         $averageOrderValue = $totalOrders > 0 ? $totalRevenue / $totalOrders : 0;
 
-        // Produits les plus vendus par ce vendeur
         $topProducts = DB::table('order_products')
-            ->join('products', 'products._id', '=', 'order_products.product_id')
-            ->whereIn('products.shop_id', $shopIds)
+        ->join('products', 'products._id', '=', 'order_products.product_id')
+        ->whereIn('products.shop_id', $shopIds)
             ->select('products.name', DB::raw('SUM(order_products.quantity) as total_quantity'))
             ->groupBy('products.name')
             ->orderByDesc('total_quantity')
             ->limit(5)
             ->get();
 
-        // Ventes et revenus mensuels pour ce vendeur
         $monthlySales = DB::table('orders')
-            ->whereIn('shop_id', $shopIds)
-            ->select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total_sales'), DB::raw('SUM(total_amount) as monthly_revenue'))
+        ->join('order_products', 'orders._id', '=', 'order_products.order_id')
+        ->join('products', 'products._id', '=', 'order_products.product_id')
+        ->where('orders.seller_id', $seller->id) // Utiliser `seller_id` ici aussi
+            ->select(
+                DB::raw('MONTH(orders.created_at) as month'),
+                DB::raw('COUNT(*) as total_sales'),
+                DB::raw('SUM(order_products.quantity * products.unit_price) as monthly_revenue')
+            )
             ->groupBy('month')
             ->orderBy('month')
             ->get();
 
-        // Stock total des produits pour ce vendeur
         $totalStockQuantity = Product::whereIn('shop_id', $shopIds)->sum('stock_quantity');
-
-        // Ventes par catégorie de produit pour ce vendeur
-        $salesByCategory = DB::table('order_products')
-            ->join('products', 'products._id', '=', 'order_products.product_id')
-            ->join('category_products', 'category_products._id', '=', 'products.category_produit_id')
-            ->whereIn('products.shop_id', $shopIds)
-            ->select('category_products.name as category', DB::raw('SUM(order_products.quantity * products.unit_price) as total_sales'))
-            ->groupBy('category')
-            ->orderByDesc('total_sales')
-            ->get();
-
         $totalShops = $shopIds->count();
 
         return view('seller.dashboard', compact(
@@ -80,12 +75,11 @@ class DashboardController extends Controller
             'topProducts',
             'monthlySales',
             'totalStockQuantity',
-            'salesByCategory',
-            'totalShops',
-            'totalSellers'
+            'totalShops'
         ));
-
     }
+
+
 
     // Obtenir les statistiques de vente pour un vendeur spécifique
     public function salesStatistics(Seller $seller)

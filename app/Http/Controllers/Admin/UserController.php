@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Events\UserStatusChanged;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use Spatie\Permission\Models\Role;
@@ -22,11 +23,17 @@ class UserController extends Controller
 
     public function changeUserStatus(Request $request)
     {
-        $userId = $request['user_id'];
-        $isActive = $request['is_active'];
+        $userId = $request->input('userId');
+        $isActive = $request->input('isActive') == 'true' ? true : false;
         $user = User::find($userId);
         $user->is_active = $isActive;
         $user->save();
+
+
+        broadcast(new UserStatusChanged());
+
+        Log::info("Événement broadcasté : User ID: $userId, Status: $isActive");
+
         return response()->json(['message' => 'User status updated successfully']);
     }
 

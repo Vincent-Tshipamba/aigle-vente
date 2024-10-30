@@ -357,20 +357,20 @@
                     @csrf
                     <div class="grid gap-4 mb-4 grid-cols-2 text-left">
                         <div class="col-span-2 flex items-center">
-                            <label for="name" class="block w-full mb-2 text-sm md:text-base font-medium text-white">Nom d'utilisateur</label>
-                            <input type="text" name="name" id="name" class="bg-custom-dark border border-gray-300 text-gray-200 text-sm md:text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="John Doe" required="">
+                            <label for="name" class="block w-full mb-2 text-sm md:text-base font-medium text-black dark:text-white">Nom d'utilisateur</label>
+                            <input type="text" name="name" id="name" class="border border-gray-300 text-gray-800 text-sm md:text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="John Doe" required="">
                         </div>
                         <div class="col-span-2 flex items-center">
-                            <label for="email" class="block w-full mb-2 text-sm md:text-base font-medium text-white">Adresse mail</label>
-                            <input type="email" name="email" id="email" class="bg-custom-dark border border-gray-300 text-gray-200 text-sm md:text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="exemple@exemple.com" required="">
+                            <label for="email" class="block w-full mb-2 text-sm md:text-base font-medium text-black dark:text-white">Adresse mail</label>
+                            <input type="email" name="email" id="email" class="border border-gray-300 text-gray-800 text-sm md:text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="exemple@exemple.com" required="">
                         </div>
                         <div class="col-span-2 flex items-center">
-                            <label for="password" class="block w-full mb-2 text-sm md:text-base font-medium text-white">Mot de passe</label>
-                            <input type="text" name="password" id="password" class="w-full bg-custom-dark border border-gray-300 text-gray-200 text-sm md:text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tapez un mot de passe" required="">
+                            <label for="password" class="block w-full mb-2 text-sm md:text-base font-medium text-black dark:text-white">Mot de passe</label>
+                            <input type="text" name="password" id="password" class="w-full border border-gray-300 text-gray-800 text-sm md:text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tapez un mot de passe" required="">
                         </div>
                         <div class="flex space-x-3">
-                            <input id="mail" name="mail" type="checkbox" class="md:w-5 md:h-5 w-4 h-4 text-indigo-600 bg-custom-dark border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="mail" class="block text-sm md:text-base font-medium text-gray-300">Notifier par mail</label>
+                            <input id="mail" name="mail" type="checkbox" class="md:w-5 md:h-5 w-4 h-4 text-black dark:text-[#e38407] border-gray-300 rounded focus:ring-[#e38407] dark:focus:ring-[#e38407] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="mail" class="block text-sm md:text-base font-medium text-black dark:text-white">Notifier par mail</label>
                         </div>
                     </div>
                 </form>
@@ -402,9 +402,9 @@
                     };
                 },
                 customClass: {
-                    popup: 'bg-gray-900 text-white rounded-lg shadow-lg', // Classes Tailwind pour le popup
-                    confirmButton: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded', // Bouton de confirmation
-                    cancelButton: 'bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded' // Bouton d'annulation
+                    popup: 'bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-lg shadow-lg', // Classes Tailwind pour le popup
+                    confirmButton: 'bg-[#e38407] hover:bg-[#e38407] text-white font-bold py-2 px-4 rounded', // Bouton de confirmation
+                    cancelButton: 'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded' // Bouton d'annulation
                 },
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -460,9 +460,10 @@
                     }
                 },
                 customClass: {
-                    popup: 'bg-gray-900 text-white rounded-lg shadow-lg', // Classes Tailwind pour le popup
-                    confirmButton: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded', // Bouton de confirmation
-                    cancelButton: 'bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded' // Bouton d'annulation
+                    input: 'bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-lg shadow-lg', // Classes Tailwind pour le popup
+                    popup: 'bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-lg shadow-lg', // Classes Tailwind pour le popup
+                    confirmButton: 'bg-[#e38407] hover:bg-[#e38407] text-white font-bold py-2 px-4 rounded', // Bouton de confirmation
+                    cancelButton: 'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded' // Bouton d'annulation
                 },
                 allowOutsideClick: false
             }).then((result) => {
@@ -521,9 +522,10 @@
                     }
                 },
                 customClass: {
-                    popup: 'bg-gray-900 text-white rounded-lg shadow-lg', // Classes Tailwind pour le popup
-                    confirmButton: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded', // Bouton de confirmation
-                    cancelButton: 'bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded' // Bouton d'annulation
+                    input: 'bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-lg shadow-lg', // Classes Tailwind pour le popup
+                    popup: 'bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-lg shadow-lg', // Classes Tailwind pour le popup
+                    confirmButton: 'bg-[#e38407] hover:bg-[#e38407] text-white font-bold py-2 px-4 rounded', // Bouton de confirmation
+                    cancelButton: 'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded' // Bouton d'annulation
                 },
                 allowOutsideClick: false
             }).then((result) => {
@@ -608,67 +610,6 @@
                 }
             });
         }
-
-        $('#newRoleButton').click(function(e) {
-            e.preventDefault();
-
-            // Trigger SweetAlert with input
-            Swal.fire({
-                title: 'Créer un rôle',
-                input: 'text',
-                inputPlaceholder: 'Entrez le nom du nouveau rôle',
-                showCancelButton: true,
-                confirmButtonText: 'Créer',
-                cancelButtonText: 'Annuler',
-                inputValidator: (value) => {
-                    if (!value) {
-                        return 'Vous devez entrer un nom de rôle !';
-                    }
-                },
-                customClass: {
-                    popup: 'bg-gray-900 text-white rounded-lg shadow-lg', // Classes Tailwind pour le popup
-                    confirmButton: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded', // Bouton de confirmation
-                    cancelButton: 'bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded' // Bouton d'annulation
-                },
-                allowOutsideClick: false
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Make AJAX request to add the permission
-                    $.ajax({
-                        url: '{{ route('roles.store') }}',
-                        method: 'POST',
-                        data: {
-                            name: result.value,
-                            _token: '{{ csrf_token() }}' // CSRF token for security
-                        },
-                        success: function(response) {
-                            Swal.fire({
-                                title: 'Rôle créé avec succès !',
-                                text: response.message,
-                                icon: 'success',
-                                timer: 2000,
-                                timerProgressBar: true,
-                                background: '#132329', // Fond sombre
-                                color: '#fff', // Couleur du texte blanche
-                                iconColor: '#ffdd57',
-                            });
-                            getRolesAndPermissions();
-                        },
-                        error: function(error) {
-                            Swal.fire({
-                                title: 'Erreur',
-                                text: xhr.responseJSON.message ||
-                                    'Une erreur est survenue lors de la création de la permission.',
-                                icon: 'error',
-                                background: '#132329', // Fond sombre
-                                color: '#fff', // Couleur du texte blanche
-                                iconColor: '#ffdd57',
-                            });
-                        }
-                    });
-                }
-            });
-        });
     </script>
 
     <script>
@@ -774,7 +715,7 @@
 
                         Swal.fire({
                             title: 'Permission : ' + permissionName,
-                            html: '<input id="permission-name" class="bg-custom-dark text-gray-200" type="text" value="' +
+                            html: '<input id="permission-name" class="text-gray-200" type="text" value="' +
                                 permissionName + '">',
                             text: 'Que voulez-vous faire?',
                             icon: 'question',

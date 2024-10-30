@@ -18,10 +18,10 @@ Route::middleware(['auth', 'userOnline', 'checkRole:superadmin'])->group(functio
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/api/clients', [DashboardController::class, 'getClientsByPeriod']);
 
-
     // Users
     Route::resource('users', UserController::class);
     Route::get('admin/users', [UserController::class, 'index'])->middleware('checkRole:superadmin')->name('admin.users.index');
+    Route::get('admin/users/{user}', [UserController::class, 'show'])->name('admin.users.show');
     Route::delete('/users/delete/{user}', [UserController::class, 'destroyUser'])->name('users.delete');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('admin.profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('admin.profile.update');

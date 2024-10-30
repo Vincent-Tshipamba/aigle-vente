@@ -60,6 +60,8 @@ class RegisteredUserController extends Controller
             'phone' => $request->phone
         ]);
 
+        $user->assignRole('client');
+
         event(new Registered($user));
 
         Auth::login($user);

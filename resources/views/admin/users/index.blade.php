@@ -144,14 +144,20 @@
                 },
                 dataType: "json",
                 success: function(response) {
-                    Swal.fire({
-                        title: 'Succès',
-                        text: response.message,
-                        icon: 'success',
-                        timer: 1500,
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
                         showConfirmButton: false,
+                        timer: 3000,
                         timerProgressBar: true,
-                        position: 'top-end'
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+                    Toast.fire({
+                        icon: "success",
+                        title: response.message
                     });
                 },
                 error: function(error) {
@@ -262,7 +268,8 @@
                     "</div>" + "</div>" +
                     (options.searchable ?
                         "<div class='" + options.classes.search + "'>" +
-                        "<input class='" + options.classes.input + "' placeholder='" + options.labels.placeholder +
+                        "<input class='" + options.classes.input + "' placeholder='" + options.labels
+                        .placeholder +
                         "' type='search' title='" + options.labels.searchTitle + "'" + (dom.id ?
                             " aria-controls='" + dom.id + "'" : "") + ">" +
                         "</div>" : ""
@@ -307,6 +314,27 @@
                 })
             })
         }
+    </script>
+    <script>
+        $(document).ready(function() {
+            if (document.getElementById("rolesTable") && typeof simpleDatatables.DataTable !== 'undefined') {
+                const dataTable = new simpleDatatables.DataTable("#rolesTable", {
+                    searchable: false,
+                    sortable: false,
+                    pagging: false,
+                    perPageSelect: false
+                })
+            }
+
+            if (document.getElementById("usersRolesTable") && typeof simpleDatatables.DataTable !== 'undefined') {
+                const dataTable = new simpleDatatables.DataTable("#usersRolesTable", {
+                    searchable: false,
+                    sortable: false,
+                    pagging: false,
+                    perPageSelect: false
+                })
+            }
+        });
     </script>
 
 
@@ -549,7 +577,8 @@
                     var rolePermissions = response.rolePermissions;
 
                     // Create the table header with roles
-                    var header = '<tr class="bg-bg-chart"><th style="background-color: #d1d5db;"></th>';
+                    var header =
+                        '<tr class="border-b dark:border-gray-700"><th style="background-color: #d1d5db;"></th>';
                     roles.forEach(function(role) {
                         header +=
                             '<th class="text-center"><a href="#" class="text-black dark:text-white p-2 hover:bg-[#f9b544]" data-role-id="' +
@@ -653,7 +682,8 @@
                     var rolePermissions = response.rolePermissions;
 
                     // Create the table header with roles
-                    var header = '<tr class="bg-bg-chart"><th style="background-color: #d1d5db;"></th>';
+                    var header =
+                        '<tr class="border-b dark:border-gray-700"><th style="background-color: #d1d5db;"></th>';
                     roles.forEach(function(role) {
                         header +=
                             '<th class="text-center"><a href="#" class="text-black dark:text-white p-2 bg-bg-chart hover:bg-gray-600" data-role-id="' +

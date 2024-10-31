@@ -208,8 +208,6 @@
         updateMonths(currentYear);
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 
     <!-- Graphique des clients et des vendeurs -->
     <script>

@@ -12,8 +12,12 @@ class CheckAdmin
     {
         // Récupérer l'ID de l'utilisateur depuis la route
         $user = $request->route('user');
-        if ($user->hasRole('superadmin') || !$user->client || !$user->seller) {
-            return redirect()->route('admin.users.index');
+        $client_exists = isset($user->client);
+        $seller_exists = isset($user->seller);
+        $admin_exists = $user->hasRole('superadmin');
+
+        if ($user->hasRole('superadmin') && !$client_exists && !$seller_exists) {
+            return redirect()->back();
         }
         return $next($request);
     }

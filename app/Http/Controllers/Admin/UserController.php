@@ -213,7 +213,18 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        return view('admin.users.show', compact('user'));
+        $isSeller = isset($user->seller);
+        $nbr_shops = 0;
+        if ($isSeller) {
+            $nbr_shops = $user->seller->shops->count();
+        }
+
+        $isClient = isset($user->client);
+        $nbr_orders = 0;
+        if ($isClient) {
+            $nbr_orders = $user->client->orders->count();
+        }
+        return view('admin.users.show', compact('user', 'isSeller', 'isClient', 'nbr_shops', 'nbr_orders'));
     }
 
     public function edit(User $user)

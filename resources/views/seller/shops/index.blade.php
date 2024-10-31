@@ -9,10 +9,6 @@
         </div>
     @endif
 
-
-
-
-    <!-- Modal toggle -->
     <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
         class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         type="button">
@@ -43,34 +39,28 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <form class="p-4 md:p-5">
+                <form class="p-4 md:p-5" action="{{ route('shops.store') }}" method="POST">
+                    @csrf
                     <div class="grid gap-4 mb-4 grid-cols-2">
                         <div class="col-span-2">
-                            <label for="name"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom
+                                de la boutique</label>
                             <input type="text" name="name" id="name"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Type product name" required="">
+                                placeholder="Nom de la boutique" required="">
                         </div>
-                        <div class="col-span-2 sm:col-span-1">
-                            <label for="price"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                            <input type="number" name="price" id="price"
+                        @error('name')
+                            <div class="text-red-500 text-sm">{{ $message }}</div>
+                        @enderror
+
+                        <div class="col-span-2">
+                            <label for="adresse" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom
+                                de la boutique</label>
+                            <input type="text" id="address" name="address"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="$2999" required="">
+                                placeholder="Type address" required="">
                         </div>
-                        <div class="col-span-2 sm:col-span-1">
-                            <label for="category"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                            <select id="category"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                <option selected="">Select category</option>
-                                <option value="TV">TV/Monitors</option>
-                                <option value="PC">PC</option>
-                                <option value="GA">Gaming/Console</option>
-                                <option value="PH">Phones</option>
-                            </select>
-                        </div>
+
                         <div class="col-span-2">
                             <label for="description"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product
@@ -151,7 +141,7 @@
                             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
                                 aria-labelledby="dropdownMenuIconButton">
                                 <li>
-                                    <a href="{{ route("seller.shops.products.index",$shop->id) }}"
+                                    <a href="{{ route('seller.shops.products.index', $shop->id) }}"
                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Produits</a>
                                 </li>
                                 <li>

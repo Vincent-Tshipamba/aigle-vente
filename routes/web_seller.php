@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/seller/shops/{shop}/products', [ProductController::class, 'index'])->name('seller.shops.products.index');
+    Route::post('/shops/{shop}/products', [ProductController::class, 'store'])->name('shop.products.store');
     Route::get('/seller/shops', [ShopController::class, 'index'])->name('shops.index');
     Route::get('/seller/shops/create', [ShopController::class, 'create'])->name('shops.create');
     Route::post('seller/shops', [ShopController::class, 'store'])->name('shops.store');

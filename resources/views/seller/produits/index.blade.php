@@ -2,6 +2,22 @@
 
 @section('content')
 
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <!-- Modal toggle -->
     <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
         class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -32,7 +48,9 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <form class="p-4 md:p-5">
+                <form class="p-4 md:p-5" action="{{ route('shop.products.store', $shop->id) }}" method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
                     <div class="grid gap-4 mb-4 grid-cols-2">
                         <div class="col-span-2">
                             <label for="name"
@@ -51,7 +69,7 @@
                         <div class="col-span-2 sm:col-span-1">
                             <label for="category"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                            <select id="category"
+                            <select id="category" name="category_product_id"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option selected="">Select category</option>
                                 @foreach ($categories as $categorie)
@@ -60,11 +78,20 @@
                             </select>
                         </div>
                         <div class="col-span-2">
+                            <label for="images"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Images</label>
+                            <input type="file" name="images[]" id="images" multiple accept="image/*"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        </div>
+
+                        <!-- Aperçu des images sélectionnées -->
+                        <div id="image-preview" class="flex flex-wrap gap-4 mt-4"></div>
+                        <div class="col-span-2">
                             <label for="categorie"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                            <input type="number" name="category_produit_id" id="name"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">stock_quantity</label>
+                            <input type="number" name="stock_quantity" id="stock_quantity"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Type product name" required="">
+                                placeholder="Type product name" required>
                         </div>
                         <div class="col-span-2">
                             <label for="description"
@@ -91,7 +118,7 @@
     </div>
 @endsection
 
-<div class="container mx-auto p-4">
+<div class=" mt-4">
     <h1 class="text-2xl font-bold mb-4">Nos Produits</h1>
     <!-- Bascule entre la vue grille et liste -->
     <div class="flex justify-end mb-4">
@@ -122,13 +149,20 @@
             @else
                 @foreach ($products as $product)
                     <div class="bg-white p-4 rounded-lg shadow-md">
-                        <img src="{{ $product->picture }}" alt="{{ $product->name }}"
-                            class="w-full h-40 object-cover rounded-md mb-4">
+                        @php
+                            $firstPhoto = $product->photos->first();
+                        @endphp
+                        @if ($firstPhoto)
+                            <img src="{{ asset('storage/' . $firstPhoto->image) }}"
+                                alt="{{ $product->name }}" class="w-full h-40 object-cover rounded-md mb-4">
+                        @else
+                            <p>Aucune image disponible pour ce produit.</p>
+                        @endif
+
                         <h2 class="text-lg font-bold">{{ $product->name }}</h2>
                         <p class="text-gray-600">Prix : {{ $product->unit_price }} USD</p>
                         <p class="text-gray-600">Stock : {{ $product->stock_quantity }}</p>
-                        <a href="{{ route('products.show', $product->id) }}"
-                            class="text-blue-500 mt-2 inline-block">Voir
+                        <a href="" class="text-blue-500 mt-2 inline-block">Voir
                             Détails</a>
                     </div>
                 @endforeach
@@ -229,9 +263,18 @@
                                         </td>
                                         <th scope="row"
                                             class="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            <img src="{{ $product->picture }}" alt="{{ $product->name }}"
-                                                class="w-auto h-8 mr-3">
-                                            {{ $product->name }}&#34;
+                                            @php
+                                                $firstPhoto = $product->photos->first();
+                                            @endphp
+
+                                            @if ($firstPhoto)
+                                                <img src="{{ asset('storage/' . $firstPhoto->image) }}"
+                                                    alt="Image de {{ $product->name }}" class="w-auto h-8 mr-3">
+                                            @else
+                                                <p>Aucune image disponible pour ce produit.</p>
+                                            @endif
+
+
                                         </th>
                                         <td class="px-4 py-2">
                                             <span
@@ -375,6 +418,68 @@
 
 
 @section('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageInput = document.getElementById('images');
+            const previewContainer = document.getElementById('image-preview');
+
+            // Vérifiez si les éléments existent
+            if (!imageInput || !previewContainer) {
+                console.error("L'élément #images ou #image-preview est manquant dans le DOM.");
+                return;
+            }
+
+            imageInput.addEventListener('change', function(event) {
+                const files = event.target.files;
+                previewContainer.innerHTML = ''; // Efface les aperçus existants
+
+                Array.from(files).forEach((file, index) => {
+                    const fileReader = new FileReader();
+
+                    fileReader.onload = function(e) {
+                        const previewDiv = document.createElement('div');
+                        previewDiv.classList.add('relative', 'w-24', 'h-24', 'border',
+                            'rounded', 'overflow-hidden');
+
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.alt = 'Selected Image';
+                        img.classList.add('object-cover', 'w-full', 'h-full');
+
+                        const closeButton = document.createElement('button');
+                        closeButton.innerHTML = '&times;';
+                        closeButton.classList.add('absolute', 'top-0', 'right-0', 'text-white',
+                            'bg-black', 'rounded-full', 'w-6', 'h-6', 'flex',
+                            'items-center', 'justify-center');
+                        closeButton.style.cursor = 'pointer';
+
+                        closeButton.onclick = () => {
+                            previewDiv.remove();
+                            removeImage(index);
+                        };
+
+                        previewDiv.appendChild(img);
+                        previewDiv.appendChild(closeButton);
+                        previewContainer.appendChild(previewDiv);
+                    };
+
+                    fileReader.readAsDataURL(file);
+                });
+            });
+
+            function removeImage(index) {
+                const dataTransfer = new DataTransfer();
+
+                Array.from(imageInput.files).forEach((file, i) => {
+                    if (i !== index) dataTransfer.items.add(file);
+                });
+
+                imageInput.files = dataTransfer.files;
+            }
+        });
+    </script>
+
+
     <script>
         if (document.getElementById("search-table") && typeof simpleDatatables.DataTable !== 'undefined') {
             const dataTable = new simpleDatatables.DataTable("#search-table", {

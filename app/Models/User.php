@@ -59,6 +59,6 @@ class User extends Authenticatable
 
     public function isSeller(): bool
     {
-        return $this->sellers()->exists();
+        return $this->seller()->exists();
     }
 }

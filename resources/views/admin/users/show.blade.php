@@ -94,7 +94,7 @@
                     class="border dark:border-gray-500 bg-white dark:bg-gray-900 shadow-lg dark:shadow-lg dark:shadow-gray-500/20 p-4 mb-4 rounded-lg text-lg font-normal text-gray-500 lg:text-sm  dark:text-gray-400">
                     <div
                         class="mb-1.5 text-4xl font-extrabold leading-none tracking-tight text-gray-700 md:text-2xl lg:text-2xl dark:text-white">
-                        <h2>Cordonnées utilisateur</h2>
+                        <h2>Cordonnées en tant que client</h2>
                     </div>
 
                     <hr class="my-4">
@@ -163,6 +163,34 @@
                         Historique des commandes passées par le client
                     </h3>
                 </div>
+                <div class="grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-6 mb-10">
+                    @foreach ($user->client->orders as $order)
+                        <a href="{{ route('admin.orders.show', $order->id) }}"
+                            class="rounded-xl flex justify-between gap-8 items-center border p-2 h-36 w-full shadow-lg dark:shadow-lg dark:shadow-gray-500/20 backdrop-blur-xl bg-cover bg-[#fcdab40a] dark:bg-gray-900 dark:hover:bg-gray-700 hover:bg-[#f8f0e7]  hover:scale-105 transition duration-700 ease-in-out border-l-8 dark:border-[#cc832f] border-[#ff9822] hover:border-l-10 ">
+                            <div>
+                                <div class=" flex gap-4 items-center mb-4">
+
+                                    <h3 class="text-xl font-semibold text-[#ff9822]">
+                                        {{ $order->order_number }}
+                                    </h3>
+                                </div>
+                                <div class="">
+                                    <p class="text-sm font-bold  dark:text-gray-400">
+                                        Date de commande : <span class="font-normal">{{ $order->order_date }}</span>
+                                    </p>
+                                    <p class="text-sm font-bold  dark:text-gray-400">
+                                        Nombre de produits : {{ $order->products->count() }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="">
+                                <img src="{{ isset($order->image) ? $order->image : asset('img/profil.jpeg') }}"
+                                    alt=""
+                                    class=" w-28 rounded-full border border-gray-900 dark:border-gray-500 object-cover">
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
                 @if ($user->client->orders->count() > 0)
                     <div class=" flex justify-between items-center ">
                         <div class=" flex gap-4">
@@ -187,13 +215,13 @@
                             <form class="max-w-sm mx-auto">
                                 <div class=" flex items-center gap-4">
                                     <div>
-                                        <select id="year-select-client"
+                                        <select id="year-select-for-client"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         </select>
                                     </div>
 
                                     <div>
-                                        <select id="month-select-client"
+                                        <select id="month-select-for-client"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         </select>
                                     </div>
@@ -203,28 +231,6 @@
                     </div>
                     <div>
                         <canvas id="chartClientOrders"></canvas>
-                    </div>
-
-                    <div class=" my-8">
-                        <h3
-                            class="text-4xl font-extrabold leading-none tracking-tight text-gray-700 md:text-2xl lg:text-2xl dark:text-white">
-                            Commandes recentes du client
-                        </h3>
-                        @foreach ($user->client->orders as $order)
-                            <a href="{{ route('orders.show', $order->id) }}"
-                                class=" h-36  flex  items-center  p-4 w-full rounded-lg shadow-lg dark:shadow-lg dark:shadow-gray-500/20 backdrop-blur-xl bg-cover bg-white dark:bg-gray-800 dark:hover:bg-gray-700  hover:bg-[#f8f0e7] hover:scale-105 transition duration-700 ease-in-out border-l-8 border-[#ff9822] hover:border-l-10 ">
-
-                                <div>
-                                    <p class=" text-lg font-normal text-gray-500 lg:text-sm  dark:text-gray-400">
-                                        {{ $item->name }}
-                                    </p>
-
-                                    <h3 class="mb-4 mt-4 text-lg font-semibold text-gray-800 dark:text-gray-200 ">
-                                        {{ $item->title }}
-                                    </h3>
-                                </div>
-                            </a>
-                        @endforeach
                     </div>
                 @else
                     <div class=" flex justify-center items-center w-full h-full">
@@ -277,7 +283,7 @@
                     class="border dark:border-gray-500 bg-white dark:bg-gray-900 shadow-lg dark:shadow-lg dark:shadow-gray-500/20 p-4 mb-4 rounded-lg text-lg font-normal text-gray-500 lg:text-sm  dark:text-gray-400">
                     <div
                         class="mb-1.5 text-4xl font-extrabold leading-none tracking-tight text-gray-700 md:text-2xl lg:text-2xl dark:text-white">
-                        <h2>Cordonnées utilisateur</h2>
+                        <h2>Cordonnées en tant que vendeur</h2>
                     </div>
 
                     <hr class="my-4">
@@ -448,8 +454,10 @@
     @endif
 
     <script>
-        let seller_id = "{{ $user->seller->id ?? null }}";
-        let client_id = "{{ $user->client->id ?? null }}";
+        let isSeller = @json($isSeller);
+        let isClient = @json($isClient);
+        let nbr_shops = @json($nbr_shops);
+        let nbr_orders = @json($nbr_orders);
         let user_last_activity = "{{ $user->last_activity ?? null }}";
 
         function updateTimeDifference(user) {
@@ -502,20 +510,20 @@
 
         // Mettre à jour le compteur chaque seconde
         setInterval(() => {
-            if (seller_id) {
+            if (isSeller) {
                 updateTimeDifference('seller');
             }
-            if (client_id) {
+            if (isClient) {
                 updateTimeDifference('client');
             }
         }, 1000);
 
 
         // Initial call to set the correct time immediately
-        if (seller_id) {
+        if (isSeller) {
             updateTimeDifference('seller');
         }
-        if (client_id) {
+        if (isClient) {
             updateTimeDifference('client');
         }
     </script>
@@ -531,10 +539,11 @@
             'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
         ];
 
-        if ("{{ $user->seller->shops->count() > 0 }}") {
-            const yearSelectForSeller = document.getElementById('year-select-for-seller');
-            const monthSelectForSeller = document.getElementById('month-select-for-seller');
-            if (seller_id) {
+        if (isSeller) {
+            let seller_id = @json($user->seller->id);
+            if (nbr_shops > 0) {
+                const yearSelectForSeller = document.getElementById('year-select-for-seller');
+                const monthSelectForSeller = document.getElementById('month-select-for-seller');
                 for (let year = startYear; year <= currentYear; year++) {
                     const option = document.createElement('option');
                     option.value = year;
@@ -613,11 +622,12 @@
             }
         }
 
-        if ("{{ $user->client->orders->count() > 0 }}") {
-            const yearSelectForClient = document.getElementById('year-select-for-client');
-            const monthSelectForClient = document.getElementById('month-select-for-client');
+        if (isClient) {
+            let client_id = @json($user->client->id);
+            if (nbr_orders > 0) {
+                const yearSelectForClient = document.getElementById('year-select-for-client');
+                const monthSelectForClient = document.getElementById('month-select-for-client');
 
-            if (client_id) {
                 for (let year = startYear; year <= currentYear; year++) {
                     const option = document.createElement('option');
                     option.value = year;

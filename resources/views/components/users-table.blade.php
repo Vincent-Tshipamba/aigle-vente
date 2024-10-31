@@ -74,7 +74,7 @@
                                 <img class="w-10 h-10 rounded-full"
                                     src="{{ $user->client->image ?? asset('img/profil.jpeg') }}" alt="">
                                 <div class="ps-3">
-                                    <div class="text-base">{{ $user->name }}</div>
+                                    {{ $user->name }}
                                 </div>
                             </td>
                             <td>{{ $user->email }}</td>

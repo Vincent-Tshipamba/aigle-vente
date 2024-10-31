@@ -60,14 +60,21 @@
                 </thead>
                 <tbody>
                     @foreach ($users as $key => $user)
+                        @php
+                            $cache_exists = false;
+                            if (Cache::has('user-is-online-' . $user->id)) {
+                                $cache_exists = true;
+                            }
+                        @endphp
                         <tr class="hover:bg-[#f0e6d9] hover:scale-100 transition-all duration-300 ease-in-out">
                             <td>{{ $key + 1 }}</td>
-                            <td class="flex items-center px-6 py-4 hover:cursor-pointer"
-                                @if ($user->client) onclick="window.location.href='{{ route('admin.clients.show', $user->client->id) }}'" @endif>
+                            <td class="flex items-center px-6 py-4 hover:cursor-pointer hover:underline hover:text-[#e38407] hover:font-bold hover:scale-105 transition-all duration-300 ease-in-out"
+                                @if ($user->client || $user->seller) onclick="window.location.href='{{ route('admin.users.show', $user->id) }}'" @endif
+                                onclick="showUserProfile({{ $user->id }}, '{{ $user->name }}', '{{ $user->email }}', '{{ $user->created_at }}', '{{ $user->last_activity }}', '{{ $cache_exists }}')">
                                 <img class="w-10 h-10 rounded-full"
                                     src="{{ $user->client->image ?? asset('img/profil.jpeg') }}" alt="">
                                 <div class="ps-3">
-                                    <div class="text-base font-semibold">{{ $user->name }}</div>
+                                    {{ $user->name }}
                                 </div>
                             </td>
                             <td>{{ $user->email }}</td>
@@ -78,7 +85,7 @@
                             </td>
                             <td>
                                 <div class="flex items-center">
-                                    @if (Cache::has('user-is-online-' . $user->id))
+                                    @if ($cache_exists)
                                         <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Online
                                     @else
                                         <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Offline

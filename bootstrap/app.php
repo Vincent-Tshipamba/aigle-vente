@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Middleware\CheckAdmin;
 use App\Http\Middleware\UserOnline;
 use App\Http\Middleware\CheckUserRole;
 use Illuminate\Foundation\Application;
@@ -14,12 +15,14 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
         commands: __DIR__.'/../routes/console.php',
+        channels: __DIR__.'/../routes/channels.php',
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'userOnline' => UserOnline::class,
             'checkRole' => CheckUserRole::class,
+            'checkAdmin' => CheckAdmin::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

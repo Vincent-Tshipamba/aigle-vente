@@ -18,14 +18,15 @@ Route::middleware(['auth', 'userOnline', 'checkRole:superadmin'])->group(functio
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/api/clients', [DashboardController::class, 'getClientsByPeriod']);
 
-
     // Users
     Route::resource('users', UserController::class);
-    Route::get('admin/users', [UserController::class, 'index'])->middleware('checkRole:superadmin')->name('admin.users.index');
+    Route::get('admin/users', [UserController::class, 'index'])->name('admin.users.index');
+    Route::get('admin/users/{user}', [UserController::class, 'show'])->middleware('checkAdmin:id')->name('admin.users.show');
     Route::delete('/users/delete/{user}', [UserController::class, 'destroyUser'])->name('users.delete');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('admin.profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('admin.profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('admin.profile.destroy');
+    Route::get('admin/api/user-activity', [UserController::class, 'getUserActivity']);
     Route::post('admin/users/change-status', [UserController::class, 'changeUserStatus'])->name('admin.users.change-status');
 
     // Roles and Permissions
@@ -49,10 +50,12 @@ Route::middleware(['auth', 'userOnline', 'checkRole:superadmin'])->group(functio
     // Clients
     Route::get('admin/clients', [ClientController::class, 'index'])->name('admin.clients.index');
     Route::get('admin/clients/{client}', [ClientController::class, 'show'])->name('admin.clients.show');
+    Route::get('admin/api/orders', [ClientController::class, 'getOrdersByUser']);
     Route::delete('admin/clients/delete/{client}', [ClientController::class, 'destroyClient'])->name('admin.clients.delete');
 
     // Sellers
     Route::get('admin/sellers', [SellerController::class, 'index'])->name('admin.sellers.index');
+    Route::get('admin/api/seller-orders', [SellerController::class, 'getOrdersBySeller']);
     Route::get('admin/sellers/{seller}', [SellerController::class, 'show'])->name('admin.sellers.show');
 
     // Products

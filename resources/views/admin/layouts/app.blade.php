@@ -31,6 +31,7 @@
     </div>
     <script src="{{ Vite::asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ Vite::asset('node_modules/sweetalert2/dist/sweetalert2.min.js') }}"></script>
+    <script src="{{ Vite::asset('node_modules/chart.js/dist/chart.umd.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script>
     <script>
         const sidebar = document.querySelector("aside");

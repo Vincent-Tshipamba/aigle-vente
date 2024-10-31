@@ -31,7 +31,10 @@ class DashboardController extends Controller
 
         // Compter les commandes associées au vendeur en utilisant le `seller_id` dans `orders`
         $totalOrders = DB::table('orders')
-        ->where('seller_id', $seller->id) // Remplacez `shop_id` par `seller_id` ou la clé correcte
+            ->join('order_products', 'orders._id', '=', 'order_products.order_id')
+            ->join('products', 'products._id', '=', 'order_products.product_id')
+            ->join('shops', 'shops._id', '=', 'products.shop_id')
+            ->where('shops.seller_id', $seller->id)
             ->count();
 
         // Calcul du revenu total basé sur les produits du vendeur
@@ -54,7 +57,8 @@ class DashboardController extends Controller
         $monthlySales = DB::table('orders')
         ->join('order_products', 'orders._id', '=', 'order_products.order_id')
         ->join('products', 'products._id', '=', 'order_products.product_id')
-        ->where('orders.seller_id', $seller->id) // Utiliser `seller_id` ici aussi
+        ->join('shops', 'shops._id', '=', 'products.shop_id')
+        ->where('shops.seller_id', $seller->id)
             ->select(
                 DB::raw('MONTH(orders.created_at) as month'),
                 DB::raw('COUNT(*) as total_sales'),
@@ -64,7 +68,10 @@ class DashboardController extends Controller
             ->orderBy('month')
             ->get();
 
-        $totalStockQuantity = Product::whereIn('shop_id', $shopIds)->sum('stock_quantity');
+        $totalStockQuantity = DB::table('stocks')
+            ->join('products', 'products._id', '=', 'stocks.product_id')
+            ->whereIn('products.shop_id', $shopIds)
+            ->sum('stocks.quantity');
         $totalShops = $shopIds->count();
 
         return view('seller.dashboard', compact(

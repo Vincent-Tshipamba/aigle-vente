@@ -21,6 +21,7 @@ class User extends Authenticatable
         'email',
         'password',
         'is_active',
+        'last_activity',
     ];
 
     protected $hidden = [
@@ -59,6 +60,6 @@ class User extends Authenticatable
 
     public function isSeller(): bool
     {
-        return $this->sellers()->exists();
+        return $this->seller()->exists();
     }
 }

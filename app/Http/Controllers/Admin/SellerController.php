@@ -15,6 +15,16 @@ class SellerController extends Controller
         return view('admin.sellers.index', compact('sellers'));
     }
 
+
+    public function changeSellerStatus(Request $request)
+    {
+        $seller = Seller::find($request->sellerId);
+        $isActive = $request->isActive == 'true' ? true : false;
+        $seller->is_active = $isActive;
+        $seller->save();
+        return response()->json(['message' => 'Status du vendeur mis à jour avec succès']);
+    }
+
     public function getOrdersBySeller(Request $request)
     {
         $seller_id = $request->seller_id;

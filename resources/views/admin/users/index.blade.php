@@ -218,7 +218,7 @@
                 },
                 error: function(error) {
                     console.error(
-                        'Error deleting permission:',
+                        'Error changing user status:',
                         error);
                 }
             });

@@ -52,24 +52,32 @@ Route::middleware(['auth', 'userOnline', 'checkRole:superadmin'])->group(functio
     Route::get('admin/clients/{client}', [ClientController::class, 'show'])->name('admin.clients.show');
     Route::get('admin/api/orders', [ClientController::class, 'getOrdersByUser']);
     Route::delete('admin/clients/delete/{client}', [ClientController::class, 'destroyClient'])->name('admin.clients.delete');
+    Route::post('admin/clients/change-status', [ClientController::class, 'changeClientStatus'])->name('admin.clients.change-status');
 
     // Sellers
     Route::get('admin/sellers', [SellerController::class, 'index'])->name('admin.sellers.index');
     Route::get('admin/api/seller-orders', [SellerController::class, 'getOrdersBySeller']);
     Route::get('admin/sellers/{seller}', [SellerController::class, 'show'])->name('admin.sellers.show');
+    Route::post('admin/sellers/change-status', [SellerController::class, 'changeSellerStatus'])->name('admin.sellers.change-status');
 
     // Products
     Route::get('admin/products', [ProductController::class, 'index'])->name('admin.products.index');
     Route::get('admin/products/{product}', [ProductController::class, 'show'])->name('admin.products.show');
+    Route::post('admin/products/change-status', [ProductController::class, 'changeProductStatus'])->name('admin.products.change-status');
+
     // Orders
     Route::get('admin/orders/{order}', [OrderController::class, 'show'])->name('admin.orders.show');
     Route::get('admin/orders', [OrderController::class, 'index'])->name('admin.orders.index');
-
+    Route::get('admin/orders/{order}', [OrderController::class, 'show'])->name('admin.orders.show');
+    
     // Categories
     Route::get('admin/categories', [CategoryProductController::class, 'index'])->name('admin.categories.index');
     Route::get('admin/categories/{category}', [CategoryProductController::class, 'show'])->name('admin.categories.show');
+    Route::delete('admin/categories/delete', [CategoryProductController::class, 'destroy'])->name('admin.categories.destroy');
 
     // Shops
     Route::get('admin/shops', [ShopController::class, 'index'])->name('admin.shops.index');
+    Route::get('admin/api/shop/orders-flow', [ShopController::class, 'getOrdersFlow']);
     Route::get('admin/shops/{shop}', [ShopController::class, 'show'])->name('admin.shops.show');
+    Route::post('admin/shops/change-status', [ShopController::class, 'changeShopStatus'])->name('admin.shops.change-status');
 });

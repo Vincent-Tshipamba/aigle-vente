@@ -116,23 +116,26 @@
                     </thead>
                     <tbody>
                         @foreach ($categories as $key => $category)
-                            <tr>
+                            <tr
+                                class="hover:bg-[#f0e6d9] hover:scale-100 hover:cursor-pointer transition-all duration-300 ease-in-out">
                                 <td>{{ $key + 1 }}</td>
-                                <td class="flex items-center px-6 py-4">
-                                    <img class="w-10 h-10 rounded-full" src="{{ $category->image }}" alt="">
+                                <td class="flex items-center px-6 py-4" >
+                                    <img class="w-10 h-10 rounded-full" src="" alt="">
                                     <div class="ps-3">
                                         <div class="text-base font-semibold">{{ $category->name }}</div>
                                     </div>
                                 </td>
                                 <td>{{ $category->description }}</td>
                                 <td>{{ $category->products->count() }}</td>
-                                <td>
-                                    <label class="inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" value="" class="sr-only peer" checked>
-                                        <div
-                                            class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#e38407]">
-                                        </div>
-                                    </label>
+                                <td class="flex items-center gap-x-4">
+                                    <a href=""
+                                        class="text-blue-500 hover:text-blue-700 hover:underline hover:cursor-pointer transition-all duration-300 ease-in-out font-bold">
+                                        Modifier
+                                    </a>
+                                    <a href="" onclick="deleteCategory('{{ $category->id }}', '{{ $category->name }}')"
+                                        class="text-red-500 hover:text-red-700 hover:underline hover:cursor-pointer transition-all duration-300 ease-in-out font-bold">
+                                        Supprimer
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
@@ -144,6 +147,51 @@
 @endsection
 
 @section('script')
+    <script>
+        function deleteCategory(categoryId, categoryName) {
+            event.preventDefault();
+            let url = "{{ route('admin.categories.destroy') }}";
+            Swal.fire({
+                title: 'Voulez-vous vraiment supprimer la catégorie ' + categoryName + ' ?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Oui, supprimer',
+                cancelButtonText: 'Non, annuler'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: url,
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            categoryId: categoryId
+                        },
+                        dataType: "json",
+                        success: function (response) {
+                            const toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                progressBar: true,
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.onmouseenter = Swal.stopTimer;
+                                    toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+                            toast.fire({
+                                icon: 'success',
+                                title: response.message
+                            }).then(() => {
+                                window.location.reload();
+                            });
+                        }
+                    });
+                }
+            })
+        }
+    </script>
     <script>
         if (document.getElementById("sellers-table") && typeof simpleDatatables.DataTable !== 'undefined') {
             const exportCustomCSV = function(dataTable, userOptions = {}) {

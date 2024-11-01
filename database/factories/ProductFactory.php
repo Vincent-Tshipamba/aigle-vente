@@ -15,7 +15,8 @@ class ProductFactory extends Factory
             'description' => $this->faker->sentence,
             'unit_price' => $this->faker->randomFloat(2, 0, 100),
             'shop_id' => $this->faker->randomElement(Shop::pluck('id')),
-            'category_product_id' => $this->faker->randomElement(CategoryProduct::pluck('id'))
+            'category_product_id' => $this->faker->randomElement(CategoryProduct::pluck('id')),
+            'is_active' => $this->faker->boolean(),
         ];
     }
 }

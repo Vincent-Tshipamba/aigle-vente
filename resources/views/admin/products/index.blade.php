@@ -121,7 +121,8 @@
                     </thead>
                     <tbody>
                         @foreach ($products as $key => $product)
-                            <tr>
+                            <tr
+                                class="hover:bg-[#f0e6d9] hover:scale-100 hover:cursor-pointer transition-all duration-300 ease-in-out">
                                 <td>{{ $key + 1 }}</td>
                                 <td onclick="window.location.href='{{ route('admin.products.show', $product->id) }}'"
                                     class="hover:underline hover:text-[#e38407] hover:cursor-pointer hover:font-bold">
@@ -140,7 +141,8 @@
                                 <td>
                                     <label class="inline-flex items-center cursor-pointer">
                                         <input type="checkbox" value="" class="sr-only peer"
-                                            {{ $product->is_active ? 'checked' : '' }}>
+                                            {{ $product->is_active ? 'checked' : '' }}
+                                            onchange="changeProductStatus({{ $product->id }})">
                                         <div
                                             class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#e38407]">
                                         </div>
@@ -156,6 +158,44 @@
 @endsection
 
 @section('script')
+    <script>
+        function changeProductStatus(productId) {
+            event.preventDefault();
+            var isActive = event.target.checked;
+            $.ajax({
+                type: "post",
+                url: "{{ route('admin.products.change-status') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    productId: productId,
+                    isActive: isActive
+                },
+                dataType: "json",
+                success: function(response) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+                    Toast.fire({
+                        icon: "success",
+                        title: response.message
+                    });
+                },
+                error: function(error) {
+                    console.error(
+                        'Error changing product status:',
+                        error);
+                }
+            });
+        }
+    </script>
     <script>
         if (document.getElementById("products-table") && typeof simpleDatatables.DataTable !== 'undefined') {
             const exportCustomCSV = function(dataTable, userOptions = {}) {
@@ -302,5 +342,4 @@
             })
         }
     </script>
-
 @endsection

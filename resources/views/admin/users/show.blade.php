@@ -134,6 +134,7 @@
                             {{ $user->client->address }}
                         </span>
                     </div>
+                    <hr class="my-4">
                     <div class="flex ">
                         <p class="w-1/2">
                             Client créé le :
@@ -151,6 +152,7 @@
                             {{ $format }}
                         </span>
                     </div>
+                    <hr class="my-4">
                 </div>
                 <hr class="my-4">
             </div>
@@ -538,172 +540,178 @@
             'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
             'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
         ];
-
-        if (isSeller) {
-            let seller_id = @json($user->seller->id);
-            if (nbr_shops > 0) {
-                const yearSelectForSeller = document.getElementById('year-select-for-seller');
-                const monthSelectForSeller = document.getElementById('month-select-for-seller');
-                for (let year = startYear; year <= currentYear; year++) {
-                    const option = document.createElement('option');
-                    option.value = year;
-                    option.text = year;
-                    yearSelectForSeller.appendChild(option);
-                }
-
-                yearSelectForSeller.addEventListener('change', function() {
-                    sellerUpdateMonths(this.value);
-                });
-
-                yearSelectForSeller.value = currentYear;
-                sellerUpdateMonths(currentYear);
-
-                fetchSellerOrdersData(seller_id, yearSelectForSeller.value, monthSelectForSeller.value);
-
-                // Event listeners for year and month selection
-                yearSelectForSeller.addEventListener('change', function() {
-                    fetchSellerOrdersData(seller_id, yearSelectForSeller.value, monthSelectForSeller.value);
-                });
-
-                monthSelectForSeller.addEventListener('change', function() {
-                    fetchSellerOrdersData(seller_id, yearSelectForSeller.value, monthSelectForSeller.value);
-                });
-
-                function fetchSellerOrdersData(seller_id, year, month) {
-                    const sellerOrdersUrl = `/admin/api/seller-orders?seller_id=${seller_id}&year=${year}&month=${month}`;
-                    fetch(sellerOrdersUrl)
-                        .then(response => response.json())
-                        .then(data => {
-                            const dates = data.map(item => item.date);
-                            const aggregates = data.map(item => item.aggregate);
-
-                            if (myChartSeller) {
-                                myChartSeller.data.labels = dates;
-                                myChartSeller.data.datasets[0].data = aggregates;
-                                myChartSeller.update();
-                            } else {
-                                const chartElement = document.getElementById('chartSellerOrders').getContext('2d');
-                                if (myChartSeller) {
-                                    myChartSeller.destroy();
-                                }
-
-                                myChartSeller = new Chart(chartElement, {
-                                    type: 'bar',
-                                    data: {
-                                        labels: dates,
-                                        datasets: [{
-                                            label: 'Mouvements des commandes du vendeur',
-                                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                            borderColor: 'rgba(255, 99, 132, 1)',
-                                            data: aggregates,
-                                        }]
-                                    }
-                                });
-                            }
-                        })
-                        .catch(error => console.error('Erreur lors de la récupération des données pour les vendeurs :',
-                            error));
-                }
-
-                function sellerUpdateMonths(selectedYear) {
-                    const allOption = document.createElement('option');
-                    allOption.value = 'all';
-                    allOption.text = 'Tous les mois';
-                    const maxMonth = (selectedYear == currentYear) ? currentMonth : 12;
-                    monthSelectForSeller.innerHTML = '';
-                    monthSelectForSeller.appendChild(allOption);
-                    for (let i = 0; i < maxMonth; i++) {
-                        const option = document.createElement('option');
-                        option.value = i + 1;
-                        option.text = months[i];
-                        monthSelectForSeller.appendChild(option);
-                    }
-                }
-            }
-        }
-
-        if (isClient) {
-            let client_id = @json($user->client->id);
-            if (nbr_orders > 0) {
-                const yearSelectForClient = document.getElementById('year-select-for-client');
-                const monthSelectForClient = document.getElementById('month-select-for-client');
-
-                for (let year = startYear; year <= currentYear; year++) {
-                    const option = document.createElement('option');
-                    option.value = year;
-                    option.text = year;
-                    yearSelectForClient.appendChild(option);
-                }
-
-                yearSelectForClient.addEventListener('change', function() {
-                    clientUpdateMonths(this.value);
-                });
-
-                yearSelectForClient.value = currentYear;
-                clientUpdateMonths(currentYear);
-
-                fetchClientOrdersData(client_id, yearSelectForClient.value, monthSelectForClient.value);
-
-                // Event listeners for year and month selection
-                yearSelectForClient.addEventListener('change', function() {
-                    fetchClientOrdersData(client_id, yearSelectForClient.value, monthSelectForClient.value);
-                });
-
-                monthSelectForClient.addEventListener('change', function() {
-                    fetchClientOrdersData(client_id, yearSelectForClient.value, monthSelectForClient.value);
-                });
-
-                function fetchClientOrdersData(client_id, year, month) {
-                    const clientOrdersUrl = `/admin/api/orders?client_id=${client_id}&year=${year}&month=${month}`;
-                    fetch(clientOrdersUrl)
-                        .then(response => response.json())
-                        .then(data => {
-                            const dates = data.map(item => item.date);
-                            const aggregates = data.map(item => item.aggregate);
-
-                            if (myChartClient) {
-                                myChartClient.data.labels = dates;
-                                myChartClient.data.datasets[0].data = aggregates;
-                                myChartClient.update();
-                            } else {
-                                const chartElement = document.getElementById('chartClientOrders').getContext('2d');
-                                if (myChartClient) {
-                                    myChartClient.destroy();
-                                }
-
-                                myChartClient = new Chart(chartElement, {
-                                    type: 'bar',
-                                    data: {
-                                        labels: dates,
-                                        datasets: [{
-                                            label: 'Commandes du client',
-                                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                            borderColor: 'rgba(54, 162, 235, 1)',
-                                            data: aggregates,
-                                        }]
-                                    }
-                                });
-                            }
-                        })
-                        .catch(error => console.error('Erreur lors de la récupération des données pour les clients :',
-                            error));
-                }
-
-                function clientUpdateMonths(selectedYear) {
-                    const allOption = document.createElement('option');
-                    allOption.value = 'all';
-                    allOption.text = 'Tous les mois';
-                    const maxMonth = (selectedYear == currentYear) ? currentMonth : 12;
-                    monthSelectForClient.innerHTML = '';
-                    monthSelectForClient.appendChild(allOption);
-                    for (let i = 0; i < maxMonth; i++) {
-                        const option = document.createElement('option');
-                        option.value = i + 1;
-                        option.text = months[i];
-                        monthSelectForClient.appendChild(option);
-                    }
-                }
-            }
-        }
     </script>
+    @if ($user->hasRole('vendeur') || $user->seller)
+        <script>
+            if (isSeller) {
+                let seller_id = @json($user->seller->id);
+                if (nbr_shops > 0) {
+                    const yearSelectForSeller = document.getElementById('year-select-for-seller');
+                    const monthSelectForSeller = document.getElementById('month-select-for-seller');
+                    for (let year = startYear; year <= currentYear; year++) {
+                        const option = document.createElement('option');
+                        option.value = year;
+                        option.text = year;
+                        yearSelectForSeller.appendChild(option);
+                    }
+
+                    yearSelectForSeller.addEventListener('change', function() {
+                        sellerUpdateMonths(this.value);
+                    });
+
+                    yearSelectForSeller.value = currentYear;
+                    sellerUpdateMonths(currentYear);
+
+                    fetchSellerOrdersData(seller_id, yearSelectForSeller.value, monthSelectForSeller.value);
+
+                    // Event listeners for year and month selection
+                    yearSelectForSeller.addEventListener('change', function() {
+                        fetchSellerOrdersData(seller_id, yearSelectForSeller.value, monthSelectForSeller.value);
+                    });
+
+                    monthSelectForSeller.addEventListener('change', function() {
+                        fetchSellerOrdersData(seller_id, yearSelectForSeller.value, monthSelectForSeller.value);
+                    });
+
+                    function fetchSellerOrdersData(seller_id, year, month) {
+                        const sellerOrdersUrl = `/admin/api/seller-orders?seller_id=${seller_id}&year=${year}&month=${month}`;
+                        fetch(sellerOrdersUrl)
+                            .then(response => response.json())
+                            .then(data => {
+                                const dates = data.map(item => item.date);
+                                const aggregates = data.map(item => item.aggregate);
+
+                                if (myChartSeller) {
+                                    myChartSeller.data.labels = dates;
+                                    myChartSeller.data.datasets[0].data = aggregates;
+                                    myChartSeller.update();
+                                } else {
+                                    const chartElement = document.getElementById('chartSellerOrders').getContext('2d');
+                                    if (myChartSeller) {
+                                        myChartSeller.destroy();
+                                    }
+
+                                    myChartSeller = new Chart(chartElement, {
+                                        type: 'bar',
+                                        data: {
+                                            labels: dates,
+                                            datasets: [{
+                                                label: 'Mouvements des commandes du vendeur',
+                                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                                borderColor: 'rgba(255, 99, 132, 1)',
+                                                data: aggregates,
+                                            }]
+                                        }
+                                    });
+                                }
+                            })
+                            .catch(error => console.error('Erreur lors de la récupération des données pour les vendeurs :',
+                                error));
+                    }
+
+                    function sellerUpdateMonths(selectedYear) {
+                        const allOption = document.createElement('option');
+                        allOption.value = 'all';
+                        allOption.text = 'Tous les mois';
+                        const maxMonth = (selectedYear == currentYear) ? currentMonth : 12;
+                        monthSelectForSeller.innerHTML = '';
+                        monthSelectForSeller.appendChild(allOption);
+                        for (let i = 0; i < maxMonth; i++) {
+                            const option = document.createElement('option');
+                            option.value = i + 1;
+                            option.text = months[i];
+                            monthSelectForSeller.appendChild(option);
+                        }
+                    }
+                }
+            }
+        </script>
+    @endif
+    @if ($user->hasRole('client') || $user->client)
+        <script>
+            if (isClient) {
+                let client_id = @json($user->client->id);
+                if (nbr_orders > 0) {
+                    const yearSelectForClient = document.getElementById('year-select-for-client');
+                    const monthSelectForClient = document.getElementById('month-select-for-client');
+
+                    for (let year = startYear; year <= currentYear; year++) {
+                        const option = document.createElement('option');
+                        option.value = year;
+                        option.text = year;
+                        yearSelectForClient.appendChild(option);
+                    }
+
+                    yearSelectForClient.addEventListener('change', function() {
+                        clientUpdateMonths(this.value);
+                    });
+
+                    yearSelectForClient.value = currentYear;
+                    clientUpdateMonths(currentYear);
+
+                    fetchClientOrdersData(client_id, yearSelectForClient.value, monthSelectForClient.value);
+
+                    // Event listeners for year and month selection
+                    yearSelectForClient.addEventListener('change', function() {
+                        fetchClientOrdersData(client_id, yearSelectForClient.value, monthSelectForClient.value);
+                    });
+
+                    monthSelectForClient.addEventListener('change', function() {
+                        fetchClientOrdersData(client_id, yearSelectForClient.value, monthSelectForClient.value);
+                    });
+
+                    function fetchClientOrdersData(client_id, year, month) {
+                        const clientOrdersUrl = `/admin/api/orders?client_id=${client_id}&year=${year}&month=${month}`;
+                        fetch(clientOrdersUrl)
+                            .then(response => response.json())
+                            .then(data => {
+                                const dates = data.map(item => item.date);
+                                const aggregates = data.map(item => item.aggregate);
+
+                                if (myChartClient) {
+                                    myChartClient.data.labels = dates;
+                                    myChartClient.data.datasets[0].data = aggregates;
+                                    myChartClient.update();
+                                } else {
+                                    const chartElement = document.getElementById('chartClientOrders').getContext('2d');
+                                    if (myChartClient) {
+                                        myChartClient.destroy();
+                                    }
+
+                                    myChartClient = new Chart(chartElement, {
+                                        type: 'bar',
+                                        data: {
+                                            labels: dates,
+                                            datasets: [{
+                                                label: 'Commandes du client',
+                                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                                borderColor: 'rgba(54, 162, 235, 1)',
+                                                data: aggregates,
+                                            }]
+                                        }
+                                    });
+                                }
+                            })
+                            .catch(error => console.error('Erreur lors de la récupération des données pour les clients :',
+                                error));
+                    }
+
+                    function clientUpdateMonths(selectedYear) {
+                        const allOption = document.createElement('option');
+                        allOption.value = 'all';
+                        allOption.text = 'Tous les mois';
+                        const maxMonth = (selectedYear == currentYear) ? currentMonth : 12;
+                        monthSelectForClient.innerHTML = '';
+                        monthSelectForClient.appendChild(allOption);
+                        for (let i = 0; i < maxMonth; i++) {
+                            const option = document.createElement('option');
+                            option.value = i + 1;
+                            option.text = months[i];
+                            monthSelectForClient.appendChild(option);
+                        }
+                    }
+                }
+            }
+        </script>
+    @endif
 @endsection

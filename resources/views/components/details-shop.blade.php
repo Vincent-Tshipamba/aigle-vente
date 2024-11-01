@@ -35,12 +35,6 @@
 
         <div
             class="border dark:border-gray-500 bg-white dark:bg-gray-900 shadow-lg dark:shadow-lg dark:shadow-gray-500/20 p-4 mb-4 rounded-lg text-lg font-normal text-gray-500 lg:text-sm  dark:text-gray-400">
-            <div
-                class="mb-1.5 text-4xl font-extrabold leading-none tracking-tight text-gray-700 md:text-2xl lg:text-2xl dark:text-white">
-                <h2>Cordonnées en tant que vendeur</h2>
-            </div>
-
-            <hr class="my-4">
             <div class=" text-left flex ">
                 <p class="w-1/2">Prénom : </p><span class="font-bold">{{ $owner->first_name }}</span>
             </div>

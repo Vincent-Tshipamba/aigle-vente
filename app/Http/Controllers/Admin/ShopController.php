@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Shop;
+use App\Models\Order;
 use App\Models\Seller;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -30,11 +31,13 @@ class ShopController extends Controller
     {
         $owner = Seller::find($shop->seller_id);
         $products = Product::where('shop_id', $shop->id)->get();
-        $orders = DB::table('orders')
-            ->join('order_products', 'orders.id', '=', 'order_products.order_id')
-            ->join('products', 'order_products.product_id', '=', 'products.id')
-            ->where('products.shop_id', $shop->id)
+
+        $orders = Order::with(['products', 'client'])
+            ->whereHas('products', function ($query) use ($shop) {
+                $query->where('shop_id', $shop->id);
+            })
             ->get();
+
         return view('admin.shops.show', compact('shop', 'owner', 'products', 'orders'));
     }
 

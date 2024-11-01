@@ -1,7 +1,7 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
-                <table id="products-per-shop-table" class="table table-striped table-bordered">
+                <table id="orders-per-shop-table" class="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th>
@@ -16,7 +16,7 @@
                             </th>
                             <th>
                                 <span class="flex items-center">
-                                    Nom
+                                    Client
                                     <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                         width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -26,7 +26,7 @@
                             </th>
                             <th>
                                 <span class="flex items-center">
-                                    Catégorie
+                                    Produit
                                     <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                         width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -36,7 +36,7 @@
                             </th>
                             <th>
                                 <span class="flex items-center">
-                                    Description
+                                    Quantité
                                     <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                         width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -46,7 +46,7 @@
                             </th>
                             <th>
                                 <span class="flex items-center">
-                                    Prix unitaire
+                                    Prix
                                     <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                         width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -56,7 +56,7 @@
                             </th>
                             <th>
                                 <span class="flex items-center">
-                                    Quantité en stock
+                                    Total
                                     <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                         width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -64,41 +64,59 @@
                                     </svg>
                                 </span>
                             </th>
-                            <th>Action</th>
+                            <th>
+                                <span class="flex items-center">
+                                    Statut
+                                    <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                                    </svg>
+                                </span>
+                            </th>
+                            <th>
+                                <span class="flex items-center">
+                                    Date
+                                    <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                                    </svg>
+                                </span>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($products as $key => $product)
+                        @foreach ($orders as $key => $order)
                             <tr
                                 class="hover:bg-[#f0e6d9] hover:scale-100 hover:cursor-pointer transition-all duration-300 ease-in-out">
+                                @php
+                                    $total = 0;
+                                @endphp
                                 <td>{{ $key + 1 }}</td>
-                                <td onclick="window.location.href='{{ route('admin.products.show', $product->id) }}'"
-                                    class="hover:underline hover:text-[#e38407] hover:cursor-pointer hover:font-bold">
-                                    {{ $product->name }}
-                                </td>
-                                <td onclick="window.location.href='{{ route('admin.categories.show', $product->category_product->id) }}'"
-                                    class="hover:underline hover:text-[#e38407] hover:cursor-pointer hover:font-bold">
-                                    {{ $product->category_product->name }}
-                                </td>
-                                <td>{{ substr($product->description, 0, 50) . '...' }}</td>
-                                <td>{{ $product->unit_price }}</td>
+                                <td>{{ $order->client->first_name }} {{ $order->client->last_name }}</td>
                                 <td>
-                                    @if ($product->stock->quantity < 0)
-                                        <span class="text-red-500">{{ $product->stock->quantity }}</span>
-                                    @else
-                                        {{ $product->stock->quantity }}
-                                    @endif
+                                    @foreach ($order->products as $product)
+                                        {{ $product->name }}<br>
+                                    @endforeach
                                 </td>
                                 <td>
-                                    <label class="inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" value="" class="sr-only peer"
-                                            {{ $product->is_active ? 'checked' : '' }}
-                                            onchange="changeProductStatus({{ $product->id }})">
-                                        <div
-                                            class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#e38407]">
-                                        </div>
-                                    </label>
+                                    @foreach ($order->products as $product)
+                                        {{ $product->pivot->quantity }}<br>
+                                    @endforeach
                                 </td>
+                                <td>
+                                    @foreach ($order->products as $product)
+                                        {{ $product->unit_price }}<br>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    @foreach ($order->products as $product)
+                                        {{ $product->pivot->quantity * $product->unit_price }}<br>
+                                    @endforeach
+                                </td>
+                                <td>{{ $order->status }}</td>
+                                <td>{{ $order->created_at }}</td>
                             </tr>
                         @endforeach
                     </tbody>

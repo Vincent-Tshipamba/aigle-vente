@@ -10,7 +10,7 @@ class CategoryProductController extends Controller
 {
     public function index()
     {
-        $categories = CategoryProduct::all();
+        $categories = CategoryProduct::latest()->get();
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -27,7 +27,19 @@ class CategoryProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ], [
+            'name.required' => 'Veuillez saisir un nom de catégorie.',
+        ]);
+
+        CategoryProduct::firstOrCreate([
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+        ]);
+
+        return response()->json(['message' => 'Catégorie créée avec succès']);
     }
 
     /**
@@ -51,7 +63,16 @@ class CategoryProductController extends Controller
      */
     public function update(Request $request, CategoryProduct $categoryProduct)
     {
-        //
+        $categoryProduct = CategoryProduct::find($request->id);
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ], [
+            'name.required' => 'Veuillez saisir un nom de catégorie.',
+        ]);
+
+        $categoryProduct->update($validated);
+        return response()->json(['message' => 'Catégorie modifiée avec succès']);
     }
 
     /**

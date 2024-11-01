@@ -27,11 +27,29 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        // Attempt to authenticate the user
+        $credentials = $request->only('email', 'password');
 
-        $request->session()->regenerate();
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
 
-        return redirect()->intended(route('home', absolute: false));
+            // Check if the user account is disabled
+            if (!$user->is_active) {
+                Auth::logout();
+                return redirect()->route('login')->with(['account' => 'Votre compte est actuellement désactivé. Pour plus d\'informations ou pour réactiver votre compte, veuillez contacter notre support client.']);
+            }
+
+            // Regenerate session if the user is not disabled
+            $request->session()->regenerate();
+
+            return redirect()->intended(route('home', absolute: false));
+        }
+
+        // If authentication fails
+        return back()->withErrors([
+            'email' => 'Nous n\'avons pas pu trouver un compte avec cet e-mail. Veuillez vérifier et réessayer.',
+            'password' => 'Le mot de passe que vous avez saisi est incorrect. Veuillez réessayer.',
+        ]);
     }
 
     /**

@@ -35,43 +35,6 @@
                                     <li><a href="track.html">Suivi de Produit</a></li>
                                 </ul>
                             </li>
-                            <li class="has-dropdown has-megamenu">
-                                <a href="about.html">Pages</a>
-                                <ul class="submenu mega-menu">
-                                    <li>
-                                        <a class="mega-menu-title">Mise en Page</a>
-                                        <ul>
-                                            <li><a href="shop.html">Filtres Boutique v1</a></li>
-                                            <li><a href="shop-2.html">Filtres Boutique v2</a></li>
-                                            <li><a href="shop-details.html">Barre Latérale Boutique</a></li>
-                                            <li><a href="shop-details-2.html">Barre Latérale Droite Boutique</a></li>
-                                            <li><a href="shop-location.html">Vue Liste Boutique</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a class="mega-menu-title">Mise en Page</a>
-                                        <ul>
-                                            <li><a href="about.html">À Propos</a></li>
-                                            <li><a href="cart.html">Panier</a></li>
-                                            <li><a href="checkout.html">Passer à la Caisse</a></li>
-                                            <li><a href="{{ route('login') }}">Se Connecter</a></li>
-                                            <li><a href="{{ route('login') }}">Connexion</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a class="mega-menu-title">Type de Page</a>
-                                        <ul>
-                                            <li><a href="track.html">Suivi de Produit</a></li>
-                                            <li><a href="wishlist.html">Liste de Souhaits</a></li>
-                                            <li><a href="error.html">404 / Erreur</a></li>
-                                            <li><a href="coming-soon.html">Bientôt Disponible</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="{{ route('blog') }}">Blog</a>
-                            </li>
                             <li><a href="{{ route('contact') }}">Contact</a></li>
                         </ul>
                     </nav>

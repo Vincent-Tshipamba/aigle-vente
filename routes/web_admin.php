@@ -69,12 +69,14 @@ Route::middleware(['auth', 'userOnline', 'checkRole:superadmin'])->group(functio
     Route::get('admin/orders/{order}', [OrderController::class, 'show'])->name('admin.orders.show');
     Route::get('admin/orders', [OrderController::class, 'index'])->name('admin.orders.index');
     Route::get('admin/orders/{order}', [OrderController::class, 'show'])->name('admin.orders.show');
-    
+
     // Categories
     Route::get('admin/categories', [CategoryProductController::class, 'index'])->name('admin.categories.index');
     Route::get('admin/categories/{category}', [CategoryProductController::class, 'show'])->name('admin.categories.show');
     Route::delete('admin/categories/delete', [CategoryProductController::class, 'destroy'])->name('admin.categories.destroy');
-
+    Route::post('admin/categories/store', [CategoryProductController::class, 'store'])->name('admin.categories.store');
+    Route::put('admin/categories/{category}', [CategoryProductController::class, 'update'])->name('admin.categories.update');
+    
     // Shops
     Route::get('admin/shops', [ShopController::class, 'index'])->name('admin.shops.index');
     Route::get('admin/api/shop/orders-flow', [ShopController::class, 'getOrdersFlow']);

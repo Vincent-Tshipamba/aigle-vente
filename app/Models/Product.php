@@ -20,7 +20,8 @@ class Product extends Model
         'unit_price',
         'category_produit_id',
         'shop_id',
-        'description'
+        'description',
+        'is_active'
     ];
 
     protected static function boot()

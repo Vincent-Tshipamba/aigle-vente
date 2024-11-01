@@ -1,23 +1,4 @@
 <x-app-layout>
-    <!-- breadcrumb-area -->
-    <section class="breadcrumb__area pt-60 pb-60 tp-breadcrumb__bg"
-        data-background="{{ asset('img/banner/breadcrumb-01.jpg') }}">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-xl-7 col-lg-12 col-md-12 col-12">
-                    <div class="tp-breadcrumb">
-                        <div class="tp-breadcrumb__link mb-10">
-                            <span class="breadcrumb-item-active"><a href="{{ route('home') }}">Accueil</a></span>
-                            <span>Contact</span>
-                        </div>
-                        <h2 class="tp-breadcrumb__title">Entrer en Contact</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- breadcrumb-area-end -->
-
     <!-- contact-area-start -->
     <section class="contact-area pt-80 pb-80">
         <div class="container">
@@ -86,7 +67,7 @@
                                 </div>
                             </div>
                             <div class="tpcontact__submit">
-                                <button class="tp-btn tp-color-btn tp-wish-cart">Obtenir un Devis <i
+                                <button class="tp-btn tp-color-btn tp-wish-cart">Envoyer le message <i
                                         class="fal fa-long-arrow-right"></i></button>
                             </div>
                         </form>

@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Database\Seeders\OrderSeeder;
 use Illuminate\Support\Str;
+use Database\Seeders\OrderSeeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -36,9 +37,9 @@ class Product extends Model
         return $this->belongsTo(Shop::class);
     }
 
-    public function stocks(): HasMany
+    public function stock(): HasOne
     {
-        return $this->hasMany(Stock::class);
+        return $this->hasOne(Stock::class);
     }
 
     public function category_product(): BelongsTo

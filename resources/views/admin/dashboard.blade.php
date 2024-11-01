@@ -149,7 +149,7 @@
             </div>
         </div>
 
-        <div class=" grid grid-cols-1 md:grid-cols-2 gap-4 rounded-lg  w-full">
+        <div class=" grid grid-cols-1 md:grid-cols-2 gap-4 rounded-lg shadow-lg dark:shadow-lg dark:shadow-gray-500/20 backdrop-blur-xl bg-[#fcdab40a] dark:bg-gray-900 w-full">
             <div class=" w-full">
                 <div class=" m-4 ">
                     <canvas id="chartClientsSellers"></canvas>
@@ -162,8 +162,11 @@
             </div>
         </div>
     </section>
-    <section>
-        <div class="card">
+    <section class="rounded-lg shadow-lg dark:shadow-lg dark:shadow-gray-500/20 backdrop-blur-xl bg-[#fcdab40a] dark:bg-gray-900">
+        <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200 p-4">
+            Dernières commandes enregistrées par le système
+        </h3>
+        <div class="card p-4">
             <div class="card-body">
                 <div class="table-responsive">
                     <table border="1" id="orders-table" class="table table-striped table-bordered">

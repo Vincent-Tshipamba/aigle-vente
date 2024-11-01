@@ -14,6 +14,15 @@ class ShopController extends Controller
         return view('admin.shops.index', compact('shops'));
     }
 
+    public function changeShopStatus(Request $request)
+    {
+        $shop = Shop::find($request->shopId);
+        $isActive = $request->isActive == 'true' ? true : false;
+        $shop->is_active = $isActive;
+        $shop->save();
+        return response()->json(['message' => 'Status de la boutique mis à jour avec succès']);
+    }
+
     public function create()
     {
         //

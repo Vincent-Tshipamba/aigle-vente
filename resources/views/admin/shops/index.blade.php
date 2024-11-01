@@ -132,14 +132,16 @@
                                     {{ substr($shop->description, 0, 50) . '...' }}
                                 </td>
                                 <td>{{ $shop->products->count() }}</td>
-                                <td onclick="window.location.href='{{ route('admin.sellers.show', $shop->seller->id) }}'"
+                                <td onclick="window.location.href='{{ route('admin.users.show', $shop->seller->user->id) }}'"
                                     class="hover:cursor-pointer hover:text-[#e38407] hover:font-bold hover:underline">
                                     {{ $shop->seller->first_name }} {{ $shop->seller->last_name }}
                                 </td>
                                 <td>{{ $shop->created_at->format('d/m/Y') }}</td>
                                 <td>
                                     <label class="inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" value="" class="sr-only peer" checked>
+                                        <input type="checkbox" value="" class="sr-only peer"
+                                            onchange="changeShopStatus({{ $shop->id }})"
+                                            {{ $shop->is_active ? 'checked' : '' }}>
                                         <div
                                             class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#e38407]">
                                         </div>
@@ -155,6 +157,44 @@
 @endsection
 
 @section('script')
+    <script>
+        function changeShopStatus(shopId) {
+            event.preventDefault();
+            var isActive = event.target.checked;
+            $.ajax({
+                type: "post",
+                url: "{{ route('admin.shops.change-status') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    shopId: shopId,
+                    isActive: isActive
+                },
+                dataType: "json",
+                success: function(response) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+                    Toast.fire({
+                        icon: "success",
+                        title: response.message
+                    });
+                },
+                error: function(error) {
+                    console.error(
+                        'Error changing shop status:',
+                        error);
+                }
+            });
+        }
+    </script>
     <script>
         if (document.getElementById("shops-table") && typeof simpleDatatables.DataTable !== 'undefined') {
             const exportCustomCSV = function(dataTable, userOptions = {}) {

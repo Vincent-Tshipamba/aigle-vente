@@ -44,6 +44,21 @@
                                         $client = App\Models\Client::where('user_id', $user->id)->first();
                                     @endphp
 
+                                    @if (Auth::check() && !Auth::user()->isSeller())
+                                        <a href="{{ route('sellers.create') }}" class="tptrack__submition">Devenir
+                                            vendeur</a>
+                                    @else
+                                        <a href="{{ route('seller.dashboard') }}">
+                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                fill="currentColor" viewBox="0 0 24 24">
+                                                <path fill-rule="evenodd"
+                                                    d="M4 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4Zm16 7H4v7h16v-7ZM5 8a1 1 0 0 1 1-1h.01a1 1 0 0 1 0 2H6a1 1 0 0 1-1-1Zm4-1a1 1 0 0 0 0 2h.01a1 1 0 0 0 0-2H9Zm2 1a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2H12a1 1 0 0 1-1-1Z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </a>
+                                    @endif
+
                                     <div class="flex items-center mx-3 space-x-5 "
                                         data-dropdown-toggle="dropdown-user-header">
                                         <div>
@@ -78,25 +93,6 @@
                                                     <a href="{{ route('profile.edit') }}"
                                                         class="block text-xs py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                                         role="menuitem">Mes commandes</a>
-                                                </li>
-
-                                                <li>
-                                                    @if (Auth::check() && !Auth::user()->isSeller())
-                                                        <a href="{{ route('sellers.create') }}"
-                                                            class="tptrack__submition">Devenir
-                                                            vendeur</a>
-                                                    @else
-                                                        <a href="{{ route('seller.dashboard') }}">
-                                                            <svg class="w-6 h-6 text-gray-800 dark:text-white"
-                                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                                width="24" height="24" fill="currentColor"
-                                                                viewBox="0 0 24 24">
-                                                                <path fill-rule="evenodd"
-                                                                    d="M4 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4Zm16 7H4v7h16v-7ZM5 8a1 1 0 0 1 1-1h.01a1 1 0 0 1 0 2H6a1 1 0 0 1-1-1Zm4-1a1 1 0 0 0 0 2h.01a1 1 0 0 0 0-2H9Zm2 1a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2H12a1 1 0 0 1-1-1Z"
-                                                                    clip-rule="evenodd" />
-                                                            </svg>
-                                                        </a>
-                                                    @endif
                                                 </li>
 
                                                 <li>
@@ -193,44 +189,6 @@
                                             <li><a href="wishlist.html">Liste de souhaits</a></li>
                                             <li><a href="track.html">Suivi de produit</a></li>
                                         </ul>
-                                    </li>
-                                    <li class="has-dropdown has-megamenu">
-                                        <a href="about.html">Pages</a>
-                                        <ul class="submenu mega-menu">
-                                            <li>
-                                                <a class="mega-menu-title">Mise en page</a>
-                                                <ul>
-                                                    <li><a href="shop.html">Filtres de boutique v1</a></li>
-                                                    <li><a href="shop-2.html">Filtres de boutique v2</a></li>
-                                                    <li><a href="shop-details.html">Barre latérale de boutique</a></li>
-                                                    <li><a href="shop-details-2.html">Barre latérale droite de
-                                                            boutique</a></li>
-                                                    <li><a href="shop-location.html">Vue en liste de boutique</a></li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <a class="mega-menu-title">Mise en page</a>
-                                                <ul>
-                                                    <li><a href="about.html">À propos</a></li>
-                                                    <li><a href="cart.html">Panier</a></li>
-                                                    <li><a href="checkout.html">Paiement</a></li>
-                                                    <li><a href="{{ route('login') }}">Se connecter</a></li>
-                                                    <li><a href="{{ route('login') }}">Connexion</a></li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <a class="mega-menu-title">Type de page</a>
-                                                <ul>
-                                                    <li><a href="track.html">Suivi de produit</a></li>
-                                                    <li><a href="wishlist.html">Liste de souhaits</a></li>
-                                                    <li><a href="error.html">404 / Erreur</a></li>
-                                                    <li><a href="coming-soon.html">Bientôt disponible</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('blog') }}">Blog</a>
                                     </li>
                                     <li><a href="{{ route('contact') }}">Contact</a></li>
                                 </ul>

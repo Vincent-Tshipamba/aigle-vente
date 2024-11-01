@@ -65,47 +65,6 @@
                                                 <li><a href="track.html">Suivi de produit</a></li>
                                             </ul>
                                         </li>
-                                        <li class="has-dropdown has-megamenu">
-                                            <a href="about.html">Pages</a>
-                                            <ul class="submenu mega-menu">
-                                                <li>
-                                                    <a class="mega-menu-title">Mise en page</a>
-                                                    <ul>
-                                                        <li><a href="shop.html">Filtres de boutique v1</a></li>
-                                                        <li><a href="shop-2.html">Filtres de boutique v2</a></li>
-                                                        <li><a href="shop-details.html">Barre latérale de la
-                                                                boutique</a></li>
-                                                        <li><a href="shop-details-2.html">Barre latérale droite de la
-                                                                boutique</a>
-                                                        </li>
-                                                        <li><a href="shop-location.html">Vue en liste de la boutique</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a class="mega-menu-title">Mise en page</a>
-                                                    <ul>
-                                                        <li><a href="about.html">À propos</a></li>
-                                                        <li><a href="cart.html">Panier</a></li>
-                                                        <li><a href="checkout.html">Paiement</a></li>
-                                                        <li><a href="{{ route('login') }}">Se connecter</a></li>
-                                                        <li><a href="{{ route('login') }}">Connexion</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a class="mega-menu-title">Type de page</a>
-                                                    <ul>
-                                                        <li><a href="track.html">Suivi de produit</a></li>
-                                                        <li><a href="wishlist.html">Liste de souhaits</a></li>
-                                                        <li><a href="error.html">404 / Erreur</a></li>
-                                                        <li><a href="coming-soon.html">Bientôt disponible</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('blog') }}">Blog</a>
-                                        </li>
                                         <li><a href="{{ route('contact') }}">Contact</a></li>
                                     </ul>
                                 </nav>

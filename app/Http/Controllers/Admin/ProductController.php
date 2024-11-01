@@ -14,6 +14,15 @@ class ProductController extends Controller
         return view('admin.products.index', compact('products'));
     }
 
+    public function changeProductStatus(Request $request)
+    {
+        $product = Product::find($request->productId);
+        $isActive = $request->isActive == 'true' ? true : false;
+        $product->is_active = $isActive;
+        $product->save();
+        return response()->json(['message' => 'Status du produit mis à jour avec succès']);
+    }
+
     public function create()
     {
         //

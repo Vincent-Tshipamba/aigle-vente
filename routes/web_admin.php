@@ -52,12 +52,14 @@ Route::middleware(['auth', 'userOnline', 'checkRole:superadmin'])->group(functio
     Route::get('admin/clients/{client}', [ClientController::class, 'show'])->name('admin.clients.show');
     Route::get('admin/api/orders', [ClientController::class, 'getOrdersByUser']);
     Route::delete('admin/clients/delete/{client}', [ClientController::class, 'destroyClient'])->name('admin.clients.delete');
+    Route::post('admin/clients/change-status', [ClientController::class, 'changeClientStatus'])->name('admin.clients.change-status');
 
     // Sellers
     Route::get('admin/sellers', [SellerController::class, 'index'])->name('admin.sellers.index');
     Route::get('admin/api/seller-orders', [SellerController::class, 'getOrdersBySeller']);
     Route::get('admin/sellers/{seller}', [SellerController::class, 'show'])->name('admin.sellers.show');
-
+    Route::post('admin/sellers/change-status', [SellerController::class, 'changeSellerStatus'])->name('admin.sellers.change-status');
+    
     // Products
     Route::get('admin/products', [ProductController::class, 'index'])->name('admin.products.index');
     Route::get('admin/products/{product}', [ProductController::class, 'show'])->name('admin.products.show');

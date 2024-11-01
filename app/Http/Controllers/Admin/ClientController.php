@@ -35,6 +35,15 @@ class ClientController extends Controller
         return response()->json($orders);
     }
 
+    public function changeClientStatus(Request $request)
+    {
+        $client = Client::find($request->clientId);
+        $isActive = $request->isActive == 'true' ? true : false;
+        $client->is_active = $isActive;
+        $client->save();
+        return response()->json(['message' => 'Status du client mis à jour avec succès']);
+    }
+
     public function create()
     {
         //

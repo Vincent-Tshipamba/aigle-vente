@@ -134,6 +134,7 @@
                             {{ $user->client->address }}
                         </span>
                     </div>
+                    <hr class="my-4">
                     <div class="flex ">
                         <p class="w-1/2">
                             Client créé le :
@@ -151,6 +152,7 @@
                             {{ $format }}
                         </span>
                     </div>
+                    <hr class="my-4">
                 </div>
                 <hr class="my-4">
             </div>

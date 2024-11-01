@@ -18,6 +18,29 @@ class ShopController extends Controller
         return view('admin.shops.index', compact('shops'));
     }
 
+    public function getOrdersFlow(Request $request)
+    {
+        $shop_id = $request->shop_id;
+        $year = $request->year;
+        $month = $request->month;
+
+        $query = Order::with('products')
+            ->whereHas('products', function ($q) use ($shop_id) {
+                $q->where('shop_id', $shop_id);
+            })
+            ->whereYear('created_at', $year);
+
+        if ($month && $month !== 'all') {
+            $query->whereMonth('created_at', $month);
+        }
+
+        $orders = $query->selectRaw("DATE_FORMAT(created_at, '%Y-%m-%d') as date, COUNT(*) as aggregate")
+            ->groupBy('date')
+            ->get();
+
+        return response()->json($orders);
+    }
+
     public function changeShopStatus(Request $request)
     {
         $shop = Shop::find($request->shopId);

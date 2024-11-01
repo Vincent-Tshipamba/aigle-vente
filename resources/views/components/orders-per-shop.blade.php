@@ -94,7 +94,12 @@
                                     $total = 0;
                                 @endphp
                                 <td>{{ $key + 1 }}</td>
-                                <td>{{ $order->client->first_name }} {{ $order->client->last_name }}</td>
+                                <td class="hover:underline hover:text-[#e38407] hover:cursor-pointer hover:font-bold">
+                                    <a href="#"
+                                        onclick="window.location.href = '{{ route('admin.users.show', $order->client->user->id) }}'">
+                                        {{ $order->client->first_name }} {{ $order->client->last_name }}
+                                    </a>
+                                </td>
                                 <td>
                                     @foreach ($order->products as $product)
                                         {{ $product->name }}<br>

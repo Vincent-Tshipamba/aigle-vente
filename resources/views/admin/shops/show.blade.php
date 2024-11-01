@@ -107,6 +107,11 @@
 @section('script')
     <!-- Script for details shop -->
     <script>
+        function showOrderDetails(order_id) {
+            event.preventDefault();
+        }
+    </script>
+    <script>
         let owner_last_activity = "{{ $owner->user->last_activity ?? null }}";
 
         function updateTimeDifference() {
@@ -160,6 +165,99 @@
 
         // Initial call to set the correct time immediately
         updateTimeDifference();
+    </script>
+    <script>
+        let myChartOrders = null;
+        const currentYear = new Date().getFullYear();
+        const currentMonth = new Date().getMonth() + 1;
+        const startYear = 2022;
+        const shop_id = {{ $shop->id }};
+
+        const months = [
+            'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+            'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
+        ];
+        let nbr_orders = {{ $orders->count() }};
+
+        if (nbr_orders > 0) {
+            const yearSelectForOrders = document.getElementById('year-select-for-orders');
+            const monthSelectForOrders = document.getElementById('month-select-for-orders');
+            for (let year = startYear; year <= currentYear; year++) {
+                const option = document.createElement('option');
+                option.value = year;
+                option.text = year;
+                yearSelectForOrders.appendChild(option);
+            }
+
+            yearSelectForOrders.addEventListener('change', function() {
+                ordersUpdateMonths(this.value);
+            });
+
+            yearSelectForOrders.value = currentYear;
+            ordersUpdateMonths(currentYear);
+
+            fetchOrdersData(shop_id, yearSelectForOrders.value, monthSelectForOrders.value);
+
+            // Event listeners for year and month selection
+            yearSelectForOrders.addEventListener('change', function() {
+                fetchOrdersData(shop_id, yearSelectForOrders.value, monthSelectForOrders.value);
+            });
+
+            monthSelectForOrders.addEventListener('change', function() {
+                fetchOrdersData(shop_id, yearSelectForOrders.value, monthSelectForOrders.value);
+            });
+
+            function fetchOrdersData(shop_id, year, month) {
+                const ordersUrl = `/admin/api/shop/orders-flow?shop_id=${shop_id}&year=${year}&month=${month}`;
+                fetch(ordersUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        const dates = data.map(item => item.date);
+                        const aggregates = data.map(item => item.aggregate);
+
+                        if (myChartOrders) {
+                            myChartOrders.data.labels = dates;
+                            myChartOrders.data.datasets[0].data = aggregates;
+                            myChartOrders.update();
+                        } else {
+                            const chartElement = document.getElementById('chartOrders').getContext('2d');
+                            if (myChartOrders) {
+                                myChartOrders.destroy();
+                            }
+
+                            myChartOrders = new Chart(chartElement, {
+                                type: 'bar',
+                                data: {
+                                    labels: dates,
+                                    datasets: [{
+                                        label: 'Mouvements des commandes de la boutique',
+                                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                        borderColor: 'rgba(255, 99, 132, 1)',
+                                        data: aggregates,
+                                    }]
+                                }
+                            });
+                        }
+                    })
+                    .catch(error => console.error('Erreur lors de la récupération des données pour les commandes :',
+                        error));
+            }
+
+            function ordersUpdateMonths(selectedYear) {
+                const allOption = document.createElement('option');
+                allOption.value = 'all';
+                allOption.text = 'Tous les mois';
+                const maxMonth = (selectedYear == currentYear) ? currentMonth : 12;
+                monthSelectForOrders.innerHTML = '';
+                monthSelectForOrders.appendChild(allOption);
+                for (let i = 0; i < maxMonth; i++) {
+                    const option = document.createElement('option');
+                    option.value = i + 1;
+                    option.text = months[i];
+                    monthSelectForOrders.appendChild(option);
+                }
+            }
+        }
     </script>
     <!-- End script for details shop -->
 

@@ -72,7 +72,7 @@
                             <tr
                                 class="hover:bg-[#f0e6d9] hover:scale-100 hover:cursor-pointer transition-all duration-300 ease-in-out">
                                 <td>{{ $key + 1 }}</td>
-                                <td onclick="window.location.href='{{ route('admin.products.show', $product->id) }}'"
+                                <td onclick="event.preventDefault();"
                                     class="hover:underline hover:text-[#e38407] hover:cursor-pointer hover:font-bold">
                                     {{ $product->name }}
                                 </td>

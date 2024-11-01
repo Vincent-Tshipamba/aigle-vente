@@ -141,7 +141,8 @@
                     </thead>
                     <tbody>
                         @foreach ($orders as $key => $order)
-                            <tr class="hover:bg-[#dbc8af]">
+                            <tr
+                                class="hover:bg-[#f0e6d9] hover:scale-100 hover:cursor-pointer transition-all duration-300 ease-in-out">
                                 @php
                                     $total = 0;
                                 @endphp

@@ -77,12 +77,7 @@
                     Vendeur depuis le :
                 </p>
                 <span class="font-bold">
-                    @php
-                        $seller_creation_date = new DateTimeImmutable($owner->created_at);
-                        $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE);
-                        $seller_creation_date_format = $formatter->format($seller_creation_date);
-                    @endphp
-                    {{ $seller_creation_date_format }}
+                    {{ \Carbon\Carbon::parse($owner->created_at)->locale('fr')->isoFormat('LL') }}
                 </span>
             </div>
             <hr class="my-4">

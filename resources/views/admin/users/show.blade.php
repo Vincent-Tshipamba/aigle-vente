@@ -140,16 +140,7 @@
                             Client créé le :
                         </p>
                         <span class="font-bold">
-                            @php
-                                $date = new DateTimeImmutable($user->client->created_at);
-                                $formatter = new IntlDateFormatter(
-                                    'fr_FR',
-                                    IntlDateFormatter::MEDIUM,
-                                    IntlDateFormatter::NONE,
-                                );
-                                $format = $formatter->format($date);
-                            @endphp
-                            {{ $format }}
+                            {{ \Carbon\Carbon::parse($user->client->created_at)->locale('fr')->isoFormat('LL') }}
                         </span>
                     </div>
                     <hr class="my-4">
@@ -331,16 +322,7 @@
                             Vendeur depuis le :
                         </p>
                         <span class="font-bold">
-                            @php
-                                $seller_creation_date = new DateTimeImmutable($user->seller->created_at);
-                                $formatter = new IntlDateFormatter(
-                                    'fr_FR',
-                                    IntlDateFormatter::MEDIUM,
-                                    IntlDateFormatter::NONE,
-                                );
-                                $seller_creation_date_format = $formatter->format($seller_creation_date);
-                            @endphp
-                            {{ $seller_creation_date_format }}
+                            {{ \Carbon\Carbon::parse($user->seller->created_at)->locale('fr')->isoFormat('LL') }}
                         </span>
                     </div>
                     <hr class="my-4">
@@ -365,7 +347,7 @@
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-6 mb-10">
                         @foreach ($user->seller->shops as $shop)
-                            <a href="{{ route('admin.clients.index') }}"
+                            <a href="{{ route('admin.shops.show', $shop->id) }}"
                                 class="rounded-xl flex justify-between gap-8 items-center border p-2 h-36 w-full shadow-lg dark:shadow-lg dark:shadow-gray-500/20 backdrop-blur-xl bg-cover bg-[#fcdab40a] dark:bg-gray-900 dark:hover:bg-gray-700 hover:bg-[#f8f0e7]  hover:scale-105 transition duration-700 ease-in-out border-l-8 dark:border-[#cc832f] border-[#ff9822] hover:border-l-10 ">
                                 <div>
                                     <div class=" flex gap-4 items-center mb-4">

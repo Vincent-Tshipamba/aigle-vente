@@ -11,12 +11,24 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->uuid('_id')->unique();
-            $table->foreignId('sender_id')->constrained('users', 'id', 'sender_id')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('receiver_id')->constrained('users', 'id', 'receiver_id')->cascadeOnDelete()->cascadeOnUpdate();
+
+            // Foreign key for sender_id referencing users.id
+            $table->foreignId('sender_id')
+            ->constrained('users')
+            ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+
+            // Foreign key for receiver_id referencing users.id
+            $table->foreignId('receiver_id')
+            ->constrained('users')
+            ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+
             $table->text('message');
             $table->boolean('is_read')->default(false);
             $table->timestamps();
         });
+
     }
 
     public function down(): void

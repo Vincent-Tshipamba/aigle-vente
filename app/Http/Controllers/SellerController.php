@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\City;
 use App\Models\Seller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class SellerController extends Controller
 {
@@ -32,11 +33,11 @@ class SellerController extends Controller
             $seller = new Seller($validated);
             $seller->user_id = Auth::id();
 
-            // Gérer l'upload de l'image si présent
+            // Gérer l'upload de l'image si présente
             if ($request->hasFile('picture')) {
                 $filename = time() . '.' . $request->picture->extension();
                 $request->picture->move(public_path('images/sellers'), $filename);
-                $seller->picture = $filename;
+                $seller->picture = 'images/sellers/' . $filename;
             }
 
             // Extraire le nom et le sexe de l'utilisateur
@@ -46,11 +47,18 @@ class SellerController extends Controller
             $seller->first_name = $firstName;
             $seller->last_name = $lastName;
 
+           
+            $user = Auth::user();
+            $role = Role::firstOrCreate(['name' => 'vendeur']);
+
+            
+            // $user->roles()->attach($role->id);
+
             $seller->save();
 
             return redirect()->route('seller.dashboard')->with('success', 'Vendeur créé avec succès!');
         } catch (\Exception $e) {
-            return back()->withErrors(['error' => 'Une erreur s\'est produite lors de la création du vendeur.' . $e])->withInput();
+            return back()->withErrors(['error' => 'Une erreur s\'est produite lors de la création du vendeur. ' . $e->getMessage()])->withInput();
         }
     }
 }

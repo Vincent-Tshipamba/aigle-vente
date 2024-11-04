@@ -36,7 +36,7 @@
                         </div>
                         <div class="header-meta header-language flex items-center space-x-3">
                             @auth
-                                <button id="dropdownUserAvatarButtonHeader-1" data-dropdown-toggle="dropdownAvatarHeader-1"
+                                <button id="dropdownUserAvatarButtonHeader-home" data-dropdown-toggle="dropdownAvatarHeader-home"
                                     class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                                     type="button">
                                     <span class="sr-only">Open user menu</span>
@@ -45,14 +45,14 @@
                                 </button>
 
                                 <!-- Dropdown menu -->
-                                <div id="dropdownAvatarHeader-1"
+                                <div id="dropdownAvatarHeader-home"
                                     class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-60 dark:bg-gray-700 dark:divide-gray-600">
                                     <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
                                         <div>{{ Auth::user()->name }}</div>
                                         <div class="font-medium truncate">{{ Auth::user()->email }}</div>
                                     </div>
                                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                        aria-labelledby="dropdownUserAvatarButtonHeader-1">
+                                        aria-labelledby="dropdownUserAvatarButtonHeader-home">
                                         <li>
                                             @if (Auth::user()->client)
                                                 <a href="{{ route('client.dashboard') }}"

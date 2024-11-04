@@ -17,9 +17,11 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-xl-2 col-lg-3">
-                    <div class="logo">
-                        <a href="{{ route('home') }}"><img src="{{ asset('img/logo/logo_sans_bg.png') }}" width="25%"
-                                alt="logo"></a>
+                    <div class="logo col-span-1">
+                        <a href="{{ route('home') }}" class="flex items-center space-x-2">
+                            <img src="{{ asset('img/logo/logo_sans_bg.png') }}" width="25%" alt="logo">
+                            <h1 class="text-2xl font-bold animate__animated animate__slideInRight">Aigle Vente</h1>
+                        </a>
                     </div>
                 </div>
                 <div class="col-xl-10 col-lg-9">
@@ -32,12 +34,76 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="header-meta header-language flex items-center">
+                        <div class="header-meta header-language flex items-center space-x-3">
+                            @auth
+                                <button id="dropdownUserAvatarButtonHeader-1" data-dropdown-toggle="dropdownAvatarHeader-1"
+                                    class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                                    type="button">
+                                    <span class="sr-only">Open user menu</span>
+                                    <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg"
+                                        alt="user photo">
+                                </button>
+
+                                <!-- Dropdown menu -->
+                                <div id="dropdownAvatarHeader-1"
+                                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-60 dark:bg-gray-700 dark:divide-gray-600">
+                                    <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                                        <div>{{ Auth::user()->name }}</div>
+                                        <div class="font-medium truncate">{{ Auth::user()->email }}</div>
+                                    </div>
+                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                                        aria-labelledby="dropdownUserAvatarButtonHeader-1">
+                                        <li>
+                                            @if (Auth::user()->client)
+                                                <a href="{{ route('client.dashboard') }}"
+                                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                    Mon dashboard client
+                                                </a>
+                                            @elseif (Auth::user()->isSeller())
+                                                <a href="{{ route('seller.dashboard') }}"
+                                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                    Mon dashboard de vendeur
+                                                </a>
+                                            @elseif (Auth::user()->hasRole('superadmin'))
+                                                <a href="{{ route('admin.dashboard') }}"
+                                                    class="block px-6 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                    Mon dashboard administrateur
+                                                </a>
+                                            @endif
+
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('profile.edit') }}"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                Paramètres du compte
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mon
+                                                panier</a>
+                                        </li>
+                                        <li>
+                                            <!-- Authentication -->
+                                            <form id="logout-form" method="POST" action="{{ route('logout') }}"
+                                                style="display: none;">
+                                                @csrf
+                                            </form>
+                                            <a href="#" onclick="event.preventDefault(); confirmLogout();"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                <i class="fal fa-user"></i> {{ __('Me déconnecter') }}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endauth
                             <div class="header-meta__social flex items-center ml-25">
                                 <button class="header-cart p-relative tp-cart-toggle">
                                     <i class="fal fa-shopping-cart"></i>
                                     <span class="tp-product-count">2</span>
                                 </button>
+
+                                <a href="wishlist.html"><i class="fal fa-heart"></i></a>
                                 @auth
                                     @php
                                         $user = Auth::user();
@@ -171,7 +237,7 @@
                         </div>
                     </div>
                     <div class="col-xl-7 col-lg-6">
-                        <div class="main-menu">
+                        <div class="main-menu flex items-center justify-center">
                             <nav id="mobile-menu">
                                 <ul>
                                     <li class="has-dropdown">
@@ -198,44 +264,6 @@
                                             <li><a href="track.html">Suivi de produit</a></li>
                                         </ul>
                                     </li>
-                                    <li class="has-dropdown has-megamenu">
-                                        <a href="about.html">Pages</a>
-                                        <ul class="submenu mega-menu">
-                                            <li>
-                                                <a class="mega-menu-title">Mise en page</a>
-                                                <ul>
-                                                    <li><a href="shop.html">Filtres de boutique v1</a></li>
-                                                    <li><a href="shop-2.html">Filtres de boutique v2</a></li>
-                                                    <li><a href="shop-details.html">Barre latérale de boutique</a></li>
-                                                    <li><a href="shop-details-2.html">Barre latérale droite de
-                                                            boutique</a></li>
-                                                    <li><a href="shop-location.html">Vue en liste de boutique</a></li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <a class="mega-menu-title">Mise en page</a>
-                                                <ul>
-                                                    <li><a href="about.html">À propos</a></li>
-                                                    <li><a href="cart.html">Panier</a></li>
-                                                    <li><a href="checkout.html">Paiement</a></li>
-                                                    <li><a href="{{ route('login') }}">Se connecter</a></li>
-                                                    <li><a href="{{ route('login') }}">Connexion</a></li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <a class="mega-menu-title">Type de page</a>
-                                                <ul>
-                                                    <li><a href="track.html">Suivi de produit</a></li>
-                                                    <li><a href="wishlist.html">Liste de souhaits</a></li>
-                                                    <li><a href="error.html">404 / Erreur</a></li>
-                                                    <li><a href="coming-soon.html">Bientôt disponible</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('blog') }}">Blog</a>
-                                    </li>
                                     <li><a href="{{ route('contact') }}">Contact</a></li>
                                 </ul>
                             </nav>
@@ -243,14 +271,14 @@
                     </div>
                     <div class="col-xl-3 col-lg-3">
                         <div class="menu-contact">
-                            <ul>
+                            <ul class="flex justify-center">
                                 <li>
                                     <div class="menu-contact__item">
                                         <div class="menu-contact__icon">
                                             <i class="fal fa-phone"></i>
                                         </div>
                                         <div class="menu-contact__info">
-                                            <a href="tel:0123456">908. 408. 501. 89</a>
+                                            <a href="tel:0123456">+243 81 234 56 78</a>
                                         </div>
                                     </div>
                                 </li>

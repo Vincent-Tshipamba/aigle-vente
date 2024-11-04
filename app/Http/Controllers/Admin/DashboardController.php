@@ -34,8 +34,10 @@ class DashboardController extends Controller
             ->first()
             ->total_females;
 
+        $recentOrders = Order::orderBy('created_at', 'desc')->with(['products', 'client'])->take(5)->get();
 
-        return view('admin.dashboard', compact('totalUsers', 'totalVendeurs', 'totalClients', 'totalProduits', 'totalCommandes', 'totalClientsMales', 'totalClientsFemales'));
+
+        return view('admin.dashboard', compact('totalUsers', 'totalVendeurs', 'totalClients', 'totalProduits', 'totalCommandes', 'totalClientsMales', 'totalClientsFemales', 'recentOrders'));
     }
 
     public function getClientsByPeriod(Request $request)

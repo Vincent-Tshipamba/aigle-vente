@@ -116,20 +116,11 @@
             </div>
         </div>
         <div class="footer-copyright black-bg-2">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-xl-6 col-lg-7 col-md-5">
-                        <div class="footer-copyright__content">
-                            <span>Droit d'auteur 2022 <a href="{{ route('home') }}">©Ninico</a>. Tous droits réservés.
-                                Propulsé par
-                                <a href="https://themeforest.net/user/theme_pure/portfolio">Theme_Pure</a>.</span>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-5 col-md-7">
-                        <div class="footer-copyright__brand">
-                            <img src="{{ asset('img/footer/f-brand-icon-01.png') }}" alt="marque-footer">
-                        </div>
-                    </div>
+            <div class="container mx-auto">
+                <div class="footer-copyright__content text-center">
+                    <span>
+                        Copyright {{ date('Y') }} <a href="{{ route('home') }}">©AigleVente</a>. Tous droits réservés.
+                    </span>
                 </div>
             </div>
         </div>

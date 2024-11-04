@@ -1,8 +1,6 @@
 <x-app-layout>
-
-
     <!-- track-area-start -->
-    <section class="track-area pt-80 pb-40">
+    <section class="track-area pt-10 pb-40">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-6 col-sm-12">
@@ -15,8 +13,7 @@
                                 <div class="tptrack__item-content">
                                     <h4 class="tptrack__item-title">S'inscrire</h4>
                                     <p>Vos données personnelles seront utilisées pour soutenir votre expérience tout
-                                        au
-                                        long de ce site web, pour gérer l'accès à votre compte.</p>
+                                        au long de ce site web, pour gérer l'accès à votre compte.</p>
                                 </div>
                             </div>
                             <form method="POST" action="{{ route('register') }}">
@@ -99,6 +96,9 @@
                                     </div>
                                 </div>
 
+                                <!-- Hidden field for current location -->
+                                <input type="hidden" id="current_location" name="current_location" />
+
                                 <div class="tpsign__account">
                                     <a href="{{ route('login') }}">Vous avez déjà un compte ?</a>
                                 </div>
@@ -119,4 +119,30 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
+    @section('script')
+        <script>
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    console.log(latitude);
+                    console.log(longitude);
+                    // Use a reverse geocoding API to get the city name
+                    fetch(
+                            `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=fr`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.city) {
+                                console.log(data);
+                            } else {
+                                console.error("City not found");
+                            }
+                        })
+                        .catch(error => console.error('Error fetching city:', error));
+                });
+            } else {
+                console.error("Geolocation is not supported by this browser.");
+            }
+        </script>
+    @endsection
 </x-app-layout>

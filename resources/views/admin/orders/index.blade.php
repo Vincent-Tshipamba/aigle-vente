@@ -136,12 +136,12 @@
                                     </svg>
                                 </span>
                             </th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($orders as $key => $order)
-                            <tr class="hover:bg-[#dbc8af]">
+                            <tr
+                                class="hover:bg-[#f0e6d9] hover:scale-100 hover:cursor-pointer transition-all duration-300 ease-in-out">
                                 @php
                                     $total = 0;
                                 @endphp
@@ -169,14 +169,6 @@
                                 </td>
                                 <td>{{ $order->status }}</td>
                                 <td>{{ $order->created_at->format('d/m/Y') }}</td>
-                                <td>
-                                    <label class="inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" value="" class="sr-only peer" checked>
-                                        <div
-                                            class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#e38407]">
-                                        </div>
-                                    </label>
-                                </td>
                             </tr>
                         @endforeach
                     </tbody>

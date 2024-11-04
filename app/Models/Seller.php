@@ -20,7 +20,7 @@ class Seller extends Model
         'sexe',
         'picture',
         'address',
-        'city_id',
+        'location_id',
         'user_id',
         'is_active'
     ];
@@ -30,8 +30,7 @@ class Seller extends Model
      */
     protected $casts = [
         'phone' => 'string',
-        'sexe' => 'string',
-        'city_id' => 'string',
+        'sexe' => 'string'
     ];
 
     /**
@@ -52,14 +51,6 @@ class Seller extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    /**
-     * Relation avec la ville (City)
-     */
-    public function city(): BelongsTo
-    {
-        return $this->belongsTo(City::class);
     }
 
     /**
@@ -84,5 +75,10 @@ class Seller extends Model
     public function hasProfilePicture(): bool
     {
         return !is_null($this->picture);
+    }
+
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(Location::class);
     }
 }

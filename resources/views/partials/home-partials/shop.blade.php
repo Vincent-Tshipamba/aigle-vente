@@ -5,7 +5,8 @@
             <div class="col-md-12">
                 <div class="tpsectionarea text-center mb-35">
                     <h5 class="tpsectionarea__subtitle">Suivez-nous sur</h5>
-                    <h4 class="tpsectionarea__title"><i class="fab fa-instagram"></i> ninico-shop</h4>
+                    <h4 class="tpsectionarea__title"><a href="https://www.instagram.com/aigle_vente/"
+                            target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> Aigle Vente</a></h4>
                 </div>
             </div>
         </div>
@@ -13,8 +14,18 @@
             <div class="shopslider-active swiper-container">
                 <div class="swiper-wrapper">
                     <div class="tpshopitem swiper-slide">
-                        <a class="popup-image" href="{{ asset('img/instagram/instagram-01.jpg') }}">
-                            <img src="{{ asset('img/instagram/instagram-01.jpg') }}" alt="vignette-boutique">
+                        <a class="popup-image" href="{{ asset('img/instagram/coming-soon.png') }}">
+                            <img src="{{ asset('img/instagram/coming-soon.png') }}" alt="vignette-boutique">
+                        </a>
+                    </div>
+                    <div class="tpshopitem swiper-slide">
+                        <a class="popup-image" href="{{ asset('img/instagram/instagram-01.png') }}">
+                            <img src="{{ asset('img/instagram/instagram-01.png') }}" alt="vignette-boutique">
+                        </a>
+                    </div>
+                    <div class="tpshopitem swiper-slide">
+                        <a class="popup-image" href="{{ asset('img/instagram/coming-soon.png') }}">
+                            <img src="{{ asset('img/instagram/coming-soon.png') }}" alt="vignette-boutique">
                         </a>
                     </div>
                     <div class="tpshopitem swiper-slide">
@@ -23,23 +34,13 @@
                         </a>
                     </div>
                     <div class="tpshopitem swiper-slide">
-                        <a class="popup-image" href="{{ asset('img/instagram/instagram-03.jpg') }}">
-                            <img src="{{ asset('img/instagram/instagram-03.jpg') }}" alt="vignette-boutique">
+                        <a class="popup-image" href="{{ asset('img/instagram/coming-soon.png') }}">
+                            <img src="{{ asset('img/instagram/coming-soon.png') }}" alt="vignette-boutique">
                         </a>
                     </div>
                     <div class="tpshopitem swiper-slide">
-                        <a class="popup-image" href="{{ asset('img/instagram/instagram-04.jpg') }}">
-                            <img src="{{ asset('img/instagram/instagram-04.jpg') }}" alt="vignette-boutique">
-                        </a>
-                    </div>
-                    <div class="tpshopitem swiper-slide">
-                        <a class="popup-image" href="{{ asset('img/instagram/instagram-05.jpg') }}">
-                            <img src="{{ asset('img/instagram/instagram-05.jpg') }}" alt="vignette-boutique">
-                        </a>
-                    </div>
-                    <div class="tpshopitem swiper-slide">
-                        <a class="popup-image" href="{{ asset('img/instagram/instagram-06.jpg') }}">
-                            <img src="{{ asset('img/instagram/instagram-06.jpg') }}" alt="vignette-boutique">
+                        <a class="popup-image" href="{{ asset('img/instagram/coming-soon.png') }}">
+                            <img src="{{ asset('img/instagram/coming-soon.png') }}" alt="vignette-boutique">
                         </a>
                     </div>
                 </div>

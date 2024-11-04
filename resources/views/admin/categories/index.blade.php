@@ -38,7 +38,7 @@
         <div class="ms-auto">
             <div class="btn-group">
                 <div class="inline-flex gap-x-2 me-4">
-                    <a href="#" id="newUserButton"
+                    <a href="#" id="newCategoryButton" onclick="category()"
                         class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent hover:bg-[#e38407] bg-[#f8b544] text-gray-800 focus:outline-none disabled:opacity-50 disabled:pointer-events-none">
                         <svg class="w-6 h-6 text-gray-800 dark:text-white hover:text-white" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
@@ -68,7 +68,7 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
-                <table border="1" id="sellers-table" class="table table-striped table-bordered">
+                <table id="categories-table" class="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th>
@@ -116,23 +116,28 @@
                     </thead>
                     <tbody>
                         @foreach ($categories as $key => $category)
-                            <tr>
+                            <tr
+                                class="hover:bg-[#f0e6d9] hover:scale-100 hover:cursor-pointer transition-all duration-300 ease-in-out">
                                 <td>{{ $key + 1 }}</td>
                                 <td class="flex items-center px-6 py-4">
-                                    <img class="w-10 h-10 rounded-full" src="{{ $category->image }}" alt="">
+                                    <img class="w-10 h-10 rounded-full" src="{{ asset('img/profil.jpeg') }}"
+                                        alt="">
                                     <div class="ps-3">
                                         <div class="text-base font-semibold">{{ $category->name }}</div>
                                     </div>
                                 </td>
                                 <td>{{ $category->description }}</td>
                                 <td>{{ $category->products->count() }}</td>
-                                <td>
-                                    <label class="inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" value="" class="sr-only peer" checked>
-                                        <div
-                                            class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#e38407]">
-                                        </div>
-                                    </label>
+                                <td class="flex items-center gap-x-4">
+                                    <a href="" onclick="category('Modifier une catégorie', {{ $category->id }}, '{{ $category->name }}', '{{ $category->description }}', 'Enregistrer les modifications', '{{ route('admin.categories.update', $category->id) }}', 'PUT')"
+                                        class="text-blue-500 hover:text-blue-700 hover:underline hover:cursor-pointer transition-all duration-300 ease-in-out font-bold">
+                                        Modifier
+                                    </a>
+                                    <a href=""
+                                        onclick="deleteCategory('{{ $category->id }}', '{{ $category->name }}')"
+                                        class="text-red-500 hover:text-red-700 hover:underline hover:cursor-pointer transition-all duration-300 ease-in-out font-bold">
+                                        Supprimer
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
@@ -145,7 +150,145 @@
 
 @section('script')
     <script>
-        if (document.getElementById("sellers-table") && typeof simpleDatatables.DataTable !== 'undefined') {
+        function category(title = 'Créer une catégorie', id = '', name = '', description = '', confirmButtonText = 'Ajouter une catégorie', action = "{{ route('admin.categories.store') }}", method = 'POST') {
+            event.preventDefault();
+
+            // Trigger SweetAlert with input
+            Swal.fire({
+                title: title,
+                html: `
+                <form id="category-form" class="p-4 md:p-5" method="${method}" action="${action}">
+                    @csrf
+                    <div class="grid gap-4 mb-4 grid-cols-2 text-left">
+                        <div class="col-span-2 flex">
+                            <label for="name" class="block w-full mb-2 text-sm md:text-base font-medium text-black dark:text-white">Nom de la catégorie</label>
+                            <input type="text" name="name" id="name" class="border border-gray-300 text-gray-800 text-sm md:text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nom de la catégorie" required="" value="${name}">
+                        </div>
+                        <div class="col-span-2 flex">
+                            <label for="description" class="block w-full mb-2 text-sm md:text-base font-medium text-black dark:text-white">Description de la catégorie</label>
+                            <textarea name="description" rows="3" id="description" class="border border-gray-300 text-gray-800 text-sm md:text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Description de la catégorie">${description}</textarea>
+                        </div>
+                    </div>
+                </form>
+            `,
+                showCancelButton: true,
+                confirmButtonText: confirmButtonText,
+                cancelButtonText: 'Annuler',
+                allowOutsideClick: false, // Empêche de fermer en cliquant en dehors
+                preConfirm: () => {
+                    const formData = new FormData($('#category-form')[0]);
+
+                    // Vérifier si les champs sont vides
+                    const name = formData.get('name');
+                    const description = formData.get('description');
+
+                    if (!name) {
+                        Swal.showValidationMessage(
+                            'Veuillez saisir un nom de catégorie.');
+                        return false;
+                    }
+
+                    formData.append('_token',
+                        '{{ csrf_token() }}'); // Ajouter le token CSRF
+                    return {
+                        id: id,
+                        name: name,
+                        description: description,
+                        _token: formData.get('_token') // Inclure le token CSRF
+                    };
+                },
+                customClass: {
+                    popup: 'bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-lg shadow-lg', // Classes Tailwind pour le popup
+                    confirmButton: 'bg-[#e38407] hover:bg-[#e38407] text-white font-bold py-2 px-4 rounded', // Bouton de confirmation
+                    cancelButton: 'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded' // Bouton d'annulation
+                },
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Faire la requête AJAX pour ajouter l'utilisateur
+                    $.ajax({
+                        url: action,
+                        method: method,
+                        data: result.value,
+                        success: function(response) {
+                            Swal.fire({
+                                title: 'Succès',
+                                text: response.message,
+                                icon: 'success',
+                                timer: 2000,
+                                timerProgressBar: true,
+                                customClass: {
+                                    popup: 'bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-lg shadow-lg', // Classes Tailwind pour le popup
+                                }
+                            }).then(() => {
+                                if (result.isConfirmed) {
+                                    window.location.reload();
+                                } else {
+                                    window.location.reload();
+                                }
+                            });
+                        },
+                        error: function(error) {
+                            Swal.fire({
+                                title: 'Erreur',
+                                text: error.responseJSON?.message ||
+                                    'Une erreur est survenue lors de la création de la catégorie.',
+                                icon: 'error',
+                                customClass: {
+                                    popup: 'bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-lg shadow-lg', // Classes Tailwind pour le popup
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
+        function deleteCategory(categoryId, categoryName) {
+            event.preventDefault();
+            let url = "{{ route('admin.categories.destroy') }}";
+            Swal.fire({
+                title: 'Voulez-vous vraiment supprimer la catégorie ' + categoryName + ' ?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Oui, supprimer',
+                cancelButtonText: 'Non, annuler'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: url,
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            categoryId: categoryId
+                        },
+                        dataType: "json",
+                        success: function(response) {
+                            const toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                progressBar: true,
+                                showConfirmButton: false,
+                                timer: 1000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.onmouseenter = Swal.stopTimer;
+                                    toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+                            toast.fire({
+                                icon: 'success',
+                                title: response.message
+                            }).then(() => {
+                                window.location.reload();
+                            });
+                        }
+                    });
+                }
+            })
+        }
+    </script>
+    <script>
+        if (document.getElementById("categories-table") && typeof simpleDatatables.DataTable !== 'undefined') {
             const exportCustomCSV = function(dataTable, userOptions = {}) {
                 // A modified CSV export that includes a row of minuses at the start and end.
                 const clonedUserOptions = {
@@ -188,7 +331,7 @@
 
                 return str
             }
-            const dataTable = new simpleDatatables.DataTable("#sellers-table", {
+            const dataTable = new simpleDatatables.DataTable("#categories-table", {
                 searchable: true,
                 sortable: true,
                 template: (options, dom) => "<div class='" + options.classes.top + "'>" +

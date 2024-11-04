@@ -69,17 +69,7 @@
                             </th>
                             <th>
                                 <span class="flex items-center">
-                                    Prénom
-                                    <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                    </svg>
-                                </span>
-                            </th>
-                            <th>
-                                <span class="flex items-center">
-                                    Nom
+                                    Noms
                                     <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                         width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -90,16 +80,6 @@
                             <th>
                                 <span class="flex items-center">
                                     Sexe
-                                    <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                    </svg>
-                                </span>
-                            </th>
-                            <th>
-                                <span class="flex items-center">
-                                    Email
                                     <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                         width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -132,17 +112,32 @@
                     </thead>
                     <tbody>
                         @foreach ($clients as $key => $client)
-                            <tr>
+                            <tr
+                                class="hover:bg-[#f0e6d9] hover:scale-100 hover:cursor-pointer transition-all duration-300 ease-in-out">
                                 <td>{{ $key + 1 }}</td>
-                                <td>{{ $client->first_name }}</td>
-                                <td>{{ $client->last_name }}</td>
+                                <td class="flex items-center px-6 py-4 hover:cursor-pointer hover:underline hover:text-[#e38407] hover:font-bold hover:scale-105 transition-all duration-300 ease-in-out"
+                                    onclick="window.location.href='{{ route('admin.users.show', $client->user->id) }}'">
+                                    <img class="w-10 h-10 rounded-full"
+                                        src="{{ $client->image ?? asset('img/profil.jpeg') }}" alt="">
+                                    <div class="ps-3">
+                                        <div class="text-base font-semibold">{{ $client->first_name }}
+                                            {{ $client->last_name }}</div>
+                                        <div class="font-normal text-gray-500">{{ $client->user->email }}</div>
+                                    </div>
+                                </td>
                                 <td>{{ $client->sexe }}</td>
-                                <td>{{ $client->user->email }}</td>
-                                <td>{{ $client->phone }}</td>
+                                <td>
+                                    <a href="tel:{{ $client->phone }}"
+                                        class="hover:underline hover:text-[#e38407] hover:font-bold hover:scale-105 transition-all duration-300 ease-in-out">
+                                        {{ $client->phone }}
+                                    </a>
+                                </td>
                                 <td>{{ $client->city->name }}</td>
                                 <td>
                                     <label class="inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" value="" class="sr-only peer" checked>
+                                        <input type="checkbox" value="" class="sr-only peer"
+                                            onchange="changeClientStatus({{ $client->id }})"
+                                            {{ $client->is_active ? 'checked' : '' }}>
                                         <div
                                             class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#e38407]">
                                         </div>
@@ -158,6 +153,44 @@
 @endsection
 
 @section('script')
+    <script>
+        function changeClientStatus(clientId) {
+            event.preventDefault();
+            var isActive = event.target.checked;
+            $.ajax({
+                type: "post",
+                url: "{{ route('admin.clients.change-status') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    clientId: clientId,
+                    isActive: isActive
+                },
+                dataType: "json",
+                success: function(response) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+                    Toast.fire({
+                        icon: "success",
+                        title: response.message
+                    });
+                },
+                error: function(error) {
+                    console.error(
+                        'Error changing client status:',
+                        error);
+                }
+            });
+        }
+    </script>
     <script>
         if (document.getElementById("clients-table") && typeof simpleDatatables.DataTable !== 'undefined') {
             const exportCustomCSV = function(dataTable, userOptions = {}) {
@@ -304,5 +337,4 @@
             })
         }
     </script>
-
 @endsection

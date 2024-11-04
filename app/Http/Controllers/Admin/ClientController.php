@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Order;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -13,6 +14,34 @@ class ClientController extends Controller
     {
         $clients = Client::latest()->get();
         return view('admin.clients.index', compact('clients'));
+    }
+
+    public function getOrdersByUser(Request $request)
+    {
+        $client_id = $request->client_id;
+        $year = $request->year;
+        $month = $request->month;
+
+        $query = Order::selectRaw("date_format(created_at, '%Y-%m-%d') as date, count(*) as aggregate")
+            ->where('client_id', $client_id)
+            ->whereYear('created_at', $year);
+
+        if ($month && $month !== 'all') {
+            $query->whereMonth('created_at', $month);
+        }
+
+        $orders = $query->groupBy('date')->get();
+
+        return response()->json($orders);
+    }
+
+    public function changeClientStatus(Request $request)
+    {
+        $client = Client::find($request->clientId);
+        $isActive = $request->isActive == 'true' ? true : false;
+        $client->is_active = $isActive;
+        $client->save();
+        return response()->json(['message' => 'Status du client mis à jour avec succès']);
     }
 
     public function create()

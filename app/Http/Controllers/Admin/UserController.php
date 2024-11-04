@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Events\UserStatusChanged;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use Spatie\Permission\Models\Role;
@@ -22,11 +23,17 @@ class UserController extends Controller
 
     public function changeUserStatus(Request $request)
     {
-        $userId = $request['user_id'];
-        $isActive = $request['is_active'];
+        $userId = $request->input('userId');
+        $isActive = $request->input('isActive') == 'true' ? true : false;
         $user = User::find($userId);
         $user->is_active = $isActive;
         $user->save();
+
+
+        broadcast(new UserStatusChanged());
+
+        Log::info("Événement broadcasté : User ID: $userId, Status: $isActive");
+
         return response()->json(['message' => 'User status updated successfully']);
     }
 
@@ -206,7 +213,18 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        //
+        $isSeller = isset($user->seller);
+        $nbr_shops = 0;
+        if ($isSeller) {
+            $nbr_shops = $user->seller->shops->count();
+        }
+
+        $isClient = isset($user->client);
+        $nbr_orders = 0;
+        if ($isClient) {
+            $nbr_orders = $user->client->orders->count();
+        }
+        return view('admin.users.show', compact('user', 'isSeller', 'isClient', 'nbr_shops', 'nbr_orders'));
     }
 
     public function edit(User $user)

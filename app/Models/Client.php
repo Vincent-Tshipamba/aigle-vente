@@ -22,7 +22,7 @@ class Client extends Model
         'picture',
         'address',
         'delivery_address',
-        'city_id',
+        'location_id',
         'user_id',
         'is_active'
     ];
@@ -41,13 +41,13 @@ class Client extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function city(): BelongsTo
-    {
-        return $this->belongsTo(City::class);
-    }
-
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(Location::class);
     }
 }

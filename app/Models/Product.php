@@ -18,7 +18,7 @@ class Product extends Model
         '_id',
         'name',
         'unit_price',
-        'category_produit_id',
+        'category_product_id', // Assurez-vous d'utiliser le bon nom ici
         'shop_id',
         'description',
         'is_active'
@@ -57,4 +57,16 @@ class Product extends Model
     {
         return $this->belongsToMany(Panier::class, 'panier_items', 'product_id', 'panier_id')->withPivot('quantity');
     }
+
+    public function photos(): HasMany
+    {
+        return $this->hasMany(Photo::class);
+    }
+
+    public function promotions()
+    {
+        return $this->hasMany(Promotion::class);
+    }
+
+
 }

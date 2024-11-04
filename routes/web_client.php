@@ -1,11 +1,19 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
 Route::middleware('userOnline')->group(function () {
     Route::get('/', function () {
-        return view('home.index');
+        $products = Product::with('shop.seller')->get();
+
+        $saleProducts = $products->filter(function ($product) {
+            return $product->promotions->isNotEmpty();
+        });
+
+        // Retourner la vue avec les produits
+        return view('home.index', compact('products', 'saleProducts'));
     })->name('home');
 
     Route::get('/fashion', function () {
@@ -43,3 +51,4 @@ Route::middleware(['auth', 'userOnline'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('client.dashboard');
 });
+

@@ -110,25 +110,84 @@
                                         $client = App\Models\Client::where('user_id', $user->id)->first();
                                     @endphp
 
-                                    @if (Auth::check() && !Auth::user()->isSeller())
-                                        <a href="{{ route('sellers.create') }}"
-                                            class="w-full inline-block px-[10px] py-[15px] bg-[var(--tp-text-primary)] text-[var(--tp-common-white)] text-sm font-semibold rounded-md text-center transition-all duration-300 whitespace-nowrap align-middle touch-manipulation">
-                                            Devenir vendeur</a>
-                                    @else
-                                        <a href="{{ route('seller.dashboard') }}">
-                                            <svg class=" text-gray-800 dark:text-white" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                fill="currentColor" viewBox="0 0 24 24">
-                                                <path fill-rule="evenodd"
-                                                    d="M4 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4Zm16 7H4v7h16v-7ZM5 8a1 1 0 0 1 1-1h.01a1 1 0 0 1 0 2H6a1 1 0 0 1-1-1Zm4-1a1 1 0 0 0 0 2h.01a1 1 0 0 0 0-2H9Zm2 1a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2H12a1 1 0 0 1-1-1Z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                        </a>
-                                    @endif
+                                    <div class="flex items-center mx-3 space-x-5 "
+                                        data-dropdown-toggle="dropdown-user-header">
+                                        <div>
+                                            <button type="button"
+                                                class="flex text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                                                aria-expanded="false" data-dropdown-toggle="dropdown-user-header">
+                                                <span class="sr-only">Open user menu</span>
+                                                <img class="w-12 rounded-full border mx-2"
+                                                    src="{{ asset('img/profil.jpeg') }}" alt="user photo">
+
+                                            </button>
+                                        </div>
+
+                                        <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+                                            id="dropdown-user-header">
+                                            <div class="px-4 py-3" role="none">
+                                                <p class="text-sm text-gray-900 dark:text-white" role="none">
+                                                    {{ Auth::user()->name }}
+                                                </p>
+                                                <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300"
+                                                    role="none">
+                                                    {{ Auth::user()->email }}
+                                                </p>
+                                            </div>
+                                            <ul class="py-2 px-4" role="none">
+                                                <li>
+                                                    <a href="{{ route('profile.edit') }}"
+                                                        class="block text-xs py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                                        role="menuitem">Profil</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ route('profile.edit') }}"
+                                                        class="block text-xs py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                                        role="menuitem">Mes commandes</a>
+                                                </li>
+
+                                                <li>
+                                                    @if (Auth::check() && !Auth::user()->isSeller())
+                                                        <a href="{{ route('sellers.create') }}"
+                                                            class="">Devenir
+                                                            vendeur</a>
+                                                    @else
+                                                        <a href="{{ route('seller.dashboard') }}"class="block text-xs py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                                            role="menuitem">
+
+                                                            Dashboard
+
+                                                        </a>
+                                                    @endif
+                                                </li>
+
+                                                <li>
+                                                    <!-- Authentication -->
+                                                    <form id="logout-form" method="POST" action="{{ route('logout') }}"
+                                                        style="display: none;">
+                                                        @csrf
+                                                    </form>
+                                                    <a href="#" onclick="event.preventDefault(); confirmLogout();">
+                                                        <i class="fal fa-user"></i> {{ __('Deconnexion') }}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+
+                                    </div>
                                 @else
                                     <a href="{{ route('login') }}"><i class="fal fa-user"></i></a>
                                     <!-- Lien vers le formulaire de connexion -->
                                 @endauth
+
+                                <a href="wishlist.html"><i class="fal fa-heart"></i></a>
+
+                                @if (Auth::check() && !Auth::user()->isSeller())
+                                    <a href="{{ route('sellers.create') }}" class="tptrack__submition">Devenir
+                                        vendeur</a>
+                                @endif
+
                             </div>
                         </div>
                     </div>

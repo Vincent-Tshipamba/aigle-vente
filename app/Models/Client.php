@@ -24,6 +24,7 @@ class Client extends Model
         'delivery_address',
         'location_id',
         'user_id',
+        'city_id',
         'is_active'
     ];
 

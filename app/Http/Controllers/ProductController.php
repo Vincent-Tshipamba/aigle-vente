@@ -91,7 +91,7 @@ class ProductController extends Controller
                 }
             }
 
-            return redirect()->route('seller.shops.products.index')
+            return redirect()->route('seller.shops.products.index',$product->shop->id)
                 ->with('success', 'Produit créé avec succès !');
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Log des erreurs de validation

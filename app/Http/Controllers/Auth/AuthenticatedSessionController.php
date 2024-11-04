@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\City;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,8 +17,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        $cities = City::all();
-        return view('auth.login', compact('cities'));
+        return view('auth.login');
     }
 
     /**

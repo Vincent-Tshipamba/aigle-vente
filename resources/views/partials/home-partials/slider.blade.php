@@ -10,7 +10,7 @@
                                 <div class="tp-slide-item">
                                     <div class="tp-slide-item__content">
                                         <h4 class="tp-slide-item__sub-title">Accessoires</h4>
-                                        <h3 class="tp-slide-item__title mb-25">Jusqu'à
+                                        <h3 class="tp-slide-item__title mb-25 text-white">Jusqu'à
                                             <i>40% de Réduction
                                                 <img src="https://frederiqueconstant.com/wp-content/uploads/2023/03/2023_Frederique_Constant_Classic_Tourbillon_Manufacture_FC-980G3H9_PR2_HD-scaled.jpg" alt="">
                                             </i>
@@ -28,7 +28,7 @@
                                 <div class="tp-slide-item">
                                     <div class="tp-slide-item__content">
                                         <h4 class="tp-slide-item__sub-title">Accessoires</h4>
-                                        <h3 class="tp-slide-item__title mb-25">Jusqu'à <i>35% de Réduction <img
+                                        <h3 class="tp-slide-item__title mb-25 text-white">Jusqu'à <i>35% de Réduction <img
                                                     src="https://img.eobuwie.cloud/eob_marketing_banner_hone_800w_800h(Advertising/2024/10/FA24_TH_T1_OCTOBER_DUO_HERO300_300_39L_800_800_.jpg,webp)/marketing-banner-h-one-left.webp" alt=""></i>
                                             sur les Dernières Créations</h3>
                                         <a class="tp-slide-item__slide-btn tp-btn" href="shop.html">Achetez Maintenant <i
@@ -43,7 +43,7 @@
                                 <div class="tp-slide-item">
                                     <div class="tp-slide-item__content">
                                         <h4 class="tp-slide-item__sub-title">Accessoires</h4>
-                                        <h3 class="tp-slide-item__title mb-25">Jusqu'à <i>45% de Réduction <img
+                                        <h3 class="tp-slide-item__title mb-25 text-white">Jusqu'à <i>45% de Réduction <img
                                                     src="https://img.eobuwie.cloud/eob_marketing_banner_hone_600w_400h(Advertising/2024/10/1200x800px.jpg,webp)/marketing-banner-h-one-right.webp" alt=""></i>
                                             sur les Dernières Créations</h3>
                                         <a class="tp-slide-item__slide-btn tp-btn" href="shop.html">Achetez Maintenant <i

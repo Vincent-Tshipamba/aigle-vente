@@ -45,10 +45,12 @@
                                         @php
                                             $firstPhoto = $product->photos->first();
                                         @endphp
-                                        <img src="{{ asset('storage/' . $firstPhoto->image) }}"
-                                            alt="{{ $product->name }}">
-                                        <img class="product-thumb-secondary"
-                                            src="{{ asset('storage/' . $firstPhoto->image) }}" alt="">
+                                        @if ($firstPhoto)
+                                            <img src="{{ asset('storage/' . $firstPhoto->image) }}"
+                                                alt="{{ $product->name }}">
+                                            <img class="product-thumb-secondary"
+                                                src="{{ asset('storage/' . $firstPhoto->image) }}" alt="">
+                                        @endif
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>

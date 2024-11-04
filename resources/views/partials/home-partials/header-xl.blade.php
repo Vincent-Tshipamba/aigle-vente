@@ -10,7 +10,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-xl-6 col-lg-6">
+            <div class="col-xl-4 col-lg-4">
                 <div class="main-menu flex justify-center">
                     <nav>
                         <ul class="flex items-center">
@@ -43,7 +43,7 @@
                     </nav>
                 </div>
             </div>
-            <div class="col-xl-3 col-lg-3">
+            <div class="col-xl-5 col-lg-5">
                 <div class="header-meta-info flex items-center justify-end space-x-3">
                     <div class="header-meta__search-5 ml-25">
                         <div class="header-search-bar-5">
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     @auth
-                        <button id="dropdownUserAvatarButtonHeader-xl" data-dropdown-toggle="dropdownAvatarHeader-xl"
+                        <button id="dropdownUserAvatarButtonHeader-home-xl" data-dropdown-toggle="dropdownAvatarHeader-home-xl"
                             class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                             type="button">
                             <span class="sr-only">Open user menu</span>
@@ -65,14 +65,14 @@
                         </button>
 
                         <!-- Dropdown menu -->
-                        <div id="dropdownAvatarHeader-xl"
+                        <div id="dropdownAvatarHeader-home-xl"
                             class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-60 dark:bg-gray-700 dark:divide-gray-600">
                             <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
                                 <div>{{ Auth::user()->name }}</div>
                                 <div class="font-medium truncate">{{ Auth::user()->email }}</div>
                             </div>
                             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                aria-labelledby="dropdownUserAvatarButtonHeader-xl">
+                                aria-labelledby="dropdownUserAvatarButtonHeader-home-xl">
                                 <li>
                                     @if (Auth::user()->client)
                                         <a href=""

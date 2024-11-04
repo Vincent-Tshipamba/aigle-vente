@@ -63,18 +63,6 @@
                                     </div>
                                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                 </div>
-                                <!-- City -->
-                                <div class="mb-10">
-                                    <div class="relative">
-                                        <select id="city" name="city"
-                                            class=" z-40 select-custom text-gray-900 border border-gray-300 rounded-lg">
-                                            <option value="" disabled selected>Sélectionnez votre ville</option>
-                                            @foreach ($cities as $city)
-                                                <option value="{{ $city->id }}">{{ $city->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
 
                                 <!-- Password -->
                                 <div class="tptrack__email mb-10">
@@ -97,7 +85,11 @@
                                 </div>
 
                                 <!-- Hidden field for current location -->
-                                <input type="hidden" id="current_location" name="current_location" />
+                                <input type="hidden" id="current_city" name="current_city" />
+                                <input type="hidden" id="current_country" name="current_country" />
+                                <input type="hidden" id="current_continent" name="current_continent" />
+                                <input type="hidden" id="current_latitude" name="current_latitude" />
+                                <input type="hidden" id="current_longitude" name="current_longitude" />
 
                                 <div class="tpsign__account">
                                     <a href="{{ route('login') }}">Vous avez déjà un compte ?</a>
@@ -105,7 +97,8 @@
 
                                 <div class="tptrack__btn">
                                     <button type="submit" class="tptrack__submition tpsign__reg">
-                                        Inscrivez-vous maintenant<i class="fal fa-long-arrow-right"></i>
+                                        Inscrivez-vous maintenant
+                                        <i class="fal fa-long-arrow-right animate__animated animate__heartBeat"></i>
                                     </button>
                                 </div>
                             </form>
@@ -123,17 +116,31 @@
         <script>
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
+                    const current_city = $('#current_city');
+                    const current_country = $('#current_country');
+                    const current_continent = $('#current_continent');
+                    const current_latitude = $('#current_latitude');
+                    const current_longitude = $('#current_longitude');
+
                     const latitude = position.coords.latitude;
                     const longitude = position.coords.longitude;
-                    console.log(latitude);
-                    console.log(longitude);
                     // Use a reverse geocoding API to get the city name
                     fetch(
-                            `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=fr`)
+                            `https://api-bdc.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=fr`)
                         .then(response => response.json())
                         .then(data => {
-                            if (data.city) {
-                                console.log(data);
+                            if (data) {
+                                if (data.city) {
+                                    current_city.val(data.city);
+                                }
+                                if (data.countryName) {
+                                    current_country.val(data.countryName);
+                                }
+                                if (data.continent) {
+                                    current_continent.val(data.continent);
+                                }
+                                current_latitude.val(latitude);
+                                current_longitude.val(longitude);
                             } else {
                                 console.error("City not found");
                             }

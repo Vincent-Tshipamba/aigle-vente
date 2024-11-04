@@ -26,14 +26,4 @@ class City extends Model
             $model->_id = (string) Str::uuid();
         });
     }
-
-    public function clients(): HasMany
-    {
-        return $this->hasMany(Client::class);
-    }
-
-    public function sellers(): HasMany
-    {
-        return $this->hasMany(Seller::class);
-    }
 }

@@ -2,7 +2,7 @@
 <div id="header-sticky" class="logo-area tp-sticky-one mainmenu-5">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-xl-2 col-lg-3">
+            <div class="col-xl-3 col-lg-3">
                 <div class="logo col-span-1">
                     <a href="{{ route('home') }}" class="flex items-center space-x-2">
                         <img src="{{ asset('img/logo/logo_sans_bg.png') }}" width="25%" alt="logo">
@@ -43,7 +43,7 @@
                     </nav>
                 </div>
             </div>
-            <div class="col-xl-4 col-lg-9">
+            <div class="col-xl-3 col-lg-3">
                 <div class="header-meta-info flex items-center justify-end space-x-3">
                     <div class="header-meta__search-5 ml-25">
                         <div class="header-search-bar-5">

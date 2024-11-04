@@ -23,8 +23,6 @@
                             <h1 class="text-2xl font-bold animate__animated animate__slideInRight">Aigle Vente</h1>
                         </a>
                     </div>
-                    <div class="col-span-1">
-                    </div>
                 </div>
                 <div class="col-xl-10 col-lg-9">
                     <div class="header-meta-info d-flex align-items-center justify-content-between">
@@ -180,7 +178,7 @@
                         </div>
                     </div>
                     <div class="col-xl-7 col-lg-6">
-                        <div class="main-menu">
+                        <div class="main-menu flex items-center justify-center">
                             <nav id="mobile-menu">
                                 <ul>
                                     <li class="has-dropdown">
@@ -214,14 +212,14 @@
                     </div>
                     <div class="col-xl-3 col-lg-3">
                         <div class="menu-contact">
-                            <ul>
+                            <ul class="flex justify-center">
                                 <li>
                                     <div class="menu-contact__item">
                                         <div class="menu-contact__icon">
                                             <i class="fal fa-phone"></i>
                                         </div>
                                         <div class="menu-contact__info">
-                                            <a href="tel:0123456">908. 408. 501. 89</a>
+                                            <a href="tel:0123456">+243 81 234 56 78</a>
                                         </div>
                                     </div>
                                 </li>

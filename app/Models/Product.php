@@ -38,7 +38,7 @@ class Product extends Model
         return $this->belongsTo(Shop::class);
     }
 
-    public function stock(): HasOne
+    public function stocks(): HasOne
     {
         return $this->hasOne(Stock::class);
     }

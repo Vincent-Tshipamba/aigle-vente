@@ -17,7 +17,6 @@ class Product extends Model
         '_id',
         'name',
         'unit_price',
-        'stock_quantity',
         'category_product_id', // Assurez-vous d'utiliser le bon nom ici
         'shop_id',
         'description'
@@ -61,5 +60,11 @@ class Product extends Model
     {
         return $this->hasMany(Photo::class);
     }
+
+    public function promotions()
+    {
+        return $this->hasMany(Promotion::class);
+    }
+
 
 }

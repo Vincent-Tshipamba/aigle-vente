@@ -61,12 +61,11 @@ class ProductController extends Controller
 
             // Création du produit
             $product = Product::create([
-                'name' => $validated['name'], // Assurez-vous d'utiliser $validated
-                'stock_quantity' => $validated['stock_quantity'], // Ajoutez ceci
-                'unit_price' => $validated['price'], // Modifiez ici pour correspondre au champ correct
-                'category_product_id' => $validated['category_product_id'], // Modifiez ici
-                'description' => $validated['description'], // Modifiez ici
-                'shop_id' => $validated['shop_id'], // Utilisez l'ID de la boutique ici
+                'name' => $validated['name'],
+                'unit_price' => $validated['price'],
+                'category_product_id' => $validated['category_product_id'],
+                'description' => $validated['description'],
+                'shop_id' => $validated['shop_id'],
             ]);
 
 
@@ -75,6 +74,10 @@ class ProductController extends Controller
                 Log::error('Le produit n\'a pas été créé.');
                 return redirect()->back()->with('error', 'Le produit n\'a pas pu être créé.')->withInput();
             }
+
+            $product->stocks()->create([
+                'quantity' => $validated['stock_quantity'],
+            ]);
 
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $imageFile) {
@@ -103,8 +106,12 @@ class ProductController extends Controller
 
 
 
+    public function show($id)
+    {
+        $product = Product::where('_id', $id)->with(['photos', 'stocks'])->firstOrFail();
+        return view('seller.produits.show', compact('product'));
+    }
 
-    // Mettre à jour un produit si le produit appartient à une boutique du vendeur connecté
     public function update(Request $request, Product $product)
     {
         $seller = Auth::user()->seller;
@@ -117,15 +124,21 @@ class ProductController extends Controller
             'name' => 'string|max:255',
             'stock_quantity' => 'integer',
             'unit_price' => 'numeric',
-            'category_produit_id' => 'exists:category_products,_id',
+            'category_product_id' => 'exists:category_products,id', // Correction ici
             'description' => 'nullable|string',
         ]);
 
         $product->update($validated);
-        return response()->json($product);
+
+        // Mise à jour du stock, si spécifié
+        if ($request->filled('stock_quantity')) {
+            $product->stocks()->updateOrCreate([], ['quantity' => $validated['stock_quantity']]);
+        }
+
+        return redirect()->back()->with('success', 'Produit mis à jour avec succès !');
     }
 
-    // Supprimer un produit si le produit appartient à une boutique du vendeur connecté
+    // Méthode de suppression d'un produit
     public function destroy(Product $product)
     {
         $seller = Auth::user()->seller;
@@ -134,7 +147,53 @@ class ProductController extends Controller
             return response()->json(['error' => 'Accès non autorisé à ce produit.'], 403);
         }
 
+        // Suppression du produit et des relations associées
+        $product->photos()->delete();
+        $product->stocks()->delete();
         $product->delete();
-        return response()->json(['message' => 'Produit supprimé']);
+
+
+        return redirect()->route('seller.shops.products.index', $product->shop->id)->with('success', 'Produit supprimé avec succès !');
     }
+
+    public function requestPromotion(Request $request, Product $product)
+    {
+        $seller = Auth::user()->seller;
+
+        // Vérifier si le produit appartient bien à une boutique du vendeur connecté
+        if (!$seller || !$seller->shops->contains($product->shop)) {
+            return response()->json(['error' => 'Accès non autorisé à ce produit.'], 403);
+        }
+
+        // Validation des données de la demande de promotion
+        $validated = $request->validate([
+            'discount_percentage' => 'required|numeric|min:1|max:100',
+            'promotion_duration' => 'required|integer|min:1', // Durée en jours
+        ], [
+            'discount_percentage.required' => 'Veuillez fournir un pourcentage de réduction.',
+            'promotion_duration.required' => 'Veuillez spécifier la durée de la promotion.',
+        ]);
+
+        try {
+            // Logique pour gérer la demande de promotion
+            // Ici, vous pouvez enregistrer cette demande dans une table dédiée ou envoyer un email de demande
+
+            // Exemple d'enregistrement d'une promotion
+            $product->promotions()->create([
+                'discount_percentage' => $validated['discount_percentage'],
+                'promotion_duration' => $validated['promotion_duration'],
+                'status' => 'pending', // Statut initial de la demande
+            ]);
+            return redirect()->route('seller.shops.products.index')
+                ->with('success', 'Demande de promotion envoyée avec succès !');
+        } catch (\Exception $e) {
+            // Gestion des erreurs
+            Log::error('Erreur lors de la demande de promotion : ' . $e->getMessage());
+            return response()->json(['error' => 'Une erreur est survenue lors de la demande de promotion.'], 500);
+        }
+    }
+
+
+    
+    
 }

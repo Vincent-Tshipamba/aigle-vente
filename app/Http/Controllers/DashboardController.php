@@ -31,79 +31,47 @@ class DashboardController extends Controller
 
         // Compter les commandes associées au vendeur en utilisant le `seller_id` dans `orders`
         $totalOrders = DB::table('orders')
-        ->where('seller_id', $seller->id) // Remplacez `shop_id` par `seller_id` ou la clé correcte
+            ->where('seller_id', $seller->id) // Remplacez `shop_id` par `seller_id` ou la clé correcte
             ->count();
 
         // Calcul du revenu total basé sur les produits du vendeur
         $totalRevenue = DB::table('order_products')
-        ->join('products', 'products._id', '=', 'order_products.product_id')
-        ->whereIn('products.shop_id', $shopIds)
+            ->join('products', 'products._id', '=', 'order_products.product_id')
+            ->whereIn('products.shop_id', $shopIds)
             ->sum(DB::raw('order_products.quantity * products.unit_price'));
 
         $averageOrderValue = $totalOrders > 0 ? $totalRevenue / $totalOrders : 0;
 
-        $topProducts = DB::table('order_products')
-        ->join('products', 'products._id', '=', 'order_products.product_id')
-        ->whereIn('products.shop_id', $shopIds)
-            ->select('products.name', DB::raw('SUM(order_products.quantity) as total_quantity'))
-            ->groupBy('products.name')
-            ->orderByDesc('total_quantity')
-            ->limit(5)
-            ->get();
 
+
+        // $totalStockQuantity = Product::whereIn('shop_id', $shopIds)->sum('stock_quantity');
+        $totalShops = $shopIds->count();
+
+
+        // Calcul des ventes mensuelles
         $monthlySales = DB::table('orders')
-        ->join('order_products', 'orders._id', '=', 'order_products.order_id')
-        ->join('products', 'products._id', '=', 'order_products.product_id')
-        ->where('orders.seller_id', $seller->id) // Utiliser `seller_id` ici aussi
-            ->select(
-                DB::raw('MONTH(orders.created_at) as month'),
-                DB::raw('COUNT(*) as total_sales'),
-                DB::raw('SUM(order_products.quantity * products.unit_price) as monthly_revenue')
-            )
-            ->groupBy('month')
+            ->select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total_orders')) // Compte le nombre total de commandes par mois
+            ->where('seller_id', $seller->id) // Filtrer par vendeur si nécessaire
+            ->groupBy(DB::raw('MONTH(created_at)'))
             ->orderBy('month')
             ->get();
 
-        $totalStockQuantity = Product::whereIn('shop_id', $shopIds)->sum('stock_quantity');
-        $totalShops = $shopIds->count();
+        $months = [];
+        $ordersCount = [];
+
+        foreach ($monthlySales as $sale) {
+            $months[] = $sale->month; // Mois (1-12)
+            $ordersCount[] = $sale->total_orders; // Compte total des commandes pour chaque mois
+        }
 
         return view('seller.dashboard', compact(
             'totalRevenue',
             'totalOrders',
             'totalProducts',
             'averageOrderValue',
-            'topProducts',
-            'monthlySales',
-            'totalStockQuantity',
-            'totalShops'
+            'totalShops',
+            'months', // Passer les mois à la vue
+            'ordersCount' // Passer le nombre de commandes à la vue
         ));
-    }
-
-
-
-    // Obtenir les statistiques de vente pour un vendeur spécifique
-    public function salesStatistics(Seller $seller)
-    {
-        $totalSales = DB::table('order_products')
-            ->join('orders', 'orders._id', '=', 'order_products.order_id')
-            ->join('products', 'products._id', '=', 'order_products.product_id')
-            ->whereIn('products.shop_id', $seller->shops->pluck('_id'))
-            ->sum(DB::raw('order_products.quantity * products.unit_price'));
-
-        return response()->json(['total_sales' => $totalSales]);
-    }
-
-    // Obtenir le nombre de commandes pour chaque produit d'un vendeur
-    public function orderStatistics(Seller $seller)
-    {
-        $orders = DB::table('order_products')
-            ->join('products', 'products._id', '=', 'order_products.product_id')
-            ->whereIn('products.shop_id', $seller->shops->pluck('_id'))
-            ->select('products.name', DB::raw('SUM(order_products.quantity) as total_quantity'))
-            ->groupBy('products.name')
-            ->orderByDesc('total_quantity')
-            ->get();
-
-        return response()->json($orders);
     }
 }

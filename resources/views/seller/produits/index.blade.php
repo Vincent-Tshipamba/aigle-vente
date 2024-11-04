@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @if (session('success'))
+    {{-- @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
@@ -16,11 +16,11 @@
                 @endforeach
             </ul>
         </div>
-    @endif
+    @endif --}}
 
     <!-- Modal toggle -->
     <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
-        class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        class="block text-white bg-[#e38407] hover:bg-[#E38407EE]  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         type="button">
         Ajoute un Produits
     </button>
@@ -103,7 +103,7 @@
                         </div>
                     </div>
                     <button type="submit"
-                        class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        class="text-white inline-flex items-center bg-[#e38407] hover:bg-[#E38407EE] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -153,8 +153,8 @@
                             $firstPhoto = $product->photos->first();
                         @endphp
                         @if ($firstPhoto)
-                            <img src="{{ asset('storage/' . $firstPhoto->image) }}"
-                                alt="{{ $product->name }}" class="w-full h-40 object-cover rounded-md mb-4">
+                            <img src="{{ asset('storage/' . $firstPhoto->image) }}" alt="{{ $product->name }}"
+                                class="w-full h-40 object-cover rounded-md mb-4">
                         @else
                             <p>Aucune image disponible pour ce produit.</p>
                         @endif
@@ -162,7 +162,8 @@
                         <h2 class="text-lg font-bold">{{ $product->name }}</h2>
                         <p class="text-gray-600">Prix : {{ $product->unit_price }} USD</p>
                         <p class="text-gray-600">Stock : {{ $product->stock_quantity }}</p>
-                        <a href="" class="text-blue-500 mt-2 inline-block">Voir
+                        <a href="{{ route('seller.shops.products.show', $product->_id) }}"
+                            class="text-blue-500 mt-2 inline-block">Voir
                             Détails</a>
                     </div>
                 @endforeach
@@ -251,7 +252,7 @@
                         <tbody>
                             @if (empty($products))
                             @else
-                                @foreach ($products as $product)
+                                @foreach ($products as $i => $product)
                                     <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
                                         <td class="w-4 px-4 py-3">
                                             <div class="flex items-center">
@@ -278,14 +279,20 @@
                                         </th>
                                         <td class="px-4 py-2">
                                             <span
-                                                class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">Desktop
-                                                PC</span>
+                                                class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">{{ $product->name }}</span>
                                         </td>
                                         <td
                                             class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             <div class="flex items-center">
-                                                <div class="inline-block w-4 h-4 mr-2 bg-red-700 rounded-full"></div>
-                                                {{ $product->stock_quantity }}
+                                                @if (empty($product->stocks->stock_quantity))
+                                                    <div class="inline-block w-4 h-4 mr-2 bg-red-700 rounded-full">
+                                                    </div>
+                                                @else
+                                                    <div class="inline-block w-4 h-4 mr-2 bg-green-800 rounded-full">
+                                                    </div>
+                                                @endif
+
+
                                             </div>
                                         </td>
                                         <td
@@ -345,7 +352,21 @@
                                         <td class="px-4 py-2">$3.2M</td>
                                         <td
                                             class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            Just now</td>
+                                            <button id="dropdownMenuIconButton"
+                                                data-dropdown-toggle="dropdownDots{{ $i }}"
+                                                class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                                                type="button">
+                                                <svg class="w-5 h-5" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                    viewBox="0 0 4 15">
+                                                    <path
+                                                        d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+                                                </svg>
+                                            </button>
+
+                                            <!-- Dropdown menu -->
+
+                                        </td>
                                     </tr>
                                 @endforeach
                             @endif
@@ -415,6 +436,36 @@
 
 
 </div>
+
+@if (empty($product))
+@else
+    <div id="dropdownDots{{ $i }}"
+        class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconButton">
+            <li>
+                <a href="{{ route('seller.shops.products.show', $product->_id) }}"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Produits</a>
+            </li>
+            <li>
+                <a href="#"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+            </li>
+            <li>
+                <a href="#"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+            </li>
+        </ul>
+        <div class="py-2">
+            <form action="{{ route('seller.shops.products.destroy', $product->id) }}" method="POST">
+                @csrf
+                @method('delete')
+                <input type="submit" value="supprimer"
+                    class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+            </form>
+        </div>
+    </div>
+@endif
+
 
 
 @section('script')
@@ -505,6 +556,33 @@
                 gridView.classList.add("hidden");
             });
         });
+
+
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Succès',
+                text: '{{ session('success') }}',
+                toast: true,
+                position: 'top-end',
+                timer: 3000,
+                showConfirmButton: false,
+                timerProgressBar: true,
+            });
+        @endif
+
+        @if (session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Erreur',
+                text: '{{ session('error') }}',
+                toast: true,
+                position: 'top-end',
+                timer: 3000,
+                showConfirmButton: false,
+                timerProgressBar: true,
+            });
+        @endif
     </script>
 @endsection
 

@@ -20,10 +20,10 @@
                     </div>
                 </div>
             </a>
-            <a href="{{route('shops.index')}}">
+            <a href="{{ route('shops.index') }}">
                 <div class="col hover:bg-gray-900 p-4 rounded-lg shadow bg-custom-dark">
                     <div class="flex items-center">
-                        <h5 class="dark:text-white text-4xl text-black">{{$totalShops}}</h5>
+                        <h5 class="dark:text-white text-4xl text-black">{{ $totalShops }}</h5>
                         <div class="ml-auto">
                             <i class='bx bx-dollar text-3xl dark:text-white text-black'></i>
                         </div>
@@ -78,36 +78,22 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const monthlySalesData = @json($monthlySales);
-
-        const months = monthlySalesData.map(data => data.month);
-        const totalSales = monthlySalesData.map(data => data.total_sales);
-        const monthlyRevenue = monthlySalesData.map(data => data.monthly_revenue);
-
+   <script>
         const ctx = document.getElementById('monthlySalesChart').getContext('2d');
         const monthlySalesChart = new Chart(ctx, {
-            type: 'bar',
+            type: 'line', // Vous pouvez changer cela en 'bar' ou 'pie' si nécessaire
             data: {
-                labels: months,
+                labels: {!! json_encode($months) !!}, // Étiquettes des mois
                 datasets: [{
-                        label: 'Ventes mensuelles',
-                        data: totalSales,
-                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Revenu mensuel',
-                        data: monthlyRevenue,
-                        backgroundColor: 'rgba(255, 99, 132, 0.6)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1
-                    }
-                ]
+                    label: 'Total Orders', // Changez cela si vous souhaitez afficher les ventes ou d'autres métriques
+                    data: {!! json_encode($ordersCount) !!}, // Nombre de commandes
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderWidth: 2,
+                    fill: true, // Si vous souhaitez remplir la zone sous la ligne
+                }]
             },
             options: {
-                responsive: true,
                 scales: {
                     y: {
                         beginAtZero: true

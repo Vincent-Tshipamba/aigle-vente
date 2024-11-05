@@ -37,9 +37,9 @@ class RegisteredUserController extends Controller
             'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'sexe' => ['required', 'string', 'max:255'],
-            'city' => ['nullable', 'string'],
-            'continent' => ['nullable', 'string'],
-            'country' => ['nullable', 'string'],
+            'current_city' => ['nullable', 'string'],
+            'current_continent' => ['nullable', 'string'],
+            'current_country' => ['nullable', 'string'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -54,9 +54,9 @@ class RegisteredUserController extends Controller
 
         // Create a new location record
         $location = Location::firstOrCreate([
-            'continent' => $request->continent,
-            'country' => $request->country,
-            'city' => $request->city,
+            'continent' => $request->current_continent,
+            'country' => $request->current_country,
+            'city' => $request->current_city,
             'latitude' => $request->current_latitude,
             'longitude' => $request->current_longitude,
         ]);

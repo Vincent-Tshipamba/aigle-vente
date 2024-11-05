@@ -36,7 +36,8 @@
                         </div>
                         <div class="header-meta header-language flex items-center space-x-3">
                             @auth
-                                <button id="dropdownUserAvatarButtonHeader-1" data-dropdown-toggle="dropdownAvatarHeader-1"
+                                <button id="dropdownUserAvatarButtonHeader-home"
+                                    data-dropdown-toggle="dropdownAvatarHeader-home"
                                     class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                                     type="button">
                                     <span class="sr-only">Open user menu</span>
@@ -45,14 +46,14 @@
                                 </button>
 
                                 <!-- Dropdown menu -->
-                                <div id="dropdownAvatarHeader-1"
+                                <div id="dropdownAvatarHeader-home"
                                     class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-60 dark:bg-gray-700 dark:divide-gray-600">
                                     <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
                                         <div>{{ Auth::user()->name }}</div>
                                         <div class="font-medium truncate">{{ Auth::user()->email }}</div>
                                     </div>
                                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                        aria-labelledby="dropdownUserAvatarButtonHeader-1">
+                                        aria-labelledby="dropdownUserAvatarButtonHeader-home">
                                         <li>
                                             @if (Auth::user()->client)
                                                 <a href=""
@@ -96,6 +97,9 @@
                                         </li>
                                     </ul>
                                 </div>
+                            @else
+                                <a href="{{ route('login') }}"><i class="fal fa-user"></i></a>
+                                <!-- Lien vers le formulaire de connexion -->
                             @endauth
                             <div class="header-meta__social flex items-center ml-25">
                                 <button class="header-cart p-relative tp-cart-toggle">
@@ -104,88 +108,10 @@
                                 </button>
 
                                 <a href="wishlist.html"><i class="fal fa-heart"></i></a>
-                                @auth
-                                    @php
-                                        $user = Auth::user();
-                                        $client = App\Models\Client::where('user_id', $user->id)->first();
-                                    @endphp
-
-                                    <div class="flex items-center mx-3 space-x-5 "
-                                        data-dropdown-toggle="dropdown-user-header">
-                                        <div>
-                                            <button type="button"
-                                                class="flex text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                                                aria-expanded="false" data-dropdown-toggle="dropdown-user-header">
-                                                <span class="sr-only">Open user menu</span>
-                                                <img class="w-12 rounded-full border mx-2"
-                                                    src="{{ asset('img/profil.jpeg') }}" alt="user photo">
-
-                                            </button>
-                                        </div>
-
-                                        <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
-                                            id="dropdown-user-header">
-                                            <div class="px-4 py-3" role="none">
-                                                <p class="text-sm text-gray-900 dark:text-white" role="none">
-                                                    {{ Auth::user()->name }}
-                                                </p>
-                                                <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300"
-                                                    role="none">
-                                                    {{ Auth::user()->email }}
-                                                </p>
-                                            </div>
-                                            <ul class="py-2 px-4" role="none">
-                                                <li>
-                                                    <a href="{{ route('profile.edit') }}"
-                                                        class="block text-xs py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                                        role="menuitem">Profil</a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{ route('profile.edit') }}"
-                                                        class="block text-xs py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                                        role="menuitem">Mes commandes</a>
-                                                </li>
-
-                                                <li>
-                                                    @if (Auth::check() && !Auth::user()->isSeller())
-                                                        <a href="{{ route('sellers.create') }}"
-                                                            class="">Devenir
-                                                            vendeur</a>
-                                                    @else
-                                                        <a href="{{ route('seller.dashboard') }}"class="block text-xs py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                                            role="menuitem">
-
-                                                            Dashboard
-
-                                                        </a>
-                                                    @endif
-                                                </li>
-
-                                                <li>
-                                                    <!-- Authentication -->
-                                                    <form id="logout-form" method="POST" action="{{ route('logout') }}"
-                                                        style="display: none;">
-                                                        @csrf
-                                                    </form>
-                                                    <a href="#" onclick="event.preventDefault(); confirmLogout();">
-                                                        <i class="fal fa-user"></i> {{ __('Deconnexion') }}
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-
-
-                                    </div>
-                                @else
-                                    <a href="{{ route('login') }}"><i class="fal fa-user"></i></a>
-                                    <!-- Lien vers le formulaire de connexion -->
-                                @endauth
-
-                                <a href="wishlist.html"><i class="fal fa-heart"></i></a>
-
                                 @if (Auth::check() && !Auth::user()->isSeller())
-                                    <a href="{{ route('sellers.create') }}" class="tptrack__submition">Devenir
-                                        vendeur</a>
+                                    <a href="{{ route('sellers.create') }}"
+                                        class="w-full inline-block px-[10px] py-[15px] bg-[var(--tp-text-primary)] text-[var(--tp-common-white)] text-sm font-semibold rounded-md text-center transition-all duration-300 whitespace-nowrap align-middle touch-manipulation">
+                                        Devenir vendeur</a>
                                 @endif
 
                             </div>

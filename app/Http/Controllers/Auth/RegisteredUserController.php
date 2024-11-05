@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\City;
 use App\Models\User;
+use App\Models\Client;
+use App\Models\Location;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
@@ -12,7 +14,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Auth\Events\Registered;
-use App\Models\Client;
 
 class RegisteredUserController extends Controller
 {
@@ -21,8 +22,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        $cities = City::all();
-        return view('auth.register', compact('cities'));
+        return view('auth.register');
     }
 
     /**
@@ -37,9 +37,9 @@ class RegisteredUserController extends Controller
             'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'sexe' => ['required', 'string', 'max:255'],
-            'city' => ['nullable', 'string'],
-            'continent' => ['nullable', 'string'],
-            'country' => ['nullable', 'string'],
+            'current_city' => ['nullable', 'string'],
+            'current_continent' => ['nullable', 'string'],
+            'current_country' => ['nullable', 'string'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -52,12 +52,21 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        // Create a new location record
+        $location = Location::firstOrCreate([
+            'continent' => $request->current_continent,
+            'country' => $request->current_country,
+            'city' => $request->current_city,
+            'latitude' => $request->current_latitude,
+            'longitude' => $request->current_longitude,
+        ]);
+
         // Sauvegarder les autres informations dans la table clients
         $client = Client::firstOrCreate([
             'first_name' => $request->firstname,
             'last_name' => $request->lastname,
             'sexe' => $request->sexe,
-            'city_id' => $request->city,
+            'location_id' => $location->id,
             'user_id' => $user->id,
             'phone' => $request->phone
         ]);

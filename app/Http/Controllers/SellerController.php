@@ -13,9 +13,7 @@ class SellerController extends Controller
 {
     public function create()
     {
-        $cities = City::all();
-
-        return view('seller.sellers.create', compact('cities'));
+        return view('seller.sellers.create');
     }
 
     // Créer un nouveau vendeur
@@ -26,7 +24,6 @@ class SellerController extends Controller
                 'phone' => 'required|string|max:20',
                 'sexe' => 'required|string|in:Masculin,Féminin',
                 'address' => 'required|string|max:255',
-                'city_id' => 'required|exists:cities,id',
                 'picture' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             ]);
 
@@ -47,11 +44,11 @@ class SellerController extends Controller
             $seller->first_name = $firstName;
             $seller->last_name = $lastName;
 
-           
+
             $user = Auth::user();
             $role = Role::firstOrCreate(['name' => 'vendeur']);
 
-            
+
             // $user->roles()->attach($role->id);
 
             $seller->save();

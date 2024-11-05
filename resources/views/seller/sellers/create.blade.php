@@ -90,21 +90,6 @@
                                         <x-input-error :messages="$errors->get('address')" class="mt-2" />
                                     </div>
 
-                                    <!-- Ville -->
-                                    <div class="mb-10">
-                                        <div class="relative">
-                                            <select id="city_id" name="city_id" required
-                                                class="z-40 select-custom text-gray-900 border border-gray-300 rounded-lg">
-                                                <option value="" disabled selected>Sélectionnez votre ville
-                                                </option>
-                                                @foreach ($cities as $city)
-                                                    <option value="{{ $city->id }}">{{ $city->name }}</option>
-                                                @endforeach
-                                            </select>
-                                            <x-input-error :messages="$errors->get('city_id')" class="mt-2" />
-                                        </div>
-                                    </div>
-
                                     <!-- Photo -->
                                     <div class="mb-10">
                                         <div class="relative">

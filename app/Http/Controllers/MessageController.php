@@ -116,4 +116,24 @@ class MessageController extends Controller
 
         return redirect()->back()->with('success', 'Message deleted successfully!');
     }
+
+    public function sendToSeller(Request $request)
+    {
+        $request->validate([
+            'message' => 'required|string',
+            'seller_id' => 'required|exists:users,id',
+            'product_id' => 'required|exists:products,id',
+        ]);
+
+        // Create the message
+        Message::create([
+            'sender_id' => Auth::id(),
+            'receiver_id' => $request->seller_id,
+            'message' => $request->input('message'),
+            'is_read' => false,
+            'product_id' => $request->product_id, // Optional, add product_id if it's a foreign key in messages
+        ]);
+
+        return redirect()->route('home')->with('success', 'Votre message a été envoyé au vendeur.');
+    }
 }

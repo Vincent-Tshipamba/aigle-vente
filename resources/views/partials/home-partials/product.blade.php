@@ -1,4 +1,3 @@
-<!-- product-area-start -->
 <section class="product-area pt-95 pb-70">
     <div class="container">
         <div class="row">
@@ -53,16 +52,20 @@
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
                                         <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
-                                        <a class="wishlist" href=""><i class="fal fa-heart"></i></a>
+
+                                        <!-- Button to send message -->
+                                        <a href="#" class="quckview message-button"
+                                            data-seller-id="{{ $product->shop->seller->id }}"
+                                            data-product-id="{{ $product->id }}">
+                                            <i class="fal fa-comment"></i>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="tpproduct__content">
                                     <h3 class="tpproduct__title"><a href="">{{ $product->name }}</a></h3>
                                     <p class="tpproduct__shop-name">Boutique {{ $product->shop->name }}</p>
-                                    <!-- Afficher le nom de la boutique -->
                                     <p class="tpproduct__title">Propriétaire {{ $product->shop->seller->first_name }}
                                         {{ $product->shop->seller->last_name }}</p>
-                                    <!-- Afficher le nom du propriétaire -->
                                     <div class="tpproduct__priceinfo p-relative">
                                         <div class="tpproduct__priceinfo-list">
                                             <span>{{ number_format($product->unit_price, 2, ',', ' ') }} $</span>
@@ -80,6 +83,8 @@
                             </div>
                         </div>
                     @endforeach
+
+
                 @endif
 
             </div>
@@ -205,8 +210,46 @@
         </div>
     </div>
 </section>
-<!-- product-area-end -->
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const messageButtons = document.querySelectorAll('.message-button'); // Sélection par classe
+
+        messageButtons.forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault(); // Empêche le comportement par défaut du lien
+
+                const sellerId = this.getAttribute('data-seller-id');
+                const productId = this.getAttribute('data-product-id');
+                const message = "Est-ce que le produit est toujours disponible?";
+
+                // Préparer les données du message
+                const formData = new FormData();
+                formData.append('seller_id', sellerId);
+                formData.append('product_id', productId);
+                formData.append('message', message);
+                formData.append('_token', '{{ csrf_token() }}'); // CSRF token
+
+                // Envoyer la requête AJAX
+                fetch("{{ route('messages.send', ':seller_id') }}".replace(':seller_id',
+                        sellerId), {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert("Votre message a été envoyé au vendeur !");
+                            // Afficher le message dans l'interface si nécessaire
+                        } else {
+                            alert("Échec de l'envoi du message.");
+                        }
+                    })
+                    .catch(error => console.error('Erreur:', error));
+            });
+        });
+    });
+</script>
 
 <style>
     .tpproduct__thumb img {

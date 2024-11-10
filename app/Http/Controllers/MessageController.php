@@ -35,8 +35,19 @@ class MessageController extends Controller
             ->where('id', '!=', $userId)
             ->get();
 
-        return view('seller.messages.index', compact('messages', 'contacts', 'userId'));
+        // Compter les messages non lus pour chaque contact
+        $unreadCounts = [];
+        foreach ($contacts as $contact) {
+            $unreadCount = Message::where('sender_id', $contact->id)
+                ->where('receiver_id', $userId)
+                ->where('is_read', false) // Filtrer les messages non lus
+                ->count();
+            $unreadCounts[$contact->id] = $unreadCount;
+        }
+
+        return view('seller.messages.index', compact('messages', 'contacts', 'userId', 'unreadCounts'));
     }
+
 
     /**
      * Display the conversation between the authenticated user and another user.
@@ -115,13 +126,14 @@ class MessageController extends Controller
      */
     public function markAsRead(Message $message)
     {
-        // Ensure the authenticated user is the receiver
+        // Vérifier que l'utilisateur est le destinataire
         if ($message->receiver_id === Auth::id()) {
             $message->markAsRead();
         }
 
-        return redirect()->back();
+        return response()->json(['status' => 'success', 'message' => 'Message marked as read.']);
     }
+
 
     /**
      * Remove the specified message from storage.

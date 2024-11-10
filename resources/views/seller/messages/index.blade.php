@@ -10,6 +10,7 @@
             </header>
 
             <!-- Contact List -->
+
             <div class="overflow-y-auto h-full md:h-screen p-3 pb-20" id="contactList">
                 @foreach ($contacts as $contact)
                     <div data-contact-id="{{ $contact->id }}"
@@ -19,14 +20,21 @@
                                 class="w-full h-full rounded-full">
                         </div>
                         <div class="flex-1">
-                            <h2 class="text-md md:text-lg font-semibold">{{ $contact->name }}</h2>
+                            <h2 class="text-md md:text-lg font-semibold">
+                                {{ $contact->name }}
+                                @if (isset($unreadCounts[$contact->id]) && $unreadCounts[$contact->id] > 0)
+                                    <!-- Afficher le nombre de messages non lus -->
+                                    <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full ml-2">
+                                        {{ $unreadCounts[$contact->id] }}
+                                    </span>
+                                @endif
+                            </h2>
                             <p class="text-gray-600 text-sm">
                                 @php
-                                    $latestMessage = $messages->firstWhere(function ($message) use ($contact) {
+                                    $latestMessage = $messages->firstWhere(function ($message) use ($contact, $userId) {
                                         return ($message->sender_id === $contact->id &&
-                                            $message->receiver_id === Auth::id()) ||
-                                            ($message->sender_id === Auth::id() &&
-                                                $message->receiver_id === $contact->id);
+                                            $message->receiver_id === $userId) ||
+                                            ($message->sender_id === $userId && $message->receiver_id === $contact->id);
                                     });
                                 @endphp
                                 {{ $latestMessage ? \Illuminate\Support\Str::limit($latestMessage->message, 30) : 'Aucun message' }}
@@ -35,6 +43,8 @@
                     </div>
                 @endforeach
             </div>
+
+
         </div>
 
         <!-- Main Chat Area -->
@@ -84,7 +94,6 @@
                 currentContactId = contactItem.getAttribute('data-contact-id');
                 chatHeader.innerText = contactItem.querySelector('.font-semibold').innerText;
                 messageContainer.innerHTML = '';
-
                 chatInputFooter.classList.remove('hidden');
 
                 try {
@@ -94,69 +103,143 @@
                     const data = await response.json();
                     const messages = data.messages;
 
+                    // Réinitialisez l'indicateur de messages non lus pour ce contact
+                    const unreadBadge = contactItem.querySelector('.bg-red-500');
+                    if (unreadBadge) unreadBadge.remove(); // Supprime l'indicateur de messages non lus
+
+                    const messagesByDate = {};
+
+                    // Regrouper les messages par date
                     messages.forEach(message => {
-                        const messageDiv = document.createElement('div');
-                        messageDiv.classList.add('mb-4');
+                        const messageDate = new Date(message.created_at);
+                        const today = new Date();
+                        const yesterday = new Date(today);
+                        yesterday.setDate(today.getDate() - 1);
 
-                        if (message.sender_id === userId) {
-                            messageDiv.classList.add('flex', 'justify-end', 'mb-4');
-                            messageDiv.innerHTML = `
-                            <div class="flex max-w-96 bg-[#e38407] text-white rounded-lg p-3">
-                                <p>${message.message}</p>
-                            </div>
-                            <div class="w-9 h-9 rounded-full ml-2">
-                                <img src="${message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
-                                     alt="My Avatar" class="w-8 h-8 rounded-full">
-                            </div>
-                        `;
+                        let dateKey = '';
+
+                        // Vérifie si le message est aujourd'hui, hier ou une autre date
+                        if (messageDate.toDateString() === today.toDateString()) {
+                            dateKey = 'Aujourd\'hui';
+                        } else if (messageDate.toDateString() === yesterday.toDateString()) {
+                            dateKey = 'Hier';
                         } else {
-                            messageDiv.innerHTML = `
-                            <div class="flex items-center mb-4">
-                                <div class="w-9 h-9 rounded-full mr-2">
-                                    <img src="${message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
-                                         alt="User Avatar" class="w-8 h-8 rounded-full">
-                                </div>
-                                <div class="flex max-w-96 bg-sky-200 text-gray-700 rounded-lg p-3">
-                                    <p>${message.message}</p>
-                                </div>
-                            </div>
-                        `;
+                            // Sinon, on affiche la date complète
+                            dateKey = messageDate.toLocaleDateString([], {
+                                year: 'numeric',
+                                month: 'short',
+                                day: 'numeric'
+                            });
                         }
 
-                        if (message.product && message.product.photos && message.product.photos
-                            .length > 0) {
-                            const firstPhoto = message.product.photos[0];
-                            messageDiv.innerHTML += `
-                            <div class="product-image">
-                                <img class="w-20 h-20 rounded-md mb-4 object-cover"
-                                     src="${firstPhoto.image ? '/storage/' + firstPhoto.image : 'https://placehold.co/200x200'}"
-                                     alt="${message.product.name}">
-                            </div>
-                        `;
+                        // Ajouter le message à la bonne section par date
+                        if (!messagesByDate[dateKey]) {
+                            messagesByDate[dateKey] = [];
                         }
 
-                        messageContainer.appendChild(messageDiv);
+                        messagesByDate[dateKey].push(message);
                     });
+
+                    // Parcourir les groupes de messages et les afficher
+                    for (const [date, groupMessages] of Object.entries(messagesByDate)) {
+                        // Afficher l'en-tête de la date
+                        const dateHeader = document.createElement('div');
+                        dateHeader.classList.add('text-center', 'text-gray-500', 'my-4');
+                        dateHeader.innerHTML = `<strong>${date}</strong>`;
+                        messageContainer.appendChild(dateHeader);
+
+                        // Afficher les messages de cette date
+                        groupMessages.forEach(message => {
+                            const messageDiv = document.createElement('div');
+                            messageDiv.classList.add('mb-4');
+
+                            const formattedTime = new Date(message.created_at)
+                                .toLocaleTimeString([], {
+                                    hour: '2-digit',
+                                    minute: '2-digit'
+                                });
+
+                            if (message.sender_id === userId) {
+                                messageDiv.classList.add('flex', 'justify-end', 'mb-4');
+                                messageDiv.innerHTML = `
+                <div class="flex max-w-96 bg-[#e38407] text-white rounded-lg p-3">
+                    <p>${message.message}</p>
+                </div>
+                <div class="w-9 h-9 rounded-full ml-2">
+                    <img src="${message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
+                        alt="My Avatar" class="w-8 h-8 rounded-full">
+                </div>
+                <span class="text-xs text-gray-400 ml-2">${formattedTime}</span>
+            `;
+                            } else {
+                                messageDiv.innerHTML = `
+                <div class="flex items-center mb-4">
+                    <div class="w-9 h-9 rounded-full mr-2">
+                        <img src="${message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
+                            alt="User Avatar" class="w-8 h-8 rounded-full">
+                    </div>
+                    <div class="flex max-w-96 bg-sky-200 text-gray-700 rounded-lg p-3">
+                        <p>${message.message}</p>
+                    </div>
+                </div>
+                <span class="text-xs text-gray-400 ml-2">${formattedTime}</span>
+            `;
+                            }
+
+                            // Ajouter le message au conteneur
+                            messageContainer.appendChild(messageDiv);
+                        });
+                    }
+
+
                 } catch (error) {
                     console.error('Erreur lors du chargement des messages:', error);
                 }
 
+                // Listener pour les nouveaux messages
                 window.Echo.channel(`chat.${currentContactId}`)
-                    .listen('.NewMessage', (e) => {
+                    .listen('.NewMessage', async (e) => {
                         const receivedMessageDiv = document.createElement('div');
                         receivedMessageDiv.classList.add('mb-4', 'flex', 'justify-start');
                         receivedMessageDiv.innerHTML = `
-                        <div class="w-9 h-9 rounded-full mr-2">
-                            <img src="${e.message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
-                                 alt="Avatar" class="w-8 h-8 rounded-full">
-                        </div>
-                        <div class="flex max-w-96 bg-gray-300 text-black rounded-lg p-3">
-                            <p>${e.message.content}</p>
-                        </div>
-                    `;
+                <div class="w-9 h-9 rounded-full mr-2">
+                    <img src="${e.message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
+                         alt="Avatar" class="w-8 h-8 rounded-full">
+                </div>
+                <div class="flex max-w-96 bg-gray-300 text-black rounded-lg p-3">
+                    <p>${e.message.content}</p>
+                </div>
+            `;
                         messageContainer.appendChild(receivedMessageDiv);
+
+                        // Met à jour l'indicateur de messages non lus dans la liste de contacts
+                        const contactBadge = contactItem.querySelector('.bg-red-500');
+                        if (contactBadge) {
+                            contactBadge.innerText = parseInt(contactBadge.innerText) + 1;
+                        } else {
+                            const unreadIndicator = document.createElement('span');
+                            unreadIndicator.className =
+                                'bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full ml-2';
+                            unreadIndicator.innerText = '1';
+                            contactItem.querySelector('.font-semibold').appendChild(
+                                unreadIndicator);
+                        }
+
+                        // Marquer instantanément le nouveau message comme lu
+                        await fetch(`/seller/shop/message/${e.message.id}/mark-as-read`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector(
+                                    'meta[name="csrf-token"]').getAttribute(
+                                    'content')
+                            }
+                        });
                     });
             });
+
+
+
 
             // Gestion de l'envoi du message
             messageForm.addEventListener('submit', async (e) => {

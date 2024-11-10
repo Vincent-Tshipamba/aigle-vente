@@ -4,6 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{{ asset('img\logo\logo_sans_bg.png') }}" type="image/x-icon">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Aigle Vente</title>
 

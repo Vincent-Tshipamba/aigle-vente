@@ -10,13 +10,13 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['auth'])->group(function () {
-    
-
-
-    Route::resource('/seller/shop/message', MessageController::class);
+ 
+    Route::get('/seller/shop/message', [MessageController::class,'index'])->name('message.index');
+    Route::post('/seller/shop/message/{seller_id}', [MessageController::class, 'store'])->name('message.store');
     Route::post('/seller/shop/message/{message}/mark-as-read', [MessageController::class, 'markAsRead'])->name('seller.shop.message.markAsRead');
-    Route::post('/messages/{user}', [MessageController::class, 'store'])->name('messages.send');
-
+    Route::post('/messages/send/{seller_id}', [MessageController::class, 'sendMessage'])->name('messages.send');
+    Route::get('/messages/{contactId}', [MessageController::class, 'showConversation'])->name('messages.showConversation');
+   
 
 
     Route::get('/seller/shops/{shop}/products', [ProductController::class, 'index'])->name('seller.shops.products.index');
@@ -42,4 +42,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/sellers/{id}/edit', [SellerController::class, 'edit'])->name('sellers.edit');
     Route::put('/sellers/{id}', [SellerController::class, 'update'])->name('sellers.update');
     Route::delete('/sellers/{id}', [SellerController::class, 'destroy'])->name('sellers.destroy');
+
 });

@@ -5,9 +5,9 @@
         <div class="grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-4">
 
             <a href="">
-                <div class="col bg-custom-dark p-4 rounded-lg shadow hover:bg-gray-900">
+                <div class="col bg-custom-dark p-4 rounded-lg shadow hover:bg-[#25252510]">
                     <div class="flex items-center">
-                        <h5 class="dark:text-white text-4xl text-black">{{$totalRevenue}}</h5>
+                        <h5 class="dark:text-white text-4xl text-black">{{ $totalRevenue }}</h5>
                         <div class="ml-auto">
                             <i class='bx bx-group text-3xl text-white'></i>
                         </div>
@@ -21,7 +21,7 @@
                 </div>
             </a>
             <a href="{{ route('shops.index') }}">
-                <div class="col hover:bg-gray-900 p-4 rounded-lg shadow bg-custom-dark">
+                <div class="col hover:bg-[#25252510] p-4 rounded-lg shadow bg-custom-dark">
                     <div class="flex items-center">
                         <h5 class="dark:text-white text-4xl text-black">{{ $totalShops }}</h5>
                         <div class="ml-auto">
@@ -37,9 +37,9 @@
                 </div>
             </a>
             <a href="">
-                <div class="col hover:bg-gray-900 p-4 rounded-lg shadow bg-custom-dark">
+                <div class="col hover:bg-[#25252510] p-4 rounded-lg shadow bg-custom-dark">
                     <div class="flex items-center">
-                        <h5 class="dark:text-white text-4xl text-black">{{$totalOrders}}</h5>
+                        <h5 class="dark:text-white text-4xl text-black">{{ $totalOrders }}</h5>
                         <div class="ml-auto">
                             <i class='bx bx-group text-3xl text-white'></i>
                         </div>
@@ -53,9 +53,9 @@
                 </div>
             </a>
             <a href="">
-                <div class="col hover:bg-gray-900 p-4 rounded-lg shadow bg-custom-dark">
+                <div class="col hover:bg-[#25252510] p-4 rounded-lg shadow bg-custom-dark">
                     <div class="flex items-center">
-                        <h5 class="dark:text-white text-4xl text-black">{{$totalProducts}}</h5>
+                        <h5 class="dark:text-white text-4xl text-black">{{ $totalProducts }}</h5>
                         <div class="ml-auto">
                             <i class='bx bx-group text-3xl text-white'></i>
                         </div>
@@ -78,7 +78,7 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-   <script>
+    <script>
         const ctx = document.getElementById('monthlySalesChart').getContext('2d');
         const monthlySalesChart = new Chart(ctx, {
             type: 'line', // Vous pouvez changer cela en 'bar' ou 'pie' si nécessaire

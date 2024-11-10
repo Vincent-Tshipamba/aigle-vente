@@ -10,7 +10,7 @@
     @endif
 
     <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
-        class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        class="block text-white bg-[#e38407] hover:bg-[#E38407EE] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         type="button">
         Ajoute une boutique
     </button>
@@ -119,13 +119,13 @@
         @if (empty($shops))
             <p>vous navez pas encore de boutique</p>
         @else
-            @foreach ($shops as $shop)
+            @foreach ($shops as $key => $shop)
                 <tr>
                     <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white"> {{ $shop->name }} </td>
                     <td> {{ $shop->address }} </td>
                     <td> {{ $shop->description }} </td>
                     <td>
-                        <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots"
+                        <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots{{$key}}"
                             class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                             type="button">
                             <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -136,7 +136,7 @@
                         </button>
 
                         <!-- Dropdown menu -->
-                        <div id="dropdownDots"
+                        <div id="dropdownDots{{$key}}"
                             class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
                                 aria-labelledby="dropdownMenuIconButton">
@@ -174,6 +174,34 @@
                 sortable: false
             });
         }
+    </script>
+
+    <script>
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Succès',
+                text: '{{ session('success') }}',
+                toast: true,
+                position: 'top-end',
+                timer: 3000,
+                showConfirmButton: false,
+                timerProgressBar: true,
+            });
+        @endif
+
+        @if (session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Erreur',
+                text: '{{ session('error') }}',
+                toast: true,
+                position: 'top-end',
+                timer: 3000,
+                showConfirmButton: false,
+                timerProgressBar: true,
+            });
+        @endif
     </script>
 @endsection
 @endsection

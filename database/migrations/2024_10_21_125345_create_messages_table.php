@@ -25,7 +25,7 @@ return new class extends Migration
                 ->cascadeOnUpdate();
 
             $table->text('message');
-            $table->foreignId('product_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('product_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->boolean('is_read')->default(false);
             $table->timestamps();
         });

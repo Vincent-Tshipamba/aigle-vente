@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MessageSent;
+use App\Models\User;
+use App\Models\Seller;
+use App\Models\Message;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreMessageRequest;
 use App\Http\Requests\UpdateMessageRequest;
-use App\Models\Message;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -16,81 +20,96 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $conversations = Message::where('sender_id', Auth::id())
-            ->orWhere('receiver_id', Auth::id())
-            ->with(['sender', 'receiver'])
-            ->latest()
-            ->get()
-            ->unique(function ($message) {
-                return $message->sender_id < $message->receiver_id
-                    ? $message->sender_id . '-' . $message->receiver_id
-                    : $message->receiver_id . '-' . $message->sender_id;
-            });
+        // Récupérer l'utilisateur connecté
+        $userId = Auth::id();
 
-        // Check if there are any conversations to display the first user
-        $user = null;
-        if ($conversations->isNotEmpty()) {
-            $user = $conversations->first()->receiver; // Get the first receiver
-        }
+        // Récupérer les conversations où l'utilisateur connecté est l'expéditeur ou le destinataire
+        $messages = Message::where('sender_id', $userId)
+            ->orWhere('receiver_id', $userId)
+            ->with(['sender', 'receiver']) // Charger les relations avec les utilisateurs
+            ->orderBy('created_at', 'asc') // Trier par date de création
+            ->get();
 
-        // Pass an empty collection to `$messages`
-        $messages = collect();
+        // Obtenir la liste des contacts uniques avec qui l'utilisateur a une conversation
+        $contacts = User::whereIn('id', $messages->pluck('sender_id')->merge($messages->pluck('receiver_id'))->unique())
+            ->where('id', '!=', $userId)
+            ->get();
 
-        return view('seller.messages.index', compact('conversations', 'messages', 'user'));
+        return view('seller.messages.index', compact('messages', 'contacts', 'userId'));
     }
-
-
-
 
     /**
      * Display the conversation between the authenticated user and another user.
      */
-    public function show(User $user)
+    public function showConversation($contactId)
     {
-        // Check if the user exists and is authenticated
-        if (!$user || ($user->id !== Auth::id() && !Message::where('receiver_id', $user->id)->where('sender_id', Auth::id())->exists())) {
-            return redirect()->route('seller.shop.message.index')->with('error', 'User not found or no messages available.');
-        }
+        $userId = Auth::id();
 
-        $messages = Message::where(function ($query) use ($user) {
-            $query->where('sender_id', Auth::id())->where('receiver_id', $user->id);
-        })->orWhere(function ($query) use ($user) {
-            $query->where('sender_id', $user->id)->where('receiver_id', Auth::id());
+        $messages = Message::where(function ($query) use ($userId, $contactId) {
+            $query->where('sender_id', $userId)
+                ->where('receiver_id', $contactId);
         })
-        ->orderBy('created_at', 'asc')
-        ->get();
+            ->orWhere(function ($query) use ($userId, $contactId) {
+                $query->where('sender_id', $contactId)
+                    ->where('receiver_id', $userId);
+            })
+            ->with(['sender', 'receiver', 'product.photos'])
+            ->orderBy('created_at', 'asc')
+            ->get();
 
-        return view('seller.messages.show', compact('messages', 'user'));
-    }
-
-
-    /**
-     * Store a newly created message in storage.
-     */
-    /**
-     * Store a newly created message in storage.
-     */
-    public function store(StoreMessageRequest $request, User $user)
-    {
-        // Create the message
-        $message = Message::create([
-            'sender_id' => Auth::id(),
-            'receiver_id' => $user->id,
-            'message' => $request->input('message'),
-            'is_read' => false,
-        ]);
-
-        // You can also fetch the user data if you want to return it
-        $message->load('sender'); // Assuming you have a relationship defined
+        $contact = User::findOrFail($contactId);
 
         return response()->json([
-            'success' => true,
-            'message' => 'Message sent successfully!',
-            'data' => $message, // Include the message data in the response
+            'messages' => $messages,
+            'contact' => $contact,
         ]);
     }
 
 
+
+    public function store(Request $request, $seller_id)
+    {
+        
+        try {
+            Log::info('ID du vendeur reçu : ' . $seller_id);
+            $seller = User::find($seller_id);
+            if (!$seller) {
+                return response()->json(['error' => 'Le vendeur sélectionné est invalide.'], 400);
+            }
+
+            // Create the message
+            $data = Message::create([
+                'sender_id' => Auth::id(),
+                'receiver_id' => $seller_id,
+                'message' => $request->input('message'),
+                'is_read' => false,
+                'product_id' => $request->product_id,
+            ]);
+
+            
+            $data->load('sender'); 
+
+            // Broadcast the event
+            broadcast(new MessageSent($data))->toOthers();
+
+            // Return response including the sender details
+            return response()->json([
+                'status' => 'Message sent!',
+                'message' => $data->message,
+                'sender' => [
+                    'id' => $data->sender->id,
+                    'profile_picture_url' => $data->sender->profile_picture_url ?? 'https://placehold.co/200x200'
+
+                ]
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Erreur dans sendToSeller: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Erreur lors de l\'envoi du message.',
+                'error_details' => $e->getMessage() // Ajoutez ici les détails de l'erreur
+            ], 500);        }
+    }
     /**
      * Mark a message as read.
      */
@@ -117,23 +136,32 @@ class MessageController extends Controller
         return redirect()->back()->with('success', 'Message deleted successfully!');
     }
 
-    public function sendToSeller(Request $request)
+    public function sendMessage(Request $request, $user_id)
     {
-        $request->validate([
-            'message' => 'required|string',
-            'seller_id' => 'required|exists:users,id',
-            'product_id' => 'required|exists:products,id',
-        ]);
+        try {
+            Log::info('ID du vendeur reçu : ' . $user_id);
+          
 
-        // Create the message
-        Message::create([
-            'sender_id' => Auth::id(),
-            'receiver_id' => $request->seller_id,
-            'message' => $request->input('message'),
-            'is_read' => false,
-            'product_id' => $request->product_id, // Optional, add product_id if it's a foreign key in messages
-        ]);
+            $seller = User::find($user_id);
+            if (!$seller) {
+                return response()->json(['error' => 'Le vendeur sélectionné est invalide.'], 400);
+            }
 
-        return redirect()->route('home')->with('success', 'Votre message a été envoyé au vendeur.');
+            $data = Message::create([
+                'sender_id' => Auth::id(),
+                'receiver_id' => $user_id,
+                'message' => $request->input('message'),
+                'is_read' => false,
+                'product_id' => $request->product_id,
+            ]);
+
+            broadcast(new MessageSent($data))->toOthers();
+
+            return response()->json(['success' => true, 'message' => 'Votre message a été envoyé.']);
+        } catch (\Exception $e) {
+            Log::error('Erreur dans sendTomessage: ' . $e->getMessage());
+            return response()->json(['success' => false, 'message' => 'Erreur lors de l\'envoi du message.'], 500);
+        }
     }
+
 }

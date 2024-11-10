@@ -57,7 +57,7 @@
 
                                         <!-- Button to send message -->
                                         <a href="#" class="quckview message-button"
-                                            data-seller-id="{{ $product->shop->seller->id }}"
+                                            data-seller-id="{{ $product->shop->seller->user->id }}"
                                             data-product-id="{{ $product->id }}">
                                             <i class="fal fa-comment"></i>
                                         </a>
@@ -232,6 +232,9 @@
                 formData.append('message', message);
                 formData.append('_token', '{{ csrf_token() }}'); // CSRF token
 
+                console.log(sellerId);
+
+
                 // Envoyer la requête AJAX
                 fetch("{{ route('messages.send', ':seller_id') }}".replace(':seller_id',
                         sellerId), {
@@ -241,8 +244,16 @@
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            alert("Votre message a été envoyé au vendeur !");
-                            // Afficher le message dans l'interface si nécessaire
+                            Swal.fire({
+                                icon: 'success',
+                                title: data.message,
+                                text: '{{ session('success') }}',
+                                toast: true,
+                                position: 'top-end',
+                                timer: 3000,
+                                showConfirmButton: false,
+                                timerProgressBar: true,
+                            }); 
                         } else {
                             alert("Échec de l'envoi du message.");
                         }
@@ -252,6 +263,7 @@
         });
     });
 </script>
+
 
 <style>
     .tpproduct__thumb img {

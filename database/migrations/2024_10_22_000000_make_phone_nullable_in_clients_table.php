@@ -15,8 +15,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::table('clients', function (Blueprint $table) {
-            $table->string('phone')->nullable(false)->change(); // Revenir à l'état non nullable
-        });
+        // Schema::table('clients', function (Blueprint $table) {
+        //     $table->string('phone')->nullable(false)->change(); // Revenir à l'état non nullable
+        // });
     }
 };

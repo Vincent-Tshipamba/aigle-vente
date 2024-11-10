@@ -15,8 +15,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::table('stocks', function (Blueprint $table) {
-            $table->dropUnique('product_id');
-        });
+        // Schema::table('stocks', function (Blueprint $table) {
+        //     $table->dropUnique('product_id');
+        // });
     }
 };

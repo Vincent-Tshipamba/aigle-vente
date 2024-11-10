@@ -2,24 +2,44 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Message extends Model
 {
-    use HasFactory, HasUuids;
+    use HasFactory;
 
     protected $fillable = [
+        '_id',
         'sender_id',
         'receiver_id',
         'message',
         'is_read',
+        'product_id',
+
     ];
 
     /**
      * Relationship with the sender (User model).
      */
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            $model->_id = (string) Str::uuid();
+        });
+    }
+
+
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
+
     public function sender()
     {
         return $this->belongsTo(User::class, 'sender_id');
@@ -64,8 +84,8 @@ class Message extends Model
      */
     public function getSnippetAttribute()
     {
-        return strlen($this->message) > 50 
-            ? substr($this->message, 0, 50) . '...' 
+        return strlen($this->message) > 50
+            ? substr($this->message, 0, 50) . '...'
             : $this->message;
     }
 
@@ -77,4 +97,3 @@ class Message extends Model
         return $this->created_at->format('d M, Y h:i A');
     }
 }
-

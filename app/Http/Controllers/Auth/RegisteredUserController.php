@@ -9,6 +9,7 @@ use App\Models\Location;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -62,7 +63,7 @@ class RegisteredUserController extends Controller
         ]);
 
         // Sauvegarder les autres informations dans la table clients
-        $client = Client::firstOrCreate([
+        $client = Client::create([
             'first_name' => $request->firstname,
             'last_name' => $request->lastname,
             'sexe' => $request->sexe,
@@ -71,9 +72,10 @@ class RegisteredUserController extends Controller
             'phone' => $request->phone
         ]);
 
-        $user->assignRole('client');
+        $role = Role::firstOrCreate(['name' => 'client']);
+        $user->assignRole($role);
 
-        event(new Registered($user));
+        broadcast(new Registered($user));
 
         Auth::login($user);
 

@@ -43,7 +43,10 @@ Route::middleware('userOnline')->group(function () {
     Route::get('/product/{product}', [ProductController::class, 'show'])->name('products.show');
     Route::get('/shop/{shop}', [ShopController::class, 'show'])->name('shops.show');
 
-    Route::get('/client/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/client/dashboard', [DashboardController::class, 'index'])->name('client.dashboard');
+    Route::get('/client/orders', [DashboardController::class, 'orders'])->name('client.orders');
+    Route::get('/client/wishlist', [DashboardController::class, 'wishlist'])->name('client.wishlist');
+    Route::get('/client/api/orders', [DashboardController::class, 'getOrdersWishlistByPeriod']);
 });
 
 Route::middleware(['auth', 'userOnline'])->group(function () {

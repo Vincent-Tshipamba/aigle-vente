@@ -40,7 +40,7 @@
                         <div class="col">
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
-                                    <a href="">
+                                    <a href="{{ route('products.show', $product->_id) }}">
                                         @php
                                             $firstPhoto = $product->photos->first();
                                         @endphp
@@ -53,7 +53,7 @@
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
-                                        <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
+                                        <a class="quckview" href="{{ route('products.show', $product->_id) }}"><i class="fal fa-eye"></i></a>
 
                                         <!-- Button to send message -->
                                         <a href="#" class="quckview message-button"
@@ -64,7 +64,7 @@
                                     </div>
                                 </div>
                                 <div class="tpproduct__content">
-                                    <h3 class="tpproduct__title"><a href="">{{ $product->name }}</a></h3>
+                                    <h3 class="tpproduct__title"><a href="{{ route('products.show', $product->_id) }}">{{ $product->name }}</a></h3>
                                     <p class="tpproduct__shop-name">Boutique {{ $product->shop->name }}</p>
                                     <p class="tpproduct__title">Propriétaire {{ $product->shop->seller->first_name }}
                                         {{ $product->shop->seller->last_name }}</p>
@@ -253,7 +253,7 @@
                                 timer: 3000,
                                 showConfirmButton: false,
                                 timerProgressBar: true,
-                            }); 
+                            });
                         } else {
                             alert("Échec de l'envoi du message.");
                         }

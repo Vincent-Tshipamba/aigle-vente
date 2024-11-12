@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Shop;
 use App\Models\Seller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,6 +30,14 @@ class ShopController extends Controller
     public function create()
     {
         return view('seller.shops.create');
+    }
+
+    public function show($id)
+    {
+        $shop = Shop::where('_id', $id)->first();
+        $products = Product::where('shop_id', $shop->id)->get();
+
+        return view('client.shops.show', compact('shop', 'products'));
     }
 
     public function store(Request $request)

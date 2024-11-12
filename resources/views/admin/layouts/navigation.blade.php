@@ -232,7 +232,7 @@
     <div class="mini mt-20 flex flex-col space-y-2 w-full h-[calc(100vh)]">
         <!-- Dashboard -->
         <a href="{{ route('admin.dashboard') }}"
-            class="hover:ml-4 justify-end pr-5   hover:text-[#ce4e76] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('admin.dashboard') ? ' text-[#e38407] ' : 'text-white' }}">
+            class="hover:ml-4 justify-end pr-5   hover:text-[#e38407] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('admin.dashboard') ? ' text-[#e38407] ' : 'text-white' }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path fill="currentColor"
                     d="m15.943 10.498l-4.055 4.505A2 2 0 0 0 10 17h4a2 2 0 0 0-.603-1.431l3.66-4.067a.75.75 0 1 0-1.114-1.004M5 15.25a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5zm14.75.75a.75.75 0 0 0-.75-.75h-1.5a.75.75 0 0 0 0 1.5H19a.75.75 0 0 0 .75-.75" />

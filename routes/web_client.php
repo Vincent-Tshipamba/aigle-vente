@@ -2,11 +2,11 @@
 
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ShopController;
+use App\Http\Controllers\Client\ProductController;
+use App\Http\Controllers\Client\DashboardController;
 
 Route::middleware('userOnline')->group(function () {
     Route::get('/', function () {
@@ -42,6 +42,11 @@ Route::middleware('userOnline')->group(function () {
 
     Route::get('/product/{product}', [ProductController::class, 'show'])->name('products.show');
     Route::get('/shop/{shop}', [ShopController::class, 'show'])->name('shops.show');
+
+    Route::get('/client/dashboard', [DashboardController::class, 'index'])->name('client.dashboard');
+    Route::get('/client/orders', [DashboardController::class, 'orders'])->name('client.orders');
+    Route::get('/client/wishlist', [DashboardController::class, 'wishlist'])->name('client.wishlist');
+    Route::get('/client/api/orders', [DashboardController::class, 'getOrdersWishlistByPeriod']);
 });
 
 Route::middleware(['auth', 'userOnline'])->group(function () {

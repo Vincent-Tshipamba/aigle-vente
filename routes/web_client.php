@@ -2,8 +2,11 @@
 
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Client\ProductController;
+use App\Http\Controllers\Client\DashboardController;
 
 Route::middleware('userOnline')->group(function () {
     Route::get('/', function () {
@@ -37,13 +40,10 @@ Route::middleware('userOnline')->group(function () {
         return view('contact');
     })->name('contact');
 
-    Route::get('/blog', function () {
-        return view('blog.blog');
-    })->name('blog');
+    Route::get('/product/{product}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('/shop/{shop}', [ShopController::class, 'show'])->name('shops.show');
 
-    Route::get('/blog-detail', function () {
-        return view('blog.blog-details');
-    })->name('blog-details');
+    Route::get('/client/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 });
 
 Route::middleware(['auth', 'userOnline'])->group(function () {
@@ -52,4 +52,3 @@ Route::middleware(['auth', 'userOnline'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('client.dashboard');
 });
-

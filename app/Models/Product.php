@@ -68,5 +68,8 @@ class Product extends Model
         return $this->hasMany(Promotion::class);
     }
 
-
+    public function wishlist(): HasMany
+    {
+        return $this->hasMany((Wishlist::class));
+    }
 }

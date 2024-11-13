@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             PanierItemSeeder::class,
             StockSeeder::class,
             RolesPermissionsSeeder::class,
+            WishlistSeeder::class
         ]);
 
     }

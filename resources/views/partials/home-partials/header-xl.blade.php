@@ -56,7 +56,8 @@
                         </div>
                     </div>
                     @auth
-                        <button id="dropdownUserAvatarButtonHeader-home-xl" data-dropdown-toggle="dropdownAvatarHeader-home-xl"
+                        <button id="dropdownUserAvatarButtonHeader-home-xl"
+                            data-dropdown-toggle="dropdownAvatarHeader-home-xl"
                             class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                             type="button">
                             <span class="sr-only">Open user menu</span>
@@ -116,14 +117,11 @@
                                 </li>
                             </ul>
                         </div>
-                    @endauth
-                    <div class="header-meta__social d-flex align-items-center">
-                        <button class="header-cart p-relative tp-cart-toggle">
-                            <i class="fal fa-shopping-cart"></i>
-                            <span class="tp-product-count">2</span>
-                        </button>
-                        <a href="wishlist.html"><i class="fal fa-heart"></i></a>
-                        @auth
+                        <div class="header-meta__social d-flex align-items-center">
+                            <button class="header-cart p-relative tp-cart-toggle">
+                                <i class="fal fa-heart"></i>
+                                <span class="tp-product-count">2</span>
+                            </button>
                             @php
                                 $user = Auth::user();
                                 $client = App\Models\Client::where('user_id', $user->id)->first();
@@ -143,11 +141,11 @@
                                     </svg>
                                 </a>
                             @endif
-                        @else
-                            <a href="{{ route('login') }}"><i class="fal fa-user"></i></a>
-                            <!-- Lien vers le formulaire de connexion -->
-                        @endauth
-                    </div>
+                        </div>
+                    @else
+                        <a href="{{ route('login') }}"><i class="fal fa-user"></i></a>
+                        <!-- Lien vers le formulaire de connexion -->
+                    @endauth
                 </div>
             </div>
         </div>

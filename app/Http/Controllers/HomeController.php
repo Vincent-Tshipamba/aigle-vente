@@ -1,17 +1,16 @@
 <?php
 
-namespace App\View\Components;
+namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Wishlist;
-use Illuminate\View\View;
-use Illuminate\View\Component;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
-class AppLayout extends Component
+class HomeController extends Controller
 {
-    public function render(): View
+    public function home()
     {
         $products = Product::with('shop.seller')->get();
 
@@ -21,10 +20,12 @@ class AppLayout extends Component
 
         $wishlists = Wishlist::where('user_id', Auth::user()->id)->get();
         $totalAmount = DB::table('wishlists')
-            ->join('products', 'wishlists.product_id', '=', 'products.id')
-            ->where('user_id', Auth::user()->id)
+        ->join('products', 'wishlists.product_id', '=', 'products.id')
+        ->where('user_id', Auth::user()->id)
             ->sum('products.unit_price');
 
-        return view('layouts.app', compact('products', 'saleProducts', 'wishlists', 'totalAmount'));
+        // Retourner la vue avec les produits
+        return view('home.index', compact('products', 'saleProducts', 'wishlists', 'totalAmount'));
     }
+
 }

@@ -44,6 +44,8 @@ Route::middleware('userOnline')->group(function () {
     Route::get('/blog-detail', function () {
         return view('blog.blog-details');
     })->name('blog-details');
+
+    
 });
 
 Route::middleware(['auth', 'userOnline'])->group(function () {

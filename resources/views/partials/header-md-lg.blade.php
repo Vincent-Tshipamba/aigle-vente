@@ -72,7 +72,7 @@
                                         aria-labelledby="dropdownUserAvatarButtonHeader-md-lg">
                                         <li>
                                             @if (Auth::user()->client)
-                                                <a href=""
+                                                <a href="{{route('client.dashboard')}}"
                                                     class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                                     Mon dashboard client
                                                 </a>

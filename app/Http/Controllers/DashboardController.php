@@ -20,7 +20,7 @@ class DashboardController extends Controller
         // Récupérer le vendeur lié à cet utilisateur
         $seller = Seller::where('user_id', $userId)->first();
         if (!$seller) {
-            return redirect()->back()->withErrors('Vendeur non trouvé.');
+            return view('client.dashboard');
         }
 
         // Récupérer les boutiques associées à ce vendeur
@@ -60,8 +60,8 @@ class DashboardController extends Controller
         $ordersCount = [];
 
         foreach ($monthlySales as $sale) {
-            $months[] = $sale->month; // Mois (1-12)
-            $ordersCount[] = $sale->total_orders; // Compte total des commandes pour chaque mois
+            $months[] = $sale->month; 
+            $ordersCount[] = $sale->total_orders; 
         }
 
         return view('seller.dashboard', compact(
@@ -70,8 +70,8 @@ class DashboardController extends Controller
             'totalProducts',
             'averageOrderValue',
             'totalShops',
-            'months', // Passer les mois à la vue
-            'ordersCount' // Passer le nombre de commandes à la vue
+            'months', 
+            'ordersCount' 
         ));
     }
 }

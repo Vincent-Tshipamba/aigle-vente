@@ -1,4 +1,4 @@
-@extends('seller.layouts.app')
+@extends('client.layouts.app')
 
 @section('content')
     <div class="flex flex-col md:flex-row h-screen overflow-hidden">
@@ -23,6 +23,7 @@
                             <h2 class="text-md md:text-lg font-semibold">
                                 {{ $contact->name }}
                                 @if (isset($unreadCounts[$contact->id]) && $unreadCounts[$contact->id] > 0)
+                                    <!-- Afficher le nombre de messages non lus -->
                                     <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full ml-2">
                                         {{ $unreadCounts[$contact->id] }}
                                     </span>
@@ -76,8 +77,6 @@
 
 @section('script')
     <script>
-        messageContainer.scrollTop = messageContainer.scrollHeight;
-
         document.addEventListener('DOMContentLoaded', function() {
             const userId = @json(auth()->id());
             const contactList = document.getElementById('contactList');
@@ -187,38 +186,6 @@
             `;
                             }
 
-                            // Affichage des photos de produit, si présentes
-                            // Afficher les détails du produit et l'image
-                            if (message.product && message.product.photos && message.product
-                                .photos.length > 0) {
-                                const firstPhoto = message.product.photos[0];
-                                messageDiv.innerHTML += `
-                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">                
-                    <a href="#">
-                        <img class="rounded-t-lg" src="${firstPhoto.image ? '/storage/' + firstPhoto.image : 'https://placehold.co/200x200'}" alt="${message.product.name}" />
-                    </a>
-                    <div class="p-5">
-                        <a href="#">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${message.product.name}</h5>
-                        </a>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">${message.product.description || 'Aucune description disponible.'}</p>
-                        
-                        <!-- Réponse pré-enregistrée -->
-                        <div class="flex space-x-4">
-                            <button class="w-full text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2 default-message-btn" data-message="oui">
-                                Oui
-                            </button>
-                            <button class="w-full text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2 default-message-btn" data-message="non">
-                                Non
-                            </button>
-                        </div>
-                    </div>
-             </div>
-        `;
-                            }
-
-
-
                             // Ajouter le message au conteneur
                             messageContainer.appendChild(messageDiv);
                         });
@@ -235,17 +202,19 @@
                         const receivedMessageDiv = document.createElement('div');
                         receivedMessageDiv.classList.add('mb-4', 'flex', 'justify-start');
                         receivedMessageDiv.innerHTML = `
-                <div class="w-9 h-9 rounded-full mr-2">
-                    <img src="${e.message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
-                         alt="Avatar" class="w-8 h-8 rounded-full">
-                </div>
-                <div class="flex max-w-96 bg-gray-300 text-black rounded-lg p-3">
-                    <p>${e.message.content}</p>
-                </div>
-            `;
+            <div class="w-9 h-9 rounded-full mr-2">
+                <img src="${e.message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
+                     alt="Avatar" class="w-8 h-8 rounded-full">
+            </div>
+            <div class="flex max-w-96 bg-gray-300 text-black rounded-lg p-3">
+                <p>${e.message.content}</p>
+            </div>
+        `;
                         messageContainer.appendChild(receivedMessageDiv);
 
                         // Met à jour l'indicateur de messages non lus dans la liste de contacts
+                        const contactItem = contactList.querySelector(
+                            `[data-contact-id="${currentContactId}"]`);
                         const contactBadge = contactItem.querySelector('.bg-red-500');
                         if (contactBadge) {
                             contactBadge.innerText = parseInt(contactBadge.innerText) + 1;
@@ -269,6 +238,7 @@
                             }
                         });
                     });
+
             });
 
 
@@ -323,55 +293,6 @@
 
 
             });
-
-            // Fonction pour envoyer un message prédéfini
-            async function sendDefaultMessage(defaultMessage) {
-                if (!currentContactId) return;
-
-                try {
-                    const response = await fetch(`/seller/shop/message/${currentContactId}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-                                .getAttribute('content')
-                        },
-                        body: JSON.stringify({
-                            message: defaultMessage
-                        })
-                    });
-
-                    if (!response.ok) throw new Error("Erreur lors de l'envoi du message");
-
-                    const data = await response.json();
-                    const profilePictureUrl = data.sender?.profile_picture_url ??
-                        'https://placehold.co/200x200';
-
-                    // Ajouter le message envoyé à l'affichage
-                    const newMessageDiv = document.createElement('div');
-                    newMessageDiv.classList.add('mb-4', 'flex', 'justify-end');
-                    newMessageDiv.innerHTML = `
-            <div class="flex max-w-96 bg-[#e38407] text-white rounded-lg p-3">
-                <p>${defaultMessage}</p>
-            </div>
-            <div class="w-9 h-9 rounded-full ml-2">
-                <img src="${profilePictureUrl}" alt="My Avatar" class="w-8 h-8 rounded-full">
-            </div>
-        `;
-                    messageContainer.appendChild(newMessageDiv);
-                } catch (error) {
-                    console.error(error);
-                }
-            }
-
-            // Ajouter les écouteurs d'événements sur les boutons "Oui" et "Non"
-            document.querySelectorAll('.default-message-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const defaultMessage = this.getAttribute('data-message');
-                    sendDefaultMessage(defaultMessage);
-                });
-            });
-
         });
     </script>
 @endsection

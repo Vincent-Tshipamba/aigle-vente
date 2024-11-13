@@ -44,7 +44,7 @@ class ProductController extends Controller
                 'price' => 'required|numeric',
                 'category_product_id' => 'required|exists:category_products,id', // Modifiez ici
                 'description' => 'nullable|string',
-                'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             ], [
                 'name.required' => 'Le nom du produit est requis.',
                 'stock_quantity.required' => 'La quantité de stock est obligatoire.',

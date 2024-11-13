@@ -91,7 +91,7 @@ class ProductController extends Controller
                 }
             }
 
-            return redirect()->route('seller.shops.products.index',$product->shop->id)
+            return redirect()->route('seller.shops.products.index', $product->shop->id)
                 ->with('success', 'Produit créé avec succès !');
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Log des erreurs de validation
@@ -108,8 +108,22 @@ class ProductController extends Controller
 
     public function show($id)
     {
+        $userId = Auth::id();
+
+        // Récupérer le vendeur lié à cet utilisateur
+        $seller = Seller::where('user_id', $userId)->first();
         $product = Product::where('_id', $id)->with(['photos', 'stocks'])->firstOrFail();
-        return view('seller.produits.show', compact('product'));
+
+        if ($seller) {
+            return view('seller.produits.show', compact('product'));
+        }
+
+        $otherProducts = Product::where('category_product_id', $product->category_product_id)
+            ->where('_id', '!=', $product->_id)
+            ->with(['photos', 'stocks'])
+            ->get();
+
+        return view('client.products.show', compact('product', 'otherProducts'));
     }
 
     public function update(Request $request, Product $product)
@@ -192,8 +206,4 @@ class ProductController extends Controller
             return response()->json(['error' => 'Une erreur est survenue lors de la demande de promotion.'], 500);
         }
     }
-
-
-    
-    
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CategoryProduct;
 use App\Models\Product;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
@@ -13,6 +14,7 @@ class HomeController extends Controller
     public function home()
     {
         $products = Product::with('shop.seller')->get();
+        $categories = CategoryProduct::latest()->get();
 
         $saleProducts = $products->filter(function ($product) {
             return $product->promotions->isNotEmpty();
@@ -25,7 +27,7 @@ class HomeController extends Controller
             ->sum('products.unit_price');
 
         // Retourner la vue avec les produits
-        return view('home.index', compact('products', 'saleProducts', 'wishlists', 'totalAmount'));
+        return view('home.index', compact('products', 'categories', 'saleProducts', 'wishlists', 'totalAmount'));
     }
 
 }

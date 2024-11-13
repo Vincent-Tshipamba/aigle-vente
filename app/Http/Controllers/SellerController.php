@@ -13,7 +13,11 @@ class SellerController extends Controller
 {
     public function create()
     {
-        return view('seller.sellers.create');
+        $userName = Auth::user()->name;
+        [$firstName, $lastName] = explode('-', $userName);
+
+       
+        return view('seller.sellers.create',compact('lastName','firstName'));
     }
 
     // Créer un nouveau vendeur

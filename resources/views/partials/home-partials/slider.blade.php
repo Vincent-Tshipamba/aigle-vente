@@ -9,50 +9,48 @@
                             <div class="swiper-slide">
                                 <div class="tp-slide-item">
                                     <div class="tp-slide-item__content">
-                                        <h4 class="tp-slide-item__sub-title">Accessories</h4>
-                                        <h3 class="tp-slide-item__title mb-25">Up To
-                                            <i>40% Off
-                                                <img src="{{ asset('img/icon/title-shape-02.jpg') }}" alt="">
+                                        <h4 class="tp-slide-item__sub-title">Accessoires</h4>
+                                        <h3 class="tp-slide-item__title mb-25 text-white">Jusqu'à
+                                            <i>40% de Réduction
+                                                <img src="https://frederiqueconstant.com/wp-content/uploads/2023/03/2023_Frederique_Constant_Classic_Tourbillon_Manufacture_FC-980G3H9_PR2_HD-scaled.jpg" alt="">
                                             </i>
-                                            latest Creations
+                                            sur les Dernières Créations
                                         </h3>
-                                        <a class="tp-slide-item__slide-btn tp-btn" href="shop.html">Shop Now <i
+                                        <a class="tp-slide-item__slide-btn tp-btn" href="shop.html">Achetez Maintenant <i
                                                 class="fal fa-long-arrow-right"></i></a>
                                     </div>
                                     <div class="tp-slide-item__img">
-                                        <img src="{{ asset('img/slider/banner-1.jpg') }}" alt="">
+                                        <img src="https://frederiqueconstant.com/wp-content/uploads/2023/03/2023_Frederique_Constant_Classic_Tourbillon_Manufacture_FC-980G3H9_PR2_HD-scaled.jpg" alt="">
                                     </div>
                                 </div>
                             </div>
                             <div class="swiper-slide">
                                 <div class="tp-slide-item">
                                     <div class="tp-slide-item__content">
-                                        <h4 class="tp-slide-item__sub-title">Accessories</h4>
-                                        <h3 class="tp-slide-item__title mb-25">Up To <i>35% Off <img
-                                                    src="{{ asset('img/icon/title-shape-02.jpg') }}" alt=""></i>
-                                            latest
-                                            Creations</h3>
-                                        <a class="tp-slide-item__slide-btn tp-btn" href="shop.html">Shop Now <i
+                                        <h4 class="tp-slide-item__sub-title">Accessoires</h4>
+                                        <h3 class="tp-slide-item__title mb-25 text-white">Jusqu'à <i>35% de Réduction <img
+                                                    src="https://img.eobuwie.cloud/eob_marketing_banner_hone_800w_800h(Advertising/2024/10/FA24_TH_T1_OCTOBER_DUO_HERO300_300_39L_800_800_.jpg,webp)/marketing-banner-h-one-left.webp" alt=""></i>
+                                            sur les Dernières Créations</h3>
+                                        <a class="tp-slide-item__slide-btn tp-btn" href="shop.html">Achetez Maintenant <i
                                                 class="fal fa-long-arrow-right"></i></a>
                                     </div>
                                     <div class="tp-slide-item__img">
-                                        <img src="{{ asset('img/slider/banner-2.jpg') }}" alt="">
+                                        <img src="https://img.eobuwie.cloud/eob_marketing_banner_hone_800w_800h(Advertising/2024/10/FA24_TH_T1_OCTOBER_DUO_HERO300_300_39L_800_800_.jpg,webp)/marketing-banner-h-one-left.webp" alt="">
                                     </div>
                                 </div>
                             </div>
                             <div class="swiper-slide">
                                 <div class="tp-slide-item">
                                     <div class="tp-slide-item__content">
-                                        <h4 class="tp-slide-item__sub-title">Accessories</h4>
-                                        <h3 class="tp-slide-item__title mb-25">Up To <i>45% Off <img
-                                                    src="{{ asset('img/icon/title-shape-02.jpg') }}" alt=""></i>
-                                            latest
-                                            Creations</h3>
-                                        <a class="tp-slide-item__slide-btn tp-btn" href="shop.html">Shop Now <i
+                                        <h4 class="tp-slide-item__sub-title">Accessoires</h4>
+                                        <h3 class="tp-slide-item__title mb-25 text-white">Jusqu'à <i>45% de Réduction <img
+                                                    src="https://img.eobuwie.cloud/eob_marketing_banner_hone_600w_400h(Advertising/2024/10/1200x800px.jpg,webp)/marketing-banner-h-one-right.webp" alt=""></i>
+                                            sur les Dernières Créations</h3>
+                                        <a class="tp-slide-item__slide-btn tp-btn" href="shop.html">Achetez Maintenant <i
                                                 class="fal fa-long-arrow-right"></i></a>
                                     </div>
                                     <div class="tp-slide-item__img">
-                                        <img src="{{ asset('img/slider/banner-3.jpg') }}" alt="">
+                                        <img src="https://img.eobuwie.cloud/eob_marketing_banner_hone_600w_400h(Advertising/2024/10/1200x800px.jpg,webp)/marketing-banner-h-one-right.webp" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -67,10 +65,10 @@
                         <div class="tpslider-banner tp-slider-sm-banner mb-30">
                             <a href="shop-details.html">
                                 <div class="tpslider-banner__img">
-                                    <img src="{{ asset('img/slider/banner-slider-01.jpg') }}" alt="">
+                                    <img src="https://img.eobuwie.cloud/eob_marketing_banner_hone_600w_400h(Advertising/2024/10/1200x800px.jpg,webp)/marketing-banner-h-one-right.webp" alt="">
                                     <div class="tpslider-banner__content">
-                                        <span class="tpslider-banner__sub-title">Hand made</span>
-                                        <h4 class="tpslider-banner__title">New Modern & Stylist <br> Crafts</h4>
+                                        <span class="tpslider-banner__sub-title">Fait Main</span>
+                                        <h4 class="tpslider-banner__title">Nouveau Moderne & Styliste <br> Artisanat</h4>
                                     </div>
                                 </div>
                             </a>
@@ -80,10 +78,10 @@
                         <div class="tpslider-banner">
                             <a href="shop-details.html">
                                 <div class="tpslider-banner__img">
-                                    <img src="{{ asset('img/slider/banner-slider-02.jpg') }}" alt="">
+                                    <img src="https://img.eobuwie.cloud/eob_marketing_card_512w_512h(H2/2024_10/428x428_3.jpg,webp)/marketing-card.webp" alt="">
                                     <div class="tpslider-banner__content">
-                                        <span class="tpslider-banner__sub-title">Popular</span>
-                                        <h4 class="tpslider-banner__title">Energy with our <br> newest collection</h4>
+                                        <span class="tpslider-banner__sub-title">Populaire</span>
+                                        <h4 class="tpslider-banner__title">Énergie avec notre <br> nouvelle collection</h4>
                                     </div>
                                 </div>
                             </a>
@@ -95,3 +93,21 @@
     </div>
 </section>
 <!-- slider-area-end -->
+
+
+<style>
+    .tp-slide-item__img {
+    width: 696px; /* Pour que l'image prenne toute la largeur du conteneur */
+    height: 600px; /* Hauteur fixe */
+    overflow: hidden; /* Pour cacher les parties débordantes */
+    display: flex;
+    align-items: center; /* Centrer l'image verticalement */
+    justify-content: center; /* Centrer l'image horizontalement */
+}
+
+.tp-slide-item__img img {
+    width: auto; /* Laisser la largeur automatique */
+    height: 100%; /* Hauteur à 100% pour remplir le conteneur */
+    object-fit: cover; /* Pour que l'image remplisse le conteneur sans déformation */
+}
+</style>

@@ -1,6 +1,9 @@
 <?php
 
 use App\Models\Product;
+use App\Models\Wishlist;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ClientController;
@@ -8,18 +11,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Client\ProductController;
 use App\Http\Controllers\Client\WishlistController;
 use App\Http\Controllers\Client\DashboardController;
+use App\Http\Controllers\HomeController;
 
 Route::middleware('userOnline')->group(function () {
-    Route::get('/', function () {
-        $products = Product::with('shop.seller')->get();
-
-        $saleProducts = $products->filter(function ($product) {
-            return $product->promotions->isNotEmpty();
-        });
-
-        // Retourner la vue avec les produits
-        return view('home.index', compact('products', 'saleProducts'));
-    })->name('home');
+    Route::get('/', [HomeController::class, 'home'])->name('home');
 
     Route::get('/fashion', function () {
         return view('home.fashion');

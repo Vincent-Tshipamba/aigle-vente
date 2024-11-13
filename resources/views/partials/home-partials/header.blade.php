@@ -97,24 +97,22 @@
                                         </li>
                                     </ul>
                                 </div>
+                                <div class="header-meta__social flex items-center ml-25">
+                                    <button class="header-cart p-relative tp-cart-toggle">
+                                        <i class="fal fa-heart"></i>
+                                        <span class="tp-product-count">2</span>
+                                    </button>
+                                    @if (Auth::check() && !Auth::user()->isSeller())
+                                        <a href="{{ route('sellers.create') }}"
+                                            class="w-full inline-block px-[10px] py-[15px] bg-[var(--tp-text-primary)] text-[var(--tp-common-white)] text-sm font-semibold rounded-md text-center transition-all duration-300 whitespace-nowrap align-middle touch-manipulation">
+                                            Devenir vendeur</a>
+                                    @endif
+
+                                </div>
                             @else
                                 <a href="{{ route('login') }}"><i class="fal fa-user"></i></a>
                                 <!-- Lien vers le formulaire de connexion -->
                             @endauth
-                            <div class="header-meta__social flex items-center ml-25">
-                                <button class="header-cart p-relative tp-cart-toggle">
-                                    <i class="fal fa-shopping-cart"></i>
-                                    <span class="tp-product-count">2</span>
-                                </button>
-
-                                <a href="wishlist.html"><i class="fal fa-heart"></i></a>
-                                @if (Auth::check() && !Auth::user()->isSeller())
-                                    <a href="{{ route('sellers.create') }}"
-                                        class="w-full inline-block px-[10px] py-[15px] bg-[var(--tp-text-primary)] text-[var(--tp-common-white)] text-sm font-semibold rounded-md text-center transition-all duration-300 whitespace-nowrap align-middle touch-manipulation">
-                                        Devenir vendeur</a>
-                                @endif
-
-                            </div>
                         </div>
                     </div>
                 </div>

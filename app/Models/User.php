@@ -62,4 +62,9 @@ class User extends Authenticatable
     {
         return $this->seller()->exists();
     }
+
+    public function wishlist():HasOne
+    {
+        return $this->hasOne((Wishlist::class));
+    }
 }

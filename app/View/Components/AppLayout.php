@@ -19,12 +19,16 @@ class AppLayout extends Component
             return $product->promotions->isNotEmpty();
         });
 
-        $wishlists = Wishlist::where('user_id', Auth::user()->id)->get();
-        $totalAmount = DB::table('wishlists')
-            ->join('products', 'wishlists.product_id', '=', 'products.id')
-            ->where('user_id', Auth::user()->id)
-            ->sum('products.unit_price');
+        if (Auth::check()) {
+            $wishlists = Wishlist::where('user_id', Auth::user()->id)->get();
+            $totalAmount = DB::table('wishlists')
+                ->join('products', 'wishlists.product_id', '=', 'products.id')
+                ->where('user_id', Auth::user()->id)
+                ->sum('products.unit_price');
 
-        return view('layouts.app', compact('products', 'saleProducts', 'wishlists', 'totalAmount'));
+            return view('layouts.app', compact('products', 'saleProducts', 'wishlists', 'totalAmount'));
+        }
+
+        return view('layouts.app', compact('products', 'saleProducts'));
     }
 }

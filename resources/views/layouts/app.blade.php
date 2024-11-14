@@ -57,9 +57,11 @@
     @include('partials.sidebar-menu')
     <!-- sidebar-menu-area-end -->
 
-    <!-- header-cart-start -->
-    @include('partials.header-cart')
-    <!-- header-cart-end -->
+    @auth
+        <!-- header-cart-start -->
+        @include('partials.header-cart')
+        <!-- header-cart-end -->
+    @endauth
 
     <main>
         {{ $slot }}

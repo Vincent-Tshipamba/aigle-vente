@@ -20,14 +20,17 @@ class HomeController extends Controller
             return $product->promotions->isNotEmpty();
         });
 
-        $wishlists = Wishlist::where('user_id', Auth::user()->id)->get();
-        $totalAmount = DB::table('wishlists')
-        ->join('products', 'wishlists.product_id', '=', 'products.id')
-        ->where('user_id', Auth::user()->id)
-            ->sum('products.unit_price');
+        if (Auth::check()) {
+            $wishlists = Wishlist::where('user_id', Auth::user()->id)->get();
+            $totalAmount = DB::table('wishlists')
+                ->join('products', 'wishlists.product_id', '=', 'products.id')
+                ->where('user_id', Auth::user()->id)
+                ->sum('products.unit_price');
 
-        // Retourner la vue avec les produits
-        return view('home.index', compact('products', 'categories', 'saleProducts', 'wishlists', 'totalAmount'));
+            // Retourner la vue avec les produits
+            return view('home.index', compact('products', 'categories', 'saleProducts', 'wishlists', 'totalAmount'));
+        }
+
+        return view('home.index', compact('products', 'categories', 'saleProducts'));
     }
-
 }

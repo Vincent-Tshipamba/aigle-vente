@@ -36,7 +36,8 @@ Route::middleware('userOnline')->group(function () {
         return view('contact');
     })->name('contact');
 
-    Route::get('/product/{product}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
     Route::get('/shop/{shop}', [ShopController::class, 'show'])->name('shops.show');
 });
 

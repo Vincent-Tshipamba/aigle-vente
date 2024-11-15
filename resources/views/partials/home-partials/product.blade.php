@@ -52,7 +52,7 @@
                                         @endif
                                     </a>
                                     <div class="tpproduct__thumb-action">
-                                        <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
+                                        <a class="comphare" href="#"><i class="fal fa-heart"></i></a>
                                         <a class="quckview" href="{{ route('products.show', $product->_id) }}"><i class="fal fa-eye"></i></a>
 
                                         <!-- Button to send message -->

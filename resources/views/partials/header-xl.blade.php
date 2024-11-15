@@ -117,7 +117,7 @@
                         <div class="header-meta__social flex items-center space-x-3">
                             <button class="header-cart p-relative tp-cart-toggle">
                                 <i class="fal fa-heart"></i>
-                                <span class="tp-product-count">2</span>
+                                <span class="tp-product-count">{{ $wishlists->count() }}</span>
                             </button>
                             @php
                                 $user = Auth::user();

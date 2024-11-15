@@ -10,9 +10,14 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $page = $request->input('page', 1);
+        $products = Product::with('photos', 'shop.seller.user', 'shop.seller')
+            ->latest()
+            ->paginate(20, ['*'], 'page', $page);
+
+        return response()->json($products);
     }
 
     public function show($id)

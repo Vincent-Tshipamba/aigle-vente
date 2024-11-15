@@ -29,66 +29,24 @@
             </div>
         </div>
         <div class="tab-content" id="nav-tabContent">
-            <div class="row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-1">
+            <div id="pagination-buttons" class="mx-auto flex space-x-4 justify-center my-10" style="text-align: center;">
+                <button class="hover:underline hover:text-[#e38407]" id="prev-button">Previous</button>
+                <button class="hover:underline hover:text-[#e38407]" id="next-button">Next</button>
+            </div>
+            <div id="product-container"
+                class="row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-1">
                 @if (empty($products))
                     <div class="p-4 text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300"
                         role="alert">
-                        <span class="font-medium">oups desole!</span> aucun produits disponible pour le moment.
+                        <span class="font-medium">oups desole!</span> aucun produit disponible pour le moment.
                     </div>
                 @else
-                    @foreach ($products as $product)
-                        <div class="col">
-                            <div class="tpproduct pb-15 mb-30">
-                                <div class="tpproduct__thumb p-relative">
-                                    <a href="{{ route('products.show', $product->_id) }}">
-                                        @php
-                                            $firstPhoto = $product->photos->first();
-                                        @endphp
-                                        @if ($firstPhoto)
-                                            <img src="{{ asset('storage/' . $firstPhoto->image) }}"
-                                                alt="{{ $product->name }}">
-                                            <img class="product-thumb-secondary"
-                                                src="{{ asset('storage/' . $firstPhoto->image) }}" alt="">
-                                        @endif
-                                    </a>
-                                    <div class="tpproduct__thumb-action">
-                                        <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
-                                        <a class="quckview" href="{{ route('products.show', $product->_id) }}"><i class="fal fa-eye"></i></a>
-
-                                        <!-- Button to send message -->
-                                        <a href="#" class="quckview message-button"
-                                            data-seller-id="{{ $product->shop->seller->user->id }}"
-                                            data-product-id="{{ $product->id }}">
-                                            <i class="fal fa-comment"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="tpproduct__content">
-                                    <h3 class="tpproduct__title"><a href="{{ route('products.show', $product->_id) }}">{{ $product->name }}</a></h3>
-                                    <p class="tpproduct__shop-name">Boutique {{ $product->shop->name }}</p>
-                                    <p class="tpproduct__title">Propriétaire {{ $product->shop->seller->first_name }}
-                                        {{ $product->shop->seller->last_name }}</p>
-                                    <div class="tpproduct__priceinfo p-relative">
-                                        <div class="tpproduct__priceinfo-list">
-                                            <span>{{ number_format($product->unit_price, 2, ',', ' ') }} $</span>
-                                            @if ($product->old_price)
-                                                <span
-                                                    class="tpproduct__priceinfo-list-oldprice">{{ number_format($product->old_price, 2, ',', ' ') }}
-                                                    €</span>
-                                            @endif
-                                        </div>
-                                        <div class="tpproduct__cart">
-                                            <a href=""><i class="fal fa-shopping-cart"></i>Ajouter au Panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="col-12 mx-auto text-center" id="loading-message">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
                         </div>
-                    @endforeach
-
-
+                    </div>
                 @endif
-
             </div>
             <!-- Répétez la structure ci-dessus pour chaque onglet avec des conditions pour filtrer les produits -->
             <div class="tab-pane fade" id="nav-popular" role="tabpanel" aria-labelledby="nav-popular-tab">

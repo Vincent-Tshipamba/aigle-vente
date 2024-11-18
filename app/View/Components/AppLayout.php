@@ -11,9 +11,15 @@ use Illuminate\Support\Facades\Auth;
 
 class AppLayout extends Component
 {
+    private $rowperpage = 20;
     public function render(): View
     {
-        $products = Product::with('shop.seller')->get();
+        $rowperpage = $this->rowperpage;
+        $totalProducts = Product::with('photos', 'shop.seller.user', 'shop.seller')->count();
+        $products = Product::with('photos', 'shop.seller.user', 'shop.seller')
+        ->latest()
+            ->take($this->rowperpage)
+            ->get();
 
         $saleProducts = $products->filter(function ($product) {
             return $product->promotions->isNotEmpty();
@@ -26,7 +32,7 @@ class AppLayout extends Component
                 ->where('user_id', Auth::user()->id)
                 ->sum('products.unit_price');
 
-            return view('layouts.app', compact('products', 'saleProducts', 'wishlists', 'totalAmount'));
+            return view('layouts.app', compact('products', 'rowperpage', 'totalProducts', 'saleProducts', 'wishlists', 'totalAmount'));
         }
 
         return view('layouts.app', compact('products', 'saleProducts'));

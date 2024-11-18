@@ -5,19 +5,28 @@ namespace App\Http\Controllers\Client;
 use App\Models\Seller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\CategoryProduct;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
+    private $rowperpage = 4;
     public function index(Request $request)
     {
-        $page = $request->input('page', 1);
+        $categories = CategoryProduct::latest()->get();
+
+        $rowperpage = $this->rowperpage;
+        $totalProducts = Product::with('photos', 'shop.seller.user', 'shop.seller')->count();
         $products = Product::with('photos', 'shop.seller.user', 'shop.seller')
             ->latest()
-            ->paginate(20, ['*'], 'page', $page);
+            ->take($this->rowperpage)
+            ->get();
+        $saleProducts = $products->filter(function ($product) {
+            return $product->promotions->isNotEmpty();
+        });
 
-        return response()->json($products);
+        return view('partials.home-partials.product', compact('rowperpage', 'saleProducts', 'totalProducts', 'products'));
     }
 
     public function show($id)

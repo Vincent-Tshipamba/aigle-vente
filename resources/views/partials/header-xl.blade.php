@@ -115,9 +115,9 @@
                             </ul>
                         </div>
                         <div class="header-meta__social flex items-center space-x-3">
-                            <button class="header-cart p-relative tp-cart-toggle">
+                            <button class="header-cart p-relative tp-cart-toggle me-3">
                                 <i class="fal fa-heart"></i>
-                                <span class="tp-product-count">{{ $wishlists->count() }}</span>
+                                <span class="tp-product-count wishcount">{{ $wishlists->count() }}</span>
                             </button>
                             @php
                                 $user = Auth::user();

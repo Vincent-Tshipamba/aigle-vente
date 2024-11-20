@@ -26,18 +26,17 @@
     </div>
     <div class="mainmenuarea d-none d-xl-block">
         <div class="container">
-            <div class="row align-items-center">
+            <div class="row items-center">
                 <div class="col-lg-3">
-                    <div class="mainmenu d-flex align-items-center">
+                    <div class="mainmenu flex items-center">
                         <div class="logo">
-                            <a href="{{ route('home') }}" class="flex items-center space-x-2">
-                                <img src="{{ asset('img/logo/logo_sans_bg.png') }}" width="25%" alt="logo">
-                                <h1 class="text-sm font-bold animate__animated animate__slideInRight">Aigle Vente</h1>
+                            <a href="{{ route('home') }}" class="">
+                                <img src="{{ asset('img/logo/logo_sans_bg.png') }}" width="50%" alt="logo">
                             </a>
                         </div>
                         <div class="mainmenu__search">
                             <form action="#">
-                                <div class="mainmenu__search-bar p-relative">
+                                <div class="mainmenu__search-bar p-relative w-full">
                                     <button class="mainmenu__search-icon"><i class="fal fa-search"></i></button>
                                     <input type="text" placeholder="Rechercher des produits...">
                                 </div>
@@ -83,7 +82,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-3">
-                    <div class="header-meta flex items-center justify-end">
+                    <div class="header-meta flex items-center space-x-4 justify-end">
                         @auth
                             <button id="dropdownUserAvatarButtonHeader-1" data-dropdown-toggle="dropdownAvatarHeader-1"
                                 class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
@@ -145,10 +144,10 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="header-meta__social flex items-center ml-25">
-                                <button class="header-cart p-relative tp-cart-toggle">
+                            <div class="header-meta__social flex items-center space-x-3">
+                                <button class="header-cart p-relative tp-cart-toggle me-3">
                                     <i class="fal fa-heart"></i>
-                                    <span class="tp-product-count">{{ $wishlists->count() }}</span>
+                                    <span class="tp-product-count wishcount">{{ $wishlists->count() }}</span>
                                 </button>
                                 @php
                                     $user = Auth::user();

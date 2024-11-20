@@ -77,7 +77,7 @@ class HomeController extends Controller
                                 ' . ($image !== null ? '<img src="' . asset($image) . '" alt="' . $name . '">' : '') . '
                             </a>
                             <div class="tpproduct__thumb-action">
-                                <a class="comphare" href="#"><i class="fal fa-heart"></i></a>
+                                <a class="comphare" href="#" onclick="addToWishList(event, '.$id.')"><i class="fal fa-heart"></i></a>
                                 <a class="quckview" href="/products/' . $_id . '"><i
                                         class="fal fa-eye"></i></a>
 
@@ -103,8 +103,9 @@ class HomeController extends Controller
                                         $</span>
                                 </div>
                                 <div class="tpproduct__cart">
-                                    <a href=""><i class="fal fa-shopping-cart"></i>Ajouter au
-                                        Panier</a>
+                                    <a href="#" onclick="addToWishList(event, '.$id.')"><i class="fal fa-heart"></i>
+                                        Ajouter à la liste des souhaits
+                                    </a>
                                 </div>
                             </div>
                         </div>

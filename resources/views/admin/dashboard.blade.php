@@ -10,7 +10,7 @@
             Supervision Complète : Utilisateurs, Vendeurs, Clients, Produits, Commandes, ...</p>
     </div>
 
-    <section class="  h-[calc(100%-1rem)] max-h-full mb-8">
+    <section class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4  h-[calc(100%-1rem)] max-h-full mb-8">
         <!-- Total des utilisateurs enregistrés -->
         <a href="{{ route('admin.users.index') }}"
             class="h-36 items-center border p-2 w-full rounded-lg shadow-lg dark:shadow-lg dark:shadow-gray-500/20 backdrop-blur-xl bg-cover bg-[#fcdab40a] dark:bg-gray-900 dark:hover:bg-gray-700  hover:bg-[#f8f0e7] hover:scale-105 transition duration-700 ease-in-out border-l-8 dark:border-[#cc832f] border-[#ff9822] hover:border-l-10 ">

@@ -20,9 +20,6 @@
                             <button class="nav-link" id="nav-sale-tab" data-bs-toggle="tab" data-bs-target="#nav-sale"
                                 type="button" role="tab" aria-controls="nav-sale" aria-selected="false">En
                                 Promotion</button>
-                            <button class="nav-link" id="nav-rate-tab" data-bs-toggle="tab" data-bs-target="#nav-rate"
-                                type="button" role="tab" aria-controls="nav-rate" aria-selected="false">Les Mieux
-                                Notés</button>
                         </div>
                     </nav>
                 </div>
@@ -54,7 +51,7 @@
                                             @endif
                                         </a>
                                         <div class="tpproduct__thumb-action">
-                                            <a class="comphare" href="#"><i class="fal fa-heart"></i></a>
+                                            <a class="comphare" href="#" onclick="addToWishList(event, {{ $product->id }})"><i class="fal fa-heart"></i></a>
                                             <a class="quckview" href="{{ route('products.show', $product->_id) }}"><i
                                                     class="fal fa-eye"></i></a>
 
@@ -85,8 +82,9 @@
                                                 @endif
                                             </div>
                                             <div class="tpproduct__cart">
-                                                <a href=""><i class="fal fa-shopping-cart"></i>Ajouter au
-                                                    Panier</a>
+                                                <a href="" onclick="addToWishList(event, {{ $product->id }})"><i class="fal fa-heart"></i>
+                                                    Ajouter à la liste des souhaits
+                                                </a>
                                             </div>
                                         </div>
                                     </div>

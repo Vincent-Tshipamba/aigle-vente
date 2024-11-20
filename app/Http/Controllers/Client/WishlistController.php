@@ -6,18 +6,37 @@ use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class WishlistController extends Controller
 {
     public function add(Request $request)
     {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'product_id' => 'required|exists:products,id',
-        ]);
+        try {
+            $wish = Wishlist::where('product_id', $request->productId)
+                ->where('user_id', Auth::user()->id)
+                ->first();
 
-        $wishlist = Wishlist::create($request->all());
-        return response()->json($wishlist, 201);
+            if ($wish) {
+                return response()->json(['exists' => 'Le produit existe déjà dans votre liste des souhaits !']);
+            }
+
+            $wishlist = Wishlist::create([
+                'product_id' => $request->productId,
+                'user_id' => Auth::user()->id
+            ]);
+
+            $wishcount = Wishlist::where('user_id', Auth::user()->id)->count();
+
+            return response()->json([
+                'success' => 'Le produit a été ajouté à votre wishlist avec succès !',
+                'count' => $wishcount,
+                'wishlist' => $wishlist
+            ]);
+        } catch (\Throwable $th) {
+            Log::error($th);
+            return response()->json(['error' => 'Une erreur s\'est produite lors de l\'ajout du produit à votre liste des souhaits.']);
+        }
     }
 
     public function remove($id)

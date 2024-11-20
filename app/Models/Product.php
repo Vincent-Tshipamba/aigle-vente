@@ -72,4 +72,54 @@ class Product extends Model
     {
         return $this->hasMany((Wishlist::class));
     }
+
+    public function details()
+    {
+        return $this->hasOne(ProductDetail::class);
+    }
+
+    public function state()
+    {
+        return $this->belongsTo(ProductState::class, 'product_state_id');
+    }
+
+    public function stockMovements(): HasMany
+    {
+        return $this->hasMany(StockMovement::class);
+    }
+
+    public function recordStockMovement(string $type, int $quantity, string $reason, int $performedBy,int $shop): void
+    {
+        $this->stockMovements()->create([
+            'product_id' => $this->id,
+            'type' => $type,
+            'quantity' => $quantity,
+            'reason' => $reason,
+            'performed_by' => $performedBy,
+            'shop_id' => $shop, 
+        ]);
+
+        $stock = $this->stocks()->firstOrCreate(['product_id' => $this->id]);
+        if ($type === 'add') {
+            $stock->quantity += $quantity;
+        } elseif ($type === 'remove') {
+            $stock->quantity -= $quantity;
+        }
+        $stock->save();
+    }
+
+    public function calculateTotalSold(): int
+    {
+        return $this->stockMovements()
+            ->where('type', 'remove')
+            ->where('reason', 'Vente')
+            ->sum('quantity');
+    }
+
+    public function calculateTotalEarnings(): float
+    {
+        $totalSold = $this->calculateTotalSold();
+        return $totalSold * $this->unit_price;
+    }
+
 }

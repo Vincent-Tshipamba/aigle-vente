@@ -7,6 +7,9 @@ use App\Models\Seller;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\CategoryProduct;
+use App\Models\ProductDetail;
+use App\Models\ProductState;
+use App\Models\Stock;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +20,7 @@ class ProductController extends Controller
     {
         $userId = Auth::id();
 
-        // Récupérer le vendeur lié à cet utilisateur
+
         $seller = Seller::where('user_id', $userId)->first();
 
         if (!$seller || !$seller->shops()->where('id', $shop->id)->exists()) {
@@ -25,11 +28,61 @@ class ProductController extends Controller
         }
 
         $products = $shop->products()->paginate(10);
+        $stocks = Stock::all();
 
         $categories = CategoryProduct::All();
 
 
-        return view('seller.produits.index', compact('products', 'categories', 'shop'));
+        return view('seller.produits.index', compact('products', 'categories', 'shop', 'stocks'));
+    }
+
+    public function manageStockIndex ($id){
+        $product = Product::where('_id', $id)->first();
+
+        if (!$product) {
+            return response()->json(['error' => 'Produit introuvable.'], 404);
+        }
+
+        $stocks = $product->stocks; // Accès au stock actuel
+        return view('seller.manage-stocks.index', compact('product', 'stocks'));
+    }
+
+    public function manageStock(Request $request, Product $product)
+    {
+        $request->validate([
+            'type' => 'required|in:add,remove',
+            'quantity' => 'required|integer|min:1',
+            'reason' => 'required|string|max:255',
+        ]);
+
+        $shop= $product->shop->id;
+
+        $product->recordStockMovement(
+            $request->type,
+            $request->quantity,
+            $request->reason,
+            auth()->id(),
+            $shop
+        );
+
+        return redirect()->route('stocks.edit', $product->_id)->with('success', 'Stock updated successfully.');
+    }
+
+
+    public function create(Shop $shop)
+    {
+
+        $userId = Auth::id();
+
+        // Récupérer le vendeur lié à cet utilisateur
+        $seller = Seller::where('user_id', $userId)->first();
+
+        if (!$seller || !$seller->shops()->where('id', $shop->id)->exists()) {
+            return response()->json(['error' => 'Accès non autorisé à cette boutique.'], 403);
+        }
+        $categories = CategoryProduct::all();
+        $state = ProductState::all();
+        return view('seller.produits.create', compact('categories', 'state', 'shop'));
     }
 
 
@@ -42,19 +95,18 @@ class ProductController extends Controller
                 'name' => 'required|string|max:255',
                 'stock_quantity' => 'required|integer',
                 'price' => 'required|numeric',
-                'category_product_id' => 'required|exists:category_products,id', // Modifiez ici
+                'category_product_id' => 'required|exists:category_products,id',
                 'description' => 'nullable|string',
                 'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            ], [
-                'name.required' => 'Le nom du produit est requis.',
-                'stock_quantity.required' => 'La quantité de stock est obligatoire.',
-                'price.required' => 'Le prix est obligatoire.',
-                'category_product_id.required' => 'Veuillez sélectionner une catégorie.', // Modifiez ici
-                'category_product_id.exists' => 'La catégorie sélectionnée n\'existe pas.', // Modifiez ici
-                'images.*.image' => 'Chaque fichier doit être une image.',
-                'images.*.mimes' => 'Les images doivent être en format jpeg, png, jpg, ou gif.',
-                'images.*.max' => 'Chaque image doit être de 2 Mo maximum.',
-            ]);
+                'weight' => 'nullable|numeric',
+                'dimensions' => 'nullable|string|max:255',
+                'color' => 'nullable|string|max:50',
+                'size' => 'nullable|string|max:50',
+                'model' => 'nullable|string|max:50',
+                'shipping' => 'nullable|string|max:255',
+                'care' => 'nullable|string|max:255',
+                'brand' => 'nullable|string|max:50',
+            ],);
 
             // Ajout de l'ID de la boutique
             $validated['shop_id'] = $shop->id;
@@ -66,22 +118,37 @@ class ProductController extends Controller
                 'category_product_id' => $validated['category_product_id'],
                 'description' => $validated['description'],
                 'shop_id' => $validated['shop_id'],
+                'product_state_id' => $request->state,
             ]);
 
-
-            // Vérification si le produit a été créé
             if (!$product) {
                 Log::error('Le produit n\'a pas été créé.');
                 return redirect()->back()->with('error', 'Le produit n\'a pas pu être créé.')->withInput();
             }
 
+
+
+            // Création des détails du produit
+           ProductDetail::create([
+                'weight' => $validated['weight'] ?? null,
+                'dimensions' => $validated['dimensions'] ?? null,
+                'color' => $validated['color'] ?? null,
+                'size' => $validated['size'] ?? null,
+                'model' => $validated['model'] ?? null,
+                'shipping' => $validated['shipping'] ?? null,
+                'care' => $validated['care'] ?? null,
+                'brand' => $validated['brand'] ?? null,
+                'product_id' => $product->id,
+            ]);
+
+            // Ajout du stock
             $product->stocks()->create([
                 'quantity' => $validated['stock_quantity'],
             ]);
 
+            // Gestion des images
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $imageFile) {
-                    // Spécifiez le disque 'public' ici
                     $path = $imageFile->store('images', 'public');
 
                     $product->photos()->create([
@@ -94,11 +161,9 @@ class ProductController extends Controller
             return redirect()->route('seller.shops.products.index', $product->shop->id)
                 ->with('success', 'Produit créé avec succès !');
         } catch (\Illuminate\Validation\ValidationException $e) {
-            // Log des erreurs de validation
             Log::error('Erreurs de validation: ', $e->errors());
             return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (\Exception $e) {
-            // Log de toute autre erreur
             Log::error('Erreur lors de la création du produit: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Une erreur est survenue lors de la création du produit : ' . $e->getMessage())->withInput();
         }

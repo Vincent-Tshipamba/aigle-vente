@@ -20,7 +20,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        
+
         $userId = Auth::id();
         $seller = Seller::where('user_id', $userId)->first();
         if (!$seller) {
@@ -107,7 +107,7 @@ class MessageController extends Controller
 
     public function store(Request $request, $seller_id)
     {
-        
+
         try {
             Log::info('ID du vendeur reçu : ' . $seller_id);
             $seller = User::find($seller_id);
@@ -124,8 +124,8 @@ class MessageController extends Controller
                 'product_id' => $request->product_id,
             ]);
 
-            
-            $data->load('sender'); 
+
+            $data->load('sender');
 
             // Broadcast the event
             broadcast(new MessageSent($data))->toOthers();
@@ -146,7 +146,8 @@ class MessageController extends Controller
                 'success' => false,
                 'message' => 'Erreur lors de l\'envoi du message.',
                 'error_details' => $e->getMessage() // Ajoutez ici les détails de l'erreur
-            ], 500);        }
+            ], 500);
+        }
     }
     /**
      * Mark a message as read.
@@ -179,8 +180,6 @@ class MessageController extends Controller
     {
         try {
             Log::info('ID du vendeur reçu : ' . $user_id);
-          
-
             $seller = User::find($user_id);
             if (!$seller) {
                 return response()->json(['error' => 'Le vendeur sélectionné est invalide.'], 400);
@@ -203,4 +202,18 @@ class MessageController extends Controller
         }
     }
 
+    public function getUserMessages()
+    {
+        // Récupérer les messages non lus pour l'utilisateur connecté
+        $user = Auth::id();
+
+        $messages = Message::select('sender_id', DB::raw('COUNT(*) as message_count'))
+            ->with('sender') 
+            ->where('receiver_id', $user)
+            ->groupBy('sender_id')
+            ->orderBy('message_count', 'desc') 
+            ->get();
+
+        return response()->json($messages);
+    }
 }

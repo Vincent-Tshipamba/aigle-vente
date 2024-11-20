@@ -5,17 +5,15 @@ namespace App\Models;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Stock extends Model
+class StockMovement extends Model
 {
-    /** @use HasFactory<\Database\Factories\StockFactory> */
-    use HasFactory;
-
     protected $fillable = [
         '_id',
         'product_id',
-        'quantity'
+        'type',
+        'quantity',
+        'shop_id',
     ];
 
     protected static function boot()
@@ -23,7 +21,7 @@ class Stock extends Model
         parent::boot();
 
         static::creating(function ($model) {
-            $model->_id = (string) Str::uuid();
+            $model->_id = (string) Str::uuid();  
         });
     }
 
@@ -32,6 +30,8 @@ class Stock extends Model
         return $this->belongsTo(Product::class);
     }
 
-
-    
+    public function shop(): BelongsTo
+    {
+        return $this->belongsTo(Shop::class);
+    }
 }

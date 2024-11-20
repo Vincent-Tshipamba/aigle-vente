@@ -3,7 +3,7 @@
 @section('content')
     <div class="flex flex-col md:flex-row h-screen overflow-hidden">
         <!-- Sidebar -->
-        <div class="w-full md:w-1/4 bg-white border-r border-gray-300 md:flex-shrink-0">
+        <div class="w-full md:w-1/4 bg-white dark:bg-gray-800 border-r border-gray-300 md:flex-shrink-0">
             <!-- Sidebar Header -->
             <header class="p-4 border-b border-gray-300 flex justify-between items-center bg-[#e38407] text-white">
                 <h1 class="text-lg md:text-2xl font-semibold">Chat Web</h1>
@@ -49,7 +49,7 @@
         <!-- Main Chat Area -->
         <div class="flex-1 flex flex-col">
             <!-- Chat Header -->
-            <header class="bg-white p-4 text-gray-700 border-b border-gray-300">
+            <header class="bg-white dark:bg-gray-800 p-4 text-gray-700 dark:text-gray-200 border-b border-gray-300">
                 <h1 id="chatHeader" class="text-2xl font-semibold">Sélectionnez une conversation</h1>
             </header>
 

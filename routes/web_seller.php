@@ -16,15 +16,20 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/seller/shop/message/{message}/mark-as-read', [MessageController::class, 'markAsRead'])->name('seller.shop.message.markAsRead');
     Route::post('/messages/send/{seller_id}', [MessageController::class, 'sendMessage'])->name('messages.send');
     Route::get('/messages/{contactId}', [MessageController::class, 'showConversation'])->name('messages.showConversation');
+    Route::get('/messages', [MessageController::class, 'getUserMessages'])->name('messages');
    
 
 
-    Route::get('/seller/shops/{shop}/products', [ProductController::class, 'index'])->name('seller.shops.products.index');
+    Route::get('/seller/shops/{shop:_id}/products', [ProductController::class, 'index'])->name('seller.shops.products.index');
     Route::get('/seller/shops/product/{product:_id}/detail', [ProductController::class, 'show'])->name('seller.shops.products.show');
     Route::post('/shops/{shop}/products', [ProductController::class, 'store'])->name('shop.products.store');
     Route::put('/seller/shops/{product}', [ProductController::class, 'update'])->name('seller.shops.products.update');
     Route::delete('/seller/shops/{product}', [ProductController::class, 'destroy'])->name('seller.shops.products.destroy');
     Route::post('/shops/products/{product}/promotion-request', [ProductController::class, 'requestPromotion'])->name('products.promotion');
+    Route::get('/seller/shops/{shop:_id}/products/nouveau/product', [ProductController::class, 'create'])->name('seller.shops.products.create');
+    Route::get('/stocks/{product:_id}', [ProductController::class, 'manageStockIndex'])->name('stocks.edit');
+    Route::post('/products/{product}/manage-stock', [ProductController::class, 'manageStock'])->name('products.manageStock');
+    Route::get('/api/stock-movements', [DashboardController::class, 'mouvementStock']);
 
 
     Route::get('/seller/shops', [ShopController::class, 'index'])->name('shops.index');

@@ -10,7 +10,7 @@
     @endif
 
     <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
-        class="block text-white bg-[#e38407] hover:bg-[#E38407EE] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        class="block text-white bg-[#e38407] hover:bg-[#E38407EE]  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:[#E38407EE] dark:hover:[#e38407] dark:focus:[#e38407]"
         type="button">
         Ajoute une boutique
     </button>
@@ -62,6 +62,16 @@
                         </div>
 
                         <div class="col-span-2">
+                            <select id="category" name="category_product_id"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <option selected="">Select category</option>
+                                @foreach ($ShopCategories as $categorie)
+                                    <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-span-2">
                             <label for="description"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product
                                 Description</label>
@@ -69,6 +79,7 @@
                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Write product description here"></textarea>
                         </div>
+
                     </div>
                     <button type="submit"
                         class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -85,10 +96,6 @@
         </div>
     </div>
 @endsection
-
-
-
-
 
 <table id="search-table">
     <thead>
@@ -125,7 +132,7 @@
                     <td> {{ $shop->address }} </td>
                     <td> {{ $shop->description }} </td>
                     <td>
-                        <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots{{$key}}"
+                        <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots{{ $key }}"
                             class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                             type="button">
                             <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -136,12 +143,12 @@
                         </button>
 
                         <!-- Dropdown menu -->
-                        <div id="dropdownDots{{$key}}"
+                        <div id="dropdownDots{{ $key }}"
                             class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
                                 aria-labelledby="dropdownMenuIconButton">
                                 <li>
-                                    <a href="{{ route('seller.shops.products.index', $shop->id) }}"
+                                    <a href="{{ route('seller.shops.products.index', $shop->_id) }}"
                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Produits</a>
                                 </li>
                                 <li>
@@ -166,6 +173,8 @@
 
     </tbody>
 </table>
+
+
 @section('script')
     <script>
         if (document.getElementById("search-table") && typeof simpleDatatables.DataTable !== 'undefined') {

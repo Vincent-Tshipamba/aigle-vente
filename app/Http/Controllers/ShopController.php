@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Shop;
 use App\Models\Seller;
 use App\Models\Product;
+use App\Models\ShopCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,10 +24,11 @@ class ShopController extends Controller
         }
 
         $shops = $seller->shops;
-        return view('seller.shops.index',compact('shops'));
+        $ShopCategories = ShopCategory::all();
+        return view('seller.shops.index',compact('shops', 'ShopCategories'));
     }
 
-    // Créer une nouvelle boutique pour le vendeur connecté
+   
     public function create()
     {
         return view('seller.shops.create');

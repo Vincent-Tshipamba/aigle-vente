@@ -58,7 +58,7 @@
         <!-- header-cart-end -->
     @endauth
 
-    <main>
+    <main class="main-content">
         <!-- slider-area-start -->
         @include('partials.home-partials.slider')
         <!-- slider-area-end -->

@@ -124,7 +124,7 @@
                     <div class=" text-left flex ">
                         <p class="w-1/2">Ville : </p>
                         <span class="font-bold">
-                            {{ $user->client->city->name }}
+                            {{ $user->client->location->city ?? '' }}
                         </span>
                     </div>
                     <hr class="my-4">
@@ -306,7 +306,7 @@
                     <div class=" text-left flex ">
                         <p class="w-1/2">Ville : </p>
                         <span class="font-bold">
-                            {{ $user->seller->city->name }}
+                            {{ $user->seller->location->city ?? '' }}
                         </span>
                     </div>
                     <hr class="my-4">

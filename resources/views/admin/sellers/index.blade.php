@@ -156,7 +156,7 @@
                                 <td>{{ $seller->sexe }}</td>
                                 <td>{{ $seller->user->email }}</td>
                                 <td>{{ $seller->phone }}</td>
-                                <td>{{ $seller->city->name }}</td>
+                                <td>{{ $seller->location->city ?? '' }}</td>
                                 <td>
                                     <label class="inline-flex items-center cursor-pointer">
                                         <input type="checkbox" value="" class="sr-only peer"

@@ -120,56 +120,6 @@
             });
         }
     </script>
-
-<script>
-    function checkWindowSize() {
-        if($(window).height >= $(document).height){
-            fetchProducts();
-        }
-    }
-
-    function fetchProducts() {
-        var start = Number($('#start').val())
-        var rowperpage = Number($('#rowperpage').val())
-        var totalProducts = Number($('#totalProducts').val())
-
-        start = start + rowperpage
-
-        if(start <= totalProducts){
-            $('#start').val(start);
-
-            $.ajax({
-                type: "get",
-                url: "{{ route('getProducts') }}",
-                data: {
-                    start: start,
-                    _token: '{{ csrf_token() }}'
-                },
-                dataType: "json",
-                success: function (response) {
-
-                    $(".product:last").after(response).show().fadeIn()
-
-                    checkWindowSize();
-                }
-            });
-        }
-    }
-
-    $(document).on('touchmove', onScroll)
-
-    $(window).scroll(function () {
-        onScroll();
-    });
-
-    function onScroll() {
-        if($(window).scrollTop() > ($(document).height() - $(window).height() - 100)){
-            fetchProducts();
-        }
-    }
-</script>
-
-
 </body>
 
 </html>

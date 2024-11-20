@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    private $rowperpage = 5;
+    private $rowperpage = 25;
 
 
     public function home()
@@ -57,6 +57,7 @@ class HomeController extends Controller
 
         foreach ($products as $product) {
             $id = $product->id;
+            $image = null;
             if ($product->photos->first()) {
                 $image = $product->photos->first()->image;
             }
@@ -73,7 +74,7 @@ class HomeController extends Controller
                     <div class="tpproduct pb-15 mb-30">
                         <div class="tpproduct__thumb p-relative">
                             <a href="' . route('products.show', $_id) . '">
-                                ' . ($image ? '<img src="' . asset($image) . '" alt="' . $name . '">' : '') . '
+                                ' . ($image !== null ? '<img src="' . asset($image) . '" alt="' . $name . '">' : '') . '
                             </a>
                             <div class="tpproduct__thumb-action">
                                 <a class="comphare" href="#"><i class="fal fa-heart"></i></a>
@@ -111,7 +112,6 @@ class HomeController extends Controller
                 </div>
             ';
         }
-
 
         return response()->json($html);
     }

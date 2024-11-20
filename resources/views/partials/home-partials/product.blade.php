@@ -1,4 +1,4 @@
-<section class="product-area pt-95 pb-70">
+<section class="product-area pt-95 pb-70" id="productSection">
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-12">
@@ -102,10 +102,7 @@
                 @endif
             </div>
             <div class="text-center">
-                <div class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-
+                <a href="{{ route('products.index') }}" class="underline text-[#e38407] hover:scale-115 hover:text-[#e38407] hover:underline hover:font-bold">Voir tous les produits</a>
             </div>
             <!-- Répétez la structure ci-dessus pour chaque onglet avec des conditions pour filtrer les produits -->
             <div class="tab-pane fade" id="nav-popular" role="tabpanel" aria-labelledby="nav-popular-tab">

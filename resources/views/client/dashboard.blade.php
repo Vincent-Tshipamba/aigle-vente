@@ -10,9 +10,9 @@
             Supervision Complète : Discussions, Liste des souhaits, ...</p>
     </div>
 
-    <section class="grid grid-cols-1 md:grid-cols-5 gap-6 w-full md:inset-0 h-[calc(100%-1rem)] max-h-full mb-8">
+    <section class="grid grid-cols-1 md:grid-cols-5 justify-items-center items-center gap-6 mx-auto w-full md:inset-0 h-[calc(100%-1rem)] max-h-full mb-8">
         <div
-            class="col-span-2 rounded-xl items-center border p-2 h-36 w-full shadow-lg dark:shadow-lg dark:shadow-gray-500/20 backdrop-blur-xl bg-cover bg-[#fcdab40a] dark:bg-gray-900 dark:hover:bg-gray-700 hover:bg-[#f8f0e7] hover:scale-105 transition duration-700 ease-in-out border-l-8 dark:border-[#cc832f] border-[#ff9822] hover:border-l-10">
+            class="col-span-2 mx-auto rounded-xl justify-items-center items-center border p-2 h-36 w-full shadow-lg dark:shadow-lg dark:shadow-gray-500/20 backdrop-blur-xl bg-cover bg-[#fcdab40a] dark:bg-gray-900 dark:hover:bg-gray-700 hover:bg-[#f8f0e7] hover:scale-105 transition duration-700 ease-in-out border-l-8 dark:border-[#cc832f] border-[#ff9822] hover:border-l-10">
             <!-- Total des produits dans la wishlist -->
             <a href="{{ route('client.wishlist') }}" class="">
                 <div>

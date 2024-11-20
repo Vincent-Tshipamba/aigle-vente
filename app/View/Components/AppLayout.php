@@ -2,16 +2,33 @@
 
 namespace App\View\Components;
 
-use Illuminate\View\Component;
+use App\Models\Product;
+use App\Models\Wishlist;
 use Illuminate\View\View;
+use Illuminate\View\Component;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class AppLayout extends Component
 {
-    /**
-     * Get the view / contents that represents the component.
-     */
     public function render(): View
     {
-        return view('layouts.app');
+        $products = Product::with('shop.seller')->get();
+
+        $saleProducts = $products->filter(function ($product) {
+            return $product->promotions->isNotEmpty();
+        });
+
+        if (Auth::check()) {
+            $wishlists = Wishlist::where('user_id', Auth::user()->id)->get();
+            $totalAmount = DB::table('wishlists')
+                ->join('products', 'wishlists.product_id', '=', 'products.id')
+                ->where('user_id', Auth::user()->id)
+                ->sum('products.unit_price');
+
+            return view('layouts.app', compact('products', 'saleProducts', 'wishlists', 'totalAmount'));
+        }
+
+        return view('layouts.app', compact('products', 'saleProducts'));
     }
 }

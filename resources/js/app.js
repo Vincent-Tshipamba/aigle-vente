@@ -4,6 +4,9 @@ import 'flowbite';
 import 'animate.css';
 import $ from 'jquery';
 import Swal from 'sweetalert2'
+import "./index";
+import "./textarea"
+
 
 window.Alpine = Alpine;
 

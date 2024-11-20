@@ -97,24 +97,22 @@
                                         </li>
                                     </ul>
                                 </div>
+                                <div class="header-meta__social flex items-center ml-25">
+                                    <button class="header-cart p-relative tp-cart-toggle">
+                                        <i class="fal fa-heart"></i>
+                                        <span class="tp-product-count">2</span>
+                                    </button>
+                                    @if (Auth::check() && !Auth::user()->isSeller())
+                                        <a href="{{ route('sellers.create') }}"
+                                            class="w-full inline-block px-[10px] py-[15px] bg-[var(--tp-text-primary)] text-[var(--tp-common-white)] text-sm font-semibold rounded-md text-center transition-all duration-300 whitespace-nowrap align-middle touch-manipulation">
+                                            Devenir vendeur</a>
+                                    @endif
+
+                                </div>
                             @else
                                 <a href="{{ route('login') }}"><i class="fal fa-user"></i></a>
                                 <!-- Lien vers le formulaire de connexion -->
                             @endauth
-                            <div class="header-meta__social flex items-center ml-25">
-                                <button class="header-cart p-relative tp-cart-toggle">
-                                    <i class="fal fa-shopping-cart"></i>
-                                    <span class="tp-product-count">2</span>
-                                </button>
-
-                                <a href="wishlist.html"><i class="fal fa-heart"></i></a>
-                                @if (Auth::check() && !Auth::user()->isSeller())
-                                    <a href="{{ route('sellers.create') }}"
-                                        class="w-full inline-block px-[10px] py-[15px] bg-[var(--tp-text-primary)] text-[var(--tp-common-white)] text-sm font-semibold rounded-md text-center transition-all duration-300 whitespace-nowrap align-middle touch-manipulation">
-                                        Devenir vendeur</a>
-                                @endif
-
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -131,26 +129,14 @@
                                     class="fal fa-bars"></i>Catégories</a>
                             <div class="category-menu category-menu-off">
                                 <ul class="cat-menu__list">
-                                    <li><a href="shop.html"><i class="fal fa-user"></i> Bougies</a></li>
-                                    <li class="menu-item-has-children"><a href="shop.html"><i
-                                                class="fal fa-flower-tulip"></i> Fait main</a>
-                                        <ul class="submenu">
-                                            <li><a href="shop-2.html">Chaise</a></li>
-                                            <li><a href="shop-2.html">Table</a></li>
-                                            <li><a href="shop.html">Bois</a></li>
-                                            <li><a href="shop.html">Meubles</a></li>
-                                            <li><a href="shop.html">Horloge</a></li>
-                                            <li><a href="shop.html">Cadeaux</a></li>
-                                            <li><a href="shop.html">Artisanat</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="shop.html"><i class="fal fa-shoe-prints"></i> Coffrets cadeaux</a>
-                                    </li>
-                                    <li><a href="shop.html"><i class="fal fa-smile"></i> Cadeaux en plastique</a></li>
-                                    <li><a href="shop.html"><i class="fal fa-futbol"></i> Crème pour les mains</a>
-                                    </li>
-                                    <li><a href="shop.html"><i class="fal fa-crown"></i> Cosmétiques</a></li>
-                                    <li><a href="shop.html"><i class="fal fa-gift"></i> Accessoires en soie</a></li>
+                                    @foreach ($categories->take(10) as $category)
+                                        <li>
+                                            <a href="javascript:;">
+                                                <i class="fal fa-shoe-prints"></i>
+                                                {{ $category->name }}
+                                            </a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                                 <div class="daily-offer">
                                     <ul>

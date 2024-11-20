@@ -44,6 +44,9 @@ class DashboardController extends Controller
 
     public function orders()
     {
-        return view('client.orders');
+        $client_id = Auth::user()->client->id;
+        $orders = Order::where('client_id', $client_id)->get();
+
+        return view('client.orders', compact('orders'));
     }
 }

@@ -9,7 +9,6 @@ class ShopCategory extends Model
 {
     use HasFactory;
 
-    // Indiquer que les colonnes 'name' et 'description' peuvent être massivement assignées
     protected $fillable = ['name', 'description'];
     public function shops()
     {

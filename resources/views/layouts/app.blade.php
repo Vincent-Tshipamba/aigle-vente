@@ -63,7 +63,7 @@
         <!-- header-cart-end -->
     @endauth
 
-    <main>
+    <main class="main-content">
         {{ $slot }}
     </main>
 
@@ -157,6 +157,11 @@
                 }
             });
         }
+    </script>
+    <script>
+        $('.search-input').keypress(function (e) {
+            //
+        });
     </script>
     @yield('script')
 </body>

@@ -132,7 +132,7 @@
                                         {{ $client->phone }}
                                     </a>
                                 </td>
-                                <td>{{ $client->city->name }}</td>
+                                <td>{{ $client->location->city ?? '' }}</td>
                                 <td>
                                     <label class="inline-flex items-center cursor-pointer">
                                         <input type="checkbox" value="" class="sr-only peer"

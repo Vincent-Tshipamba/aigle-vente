@@ -293,9 +293,13 @@
 
     <script src="{{ Vite::asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
     <script>
-        function checkWindowSize() {
+        function checkWindowSize(rowperpage = null, totalSearchResults = null) {
             if ($(window).height >= $(document).height) {
-                fetchProducts();
+                if (rowperpage && totalSearchResults) {
+                    fetchSearchProducts(rowperpage, totalSearchResults)
+                } else {
+                    fetchProducts();
+                }
             }
         }
 

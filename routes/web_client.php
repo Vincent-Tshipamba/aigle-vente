@@ -33,7 +33,9 @@ Route::middleware('userOnline')->group(function () {
 
     // Product and Shop Routes
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/search', [ProductController::class, 'search'])->name('products.search');
     Route::get('/getProducts', [HomeController::class, 'getProducts'])->name('getProducts');
+    Route::get('/getSearchProducts', [ProductController::class, 'getSearchProducts'])->name('getSearchProducts');
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
     Route::get('/shop/{shop}', [ShopController::class, 'show'])->name('shops.show');
 });

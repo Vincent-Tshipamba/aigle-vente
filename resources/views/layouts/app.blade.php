@@ -158,8 +158,9 @@
             });
         }
     </script>
+
     <script>
-        $('.search-input').keypress(function (e) {
+        $('.search-input').keypress(function(e) {
             var value = $(this).val();
             const searchResults = `
                 <section class="product-area pb-70" id="productSection">
@@ -177,7 +178,7 @@
                         <div class="w-full md:inset-0 product-container">
                             <div
                                 class="row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-1 mx-auto">
-                                <div class="col product">
+                                <div class="col searchResultProduct">
                                 </div>
                             </div>
                         </div>
@@ -194,10 +195,11 @@
                 },
                 dataType: "json",
                 success: function(response) {
+                    const html = response.html
                     $('.main-content').html(searchResults)
 
                     const productContainer = $('.product-container');
-                    if (response.trim() === '') {
+                    if (html.trim() === '') {
                         productContainer.html(`
                             <div class="p-4 text-md text-gray-800 mx-auto text-center rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">
                                 <span class="font-medium">Oups désolé!</span> Aucun produit disponible correspondant à votre recherche. <br><br>
@@ -206,7 +208,7 @@
                             </div>
                         `);
                     } else {
-                        $(".product:last").after(response).show().fadeIn()
+                        $(".searchResultProduct:last").after(response.html).show().fadeIn()
                     }
                 },
                 error: function(xhr, status, error) {
@@ -214,6 +216,29 @@
                 }
             });
         });
+
+        function fetchSearchProducts(rowperpage=15, total=null) {
+            var start = 0
+            start = start + rowperpage
+
+
+            if (start <= total) {
+                $.ajax({
+                    type: "get",
+                    url: "{{ route('getSearchProducts') }}",
+                    data: {
+                        start: start,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        $(".searchResultProduct:last").after(response).show().fadeIn()
+
+                        checkWindowSize(response.rowperpage, response.totalSearchResults);
+                    }
+                });
+            }
+        }
     </script>
 
     @yield('script')

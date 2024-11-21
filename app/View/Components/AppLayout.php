@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Wishlist;
 use Illuminate\View\View;
 use Illuminate\View\Component;
+use App\Models\CategoryProduct;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,9 +18,11 @@ class AppLayout extends Component
         $rowperpage = $this->rowperpage;
         $totalProducts = Product::with('photos', 'shop.seller.user', 'shop.seller')->count();
         $products = Product::with('photos', 'shop.seller.user', 'shop.seller')
-        ->latest()
+            ->latest()
             ->take($this->rowperpage)
             ->get();
+
+        $categories = CategoryProduct::latest()->get();
 
         $saleProducts = $products->filter(function ($product) {
             return $product->promotions->isNotEmpty();
@@ -35,6 +38,6 @@ class AppLayout extends Component
             return view('layouts.app', compact('products', 'rowperpage', 'totalProducts', 'saleProducts', 'wishlists', 'totalAmount'));
         }
 
-        return view('layouts.app', compact('products', 'saleProducts'));
+        return view('layouts.app', compact('products', 'rowperpage', 'totalProducts', 'categories', 'saleProducts'));
     }
 }

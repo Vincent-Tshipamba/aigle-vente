@@ -36,7 +36,7 @@
 
         <!-- Vue Grille -->
         <div id="gridView">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 @if (empty($products))
                     <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
                         role="alert">
@@ -135,10 +135,10 @@
                                             <label for="checkbox-all" class="sr-only">checkbox</label>
                                         </div>
                                     </th>
-                                    <th scope="col" class="px-4 py-3">Product</th>
-                                    <th scope="col" class="px-4 py-3">Category</th>
+                                    <th scope="col" class="px-4 py-3">Image</th>
+                                    <th scope="col" class="px-4 py-3">Produits</th>
                                     <th scope="col" class="px-4 py-3">Stock</th>
-                                    <th scope="col" class="px-4 py-3">Sales/Day</th>
+                                    <th scope="col" class="px-4 py-3">Prix</th>
                                     <th scope="col" class="px-4 py-3">Sales/Month</th>
                                     <th scope="col" class="px-4 py-3">Rating</th>
                                     <th scope="col" class="px-4 py-3">Sales</th>
@@ -262,7 +262,36 @@
                                                 </button>
 
                                                 <!-- Dropdown menu -->
-
+                                                <div id="dropdownDots{{ $i }}"
+                                                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                                                        aria-labelledby="dropdownMenuIconButton">
+                                                        <li>
+                                                            <a href="{{ route('seller.shops.products.show', $product->_id) }}"
+                                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Produits</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="{{ route('stocks.edit', $product->_id) }}"
+                                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mouvement
+                                                                de stock</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#"
+                                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Modifier
+                                                                Produits</a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="py-2">
+                                                        <form
+                                                            action="{{ route('seller.shops.products.destroy', $product->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <input type="submit" value="supprimer"
+                                                                class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -271,7 +300,7 @@
                             </tbody>
                         </table>
                     </div>
-                    
+
                 </div>
             </div>
 
@@ -282,31 +311,6 @@
 
     @if (empty($product))
     @else
-        <div id="dropdownDots{{ $i }}"
-            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconButton">
-                <li>
-                    <a href="{{ route('seller.shops.products.show', $product->_id) }}"
-                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Produits</a>
-                </li>
-                <li>
-                    <a href="{{ route('stocks.edit', $product->_id) }}"
-                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                </li>
-            </ul>
-            <div class="py-2">
-                <form action="{{ route('seller.shops.products.destroy', $product->id) }}" method="POST">
-                    @csrf
-                    @method('delete')
-                    <input type="submit" value="supprimer"
-                        class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                </form>
-            </div>
-        </div>
     @endif
 
 

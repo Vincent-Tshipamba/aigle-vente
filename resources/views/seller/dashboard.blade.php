@@ -7,7 +7,7 @@
             <div
                 class="rounded-sm border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark">
                 <div class="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
-                    
+
 
                     <svg class="fill-primary dark:fill-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                         width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -95,7 +95,7 @@
                 <div class="mt-4 flex items-end justify-between">
                     <div>
                         <h4 class="text-title-md font-bold text-black dark:text-white">
-                           {{ $totalProducts }}
+                            {{ $totalProducts }}
                         </h4>
                         <span class="text-sm font-medium">Total Product</span>
                     </div>
@@ -134,7 +134,7 @@
                 <div class="mt-4 flex items-end justify-between">
                     <div>
                         <h4 class="text-title-md font-bold text-black dark:text-white">
-                            {{$clients->count()}}
+                            {{ $clients->count() }}
                         </h4>
                         <span class="text-sm font-medium">Total Client</span>
                     </div>
@@ -153,149 +153,27 @@
             <!-- Card Item End -->
         </div>
 
+        <div class="grid grid-cols-2  mt-4 gap-4">
+            <div class=" w-full">
+                @include('partials.chart-01')
 
-        <div class="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
-
-            @include('partials.chart-01')
-
-            @include('partials.chart-02')
-
-            @include('partials.chart-03')
-
-            @include('partials.map-01')
-
-            <div class="col-span-12 xl:col-span-8">
-                @include('partials.table-01')
             </div>
-
-            <div
-                class="col-span-12 rounded-sm border border-stroke bg-white py-6 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4">
-                <h4 class="mb-6 px-7.5 text-xl font-bold text-black dark:text-white">
-                    Chats
-                </h4>
-
-                <div>
-                    <a href="messages.html"
-                        class="flex items-center gap-5 px-7.5 py-3 hover:bg-gray-3 dark:hover:bg-meta-4">
-                        <div class="relative h-14 w-14 rounded-full">
-                            <img src="./images/user/user-03.png" alt="User" />
-                            <span
-                                class="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-3"></span>
-                        </div>
-
-                        <div class="flex flex-1 items-center justify-between">
-                            <div>
-                                <h5 class="font-medium text-black dark:text-white">
-                                    Devid Heilo
-                                </h5>
-                                <p>
-                                    <span class="text-sm font-medium text-black dark:text-white">Hello, how are you?</span>
-                                    <span class="text-xs"> . 12 min</span>
-                                </p>
-                            </div>
-                            <div class="flex h-6 w-6 items-center justify-center rounded-full bg-primary">
-                                <span class="text-sm font-medium text-white">3</span>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="messages.html"
-                        class="flex items-center gap-5 px-7.5 py-3 hover:bg-gray-3 dark:hover:bg-meta-4">
-                        <div class="relative h-14 w-14 rounded-full">
-                            <img src="./images/user/user-04.png" alt="User" />
-                            <span
-                                class="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-3"></span>
-                        </div>
-
-                        <div class="flex flex-1 items-center justify-between">
-                            <div>
-                                <h5 class="font-medium">Henry Fisher</h5>
-                                <p>
-                                    <span class="text-sm font-medium">I am waiting for you</span>
-                                    <span class="text-xs"> . 5:54 PM</span>
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="messages.html"
-                        class="flex items-center gap-5 px-7.5 py-3 hover:bg-gray-3 dark:hover:bg-meta-4">
-                        <div class="relative h-14 w-14 rounded-full">
-                            <img src="./images/user/user-05.png" alt="User" />
-                            <span
-                                class="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-6"></span>
-                        </div>
-
-                        <div class="flex flex-1 items-center justify-between">
-                            <div>
-                                <h5 class="font-medium">Wilium Smith</h5>
-                                <p>
-                                    <span class="text-sm font-medium">Where are you now?</span>
-                                    <span class="text-xs"> . 10:12 PM</span>
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="messages.html"
-                        class="flex items-center gap-5 px-7.5 py-3 hover:bg-gray-3 dark:hover:bg-meta-4">
-                        <div class="relative h-14 w-14 rounded-full">
-                            <img src="./images/user/user-01.png" alt="User" />
-                            <span
-                                class="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-3"></span>
-                        </div>
-
-                        <div class="flex flex-1 items-center justify-between">
-                            <div>
-                                <h5 class="font-medium text-black dark:text-white">
-                                    Henry Deco
-                                </h5>
-                                <p>
-                                    <span class="text-sm font-medium text-black dark:text-white">Thank you so much!</span>
-                                    <span class="text-xs"> . Sun</span>
-                                </p>
-                            </div>
-                            <div class="flex h-6 w-6 items-center justify-center rounded-full bg-primary">
-                                <span class="text-sm font-medium text-white">2</span>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="messages.html"
-                        class="flex items-center gap-5 px-7.5 py-3 hover:bg-gray-3 dark:hover:bg-meta-4">
-                        <div class="relative h-14 w-14 rounded-full">
-                            <img src="./images/user/user-02.png" alt="User" />
-                            <span
-                                class="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-7"></span>
-                        </div>
-
-                        <div class="flex flex-1 items-center justify-between">
-                            <div>
-                                <h5 class="font-medium">Jubin Jack</h5>
-                                <p>
-                                    <span class="text-sm font-medium">I really love that!</span>
-                                    <span class="text-xs"> . Oct 23</span>
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="messages.html"
-                        class="flex items-center gap-5 px-7.5 py-3 hover:bg-gray-3 dark:hover:bg-meta-4">
-                        <div class="relative h-14 w-14 rounded-full">
-                            <img src="./images/user/user-05.png" alt="User" />
-                            <span
-                                class="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-6"></span>
-                        </div>
-
-                        <div class="flex flex-1 items-center justify-between">
-                            <div>
-                                <h5 class="font-medium">Wilium Smith</h5>
-                                <p>
-                                    <span class="text-sm font-medium">Where are you now?</span>
-                                    <span class="text-xs"> . Sep 20</span>
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+            <div class=" w-full h-full">
+                @include('partials.chart-02')
             </div>
-
         </div>
+
+        <div class="grid grid-cols-2  mt-4 gap-4">
+            <div>
+               @include('partials.chart-03')
+            </div>
+            <div>
+                 @include('partials.map-01')
+            </div>
+        </div>
+
+
+
+        
     </div>
 @endsection

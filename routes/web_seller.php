@@ -30,6 +30,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/stocks/{product:_id}', [ProductController::class, 'manageStockIndex'])->name('stocks.edit');
     Route::post('/products/{product}/manage-stock', [ProductController::class, 'manageStock'])->name('products.manageStock');
     Route::get('/api/stock-movements', [DashboardController::class, 'mouvementStock']);
+    Route::get('/api/chart-data', [DashboardController::class, 'getChartData']);
+    Route::get('/api/messages-locations', [DashboardController::class, 'getChartDataLocation']);
+    Route::get('/api/shop/visitors', [DashboardController::class, 'getShopVisitors']);
+
+
 
 
     Route::get('/seller/shops', [ShopController::class, 'index'])->name('shops.index');

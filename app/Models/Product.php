@@ -94,7 +94,7 @@ class Product extends Model
             'product_id' => $this->id,
             'type' => $type,
             'quantity' => $quantity,
-            'reason' => $reason,
+            'raison' => $reason,
             'performed_by' => $performedBy,
             'shop_id' => $shop, 
         ]);

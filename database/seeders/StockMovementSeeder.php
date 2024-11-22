@@ -17,9 +17,9 @@ class StockMovementSeeder extends Seeder
                 '_id' => Str::uuid(),
                 'product_id' => 1, // Remplacez par un ID valide
                 'type' => 'add',
-                'quantity' => 100,
+                'quantity' => 10,
                 'shop_id' => 1, // Remplacez par un ID valide
-                'created_at' => Carbon::create('2024', '11', '01', '14', '30'),
+                'created_at' => Carbon::create('2024', '01', '01', '14', '30'),
                 'updated_at' => Carbon::create('2024', '11', '01', '14', '30'),
             ],
             [
@@ -28,16 +28,16 @@ class StockMovementSeeder extends Seeder
                 'type' => 'remove',
                 'quantity' => 50,
                 'shop_id' => 1,
-                'created_at' => Carbon::create('2024', '10', '15', '10', '00'),
+                'created_at' => Carbon::create('2024', '01', '15', '10', '00'),
                 'updated_at' => Carbon::create('2024', '10', '15', '10', '00'),
             ],
             [
                 '_id' => Str::uuid(),
                 'product_id' => 3,
                 'type' => 'add',
-                'quantity' => 200,
+                'quantity' => 10,
                 'shop_id' => 2,
-                'created_at' => Carbon::create('2024', '06', '05', '08', '45'),
+                'created_at' => Carbon::create('2024', '01', '05', '08', '45'),
                 'updated_at' => Carbon::create('2024', '09', '05', '08', '45'),
             ],
 
@@ -45,10 +45,10 @@ class StockMovementSeeder extends Seeder
                 '_id' => Str::uuid(),
                 'product_id' => 1, // Remplacez par un ID valide
                 'type' => 'add',
-                'quantity' => 100,
+                'quantity' => 20,
                 'shop_id' => 1, // Remplacez par un ID valide
-                'created_at' => Carbon::create('2024', '11', '01', '14', '30'),
-                'updated_at' => Carbon::create('2024', '11', '01', '14', '30'),
+                'created_at' => Carbon::create('2024', '03', '01', '14', '30'),
+                'updated_at' => Carbon::create('2024', '03', '01', '14', '30'),
             ],
             [
                 '_id' => Str::uuid(),
@@ -56,16 +56,16 @@ class StockMovementSeeder extends Seeder
                 'type' => 'remove',
                 'quantity' => 50,
                 'shop_id' => 1,
-                'created_at' => Carbon::create('2024', '10', '15', '10', '00'),
+                'created_at' => Carbon::create('2024', '04', '15', '10', '00'),
                 'updated_at' => Carbon::create('2024', '10', '15', '10', '00'),
             ],
             [
                 '_id' => Str::uuid(),
                 'product_id' => 3,
                 'type' => 'add',
-                'quantity' => 200,
+                'quantity' => 30,
                 'shop_id' => 2,
-                'created_at' => Carbon::create('2024', '09', '05', '08', '45'),
+                'created_at' => Carbon::create('2024', '05', '05', '08', '45'),
                 'updated_at' => Carbon::create('2024', '09', '05', '08', '45'),
             ],
 
@@ -73,25 +73,25 @@ class StockMovementSeeder extends Seeder
                 '_id' => Str::uuid(),
                 'product_id' => 1, // Remplacez par un ID valide
                 'type' => 'add',
-                'quantity' => 100,
+                'quantity' => 20,
                 'shop_id' => 1, // Remplacez par un ID valide
-                'created_at' => Carbon::create('2024', '11', '01', '14', '30'),
-                'updated_at' => Carbon::create('2024', '11', '01', '14', '30'),
+                'created_at' => Carbon::create('2024', '03', '01', '14', '30'),
+                'updated_at' => Carbon::create('2024', '03', '01', '14', '30'),
             ],
             [
                 '_id' => Str::uuid(),
                 'product_id' => 2,
                 'type' => 'remove',
-                'quantity' => 50,
+                'quantity' => 60,
                 'shop_id' => 1,
-                'created_at' => Carbon::create('2024', '17', '15', '10', '00'),
+                'created_at' => Carbon::create('2024', '06', '15', '10', '00'),
                 'updated_at' => Carbon::create('2024', '10', '15', '10', '00'),
             ],
             [
                 '_id' => Str::uuid(),
                 'product_id' => 3,
                 'type' => 'add',
-                'quantity' => 200,
+                'quantity' => 40,
                 'shop_id' => 2,
                 'created_at' => Carbon::create('2024', '08', '05', '08', '45'),
                 'updated_at' => Carbon::create('2024', '09', '05', '08', '45'),
@@ -101,10 +101,10 @@ class StockMovementSeeder extends Seeder
                 '_id' => Str::uuid(),
                 'product_id' => 1, // Remplacez par un ID valide
                 'type' => 'add',
-                'quantity' => 100,
+                'quantity' => 20,
                 'shop_id' => 1, // Remplacez par un ID valide
                 'created_at' => Carbon::create('2024', '04', '01', '14', '30'),
-                'updated_at' => Carbon::create('2024', '11', '01', '14', '30'),
+                'updated_at' => Carbon::create('2024', '03', '01', '14', '30'),
             ],
             [
                 '_id' => Str::uuid(),
@@ -112,14 +112,14 @@ class StockMovementSeeder extends Seeder
                 'type' => 'remove',
                 'quantity' => 50,
                 'shop_id' => 1,
-                'created_at' => Carbon::create('2024', '10', '15', '10', '00'),
+                'created_at' => Carbon::create('2024', '04', '15', '10', '00'),
                 'updated_at' => Carbon::create('2024', '10', '15', '10', '00'),
             ],
             [
                 '_id' => Str::uuid(),
                 'product_id' => 3,
                 'type' => 'add',
-                'quantity' => 200,
+                'quantity' => 100,
                 'shop_id' => 2,
                 'created_at' => Carbon::create('2024', '09', '05', '08', '45'),
                 'updated_at' => Carbon::create('2024', '09', '05', '08', '45'),
@@ -129,10 +129,38 @@ class StockMovementSeeder extends Seeder
                 '_id' => Str::uuid(),
                 'product_id' => 1, // Remplacez par un ID valide
                 'type' => 'add',
-                'quantity' => 100,
+                'quantity' => 10,
                 'shop_id' => 1, // Remplacez par un ID valide
-                'created_at' => Carbon::create('2024', '11', '01', '14', '30'),
-                'updated_at' => Carbon::create('2024', '11', '01', '14', '30'),
+                'created_at' => Carbon::create('2024', '03', '01', '14', '30'),
+                'updated_at' => Carbon::create('2024', '03', '01', '14', '30'),
+            ],
+            [
+                '_id' => Str::uuid(),
+                'product_id' => 2,
+                'type' => 'remove',
+                'quantity' => 30,
+                'shop_id' => 1,
+                'created_at' => Carbon::create('2024', '04', '15', '10', '00'),
+                'updated_at' => Carbon::create('2024', '10', '15', '10', '00'),
+            ],
+            [
+                '_id' => Str::uuid(),
+                'product_id' => 3,
+                'type' => 'add',
+                'quantity' => 70,
+                'shop_id' => 2,
+                'created_at' => Carbon::create('2024', '06', '05', '08', '45'),
+                'updated_at' => Carbon::create('2024', '09', '05', '08', '45'),
+            ],
+
+            [
+                '_id' => Str::uuid(),
+                'product_id' => 1, // Remplacez par un ID valide
+                'type' => 'add',
+                'quantity' => 20,
+                'shop_id' => 1, // Remplacez par un ID valide
+                'created_at' => Carbon::create('2024', '05', '01', '14', '30'),
+                'updated_at' => Carbon::create('2024', '03', '01', '14', '30'),
             ],
             [
                 '_id' => Str::uuid(),
@@ -140,7 +168,7 @@ class StockMovementSeeder extends Seeder
                 'type' => 'remove',
                 'quantity' => 50,
                 'shop_id' => 1,
-                'created_at' => Carbon::create('2024', '10', '15', '10', '00'),
+                'created_at' => Carbon::create('2024', '06', '15', '10', '00'),
                 'updated_at' => Carbon::create('2024', '10', '15', '10', '00'),
             ],
             [
@@ -149,7 +177,7 @@ class StockMovementSeeder extends Seeder
                 'type' => 'add',
                 'quantity' => 200,
                 'shop_id' => 2,
-                'created_at' => Carbon::create('2024', '09', '05', '08', '45'),
+                'created_at' => Carbon::create('2024', '05', '05', '08', '45'),
                 'updated_at' => Carbon::create('2024', '09', '05', '08', '45'),
             ],
 
@@ -159,35 +187,7 @@ class StockMovementSeeder extends Seeder
                 'type' => 'add',
                 'quantity' => 100,
                 'shop_id' => 1, // Remplacez par un ID valide
-                'created_at' => Carbon::create('2024', '11', '01', '14', '30'),
-                'updated_at' => Carbon::create('2024', '11', '01', '14', '30'),
-            ],
-            [
-                '_id' => Str::uuid(),
-                'product_id' => 2,
-                'type' => 'remove',
-                'quantity' => 50,
-                'shop_id' => 1,
-                'created_at' => Carbon::create('2024', '05', '15', '10', '00'),
-                'updated_at' => Carbon::create('2024', '10', '15', '10', '00'),
-            ],
-            [
-                '_id' => Str::uuid(),
-                'product_id' => 3,
-                'type' => 'add',
-                'quantity' => 200,
-                'shop_id' => 2,
-                'created_at' => Carbon::create('2024', '09', '05', '08', '45'),
-                'updated_at' => Carbon::create('2024', '09', '05', '08', '45'),
-            ],
-
-            [
-                '_id' => Str::uuid(),
-                'product_id' => 1, // Remplacez par un ID valide
-                'type' => 'add',
-                'quantity' => 100,
-                'shop_id' => 1, // Remplacez par un ID valide
-                'created_at' => Carbon::create('2024', '11', '01', '14', '30'),
+                'created_at' => Carbon::create('2024', '03', '01', '14', '30'),
                 'updated_at' => Carbon::create('2024', '11', '01', '14', '30'),
             ],
             [
@@ -266,7 +266,7 @@ class StockMovementSeeder extends Seeder
             ],
         ];
 
-        
+        // Insérer les données dans la table stock_movements
         DB::table('stock_movements')->insert($stockMovements);
     }
 }

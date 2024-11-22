@@ -30,7 +30,7 @@
                             </div>
                         </div>
                         <div class="tpdealcontact__count">
-                            <div class="tpdealcontact__countdown" data-countdown="2022/12/29"></div>
+                            <div class="tpdealcontact__countdown" data-countdown="2024/12/29"></div>
                             <i>Reste jusqu'à la <br> fin de l'offre</i>
                         </div>
                     </div>

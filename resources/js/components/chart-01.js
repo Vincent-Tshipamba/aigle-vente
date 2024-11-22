@@ -138,11 +138,11 @@ const chart01 = () => {
                     series: [
                         {
                             name: "Total Revenue",
-                            data: data.revenues, // From the API response
+                            data: data.revenues, 
                         },
                         {
                             name: "Total Sales",
-                            data: data.sales, // From the API response
+                            data: data.sales, 
                         },
                     ],
                     xaxis: {

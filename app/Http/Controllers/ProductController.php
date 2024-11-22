@@ -238,7 +238,7 @@ class ProductController extends Controller
     public function requestPromotion(Request $request, Product $product)
     {
         $seller = Auth::user()->seller;
-
+ 
         // Vérifier si le produit appartient bien à une boutique du vendeur connecté
         if (!$seller || !$seller->shops->contains($product->shop)) {
             return response()->json(['error' => 'Accès non autorisé à ce produit.'], 403);

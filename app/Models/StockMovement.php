@@ -14,6 +14,7 @@ class StockMovement extends Model
         'type',
         'quantity',
         'shop_id',
+        'raison'
     ];
 
     protected static function boot()

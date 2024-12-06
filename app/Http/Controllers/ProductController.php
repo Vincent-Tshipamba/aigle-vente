@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shop;
+use App\Models\Stock;
 use App\Models\Seller;
 use App\Models\Product;
-use Illuminate\Http\Request;
-use App\Models\CategoryProduct;
-use App\Models\ProductDetail;
 use App\Models\ProductState;
-use App\Models\Stock;
+use Illuminate\Http\Request;
+use App\Models\ProductDetail;
+use App\Models\CategoryProduct;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -36,7 +37,8 @@ class ProductController extends Controller
         return view('seller.produits.index', compact('products', 'categories', 'shop', 'stocks'));
     }
 
-    public function manageStockIndex ($id){
+    public function manageStockIndex($id)
+    {
         $product = Product::where('_id', $id)->first();
 
         if (!$product) {
@@ -55,7 +57,7 @@ class ProductController extends Controller
             'reason' => 'required|string|max:255',
         ]);
 
-        $shop= $product->shop->id;
+        $shop = $product->shop->id;
 
         $product->recordStockMovement(
             $request->type,
@@ -129,7 +131,7 @@ class ProductController extends Controller
 
 
             // Création des détails du produit
-           ProductDetail::create([
+            $productDetail = ProductDetail::create([
                 'weight' => $validated['weight'] ?? null,
                 'dimensions' => $validated['dimensions'] ?? null,
                 'color' => $validated['color'] ?? null,
@@ -140,6 +142,11 @@ class ProductController extends Controller
                 'brand' => $validated['brand'] ?? null,
                 'product_id' => $product->id,
             ]);
+
+            if (!$productDetail) {
+                Log::error('Le produit n\'a pas été créé.');
+                return redirect()->back()->with('error', 'Le produit n\'a pas pu être créé.')->withInput();
+            }
 
             // Ajout du stock
             $product->stocks()->create([
@@ -158,7 +165,7 @@ class ProductController extends Controller
                 }
             }
 
-            return redirect()->route('seller.shops.products.index', $product->shop->id)
+            return redirect()->route('seller.shops.products.index', $product->shop->_id)
                 ->with('success', 'Produit créé avec succès !');
         } catch (\Illuminate\Validation\ValidationException $e) {
             Log::error('Erreurs de validation: ', $e->errors());
@@ -191,31 +198,103 @@ class ProductController extends Controller
         return view('client.products.show', compact('product', 'otherProducts'));
     }
 
-    public function update(Request $request, Product $product)
+    public function edit(Shop $shop, Product $product)
     {
-        $seller = Auth::user()->seller;
 
-        if (!$seller || !$seller->shops->contains($product->shop)) {
-            return response()->json(['error' => 'Accès non autorisé à ce produit.'], 403);
+        if ($shop->id !== $product->shop_id) {
+            abort(403, 'Vous n\'avez pas accès à ce produit.');
         }
 
-        $validated = $request->validate([
-            'name' => 'string|max:255',
-            'stock_quantity' => 'integer',
-            'unit_price' => 'numeric',
-            'category_product_id' => 'exists:category_products,id', // Correction ici
-            'description' => 'nullable|string',
+        $product = Product::where('_id', $product->_id)->with(['photos', 'stocks'])->firstOrFail();
+        $categories = CategoryProduct::all();
+        $state = ProductState::all();
+        return view('seller.produits.edit', [
+            'shop' => $shop,
+            'product' => $product,
+            'categories' => $categories,
+            'state' => $state
         ]);
-
-        $product->update($validated);
-
-        // Mise à jour du stock, si spécifié
-        if ($request->filled('stock_quantity')) {
-            $product->stocks()->updateOrCreate([], ['quantity' => $validated['stock_quantity']]);
-        }
-
-        return redirect()->back()->with('success', 'Produit mis à jour avec succès !');
     }
+
+
+    public function update(Request $request, Shop $shop, Product $product)
+    {
+        try {
+            // Validation des données
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'stock_quantity' => 'required|integer',
+                'price' => 'required|numeric',
+                'category_product_id' => 'required|exists:category_products,id',
+                'description' => 'nullable|string',
+                'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+                'weight' => 'nullable|numeric',
+                'dimensions' => 'nullable|string|max:255',
+                'color' => 'nullable|string|max:50',
+                'size' => 'nullable|string|max:50',
+                'model' => 'nullable|string|max:50',
+                'shipping' => 'nullable|string|max:255',
+                'care' => 'nullable|string|max:255',
+                'brand' => 'nullable|string|max:50',
+            ]);
+
+            // Mise à jour des informations principales du produit
+            $product->update([
+                'name' => $validated['name'],
+                'unit_price' => $validated['price'],
+                'category_product_id' => $validated['category_product_id'],
+                'description' => $validated['description'],
+                'product_state_id' => $request->state,
+            ]);
+
+            // Mise à jour ou création des détails du produit
+            $productDetail = $product->details()->firstOrNew();
+            $productDetail->fill([
+                'weight' => $validated['weight'] ?? null,
+                'dimensions' => $validated['dimensions'] ?? null,
+                'color' => $validated['color'] ?? null,
+                'size' => $validated['size'] ?? null,
+                'model' => $validated['model'] ?? null,
+                'shipping' => $validated['shipping'] ?? null,
+                'care' => $validated['care'] ?? null,
+                'brand' => $validated['brand'] ?? null,
+            ]);
+            $productDetail->save();
+
+            // Mise à jour du stock
+            $product->stocks()->updateOrCreate([], [
+                'quantity' => $validated['stock_quantity'],
+            ]);
+
+            // Gestion des images
+            if ($request->hasFile('images')) {
+                // Supprimer les anciennes images si nécessaire
+                foreach ($product->photos as $photo) {
+                    Storage::disk('public')->delete($photo->image);
+                    $photo->delete();
+                }
+
+                // Ajouter les nouvelles images
+                foreach ($request->file('images') as $imageFile) {
+                    $path = $imageFile->store('images', 'public');
+                    $product->photos()->create([
+                        'image' => $path,
+                        'description' => 'Image pour ' . $product->name,
+                    ]);
+                }
+            }
+
+            return redirect()->route('seller.shops.products.index', $product->shop->_id)
+                ->with('success', 'Produit mis à jour avec succès !');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Log::error('Erreurs de validation: ', $e->errors());
+            return redirect()->back()->withErrors($e->errors())->withInput();
+        } catch (\Exception $e) {
+            Log::error('Erreur lors de la mise à jour du produit: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Une erreur est survenue lors de la mise à jour du produit : ' . $e->getMessage())->withInput();
+        }
+    }
+
 
     // Méthode de suppression d'un produit
     public function destroy(Product $product)
@@ -238,7 +317,7 @@ class ProductController extends Controller
     public function requestPromotion(Request $request, Product $product)
     {
         $seller = Auth::user()->seller;
- 
+
         // Vérifier si le produit appartient bien à une boutique du vendeur connecté
         if (!$seller || !$seller->shops->contains($product->shop)) {
             return response()->json(['error' => 'Accès non autorisé à ce produit.'], 403);
@@ -269,6 +348,27 @@ class ProductController extends Controller
             // Gestion des erreurs
             Log::error('Erreur lors de la demande de promotion : ' . $e->getMessage());
             return response()->json(['error' => 'Une erreur est survenue lors de la demande de promotion.'], 500);
+        }
+    }
+
+    public function deleteImage(Request $request, Product $product, $photoId)
+    {
+        try {
+            // Trouver l'image en base de données
+            $photo = $product->photos()->findOrFail($photoId);
+
+            // Supprimer l'image du stockage
+            $imagePath = 'public/' . $photo->image; // Le chemin de l'image stockée
+            if (Storage::exists($imagePath)) {
+                Storage::delete($imagePath); // Suppression du fichier
+            }
+
+            // Supprimer l'entrée en base de données
+            $photo->delete();
+
+            return redirect()->back()->with('success', 'Image supprimée avec succès!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Une erreur est survenue lors de la suppression de l\'image.');
         }
     }
 }

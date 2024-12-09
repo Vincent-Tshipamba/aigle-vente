@@ -44,14 +44,17 @@
                                                 $firstPhoto = $product->photos->first();
                                             @endphp
                                             @if ($firstPhoto)
-                                                <img src="{{ asset($firstPhoto->image) }}"
-                                                    alt="{{ $product->name }}">
+                                                <img src="{{ asset($firstPhoto->image) }}" alt="{{ $product->name }}">
                                                 <img class="product-thumb-secondary"
                                                     src="{{ asset($firstPhoto->image) }}" alt="">
                                             @endif
                                         </a>
                                         <div class="tpproduct__thumb-action">
-                                            <a class="comphare" href="#" onclick="addToWishList(event, {{ $product->id }})"><i class="fal fa-heart"></i></a>
+                                            @auth
+                                                <a class="comphare" href="#"
+                                                    onclick="addToWishList(event, {{ $product->id }})"><i
+                                                        class="fal fa-heart"></i></a>
+                                            @endauth
                                             <a class="quckview" href="{{ route('products.show', $product->_id) }}"><i
                                                     class="fal fa-eye"></i></a>
 
@@ -82,9 +85,21 @@
                                                 @endif
                                             </div>
                                             <div class="tpproduct__cart">
-                                                <a href="" onclick="addToWishList(event, {{ $product->id }})"><i class="fal fa-heart"></i>
-                                                    Ajouter à la liste des souhaits
-                                                </a>
+                                                @if (Auth::check())
+                                                    <div class="tpproduct__cart">
+                                                        <a href="cart.html"
+                                                            onclick="addToWishList(event, {{ $product->id }})"><i
+                                                                class="fal fa-shopping-cart"></i>
+                                                            Ajouter à
+                                                            la
+                                                            liste des souhaits
+                                                        </a>
+                                                    </div>
+                                                @else
+                                                    <div class="tpproduct__cart">
+                                                        <span>${{ $product->unit_price }}</span>
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -100,7 +115,9 @@
                 @endif
             </div>
             <div class="text-center">
-                <a href="{{ route('products.index') }}" class="underline text-[#e38407] hover:scale-115 hover:text-[#e38407] hover:underline hover:font-bold">Voir tous les produits</a>
+                <a href="{{ route('products.index') }}"
+                    class="underline text-[#e38407] hover:scale-115 hover:text-[#e38407] hover:underline hover:font-bold">Voir
+                    tous les produits</a>
             </div>
             <!-- Répétez la structure ci-dessus pour chaque onglet avec des conditions pour filtrer les produits -->
             <div class="tab-pane fade" id="nav-popular" role="tabpanel" aria-labelledby="nav-popular-tab">
@@ -156,7 +173,10 @@
                                                 src="{{ asset('storage/' . $firstPhoto->image) }}" alt="">
                                         </a>
                                         <div class="tpproduct__thumb-action">
-                                            <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
+                                            @auth
+                                                <a class="comphare" onclick="addToWishList(event, {{ $product->id }})"
+                                                    href="#"><i class="fal fa-heart"></i></a>
+                                            @endauth
                                             <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
                                             <a class="wishlist" href=""><i class="fal fa-heart"></i></a>
                                         </div>

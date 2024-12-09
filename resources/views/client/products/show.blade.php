@@ -428,9 +428,7 @@
                                                     <a href="cart.html"
                                                         onclick="addToWishList(event, {{ $product->id }})"><i
                                                             class="fal fa-shopping-cart"></i>
-                                                        Ajouter à
-                                                        la
-                                                        liste des souhaits
+                                                        Ajouter à la liste des souhaits
                                                     </a>
                                                 </div>
                                             @else

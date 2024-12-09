@@ -84,23 +84,19 @@
                                                         €</span>
                                                 @endif
                                             </div>
-                                            <div class="tpproduct__cart">
-                                                @if (Auth::check())
-                                                    <div class="tpproduct__cart">
-                                                        <a href="cart.html"
-                                                            onclick="addToWishList(event, {{ $product->id }})"><i
-                                                                class="fal fa-shopping-cart"></i>
-                                                            Ajouter à
-                                                            la
-                                                            liste des souhaits
-                                                        </a>
-                                                    </div>
-                                                @else
-                                                    <div class="tpproduct__cart">
-                                                        <span>${{ $product->unit_price }}</span>
-                                                    </div>
-                                                @endif
-                                            </div>
+                                            @if (Auth::check())
+                                                <div class="tpproduct__cart">
+                                                    <a href="cart.html"
+                                                        onclick="addToWishList(event, {{ $product->id }})"><i
+                                                            class="fal fa-shopping-cart"></i>
+                                                        Ajouter à la liste des souhaits
+                                                    </a>
+                                                </div>
+                                            @else
+                                                <div class="tpproduct__cart">
+                                                    <span>${{ $product->unit_price }}</span>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

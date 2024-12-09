@@ -10,7 +10,7 @@ use Spatie\Permission\Models\Permission;
 
 class RolePermissionController extends Controller
 {
-    public function index()
+    public function getRolesPermissions()
     {
         $roles = Role::with('permissions')->get(); // Load roles with their associated permissions
         $permissions = Permission::all();

@@ -109,53 +109,58 @@
     <script>
         function addToWishList(event, productId) {
             event.preventDefault();
-            $.ajax({
-                type: "post",
-                url: "{{ route('client.wishlist.add') }}",
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    productId: productId
-                },
-                dataType: "json",
-                success: function(response) {
-                    if (response.count) {
-                        $('.wishcount').text(response.count)
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: "top-end",
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.onmouseenter = Swal.stopTimer;
-                                toast.onmouseleave = Swal.resumeTimer;
-                            }
-                        });
-                        Toast.fire({
-                            icon: "success",
-                            title: response.success
-                        });
-                    }
+            let isAuthenticated = @auth true @else false @endauth;
+            if(isAuthenticated){
+                $.ajax({
+                    type: "post",
+                    url: "{{ route('client.wishlist.add') }}",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        productId: productId
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.count) {
+                            $('.wishcount').text(response.count)
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.onmouseenter = Swal.stopTimer;
+                                    toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+                            Toast.fire({
+                                icon: "success",
+                                title: response.success
+                            });
+                        }
 
-                    if (response.exists) {
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: "top-end",
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.onmouseenter = Swal.stopTimer;
-                                toast.onmouseleave = Swal.resumeTimer;
-                            }
-                        });
-                        Toast.fire({
-                            icon: "success",
-                            title: response.exists
-                        });
+                        if (response.exists) {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.onmouseenter = Swal.stopTimer;
+                                    toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+                            Toast.fire({
+                                icon: "success",
+                                title: response.exists
+                            });
+                        }
                     }
-                }
-            });
+                });
+            } else {
+                window.location.href="{{ route('login') }}"
+            }
         }
     </script>
 

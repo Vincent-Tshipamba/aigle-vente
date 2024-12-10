@@ -65,12 +65,10 @@
                             <div class="tpproduct-details__cart ml-20">
                                 <button>Contacter le vendeur</button>
                             </div>
-                            @auth
-                                <div class="tpproduct-details__wishlist ml-20">
-                                    <a href="#" onclick="addToWishList(event, {{ $product->id }})"><i
-                                            class="fal fa-heart"></i></a>
-                                </div>
-                            @endauth
+                            <div class="tpproduct-details__wishlist ml-20">
+                                <a href="#" onclick="addToWishList(event, {{ $product->id }})"><i
+                                        class="fal fa-heart"></i></a>
+                            </div>
                         </div>
                         <div class="tpproduct-details__information tpproduct-details__tags">
                             <p>Tags:</p>
@@ -398,10 +396,8 @@
                                                 src="{{ asset($firstPhoto->image) }}" alt="{{ $product->name }}">
                                         </a>
                                         <div class="tpproduct__thumb-action">
-                                            @auth
-                                                <a class="comphare" onclick="addToWishList(event, {{ $product->id }})"
-                                                    href="#"><i class="fal fa-heart"></i></a>
-                                            @endauth
+                                            <a class="comphare" onclick="addToWishList(event, {{ $product->id }})"
+                                                href="#"><i class="fal fa-heart"></i></a>
 
                                             <a class="quckview" href="{{ route('products.show', $product->_id) }}"><i
                                                     class="fal fa-eye"></i></a>
@@ -423,19 +419,13 @@
                                             <div class="tpproduct__priceinfo-list">
                                                 <span>${{ $product->unit_price }}</span>
                                             </div>
-                                            @if (Auth::check())
-                                                <div class="tpproduct__cart">
-                                                    <a href="cart.html"
-                                                        onclick="addToWishList(event, {{ $product->id }})"><i
-                                                            class="fal fa-shopping-cart"></i>
-                                                        Ajouter à la liste des souhaits
-                                                    </a>
-                                                </div>
-                                            @else
-                                                <div class="tpproduct__cart">
-                                                    <span>${{ $product->unit_price }}</span>
-                                                </div>
-                                            @endif
+                                            <div class="tpproduct__cart">
+                                                <a href="cart.html"
+                                                    onclick="addToWishList(event, {{ $product->id }})"><i
+                                                        class="fal fa-shopping-cart"></i>
+                                                    Ajouter à la liste des souhaits
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

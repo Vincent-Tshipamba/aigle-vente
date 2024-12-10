@@ -53,11 +53,10 @@
                                                 @endif
                                             </a>
                                             <div class="tpproduct__thumb-action">
-                                                @auth
-                                                    <a class="comphare" href="#"
-                                                        onclick="addToWishList(event, {{ $product->id }})"><i
-                                                            class="fal fa-heart"></i></a>
-                                                @endauth
+                                                <a class="comphare" href="#"
+                                                    onclick="addToWishList(event, {{ $product->id }})"><i
+                                                        class="fal fa-heart"></i></a>
+
                                                 <a class="quckview"
                                                     href="{{ route('products.show', $product->_id) }}"><i
                                                         class="fal fa-eye"></i></a>
@@ -163,10 +162,10 @@
                                                     alt="">
                                             </a>
                                             <div class="tpproduct__thumb-action">
-                                                @auth
-                                                    <a class="comphare" onclick="addToWishList(event, {{ $product->id }})" href="#"><i
-                                                            class="fal fa-exchange"></i></a>
-                                                @endauth
+                                                <a class="comphare"
+                                                    onclick="addToWishList(event, {{ $product->id }})"
+                                                    href="#"><i class="fal fa-exchange"></i></a>
+
                                                 <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
                                                 <a class="wishlist" href=""><i class="fal fa-heart"></i></a>
                                             </div>

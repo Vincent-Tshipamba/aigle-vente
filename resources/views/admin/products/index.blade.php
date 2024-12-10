@@ -3,7 +3,7 @@
 @section('content')
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none sm:flex items-center mb-3">
-        <nav class="flex px-5 py-3 text-gray-700 rounded-lg bg-[#eaeaebf3] dark:bg-[#1E293B]" aria-label="Breadcrumb">
+        <nav class="flex w-full px-5 py-3 text-gray-700 rounded-lg bg-[#eaeaebf3] dark:bg-[#1E293B]" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-3">
                 <li class="inline-flex items-center">
                     <a href="{{ route('admin.dashboard') }}"
@@ -125,8 +125,15 @@
                                 class="hover:bg-[#f0e6d9] hover:scale-100 hover:cursor-pointer transition-all duration-300 ease-in-out">
                                 <td>{{ $key + 1 }}</td>
                                 <td onclick="window.location.href='{{ route('admin.products.show', $product->id) }}'"
-                                    class="hover:underline hover:text-[#e38407] hover:cursor-pointer hover:font-bold">
-                                    {{ $product->name }}
+                                    class="flex items-center px-6 py-4 hover:underline hover:text-[#e38407] hover:cursor-pointer hover:font-bold">
+                                    @php
+                                        $firstPhoto = $product->photos->first();
+                                    @endphp
+                                    <img class="w-10 h-10 rounded-full"
+                                        src="{{ $firstPhoto->image ?? asset('img/profil.jpeg') }}" alt="">
+                                    <div class="ps-3">
+                                        {{ $product->name }}
+                                    </div>
                                 </td>
                                 <td onclick="window.location.href='{{ route('admin.categories.show', $product->category_product->id) }}'"
                                     class="hover:underline hover:text-[#e38407] hover:cursor-pointer hover:font-bold">

@@ -120,8 +120,8 @@
                                 class="hover:bg-[#f0e6d9] hover:scale-100 hover:cursor-pointer transition-all duration-300 ease-in-out">
                                 <td>{{ $key + 1 }}</td>
                                 <td class="flex items-center px-6 py-4">
-                                    <img class="w-10 h-10 rounded-full" src="{{ asset('img/profil.jpeg') }}"
-                                        alt="">
+                                    <img class="w-10 h-10 rounded-full"
+                                        src="{{ $category->image ?? asset('img/profil.jpeg') }}" alt="">
                                     <div class="ps-3">
                                         <div class="text-base font-semibold">{{ $category->name }}</div>
                                     </div>
@@ -129,7 +129,8 @@
                                 <td>{{ $category->description }}</td>
                                 <td>{{ $category->products->count() }}</td>
                                 <td class="flex items-center gap-x-4">
-                                    <a href="" onclick="category('Modifier une catégorie', {{ $category->id }}, '{{ $category->name }}', '{{ $category->description }}', 'Enregistrer les modifications', '{{ route('admin.categories.update', $category->id) }}', 'PUT')"
+                                    <a href=""
+                                        onclick="category('Modifier une catégorie', {{ $category->id }}, '{{ $category->name }}', '{{ $category->description }}', 'Enregistrer les modifications', '{{ route('admin.categories.update', $category->id) }}', 'PUT')"
                                         class="text-blue-500 hover:text-blue-700 hover:underline hover:cursor-pointer transition-all duration-300 ease-in-out font-bold">
                                         Modifier
                                     </a>
@@ -150,7 +151,8 @@
 
 @section('script')
     <script>
-        function category(title = 'Créer une catégorie', id = '', name = '', description = '', confirmButtonText = 'Ajouter une catégorie', action = "{{ route('admin.categories.store') }}", method = 'POST') {
+        function category(title = 'Créer une catégorie', id = '', name = '', description = '', confirmButtonText =
+            'Ajouter une catégorie', action = "{{ route('admin.categories.store') }}", method = 'POST') {
             event.preventDefault();
 
             // Trigger SweetAlert with input
@@ -202,6 +204,20 @@
                     confirmButton: 'bg-[#e38407] hover:bg-[#e38407] text-white font-bold py-2 px-4 rounded', // Bouton de confirmation
                     cancelButton: 'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded' // Bouton d'annulation
                 },
+                showClass: {
+                    popup: `
+                    animate__animated
+                    animate__fadeInUp
+                    animate__faster
+                    `
+                },
+                hideClass: {
+                    popup: `
+                    animate__animated
+                    animate__fadeOutDown
+                    animate__faster
+                    `
+                }
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Faire la requête AJAX pour ajouter l'utilisateur
@@ -233,6 +249,20 @@
                                 text: error.responseJSON?.message ||
                                     'Une erreur est survenue lors de la création de la catégorie.',
                                 icon: 'error',
+                                showClass: {
+                                    popup: `
+                                        animate__animated
+                                        animate__fadeInUp
+                                        animate__faster
+                                        `
+                                },
+                                hideClass: {
+                                    popup: `
+                                    animate__animated
+                                    animate__fadeOutDown
+                                    animate__faster
+                                    `
+                                },
                                 customClass: {
                                     popup: 'bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-lg shadow-lg', // Classes Tailwind pour le popup
                                 }

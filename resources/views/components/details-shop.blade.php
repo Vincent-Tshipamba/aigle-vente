@@ -61,7 +61,7 @@
             <div class=" text-left flex ">
                 <p class="w-1/2">Ville : </p>
                 <span class="font-bold">
-                    {{ $owner->city->name }}
+                    {{ $owner->location->city ?? 'N/A' }}
                 </span>
             </div>
             <hr class="my-4">

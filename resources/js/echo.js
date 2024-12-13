@@ -4,7 +4,8 @@ import Pusher from 'pusher-js';
 window.Pusher = Pusher;
 
 window.Echo = new Echo({
-    broadcaster: 'reverb',
+    broadcaster: 'pusher',
+    cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
     key: import.meta.env.VITE_PUSHER_APP_KEY,
     wsHost: import.meta.env.VITE_PUSHER_HOST,
     wsPort: import.meta.env.VITE_PUSHER_PORT ?? 80,

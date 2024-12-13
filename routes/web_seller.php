@@ -10,21 +10,31 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['auth'])->group(function () {
- 
+
     Route::get('/seller/shop/message', [MessageController::class,'index'])->name('message.index');
     Route::post('/seller/shop/message/{seller_id}', [MessageController::class, 'store'])->name('message.store');
     Route::post('/seller/shop/message/{message}/mark-as-read', [MessageController::class, 'markAsRead'])->name('seller.shop.message.markAsRead');
     Route::post('/messages/send/{seller_id}', [MessageController::class, 'sendMessage'])->name('messages.send');
     Route::get('/messages/{contactId}', [MessageController::class, 'showConversation'])->name('messages.showConversation');
-   
+    Route::get('/messages', [MessageController::class, 'getUserMessages'])->name('messages');
 
-
-    Route::get('/seller/shops/{shop}/products', [ProductController::class, 'index'])->name('seller.shops.products.index');
+    Route::get('/shops/{shop:_id}/products/{product:_id}/edit', [ProductController::class, 'edit'])->name('seller.shops.products.edit');
+    Route::put('/shops/{shop}/products/{product}', [ProductController::class, 'update'])->name('seller.shops.products.update');
+    Route::get('/seller/shops/{shop:_id}/products', [ProductController::class, 'index'])->name('seller.shops.products.index');
     Route::get('/seller/shops/product/{product:_id}/detail', [ProductController::class, 'show'])->name('seller.shops.products.show');
     Route::post('/shops/{shop}/products', [ProductController::class, 'store'])->name('shop.products.store');
-    Route::put('/seller/shops/{product}', [ProductController::class, 'update'])->name('seller.shops.products.update');
     Route::delete('/seller/shops/{product}', [ProductController::class, 'destroy'])->name('seller.shops.products.destroy');
     Route::post('/shops/products/{product}/promotion-request', [ProductController::class, 'requestPromotion'])->name('products.promotion');
+    Route::get('/seller/shops/{shop:_id}/products/nouveau/product', [ProductController::class, 'create'])->name('seller.shops.products.create');
+    Route::get('/stocks/{product:_id}', [ProductController::class, 'manageStockIndex'])->name('stocks.edit');
+    Route::post('/products/{product}/manage-stock', [ProductController::class, 'manageStock'])->name('products.manageStock');
+    Route::get('/api/stock-movements', [DashboardController::class, 'mouvementStock']);
+    Route::get('/api/chart-data', [DashboardController::class, 'getChartData']);
+    Route::get('/api/messages-locations', [DashboardController::class, 'getChartDataLocation']);
+    Route::get('/api/shop/visitors', [DashboardController::class, 'getShopVisitors']);
+
+
+    Route::delete('/products/{product}/images/{photoId}', [ProductController::class, 'deleteImage'])->name('product.deleteImage');
 
 
     Route::get('/seller/shops', [ShopController::class, 'index'])->name('shops.index');
@@ -33,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/seller/dashboard', [DashboardController::class, 'index'])->name('seller.dashboard');
+    Route::get('/seller/profile', [SellerController::class, 'profile'])->name('seller.profile');
     Route::get('/dashboard/sales-statistics/{seller}', [DashboardController::class, 'salesStatistics'])->name('dashboard.salesStatistics');
     Route::get('/dashboard/order-statistics/{seller}', [DashboardController::class, 'orderStatistics'])->name('dashboard.orderStatistics');
     Route::get('/sellers/create', [SellerController::class, 'create'])->name('sellers.create');

@@ -15,20 +15,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             CategoryProductSeeder::class,
-            SellerSeeder::class,
-            ClientSeeder::class,
-            ShopSeeder::class,
-            ProductSeeder::class,
-            OrderSeeder::class,
-            PhotoSeeder::class,
-            FactureSeeder::class,
-            OrderProductSeeder::class,
-            DeliverySeeder::class,
-            PanierSeeder::class,
-            PanierItemSeeder::class,
-            StockSeeder::class,
-            RolesPermissionsSeeder::class,
-            WishlistSeeder::class
+            ProductStateSeeder::class
         ]);
 
     }

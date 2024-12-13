@@ -37,7 +37,12 @@ Route::middleware('userOnline')->group(function () {
     Route::get('/getProducts', [HomeController::class, 'getProducts'])->name('getProducts');
     Route::get('/getSearchProducts', [ProductController::class, 'getSearchProducts'])->name('getSearchProducts');
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
-    Route::get('/shop/{shop}', [ShopController::class, 'show'])->name('shops.show');
+
+
+    Route::middleware(['track.visits'])->group(function () {
+        Route::get('/shop/{_id}', [ShopController::class, 'show'])->name('shops.show');
+    });
+
 });
 
 // Routes for authenticated users

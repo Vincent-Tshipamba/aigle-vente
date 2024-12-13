@@ -53,7 +53,11 @@
                                                 @endif
                                             </a>
                                             <div class="tpproduct__thumb-action">
-                                                <a class="comphare" href="#" onclick="addToWishList(event, {{ $product->id }})"><i class="fal fa-heart"></i></a>
+                                                @auth
+                                                    <a class="comphare" href="#"
+                                                        onclick="addToWishList(event, {{ $product->id }})"><i
+                                                            class="fal fa-heart"></i></a>
+                                                @endauth
                                                 <a class="quckview"
                                                     href="{{ route('products.show', $product->_id) }}"><i
                                                         class="fal fa-eye"></i></a>
@@ -85,7 +89,9 @@
                                                     @endif
                                                 </div>
                                                 <div class="tpproduct__cart">
-                                                    <a href="" onclick="addToWishList(event, {{ $product->id }})"><i class="fal fa-heart"></i>
+                                                    <a href=""
+                                                        onclick="addToWishList(event, {{ $product->id }})"><i
+                                                            class="fal fa-heart"></i>
                                                         Ajouter à la liste des souhaits
                                                     </a>
                                                 </div>
@@ -157,8 +163,10 @@
                                                     alt="">
                                             </a>
                                             <div class="tpproduct__thumb-action">
-                                                <a class="comphare" href="#"><i
-                                                        class="fal fa-exchange"></i></a>
+                                                @auth
+                                                    <a class="comphare" onclick="addToWishList(event, {{ $product->id }})" href="#"><i
+                                                            class="fal fa-exchange"></i></a>
+                                                @endauth
                                                 <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
                                                 <a class="wishlist" href=""><i class="fal fa-heart"></i></a>
                                             </div>
@@ -293,9 +301,13 @@
 
     <script src="{{ Vite::asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
     <script>
-        function checkWindowSize() {
+        function checkWindowSize(rowperpage = null, totalSearchResults = null) {
             if ($(window).height >= $(document).height) {
-                fetchProducts();
+                if (rowperpage && totalSearchResults) {
+                    fetchSearchProducts(rowperpage, totalSearchResults)
+                } else {
+                    fetchProducts();
+                }
             }
         }
 

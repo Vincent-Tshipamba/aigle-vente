@@ -58,7 +58,7 @@
         <!-- header-cart-end -->
     @endauth
 
-    <main>
+    <main class="main-content">
         <!-- slider-area-start -->
         @include('partials.home-partials.slider')
         <!-- slider-area-end -->
@@ -171,6 +171,103 @@
                     }
                 }
             });
+        }
+    </script>
+    <script>
+        $('.search-input').keypress(function(e) {
+            var value = $(this).val();
+            const searchResults = `
+                <section class="product-area pb-70" id="productSection">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="tpsection mb-40">
+                                    <h4 class="tpsection__title">Produits <span> Populaires <img
+                                                src="{{ asset('img/icon/title-shape-01.jpg') }}" alt=""></span></h4>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                            </div>
+                        </div>
+                        <div class="w-full md:inset-0 product-container">
+                            <div
+                                class="row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-1 mx-auto">
+                                <div class="col searchResultProduct">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `;
+
+            $.ajax({
+                type: "get",
+                url: "{{ route('products.search') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    value: value
+                },
+                dataType: "json",
+                success: function(response) {
+                    const html = response.html
+                    $('.main-content').html(searchResults)
+
+                    const productContainer = $('.product-container');
+                    if (html.trim() === '') {
+                        productContainer.html(`
+                            <div class="p-4 text-md text-gray-800 mx-auto text-center rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">
+                                <span class="font-medium">Oups désolé!</span> Aucun produit disponible correspondant à votre recherche. <br><br>
+                                <button onclick="window.location.href='/products'" class="footer-widget__fw-news-btn tpsecondary-btn">Voir le catalogue des produits disponibles<i
+                                                class="fal fa-long-arrow-right"></i></button>
+                            </div>
+                        `);
+                    } else {
+                        $(".searchResultProduct:last").after(response.html).show().fadeIn()
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error fetching products:", error);
+                }
+            });
+        });
+
+        function fetchSearchProducts(rowperpage, total) {
+            var start = 0
+            var rowperpage = rowperpage
+            var totalProductsSearch = total
+            start = start + rowperpage
+
+            if (start <= totalProducts) {
+                $.ajax({
+                    type: "get",
+                    url: "{{ route('getSearchProducts') }}",
+                    data: {
+                        start: start,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        const html = response.html
+                        $('.main-content').html(searchResults)
+
+                        const productContainer = $('.product-container');
+                        if (html.trim() === '') {
+                            productContainer.html(`
+                            <div class="p-4 text-md text-gray-800 mx-auto text-center rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">
+                                <span class="font-medium">Oups désolé!</span> Aucun produit disponible correspondant à votre recherche. <br><br>
+                                <button onclick="window.location.href='/products'" class="footer-widget__fw-news-btn tpsecondary-btn">Voir le catalogue des produits disponibles<i
+                                                class="fal fa-long-arrow-right"></i></button>
+                            </div>
+                        `);
+                        } else {
+                            $(".searchResultProduct:last").after(response.html).show().fadeIn()
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error fetching products:", error);
+                    }
+                });
+            }
         }
     </script>
     @yield('script')

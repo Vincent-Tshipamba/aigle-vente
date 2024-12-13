@@ -8,35 +8,31 @@
                         <div class="d-flex align-items-start">
                             <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist"
                                 aria-orientation="vertical">
-                                <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill"
-                                    data-bs-target="#v-pills-home" type="button" role="tab"
-                                    aria-controls="v-pills-home" aria-selected="true">
-                                    <img src="{{ asset('img/product/home-one/product-1.jpg') }}" alt="">
-                                </button>
-                                <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill"
-                                    data-bs-target="#v-pills-profile" type="button" role="tab"
-                                    aria-controls="v-pills-profile" aria-selected="false">
-                                    <img src="{{ asset('img/product/home-one/product-2.jpg') }}" alt="">
-                                </button>
-                                <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill"
-                                    data-bs-target="#v-pills-messages" type="button" role="tab"
-                                    aria-controls="v-pills-messages" aria-selected="false">
-                                    <img src="{{ asset('img/product/home-one/product-3.jpg') }}" alt="">
-                                </button>
+                                @php
+                                    // Assuming $product->photos is a collection of photos
+                                    $photos = $product->photos;
+                                @endphp
+
+                                @foreach ($photos as $index => $photo)
+                                    <button class="nav-link {{ $index == 0 ? 'active' : '' }}"
+                                        id="v-pills-{{ $index }}-tab" data-bs-toggle="pill"
+                                        data-bs-target="#v-pills-{{ $index }}" type="button" role="tab"
+                                        aria-controls="v-pills-{{ $index }}"
+                                        aria-selected="{{ $index == 0 ? 'true' : 'false' }}">
+                                        <img src="{{ asset($photo->image) }}"
+                                            alt="{{ $product->name }} - {{ $index + 1 }}">
+                                    </button>
+                                @endforeach
                             </div>
                             <div class="tab-content" id="v-pills-tabContent">
-                                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
-                                    aria-labelledby="v-pills-home-tab">
-                                    <img src="{{ asset('img/product/home-one/product-1.jpg') }}" alt="">
-                                </div>
-                                <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
-                                    aria-labelledby="v-pills-profile-tab">
-                                    <img src="{{ asset('img/product/home-one/product-2.jpg') }}" alt="">
-                                </div>
-                                <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
-                                    aria-labelledby="v-pills-messages-tab">
-                                    <img src="{{ asset('img/product/home-one/product-3.jpg') }}" alt="">
-                                </div>
+                                @foreach ($photos as $index => $photo)
+                                    <div class="tab-pane fade {{ $index == 0 ? 'show active' : '' }}"
+                                        id="v-pills-{{ $index }}" role="tabpanel"
+                                        aria-labelledby="v-pills-{{ $index }}-tab">
+                                        <img src="{{ asset($photo->image) }}"
+                                            alt="{{ $product->name }} - {{ $index + 1 }}">
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -69,9 +65,12 @@
                             <div class="tpproduct-details__cart ml-20">
                                 <button>Contacter le vendeur</button>
                             </div>
-                            <div class="tpproduct-details__wishlist ml-20">
-                                <a href="#"><i class="fal fa-heart"></i></a>
-                            </div>
+                            @auth
+                                <div class="tpproduct-details__wishlist ml-20">
+                                    <a href="#" onclick="addToWishList(event, {{ $product->id }})"><i
+                                            class="fal fa-heart"></i></a>
+                                </div>
+                            @endauth
                         </div>
                         <div class="tpproduct-details__information tpproduct-details__tags">
                             <p>Tags:</p>
@@ -104,8 +103,8 @@
                             <ul class="nav nav-tabs pro-details-nav-btn" id="myTabs" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-links active" id="home-tab-1" data-bs-toggle="tab"
-                                        data-bs-target="#home-1" type="button" role="tab"
-                                        aria-controls="home-1" aria-selected="true">Description</button>
+                                        data-bs-target="#home-1" type="button" role="tab" aria-controls="home-1"
+                                        aria-selected="true">Description</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-links" id="information-tab" data-bs-toggle="tab"
@@ -391,17 +390,27 @@
                                 <div class="tpproduct pb-15 mb-30">
                                     <div class="tpproduct__thumb p-relative">
                                         <a href="{{ route('products.show', $product->_id) }}">
-                                            <img src="{{ asset('img/product/home-one/product-1.jpg') }}"
-                                                alt="product-thumb">
+                                            @php
+                                                $firstPhoto = $product->photos->first();
+                                            @endphp
+                                            <img src="{{ asset($firstPhoto->image) }}" alt="{{ $product->name }}">
                                             <img class="product-thumb-secondary"
-                                                src="{{ asset('img/product/home-one/product-2.jpg') }}"
-                                                alt="">
+                                                src="{{ asset($firstPhoto->image) }}" alt="{{ $product->name }}">
                                         </a>
                                         <div class="tpproduct__thumb-action">
-                                            <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
+                                            @auth
+                                                <a class="comphare" onclick="addToWishList(event, {{ $product->id }})"
+                                                    href="#"><i class="fal fa-heart"></i></a>
+                                            @endauth
+
                                             <a class="quckview" href="{{ route('products.show', $product->_id) }}"><i
                                                     class="fal fa-eye"></i></a>
-                                            <a class="wishlist" href="wishlist.html"><i class="fal fa-heart"></i></a>
+
+                                            <a href="#" class="quckview message-button"
+                                                data-seller-id="{{ $product->shop->seller->user->id }}"
+                                                data-product-id="{{ $product->id }}">
+                                                <i class="fal fa-comment"></i>
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="tpproduct__content">
@@ -414,10 +423,19 @@
                                             <div class="tpproduct__priceinfo-list">
                                                 <span>${{ $product->unit_price }}</span>
                                             </div>
-                                            <div class="tpproduct__cart">
-                                                <a href="cart.html"><i class="fal fa-shopping-cart"></i>Ajouter à la
-                                                    liste des souhaits</a>
-                                            </div>
+                                            @if (Auth::check())
+                                                <div class="tpproduct__cart">
+                                                    <a href="cart.html"
+                                                        onclick="addToWishList(event, {{ $product->id }})"><i
+                                                            class="fal fa-shopping-cart"></i>
+                                                        Ajouter à la liste des souhaits
+                                                    </a>
+                                                </div>
+                                            @else
+                                                <div class="tpproduct__cart">
+                                                    <span>${{ $product->unit_price }}</span>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

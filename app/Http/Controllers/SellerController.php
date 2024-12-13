@@ -16,7 +16,7 @@ class SellerController extends Controller
         $userName = Auth::user()->name;
         [$firstName, $lastName] = explode('-', $userName);
 
-       
+
         return view('seller.sellers.create',compact('lastName','firstName'));
     }
 
@@ -61,5 +61,14 @@ class SellerController extends Controller
         } catch (\Exception $e) {
             return back()->withErrors(['error' => 'Une erreur s\'est produite lors de la création du vendeur. ' . $e->getMessage()])->withInput();
         }
+    }
+
+    public function profile(){
+
+        $userId = Auth::id();
+        $seller = Seller::where('user_id', $userId)->first();
+        return view('seller.sellers.profile', compact('seller'));
+
+
     }
 }

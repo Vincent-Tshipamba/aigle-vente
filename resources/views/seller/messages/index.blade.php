@@ -1,78 +1,136 @@
 @extends('seller.layouts.app')
 
 @section('content')
-    <div class="flex flex-col md:flex-row h-screen overflow-hidden">
-        <!-- Sidebar -->
-        <div class="w-full md:w-1/4 bg-white dark:bg-gray-800 border-r border-gray-300 md:flex-shrink-0">
-            <!-- Sidebar Header -->
-            <header class="p-4 border-b border-gray-300 flex justify-between items-center bg-[#e38407] text-white">
-                <h1 class="text-lg md:text-2xl font-semibold">Chat Web</h1>
-            </header>
 
-            <!-- Contact List -->
-
-            <div class="overflow-y-auto h-full md:h-screen p-3 pb-20" id="contactList">
-                @foreach ($contacts as $contact)
-                    <div data-contact-id="{{ $contact->id }}"
-                        class="contact-item flex items-center mb-4 cursor-pointer hover:bg-gray-100 p-2 rounded-md">
-                        <div class="w-10 h-10 md:w-12 md:h-12 bg-gray-300 rounded-full mr-3">
-                            <img src="{{ $contact->profile_picture_url }}" alt="{{ $contact->name }}"
-                                class="w-full h-full rounded-full">
+    <!-- component -->
+    <div class="flex h-screen antialiased text-gray-800">
+        <div class="flex flex-row h-full w-full overflow-x-hidden">
+            <div class="flex flex-col py-8 pl-6 pr-2 w-64 bg-white dark:bg-gray-800 flex-shrink-0">
+                <div class="flex flex-row items-center justify-center h-12 w-full">
+                    <div class="flex items-center justify-center rounded-2xl text-primary bg-indigo-100 h-10 w-10">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="ml-2 font-bold text-2xl">AigleVente</div>
+                </div>
+                <div
+                    class="flex flex-col items-center bg-indigo-100 border border-gray-200 mt-4 w-full py-6 px-4 rounded-lg">
+                    <div class="h-20 w-20 rounded-full border overflow-hidden">
+                        <img src="https://placehold.co/200x200" alt="Avatar" class="h-full w-full" />
+                    </div>
+                    <div class="text-sm font-semibold mt-2"> {{ Auth::user()->name }} </div>
+                    <div class="text-xs text-gray-500">Vendeur</div>
+                    <div class="flex flex-row items-center mt-3">
+                        <div class="flex flex-col justify-center h-4 w-8 bg-primary rounded-full">
+                            <div class="h-3 w-3 bg-white rounded-full self-end mr-1"></div>
                         </div>
-                        <div class="flex-1">
-                            <h2 class="text-md md:text-lg font-semibold">
-                                {{ $contact->name }}
+                        <div class="leading-none ml-1 text-xs">Active</div>
+                    </div>
+                </div>
+                <div class="flex flex-col mt-8">
+                    <div class="flex flex-row items-center justify-between text-xs">
+                        <span class="font-bold">Active Conversations</span>
+                        <span
+                            class="flex items-center justify-center bg-gray-300 h-4 w-4 rounded-full">{{ $contacts->count() }}</span>
+                    </div>
+                    <div class="flex flex-col space-y-1 mt-4 -mx-2 h-48 overflow-y-auto" id="contactList">
+                        @foreach ($contacts as $contact)
+                            <button data-contact-id="{{ $contact->id }}"
+                                class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2 contact-item">
+                                <div class="flex items-center justify-center h-8 w-8 bg-indigo-200 rounded-full">
+                                    {{ strtoupper(substr($contact->name, 0, 1)) }}
+                                </div>
+                                <div class="ml-2 text-sm font-semibold">{{ $contact->name }}</div>
                                 @if (isset($unreadCounts[$contact->id]) && $unreadCounts[$contact->id] > 0)
-                                    <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full ml-2">
+                                    <div
+                                        class="flex items-center justify-center ml-auto text-xs text-white bg-red-500 h-4 w-4 rounded leading-none">
                                         {{ $unreadCounts[$contact->id] }}
-                                    </span>
+                                    </div>
                                 @endif
-                            </h2>
-                            <p class="text-gray-600 text-sm">
-                                @php
-                                    $latestMessage = $messages->firstWhere(function ($message) use ($contact, $userId) {
-                                        return ($message->sender_id === $contact->id &&
-                                            $message->receiver_id === $userId) ||
-                                            ($message->sender_id === $userId && $message->receiver_id === $contact->id);
-                                    });
-                                @endphp
-                                {{ $latestMessage ? \Illuminate\Support\Str::limit($latestMessage->message, 30) : 'Aucun message' }}
-                            </p>
+                            </button>
+                        @endforeach
+
+
+                    </div>
+                    <div class="flex flex-row items-center justify-between text-xs mt-6">
+                        <span class="font-bold">Archivied</span>
+                        <span class="flex items-center justify-center bg-gray-300 h-4 w-4 rounded-full">7</span>
+                    </div>
+                    <div class="flex flex-col space-y-1 mt-4 -mx-2">
+                        <button class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2">
+                            <div class="flex items-center justify-center h-8 w-8 bg-indigo-200 rounded-full">
+                                H
+                            </div>
+                            <div class="ml-2 text-sm font-semibold">Henry Boyd</div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col flex-auto h-full p-6">
+                <div class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 dark:bg-gray-700 h-full p-4">
+                    <div class="flex flex-col h-full overflow-x-auto mb-4">
+                        <div class="flex flex-col h-full">
+                            <div class="grid grid-cols-12 gap-y-2" id="messageContainer">
+
+                            </div>
                         </div>
                     </div>
-                @endforeach
-            </div>
-
-
-        </div>
-
-        <!-- Main Chat Area -->
-        <div class="flex-1 flex flex-col">
-            <!-- Chat Header -->
-            <header class="bg-white dark:bg-gray-800 p-4 text-gray-700 dark:text-gray-200 border-b border-gray-300">
-                <h1 id="chatHeader" class="text-2xl font-semibold">Sélectionnez une conversation</h1>
-            </header>
-
-            <!-- Chat Messages -->
-            <div class="flex-1 overflow-y-auto p-4 pb-36" id="messageContainer">
-                <!-- Messages go here -->
-            </div>
-
-            <!-- Chat Input -->
-            <footer id="chatInputFooter"
-                class="bg-white border-t border-gray-300 p-4 fixed bottom-0 w-full md:relative hidden">
-                <div class="flex items-center">
-                    <form id="messageForm" class="flex items-center w-full" action="" method="POST">
+                    <form id="messageForm" action="" method="POST">
                         @csrf
-                        <input type="text" name="message" id="messageInput" placeholder="Type a message..."
-                            class="w-full p-2 rounded-md border border-gray-400 focus:outline-none focus:border-blue-500"
-                            required>
-                        <button type="submit" class="bg-indigo-500 text-white px-4 py-2 rounded-md ml-2">Send</button>
+                        <div class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4 hidden"
+                            id="chatInputFooter">
+
+                            <div>
+                                <button class="flex items-center justify-center text-gray-400 hover:text-gray-600">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="flex-grow ml-4">
+
+                                <div class="relative w-full">
+                                    <input type="text"
+                                        class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10" id="messageInput" />
+                                    <button
+                                        class="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <button
+                                    class="flex items-center justify-center bg-primary hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0">
+                                    <span>Send</span>
+                                    <span class="ml-2">
+                                        <svg class="w-4 h-4 transform rotate-45 -mt-px" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                                        </svg>
+                                    </span>
+                                </button>
+                            </div>
+
+                        </div>
                     </form>
                 </div>
-            </footer>
+            </div>
         </div>
     </div>
+
 
 @section('script')
     <script>
@@ -90,10 +148,10 @@
             // Gestion du clic sur un contact
             contactList.addEventListener('click', async (e) => {
                 const contactItem = e.target.closest('.contact-item');
-                if (!contactItem) return;
+                if (!contactItem) return alert('null');
 
                 currentContactId = contactItem.getAttribute('data-contact-id');
-                chatHeader.innerText = contactItem.querySelector('.font-semibold').innerText;
+                // chatHeader.innerText = contactItem.querySelector('.font-semibold').innerText;
                 messageContainer.innerHTML = '';
                 chatInputFooter.classList.remove('hidden');
 
@@ -119,7 +177,7 @@
 
                         let dateKey = '';
 
-                        // Vérifie si le message est aujourd'hui, hier ou une autre date
+
                         if (messageDate.toDateString() === today.toDateString()) {
                             dateKey = 'Aujourd\'hui';
                         } else if (messageDate.toDateString() === yesterday.toDateString()) {
@@ -145,14 +203,14 @@
                     for (const [date, groupMessages] of Object.entries(messagesByDate)) {
                         // Afficher l'en-tête de la date
                         const dateHeader = document.createElement('div');
-                        dateHeader.classList.add('text-center', 'text-gray-500', 'my-4');
+                        dateHeader.classList.add('col-start-6', 'col-end-6' ,'p-3', 'rounded-lg');
                         dateHeader.innerHTML = `<strong>${date}</strong>`;
                         messageContainer.appendChild(dateHeader);
 
                         // Afficher les messages de cette date
                         groupMessages.forEach(message => {
                             const messageDiv = document.createElement('div');
-                            messageDiv.classList.add('mb-4');
+                            messageDiv.classList.add('col-start-1', 'col-end-8' ,'p-3', 'rounded-lg');
 
                             const formattedTime = new Date(message.created_at)
                                 .toLocaleTimeString([], {
@@ -161,29 +219,33 @@
                                 });
 
                             if (message.sender_id === userId) {
-                                messageDiv.classList.add('flex', 'justify-end', 'mb-4');
+                                messageDiv.classList.add('col-start-6', 'col-end-13', 'p-3',
+                                    'rounded-lg');
                                 messageDiv.innerHTML = `
-                <div class="flex max-w-96 bg-[#e38407] text-white rounded-lg p-3">
-                    <p>${message.message}</p>
-                </div>
-                <div class="w-9 h-9 rounded-full ml-2">
-                    <img src="${message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
-                        alt="My Avatar" class="w-8 h-8 rounded-full">
-                </div>
-                <span class="text-xs text-gray-400 ml-2">${formattedTime}</span>
+                                <div class="flex flex-row items-center">
+                                        <div class="flex items-center justify-center h-10 w-10 rounded-full bg-primary flex-shrink-0">
+                                            <img src="${message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
+                                                                        alt="User Avatar" class="w-8 h-8 rounded-full">
+                                        </div>
+                                        <div class="relative ml-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
+                                            <p>${message.message}</p>
+                                        </div>
+                                </div>
+                                 <span class="text-xs text-gray-400 ml-2">${formattedTime}</span>
             `;
                             } else {
                                 messageDiv.innerHTML = `
-                <div class="flex items-center mb-4">
-                    <div class="w-9 h-9 rounded-full mr-2">
-                        <img src="${message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
-                            alt="User Avatar" class="w-8 h-8 rounded-full">
-                    </div>
-                    <div class="flex max-w-96 bg-sky-200 text-gray-700 rounded-lg p-3">
-                        <p>${message.message}</p>
-                    </div>
-                </div>
-                <span class="text-xs text-gray-400 ml-2">${formattedTime}</span>
+                                        <div class="flex flex-row items-center">
+
+                                            <div class="flex items-center justify-center h-10 w-10 rounded-full bg-primary flex-shrink-0">
+                                                <img src="${message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
+                                                    alt="User Avatar" class="w-8 h-8 rounded-full">
+                                            </div>
+                                            <div class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
+                                                <p>${message.message}</p>
+                                            </div>
+                                        </div>
+                                        <span class="text-xs text-gray-400 ml-2">${formattedTime}</span>
             `;
                             }
 
@@ -193,31 +255,29 @@
                                 .photos.length > 0) {
                                 const firstPhoto = message.product.photos[0];
                                 messageDiv.innerHTML += `
-                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">                
-                    <a href="#">
-                        <img class="rounded-t-lg" src="${firstPhoto.image ? '/storage/' + firstPhoto.image : 'https://placehold.co/200x200'}" alt="${message.product.name}" />
-                    </a>
-                    <div class="p-5">
-                        <a href="#">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${message.product.name}</h5>
-                        </a>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">${message.product.description || 'Aucune description disponible.'}</p>
-                        
-                        <!-- Réponse pré-enregistrée -->
-                        <div class="flex space-x-4">
-                            <button class="w-full text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2 default-message-btn" data-message="oui">
-                                Oui
-                            </button>
-                            <button class="w-full text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2 default-message-btn" data-message="non">
-                                Non
-                            </button>
-                        </div>
-                    </div>
-             </div>
+                                    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                            <a href="#">
+                                                <img class="rounded-t-lg" src="${firstPhoto.image ? '/storage/' + firstPhoto.image : 'https://placehold.co/200x200'}" alt="${message.product.name}" />
+                                            </a>
+                                            <div class="p-5">
+                                                <a href="#">
+                                                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${message.product.name}</h5>
+                                                </a>
+                                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">${message.product.description || 'Aucune description disponible.'}</p>
+
+                                                <!-- Réponse pré-enregistrée -->
+                                                <div class="flex space-x-4">
+                                                    <button class="w-full text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2 default-message-btn" data-message="oui">
+                                                        Oui
+                                                    </button>
+                                                    <button class="w-full text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2 default-message-btn" data-message="non">
+                                                        Non
+                                                    </button>
+                                                </div>
+                                            </div>
+                                    </div>
         `;
                             }
-
-
 
                             // Ajouter le message au conteneur
                             messageContainer.appendChild(messageDiv);
@@ -233,15 +293,17 @@
                 window.Echo.channel(`chat.${currentContactId}`)
                     .listen('.NewMessage', async (e) => {
                         const receivedMessageDiv = document.createElement('div');
-                        receivedMessageDiv.classList.add('mb-4', 'flex', 'justify-start');
+                        receivedMessageDiv.classList.add('col-start-6', 'col-end-13', 'p-3',
+                            'rounded-lg');
                         receivedMessageDiv.innerHTML = `
-                <div class="w-9 h-9 rounded-full mr-2">
-                    <img src="${e.message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
-                         alt="Avatar" class="w-8 h-8 rounded-full">
-                </div>
-                <div class="flex max-w-96 bg-gray-300 text-black rounded-lg p-3">
-                    <p>${e.message.content}</p>
-                </div>
+                        <div class="flex flex-row items-center">
+                            <div class="flex items-center justify-center h-10 w-10 rounded-full bg-primary flex-shrink-0">
+
+                            </div>
+                            <div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
+                                <p>${e.message.content}</p>
+                            </div>
+                        </div>
             `;
                         messageContainer.appendChild(receivedMessageDiv);
 
@@ -302,13 +364,15 @@
 
                     // Ajouter le message envoyé à l'affichage
                     const newMessageDiv = document.createElement('div');
-                    newMessageDiv.classList.add('mb-4', 'flex', 'justify-end');
+                    newMessageDiv.classList.add('col-start-6', 'col-end-13', 'p-3', 'rounded-lg');
                     newMessageDiv.innerHTML = `
-                    <div class="flex max-w-96 bg-[#e38407] text-white rounded-lg p-3">
-                        <p>${messageText}</p>
-                    </div>
-                    <div class="w-9 h-9 rounded-full ml-2">
-                        <img src="${profilePictureUrl}" alt="My Avatar" class="w-8 h-8 rounded-full">
+                    <div class="flex flex-row items-center">
+                        <div class="flex items-center justify-center h-10 w-10 rounded-full bg-primary flex-shrink-0">
+
+                        </div>
+                        <div class="relative ml-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
+                            <p>${messageText}</p>
+                        </div>
                     </div>
                 `;
                     messageContainer.appendChild(newMessageDiv);
@@ -349,14 +413,14 @@
 
                     // Ajouter le message envoyé à l'affichage
                     const newMessageDiv = document.createElement('div');
-                    newMessageDiv.classList.add('mb-4', 'flex', 'justify-end');
+                    newMessageDiv.classList.add('col-end-13', 'col-start-6', 'rounded-lg', 'p-3');
                     newMessageDiv.innerHTML = `
-            <div class="flex max-w-96 bg-[#e38407] text-white rounded-lg p-3">
-                <p>${defaultMessage}</p>
-            </div>
-            <div class="w-9 h-9 rounded-full ml-2">
-                <img src="${profilePictureUrl}" alt="My Avatar" class="w-8 h-8 rounded-full">
-            </div>
+                            <div class="flex items-center justify-center h-10 w-10 rounded-full bg-primary flex-shrink-0">
+
+                            </div>
+                            <div class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
+                                <p>${defaultMessage}</p>
+                            </div>
         `;
                     messageContainer.appendChild(newMessageDiv);
                 } catch (error) {

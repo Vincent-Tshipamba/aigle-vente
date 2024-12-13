@@ -39,13 +39,6 @@ class Shop extends Model
     }
 
 
-    // Dans le modèle Seller
-    public function shops()
-    {
-        return $this->hasMany(Shop::class);
-    }
-
-
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);

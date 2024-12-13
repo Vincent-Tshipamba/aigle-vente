@@ -14,22 +14,8 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
 
         $this->call([
-            // CategoryProductSeeder::class,
-            // SellerSeeder::class,
-            // ClientSeeder::class,
-            // ShopSeeder::class,
-            // ProductSeeder::class,
-            // OrderSeeder::class,
-            // PhotoSeeder::class,
-            // FactureSeeder::class,
-            // OrderProductSeeder::class,
-            // DeliverySeeder::class,
-            // PanierSeeder::class,
-            // PanierItemSeeder::class,
-            // StockSeeder::class,
-            // RolesPermissionsSeeder::class,
-            // WishlistSeeder::class,
-            StockMovementSeeder::class
+            CategoryProductSeeder::class,
+            ProductStateSeeder::class
         ]);
 
     }

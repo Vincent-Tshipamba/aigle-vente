@@ -112,6 +112,11 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
+    <div id="location-error" class="text-red-500 text-sm hidden">
+        Vous devez autoriser l'accès à votre localisation pour vous inscrire.
+    </div>
+
+
     @section('script')
         <script>
             Swal.fire({

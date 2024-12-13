@@ -20,8 +20,35 @@ class MessageController extends Controller
      */
     public function index()
     {
-        // Récupérer l'utilisateur connecté
+
         $userId = Auth::id();
+        $seller = Seller::where('user_id', $userId)->first();
+        if (!$seller) {
+
+            // Récupérer les conversations où l'utilisateur connecté est l'expéditeur ou le destinataire
+            $messages = Message::where('sender_id', $userId)
+                ->orWhere('receiver_id', $userId)
+                ->with(['sender', 'receiver']) // Charger les relations avec les utilisateurs
+                ->orderBy('created_at', 'asc') // Trier par date de création
+                ->get();
+
+            // Obtenir la liste des contacts uniques avec qui l'utilisateur a une conversation
+            $contacts = User::whereIn('id', $messages->pluck('sender_id')->merge($messages->pluck('receiver_id'))->unique())
+                ->where('id', '!=', $userId)
+                ->get();
+
+            // Compter les messages non lus pour chaque contact
+            $unreadCounts = [];
+            foreach ($contacts as $contact) {
+                $unreadCount = Message::where('sender_id', $contact->id)
+                    ->where('receiver_id', $userId)
+                    ->where('is_read', false) // Filtrer les messages non lus
+                    ->count();
+                $unreadCounts[$contact->id] = $unreadCount;
+            }
+
+            return view('client.messages.index', compact('messages', 'contacts', 'userId', 'unreadCounts'));
+        }
 
         // Récupérer les conversations où l'utilisateur connecté est l'expéditeur ou le destinataire
         $messages = Message::where('sender_id', $userId)
@@ -80,7 +107,7 @@ class MessageController extends Controller
 
     public function store(Request $request, $seller_id)
     {
-        
+
         try {
             Log::info('ID du vendeur reçu : ' . $seller_id);
             $seller = User::find($seller_id);
@@ -97,8 +124,8 @@ class MessageController extends Controller
                 'product_id' => $request->product_id,
             ]);
 
-            
-            $data->load('sender'); 
+
+            $data->load('sender');
 
             // Broadcast the event
             broadcast(new MessageSent($data))->toOthers();
@@ -119,7 +146,8 @@ class MessageController extends Controller
                 'success' => false,
                 'message' => 'Erreur lors de l\'envoi du message.',
                 'error_details' => $e->getMessage() // Ajoutez ici les détails de l'erreur
-            ], 500);        }
+            ], 500);
+        }
     }
     /**
      * Mark a message as read.
@@ -152,8 +180,6 @@ class MessageController extends Controller
     {
         try {
             Log::info('ID du vendeur reçu : ' . $user_id);
-          
-
             $seller = User::find($user_id);
             if (!$seller) {
                 return response()->json(['error' => 'Le vendeur sélectionné est invalide.'], 400);
@@ -176,4 +202,18 @@ class MessageController extends Controller
         }
     }
 
+    public function getUserMessages()
+    {
+        // Récupérer les messages non lus pour l'utilisateur connecté
+        $user = Auth::id();
+
+        $messages = Message::select('sender_id', DB::raw('COUNT(*) as message_count'))
+            ->with('sender') 
+            ->where('receiver_id', $user)
+            ->groupBy('sender_id')
+            ->orderBy('message_count', 'desc') 
+            ->get();
+
+        return response()->json($messages);
+    }
 }

@@ -47,18 +47,21 @@
                                                 class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                                 Mon dashboard client
                                             </a>
-                                        @elseif (Auth::user()->isSeller())
+                                        @endif
+
+                                        @if (Auth::user()->isSeller())
                                             <a href="{{ route('seller.dashboard') }}"
                                                 class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                                 Mon dashboard de vendeur
                                             </a>
-                                        @elseif (Auth::user()->hasRole('superadmin'))
+                                        @endif
+
+                                        @if (Auth::user()->hasRole('superadmin'))
                                             <a href="{{ route('admin.dashboard') }}"
                                                 class="block px-6 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                                 Mon dashboard administrateur
                                             </a>
                                         @endif
-
                                     </li>
                                     <li>
                                         <a href="{{ route('profile.edit') }}"
@@ -163,18 +166,21 @@
                                                     class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                                     Mon dashboard client
                                                 </a>
-                                            @elseif (Auth::user()->isSeller())
+                                            @endif
+
+                                            @if (Auth::user()->isSeller())
                                                 <a href="{{ route('seller.dashboard') }}"
                                                     class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                                     Mon dashboard de vendeur
                                                 </a>
-                                            @elseif (Auth::user()->hasRole('superadmin'))
+                                            @endif
+
+                                            @if (Auth::user()->hasRole('superadmin'))
                                                 <a href="{{ route('admin.dashboard') }}"
                                                     class="block px-6 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                                     Mon dashboard administrateur
                                                 </a>
                                             @endif
-
                                         </li>
                                         <li>
                                             <a href="{{ route('profile.edit') }}"

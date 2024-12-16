@@ -14,28 +14,14 @@
                 <div class="main-menu flex justify-center">
                     <nav>
                         <ul class="flex items-center">
-                            <li class="has-dropdown">
+                            <li>
                                 <a href="{{ route('home') }}">Accueil</a>
-                                <ul class="submenu">
-                                    <li><a href="{{ route('home.fashion') }}">Mode</a></li>
-                                    <li><a href="{{ route('home.furniture') }}">Meubles</a></li>
-                                    <li><a href="{{ route('home.cosmetic') }}">Cosmétiques</a></li>
-                                    <li><a href="{{ route('home.food-grocery') }}">Épicerie</a></li>
-                                </ul>
                             </li>
                             <li class="has-dropdown">
-                                <a href="shop.html">Boutique</a>
+                                <a href="{{ route("products.index") }}">Produits</a>
                                 <ul class="submenu">
-                                    <li><a href="shop.html">Boutique</a></li>
-                                    <li><a href="shop-2.html">Boutique 2</a></li>
-                                    <li><a href="shop-details.html">Détails de la Boutique</a></li>
-                                    <li><a href="shop-details-2.html">Détails de la Boutique 2</a></li>
-                                    <li><a href="shop-location.html">Localisation de la Boutique</a></li>
-                                    <li><a href="cart.html">Panier</a></li>
-                                    <li><a href="{{ route('login') }}">Se Connecter</a></li>
-                                    <li><a href="checkout.html">Passer à la Caisse</a></li>
-                                    <li><a href="wishlist.html">Liste de Souhaits</a></li>
-                                    <li><a href="track.html">Suivi de Produit</a></li>
+                                    <li><a href="{{ route('products.index') }}">Produits</a></li>
+                                    <li><a href="{{ route('client.wishlist') }}">Liste de Souhaits</a></li>
                                 </ul>
                             </li>
                             <li><a href="{{ route('contact') }}">Contact</a></li>
@@ -76,22 +62,25 @@
                                 aria-labelledby="dropdownUserAvatarButtonHeader-home-xl">
                                 <li>
                                     @if (Auth::user()->client)
-                                        <a href="{{route('client.dashboard')}}"
+                                        <a href="{{ route('client.dashboard') }}"
                                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                             Mon dashboard client
                                         </a>
-                                    @elseif (Auth::user()->isSeller())
+                                    @endif
+
+                                    @if (Auth::user()->isSeller())
                                         <a href="{{ route('seller.dashboard') }}"
                                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                             Mon dashboard de vendeur
                                         </a>
-                                    @elseif (Auth::user()->hasRole('superadmin'))
+                                    @endif
+
+                                    @if (Auth::user()->hasRole('superadmin'))
                                         <a href="{{ route('admin.dashboard') }}"
                                             class="block px-6 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                             Mon dashboard administrateur
                                         </a>
                                     @endif
-
                                 </li>
                                 <li>
                                     <a href="{{ route('profile.edit') }}"

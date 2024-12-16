@@ -56,7 +56,8 @@ Route::middleware(['auth', 'userOnline'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('client.dashboard');
     Route::get('/client/dashboard', [DashboardController::class, 'index'])->name('client.dashboard');
     Route::get('/client/orders', [DashboardController::class, 'orders'])->name('client.orders');
-    Route::get('/client/api/orders', [DashboardController::class, 'getOrdersWishlistByPeriod']);
+    Route::get('/client/api/wishlist', [DashboardController::class, 'getClientWishlistByPeriod']);
+    Route::get('/client/api/contacted-sellers', [DashboardController::class, 'getClientContactedSellersByPeriod']);
 
     // Wishlist Routes
     Route::post('/wishlist/add', [WishlistController::class, 'add'])->name('client.wishlist.add');

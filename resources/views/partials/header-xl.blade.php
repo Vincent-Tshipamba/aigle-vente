@@ -13,28 +13,14 @@
             <div class="col-xl-6 col-lg-6">
                 <div class="main-menu flex justify-center">
                     <ul class="flex items-center">
-                        <li class="has-dropdown">
+                        <li>
                             <a href="{{ route('home') }}">Accueil</a>
-                            <ul class="submenu">
-                                <li><a href="{{ route('home.fashion') }}">Mode</a></li>
-                                <li><a href="{{ route('home.furniture') }}">Meubles</a></li>
-                                <li><a href="{{ route('home.cosmetic') }}">Cosmétiques</a></li>
-                                <li><a href="{{ route('home.food-grocery') }}">Épicerie</a></li>
-                            </ul>
                         </li>
                         <li class="has-dropdown">
-                            <a href="shop.html">Boutique</a>
+                            <a href="{{ route('products.index') }}">Produits</a>
                             <ul class="submenu">
-                                <li><a href="shop.html">Boutique</a></li>
-                                <li><a href="shop-2.html">Boutique 2</a></li>
-                                <li><a href="shop-details.html">Détails Boutique</a></li>
-                                <li><a href="shop-details-2.html">Détails Boutique 2</a></li>
-                                <li><a href="shop-location.html">Localisation Boutique</a></li>
-                                <li><a href="cart.html">Panier</a></li>
-                                <li><a href="{{ route('login') }}">Se Connecter</a></li>
-                                <li><a href="checkout.html">Paiement</a></li>
-                                <li><a href="wishlist.html">Liste de Souhaits</a></li>
-                                <li><a href="track.html">Suivi Produit</a></li>
+                                <li><a href="{{ route('products.index') }}">Produits</a></li>
+                                <li><a href="{{ route('client.wishlist') }}">Liste de Souhaits</a></li>
                             </ul>
                         </li>
                         <li><a href="{{ route('contact') }}">Contact</a></li>

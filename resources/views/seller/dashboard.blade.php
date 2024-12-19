@@ -174,6 +174,10 @@
 
 
 
-        
+
     </div>
 @endsection
+
+@push('scripts')
+    @vite(['resources/js/charts-dashboard-seller.js'])
+@endpush

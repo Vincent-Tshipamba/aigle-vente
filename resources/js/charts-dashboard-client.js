@@ -1,9 +1,5 @@
-import chart01 from "./components/chart-01";
-import chart02 from "./components/chart-02";
-import chart03 from "./components/chart-03";
 import chartWishlist from "./components/chart-wishlist";
 import chartContactedSellers from "./components/chart-contacted-sellers";
-import map01 from "./components/map-01";
 
 // Common Variables for Both Charts
 const currentYear = new Date().getFullYear();
@@ -84,8 +80,4 @@ monthSelectContactedSellers.addEventListener('change', function () {
 document.addEventListener("DOMContentLoaded", () => {
     chartWishlist(yearSelectWishlist.value, monthSelectWishlist.value);
     chartContactedSellers(yearSelectContactedSellers.value, monthSelectContactedSellers.value);
-    chart01();
-    chart02();
-    chart03();
-    map01();
 });

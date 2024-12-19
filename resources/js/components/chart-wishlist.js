@@ -54,6 +54,9 @@ const chartWishlist = (year, month) => {
                     axisTicks: {
                         show: false,
                     },
+                    title: {
+                        text: "Dates",
+                    },
                 },
                 legend: {
                     show: true,

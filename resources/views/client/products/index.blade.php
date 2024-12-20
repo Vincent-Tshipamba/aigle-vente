@@ -298,7 +298,6 @@
         }
     </style>
 
-    <script src="{{ Vite::asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
     <script>
         function checkWindowSize(rowperpage = null, totalSearchResults = null) {
             if ($(window).height >= $(document).height) {

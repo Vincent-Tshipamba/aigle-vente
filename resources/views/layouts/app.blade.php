@@ -86,9 +86,6 @@
     <script src="{{ asset('js/meanmenu.js') }}"></script>
     <script src="{{ asset('js/jquery.knob.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-    <script src="{{ Vite::asset('node_modules/flowbite/dist/flowbite.min.js') }}"></script>
-    <script src="{{ Vite::asset('node_modules/sweetalert2/dist/sweetalert2.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function confirmLogout() {
             Swal.fire({

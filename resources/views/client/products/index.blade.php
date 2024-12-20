@@ -299,60 +299,62 @@
     </style>
 
     <script>
-        function checkWindowSize(rowperpage = null, totalSearchResults = null) {
-            if ($(window).height >= $(document).height) {
-                if (rowperpage && totalSearchResults) {
-                    fetchSearchProducts(rowperpage, totalSearchResults)
-                } else {
-                    fetchProducts();
-                }
-            }
-        }
-
-        function fetchProducts() {
-            var start = Number($('#start').val())
-            var rowperpage = Number($('#rowperpage').val())
-            var totalProducts = Number($('#totalProducts').val())
-            start = start + rowperpage
-
-            if (start <= totalProducts) {
-                $('#start').val(start);
-
-                $.ajax({
-                    type: "get",
-                    url: "{{ route('getProducts') }}",
-                    data: {
-                        start: start,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    dataType: "json",
-                    success: function(response) {
-                        $(".product:last").after(response).show().fadeIn()
-
-                        checkWindowSize();
+        document.addEventListener('DOMContentLoaded', function() {
+            function checkWindowSize(rowperpage = null, totalSearchResults = null) {
+                if ($(window).height >= $(document).height) {
+                    if (rowperpage && totalSearchResults) {
+                        fetchSearchProducts(rowperpage, totalSearchResults)
+                    } else {
+                        fetchProducts();
                     }
-                });
-            }
-        }
-
-        $(document).on('touchmove', onScroll)
-
-        $(window).scroll(function() {
-            onScroll();
-        });
-
-        function onScroll() {
-            var productSectionTop = $('#productSection').offset().top;
-            var windowScrollTop = $(window).scrollTop();
-            var windowHeight = $(window).height();
-
-            if (windowScrollTop + windowHeight > productSectionTop && windowScrollTop < productSectionTop + $(
-                    '#productSection').height()) {
-                if (windowScrollTop > ($('#productSection').height() - windowHeight - 100)) {
-                    fetchProducts();
                 }
             }
-        }
+
+            function fetchProducts() {
+                var start = Number($('#start').val())
+                var rowperpage = Number($('#rowperpage').val())
+                var totalProducts = Number($('#totalProducts').val())
+                start = start + rowperpage
+
+                if (start <= totalProducts) {
+                    $('#start').val(start);
+
+                    $.ajax({
+                        type: "get",
+                        url: "{{ route('getProducts') }}",
+                        data: {
+                            start: start,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        dataType: "json",
+                        success: function(response) {
+                            $(".product:last").after(response).show().fadeIn()
+
+                            checkWindowSize();
+                        }
+                    });
+                }
+            }
+
+            $(document).on('touchmove', onScroll)
+
+            $(window).scroll(function() {
+                onScroll();
+            });
+
+            function onScroll() {
+                var productSectionTop = $('#productSection').offset().top;
+                var windowScrollTop = $(window).scrollTop();
+                var windowHeight = $(window).height();
+
+                if (windowScrollTop + windowHeight > productSectionTop && windowScrollTop < productSectionTop + $(
+                        '#productSection').height()) {
+                    if (windowScrollTop > ($('#productSection').height() - windowHeight - 100)) {
+                        fetchProducts();
+                    }
+                }
+            }
+        });
     </script>
 
 </x-app-layout>

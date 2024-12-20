@@ -255,7 +255,9 @@
     </section>
 @endsection
 
-@section('script')
+@push('scripts')
+    @vite(['resources/js/charts-dashboard-client.js'])
+
     <script>
         if (document.getElementById("recent-wishlist-table") && typeof simpleDatatables.DataTable !== 'undefined') {
             const exportCustomCSV = function(dataTable, userOptions = {}) {
@@ -402,4 +404,4 @@
             })
         }
     </script>
-@endsection
+@endpush

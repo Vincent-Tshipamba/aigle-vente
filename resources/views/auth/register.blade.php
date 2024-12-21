@@ -119,86 +119,88 @@
 
     @section('script')
         <script>
-            Swal.fire({
-                icon: 'warning',
-                title: 'Geolocalisation requise',
-                text: "Pour vous offrir une meilleure expérience d'achat, il est important que nous connaissions votre emplacement. Votre adresse est utilisée pour vous proposer des produits disponibles près de chez vous et vous fournir des informations de livraison précises.",
-                confirmButtonText: 'J\'ai compris',
-                background: "#fff url(/images/trees.png)",
-                backdrop: `
-                    rgba(0,0,123,0.4)
-                    left top
-                    no-repeat
-                `,
-                showClass: {
-                    popup: `
-                        animate__animated
-                        animate__fadeInUp
-                        animate__faster
-                    `
-                },
-                hideClass: {
-                    popup: `
-                        animate__animated
-                        animate__fadeOutDown
-                        animate__faster
-                    `
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    askForLocation();
-                }
-            });
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Geolocalisation requise',
+                    text: "Pour vous offrir une meilleure expérience d'achat, il est important que nous connaissions votre emplacement. Votre adresse est utilisée pour vous proposer des produits disponibles près de chez vous et vous fournir des informations de livraison précises.",
+                    confirmButtonText: 'J\'ai compris',
+                    background: "#fff url(/images/trees.png)",
+                    backdrop: `
+                        rgba(0,0,123,0.4)
+                        left top
+                        no-repeat
+                    `,
+                    showClass: {
+                        popup: `
+                            animate__animated
+                            animate__fadeInUp
+                            animate__faster
+                        `
+                    },
+                    hideClass: {
+                        popup: `
+                            animate__animated
+                            animate__fadeOutDown
+                            animate__faster
+                        `
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        askForLocation();
+                    }
+                });
 
-            function askForLocation() {
-                // Request geolocation
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(function(position) {
-                        const current_city = $('#current_city');
-                        const current_country = $('#current_country');
-                        const current_continent = $('#current_continent');
-                        const current_latitude = $('#current_latitude');
-                        const current_longitude = $('#current_longitude');
+                function askForLocation() {
+                    // Request geolocation
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(function(position) {
+                            const current_city = $('#current_city');
+                            const current_country = $('#current_country');
+                            const current_continent = $('#current_continent');
+                            const current_latitude = $('#current_latitude');
+                            const current_longitude = $('#current_longitude');
 
-                        const latitude = position.coords.latitude;
-                        const longitude = position.coords.longitude;
+                            const latitude = position.coords.latitude;
+                            const longitude = position.coords.longitude;
 
-                        // Use a reverse geocoding API to get the city name
-                        fetch(
-                                `https://api-bdc.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=fr`
-                            )
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data) {
-                                    if (data.city) {
-                                        current_city.val(data.city);
+                            // Use a reverse geocoding API to get the city name
+                            fetch(
+                                    `https://api-bdc.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=fr`
+                                )
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data) {
+                                        if (data.city) {
+                                            current_city.val(data.city);
+                                        }
+                                        if (data.countryName) {
+                                            current_country.val(data.countryName);
+                                        }
+                                        if (data.continent) {
+                                            current_continent.val(data.continent);
+                                        }
+                                        current_latitude.val(latitude);
+                                        current_longitude.val(longitude);
+                                    } else {
+                                        console.error("City not found");
                                     }
-                                    if (data.countryName) {
-                                        current_country.val(data.countryName);
-                                    }
-                                    if (data.continent) {
-                                        current_continent.val(data.continent);
-                                    }
-                                    current_latitude.val(latitude);
-                                    current_longitude.val(longitude);
-                                } else {
-                                    console.error("City not found");
-                                }
-                            })
-                            .catch(error => console.error('Error fetching city:', error));
-                    }, function(error) {
-                        // Handle errors if the user denies the geolocation again
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Erreur',
-                            text: "Nous n'avons pas pu obtenir votre emplacement. Veuillez vérifier vos paramètres de géolocalisation.",
-                            confirmButtonText: 'Essayer à nouveau'
+                                })
+                                .catch(error => console.error('Error fetching city:', error));
+                        }, function(error) {
+                            // Handle errors if the user denies the geolocation again
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Erreur',
+                                text: "Nous n'avons pas pu obtenir votre emplacement. Veuillez vérifier vos paramètres de géolocalisation.",
+                                confirmButtonText: 'Essayer à nouveau'
+                            });
                         });
-                    });
-                } else {
-                    console.error("Geolocation is not supported by this browser.");
+                    } else {
+                        console.error("Geolocation is not supported by this browser.");
+                    }
                 }
-            }
+            })
         </script>
     @endsection
 </x-app-layout>

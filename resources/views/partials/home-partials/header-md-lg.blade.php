@@ -134,9 +134,10 @@
                 </div>
             </div>
             <div class="col-2">
-                <div class="logo text-center">
-                    <a href="{{ route('home') }}"><img src="{{ asset('img/logo/logo_sans_bg.png') }}" width="75%"
-                            alt="logo"></a>
+                <div class="logo text-center w-full">
+                    <a href="{{ route('home') }}">
+                        <img src="{{ asset('img/logo/logo_sans_bg.png') }}" width="100" alt="logo">
+                    </a>
                 </div>
             </div>
             <div class="col-5">

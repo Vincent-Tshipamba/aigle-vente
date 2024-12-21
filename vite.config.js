@@ -7,6 +7,8 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
+                'resources/js/charts-dashboard-seller.js',
+                'resources/js/charts-dashboard-client.js',
             ],
             refresh: true,
         }),

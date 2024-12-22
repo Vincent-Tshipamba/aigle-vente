@@ -37,6 +37,8 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/products/{product}/images/{photoId}', [ProductController::class, 'deleteImage'])->name('product.deleteImage');
 
 
+    Route::delete('seller/shops/{shop:_id}', [ShopController::class, 'destroy'])->name('shops.destroy');
+    Route::post('seller/shops/{shop:_id}', [ShopController::class, 'update'])->name('shops.update');
     Route::get('/seller/shops', [ShopController::class, 'index'])->name('shops.index');
     Route::get('/seller/shops/create', [ShopController::class, 'create'])->name('shops.create');
     Route::post('seller/shops', [ShopController::class, 'store'])->name('shops.store');

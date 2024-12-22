@@ -153,7 +153,7 @@
             <!-- Card Item End -->
         </div>
 
-        <div class="grid grid-cols-2  mt-4 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2  mt-4 gap-4">
             <div class=" w-full">
                 @include('partials.chart-01')
 
@@ -163,7 +163,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-2  mt-4 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2  mt-4 gap-4">
             <div>
                @include('partials.chart-03')
             </div>

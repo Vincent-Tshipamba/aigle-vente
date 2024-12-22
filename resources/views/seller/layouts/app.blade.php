@@ -22,9 +22,9 @@
 $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
     :class="{ 'dark text-bodydark bg-boxdark-2': darkMode === true }">
     @include('preloader')
-    <div class=" bg-gray-100 dark:bg-[#1E293B] ">
+    <div class=" bg-gray-100 dark:bg-[#1E293B] h-screen">
         @include('seller.layouts.navigation')
-        <div class="duration-500 ease-in-out transform content ">
+        <div class="duration-500 ease-in-out transform contents h-screen ">
             <div class=" dark:bg-[#1e293bf3] bg-white pt-20 px-2 md:px-5 pb-4 ml-12  backdrop-blur-2xl">
                 <!-- Page Content -->
                 <main>

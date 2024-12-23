@@ -3,12 +3,12 @@ import Alpine from 'alpinejs';
 import 'flowbite';
 import 'animate.css';
 import $ from 'jquery';
-window.$ = window.jQuery = $;
 import Swal from 'sweetalert2'
-window.Swal = Swal;
 import "./textarea"
+import 'jquery-validation';
 
-
+window.$ = window.jQuery = $;
+window.Swal = Swal;
 window.Alpine = Alpine;
 
 Alpine.start();

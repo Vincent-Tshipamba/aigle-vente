@@ -128,35 +128,33 @@
 <div id="header-mob-sticky" class="tp-md-lg-header d-md-none pt-20 pb-20">
     <div class="container">
         <div class="row items-center">
-            <div class="col-5 d-flex align-items-center">
+            <div class="col-4 flex items-center">
                 <div class="header-canvas flex-auto">
                     <button class="tp-menu-toggle"><i class="far fa-bars"></i></button>
                 </div>
             </div>
-            <div class="col-2">
-                <div class="logo text-center w-full">
-                    <a href="{{ route('home') }}">
-                        <img src="{{ asset('img/logo/logo_sans_bg.png') }}" width="100" alt="logo">
-                    </a>
-                </div>
+            <div class="col-4 flex justify-center items-center mx-auto {{ Auth::check() ? 'hidden' : '' }}">
+                <a href="{{ route('home') }}" class="text-center">
+                    <img src="{{ asset('img/logo/logo_sans_bg.png') }}" width="50" alt="logo">
+                </a>
             </div>
-            <div class="col-5">
-                <div class="header-meta-info d-flex align-items-center justify-content-end ml-25">
-                    <div class="header-meta m-0 d-flex align-items-center">
-                        <div class="header-meta__social d-flex align-items-center">
+            <div class="{{ Auth::check() ? 'col-8' : 'col-4' }}">
+                <div class="header-meta-info flex items-center justify-end ml-25">
+                    <div class="header-meta m-0 flex items-center">
+                        <div class="header-meta__social flex items-center space-x-3">
                             @auth
                                 <button id="dropdownUserAvatarButtonHeader-home-md-lg"
                                     data-dropdown-toggle="dropdownAvatarHeader-home-md-lg-2"
                                     class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                                     type="button">
                                     <span class="sr-only">Open user menu</span>
-                                    <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg"
+                                    <img class="w-8 h-8 rounded-full" src=""
                                         alt="user photo">
                                 </button>
 
                                 <!-- Dropdown menu -->
                                 <div id="dropdownAvatarHeader-home-md-lg-2"
-                                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-60 dark:bg-gray-700 dark:divide-gray-600">
+                                    class="hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-60 dark:bg-gray-700 dark:divide-gray-600">
                                     <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
                                         <div>{{ Auth::user()->name }}</div>
                                         <div class="font-medium truncate">{{ Auth::user()->email }}</div>
@@ -209,7 +207,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="header-meta__social flex items-center ml-25">
+                                <div class="header-meta__social flex items-center">
                                     <button class="header-cart p-relative tp-cart-toggle me-2">
                                         <i class="fal fa-heart"></i>
                                         <span class="tp-product-count wishcount">{{ $wishlists->count() }}</span>
@@ -236,7 +234,7 @@
                                     @endif
                                 </div>
                             @else
-                                <a href="{{ route('login') }}"><i class="fal fa-user"></i></a>
+                                <a href="{{ route('login') }}" class="text-md text-black dark:text-gray-200"><i class="fal fa-user"></i></a>
                                 <!-- Lien vers le formulaire de connexion -->
                             @endauth
                         </div>

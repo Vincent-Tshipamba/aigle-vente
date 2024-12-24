@@ -126,18 +126,17 @@
 <div id="header-mob-sticky" class="tp-md-lg-header d-md-none pt-20 pb-20">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-1 d-flex align-items-center">
+            <div class="col-4 flex items-center">
                 <div class="header-canvas flex-auto">
                     <button class="tp-menu-toggle"><i class="far fa-bars"></i></button>
                 </div>
             </div>
-            <div class="col-2 mx-auto flex justify-start">
-                <div class="logo text-left">
-                    <a href="{{ route('home') }}"><img src="{{ asset('img/logo/logo_sans_bg.png') }}" width="85%"
-                            alt="logo"></a>
-                </div>
+            <div class="col-4 flex justify-center items-center mx-auto {{ Auth::check() ? 'hidden' : '' }}">
+                <a href="{{ route('home') }}" class="text-center">
+                    <img src="{{ asset('img/logo/logo_sans_bg.png') }}" width="50" alt="logo">
+                </a>
             </div>
-            <div class="col-9">
+            <div class="{{ Auth::check() ? 'col-8' : 'col-4' }}">
                 <div class="header-meta-info flex items-center justify-end space-x-4">
                     <div class="header-meta m-0 flex items-center">
                         <div class="header-meta__social flex items-center space-x-3">

@@ -7,22 +7,25 @@
             <div class="tpcart__product-list">
                 <ul>
                     @foreach ($wishlists->take(4) as $wishlist)
-                    <li>
-                        <div class="tpcart__item">
-                            <div class="tpcart__img">
-                                <img src="{{ $wishlist->product->photos->first() ?? asset('img/product/home-one/product-1.jpg') }}" alt="">
-                                <div class="tpcart__del">
-                                    <a href="#"><i class="far fa-times-circle"></i></a>
+                        <li>
+                            <div class="tpcart__item">
+                                <div class="tpcart__img">
+                                    <img loading="lazy"
+                                        src="{{ $wishlist->product->photos->first() ?? asset('img/product/home-one/product-1.jpg') }}"
+                                        alt="">
+                                    <div class="tpcart__del">
+                                        <a href="#"><i class="far fa-times-circle"></i></a>
+                                    </div>
+                                </div>
+                                <div class="tpcart__content">
+                                    <span class="tpcart__content-title"><a
+                                            href="{{ route('products.show', $wishlist->product->_id) }}">{{ $wishlist->product->name }}</a></span>
+                                    <div class="tpcart__cart-price">
+                                        <span class="new-price">${{ $wishlist->product->unit_price }}</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="tpcart__content">
-                                <span class="tpcart__content-title"><a href="{{ route('products.show', $wishlist->product->_id) }}">{{ $wishlist->product->name }}</a></span>
-                                <div class="tpcart__cart-price">
-                                    <span class="new-price">${{ $wishlist->product->unit_price }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                        </li>
                     @endforeach
                 </ul>
             </div>

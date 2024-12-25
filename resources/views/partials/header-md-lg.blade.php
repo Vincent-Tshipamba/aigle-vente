@@ -7,8 +7,8 @@
                     <button class="tp-menu-toggle"><i class="far fa-bars"></i></button>
                 </div>
                 <div class="logo">
-                    <a href="{{ route('home') }}"><img src="{{ asset('img/logo/logo_sans_bg.png') }}" width="85%"
-                            alt="logo"></a>
+                    <a href="{{ route('home') }}"><img loading="lazy" src="{{ asset('img/logo/logo_sans_bg.png') }}"
+                            width="85%" alt="logo"></a>
                 </div>
             </div>
             <div class="col-lg-11 col-md-10">
@@ -133,7 +133,7 @@
             </div>
             <div class="col-4 flex justify-center items-center mx-auto {{ Auth::check() ? 'hidden' : '' }}">
                 <a href="{{ route('home') }}" class="text-center">
-                    <img src="{{ asset('img/logo/logo_sans_bg.png') }}" width="50" alt="logo">
+                    <img loading="lazy" src="{{ asset('img/logo/logo_sans_bg.png') }}" width="50" alt="logo">
                 </a>
             </div>
             <div class="{{ Auth::check() ? 'col-8' : 'col-4' }}">

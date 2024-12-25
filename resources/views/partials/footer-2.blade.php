@@ -7,11 +7,13 @@
                     <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
                         <div class="footer-widget footer-col-1 mb-40">
                             <div class="footer-logo mb-30">
-                                <a href="{{ route('home') }}"><img src="{{ asset('img/logo/logo_sans_bg.png') }}" alt="logo"></a>
+                                <a href="{{ route('home') }}"><img loading="lazy"
+                                        src="{{ asset('img/logo/logo_sans_bg.png') }}" alt="logo"></a>
                             </div>
                             <div class="footer-content">
                                 <p>Design origami rose élégant en trois <br> dimensions et décoration coexistent. <br>
-                                    Idéal pour ajouter une touche décorative à <br> la décoration de n'importe quelle pièce.</p>
+                                    Idéal pour ajouter une touche décorative à <br> la décoration de n'importe quelle
+                                    pièce.</p>
                             </div>
                         </div>
                     </div>
@@ -103,8 +105,10 @@
                                 <p>15% de réduction sur votre premier achat</p>
                             </div>
                             <div class="footer-cta__source-thumb">
-                                <a href="#"><img src="{{ asset('img/footer/f-google.jpg') }}" alt="google"></a>
-                                <a href="#"><img src="{{ asset('img/footer/f-app.jpg') }}" alt="app"></a>
+                                <a href="#"><img loading="lazy" src="{{ asset('img/footer/f-google.jpg') }}"
+                                        alt="google"></a>
+                                <a href="#"><img loading="lazy" src="{{ asset('img/footer/f-app.jpg') }}"
+                                        alt="app"></a>
                             </div>
                         </div>
                     </div>
@@ -115,7 +119,8 @@
             <div class="container">
                 <div class="footer-copyright__content text-center">
                     <span>
-                        Copyright {{ date('Y') }} <a href="{{ route('home') }}">©AigleVente</a>. Tous droits réservés.
+                        Copyright {{ date('Y') }} <a href="{{ route('home') }}">©AigleVente</a>. Tous droits
+                        réservés.
                     </span>
                 </div>
             </div>

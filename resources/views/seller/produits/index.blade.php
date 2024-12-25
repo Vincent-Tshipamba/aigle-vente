@@ -50,8 +50,8 @@
                                 $firstPhoto = $product->photos->first();
                             @endphp
                             @if ($firstPhoto)
-                                <img src="{{ asset('storage/' . $firstPhoto->image) }}" alt="{{ $product->name }}"
-                                    class="w-full h-40 object-cover rounded-md mb-4">
+                                <img loading="lazy" src="{{ asset('storage/' . $firstPhoto->image) }}"
+                                    alt="{{ $product->name }}" class="w-full h-40 object-cover rounded-md mb-4">
                             @else
                                 <p>Aucune image disponible pour ce produit.</p>
                             @endif
@@ -71,7 +71,8 @@
                                     </svg>
                                 </a>
 
-                                <a href="{{ route('seller.shops.products.edit', ['shop' => $shop->_id, 'product' => $product->_id]) }}" class="text-blue-500 mt-2 inline-block">
+                                <a href="{{ route('seller.shops.products.edit', ['shop' => $shop->_id, 'product' => $product->_id]) }}"
+                                    class="text-blue-500 mt-2 inline-block">
                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                         viewBox="0 0 24 24">
@@ -145,7 +146,7 @@
                                         @endphp
 
                                         @if ($firstPhoto)
-                                            <img src="{{ asset('storage/' . $firstPhoto->image) }}"
+                                            <img loading="lazy" src="{{ asset('storage/' . $firstPhoto->image) }}"
                                                 alt="Image de {{ $product->name }}" class="w-auto h-8 mr-3">
                                         @else
                                             <p>Aucune image disponible pour ce produit.</p>

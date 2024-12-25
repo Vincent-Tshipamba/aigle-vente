@@ -20,7 +20,8 @@
     <!-- ====== Profile Section Start -->
     <div class="overflow-hidden ">
         <div class="relative z-20 h-35 md:h-65">
-            <img src="https://timelinecovers.pro/facebook-cover/download/eagle-looking-at-your-profile-facebook-cover.jpg"
+            <img loading="lazy"
+                src="https://timelinecovers.pro/facebook-cover/download/eagle-looking-at-your-profile-facebook-cover.jpg"
                 alt="profile cover" class="h-full w-full rounded-tl-sm rounded-tr-sm object-cover object-center" />
             <div class="absolute bottom-1 right-1 z-10 xsm:bottom-4 xsm:right-4">
                 <label for="cover"
@@ -50,7 +51,8 @@
                     </div>
                 @else
                     <div class="relative drop-shadow-2">
-                        <img src="{{ asset('storage/' . $seller->picture) }}" alt="{{$seller->full_name}}" />
+                        <img loading="lazy" src="{{ asset('storage/' . $seller->picture) }}"
+                            alt="{{ $seller->full_name }}" />
                         <label for="profile"
                             class="absolute bottom-0 right-0 flex h-8.5 w-8.5 cursor-pointer items-center justify-center rounded-full bg-primary text-white hover:bg-opacity-90 sm:bottom-2 sm:right-2">
                             <svg class="fill-current" width="14" height="14" viewBox="0 0 14 14" fill="none"
@@ -86,7 +88,7 @@
                         <span class="text-sm">Produits</span>
                     </div>
                     <div class="flex flex-col items-center justify-center gap-1 px-4 xsm:flex-row">
-                        <span class="font-semibold text-black dark:text-white"> {{$seller->sexe}} </span>
+                        <span class="font-semibold text-black dark:text-white"> {{ $seller->sexe }} </span>
                         <span class="text-sm">Sexe</span>
                     </div>
                 </div>
@@ -96,10 +98,10 @@
                         About Me
                     </h4>
                     <p class="mt-4.5 text-sm font-normal">
-                        {{$seller->address}}
+                        {{ $seller->address }}
                     </p>
                     <p class="mt-4.5 text-sm font-normal">
-                        {{$seller->phone}}
+                        {{ $seller->phone }}
                     </p>
                 </div>
 

@@ -11,8 +11,9 @@
         <div class="custom-row category-border pb-45 justify-content-xl-between xl:gap-10">
             @foreach ($categories as $i => $category)
                 <div class="tpcategory mb-40">
-                    <div class="tpcategory__icon bg-cover bg-center p-relative" style="background-image: url('{{ asset($category->image) }}');">
-                        <img src="{{ asset($category->image) }}" width="33" height="50" />
+                    <div class="tpcategory__icon bg-cover bg-center p-relative"
+                        style="background-image: url('{{ asset($category->image) }}');">
+                        <img loading="lazy" src="{{ asset($category->image) }}" width="33" height="50" />
                         <span>{{ $i + 1 }}</span>
                     </div>
                     <div class="tpcategory__content">

@@ -20,7 +20,7 @@
                 <div
                     class="flex flex-col items-center bg-indigo-100 border border-gray-200 mt-4 w-full py-6 px-4 rounded-lg">
                     <div class="h-20 w-20 rounded-full border overflow-hidden">
-                        <img src="https://placehold.co/200x200" alt="Avatar" class="h-full w-full" />
+                        <img loading="lazy" src="https://placehold.co/200x200" alt="Avatar" class="h-full w-full" />
                     </div>
                     <div class="text-sm font-semibold mt-2"> {{ Auth::user()->name }} </div>
                     <div class="text-xs text-gray-500">Vendeur</div>
@@ -224,7 +224,7 @@
                                 messageDiv.innerHTML = `
                                 <div class="flex flex-row items-center">
                                         <div class="flex items-center justify-center h-10 w-10 rounded-full bg-primary flex-shrink-0">
-                                            <img src="${message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
+                                            <img loading="lazy" src="${message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
                                                                         alt="User Avatar" class="w-8 h-8 rounded-full">
                                         </div>
                                         <div class="relative ml-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
@@ -238,7 +238,7 @@
                                         <div class="flex flex-row items-center">
 
                                             <div class="flex items-center justify-center h-10 w-10 rounded-full bg-primary flex-shrink-0">
-                                                <img src="${message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
+                                                <img loading="lazy" src="${message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
                                                     alt="User Avatar" class="w-8 h-8 rounded-full">
                                             </div>
                                             <div class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">

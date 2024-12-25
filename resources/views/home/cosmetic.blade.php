@@ -4,7 +4,7 @@
         <div class="container">
             <div class="platinamborder p-relative">
                 <div class="platinam-slidershape d-none d-md-block">
-                    <img src="{{ asset('img/slider/fasion-tag-03.png') }}" alt="tag">
+                    <img loading="lazy" src="{{ asset('img/slider/fasion-tag-03.png') }}" alt="tag">
                 </div>
                 <div class="swiper-container sliderthree-active">
                     <div class="swiper-wrapper">
@@ -26,7 +26,8 @@
                                 </div>
                                 <div class="col-xl-6 col-lg-6 d-none d-lg-block">
                                     <div class="tpslidertwo__img p-relative pt-80 pb-80">
-                                        <img src="{{ asset('img/slider/slider-bg-04.png') }}" alt="">
+                                        <img loading="lazy" src="{{ asset('img/slider/slider-bg-04.png') }}"
+                                            alt="">
                                     </div>
                                 </div>
                                 <div class="tpsliderthree__pagination"></div>
@@ -51,7 +52,8 @@
                                 </div>
                                 <div class="col-xl-6 col-lg-6 d-none d-lg-block">
                                     <div class="tpslidertwo__img p-relative pt-80 pb-80">
-                                        <img src="{{ asset('img/slider/slider-bg-05.png') }}" alt="">
+                                        <img loading="lazy" src="{{ asset('img/slider/slider-bg-05.png') }}"
+                                            alt="">
                                     </div>
                                 </div>
                                 <div class="tpsliderthree__pagination"></div>
@@ -76,7 +78,8 @@
                                 </div>
                                 <div class="col-xl-6 col-lg-6 d-none d-lg-block">
                                     <div class="tpslidertwo__img p-relative pt-80 pb-80">
-                                        <img src="{{ asset('img/slider/slider-bg-06.png') }}" alt="">
+                                        <img loading="lazy" src="{{ asset('img/slider/slider-bg-06.png') }}"
+                                            alt="">
                                     </div>
                                 </div>
                                 <div class="tpsliderthree__pagination"></div>
@@ -95,22 +98,22 @@
             <div class="swiper-container brand-active">
                 <div class="swiper-wrapper brand-items">
                     <div class="swiper-slide">
-                        <img src="{{ asset('img/brand/pla-brand-01.png') }}" alt="brand">
+                        <img loading="lazy" src="{{ asset('img/brand/pla-brand-01.png') }}" alt="brand">
                     </div>
                     <div class="swiper-slide">
-                        <img src="{{ asset('img/brand/pla-brand-02.png') }}" alt="brand">
+                        <img loading="lazy" src="{{ asset('img/brand/pla-brand-02.png') }}" alt="brand">
                     </div>
                     <div class="swiper-slide">
-                        <img src="{{ asset('img/brand/pla-brand-03.png') }}" alt="brand">
+                        <img loading="lazy" src="{{ asset('img/brand/pla-brand-03.png') }}" alt="brand">
                     </div>
                     <div class="swiper-slide">
-                        <img src="{{ asset('img/brand/pla-brand-04.png') }}" alt="brand">
+                        <img loading="lazy" src="{{ asset('img/brand/pla-brand-04.png') }}" alt="brand">
                     </div>
                     <div class="swiper-slide">
-                        <img src="{{ asset('img/brand/pla-brand-05.png') }}" alt="brand">
+                        <img loading="lazy" src="{{ asset('img/brand/pla-brand-05.png') }}" alt="brand">
                     </div>
                     <div class="swiper-slide">
-                        <img src="{{ asset('img/brand/pla-brand-06.png') }}" alt="brand">
+                        <img loading="lazy" src="{{ asset('img/brand/pla-brand-06.png') }}" alt="brand">
                     </div>
                 </div>
             </div>
@@ -125,7 +128,7 @@
                 <div class="row gx-3">
                     <div class="col-lg-4 col-md-12">
                         <div class="banneritem banneroverlay p-relative">
-                            <img src="{{ asset('img/banner/banner-thumb-01.jpg') }}" alt="">
+                            <img loading="lazy" src="{{ asset('img/banner/banner-thumb-01.jpg') }}" alt="">
                             <div class="bannertext text-center">
                                 <span class="bannertext__subtitle">Hair Color</span>
                                 <h4 class="bannertext__title mb-40"><a href="shop-2.html">Reactive Providence <br> Hair
@@ -138,7 +141,7 @@
                     </div>
                     <div class="col-lg-4 col-md-12">
                         <div class="banneritem banner-animation mb-15 p-relative">
-                            <img src="{{ asset('img/banner/banner-thumb-02.jpg') }}" alt="">
+                            <img loading="lazy" src="{{ asset('img/banner/banner-thumb-02.jpg') }}" alt="">
                             <div class="bannerbox">
                                 <span class="bannerbox__subtitle">Cosmetics</span>
                                 <h4 class="bannerbox__title mb-95">
@@ -152,7 +155,7 @@
                             </div>
                         </div>
                         <div class="banneritem banner-animation p-relative">
-                            <img src="{{ asset('img/banner/banner-thumb-03.jpg') }}" alt="">
+                            <img loading="lazy" src="{{ asset('img/banner/banner-thumb-03.jpg') }}" alt="">
                             <div class="bannerbox">
                                 <h4 class="bannerbox__title banner-bottom-title">
                                     <a href="shop.html">50% Offer On</a>
@@ -169,7 +172,7 @@
                     </div>
                     <div class="col-lg-4 col-md-12">
                         <div class="banneritem banner-animation p-relative">
-                            <img src="{{ asset('img/banner/banner-thumb-04.jpg') }}" alt="">
+                            <img loading="lazy" src="{{ asset('img/banner/banner-thumb-04.jpg') }}" alt="">
                             <div class="bannerbox">
                                 <span class="bannerbox__subtitle banner-right-bg mb-200">Featured Brand</span>
                                 <div class="bannerbox__btn">
@@ -208,7 +211,7 @@
                         <div class="tpratingitem tpproduct text-center">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details.html">
-                                    <img src="{{ asset('img/product/home-four/product-1.jpg') }}"
+                                    <img loading="lazy" src="{{ asset('img/product/home-four/product-1.jpg') }}"
                                         alt="product-thumb">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-four/product-2.jpg') }}" alt="">
@@ -238,7 +241,7 @@
                         <div class="tpratingitem tpproduct text-center">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details.html">
-                                    <img src="{{ asset('img/product/home-four/product-3.jpg') }}"
+                                    <img loading="lazy" src="{{ asset('img/product/home-four/product-3.jpg') }}"
                                         alt="product-thumb">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-four/product-4.jpg') }}" alt="">
@@ -270,7 +273,7 @@
                         <div class="tpratingitem tpproduct text-center">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details.html">
-                                    <img src="{{ asset('img/product/home-four/product-9.jpg') }}"
+                                    <img loading="lazy" src="{{ asset('img/product/home-four/product-9.jpg') }}"
                                         alt="product-thumb">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-four/product-10.jpg') }}" alt="">
@@ -296,7 +299,7 @@
                         <div class="tpratingitem tpproduct text-center">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details.html">
-                                    <img src="{{ asset('img/product/home-four/product-7.jpg') }}"
+                                    <img loading="lazy" src="{{ asset('img/product/home-four/product-7.jpg') }}"
                                         alt="product-thumb">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-four/product-8.jpg') }}" alt="">
@@ -326,7 +329,7 @@
                         <div class="tpratingitem tpproduct text-center">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="shop-details.html">
-                                    <img src="{{ asset('img/product/home-four/product-5.jpg') }}"
+                                    <img loading="lazy" src="{{ asset('img/product/home-four/product-5.jpg') }}"
                                         alt="product-thumb">
                                     <img class="product-thumb-secondary"
                                         src="{{ asset('img/product/home-four/product-6.jpg') }}" alt="">
@@ -367,7 +370,8 @@
                 <div class="col-lg-2 col-md-4 col-6">
                     <div class="tpfeatures tpfeaturesborder text-center mb-50">
                         <div class="tpfeatures__icon mb-30">
-                            <img src="{{ asset('img/features/feature-icon-01.png') }}" alt="features-icon">
+                            <img loading="lazy" src="{{ asset('img/features/feature-icon-01.png') }}"
+                                alt="features-icon">
                         </div>
                         <div class="tpfeatures__content">
                             <h5 class="tpfeatures__title">Finest Skincare <br> Lotions</h5>
@@ -377,7 +381,8 @@
                 <div class="col-lg-2 col-md-4 col-6">
                     <div class="tpfeatures tpfeaturesborder text-center mb-50">
                         <div class="tpfeatures__icon mb-30">
-                            <img src="{{ asset('img/features/feature-icon-02.png') }}" alt="features-icon">
+                            <img loading="lazy" src="{{ asset('img/features/feature-icon-02.png') }}"
+                                alt="features-icon">
                         </div>
                         <div class="tpfeatures__content">
                             <h5 class="tpfeatures__title">Finest Skincare <br> Lotions</h5>
@@ -387,7 +392,8 @@
                 <div class="col-lg-2 col-md-4 col-6">
                     <div class="tpfeatures tpfeaturesborder text-center mb-50">
                         <div class="tpfeatures__icon mb-30">
-                            <img src="{{ asset('img/features/feature-icon-03.png') }}" alt="features-icon">
+                            <img loading="lazy" src="{{ asset('img/features/feature-icon-03.png') }}"
+                                alt="features-icon">
                         </div>
                         <div class="tpfeatures__content">
                             <h5 class="tpfeatures__title">Finest Skincare <br> Lotions</h5>
@@ -397,7 +403,8 @@
                 <div class="col-lg-2 col-md-4 col-6">
                     <div class="tpfeatures tpfeaturesborder text-center mb-50">
                         <div class="tpfeatures__icon mb-30">
-                            <img src="{{ asset('img/features/feature-icon-04.png') }}" alt="features-icon">
+                            <img loading="lazy" src="{{ asset('img/features/feature-icon-04.png') }}"
+                                alt="features-icon">
                         </div>
                         <div class="tpfeatures__content">
                             <h5 class="tpfeatures__title">Finest Skincare <br> Lotions</h5>
@@ -407,7 +414,8 @@
                 <div class="col-lg-2 col-md-4 col-6">
                     <div class="tpfeatures tpfeaturesborder text-center mb-50">
                         <div class="tpfeatures__icon mb-30">
-                            <img src="{{ asset('img/features/feature-icon-05.png') }}" alt="features-icon">
+                            <img loading="lazy" src="{{ asset('img/features/feature-icon-05.png') }}"
+                                alt="features-icon">
                         </div>
                         <div class="tpfeatures__content">
                             <h5 class="tpfeatures__title">Finest Skincare <br> Lotions</h5>
@@ -417,7 +425,8 @@
                 <div class="col-lg-2 col-md-4 col-6">
                     <div class="tpfeatures tpfeaturesborder text-center mb-50">
                         <div class="tpfeatures__icon mb-30">
-                            <img src="{{ asset('img/features/feature-icon-06.png') }}" alt="features-icon">
+                            <img loading="lazy" src="{{ asset('img/features/feature-icon-06.png') }}"
+                                alt="features-icon">
                         </div>
                         <div class="tpfeatures__content">
                             <h5 class="tpfeatures__title">Finest Skincare <br> Lotions</h5>
@@ -475,7 +484,8 @@
                     <div class="col-xxl-7 col-xl-6 col-lg-6 col-md-12">
                         <div class="tpdealproduct mb-30">
                             <div class="tpdealproduct__thumb">
-                                <img src="{{ asset('img/floded/floded-03.png') }}" alt="dealproduct-thumb">
+                                <img loading="lazy" src="{{ asset('img/floded/floded-03.png') }}"
+                                    alt="dealproduct-thumb">
                             </div>
                         </div>
                     </div>
@@ -519,7 +529,8 @@
                             </div>
                             <div class="tptesti__avata d-flex align-items-center justify-content-center">
                                 <div class="tptesti__avata-icon mr-20">
-                                    <img src="{{ asset('img/testimonial/testi-avata-01.png') }}" alt="avata">
+                                    <img loading="lazy" src="{{ asset('img/testimonial/testi-avata-01.png') }}"
+                                        alt="avata">
                                 </div>
                                 <div class="tptesti__avata-content text-start">
                                     <h5 class="tptesti__avata-content-title">Miranda H. Halim</h5>
@@ -544,7 +555,8 @@
                             </div>
                             <div class="tptesti__avata d-flex align-items-center justify-content-center">
                                 <div class="tptesti__avata-icon mr-20">
-                                    <img src="{{ asset('img/testimonial/testi-avata-02.png') }}" alt="avata">
+                                    <img loading="lazy" src="{{ asset('img/testimonial/testi-avata-02.png') }}"
+                                        alt="avata">
                                 </div>
                                 <div class="tptesti__avata-content text-start">
                                     <h5 class="tptesti__avata-content-title">Cameron William</h5>
@@ -569,7 +581,8 @@
                             </div>
                             <div class="tptesti__avata d-flex align-items-center justify-content-center">
                                 <div class="tptesti__avata-icon mr-20">
-                                    <img src="{{ asset('img/testimonial/testi-avata-03.png') }}" alt="avata">
+                                    <img loading="lazy" src="{{ asset('img/testimonial/testi-avata-03.png') }}"
+                                        alt="avata">
                                 </div>
                                 <div class="tptesti__avata-content text-start">
                                     <h5 class="tptesti__avata-content-title">Robertia</h5>

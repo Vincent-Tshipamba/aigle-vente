@@ -22,7 +22,7 @@
                                             $firstImage = $product->photos()->first();
                                         @endphp
                                         <div class="tp-slide-item__img">
-                                            <img src="{{ $firstImage->image }}" alt="{{ $product->name }}">
+                                            <img loading="lazy" src="{{ $firstImage->image }}" alt="{{ $product->name }}">
                                         </div>
                                     </div>
                                 </div>

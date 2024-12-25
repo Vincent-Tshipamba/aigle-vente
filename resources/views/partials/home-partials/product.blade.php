@@ -57,11 +57,13 @@
                                                     class="fal fa-eye"></i></a>
 
                                             <!-- Button to send message -->
-                                            <a href="#" class="quckview message-button"
-                                                data-seller-id="{{ $product->shop->seller->user->id }}"
-                                                data-product-id="{{ $product->id }}">
-                                                <i class="fal fa-comment"></i>
-                                            </a>
+                                            @auth
+                                                <a href="#" class="quckview message-button"
+                                                    data-seller-id="{{ $product->shop->seller->user->id }}"
+                                                    data-product-id="{{ $product->id }}">
+                                                    <i class="fal fa-comment"></i>
+                                                </a>
+                                            @endauth
                                         </div>
                                     </div>
                                     <div class="tpproduct__content">

@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\ShopCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class ShopController extends Controller
 {
@@ -25,10 +26,10 @@ class ShopController extends Controller
 
         $shops = $seller->shops;
         $ShopCategories = ShopCategory::all();
-        return view('seller.shops.index',compact('shops', 'ShopCategories'));
+        return view('seller.shops.index', compact('shops', 'ShopCategories'));
     }
 
-   
+
     public function create()
     {
         return view('seller.shops.create');
@@ -77,9 +78,10 @@ class ShopController extends Controller
     // Mettre à jour une boutique si elle appartient au vendeur connecté
     public function update(Request $request, Shop $shop)
     {
+        // Vérifier si le vendeur connecté possède la boutique
         $seller = Auth::user()->seller;
 
-        if (!$seller || !$seller->shops->contains($shop)) {
+        if (!$seller || $shop->seller_id !== $seller->id) {
             return response()->json(['error' => 'Accès non autorisé à cette boutique.'], 403);
         }
 
@@ -96,13 +98,18 @@ class ShopController extends Controller
     // Supprimer une boutique si elle appartient au vendeur connecté
     public function destroy(Shop $shop)
     {
+        // Vérifier si le vendeur connecté possède la boutique
         $seller = Auth::user()->seller;
 
-        if (!$seller || !$seller->shops->contains($shop)) {
+        if (!$seller || $shop->seller_id !== $seller->id) {
             return response()->json(['error' => 'Accès non autorisé à cette boutique.'], 403);
         }
-
-        $shop->delete();
-        return response()->json(['message' => 'Boutique supprimée']);
+        try {
+            $shop->delete();
+            // Rediriger avec un message de confirmation
+            return redirect()->back()->with('success', 'Boutique supprimée avec succès.');
+        } catch (\Throwable $th) {
+            return redirect()->back()->withErrors(['error' => 'Erreur lors de la suppression de la boutique.']);
+        }
     }
 }

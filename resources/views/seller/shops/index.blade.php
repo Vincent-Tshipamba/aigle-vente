@@ -25,7 +25,7 @@
                 <!-- Modal header -->
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                        Create New Product
+                        Ajouter une boutique
                     </h3>
                     <button type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -61,7 +61,7 @@
                                 placeholder="Type address" required="">
                         </div>
 
-                        <div class="col-span-2">
+                        {{-- <div class="col-span-2">
                             <select id="category" name="category_product_id"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option selected="">Select category</option>
@@ -69,7 +69,7 @@
                                     <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div> --}}
 
                         <div class="col-span-2">
                             <label for="description"
@@ -89,7 +89,7 @@
                                 d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                 clip-rule="evenodd"></path>
                         </svg>
-                        Add new product
+                        Ajouter
                     </button>
                 </form>
             </div>
@@ -152,14 +152,19 @@
                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Produits</a>
                                 </li>
                                 <li>
-                                    <a href="#"
+                                    <a href="{{ route('shops.update', $shop->_id) }}"
                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Modifier</a>
                                 </li>
-                               
+
                             </ul>
                             <div class="py-2">
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Supprimer</a>
+                                <form action="{{ route('shops.destroy', $shop->_id) }}"
+                                    method="POST" class="delete-form">
+                                    @csrf
+                                    @method('delete')
+                                    <input type="submit" value="supprimer"
+                                        class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                </form>
                             </div>
                         </div>
                     </td>
@@ -207,6 +212,30 @@
                 timerProgressBar: true,
             });
         @endif
+    </script>
+
+    <script>
+        document.querySelectorAll('.delete-form').forEach(form => {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault(); // Empêche l'envoi du formulaire
+                const form = this; // Référence au formulaire
+
+                Swal.fire({
+                    title: 'Êtes-vous sûr ?',
+                    text: "Vous ne pourrez pas revenir en arrière !",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Oui, supprimer !',
+                    cancelButtonText: 'Annuler'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit(); // Soumet le formulaire si l'utilisateur confirme
+                    }
+                });
+            });
+        });
     </script>
 @endsection
 @endsection

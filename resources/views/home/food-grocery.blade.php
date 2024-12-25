@@ -52,7 +52,8 @@
                                                     class="fal fa-long-arrow-right"></i></a>
                                         </div>
                                         <div class="tp-slide-item__img">
-                                            <img src="{{ asset('img/slider/slider-05-bg-1.jpg') }}" alt="">
+                                            <img loading="lazy" src="{{ asset('img/slider/slider-05-bg-1.jpg') }}"
+                                                alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -65,7 +66,8 @@
                                                     class="fal fa-long-arrow-right"></i></a>
                                         </div>
                                         <div class="tp-slide-item__img">
-                                            <img src="{{ asset('img/slider/slider-05-bg-2.jpg') }}" alt="">
+                                            <img loading="lazy" src="{{ asset('img/slider/slider-05-bg-2.jpg') }}"
+                                                alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -78,7 +80,8 @@
                                                     class="fal fa-long-arrow-right"></i></a>
                                         </div>
                                         <div class="tp-slide-item__img">
-                                            <img src="{{ asset('img/slider/slider-05-bg-3.jpg') }}" alt="">
+                                            <img loading="lazy" src="{{ asset('img/slider/slider-05-bg-3.jpg') }}"
+                                                alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +94,8 @@
                                                     class="fal fa-long-arrow-right"></i></a>
                                         </div>
                                         <div class="tp-slide-item__img">
-                                            <img src="{{ asset('img/slider/slider-05-bg-4.jpg') }}" alt="">
+                                            <img loading="lazy" src="{{ asset('img/slider/slider-05-bg-4.jpg') }}"
+                                                alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -106,7 +110,8 @@
                             <div class="tpslider-banner mb-30 tpbnner-height-5">
                                 <a href="shop-2.html">
                                     <div class="tpslider-banner__img tpbannerthumb-5">
-                                        <img src="{{ asset('img/slider/slider-05-banner-1.jpg') }}" alt="">
+                                        <img loading="lazy" src="{{ asset('img/slider/slider-05-banner-1.jpg') }}"
+                                            alt="">
                                         <div class="tpslider-banner__content">
                                             <span class="tpslider-banner__sub-title">Best Bakery Products</span>
                                             <h4 class="tpslider-banner__title">100% Fresh Product <br> Every Hour</h4>
@@ -120,7 +125,8 @@
                             <div class="tpslider-banner white-banner">
                                 <a href="shop.html">
                                     <div class="tpslider-banner__img tpbannerthumb-5">
-                                        <img src="{{ asset('img/slider/slider-05-banner-2.jpg') }}" alt="">
+                                        <img loading="lazy" src="{{ asset('img/slider/slider-05-banner-2.jpg') }}"
+                                            alt="">
                                         <div class="tpslider-banner__content">
                                             <span class="tpslider-banner__sub-title">Best Bakery Products</span>
                                             <h4 class="tpslider-banner__title">100% Fresh Product <br> Every Hour</h4>
@@ -236,7 +242,7 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-1.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-1.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-2.jpg') }}" alt="">
@@ -265,7 +271,7 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-3.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-3.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-4.jpg') }}" alt="">
@@ -294,7 +300,7 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-5.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-5.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-6.jpg') }}" alt="">
@@ -324,7 +330,7 @@
                                 <div class="tpproduct__thumb p-relative">
                                     <span class="tpproduct__thumb-topsall">On Sale</span>
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-7.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-7.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-8.jpg') }}" alt="">
@@ -353,7 +359,7 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-9.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-9.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-10.jpg') }}" alt="">
@@ -384,7 +390,7 @@
                                 <div class="tpproduct__thumb p-relative">
                                     <span class="tpproduct__thumb-volt"><i class="fas fa-bolt"></i></span>
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-11.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-11.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-12.jpg') }}" alt="">
@@ -413,7 +419,7 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-13.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-13.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-14.jpg') }}" alt="">
@@ -442,7 +448,7 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-15.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-15.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-16.jpg') }}" alt="">
@@ -497,7 +503,7 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-17.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-17.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-18.jpg') }}" alt="">
@@ -527,7 +533,7 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-19.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-19.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-20.jpg') }}" alt="">
@@ -561,7 +567,7 @@
                                 <div class="tpproduct__thumb p-relative">
                                     <span class="tpproduct__thumb-volt"><i class="fas fa-bolt"></i></span>
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-11.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-11.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-12.jpg') }}" alt="">
@@ -590,7 +596,7 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-13.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-13.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-14.jpg') }}" alt="">
@@ -619,7 +625,7 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-15.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-15.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-16.jpg') }}" alt="">
@@ -674,7 +680,7 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-17.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-17.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-18.jpg') }}" alt="">
@@ -704,7 +710,7 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-19.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-19.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-20.jpg') }}" alt="">
@@ -733,7 +739,7 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-1.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-1.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-2.jpg') }}" alt="">
@@ -762,7 +768,7 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-3.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-3.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-4.jpg') }}" alt="">
@@ -791,7 +797,7 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-5.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-5.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-6.jpg') }}" alt="">
@@ -821,7 +827,7 @@
                                 <div class="tpproduct__thumb p-relative">
                                     <span class="tpproduct__thumb-topsall">On Sale</span>
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-7.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-7.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-8.jpg') }}" alt="">
@@ -850,7 +856,7 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-9.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-9.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-10.jpg') }}" alt="">
@@ -884,7 +890,7 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-15.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-15.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-16.jpg') }}" alt="">
@@ -939,7 +945,7 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-17.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-17.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-18.jpg') }}" alt="">
@@ -969,7 +975,7 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-19.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-19.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-20.jpg') }}" alt="">
@@ -998,7 +1004,7 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-1.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-1.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-2.jpg') }}" alt="">
@@ -1027,7 +1033,7 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-3.jpg') }}"
+                                        <img loading="lazy" src="{{ asset('img/product/home-five/product-3.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-4.jpg') }}" alt="">
@@ -1056,10 +1062,12 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-5.jpg') }}"
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-five/product-5.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-five/product-6.jpg') }}" alt="">
+                                            src="{{ asset('img/product/home-five/product-6.jpg') }}"
+                                            alt="">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -1086,7 +1094,8 @@
                                 <div class="tpproduct__thumb p-relative">
                                     <span class="tpproduct__thumb-topsall">On Sale</span>
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-7.jpg') }}"
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-five/product-7.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-8.jpg') }}"
@@ -1116,7 +1125,8 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-9.jpg') }}"
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-five/product-9.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-10.jpg') }}"
@@ -1148,7 +1158,8 @@
                                 <div class="tpproduct__thumb p-relative">
                                     <span class="tpproduct__thumb-volt"><i class="fas fa-bolt"></i></span>
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-11.jpg') }}"
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-five/product-11.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-12.jpg') }}"
@@ -1178,7 +1189,8 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-13.jpg') }}"
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-five/product-13.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-14.jpg') }}"
@@ -1213,7 +1225,8 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-5.jpg') }}"
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-five/product-5.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-6.jpg') }}"
@@ -1244,7 +1257,8 @@
                                 <div class="tpproduct__thumb p-relative">
                                     <span class="tpproduct__thumb-topsall">On Sale</span>
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-7.jpg') }}"
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-five/product-7.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-8.jpg') }}"
@@ -1274,7 +1288,8 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-9.jpg') }}"
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-five/product-9.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-10.jpg') }}"
@@ -1306,7 +1321,8 @@
                                 <div class="tpproduct__thumb p-relative">
                                     <span class="tpproduct__thumb-volt"><i class="fas fa-bolt"></i></span>
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-11.jpg') }}"
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-five/product-11.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-12.jpg') }}"
@@ -1336,7 +1352,8 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-13.jpg') }}"
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-five/product-13.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-14.jpg') }}"
@@ -1366,7 +1383,8 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-15.jpg') }}"
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-five/product-15.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-16.jpg') }}"
@@ -1423,7 +1441,8 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-17.jpg') }}"
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-five/product-17.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-18.jpg') }}"
@@ -1454,7 +1473,8 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-19.jpg') }}"
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-five/product-19.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-20.jpg') }}"
@@ -1484,7 +1504,8 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-1.jpg') }}"
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-five/product-1.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-2.jpg') }}"
@@ -1514,7 +1535,8 @@
                             <div class="tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-five/product-3.jpg') }}"
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-five/product-3.jpg') }}"
                                             alt="product-thumb">
                                         <img class="product-thumb-secondary"
                                             src="{{ asset('img/product/home-five/product-4.jpg') }}"
@@ -1597,7 +1619,8 @@
                         <h4 class="tpselectproduct__heading mb-35">Biscuit & Snacks</h4>
                         <div class="tpselectproduct__item d-flex align-items-center mb-25">
                             <div class="tpselectproduct__thumb mr-25">
-                                <img src="{{ asset('img/product/home-five/product-1.jpg') }}" alt="thumb">
+                                <img loading="lazy" src="{{ asset('img/product/home-five/product-1.jpg') }}"
+                                    alt="thumb">
                             </div>
                             <div class="tpselectproduct__content">
                                 <div class="tpselectproduct__rating">
@@ -1614,7 +1637,8 @@
                         </div>
                         <div class="tpselectproduct__item d-flex align-items-center mb-25">
                             <div class="tpselectproduct__thumb mr-25">
-                                <img src="{{ asset('img/product/home-five/product-3.jpg') }}" alt="thumb">
+                                <img loading="lazy" src="{{ asset('img/product/home-five/product-3.jpg') }}"
+                                    alt="thumb">
                             </div>
                             <div class="tpselectproduct__content">
                                 <div class="tpselectproduct__rating">
@@ -1631,7 +1655,8 @@
                         </div>
                         <div class="tpselectproduct__item d-flex align-items-center mb-25">
                             <div class="tpselectproduct__thumb mr-25">
-                                <img src="{{ asset('img/product/home-five/product-5.jpg') }}" alt="thumb">
+                                <img loading="lazy" src="{{ asset('img/product/home-five/product-5.jpg') }}"
+                                    alt="thumb">
                             </div>
                             <div class="tpselectproduct__content">
                                 <div class="tpselectproduct__rating">
@@ -1648,7 +1673,8 @@
                         </div>
                         <div class="tpselectproduct__item d-flex align-items-center mb-25">
                             <div class="tpselectproduct__thumb mr-25">
-                                <img src="{{ asset('img/product/home-five/product-7.jpg') }}" alt="thumb">
+                                <img loading="lazy" src="{{ asset('img/product/home-five/product-7.jpg') }}"
+                                    alt="thumb">
                             </div>
                             <div class="tpselectproduct__content">
                                 <div class="tpselectproduct__rating">
@@ -1670,7 +1696,8 @@
                         <h4 class="tpselectproduct__heading mb-35">Chocolate</h4>
                         <div class="tpselectproduct__item d-flex align-items-center mb-25">
                             <div class="tpselectproduct__thumb mr-25">
-                                <img src="{{ asset('img/product/home-five/product-9.jpg') }}" alt="thumb">
+                                <img loading="lazy" src="{{ asset('img/product/home-five/product-9.jpg') }}"
+                                    alt="thumb">
                             </div>
                             <div class="tpselectproduct__content">
                                 <div class="tpselectproduct__rating">
@@ -1687,7 +1714,8 @@
                         </div>
                         <div class="tpselectproduct__item d-flex align-items-center mb-25">
                             <div class="tpselectproduct__thumb mr-25">
-                                <img src="{{ asset('img/product/home-five/product-11.jpg') }}" alt="thumb">
+                                <img loading="lazy" src="{{ asset('img/product/home-five/product-11.jpg') }}"
+                                    alt="thumb">
                             </div>
                             <div class="tpselectproduct__content">
                                 <div class="tpselectproduct__rating">
@@ -1704,7 +1732,8 @@
                         </div>
                         <div class="tpselectproduct__item d-flex align-items-center mb-25">
                             <div class="tpselectproduct__thumb mr-25">
-                                <img src="{{ asset('img/product/home-five/product-13.jpg') }}" alt="thumb">
+                                <img loading="lazy" src="{{ asset('img/product/home-five/product-13.jpg') }}"
+                                    alt="thumb">
                             </div>
                             <div class="tpselectproduct__content">
                                 <div class="tpselectproduct__rating">
@@ -1721,7 +1750,8 @@
                         </div>
                         <div class="tpselectproduct__item d-flex align-items-center mb-25">
                             <div class="tpselectproduct__thumb mr-25">
-                                <img src="{{ asset('img/product/home-five/product-15.jpg') }}" alt="thumb">
+                                <img loading="lazy" src="{{ asset('img/product/home-five/product-15.jpg') }}"
+                                    alt="thumb">
                             </div>
                             <div class="tpselectproduct__content">
                                 <div class="tpselectproduct__rating">
@@ -1743,7 +1773,8 @@
                         <h4 class="tpselectproduct__heading mb-35">Shakes & Biscuit</h4>
                         <div class="tpselectproduct__item d-flex align-items-center mb-25">
                             <div class="tpselectproduct__thumb mr-25">
-                                <img src="{{ asset('img/product/home-five/product-17.jpg') }}" alt="thumb">
+                                <img loading="lazy" src="{{ asset('img/product/home-five/product-17.jpg') }}"
+                                    alt="thumb">
                             </div>
                             <div class="tpselectproduct__content">
                                 <div class="tpselectproduct__rating">
@@ -1760,7 +1791,8 @@
                         </div>
                         <div class="tpselectproduct__item d-flex align-items-center mb-25">
                             <div class="tpselectproduct__thumb mr-25">
-                                <img src="{{ asset('img/product/home-five/product-19.jpg') }}" alt="thumb">
+                                <img loading="lazy" src="{{ asset('img/product/home-five/product-19.jpg') }}"
+                                    alt="thumb">
                             </div>
                             <div class="tpselectproduct__content">
                                 <div class="tpselectproduct__rating">
@@ -1777,7 +1809,8 @@
                         </div>
                         <div class="tpselectproduct__item d-flex align-items-center mb-25">
                             <div class="tpselectproduct__thumb mr-25">
-                                <img src="{{ asset('img/product/home-five/product-21.jpg') }}" alt="thumb">
+                                <img loading="lazy" src="{{ asset('img/product/home-five/product-21.jpg') }}"
+                                    alt="thumb">
                             </div>
                             <div class="tpselectproduct__content">
                                 <div class="tpselectproduct__rating">
@@ -1794,7 +1827,8 @@
                         </div>
                         <div class="tpselectproduct__item d-flex align-items-center mb-25">
                             <div class="tpselectproduct__thumb mr-25">
-                                <img src="{{ asset('img/product/home-five/product-22.jpg') }}" alt="thumb">
+                                <img loading="lazy" src="{{ asset('img/product/home-five/product-22.jpg') }}"
+                                    alt="thumb">
                             </div>
                             <div class="tpselectproduct__content">
                                 <div class="tpselectproduct__rating">
@@ -1816,7 +1850,8 @@
                         <h4 class="tpselectproduct__heading mb-35">Cake & Honey</h4>
                         <div class="tpselectproduct__item d-flex align-items-center mb-25">
                             <div class="tpselectproduct__thumb mr-25">
-                                <img src="{{ asset('img/product/home-five/product-23.jpg') }}" alt="thumb">
+                                <img loading="lazy" src="{{ asset('img/product/home-five/product-23.jpg') }}"
+                                    alt="thumb">
                             </div>
                             <div class="tpselectproduct__content">
                                 <div class="tpselectproduct__rating">
@@ -1833,7 +1868,8 @@
                         </div>
                         <div class="tpselectproduct__item d-flex align-items-center mb-25">
                             <div class="tpselectproduct__thumb mr-25">
-                                <img src="{{ asset('img/product/home-five/product-24.jpg') }}" alt="thumb">
+                                <img loading="lazy" src="{{ asset('img/product/home-five/product-24.jpg') }}"
+                                    alt="thumb">
                             </div>
                             <div class="tpselectproduct__content">
                                 <div class="tpselectproduct__rating">
@@ -1850,7 +1886,8 @@
                         </div>
                         <div class="tpselectproduct__item d-flex align-items-center mb-25">
                             <div class="tpselectproduct__thumb mr-25">
-                                <img src="{{ asset('img/product/home-five/product-25.jpg') }}" alt="thumb">
+                                <img loading="lazy" src="{{ asset('img/product/home-five/product-25.jpg') }}"
+                                    alt="thumb">
                             </div>
                             <div class="tpselectproduct__content">
                                 <div class="tpselectproduct__rating">
@@ -1867,7 +1904,8 @@
                         </div>
                         <div class="tpselectproduct__item d-flex align-items-center mb-25">
                             <div class="tpselectproduct__thumb mr-25">
-                                <img src="{{ asset('img/product/home-five/product-9.jpg') }}" alt="thumb">
+                                <img loading="lazy" src="{{ asset('img/product/home-five/product-9.jpg') }}"
+                                    alt="thumb">
                             </div>
                             <div class="tpselectproduct__content">
                                 <div class="tpselectproduct__rating">
@@ -1923,7 +1961,8 @@
                             </div>
                             <div class="tptesti__avata d-flex align-items-center justify-content-center">
                                 <div class="tptesti__avata-icon mr-20">
-                                    <img src="{{ asset('img/testimonial/testi-avata-01.png') }}" alt="avata">
+                                    <img loading="lazy" src="{{ asset('img/testimonial/testi-avata-01.png') }}"
+                                        alt="avata">
                                 </div>
                                 <div class="tptesti__avata-content text-start">
                                     <h5 class="tptesti__avata-content-title">Miranda H. Halim</h5>
@@ -1948,7 +1987,8 @@
                             </div>
                             <div class="tptesti__avata d-flex align-items-center justify-content-center">
                                 <div class="tptesti__avata-icon mr-20">
-                                    <img src="{{ asset('img/testimonial/testi-avata-02.png') }}" alt="avata">
+                                    <img loading="lazy" src="{{ asset('img/testimonial/testi-avata-02.png') }}"
+                                        alt="avata">
                                 </div>
                                 <div class="tptesti__avata-content text-start">
                                     <h5 class="tptesti__avata-content-title">Robertia</h5>
@@ -1973,7 +2013,8 @@
                             </div>
                             <div class="tptesti__avata d-flex align-items-center justify-content-center">
                                 <div class="tptesti__avata-icon mr-20">
-                                    <img src="{{ asset('img/testimonial/testi-avata-03.png') }}" alt="avata">
+                                    <img loading="lazy" src="{{ asset('img/testimonial/testi-avata-03.png') }}"
+                                        alt="avata">
                                 </div>
                                 <div class="tptesti__avata-content text-start">
                                     <h5 class="tptesti__avata-content-title">Savannah Nguyen</h5>

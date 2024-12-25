@@ -6,7 +6,7 @@
                 <div class="col-lg-6 col-md-12">
                     <div class="tpdealproduct">
                         <div class="tpdealproduct__thumb p-relative text-center">
-                            <img src="{{ asset('img/floded/floded-01.png') }}" alt="dealproduct-thumb">
+                            <img loading="lazy" src="{{ asset('img/floded/floded-01.png') }}" alt="dealproduct-thumb">
                             <div class="tpdealproductd__offer">
                                 <h5 class="tpdealproduct__offer-price"><span>À partir de</span>49€</h5>
                             </div>
@@ -20,8 +20,11 @@
                             <del>59,00€</del>
                         </div>
                         <div class="tpdealcontact__text mb-30">
-                            <h4 class="tpdealcontact__title mb-10"><a href="shop-details.html">Pots Pliés Abstraits Pro2</a></h4>
-                            <p>Design origami rose élégant, vue tridimensionnelle et décoration coexistent. Idéal pour ajouter une touche décorative à la décoration de n'importe quelle pièce. Magnifique pièce d'accent pour les tables basses ou les tables d'appoint.</p>
+                            <h4 class="tpdealcontact__title mb-10"><a href="shop-details.html">Pots Pliés Abstraits
+                                    Pro2</a></h4>
+                            <p>Design origami rose élégant, vue tridimensionnelle et décoration coexistent. Idéal pour
+                                ajouter une touche décorative à la décoration de n'importe quelle pièce. Magnifique
+                                pièce d'accent pour les tables basses ou les tables d'appoint.</p>
                         </div>
                         <div class="tpdealcontact__progress mb-30">
                             <div class="progress">

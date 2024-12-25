@@ -5,7 +5,8 @@
             class="bg-white dark:bg-gray-900 shadow-lg dark:shadow-lg dark:shadow-gray-500/20 p-4 mb-4 rounded-lg border dark:border-gray-500 text-center">
             <div class="">
                 <div class=" flex justify-center">
-                    <img src="{{ isset($owner->image) ? $owner->image : asset('img/profil.jpeg') }}" alt=""
+                    <img loading="lazy" src="{{ isset($owner->image) ? $owner->image : asset('img/profil.jpeg') }}"
+                        alt=""
                         class=" w-28 h-28 rounded-full border border-gray-900 dark:border-gray-500 object-cover">
                 </div>
             </div>
@@ -102,7 +103,9 @@
             </h3>
             @if ($orders->count() > 3)
                 <div>
-                    <a href="#" class="text-[#e38407] hover:scale-105 transition duration-700 ease-in-out hover:underline">Voir toutes les commandes</a>
+                    <a href="#"
+                        class="text-[#e38407] hover:scale-105 transition duration-700 ease-in-out hover:underline">Voir
+                        toutes les commandes</a>
                 </div>
             @endif
         </div>
@@ -127,7 +130,8 @@
                         </div>
                     </div>
                     <div class="">
-                        <img src="{{ isset($order->image) ? $order->image : asset('img/profil.jpeg') }}" alt=""
+                        <img loading="lazy" src="{{ isset($order->image) ? $order->image : asset('img/profil.jpeg') }}"
+                            alt=""
                             class=" w-28 rounded-full border border-gray-900 dark:border-gray-500 object-cover">
                     </div>
                 </a>

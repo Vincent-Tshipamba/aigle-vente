@@ -16,7 +16,7 @@
                     <div data-contact-id="{{ $contact->id }}"
                         class="contact-item flex items-center mb-4 cursor-pointer hover:bg-gray-100 p-2 rounded-md">
                         <div class="w-10 h-10 md:w-12 md:h-12 bg-gray-300 rounded-full mr-3">
-                            <img src="{{ $contact->profile_picture_url }}" alt="{{ $contact->name }}"
+                            <img loading="lazy" src="{{ $contact->profile_picture_url }}" alt="{{ $contact->name }}"
                                 class="w-full h-full rounded-full">
                         </div>
                         <div class="flex-1">
@@ -166,7 +166,7 @@
                     <p>${message.message}</p>
                 </div>
                 <div class="w-9 h-9 rounded-full ml-2">
-                    <img src="${message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
+                    <img loading="lazy" src="${message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
                         alt="My Avatar" class="w-8 h-8 rounded-full">
                 </div>
                 <span class="text-xs text-gray-400 ml-2">${formattedTime}</span>
@@ -175,7 +175,7 @@
                                 messageDiv.innerHTML = `
                 <div class="flex items-center mb-4">
                     <div class="w-9 h-9 rounded-full mr-2">
-                        <img src="${message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
+                        <img loading="lazy" src="${message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
                             alt="User Avatar" class="w-8 h-8 rounded-full">
                     </div>
                     <div class="flex max-w-96 bg-sky-200 text-gray-700 rounded-lg p-3">
@@ -203,7 +203,7 @@
                         receivedMessageDiv.classList.add('mb-4', 'flex', 'justify-start');
                         receivedMessageDiv.innerHTML = `
             <div class="w-9 h-9 rounded-full mr-2">
-                <img src="${e.message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
+                <img loading="lazy" src="${e.message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
                      alt="Avatar" class="w-8 h-8 rounded-full">
             </div>
             <div class="flex max-w-96 bg-gray-300 text-black rounded-lg p-3">
@@ -278,7 +278,7 @@
                         <p>${messageText}</p>
                     </div>
                     <div class="w-9 h-9 rounded-full ml-2">
-                        <img src="${profilePictureUrl}" alt="My Avatar" class="w-8 h-8 rounded-full">
+                        <img loading="lazy" src="${profilePictureUrl}" alt="My Avatar" class="w-8 h-8 rounded-full">
                     </div>
                 `;
                     messageContainer.appendChild(newMessageDiv);

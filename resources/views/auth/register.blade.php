@@ -18,7 +18,7 @@
                         <div class="tptrack__content grey-bg-3">
                             <div class="tptrack__item d-flex mb-20">
                                 <div class="tptrack__item-icon">
-                                    <img src="{{ asset('img/icon/sign-up.png') }}" alt="">
+                                    <img loading="lazy" src="{{ asset('img/icon/sign-up.png') }}" alt="">
                                 </div>
                                 <div class="tptrack__item-content">
                                     <h4 class="tptrack__item-title">S'inscrire</h4>
@@ -144,7 +144,6 @@
                     title: 'Geolocalisation requise',
                     text: "Pour vous offrir une meilleure expérience d'achat, il est important que nous connaissions votre emplacement. Votre adresse est utilisée pour vous proposer des produits disponibles près de chez vous et vous fournir des informations de livraison précises.",
                     confirmButtonText: 'J\'ai compris',
-                    background: "#fff url(/images/trees.png)",
                     backdrop: `
                         rgba(0,0,123,0.4)
                         left top
@@ -259,7 +258,7 @@
         </script>
 
         <script>
-            $(document).ready(function() {
+            document.addEventListener('DOMContentLoaded', function() {
                 $("#register-form").validate({
                     rules: {
                         firstname: {

@@ -105,7 +105,8 @@
                                             </tr>
                                             <tr>
                                                 <td class="add-info">Identité du vendeur</td>
-                                                <td class="add-info-list"> {{ $shop->seller->first_name }} {{ $shop->seller->last_name }}</td>
+                                                <td class="add-info-list"> {{ $shop->seller->first_name }}
+                                                    {{ $shop->seller->last_name }}</td>
                                             </tr>
                                             <tr>
                                                 <td class="add-info">Adresse de la boutique</td>
@@ -113,7 +114,9 @@
                                             </tr>
                                             <tr>
                                                 <td class="add-info">Numéro de contact</td>
-                                                <td class="add-info-list"><a class="hover:text-[#e38407]" href="tel:{{ $shop->seller->phone }}">{{ $shop->seller->phone }}</a></td>
+                                                <td class="add-info-list"><a class="hover:text-[#e38407]"
+                                                        href="tel:{{ $shop->seller->phone }}">{{ $shop->seller->phone }}</a>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -129,7 +132,8 @@
                                             <li>
                                                 <div class="comments-box d-flex">
                                                     <div class="comments-avatar mr-25">
-                                                        <img src="{{ $shop->image ?? asset('img/shop/reviewer-01.png') }}"
+                                                        <img loading="lazy"
+                                                            src="{{ $shop->image ?? asset('img/shop/reviewer-01.png') }}"
                                                             alt="Image de la boutique">
                                                     </div>
                                                     <div class="comments-text">
@@ -173,7 +177,8 @@
                                             <li>
                                                 <div class="comments-box d-flex">
                                                     <div class="comments-avatar mr-25">
-                                                        <img src="{{ asset('img/shop/reviewer-02.png') }}"
+                                                        <img loading="lazy"
+                                                            src="{{ asset('img/shop/reviewer-02.png') }}"
                                                             alt="">
                                                     </div>
                                                     <div class="comments-text">
@@ -217,7 +222,8 @@
                                             <li>
                                                 <div class="comments-box d-flex">
                                                     <div class="comments-avatar mr-25">
-                                                        <img src="{{ asset('img/shop/reviewer-03.png') }}"
+                                                        <img loading="lazy"
+                                                            src="{{ asset('img/shop/reviewer-03.png') }}"
                                                             alt="">
                                                     </div>
                                                     <div class="comments-text">
@@ -337,14 +343,16 @@
                                 <div class="tpproduct pb-15 mb-30">
                                     <div class="tpproduct__thumb p-relative">
                                         <a href="{{ route('products.show', $product->_id) }}">
-                                            <img src="{{ asset('img/product/home-one/product-1.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-one/product-1.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="product-thumb-secondary"
                                                 src="{{ asset('img/product/home-one/product-2.jpg') }}"
                                                 alt="">
                                         </a>
                                         <div class="tpproduct__thumb-action">
-                                            <a class="comphare" onclick="addToWishList(event, {{ $product->id }})" href="#"><i class="fal fa-heart"></i></a>
+                                            <a class="comphare" onclick="addToWishList(event, {{ $product->id }})"
+                                                href="#"><i class="fal fa-heart"></i></a>
                                             <a class="quckview" href="{{ route('products.show', $product->_id) }}"><i
                                                     class="fal fa-eye"></i></a>
                                             <a class="wishlist" href="wishlist.html"><i class="fal fa-heart"></i></a>

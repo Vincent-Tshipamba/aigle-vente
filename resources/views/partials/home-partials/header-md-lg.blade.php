@@ -8,7 +8,8 @@
                 </div>
                 <div class="logo">
                     <a href="{{ route('home') }}" class="flex items-center space-x-2">
-                        <img src="{{ asset('img/logo/logo_sans_bg.png') }}" width="25%" alt="logo">
+                        <img loading="lazy" src="{{ asset('img/logo/logo_sans_bg.png') }}" width="25%"
+                            alt="logo">
                         <h1 class="text-lg font-bold animate__animated animate__slideInRight">Aigle Vente</h1>
                     </a>
                 </div>
@@ -135,7 +136,7 @@
             </div>
             <div class="col-4 flex justify-center items-center mx-auto {{ Auth::check() ? 'hidden' : '' }}">
                 <a href="{{ route('home') }}" class="text-center">
-                    <img src="{{ asset('img/logo/logo_sans_bg.png') }}" width="50" alt="logo">
+                    <img loading="lazy" src="{{ asset('img/logo/logo_sans_bg.png') }}" width="50" alt="logo">
                 </a>
             </div>
             <div class="{{ Auth::check() ? 'col-8' : 'col-4' }}">
@@ -148,8 +149,7 @@
                                     class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                                     type="button">
                                     <span class="sr-only">Open user menu</span>
-                                    <img class="w-8 h-8 rounded-full" src=""
-                                        alt="user photo">
+                                    <img class="w-8 h-8 rounded-full" src="" alt="user photo">
                                 </button>
 
                                 <!-- Dropdown menu -->
@@ -234,7 +234,8 @@
                                     @endif
                                 </div>
                             @else
-                                <a href="{{ route('login') }}" class="text-md text-black dark:text-gray-200"><i class="fal fa-user"></i></a>
+                                <a href="{{ route('login') }}" class="text-md text-black dark:text-gray-200"><i
+                                        class="fal fa-user"></i></a>
                                 <!-- Lien vers le formulaire de connexion -->
                             @endauth
                         </div>

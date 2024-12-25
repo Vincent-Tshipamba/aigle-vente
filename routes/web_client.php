@@ -12,6 +12,7 @@ use App\Http\Controllers\Client\ProductController;
 use App\Http\Controllers\Client\WishlistController;
 use App\Http\Controllers\Client\DashboardController;
 use App\Http\Controllers\HomeController; // Routes accessible to any online user
+
 Route::middleware('userOnline')->group(function () {
     // Home and Static Pages
     Route::get('/', [HomeController::class, 'home'])->name('home');
@@ -30,6 +31,12 @@ Route::middleware('userOnline')->group(function () {
     Route::get('/contact', function () {
         return view('contact');
     })->name('contact');
+
+    Route::get('/home/slider', [HomeController::class, 'slider'])->name('home.slider');
+    Route::get('/home/category', [HomeController::class, 'category'])->name('home.category');
+    Route::get('/home/product', [HomeController::class, 'product'])->name('home.product');
+    Route::get('/home/dealProduct', [HomeController::class, 'dealProduct'])->name('home.dealProduct');
+    Route::get('/home/shop', [HomeController::class, 'shop'])->name('home.shop');
 
     // Product and Shop Routes
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');

@@ -3,8 +3,7 @@
         <div class="row">
             <div class="col-md-6 col-12">
                 <div class="tpsection mb-40">
-                    <h4 class="tpsection__title">Produits <span> Populaires <img
-                                src="{{ asset('img/icon/title-shape-01.jpg') }}" alt=""></span></h4>
+                    <h4 class="tpsection__title">Produits <span> Populaires </span></h4>
                 </div>
             </div>
             <div class="col-md-6 col-12">
@@ -27,10 +26,10 @@
         </div>
         <div class="tab-content" id="nav-tabContent">
             <div id="product-container" class="w-full md:inset-0">
-                @if (empty($products))
+                @if (!isset($products))
                     <div class="p-4 text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300"
                         role="alert">
-                        <span class="font-medium">oups desole!</span> aucun produit disponible pour le moment.
+                        <span class="font-medium">Oups désolé !</span> Aucun produit disponible pour le moment.
                     </div>
                 @else
                     <div
@@ -44,7 +43,8 @@
                                                 $firstPhoto = $product->photos->first();
                                             @endphp
                                             @if ($firstPhoto)
-                                                <img src="{{ asset($firstPhoto->image) }}" alt="{{ $product->name }}">
+                                                <img loading="lazy" src="{{ asset($firstPhoto->image) }}"
+                                                    alt="{{ $product->name }}">
                                                 <img class="product-thumb-secondary"
                                                     src="{{ asset($firstPhoto->image) }}" alt="">
                                             @endif
@@ -115,7 +115,7 @@
                         <div class="tpproduct pb-15 mb-30">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="{{ route('shop.details', $product->id) }}">
-                                    <img src="{{ asset($product->image_primary) }}" alt="{{ $product->name }}">
+                                    <img loading="lazy" src="{{ asset($product->image_primary) }}" alt="{{ $product->name }}">
                                     <img class="product-thumb-secondary" src="{{ asset($product->image_secondary) }}"
                                         alt="">
                                 </a>
@@ -155,7 +155,7 @@
                                             @php
                                                 $firstPhoto = $product->photos->first();
                                             @endphp
-                                            <img src="{{ asset('storage/' . $firstPhoto->image) }}"
+                                            <img loading="lazy" src="{{ asset('storage/' . $firstPhoto->image) }}"
                                                 alt="{{ $product->name }}">
                                             <img class="product-thumb-secondary"
                                                 src="{{ asset('storage/' . $firstPhoto->image) }}" alt="">
@@ -199,7 +199,7 @@
                         <div class="tpproduct pb-15 mb-30">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="{{ route('shop.details', $product->id) }}">
-                                    <img src="{{ asset($product->image_primary) }}" alt="{{ $product->name }}">
+                                    <img loading="lazy" src="{{ asset($product->image_primary) }}" alt="{{ $product->name }}">
                                     <img class="product-thumb-secondary" src="{{ asset($product->image_secondary) }}"
                                         alt="">
                                 </a>
@@ -230,57 +230,6 @@
             </div>
         </div>
 </section>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const messageButtons = document.querySelectorAll('.message-button'); // Sélection par classe
-
-        messageButtons.forEach(button => {
-            button.addEventListener('click', function(event) {
-                event.preventDefault(); // Empêche le comportement par défaut du lien
-
-                const sellerId = this.getAttribute('data-seller-id');
-                const productId = this.getAttribute('data-product-id');
-                const message = "Est-ce que le produit est toujours disponible?";
-
-                // Préparer les données du message
-                const formData = new FormData();
-                formData.append('seller_id', sellerId);
-                formData.append('product_id', productId);
-                formData.append('message', message);
-                formData.append('_token', '{{ csrf_token() }}'); // CSRF token
-
-                console.log(sellerId);
-
-
-                // Envoyer la requête AJAX
-                fetch("{{ route('messages.send', ':seller_id') }}".replace(':seller_id',
-                        sellerId), {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: data.message,
-                                text: '{{ session('success') }}',
-                                toast: true,
-                                position: 'top-end',
-                                timer: 3000,
-                                showConfirmButton: false,
-                                timerProgressBar: true,
-                            });
-                        } else {
-                            alert("Échec de l'envoi du message.");
-                        }
-                    })
-                    .catch(error => console.error('Erreur:', error));
-            });
-        });
-    });
-</script>
 
 
 <style>

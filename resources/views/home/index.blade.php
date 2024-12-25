@@ -399,32 +399,32 @@
                     document.head.appendChild(link);
                 });
 
-                // Injecter les fichiers JS
-                const jsFiles = [
-                    'js/sendMessage.js',
-                    'js/jquery.js',
-                    'js/waypoints.js',
-                    'js/bootstrap.bundle.min.js',
-                    'js/swiper-bundle.js',
-                    'js/slick.js',
-                    'js/magnific-popup.js',
-                    'js/nice-select.js',
-                    'js/counterup.js',
-                    'js/wow.js',
-                    'js/isotope-pkgd.js',
-                    'js/imagesloaded-pkgd.js',
-                    'js/countdown.js',
-                    'js/ajax-form.js',
-                    'js/meanmenu.js',
-                    'js/jquery.knob.js',
-                    'js/main.js'
-                ];
+                // // Injecter les fichiers JS
+                // const jsFiles = [
+                //     'js/jquery.js',
+                //     'js/waypoints.js',
+                //     'js/bootstrap.bundle.min.js',
+                //     'js/swiper-bundle.js',
+                //     'js/slick.js',
+                //     'js/magnific-popup.js',
+                //     'js/nice-select.js',
+                //     'js/counterup.js',
+                //     'js/wow.js',
+                //     'js/isotope-pkgd.js',
+                //     'js/imagesloaded-pkgd.js',
+                //     'js/countdown.js',
+                //     'js/ajax-form.js',
+                //     'js/meanmenu.js',
+                //     'js/jquery.knob.js',
+                //     'js/main.js',
+                //     'js/sendMessage.js',
+                // ];
 
-                jsFiles.forEach(file => {
-                    const script = document.createElement('script');
-                    script.src = `{{ asset('${file}') }}`;
-                    document.body.appendChild(script);
-                });
+                // jsFiles.forEach(file => {
+                //     const script = document.createElement('script');
+                //     script.src = `{{ asset('${file}') }}`;
+                //     document.body.appendChild(script);
+                // });
             }
         });
     </script>
@@ -606,56 +606,53 @@
     </script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const messageButtons = document.querySelectorAll('.message-button'); // Sélection par classe
+        // Use a parent container that exists at all times or document if no specific parent
+        document.body.addEventListener('click', function(event) {
+            // Check if the clicked element has the class 'message-button'
+            if (event.target && event.target.classList.contains('message-button')) {
+                event.preventDefault(); // Prevent default link behavior
 
-            messageButtons.forEach(button => {
-                button.addEventListener('click', function(event) {
-                    event.preventDefault(); // Empêche le comportement par défaut du lien
+                const button = event.target; // The clicked button
+                const sellerId = button.getAttribute('data-seller-id');
+                const productId = button.getAttribute('data-product-id');
+                const message = "Coucou ! Est-ce que le produit est toujours disponible?";
 
-                    const sellerId = this.getAttribute('data-seller-id');
-                    const productId = this.getAttribute('data-product-id');
-                    const message = "Est-ce que le produit est toujours disponible?";
+                // Prepare message data
+                const formData = new FormData();
+                formData.append('seller_id', sellerId);
+                formData.append('product_id', productId);
+                formData.append('message', message);
+                formData.append('_token', document.querySelector('meta[name="csrf-token"]')
+                    .getAttribute('content')); // Fetch CSRF token dynamically
 
-                    // Préparer les données du message
-                    const formData = new FormData();
-                    formData.append('seller_id', sellerId);
-                    formData.append('product_id', productId);
-                    formData.append('message', message);
-                    formData.append('_token', '{{ csrf_token() }}'); // CSRF token
-
-                    console.log(sellerId);
-
-
-                    // Envoyer la requête AJAX
-                    fetch("{{ route('messages.send', ':seller_id') }}".replace(':seller_id',
-                            sellerId), {
-                            method: 'POST',
-                            body: formData
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: data.message,
-                                    text: "{{ session('success') }}",
-                                    toast: true,
-                                    position: 'top-end',
-                                    timer: 3000,
-                                    showConfirmButton: false,
-                                    timerProgressBar: true,
-                                });
-                            } else {
-                                alert("Échec de l'envoi du message.");
-                            }
-                        })
-                        .catch(error => console.error('Erreur:', error));
-                });
-            });
+                // Send AJAX request
+                fetch("{{ route('messages.send', ':seller_id') }}".replace(':seller_id', sellerId), {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: data.message,
+                                text: "{{ session('success') }}",
+                                toast: true,
+                                position: 'top-end',
+                                timer: 3000,
+                                showConfirmButton: false,
+                                timerProgressBar: true,
+                            });
+                        } else {
+                            alert("Échec de l'envoi du message.");
+                        }
+                    })
+                    .catch(error => console.error('Erreur:', error));
+            }
         });
     </script>
 
+    @stack('script')
     @yield('script')
 </body>
 

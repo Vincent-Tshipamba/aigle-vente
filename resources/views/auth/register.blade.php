@@ -258,7 +258,7 @@
         </script>
 
         <script>
-            $(document).ready(function() {
+            document.addEventListener('DOMContentLoaded', function() {
                 $("#register-form").validate({
                     rules: {
                         firstname: {

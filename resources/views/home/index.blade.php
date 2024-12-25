@@ -399,32 +399,31 @@
                     document.head.appendChild(link);
                 });
 
-                // // Injecter les fichiers JS
-                // const jsFiles = [
-                //     'js/jquery.js',
-                //     'js/waypoints.js',
-                //     'js/bootstrap.bundle.min.js',
-                //     'js/swiper-bundle.js',
-                //     'js/slick.js',
-                //     'js/magnific-popup.js',
-                //     'js/nice-select.js',
-                //     'js/counterup.js',
-                //     'js/wow.js',
-                //     'js/isotope-pkgd.js',
-                //     'js/imagesloaded-pkgd.js',
-                //     'js/countdown.js',
-                //     'js/ajax-form.js',
-                //     'js/meanmenu.js',
-                //     'js/jquery.knob.js',
-                //     'js/main.js',
-                //     'js/sendMessage.js',
-                // ];
+                // Injecter les fichiers JS
+                const jsFiles = [
+                    'js/jquery.js',
+                    'js/waypoints.js',
+                    'js/bootstrap.bundle.min.js',
+                    'js/swiper-bundle.js',
+                    'js/slick.js',
+                    'js/magnific-popup.js',
+                    'js/nice-select.js',
+                    'js/counterup.js',
+                    'js/wow.js',
+                    'js/isotope-pkgd.js',
+                    'js/imagesloaded-pkgd.js',
+                    'js/countdown.js',
+                    'js/ajax-form.js',
+                    'js/meanmenu.js',
+                    'js/jquery.knob.js',
+                    'js/main.js',
+                ];
 
-                // jsFiles.forEach(file => {
-                //     const script = document.createElement('script');
-                //     script.src = `{{ asset('${file}') }}`;
-                //     document.body.appendChild(script);
-                // });
+                jsFiles.forEach(file => {
+                    const script = document.createElement('script');
+                    script.src = `{{ asset('${file}') }}`;
+                    document.body.appendChild(script);
+                });
             }
         });
     </script>

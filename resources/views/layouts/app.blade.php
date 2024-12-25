@@ -70,22 +70,6 @@
     @yield('footer')
 
     <!-- JS here -->
-    <script src="{{ asset('js/jquery.js') }}"></script>
-    <script src="{{ asset('js/waypoints.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('js/swiper-bundle.js') }}"></script>
-    <script src="{{ asset('js/slick.js') }}"></script>
-    <script src="{{ asset('js/magnific-popup.js') }}"></script>
-    <script src="{{ asset('js/nice-select.js') }}"></script>
-    <script src="{{ asset('js/counterup.js') }}"></script>
-    <script src="{{ asset('js/wow.js') }}"></script>
-    <script src="{{ asset('js/isotope-pkgd.js') }}"></script>
-    <script src="{{ asset('js/imagesloaded-pkgd.js') }}"></script>
-    <script src="{{ asset('js/countdown.js') }}"></script>
-    <script src="{{ asset('js/ajax-form.js') }}"></script>
-    <script src="{{ asset('js/meanmenu.js') }}"></script>
-    <script src="{{ asset('js/jquery.knob.js') }}"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
     <script>
         function confirmLogout() {
             Swal.fire({
@@ -106,65 +90,69 @@
     <script>
         function addToWishList(event, productId) {
             event.preventDefault();
-            let isAuthenticated = @auth true @else false @endauth;
-            if(isAuthenticated){
-                $.ajax({
-                    type: "post",
-                    url: "{{ route('client.wishlist.add') }}",
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        productId: productId
-                    },
-                    dataType: "json",
-                    success: function(response) {
-                        if (response.count) {
-                            $('.wishcount').text(response.count)
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: "top-end",
-                                showConfirmButton: false,
-                                timer: 3000,
-                                timerProgressBar: true,
-                                didOpen: (toast) => {
-                                    toast.onmouseenter = Swal.stopTimer;
-                                    toast.onmouseleave = Swal.resumeTimer;
-                                }
-                            });
-                            Toast.fire({
-                                icon: "success",
-                                title: response.success
-                            });
-                        }
-
-                        if (response.exists) {
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: "top-end",
-                                showConfirmButton: false,
-                                timer: 3000,
-                                timerProgressBar: true,
-                                didOpen: (toast) => {
-                                    toast.onmouseenter = Swal.stopTimer;
-                                    toast.onmouseleave = Swal.resumeTimer;
-                                }
-                            });
-                            Toast.fire({
-                                icon: "success",
-                                title: response.exists
-                            });
-                        }
+            let isAuthenticated = @auth true
+        @else
+            false
+        @endauth ;
+        if (isAuthenticated) {
+            $.ajax({
+                type: "post",
+                url: "{{ route('client.wishlist.add') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    productId: productId
+                },
+                dataType: "json",
+                success: function(response) {
+                    if (response.count) {
+                        $('.wishcount').text(response.count)
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: "top-end",
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+                        Toast.fire({
+                            icon: "success",
+                            title: response.success
+                        });
                     }
-                });
-            } else {
-                window.location.href="{{ route('login') }}"
-            }
+
+                    if (response.exists) {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: "top-end",
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+                        Toast.fire({
+                            icon: "success",
+                            title: response.exists
+                        });
+                    }
+                }
+            });
+        } else {
+            window.location.href = "{{ route('login') }}"
+        }
         }
     </script>
 
     <script>
-        $('.search-input').keypress(function(e) {
-            var value = $(this).val();
-            const searchResults = `
+        document.addEventListener('DOMContentLoaded', function() {
+            $('.search-input').keypress(function(e) {
+                var value = $(this).val();
+                const searchResults = `
                 <section class="product-area pb-70" id="productSection">
                     <div class="container">
                         <div class="row">
@@ -188,59 +176,60 @@
                 </section>
             `;
 
-            $.ajax({
-                type: "get",
-                url: "{{ route('products.search') }}",
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    value: value
-                },
-                dataType: "json",
-                success: function(response) {
-                    const html = response.html
-                    $('.main-content').html(searchResults)
+                $.ajax({
+                    type: "get",
+                    url: "{{ route('products.search') }}",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        value: value
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        const html = response.html
+                        $('.main-content').html(searchResults)
 
-                    const productContainer = $('.product-container');
-                    if (html.trim() === '') {
-                        productContainer.html(`
+                        const productContainer = $('.product-container');
+                        if (html.trim() === '') {
+                            productContainer.html(`
                             <div class="p-4 text-md text-gray-800 mx-auto text-center rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">
                                 <span class="font-medium">Oups désolé!</span> Aucun produit disponible correspondant à votre recherche. <br><br>
                                 <button onclick="window.location.href='/products'" class="footer-widget__fw-news-btn tpsecondary-btn">Voir le catalogue des produits disponibles<i
                                                 class="fal fa-long-arrow-right"></i></button>
                             </div>
                         `);
-                    } else {
-                        $(".searchResultProduct:last").after(response.html).show().fadeIn()
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error("Error fetching products:", error);
-                }
-            });
-        });
-
-        function fetchSearchProducts(rowperpage=15, total=null) {
-            var start = 0
-            start = start + rowperpage
-
-
-            if (start <= total) {
-                $.ajax({
-                    type: "get",
-                    url: "{{ route('getSearchProducts') }}",
-                    data: {
-                        start: start,
-                        _token: '{{ csrf_token() }}'
+                        } else {
+                            $(".searchResultProduct:last").after(response.html).show().fadeIn()
+                        }
                     },
-                    dataType: "json",
-                    success: function(response) {
-                        $(".searchResultProduct:last").after(response).show().fadeIn()
-
-                        checkWindowSize(response.rowperpage, response.totalSearchResults);
+                    error: function(xhr, status, error) {
+                        console.error("Error fetching products:", error);
                     }
                 });
+            });
+
+            function fetchSearchProducts(rowperpage = 15, total = null) {
+                var start = 0
+                start = start + rowperpage
+
+
+                if (start <= total) {
+                    $.ajax({
+                        type: "get",
+                        url: "{{ route('getSearchProducts') }}",
+                        data: {
+                            start: start,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        dataType: "json",
+                        success: function(response) {
+                            $(".searchResultProduct:last").after(response).show().fadeIn()
+
+                            checkWindowSize(response.rowperpage, response.totalSearchResults);
+                        }
+                    });
+                }
             }
-        }
+        });
     </script>
 
     @yield('script')

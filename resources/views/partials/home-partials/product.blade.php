@@ -44,9 +44,9 @@
                                                 $firstPhoto = $product->photos->first();
                                             @endphp
                                             @if ($firstPhoto)
-                                                <img src="{{ asset($firstPhoto->image) }}" alt="{{ $product->name }}">
+                                                <img src="{{ asset('storage/' . $firstPhoto->image) }}" alt="{{ $product->name }}">
                                                 <img class="product-thumb-secondary"
-                                                    src="{{ asset($firstPhoto->image) }}" alt="">
+                                                    src="{{ asset('storage/' . $firstPhoto->image) }}" alt="">
                                             @endif
                                         </a>
                                         <div class="tpproduct__thumb-action">

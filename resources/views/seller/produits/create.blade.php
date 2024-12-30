@@ -1,15 +1,13 @@
 @extends('seller.layouts.app')
 
 @section('content')
-
     <div class="titlr">
         <h1 class="text-2xl font-semibold text-black dark:text-white mb-4">
             Ajouter un produit
         </h1>
     </div>
- 
-    <form action="{{ route('shop.products.store', $shop->id) }}" method="POST" enctype="multipart/form-data">
 
+    <form action="{{ route('shop.products.store', $shop->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="grid grid-cols-1 gap-9 sm:grid-cols-2">
 
@@ -908,7 +906,6 @@
                     class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Ajouter le produit</button>
 
         </div>
-
     </form>
 
 @section('script')

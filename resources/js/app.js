@@ -12,4 +12,3 @@ import "./textarea"
 window.Alpine = Alpine;
 
 Alpine.start();
-

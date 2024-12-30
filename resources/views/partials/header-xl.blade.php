@@ -5,7 +5,7 @@
             <div class="col-xl-2 col-lg-3">
                 <div class="logo">
                     <a href="{{ route('home') }}" class="flex items-center space-x-2">
-                        <img src="{{ asset('img/logo/logo_sans_bg.png') }}" width="25%" alt="logo">
+                        <img loading="lazy" src="{{ asset('img/logo/logo_sans_bg.png') }}" width="25%" alt="logo">
                         <h1 class="text-xl font-bold animate__animated animate__slideInRight">Aigle Vente</h1>
                     </a>
                 </div>
@@ -59,7 +59,7 @@
                                 aria-labelledby="dropdownUserAvatarButtonHeader-xl">
                                 <li>
                                     @if (Auth::user()->client)
-                                        <a href="{{route('client.dashboard')}}"
+                                        <a href="{{ route('client.dashboard') }}"
                                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                             Mon dashboard client
                                         </a>

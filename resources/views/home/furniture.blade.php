@@ -20,9 +20,11 @@
                                 </div>
                                 <div class="col-xl-5 col-lg-6 col-md-6 d-none d-md-block">
                                     <div class="tpsliderthree__img p-relative text-end pt-55">
-                                        <img src="{{ asset('img/slider/slider-04.png') }}" alt="">
+                                        <img loading="lazy" src="{{ asset('img/slider/slider-04.png') }}"
+                                            alt="">
                                         <div class="tpslidertwo__img-shape">
-                                            <img src="{{ asset('img/slider/fasion-tag-02.png') }}" alt="tag">
+                                            <img loading="lazy" src="{{ asset('img/slider/fasion-tag-02.png') }}"
+                                                alt="tag">
                                         </div>
                                     </div>
                                 </div>
@@ -45,9 +47,11 @@
                                 </div>
                                 <div class="col-xl-5 col-lg-6 col-md-6 d-none d-md-block">
                                     <div class="tpsliderthree__img p-relative text-end pt-55">
-                                        <img src="{{ asset('img/slider/slider-05.png') }}" alt="">
+                                        <img loading="lazy" src="{{ asset('img/slider/slider-05.png') }}"
+                                            alt="">
                                         <div class="tpslidertwo__img-shape">
-                                            <img src="{{ asset('img/slider/fasion-tag-02.png') }}" alt="tag">
+                                            <img loading="lazy" src="{{ asset('img/slider/fasion-tag-02.png') }}"
+                                                alt="tag">
                                         </div>
                                     </div>
                                 </div>
@@ -70,9 +74,11 @@
                                 </div>
                                 <div class="col-xl-5 col-lg-6 col-md-6 d-none d-md-block">
                                     <div class="tpsliderthree__img p-relative text-end pt-55">
-                                        <img src="{{ asset('img/slider/slider-06.png') }}" alt="">
+                                        <img loading="lazy" src="{{ asset('img/slider/slider-06.png') }}"
+                                            alt="">
                                         <div class="tpslidertwo__img-shape">
-                                            <img src="{{ asset('img/slider/fasion-tag-02.png') }}" alt="tag">
+                                            <img loading="lazy" src="{{ asset('img/slider/fasion-tag-02.png') }}"
+                                                alt="tag">
                                         </div>
                                     </div>
                                 </div>
@@ -193,9 +199,11 @@
                             <div class=" tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-41.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy" src="{{ asset('img/product/home-three/product-41.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-42.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-42.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -222,9 +230,11 @@
                                 <div class="tpproduct__thumb p-relative">
                                     <span class="tpproduct__thumb-discount">-20%</span>
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-43.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy" src="{{ asset('img/product/home-three/product-43.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-44.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-44.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -250,9 +260,12 @@
                             <div class=" tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-45.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-three/product-45.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-46.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-46.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -279,9 +292,12 @@
                                 <div class="tpproduct__thumb p-relative">
                                     <span class="tpproduct__thumb-topsall">On Sale</span>
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-47.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-three/product-47.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-48.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-48.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -307,9 +323,12 @@
                             <div class=" tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-49.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-three/product-49.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-50.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-50.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -337,9 +356,12 @@
                                 <div class="tpproduct__thumb p-relative">
                                     <span class="tpproduct__thumb-volt"><i class="fas fa-bolt"></i></span>
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-51.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-three/product-51.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-52.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-52.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -365,9 +387,12 @@
                             <div class=" tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-53.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-three/product-53.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-54.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-54.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -393,9 +418,12 @@
                             <div class=" tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-55.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-three/product-55.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-56.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-56.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -447,9 +475,12 @@
                             <div class=" tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-57.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-three/product-57.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-58.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-58.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -476,9 +507,12 @@
                             <div class=" tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-59.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-three/product-59.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-60.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-60.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -510,9 +544,12 @@
                                 <div class="tpproduct__thumb p-relative">
                                     <span class="tpproduct__thumb-volt"><i class="fas fa-bolt"></i></span>
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-51.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-three/product-51.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-52.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-52.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -538,9 +575,12 @@
                             <div class=" tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-53.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-three/product-53.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-54.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-54.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -566,9 +606,12 @@
                             <div class=" tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-55.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-three/product-55.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-56.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-56.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -620,9 +663,12 @@
                             <div class=" tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-57.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-three/product-57.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-58.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-58.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -649,9 +695,12 @@
                             <div class=" tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-59.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-three/product-59.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-60.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-60.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -681,7 +730,8 @@
                                             src="{{ asset('img/product/home-three/product-41.jpg') }}"
                                             alt="product-thumb"></a>
                                     <a class="product-thumb-secondary" href="shop-details.html"><img
-                                            src="{{ asset('img/product/home-three/product-42.jpg') }}" alt=""></a>
+                                            src="{{ asset('img/product/home-three/product-42.jpg') }}"
+                                            alt=""></a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
                                         <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
@@ -710,7 +760,8 @@
                                             src="{{ asset('img/product/home-three/product-43.jpg') }}"
                                             alt="product-thumb"></a>
                                     <a class="product-thumb-secondary" href="shop-details-2.html"><img
-                                            src="{{ asset('img/product/home-three/product-44.jpg') }}" alt=""></a>
+                                            src="{{ asset('img/product/home-three/product-44.jpg') }}"
+                                            alt=""></a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
                                         <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
@@ -738,7 +789,8 @@
                                             src="{{ asset('img/product/home-three/product-45.jpg') }}"
                                             alt="product-thumb"></a>
                                     <a class="product-thumb-secondary" href="shop-details-2.html"><img
-                                            src="{{ asset('img/product/home-three/product-46.jpg') }}" alt=""></a>
+                                            src="{{ asset('img/product/home-three/product-46.jpg') }}"
+                                            alt=""></a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
                                         <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
@@ -767,7 +819,8 @@
                                             src="{{ asset('img/product/home-three/product-47.jpg') }}"
                                             alt="product-thumb"></a>
                                     <a class="product-thumb-secondary" href="shop-details-2.html"><img
-                                            src="{{ asset('img/product/home-three/product-48.jpg') }}" alt=""></a>
+                                            src="{{ asset('img/product/home-three/product-48.jpg') }}"
+                                            alt=""></a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
                                         <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
@@ -795,7 +848,8 @@
                                             src="{{ asset('img/product/home-three/product-49.jpg') }}"
                                             alt="product-thumb"></a>
                                     <a class="product-thumb-secondary" href="#"><img
-                                            src="{{ asset('img/product/home-three/product-50.jpg') }}" alt=""></a>
+                                            src="{{ asset('img/product/home-three/product-50.jpg') }}"
+                                            alt=""></a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
                                         <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
@@ -825,9 +879,12 @@
                             <div class=" tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-57.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-three/product-57.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-58.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-58.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -854,9 +911,12 @@
                             <div class=" tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-59.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-three/product-59.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-60.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-60.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -886,7 +946,8 @@
                                             src="{{ asset('img/product/home-three/product-41.jpg') }}"
                                             alt="product-thumb"></a>
                                     <a class="product-thumb-secondary" href="shop-details.html"><img
-                                            src="{{ asset('img/product/home-three/product-42.jpg') }}" alt=""></a>
+                                            src="{{ asset('img/product/home-three/product-42.jpg') }}"
+                                            alt=""></a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
                                         <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
@@ -915,7 +976,8 @@
                                             src="{{ asset('img/product/home-three/product-43.jpg') }}"
                                             alt="product-thumb"></a>
                                     <a class="product-thumb-secondary" href="shop-details-2.html"><img
-                                            src="{{ asset('img/product/home-three/product-44.jpg') }}" alt=""></a>
+                                            src="{{ asset('img/product/home-three/product-44.jpg') }}"
+                                            alt=""></a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
                                         <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
@@ -943,7 +1005,8 @@
                                             src="{{ asset('img/product/home-three/product-45.jpg') }}"
                                             alt="product-thumb"></a>
                                     <a class="product-thumb-secondary" href="shop-details-2.html"><img
-                                            src="{{ asset('img/product/home-three/product-46.jpg') }}" alt=""></a>
+                                            src="{{ asset('img/product/home-three/product-46.jpg') }}"
+                                            alt=""></a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
                                         <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
@@ -969,9 +1032,12 @@
                                 <div class="tpproduct__thumb p-relative">
                                     <span class="tpproduct__thumb-volt"><i class="fas fa-bolt"></i></span>
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-51.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-three/product-51.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-52.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-52.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -997,9 +1063,12 @@
                             <div class=" tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-53.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-three/product-53.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-54.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-54.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -1025,9 +1094,12 @@
                             <div class=" tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-55.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-three/product-55.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-56.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-56.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -1084,7 +1156,8 @@
                                             src="{{ asset('img/product/home-three/product-47.jpg') }}"
                                             alt="product-thumb"></a>
                                     <a class="product-thumb-secondary" href="shop-details-2.html"><img
-                                            src="{{ asset('img/product/home-three/product-48.jpg') }}" alt=""></a>
+                                            src="{{ asset('img/product/home-three/product-48.jpg') }}"
+                                            alt=""></a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
                                         <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
@@ -1112,7 +1185,8 @@
                                             src="{{ asset('img/product/home-three/product-49.jpg') }}"
                                             alt="product-thumb"></a>
                                     <a class="product-thumb-secondary" href="#"><img
-                                            src="{{ asset('img/product/home-three/product-50.jpg') }}" alt=""></a>
+                                            src="{{ asset('img/product/home-three/product-50.jpg') }}"
+                                            alt=""></a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
                                         <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
@@ -1143,9 +1217,12 @@
                             <div class=" tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-55.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-three/product-55.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-56.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-56.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -1202,7 +1279,8 @@
                                             src="{{ asset('img/product/home-three/product-47.jpg') }}"
                                             alt="product-thumb"></a>
                                     <a class="product-thumb-secondary" href="shop-details-2.html"><img
-                                            src="{{ asset('img/product/home-three/product-48.jpg') }}" alt=""></a>
+                                            src="{{ asset('img/product/home-three/product-48.jpg') }}"
+                                            alt=""></a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
                                         <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
@@ -1230,7 +1308,8 @@
                                             src="{{ asset('img/product/home-three/product-49.jpg') }}"
                                             alt="product-thumb"></a>
                                     <a class="product-thumb-secondary" href="#"><img
-                                            src="{{ asset('img/product/home-three/product-50.jpg') }}" alt=""></a>
+                                            src="{{ asset('img/product/home-three/product-50.jpg') }}"
+                                            alt=""></a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
                                         <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
@@ -1256,9 +1335,12 @@
                             <div class=" tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-57.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-three/product-57.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-58.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-58.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -1285,9 +1367,12 @@
                             <div class=" tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-59.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-three/product-59.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-60.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-60.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -1317,7 +1402,8 @@
                                             src="{{ asset('img/product/home-three/product-41.jpg') }}"
                                             alt="product-thumb"></a>
                                     <a class="product-thumb-secondary" href="shop-details.html"><img
-                                            src="{{ asset('img/product/home-three/product-42.jpg') }}" alt=""></a>
+                                            src="{{ asset('img/product/home-three/product-42.jpg') }}"
+                                            alt=""></a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
                                         <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
@@ -1346,7 +1432,8 @@
                                             src="{{ asset('img/product/home-three/product-43.jpg') }}"
                                             alt="product-thumb"></a>
                                     <a class="product-thumb-secondary" href="shop-details-2.html"><img
-                                            src="{{ asset('img/product/home-three/product-44.jpg') }}" alt=""></a>
+                                            src="{{ asset('img/product/home-three/product-44.jpg') }}"
+                                            alt=""></a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
                                         <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
@@ -1374,7 +1461,8 @@
                                             src="{{ asset('img/product/home-three/product-45.jpg') }}"
                                             alt="product-thumb"></a>
                                     <a class="product-thumb-secondary" href="shop-details-2.html"><img
-                                            src="{{ asset('img/product/home-three/product-46.jpg') }}" alt=""></a>
+                                            src="{{ asset('img/product/home-three/product-46.jpg') }}"
+                                            alt=""></a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
                                         <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
@@ -1400,9 +1488,12 @@
                                 <div class="tpproduct__thumb p-relative">
                                     <span class="tpproduct__thumb-volt"><i class="fas fa-bolt"></i></span>
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-51.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-three/product-51.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-52.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-52.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -1428,9 +1519,12 @@
                             <div class=" tpproduct pb-15 mb-30">
                                 <div class="tpproduct__thumb p-relative">
                                     <a href="shop-details.html">
-                                        <img src="{{ asset('img/product/home-three/product-53.jpg') }}" alt="product-thumb">
+                                        <img loading="lazy"
+                                            src="{{ asset('img/product/home-three/product-53.jpg') }}"
+                                            alt="product-thumb">
                                         <img class="product-thumb-secondary"
-                                            src="{{ asset('img/product/home-three/product-54.jpg') }}" alt="product-thumb">
+                                            src="{{ asset('img/product/home-three/product-54.jpg') }}"
+                                            alt="product-thumb">
                                     </a>
                                     <div class="tpproduct__thumb-action">
                                         <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
@@ -1466,7 +1560,8 @@
                 <div class="col-xl-6 col-lg-12 col-md-12">
                     <div class="tpbanneritems p-relative">
                         <div class="tpbanneritem__thumb mb-20">
-                            <img src="{{ asset('img/banner/banner-03-01.jpg') }}" alt="banner-img">
+                            <img loading="lazy" src="{{ asset('img/banner/banner-03-01.jpg') }}"
+                                alt="banner-img">
                             <div class="tpbanneritem__content">
                                 <p>Furniture</p>
                                 <h5 class="tpbanneritem__title mb-60"><a href="shop-2.html">New Modern & Stylist
@@ -1484,7 +1579,8 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="tpbanneritem__thumb banner-animation p-relative">
-                                    <img src="{{ asset('img/banner/banner-03-02.jpg') }}" alt="banner-img">
+                                    <img loading="lazy" src="{{ asset('img/banner/banner-03-02.jpg') }}"
+                                        alt="banner-img">
                                     <div class="tpbanneritem__text">
                                         <h5 class="tpbanneritem__text-title"><a href="shop-2.html">Lamp <br>
                                                 Collections</a></h5>
@@ -1494,7 +1590,8 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="tpbanneritem__thumb banner-animation p-relative">
-                                    <img src="{{ asset('img/banner/banner-03-03.jpg') }}" alt="banner-img">
+                                    <img loading="lazy" src="{{ asset('img/banner/banner-03-03.jpg') }}"
+                                        alt="banner-img">
                                     <div class="tpbanneritem__text">
                                         <h5 class="tpbanneritem__text-title"><a href="shop.html">Minimal Chair</a>
                                         </h5>
@@ -1518,7 +1615,8 @@
                     <div class="col-lg-6 col-md-12">
                         <div class="tpdealproduct">
                             <div class="tpdealproduct__thumb p-relative text-center">
-                                <img src="{{ asset('img/floded/floded-02.png') }}" alt="dealproduct-thumb">
+                                <img loading="lazy" src="{{ asset('img/floded/floded-02.png') }}"
+                                    alt="dealproduct-thumb">
                                 <div class="tpdealproduct__offer">
                                     <h5 class="tpdealproduct__offer-price"><span>From</span>$49</h5>
                                 </div>
@@ -1576,8 +1674,8 @@
                     <div class="swiper-slide">
                         <div class="whiteproduct">
                             <div class="whiteproduct__thumb">
-                                <a href="shop-details.html"><img src="{{ asset('img/shop/w-product-01.jpg') }}"
-                                        alt="product-thumb"></a>
+                                <a href="shop-details.html"><img loading="lazy"
+                                        src="{{ asset('img/shop/w-product-01.jpg') }}" alt="product-thumb"></a>
                             </div>
                             <div class="whiteproduct__content d-flex justify-content-between align-items-center">
                                 <div class="whiteproduct__text">
@@ -1595,8 +1693,8 @@
                     <div class="swiper-slide">
                         <div class="whiteproduct">
                             <div class="whiteproduct__thumb">
-                                <a href="shop-details.html"><img src="{{ asset('img/shop/w-product-02.jpg') }}"
-                                        alt="product-thumb"></a>
+                                <a href="shop-details.html"><img loading="lazy"
+                                        src="{{ asset('img/shop/w-product-02.jpg') }}" alt="product-thumb"></a>
                             </div>
                             <div class="whiteproduct__content d-flex justify-content-between align-items-center">
                                 <div class="whiteproduct__text">
@@ -1614,8 +1712,8 @@
                     <div class="swiper-slide">
                         <div class="whiteproduct">
                             <div class="whiteproduct__thumb">
-                                <a href="shop-details.html"><img src="{{ asset('img/shop/w-product-03.jpg') }}"
-                                        alt="product-thumb"></a>
+                                <a href="shop-details.html"><img loading="lazy"
+                                        src="{{ asset('img/shop/w-product-03.jpg') }}" alt="product-thumb"></a>
                             </div>
                             <div class="whiteproduct__content d-flex justify-content-between align-items-center">
                                 <div class="whiteproduct__text">
@@ -1633,8 +1731,8 @@
                     <div class="swiper-slide">
                         <div class="whiteproduct">
                             <div class="whiteproduct__thumb">
-                                <a href="shop-details.html"><img src="{{ asset('img/shop/w-product-04.jpg') }}"
-                                        alt="product-thumb"></a>
+                                <a href="shop-details.html"><img loading="lazy"
+                                        src="{{ asset('img/shop/w-product-04.jpg') }}" alt="product-thumb"></a>
                             </div>
                             <div class="whiteproduct__content d-flex justify-content-between align-items-center">
                                 <div class="whiteproduct__text">
@@ -1652,8 +1750,8 @@
                     <div class="swiper-slide">
                         <div class="whiteproduct">
                             <div class="whiteproduct__thumb">
-                                <a href="shop-details.html"><img src="{{ asset('img/shop/w-product-05.jpg') }}"
-                                        alt="product-thumb"></a>
+                                <a href="shop-details.html"><img loading="lazy"
+                                        src="{{ asset('img/shop/w-product-05.jpg') }}" alt="product-thumb"></a>
                             </div>
                             <div class="whiteproduct__content d-flex justify-content-between align-items-center">
                                 <div class="whiteproduct__text">
@@ -1672,8 +1770,10 @@
             </div>
         </div>
         <div class="banner-shape">
-            <img src="{{ asset('img/banner/product-shape-01.png') }}" alt="shape" class="banner-shape-primary">
-            <img src="{{ asset('img/banner/product-shape-02.png') }}" alt="shape" class="banner-shape-secondary">
+            <img loading="lazy" src="{{ asset('img/banner/product-shape-01.png') }}" alt="shape"
+                class="banner-shape-primary">
+            <img loading="lazy" src="{{ asset('img/banner/product-shape-02.png') }}" alt="shape"
+                class="banner-shape-secondary">
         </div>
     </section>
     <!-- white-product-area-end -->
@@ -1691,22 +1791,22 @@
             <div class="swiper-container brand-active">
                 <div class="swiper-wrapper brand-items">
                     <div class="swiper-slide">
-                        <img src="{{ asset('img/brand/brand-w-01.png') }}" alt="brand">
+                        <img loading="lazy" src="{{ asset('img/brand/brand-w-01.png') }}" alt="brand">
                     </div>
                     <div class="swiper-slide">
-                        <img src="{{ asset('img/brand/brand-w-02.png') }}" alt="brand">
+                        <img loading="lazy" src="{{ asset('img/brand/brand-w-02.png') }}" alt="brand">
                     </div>
                     <div class="swiper-slide">
-                        <img src="{{ asset('img/brand/brand-w-03.png') }}" alt="brand">
+                        <img loading="lazy" src="{{ asset('img/brand/brand-w-03.png') }}" alt="brand">
                     </div>
                     <div class="swiper-slide">
-                        <img src="{{ asset('img/brand/brand-w-04.png') }}" alt="brand">
+                        <img loading="lazy" src="{{ asset('img/brand/brand-w-04.png') }}" alt="brand">
                     </div>
                     <div class="swiper-slide">
-                        <img src="{{ asset('img/brand/brand-w-05.png') }}" alt="brand">
+                        <img loading="lazy" src="{{ asset('img/brand/brand-w-05.png') }}" alt="brand">
                     </div>
                     <div class="swiper-slide">
-                        <img src="{{ asset('img/brand/brand-w-06.png') }}" alt="brand">
+                        <img loading="lazy" src="{{ asset('img/brand/brand-w-06.png') }}" alt="brand">
                     </div>
                 </div>
             </div>

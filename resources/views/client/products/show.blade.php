@@ -19,7 +19,7 @@
                                         data-bs-target="#v-pills-{{ $index }}" type="button" role="tab"
                                         aria-controls="v-pills-{{ $index }}"
                                         aria-selected="{{ $index == 0 ? 'true' : 'false' }}">
-                                        <img src="{{ asset($photo->image) }}"
+                                        <img loading="lazy" src="{{ asset($photo->image) }}"
                                             alt="{{ $product->name }} - {{ $index + 1 }}">
                                     </button>
                                 @endforeach
@@ -29,7 +29,7 @@
                                     <div class="tab-pane fade {{ $index == 0 ? 'show active' : '' }}"
                                         id="v-pills-{{ $index }}" role="tabpanel"
                                         aria-labelledby="v-pills-{{ $index }}-tab">
-                                        <img src="{{ asset($photo->image) }}"
+                                        <img loading="lazy" src="{{ asset($photo->image) }}"
                                             alt="{{ $product->name }} - {{ $index + 1 }}">
                                     </div>
                                 @endforeach
@@ -180,7 +180,8 @@
                                             <li>
                                                 <div class="comments-box d-flex">
                                                     <div class="comments-avatar mr-25">
-                                                        <img src="{{ asset('img/shop/reviewer-01.png') }}"
+                                                        <img loading="lazy"
+                                                            src="{{ asset('img/shop/reviewer-01.png') }}"
                                                             alt="">
                                                     </div>
                                                     <div class="comments-text">
@@ -224,7 +225,8 @@
                                             <li>
                                                 <div class="comments-box d-flex">
                                                     <div class="comments-avatar mr-25">
-                                                        <img src="{{ asset('img/shop/reviewer-02.png') }}"
+                                                        <img loading="lazy"
+                                                            src="{{ asset('img/shop/reviewer-02.png') }}"
                                                             alt="">
                                                     </div>
                                                     <div class="comments-text">
@@ -268,7 +270,8 @@
                                             <li>
                                                 <div class="comments-box d-flex">
                                                     <div class="comments-avatar mr-25">
-                                                        <img src="{{ asset('img/shop/reviewer-03.png') }}"
+                                                        <img loading="lazy"
+                                                            src="{{ asset('img/shop/reviewer-03.png') }}"
                                                             alt="">
                                                     </div>
                                                     <div class="comments-text">
@@ -391,7 +394,8 @@
                                             @php
                                                 $firstPhoto = $product->photos->first();
                                             @endphp
-                                            <img src="{{ asset($firstPhoto->image) }}" alt="{{ $product->name }}">
+                                            <img loading="lazy" src="{{ asset($firstPhoto->image) }}"
+                                                alt="{{ $product->name }}">
                                             <img class="product-thumb-secondary"
                                                 src="{{ asset($firstPhoto->image) }}" alt="{{ $product->name }}">
                                         </a>

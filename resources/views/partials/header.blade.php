@@ -31,7 +31,8 @@
                     <div class="mainmenu flex items-center">
                         <div class="logo">
                             <a href="{{ route('home') }}" class="">
-                                <img src="{{ asset('img/logo/logo_sans_bg.png') }}" width="50%" alt="logo">
+                                <img loading="lazy" src="{{ asset('img/logo/logo_sans_bg.png') }}" width="50%"
+                                    alt="logo">
                             </a>
                         </div>
                         <div class="mainmenu__search">

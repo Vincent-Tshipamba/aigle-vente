@@ -13,16 +13,27 @@ class HomeController extends Controller
 {
     private $rowperpage = 25;
 
-
     public function home()
     {
         $rowperpage = $this->rowperpage;
+
         $totalProducts = Product::with('photos', 'shop.seller.user', 'shop.seller')->count();
+
         $products = Product::with('photos', 'shop.seller.user', 'shop.seller')
             ->latest()
-            ->skip(0)
+            ->skip(2)
             ->take($this->rowperpage)
             ->get();
+
+        $firstMostRecentProduct = Product::with('photos', 'shop.seller.user', 'shop.seller')
+            ->latest()
+            ->first();
+
+        $secondMostRecentProduct = Product::with('photos', 'shop.seller.user', 'shop.seller')
+            ->latest()
+            ->skip(1)
+            ->first();
+
         $categories = CategoryProduct::latest()->get();
 
         $saleProducts = $products->filter(function ($product) {
@@ -37,10 +48,10 @@ class HomeController extends Controller
                 ->sum('products.unit_price');
 
             // Retourner la vue avec les produits
-            return view('home.index', compact('products', 'rowperpage', 'totalProducts', 'categories', 'saleProducts', 'wishlists', 'totalAmount'));
+            return view('home.index', compact('products', 'firstMostRecentProduct', 'secondMostRecentProduct', 'rowperpage', 'totalProducts', 'categories', 'saleProducts', 'wishlists', 'totalAmount'));
         }
 
-        return view('home.index', compact('products', 'rowperpage', 'totalProducts', 'categories', 'saleProducts'));
+        return view('home.index', compact('products', 'firstMostRecentProduct', 'secondMostRecentProduct', 'rowperpage', 'totalProducts', 'categories', 'saleProducts'));
     }
 
     public function getProducts(Request $request)
@@ -74,10 +85,10 @@ class HomeController extends Controller
                     <div class="tpproduct pb-15 mb-30">
                         <div class="tpproduct__thumb p-relative">
                             <a href="' . route('products.show', $_id) . '">
-                                ' . ($image !== null ? '<img src="' . asset($image) . '" alt="' . $name . '">' : '') . '
+                                ' . ($image !== null ? '<img loading="lazy" src="' . asset($image) . '" alt="' . $name . '">' : '') . '
                             </a>
                             <div class="tpproduct__thumb-action">
-                                <a class="comphare" href="#" onclick="addToWishList(event, '.$id.')"><i class="fal fa-heart"></i></a>
+                                <a class="comphare" href="#" onclick="addToWishList(event, ' . $id . ')"><i class="fal fa-heart"></i></a>
                                 <a class="quckview" href="/products/' . $_id . '"><i
                                         class="fal fa-eye"></i></a>
 
@@ -103,7 +114,7 @@ class HomeController extends Controller
                                         $</span>
                                 </div>
                                 <div class="tpproduct__cart">
-                                    <a href="#" onclick="addToWishList(event, '.$id.')"><i class="fal fa-heart"></i>
+                                    <a href="#" onclick="addToWishList(event, ' . $id . ')"><i class="fal fa-heart"></i>
                                         Ajouter à la liste des souhaits
                                     </a>
                                 </div>
@@ -115,5 +126,60 @@ class HomeController extends Controller
         }
 
         return response()->json($html);
+    }
+
+    public function slider()
+    {
+        $products = Product::with('photos', 'shop.seller.user', 'shop.seller')
+            ->latest()
+            ->skip(2)
+            ->take($this->rowperpage)
+            ->get();
+
+        $firstMostRecentProduct = Product::with('photos', 'shop.seller.user', 'shop.seller')
+            ->latest()
+            ->first();
+
+        $secondMostRecentProduct = Product::with('photos', 'shop.seller.user', 'shop.seller')
+            ->latest()
+            ->skip(1)
+            ->first();
+
+        return view('partials.home-partials.slider', compact('products', 'firstMostRecentProduct', 'secondMostRecentProduct'));
+    }
+
+    public function category()
+    {
+        $categories = CategoryProduct::latest()->get();
+
+        return view('partials.home-partials.category', compact('categories'));
+    }
+
+    public function product()
+    {
+        $rowperpage = $this->rowperpage;
+
+        $totalProducts = Product::with('photos', 'shop.seller.user', 'shop.seller')->count();
+
+        $products = Product::with('photos', 'shop.seller.user', 'shop.seller')
+            ->latest()
+            ->skip(2)
+            ->take($this->rowperpage)
+            ->get();
+
+        $saleProducts = $products->filter(function ($product) {
+            return $product->promotions->isNotEmpty();
+        });
+        return view('partials.home-partials.product', compact('rowperpage', 'products', 'totalProducts', 'saleProducts'));
+    }
+
+    public function dealProduct()
+    {
+        return view('partials.home-partials.deal-product');
+    }
+
+    public function shop()
+    {
+        return view('partials.home-partials.shop');
     }
 }

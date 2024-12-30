@@ -85,7 +85,7 @@ class ProductController extends Controller
                     <div class="tpproduct pb-15 mb-30">
                         <div class="tpproduct__thumb p-relative">
                             <a href="' . route('products.show', $_id) . '">
-                                ' . ($image !== null ? '<img src="' . asset($image) . '" alt="' . $name . '">' : '') . '
+                                ' . ($image !== null ? '<img loading="lazy" src="' . asset($image) . '" alt="' . $name . '">' : '') . '
                             </a>
                             <div class="tpproduct__thumb-action">
                                 <a class="comphare" href="#" onclick="addToWishList(event, ' . $id . ')"><i class="fal fa-heart"></i></a>
@@ -162,7 +162,7 @@ class ProductController extends Controller
                     <div class="tpproduct pb-15 mb-30">
                         <div class="tpproduct__thumb p-relative">
                             <a href="' . route('products.show', $_id) . '">
-                                ' . ($image !== null ? '<img src="' . asset($image) . '" alt="' . $name . '">' : '') . '
+                                ' . ($image !== null ? '<img loading="lazy" src="' . asset($image) . '" alt="' . $name . '">' : '') . '
                             </a>
                             <div class="tpproduct__thumb-action">
                                 <a class="comphare" href="#" onclick="addToWishList(event, ' . $id . ')"><i class="fal fa-heart"></i></a>

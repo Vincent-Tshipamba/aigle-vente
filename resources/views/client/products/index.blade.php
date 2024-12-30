@@ -46,7 +46,7 @@
                                                     $firstPhoto = $product->photos->first();
                                                 @endphp
                                                 @if ($firstPhoto)
-                                                    <img src="{{ asset($firstPhoto->image) }}"
+                                                    <img loading="lazy" src="{{ asset($firstPhoto->image) }}"
                                                         alt="{{ $product->name }}">
                                                     <img class="product-thumb-secondary"
                                                         src="{{ asset($firstPhoto->image) }}" alt="">
@@ -114,7 +114,7 @@
                         <div class="tpproduct pb-15 mb-30">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="{{ route('shop.details', $product->id) }}">
-                                    <img src="{{ asset($product->image_primary) }}" alt="{{ $product->name }}">
+                                    <img loading="lazy" src="{{ asset($product->image_primary) }}" alt="{{ $product->name }}">
                                     <img class="product-thumb-secondary" src="{{ asset($product->image_secondary) }}"
                                         alt="">
                                 </a>
@@ -155,7 +155,8 @@
                                                 @php
                                                     $firstPhoto = $product->photos->first();
                                                 @endphp
-                                                <img src="{{ asset('storage/' . $firstPhoto->image) }}"
+                                                <img loading="lazy"
+                                                    src="{{ asset('storage/' . $firstPhoto->image) }}"
                                                     alt="{{ $product->name }}">
                                                 <img class="product-thumb-secondary"
                                                     src="{{ asset('storage/' . $firstPhoto->image) }}"
@@ -202,7 +203,7 @@
                         <div class="tpproduct pb-15 mb-30">
                             <div class="tpproduct__thumb p-relative">
                                 <a href="{{ route('shop.details', $product->id) }}">
-                                    <img src="{{ asset($product->image_primary) }}" alt="{{ $product->name }}">
+                                    <img loading="lazy" src="{{ asset($product->image_primary) }}" alt="{{ $product->name }}">
                                     <img class="product-thumb-secondary" src="{{ asset($product->image_secondary) }}"
                                         alt="">
                                 </a>

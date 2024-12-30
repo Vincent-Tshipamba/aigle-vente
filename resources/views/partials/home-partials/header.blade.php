@@ -19,7 +19,8 @@
                 <div class="col-xl-2 col-lg-3">
                     <div class="logo col-span-1">
                         <a href="{{ route('home') }}" class="flex items-center space-x-2">
-                            <img src="{{ asset('img/logo/logo_sans_bg.png') }}" width="25%" alt="logo">
+                            <img loading="lazy" src="{{ asset('img/logo/logo_sans_bg.png') }}" width="25%"
+                                alt="logo">
                             <h1 class="text-2xl font-bold animate__animated animate__slideInRight">Aigle Vente</h1>
                         </a>
                     </div>

@@ -14,24 +14,7 @@
     @media #{$xs} {
         width: 50%;
     }
-    &::after {
-        position: absolute;
-        content: '';
-        top: 0;
-        bottom: 0;
-        margin: auto;
-        text-align: center;
-        right: -65px;
-        height: 200px;
-        width: 1px;
-        background-color: var(--tp-border-3);
-        @media #{$xl} {
-            right: -30px;
-        }
-        @media #{$lg,$md,$xs} {
-            display: none;
-        }
-    }
+    
     &:last-child{
         &::after {
             display: none;
@@ -177,7 +160,7 @@
     & .form-check-input {
         height: 10px;
         width: 10px;
-        background-color: #e3e3e3;  
+        background-color: #e3e3e3;
         transform: translateY(4px);
     }
     & .form-check-input[type="checkbox"] {

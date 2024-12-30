@@ -25,9 +25,11 @@
                                     </div>
                                     <div class="col-xl-7 col-lg-6 col-md-6 d-none d-md-block">
                                         <div class="tpslidertwo__img p-relative text-end">
-                                            <img src="{{ asset('img/slider/slider-01.png') }}" alt="">
+                                            <img loading="lazy" src="{{ asset('img/slider/slider-01.png') }}"
+                                                alt="">
                                             <div class="tpslidertwo__img-shape">
-                                                <img src="{{ asset('img/slider/fasion-tag-01.png') }}" alt="tag">
+                                                <img loading="lazy" src="{{ asset('img/slider/fasion-tag-01.png') }}"
+                                                    alt="tag">
                                             </div>
                                         </div>
                                     </div>
@@ -56,9 +58,11 @@
                                     </div>
                                     <div class="col-xl-7 col-lg-6 col-md-6 d-none d-md-block">
                                         <div class="tpslidertwo__img p-relative text-end">
-                                            <img src="{{ asset('img/slider/slider-02.png') }}" alt="">
+                                            <img loading="lazy" src="{{ asset('img/slider/slider-02.png') }}"
+                                                alt="">
                                             <div class="tpslidertwo__img-shape">
-                                                <img src="{{ asset('img/slider/fasion-tag-01.png') }}" alt="tag">
+                                                <img loading="lazy" src="{{ asset('img/slider/fasion-tag-01.png') }}"
+                                                    alt="tag">
                                             </div>
                                         </div>
                                     </div>
@@ -87,9 +91,11 @@
                                     </div>
                                     <div class="col-xl-7 col-lg-6 col-md-6 d-none d-md-block">
                                         <div class="tpslidertwo__img p-relative text-end">
-                                            <img src="{{ asset('img/slider/slider-03.png') }}" alt="">
+                                            <img loading="lazy" src="{{ asset('img/slider/slider-03.png') }}"
+                                                alt="">
                                             <div class="tpslidertwo__img-shape">
-                                                <img src="{{ asset('img/slider/fasion-tag-01.png') }}" alt="tag">
+                                                <img loading="lazy" src="{{ asset('img/slider/fasion-tag-01.png') }}"
+                                                    alt="tag">
                                             </div>
                                         </div>
                                     </div>
@@ -116,7 +122,7 @@
             <div class="row g-0">
                 <div class="col-lg-3 col-md-3">
                     <div class="banneritem__thumb banner-animation text-center p-relative">
-                        <img src="{{ asset('img/banner/banner-2-01.jpg') }}" alt="">
+                        <img loading="lazy" src="{{ asset('img/banner/banner-2-01.jpg') }}" alt="">
                         <div class="banneritem__content">
                             <a href="shop.html"><i class="far fa-long-arrow-right"></i></a>
                             <p>19 Articles</p>
@@ -124,7 +130,7 @@
                         </div>
                     </div>
                     <div class="banneritem__thumb banner-animation text-center p-relative">
-                        <img src="{{ asset('img/banner/banner-2-02.jpg') }}" alt="">
+                        <img loading="lazy" src="{{ asset('img/banner/banner-2-02.jpg') }}" alt="">
                         <div class="banneritem__content">
                             <a href="shop-2.html"><i class="far fa-long-arrow-right"></i></a>
                             <p>22 Articles</p>
@@ -134,7 +140,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="banneritem__thumb banner-animation text-center p-relative">
-                        <img src="{{ asset('img/banner/banner-2-03.jpg') }}" alt="">
+                        <img loading="lazy" src="{{ asset('img/banner/banner-2-03.jpg') }}" alt="">
                         <div class="banneritem__content banner-center">
                             <a href="shop-2.html"><i class="far fa-long-arrow-right"></i></a>
                             <p>30 Articles</p>
@@ -144,7 +150,7 @@
                 </div>
                 <div class="col-lg-3 col-md-3">
                     <div class="banneritem__thumb banner-animation text-center p-relative">
-                        <img src="{{ asset('img/banner/banner-2-04.jpg') }}" alt="">
+                        <img loading="lazy" src="{{ asset('img/banner/banner-2-04.jpg') }}" alt="">
                         <div class="banneritem__content">
                             <a href="shop-2.html"><i class="far fa-long-arrow-right"></i></a>
                             <p>13 Articles</p>
@@ -201,7 +207,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-21.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-21.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-22.jpg') }}"
@@ -281,7 +288,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-31.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-31.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-32.jpg') }}"
@@ -360,7 +368,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-27.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-27.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-28.jpg') }}"
@@ -439,7 +448,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-25.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-25.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-26.jpg') }}"
@@ -518,7 +528,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-29.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-29.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-30.jpg') }}"
@@ -597,7 +608,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-33.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-33.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-34.jpg') }}"
@@ -677,7 +689,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-23.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-23.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-24.jpg') }}"
@@ -756,7 +769,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-35.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-35.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-36.jpg') }}"
@@ -835,7 +849,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-37.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-37.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-38.jpg') }}"
@@ -915,7 +930,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-39.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-39.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-40.jpg') }}"
@@ -999,7 +1015,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-33.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-33.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-34.jpg') }}"
@@ -1079,7 +1096,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-23.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-23.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-24.jpg') }}"
@@ -1158,7 +1176,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-35.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-35.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-36.jpg') }}"
@@ -1237,7 +1256,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-37.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-37.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-38.jpg') }}"
@@ -1317,7 +1337,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-39.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-39.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-40.jpg') }}"
@@ -1396,7 +1417,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-21.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-21.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-22.jpg') }}"
@@ -1476,7 +1498,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-31.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-31.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-32.jpg') }}"
@@ -1556,7 +1579,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-27.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-27.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-28.jpg') }}"
@@ -1635,7 +1659,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-25.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-25.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-26.jpg') }}"
@@ -1714,7 +1739,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-29.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-29.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-30.jpg') }}"
@@ -1798,7 +1824,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-35.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-35.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-36.jpg') }}"
@@ -1877,7 +1904,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-37.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-37.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-38.jpg') }}"
@@ -1956,7 +1984,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-39.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-39.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-40.jpg') }}"
@@ -2035,7 +2064,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-21.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-21.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-22.jpg') }}"
@@ -2114,7 +2144,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-31.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-31.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-32.jpg') }}"
@@ -2193,7 +2224,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-33.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-33.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-34.jpg') }}"
@@ -2272,7 +2304,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-23.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-23.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-24.jpg') }}"
@@ -2351,7 +2384,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-27.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-27.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-28.jpg') }}"
@@ -2430,7 +2464,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-25.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-25.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-26.jpg') }}"
@@ -2509,7 +2544,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-29.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-29.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-30.jpg') }}"
@@ -2593,7 +2629,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-33.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-33.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-34.jpg') }}"
@@ -2672,7 +2709,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-23.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-23.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-24.jpg') }}"
@@ -2751,7 +2789,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-27.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-27.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-28.jpg') }}"
@@ -2830,7 +2869,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-25.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-25.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-26.jpg') }}"
@@ -2909,7 +2949,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-29.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-29.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-30.jpg') }}"
@@ -2988,7 +3029,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-39.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-39.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-40.jpg') }}"
@@ -3067,7 +3109,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-21.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-21.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-22.jpg') }}"
@@ -3146,7 +3189,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-31.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-31.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-32.jpg') }}"
@@ -3225,7 +3269,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-35.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-35.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-36.jpg') }}"
@@ -3304,7 +3349,8 @@
                                 <div class="tpproduct__thumb">
                                     <div class="tpproduct__thumbitem p-relative">
                                         <a href="shop-details-2.html">
-                                            <img src="{{ asset('img/product/home-two/product-37.jpg') }}"
+                                            <img loading="lazy"
+                                                src="{{ asset('img/product/home-two/product-37.jpg') }}"
                                                 alt="product-thumb">
                                             <img class="thumbitem-secondary"
                                                 src="{{ asset('img/product/home-two/product-38.jpg') }}"
@@ -3392,7 +3438,8 @@
                 <div class="col-lg-8 col-md-8">
                     <div class="exclusiveitem banner-animation p-relative mb-30">
                         <div class="exclusiveitem__thumb">
-                            <img src="{{ asset('img/banner/banner-offer-01.jpg') }}" alt="">
+                            <img loading="lazy" src="{{ asset('img/banner/banner-offer-01.jpg') }}"
+                                alt="">
                         </div>
                         <div class="tpexclusive__content">
                             <h4 class="tpexclusive__subtitle">Collection</h4>
@@ -3406,7 +3453,8 @@
                 <div class="col-lg-4 col-md-4">
                     <div class="exclusivearea banner-animation p-relative mb-30">
                         <div class="exclusivearea__thumb">
-                            <img src="{{ asset('img/banner/banner-offer-02.jpg') }}" alt="">
+                            <img loading="lazy" src="{{ asset('img/banner/banner-offer-02.jpg') }}"
+                                alt="">
                         </div>
                         <div class="tpexclusive__contentarea text-center">
                             <h4 class="tpexclusive__subtitle subcolor">Remise</h4>

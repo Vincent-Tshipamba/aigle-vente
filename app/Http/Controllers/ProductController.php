@@ -45,7 +45,7 @@ class ProductController extends Controller
             return response()->json(['error' => 'Produit introuvable.'], 404);
         }
 
-        $stocks = $product->stocks; // Accès au stock actuel
+        $stocks = $product->stocks; 
         return view('seller.manage-stocks.index', compact('product', 'stocks'));
     }
 
@@ -130,7 +130,7 @@ class ProductController extends Controller
 
 
 
-            // Création des détails du produit
+            
             $productDetail = ProductDetail::create([
                 'weight' => $validated['weight'] ?? null,
                 'dimensions' => $validated['dimensions'] ?? null,

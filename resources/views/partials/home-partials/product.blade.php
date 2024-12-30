@@ -46,7 +46,7 @@
                                                 <img loading="lazy" src="{{ asset($firstPhoto->image) }}"
                                                     alt="{{ $product->name }}">
                                                 <img class="product-thumb-secondary"
-                                                    src="{{ asset($firstPhoto->image) }}" alt="">
+                                                    src="{{ asset('storage/' . $firstPhoto->image) }}" alt="">
                                             @endif
                                         </a>
                                         <div class="tpproduct__thumb-action">

@@ -24,6 +24,7 @@ import './home/jquery.knob';
 import './home/main';
 import './home/jquery-ui';
 
+window.$ = window.jQuery = $;
 window.Swal = Swal;
 window.Alpine = Alpine;
 

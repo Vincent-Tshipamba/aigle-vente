@@ -2,12 +2,11 @@ import './bootstrap';
 import Alpine from 'alpinejs';
 import 'flowbite';
 import 'animate.css';
-import $ from 'jquery';
 import Swal from 'sweetalert2'
 import "./textarea"
 import 'jquery-validation';
 // import './home/sendMessage';
-import './home/jquery';
+// import './home/jquery';
 import './home/waypoints';
 import './home/bootstrap.bundle.min.js'
 import './home/swiper-bundle';

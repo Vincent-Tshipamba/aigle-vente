@@ -71,6 +71,23 @@
 
     <!-- JS here -->
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/waypoints.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/swiper-bundle.js') }}"></script>
+    <script src="{{ asset('js/slick.js') }}"></script>
+    <script src="{{ asset('js/magnific-popup.js') }}"></script>
+    <script src="{{ asset('js/nice-select.js') }}"></script>
+    <script src="{{ asset('js/counterup.js') }}"></script>
+    <script src="{{ asset('js/wow.js') }}"></script>
+    <script src="{{ asset('js/isotope-pkgd.js') }}"></script>
+    <script src="{{ asset('js/imagesloaded-pkgd.js') }}"></script>
+    <script src="{{ asset('js/countdown.js') }}"></script>
+    <script src="{{ asset('js/ajax-form.js') }}"></script>
+    <script src="{{ asset('js/meanmenu.js') }}"></script>
+    <script src="{{ asset('js/jquery.knob.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+
     <script>
         function confirmLogout() {
             Swal.fire({

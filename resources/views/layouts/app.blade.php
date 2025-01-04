@@ -87,6 +87,7 @@
     <script src="{{ asset('js/meanmenu.js') }}"></script>
     <script src="{{ asset('js/jquery.knob.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 
     <script>
         function confirmLogout() {

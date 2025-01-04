@@ -349,6 +349,7 @@
     @include('partials.home-partials.footer')
     <!-- footer-area-end -->
 
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const lazySections = document.querySelectorAll('.lazy-section');

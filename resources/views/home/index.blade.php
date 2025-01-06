@@ -110,8 +110,6 @@
                 </div>
             </div>
         </section>
-
-        
         <!-- slider-area-end -->
 
         <!-- category-area-start -->
@@ -146,9 +144,7 @@
                     </div>
                 </div>
             </div>
-        </section> 
-
-        @include('partials.home-partials.category')
+        </section>
         <!-- category-area-end -->
 
         <!-- product-area-start -->
@@ -670,7 +666,7 @@
         });
     </script>
 
-   
+
 
 
     @stack('script')

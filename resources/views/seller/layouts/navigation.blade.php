@@ -45,7 +45,7 @@
                 <!-- Dark Mode Toggler -->
             </li>
 
-            <!-- Notification Menu Area -->
+            {{-- <!-- Notification Menu Area -->
             <li class="relative" x-data="{ dropdownOpen: false, notifying: true }" @click.outside="dropdownOpen = false">
                 <a class="relative flex h-8.5 w-8.5 items-center justify-center rounded-full border-[0.5px] border-stroke bg-gray hover:text-primary dark:border-strokedark dark:bg-meta-4 dark:text-white"
                     href="#" @click.prevent="dropdownOpen = ! dropdownOpen; notifying = false">
@@ -122,7 +122,7 @@
                 </div>
                 <!-- Dropdown End -->
             </li>
-            <!-- Notification Menu Area -->
+            <!-- Notification Menu Area --> --}}
 
             <!-- Chat Notification Area -->
             <li class="relative" x-data="{ dropdownOpen: false, notifying: true }" @click.outside="dropdownOpen = false">

@@ -13,7 +13,8 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <!-- Styles / Scripts -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -109,6 +110,8 @@
                 </div>
             </div>
         </section>
+
+        
         <!-- slider-area-end -->
 
         <!-- category-area-start -->
@@ -143,7 +146,9 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> 
+
+        @include('partials.home-partials.category')
         <!-- category-area-end -->
 
         <!-- product-area-start -->
@@ -656,6 +661,9 @@
             }
         });
     </script>
+
+   
+
 
     @stack('script')
     @yield('script')

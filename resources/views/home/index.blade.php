@@ -152,7 +152,7 @@
         <!-- category-area-end -->
 
         <!-- product-area-start -->
-        <section class="product-area pt-95 pb-70 lazy-section" data-url="{{ route('home.product') }}"
+        <section class="product-area pt-20 pb-70 lazy-section" data-url="{{ route('home.product') }}"
             id="productSection">
             <div class="container">
                 <div class="row">

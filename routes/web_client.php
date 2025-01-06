@@ -60,7 +60,7 @@ Route::middleware(['auth', 'userOnline'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Dashboard and Order Management
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('client.dashboard');
+    // Route::get('/dashboard', [DashboardController::class, 'index'])->name('client.dashboard');//
     Route::get('/client/dashboard', [DashboardController::class, 'index'])->name('client.dashboard');
     Route::get('/client/orders', [DashboardController::class, 'orders'])->name('client.orders');
     Route::get('/client/api/wishlist', [DashboardController::class, 'getClientWishlistByPeriod']);

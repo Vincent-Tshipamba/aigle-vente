@@ -146,6 +146,9 @@
                 </div>
             </div>
         </section>
+        </section> 
+
+       
         <!-- category-area-end -->
 
         <!-- product-area-start -->

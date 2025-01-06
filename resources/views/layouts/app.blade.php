@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="{{ asset('css/meanmenu.css') }}">
     <link rel="stylesheet" href="{{ asset('css/spacing.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    @livewireStyles()
 </head>
 
 <body>
@@ -41,17 +42,19 @@
     @include('partials.scroll-top')
     <!-- Scroll-top-end-->
 
-    <!-- header-area-start -->
-    @include('partials.header')
-    <!-- header-area-end -->
+    @if (!request()->routeIs('products.index'))
+        <!-- header-area-start -->
+        @include('partials.header')
+        <!-- header-area-end -->
 
-    <!-- header-xl-sticky-area -->
-    @include('partials.header-xl')
-    <!-- header-xl-sticky-end -->
+        <!-- header-xl-sticky-area -->
+        @include('partials.header-xl')
+        <!-- header-xl-sticky-end -->
 
-    <!-- header-md-lg-area -->
-    @include('partials.header-md-lg')
-    <!-- header-md-lg-area -->
+        <!-- header-md-lg-area -->
+        @include('partials.header-md-lg')
+        <!-- header-md-lg-area -->
+    @endif
 
     <!-- sidebar-menu-area -->
     @include('partials.sidebar-menu')
@@ -260,6 +263,8 @@
     </script>
 
     @yield('script')
+    @stack('script')
+    @livewireScripts()
 </body>
 
 </html>

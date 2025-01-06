@@ -4,9 +4,8 @@
 
     <!-- component -->
     <div class="flex h-screen antialiased text-gray-800">
-        <div class="md:flex md:flex-row h-full w-full overflow-x-hidden">
-            <div
-                class=" items-center gap-4 flex justify-between md:flex-col py-8 pl-6 pr-2 w-64 bg-white dark:bg-gray-800 flex-shrink-0">
+        <div class="flex flex-row h-full  overflow-x-hidden">
+            <div class="flex flex-col py-8 pl-6 pr-2 w-64 bg-white flex-shrink-0">
                 <div class="flex flex-row items-center justify-center h-12 w-full">
                     <div class="flex items-center justify-center rounded-2xl text-primary bg-indigo-100 h-10 w-10">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -18,8 +17,7 @@
                     </div>
                     <div class="ml-2 font-bold text-2xl dark:text-gray-200 ">AigleVente</div>
                 </div>
-                <div
-                    class="md:flex hidden flex-col items-center bg-indigo-100 border border-gray-200 mt-4 w-full py-6 px-4 rounded-lg">
+                <div class=" flex-col items-center bg-indigo-100 border border-gray-200 mt-4 w-full py-6 px-4 rounded-lg">
                     <div class="h-20 w-20 rounded-full border overflow-hidden">
                         <img loading="lazy" src="https://placehold.co/200x200" alt="Avatar" class="h-full w-full" />
                     </div>
@@ -33,12 +31,12 @@
                     </div>
                 </div>
                 <div class="flex  flex-col mt-8">
-                    <div class="md:flex hidden flex-row items-center justify-between text-xs">
+                    <div class="md:flex  flex-row items-center justify-between text-xs">
                         <span class="font-bold">Active Conversations</span>
                         <span
                             class="flex items-center justify-center bg-gray-300 h-4 w-4 rounded-full">{{ $contacts->count() }}</span>
                     </div>
-                    <div class="flex flex-col space-y-1 mt-4 -mx-2 h-48 overflow-y-auto hidden md:flex" id="contactList">
+                    <div class="flex flex-col space-y-1 mt-4 -mx-2 h-48 overflow-y-auto  md:flex" id="contactList">
                         @foreach ($contacts as $contact)
                             <button data-contact-id="{{ $contact->id }}"
                                 class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2 contact-item">
@@ -55,7 +53,7 @@
                             </button>
                         @endforeach
                     </div>
-                    <!-- Modal pour les petits écrans -->
+                    {{-- <!-- Modal pour les petits écrans -->
                     <div class="md:hidden">
                         <button  data-modal-target="contactModal" data-modal-toggle="contactModal"
                             class="text-white px-4 py-2 rounded  transition duration-200">
@@ -117,14 +115,14 @@
                                 </div>
                             </div>
                         </div>
-                    @endsection
+                    @endsection --}}
 
 
 
                 </div>
             </div>
         </div>
-        <div class="flex flex-col flex-auto h-full md:p-6">
+        <div class="flex flex-col flex-auto h-full">
             <div class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 dark:bg-gray-700 h-full p-4">
                 <div class="flex flex-col h-full overflow-x-auto mb-4">
                     <div class="flex flex-col h-full">
@@ -170,8 +168,8 @@
                                 class="flex items-center justify-center bg-primary hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0">
                                 <span>Send</span>
                                 <span class="ml-2">
-                                    <svg class="w-4 h-4 transform rotate-45 -mt-px" fill="none"
-                                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <svg class="w-4 h-4 transform rotate-45 -mt-px" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
                                     </svg>
@@ -184,7 +182,9 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
+
+
 
 
 @section('script')
@@ -265,8 +265,8 @@
                         // Afficher les messages de cette date
                         groupMessages.forEach(message => {
                             const messageDiv = document.createElement('div');
-                            messageDiv.classList.add('col-start-1', 'col-end-8', 'p-3',
-                                'rounded-lg');
+                            // messageDiv.classList.add('col-start-1', 'col-end-8', 'p-3',
+                            //     'rounded-lg');
 
                             const formattedTime = new Date(message.created_at)
                                 .toLocaleTimeString([], {
@@ -275,21 +275,27 @@
                                 });
 
                             if (message.sender_id === userId) {
+
                                 messageDiv.classList.add('col-start-6', 'col-end-13', 'p-3',
                                     'rounded-lg');
                                 messageDiv.innerHTML = `
-                                <div class="flex flex-row items-center">
-                                        <div class="flex items-center justify-center h-10 w-10 rounded-full bg-primary flex-shrink-0">
+                               
+
+                                 <div class="flex items-center justify-start flex-row-reverse">
+                                        <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
                                             <img loading="lazy" src="${message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
                                                                         alt="User Avatar" class="w-8 h-8 rounded-full">
                                         </div>
-                                        <div class="relative ml-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
-                                            <p>${message.message}</p>
+                                        <div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
+                                            <div>${message.message}</div>
                                         </div>
                                 </div>
+
                                  <span class="text-xs text-gray-400 ml-2">${formattedTime}</span>
             `;
                             } else {
+                                messageDiv.classList.add('col-start-1', 'col-end-8', 'p-3',
+                                    'rounded-lg');
                                 messageDiv.innerHTML = `
                                         <div class="flex flex-row items-center">
 
@@ -301,6 +307,7 @@
                                                 <p>${message.message}</p>
                                             </div>
                                         </div>
+                                        
                                         <span class="text-xs text-gray-400 ml-2">${formattedTime}</span>
             `;
                             }
@@ -319,19 +326,12 @@
                                                 <a href="#">
                                                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${message.product.name}</h5>
                                                 </a>
-                                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">${message.product.description || 'Aucune description disponible.'}</p>
+                                               
 
-                                                <!-- Réponse pré-enregistrée -->
-                                                <div class="flex space-x-4">
-                                                    <button class="w-full text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2 default-message-btn" data-message="oui">
-                                                        Oui
-                                                    </button>
-                                                    <button class="w-full text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2 default-message-btn" data-message="non">
-                                                        Non
-                                                    </button>
-                                                </div>
+                                               
                                             </div>
                                     </div>
+                                     <span class="text-xs text-gray-400 ml-2">${formattedTime}</span>
         `;
                             }
 
@@ -352,14 +352,18 @@
                         receivedMessageDiv.classList.add('col-start-6', 'col-end-13', 'p-3',
                             'rounded-lg');
                         receivedMessageDiv.innerHTML = `
-                        <div class="flex flex-row items-center">
-                            <div class="flex items-center justify-center h-10 w-10 rounded-full bg-primary flex-shrink-0">
 
-                            </div>
-                            <div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
-                                <p>${e.message.content}</p>
-                            </div>
-                        </div>
+                         <div class="flex items-center justify-start flex-row-reverse">
+                                        <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
+                                            <img loading="lazy" src="${e.message.sender.profile_picture_url ?? 'https://placehold.co/200x200'}"
+                                                                        alt="User Avatar" class="w-8 h-8 rounded-full">
+                                        </div>
+                                        <div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
+                                            <div>${e.message.content}</div>
+                                        </div>
+                                </div>
+
+                                 <span class="text-xs text-gray-400 ml-2">${formattedTime}</span>
             `;
                         messageContainer.appendChild(receivedMessageDiv);
 

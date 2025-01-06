@@ -26,14 +26,14 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="body bg-white dark:bg-[#1E293B] text-black" x-data="{ page: 'ecommerce', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode'));
+<body class="body bg-gray-100 dark:bg-[#1E293B] text-black" x-data="{ page: 'ecommerce', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode'));
 $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
     :class="{ 'dark text-bodydark bg-boxdark-2': darkMode === true }">
     @include('preloader')
     <div class=" bg-gray-100 dark:bg-[#1E293B] h-screen">
         @include('seller.layouts.navigation')
-        <div class="duration-500 ease-in-out transform contents h-screen ">
-            <div class=" dark:bg-[#1e293bf3] bg-white pt-20 px-2 md:px-5 pb-4 ml-12  backdrop-blur-2xl">
+        <div class=" sm:ml-64">
+            <div class=" p-4  mt-14">
                 <!-- Page Content -->
                 <main>
                     @yield('content')

@@ -43,10 +43,10 @@
                                                 $firstPhoto = $product->photos->first();
                                             @endphp
                                             @if ($firstPhoto)
-                                                <img loading="lazy" src="{{ asset('storage/' . $firstPhoto->image) }}"
+                                                <img loading="lazy" src="{{ asset($firstPhoto->image) }}"
                                                     alt="{{ $product->name }}">
                                                 <img class="product-thumb-secondary"
-                                                    src="{{ asset('storage/' . $firstPhoto->image) }}" alt="">
+                                                    src="{{ asset($firstPhoto->image) }}" alt="">
                                             @endif
                                         </a>
                                         <div class="tpproduct__thumb-action">
@@ -157,10 +157,10 @@
                                             @php
                                                 $firstPhoto = $product->photos->first();
                                             @endphp
-                                            <img loading="lazy" src="{{ asset('storage/' . $firstPhoto->image) }}"
+                                            <img loading="lazy" src="{{ asset($firstPhoto->image) }}"
                                                 alt="{{ $product->name }}">
                                             <img class="product-thumb-secondary"
-                                                src="{{ asset('storage/' . $firstPhoto->image) }}" alt="">
+                                                src="{{ asset($firstPhoto->image) }}" alt="">
                                         </a>
                                         <div class="tpproduct__thumb-action">
                                             <a class="comphare" onclick="addToWishList(event, {{ $product->id }})"

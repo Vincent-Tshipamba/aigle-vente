@@ -38,12 +38,26 @@
         }
     </style>
 
+    <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <h2 class="text-title-md2 font-bold text-black dark:text-white">
+            Details
+        </h2>
 
+        <nav>
+            <ol class="flex items-center gap-2">
+                <li>
+                    <a class="font-medium" href="{{ route('seller.shops.products.index', $shop->_id) }}">Produits
+                        /</a>
+                </li>
+                <li class="text-primary">Detail</li>
+            </ol>
+        </nav>
+    </div>
 
-    <div class="px-4 md:px-12 mt-4">
+    <div class="">
         <h1 class="text-2xl font-bold mb-4">Nos Produits</h1>
         <!-- Bascule entre la vue grille et liste -->
-        <div class="my-12 flex justify-between items-center">
+        <div class="my-12 flex flex-wrap justify-between items-center">
             <div>
                 <a class="flex gap-2 items-center text-white bg-[#e38407] hover:bg-[#E38407EE]  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:[#E38407EE] dark:hover:[#e38407] dark:focus:[#e38407]"
                     href="{{ route('seller.shops.products.create', $shop->_id) }}">
@@ -93,7 +107,7 @@
         <!-- Vue Grille -->
         <div id="gridView">
             <div
-                class="w-fit  grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
+                class="w-full  grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
                 @if (empty($products))
                     <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
                         role="alert">
@@ -110,7 +124,7 @@
                         <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
                             <a href="{{ route('seller.shops.products.show', $product->_id) }}">
                                 @if ($firstPhoto)
-                                    <img src="{{ asset('storage/' . $firstPhoto->image) }}" alt="{{ $product->name }}"
+                                    <img src="{{ asset( $firstPhoto->image) }}" alt="{{ $product->name }}"
                                         class="h-80 w-72 object-cover rounded-t-xl" />
                                 @else
                                     <p>Aucune image disponible pour ce produit.</p>

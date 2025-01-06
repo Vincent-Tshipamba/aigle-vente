@@ -18,7 +18,7 @@
         <div>
             <fieldset>
                 <legend class="text-lg font-medium text-gray-700 mb-3">Filtres</legend>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 w-full">
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-1 w-full">
                     @foreach ($categories as $category)
                         <label class="flex items-center space-x-2 p-2 rounded cursor-pointer hover:bg-gray-50">
                             <input type="checkbox" id="{{ $category->name }}" name="{{ $category->name }}"
@@ -31,8 +31,6 @@
             </fieldset>
         </div>
     </div>
-
-
 
     <section class="product-area pb-70" id="productSection">
         <div class="container">
@@ -135,7 +133,13 @@
                             @endforeach
                         </div>
                         <div class="justify-center">
-                            {{-- {{ $products->links('pagination::bootstrap-5') }} --}}
+                            <div class="text-center">
+                                <button type="button" onclick="window.location.href='/products'"
+                                    class="rounded-full border text-white hover:font-bold bg-gray-400 hover:bg-[#040404] px-10 py-3 space-x-3">
+                                    <span>Voir tous les produits</span>
+                                    <i class="fal fa-long-arrow-right"></i>
+                                </button>
+                            </div>
                         </div>
                     @endif
                 </div>

@@ -1,5 +1,5 @@
 <x-app-layout>
-    @livewire('client-produits', ['wishlists' => $wishlists])
+    @livewire('client-produits', ['wishlists' => $wishlists ?? null])
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -51,18 +51,6 @@
             });
         });
     </script>
-
-
-    <style>
-        .tpproduct__thumb img {
-            width: 400px;
-            /* Prend toute la largeur du conteneur */
-            height: 375px;
-            /* Définir une hauteur fixe */
-            object-fit: cover;
-            /* Recadrage de l'image pour remplir le conteneur sans déformer */
-        }
-    </style>
 
     @push('script')
         <script>

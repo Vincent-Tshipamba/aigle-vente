@@ -1,5 +1,5 @@
 <!-- slider-area-start -->
-<section class="slider-area pb-25">
+<section class="slider-area mb-40">
     <div class="container">
         <div class="row justify-content-xl-end">
             <div class="col-xl-9 col-xxl-7 col-lg-9">

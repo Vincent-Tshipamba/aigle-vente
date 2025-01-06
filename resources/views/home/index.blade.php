@@ -62,7 +62,7 @@
 
     <main class="main-content">
         <!-- slider-area-start -->
-        <section class="slider-area pb-25 lazy-section" data-url="{{ route('home.slider') }}">
+        <section class="slider-area lazy-section" data-url="{{ route('home.slider') }}">
             <div class="container">
                 <div class="row justify-content-xl-end">
                     <!-- Section principale du slider -->
@@ -115,8 +115,7 @@
         <!-- slider-area-end -->
 
         <!-- category-area-start -->
-
-        {{-- <section class="category-area pt-70 lazy-section" data-url="{{ route('home.category') }}">
+        <section class="category-area pt-20 lazy-section" data-url="{{ route('home.category') }}">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -125,21 +124,26 @@
                         </div>
                     </div>
                 </div>
-                <div class="custom-row category-border pb-45 justify-content-xl-between xl:gap-10">
-                    <!-- Placeholder Elements -->
-                    @for ($i = 0; $i < $categories->count(); $i++)
-                        <div class="tpcategory mb-40 placeholder">
-                            <div class="tpcategory__icon shimmer">
-                                <div class="shimmer" style="width: 33px; height: 50px;"></div>
-                                <span class="shimmer" style="width: 20px; height: 20px; border-radius: 50%;"></span>
+                <div
+                    class="shopslider-active swiper-container custom-row category-border justify-content-xl-between xl:gap-10">
+                    <div class="swiper-wrapper"> <!-- Placeholder Elements -->
+                        @for ($i = 0; $i < $categories->count(); $i++)
+                            <div class="tpcategory tpshopitem swiper-slide mb-40 placeholder">
+                                <div class="popup-image">
+                                    <div class="tpcategory__icon shimmer">
+                                        <div class="shimmer" style="width: 33px; height: 50px;"></div>
+                                        <span class="shimmer"
+                                            style="width: 20px; height: 20px; border-radius: 50%;"></span>
+                                    </div>
+                                    <div class="tpcategory__content">
+                                        <h5 class="tpcategory__title">
+                                            <div class="shimmer" style="width: 100px; height: 20px;"></div>
+                                        </h5>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="tpcategory__content">
-                                <h5 class="tpcategory__title">
-                                    <div class="shimmer" style="width: 100px; height: 20px;"></div>
-                                </h5>
-                            </div>
-                        </div>
-                    @endfor
+                        @endfor
+                    </div>
                 </div>
             </div>
         </section> --}}

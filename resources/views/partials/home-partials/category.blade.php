@@ -1,37 +1,33 @@
-<section class="py-10">
-    <div class="container mx-auto">
-        <div class="tpsection mb-40">
-            <h4 class="tpsection__title">Top <span> Catégories </span></h4>
-        </div>
-
-        @if ($categories->isEmpty())
-            <p class="text-center text-gray-500">Aucune catégorie disponible pour le moment.</p>
-        @else
-            <div id="post-carousel" class="splide">
-                <div class="splide__track">
-                    <ul class="splide__list">
-                        @foreach ($categories as $i => $category)
-                            <li class="splide__slide">
-                                <div class="text-center group">
-                                    <!-- Image avec effet hover -->
-                                    <div class="relative bg-cover bg-center rounded-full w-32 h-32 mx-auto mb-5 transition-transform duration-300 transform group-hover:scale-110"
-                                        style="background-image: url('{{ asset($category->image ?? 'default-image.jpg') }}');">
-                                        <span
-                                            class="absolute top-0 right-0 w-8 h-8 bg-white text-[#e38407] rounded-full flex items-center justify-center font-bold shadow-md">
-                                            {{ $i + 1 }}
-                                        </span>
-                                    </div>
-                                    <!-- Titre -->
-                                    <h5 class="text-lg font-semibold">
-                                        {{ $category->name }}
-                                    </h5>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
+<!-- category-area-start -->
+<section class="category-area mt-40">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tpsection mb-40">
+                    <h4 class="tpsection__title">Top <span> Catégories </span></h4>
                 </div>
             </div>
-        @endif
+        </div>
+        <div class="shopslider-active swiper-container custom-row category-border justify-content-xl-between xl:gap-10">
+            <div class="swiper-wrapper">
+                @foreach ($categories as $i => $category)
+                    <div class="tpcategory mb-40 tpshopitem swiper-slide">
+                        <div class="popup-image">
+                            <div class="tpcategory__icon bg-cover bg-center p-relative"
+                                style="background-image: url('{{ asset($category->image) }}');">
+                                <img loading="lazy" src="{{ asset($category->image) }}" width="33" height="50" />
+                                <span>{{ $i + 1 }}</span>
+                            </div>
+                            <div class="tpcategory__content">
+                                <h5 class="tpcategory__title">
+                                    {{ $category->name }}
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </div>
 </section>
 

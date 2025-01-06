@@ -39,7 +39,9 @@
                             <form action="#">
                                 <div class="mainmenu__search-bar p-relative w-full">
                                     <button class="mainmenu__search-icon"><i class="fal fa-search"></i></button>
-                                    <input class="search-input" type="text" placeholder="Rechercher des produits...">
+                                    <input @if (request()->routeIs('products.index')) wire:model.live="search" @endif
+                                        class="{{ !request()->routeIs('products.index') ? 'search-input' : '' }}"
+                                        type="text" placeholder="Rechercher des produits...">
                                 </div>
                             </form>
                         </div>

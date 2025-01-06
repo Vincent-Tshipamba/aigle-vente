@@ -81,7 +81,7 @@
                                                 @if ($product->old_price)
                                                     <span
                                                         class="tpproduct__priceinfo-list-oldprice">{{ number_format($product->old_price, 2, ',', ' ') }}
-                                                        €</span>
+                                                        $</span>
                                                 @endif
                                             </div>
                                             <div class="tpproduct__cart">
@@ -231,6 +231,7 @@
                 </div> --}}
             </div>
         </div>
+    </div>
 </section>
 
 <style>

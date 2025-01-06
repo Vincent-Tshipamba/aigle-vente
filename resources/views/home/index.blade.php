@@ -146,7 +146,7 @@
                     </div>
                 </div>
             </div>
-        </section> --}}
+        </section> 
 
         @include('partials.home-partials.category')
         <!-- category-area-end -->

@@ -11,7 +11,7 @@ class ClientProduits extends Component
 {
     use WithPagination;
 
-    public $search = '', $categories;
+    public $search = '', $categories, $wishlists;
     protected $queryString = [
         'search' => ['except' => '']
     ];
@@ -28,6 +28,11 @@ class ClientProduits extends Component
     public function updatedSearch()
     {
         $this->resetPage();
+    }
+
+    public function mount($wishlists)
+    {
+        $this->wishlists = $wishlists;
     }
 
     public function render()

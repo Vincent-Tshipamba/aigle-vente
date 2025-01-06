@@ -4,8 +4,7 @@
             <div class="row">
                 <div class="col-md-6 col-12">
                     <div class="tpsection mb-40">
-                        <h4 class="tpsection__title">Produits <span> Populaires <img
-                                    src="{{ asset('img/icon/title-shape-01.jpg') }}" alt=""></span></h4>
+                        <h4 class="tpsection__title">Produits <span> Populaires </span></h4>
                     </div>
                 </div>
                 <div class="col-md-6 col-12">

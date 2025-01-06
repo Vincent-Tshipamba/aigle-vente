@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="{{ asset('css/spacing.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/loaders.css') }}">
+    @livewireStyles
 </head>
 
 <body>
@@ -671,6 +672,7 @@
 
     @stack('script')
     @yield('script')
+    @livewireScripts
 </body>
 
 </html>

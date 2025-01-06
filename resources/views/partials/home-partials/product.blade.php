@@ -1,4 +1,4 @@
-<section class="product-area pt-95 pb-70" id="productSection">
+<section class="product-area pt-20 pb-70" id="productSection">
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-12">

@@ -1,22 +1,24 @@
 <div>
-    <!-- header-area-start -->
-    @include('partials.header')
-    <!-- header-area-end -->
+    @if (request()->routeIs('products.index'))
+        <!-- header-area-start -->
+        @include('partials.header')
+        <!-- header-area-end -->
 
-    <!-- header-xl-sticky-area -->
-    @include('partials.header-xl')
-    <!-- header-xl-sticky-end -->
+        <!-- header-xl-sticky-area -->
+        @include('partials.header-xl')
+        <!-- header-xl-sticky-end -->
 
-    <!-- header-md-lg-area -->
-    @include('partials.header-md-lg')
-    <!-- header-md-lg-area -->
+        <!-- header-md-lg-area -->
+        @include('partials.header-md-lg')
+        <!-- header-md-lg-area -->
+    @endif
 
     <div class="relative container mb-6 max-w-full">
         <!-- Category Filter -->
-        <div class="">
+        <div>
             <fieldset>
                 <legend class="text-lg font-medium text-gray-700 mb-3">Filtres</legend>
-                <div class="grid grid-cols-5 w-full">
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 w-full">
                     @foreach ($categories as $category)
                         <label class="flex items-center space-x-2 p-2 rounded cursor-pointer hover:bg-gray-50">
                             <input type="checkbox" id="{{ $category->name }}" name="{{ $category->name }}"
@@ -29,6 +31,7 @@
             </fieldset>
         </div>
     </div>
+
 
 
     <section class="product-area pb-70" id="productSection">

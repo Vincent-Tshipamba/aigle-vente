@@ -170,6 +170,18 @@ class HomeController extends Controller
         $saleProducts = $products->filter(function ($product) {
             return $product->promotions->isNotEmpty();
         });
+
+        if (Auth::check()) {
+            $wishlists = Wishlist::where('user_id', Auth::user()->id)->get();
+            $totalAmount = DB::table('wishlists')
+                ->join('products', 'wishlists.product_id', '=', 'products.id')
+                ->where('user_id', Auth::user()->id)
+                ->sum('products.unit_price');
+
+            // Retourner la vue avec les produits
+            return view('partials.home-partials.product', compact('rowperpage', 'products', 'wishlists', 'totalAmount'));
+        }
+
         return view('partials.home-partials.product', compact('rowperpage', 'products', 'totalProducts', 'saleProducts'));
     }
 

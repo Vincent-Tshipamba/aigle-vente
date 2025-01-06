@@ -148,7 +148,7 @@
             </div>
         </section> 
 
-        @include('partials.home-partials.category')
+       
         <!-- category-area-end -->
 
         <!-- product-area-start -->

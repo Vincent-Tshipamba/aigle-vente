@@ -63,7 +63,7 @@ class ProductController extends Controller
             $request->type,
             $request->quantity,
             $request->reason,
-            auth()->id(),
+            Auth::id(),
             $shop
         );
 
@@ -153,17 +153,22 @@ class ProductController extends Controller
                 'quantity' => $validated['stock_quantity'],
             ]);
 
-            // Gestion des images
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $imageFile) {
-                    $path = $imageFile->store('images', 'public');
+                    // Crée un nom unique pour éviter les conflits
+                    $imageName = uniqid() . '.' . $imageFile->getClientOriginalExtension();
 
+                    
+                    $path = $imageFile->move(public_path('products_images'), $imageName);
+
+                    // Enregistrez le chemin relatif dans la base de données
                     $product->photos()->create([
-                        'image' => $path,
+                        'image' => 'products_images/' . $imageName,
                         'description' => 'Image pour ' . $product->name,
                     ]);
                 }
             }
+
 
             return redirect()->route('seller.shops.products.index', $product->shop->_id)
                 ->with('success', 'Produit créé avec succès !');

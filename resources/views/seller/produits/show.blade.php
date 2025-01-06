@@ -58,13 +58,13 @@
 
                     <!-- Main image -->
                     <img id="mainImage" class="w-full h-96 rounded-md mb-4"
-                        src="{{ asset('storage/' . $firstPhoto->image) }}" alt="{{ $product->name }}" />
+                        src="{{ asset($firstPhoto->image) }}" alt="{{ $product->name }}" />
 
                     <!-- Thumbnails -->
                     <div class="flex gap-2 mt-4">
                         @foreach ($product->photos as $photo)
-                            <img onclick="changeMainImage('{{ asset('storage/' . $photo->image) }}')"
-                                src="{{ asset('storage/' . $photo->image) }}" alt="{{ $product->name }}"
+                            <img onclick="changeMainImage('{{ asset($photo->image) }}')"
+                                src="{{ asset($photo->image) }}" alt="{{ $product->name }}"
                                 class="w-20 h-20 object-cover rounded-md cursor-pointer border border-gray-300 hover:border-primary-500 transition-all" />
                         @endforeach
                     </div>

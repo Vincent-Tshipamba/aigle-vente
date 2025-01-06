@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="{{ asset('css/meanmenu.css') }}">
     <link rel="stylesheet" href="{{ asset('css/spacing.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-    @livewireStyles()
+    @livewireStyles
 </head>
 
 <body>
@@ -264,7 +264,7 @@
 
     @yield('script')
     @stack('script')
-    @livewireScripts()
+    @livewireScripts
 </body>
 
 </html>

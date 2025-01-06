@@ -11,7 +11,7 @@ class ClientProduits extends Component
 {
     use WithPagination;
 
-    public $search = '', $categories, $wishlists;
+    public $search = '', $categories, $wishlists, $limit;
     protected $queryString = [
         'search' => ['except' => '']
     ];
@@ -30,7 +30,7 @@ class ClientProduits extends Component
         $this->resetPage();
     }
 
-    public function mount($wishlists)
+    public function mount($wishlists = null, $limit = null)
     {
         $this->wishlists = $wishlists;
     }
@@ -50,7 +50,7 @@ class ClientProduits extends Component
         }
 
         return view('livewire.client-produits', [
-            'products' => $query->get()
+            'products' => $query->take($this->limit)->get()
         ]);
     }
 }

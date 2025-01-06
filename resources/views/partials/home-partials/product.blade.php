@@ -1,1 +1,1 @@
-@livewire('client-produits', ['wishlists' => $wishlists])
+@livewire('client-produits', ['wishlists' => $wishlists ?? null, 'limit' => 24])

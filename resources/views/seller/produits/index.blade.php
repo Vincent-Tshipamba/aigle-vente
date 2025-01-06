@@ -2,41 +2,98 @@
 
 @section('content')
 
-    <!-- Modal toggle -->
+
+
+    {{-- <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+        <li class="me-2">
+            <a href="#" class="inline-block px-4 py-3 text-white bg-blue-600 rounded-lg active" aria-current="page">Tab
+                1</a>
+        </li>
+        <li class="me-2">
+            <a href="#"
+                class="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">Tab
+                2</a>
+        </li>
+        <li class="me-2">
+            <a href="#"
+                class="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">Tab
+                3</a>
+        </li>
+        <li class="me-2">
+            <a href="#"
+                class="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">Tab
+                4</a>
+        </li>
+        <li>
+            <a class="inline-block px-4 py-3 text-gray-400 cursor-not-allowed dark:text-gray-500">Tab 5</a>
+        </li>
+    </ul> --}}
+
+    <style>
+        /*@apply bg-white text-blue-400 rounded-full;*/
+        .active {
+            background: white;
+            border-radius: 9999px;
+            color: #e38407;
+        }
+    </style>
 
 
 
-    <div class=" mt-4">
+    <div class="px-4 md:px-12 mt-4">
         <h1 class="text-2xl font-bold mb-4">Nos Produits</h1>
         <!-- Bascule entre la vue grille et liste -->
-        <div class="flex justify-between md:justify-end mb-4">
-            <a class="block text-white bg-[#e38407] hover:bg-[#E38407EE]  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:[#E38407EE] dark:hover:[#e38407] dark:focus:[#e38407]"
-                href="{{ route('seller.shops.products.create', $shop->_id) }}">
-                Ajoute un Produits
-            </a>
-            <button id="gridViewBtn" class="px-4 py-2 text-black dark:text-gray-100 rounded-lg text-6xl">
-                <svg class="" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    fill="currentColor" viewBox="0 0 24 24">
-                    <path fill-rule="evenodd"
-                        d="M4.857 3A1.857 1.857 0 0 0 3 4.857v4.286C3 10.169 3.831 11 4.857 11h4.286A1.857 1.857 0 0 0 11 9.143V4.857A1.857 1.857 0 0 0 9.143 3H4.857Zm10 0A1.857 1.857 0 0 0 13 4.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 21 9.143V4.857A1.857 1.857 0 0 0 19.143 3h-4.286Zm-10 10A1.857 1.857 0 0 0 3 14.857v4.286C3 20.169 3.831 21 4.857 21h4.286A1.857 1.857 0 0 0 11 19.143v-4.286A1.857 1.857 0 0 0 9.143 13H4.857Zm10 0A1.857 1.857 0 0 0 13 14.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 21 19.143v-4.286A1.857 1.857 0 0 0 19.143 13h-4.286Z"
-                        clip-rule="evenodd" />
-                </svg>
+        <div class="my-12 flex justify-between items-center">
+            <div>
+                <a class="flex gap-2 items-center text-white bg-[#e38407] hover:bg-[#E38407EE]  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:[#E38407EE] dark:hover:[#e38407] dark:focus:[#e38407]"
+                    href="{{ route('seller.shops.products.create', $shop->_id) }}">
+                    <svg class="" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
 
-            </button>
-            <button id="listViewBtn" class="px-4 py-2 text-black dark:text-gray-100 rounded-lg text-6xl">
-                <svg class="" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    fill="currentColor" viewBox="0 0 24 24">
-                    <path fill-rule="evenodd"
-                        d="M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6Zm4.996 2a1 1 0 0 0 0 2h.01a1 1 0 1 0 0-2h-.01ZM11 8a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2h-6Zm-4.004 3a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2h-.01ZM11 11a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2h-6Zm-4.004 3a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2h-.01ZM11 14a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2h-6Z"
-                        clip-rule="evenodd" />
-                </svg>
+                    Ajoute un Produits
 
-            </button>
+                </a>
+            </div>
+            <div
+                class="bg-gray-200 dark:bg-gray-600 text-sm text-gray-500 dark:text-gray-200 leading-none border-2 border-gray-200 dark:border-gray-800 rounded-full inline-flex mt-4 ">
+                <button
+                    class="inline-flex items-center transition-colors duration-800 ease-in focus:outline-none hover:text-[#e38407] focus:text-[#e38407] rounded-l-full py-4 px-10  active"
+                    id="gridViewBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="fill-current w-4 h-4 mr-2">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    <span>Grid</span>
+                </button>
+                <button
+                    class="inline-flex items-center transition-colors duration-800 ease-in focus:outline-none hover:text-[#e38407] focus:text-[#e38407] rounded-r-full px-10  py-4"
+                    id="listViewBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="fill-current w-4 h-4 mr-2">
+                        <line x1="8" y1="6" x2="21" y2="6"></line>
+                        <line x1="8" y1="12" x2="21" y2="12"></line>
+                        <line x1="8" y1="18" x2="21" y2="18"></line>
+                        <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                        <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                        <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                    </svg>
+                    <span>List</span>
+                </button>
+            </div>
         </div>
 
         <!-- Vue Grille -->
         <div id="gridView">
-            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <div
+                class="w-fit  grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
                 @if (empty($products))
                     <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
                         role="alert">
@@ -45,49 +102,45 @@
                     </div>
                 @else
                     @foreach ($products as $product)
-                        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
-                            @php
-                                $firstPhoto = $product->photos->first();
-                            @endphp
-                            @if ($firstPhoto)
-                                <img loading="lazy" src="{{ asset('storage/' . $firstPhoto->image) }}"
-                                    alt="{{ $product->name }}" class="w-full h-40 object-cover rounded-md mb-4">
-                            @else
-                                <p>Aucune image disponible pour ce produit.</p>
-                            @endif
+                        @php
+                            $firstPhoto = $product->photos->first();
+                        @endphp
 
-                            <h2 class="text-lg font-bold">{{ $product->name }}</h2>
-                            <p class="text-gray-600">Prix : {{ $product->unit_price }} USD</p>
-                            <p class="text-gray-600">Stock : {{ $product->stocks->quantity ?? 0 }}</p>
-                            <div class=" grid grid-cols-3 items-center">
-                                <a href="{{ route('seller.shops.products.show', $product->_id) }}"
-                                    class="text-blue-500 mt-2 inline-block"><svg
-                                        class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path fill-rule="evenodd"
-                                            d="M4.998 7.78C6.729 6.345 9.198 5 12 5c2.802 0 5.27 1.345 7.002 2.78a12.713 12.713 0 0 1 2.096 2.183c.253.344.465.682.618.997.14.286.284.658.284 1.04s-.145.754-.284 1.04a6.6 6.6 0 0 1-.618.997 12.712 12.712 0 0 1-2.096 2.183C17.271 17.655 14.802 19 12 19c-2.802 0-5.27-1.345-7.002-2.78a12.712 12.712 0 0 1-2.096-2.183 6.6 6.6 0 0 1-.618-.997C2.144 12.754 2 12.382 2 12s.145-.754.284-1.04c.153-.315.365-.653.618-.997A12.714 12.714 0 0 1 4.998 7.78ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </a>
+                        <!--   ✅ Product card 1 - Starts Here 👇 -->
+                        <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+                            <a href="{{ route('seller.shops.products.show', $product->_id) }}">
+                                @if ($firstPhoto)
+                                    <img src="{{ asset('storage/' . $firstPhoto->image) }}" alt="{{ $product->name }}"
+                                        class="h-80 w-72 object-cover rounded-t-xl" />
+                                @else
+                                    <p>Aucune image disponible pour ce produit.</p>
+                                @endif
 
-                                <a href="{{ route('seller.shops.products.edit', ['shop' => $shop->_id, 'product' => $product->_id]) }}"
-                                    class="text-blue-500 mt-2 inline-block">
-                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path fill-rule="evenodd"
-                                            d="M11.32 6.176H5c-1.105 0-2 .949-2 2.118v10.588C3 20.052 3.895 21 5 21h11c1.105 0 2-.948 2-2.118v-7.75l-3.914 4.144A2.46 2.46 0 0 1 12.81 16l-2.681.568c-1.75.37-3.292-1.263-2.942-3.115l.536-2.839c.097-.512.335-.983.684-1.352l2.914-3.086Z"
-                                            clip-rule="evenodd" />
-                                        <path fill-rule="evenodd"
-                                            d="M19.846 4.318a2.148 2.148 0 0 0-.437-.692 2.014 2.014 0 0 0-.654-.463 1.92 1.92 0 0 0-1.544 0 2.014 2.014 0 0 0-.654.463l-.546.578 2.852 3.02.546-.579a2.14 2.14 0 0 0 .437-.692 2.244 2.244 0 0 0 0-1.635ZM17.45 8.721 14.597 5.7 9.82 10.76a.54.54 0 0 0-.137.27l-.536 2.84c-.07.37.239.696.588.622l2.682-.567a.492.492 0 0 0 .255-.145l4.778-5.06Z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-
-                                </a>
-                            </div>
-
+                                <div class="px-4 py-3 w-72">
+                                    <span
+                                        class="text-gray-400 mr-3 uppercase text-xs">{{ $product->category_product->name }}</span>
+                                    <p class="text-lg font-bold text-black truncate block capitalize">{{ $product->name }}
+                                    </p>
+                                    <div class="flex items-center">
+                                        <p class="text-lg font-semibold text-black cursor-auto my-3">
+                                            ${{ $product->unit_price }} </p>
+                                        <del>
+                                            <p class="text-sm text-gray-600 cursor-auto ml-2">$199</p>
+                                        </del>
+                                        <a href="{{ route('seller.shops.products.edit', ['shop' => $shop->_id, 'product' => $product->_id]) }}"
+                                            class="ml-auto"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                height="20" fill="currentColor" class="bi bi-bag-plus"
+                                                viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
+                                                <path
+                                                    d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
+                                            </svg></a>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
+                        <!--   🛑 Product card 1 - Ends Here  -->
                     @endforeach
                     <div class="mt-4">
                         {{ $products->links() }}
@@ -119,10 +172,10 @@
                             <th scope="col" class="px-4 py-3">Produits</th>
                             <th scope="col" class="px-4 py-3">Stock</th>
                             <th scope="col" class="px-4 py-3">Prix</th>
-                            <th scope="col" class="px-4 py-3">Sales/Month</th>
+                            {{-- <th scope="col" class="px-4 py-3">Sales/Month</th>
                             <th scope="col" class="px-4 py-3">Rating</th>
                             <th scope="col" class="px-4 py-3">Sales</th>
-                            <th scope="col" class="px-4 py-3">Revenue</th>
+                            <th scope="col" class="px-4 py-3">Revenue</th> --}}
                             <th scope="col" class="px-4 py-3">Last Update</th>
                         </tr>
                     </thead>
@@ -173,7 +226,7 @@
                                     </td>
                                     <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $product->unit_price }}</td>
-                                    <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{-- <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         0.47</td>
                                     <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         <div class="flex items-center">
@@ -216,7 +269,7 @@
                                             1.6M
                                         </div>
                                     </td>
-                                    <td class="px-4 py-2">$3.2M</td>
+                                    <td class="px-4 py-2">$3.2M</td> --}}
                                     <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         <button id="dropdownMenuIconButton"
                                             data-dropdown-toggle="dropdownDots{{ $i }}"
@@ -255,7 +308,7 @@
                                                     @csrf
                                                     @method('delete')
                                                     <input type="submit" value="supprimer"
-                                                        class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                                        class="block px-4 py-2 w-full text-left text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                                                 </form>
                                             </div>
                                         </div>
@@ -361,11 +414,15 @@
             gridViewBtn.addEventListener("click", () => {
                 gridView.classList.remove("hidden");
                 listView.classList.add("hidden");
+                gridViewBtn.classList.add("active");
+                listViewBtn.classList.remove("active");
             });
 
             listViewBtn.addEventListener("click", () => {
                 listView.classList.remove("hidden");
                 gridView.classList.add("hidden");
+                listViewBtn.classList.add("active");
+                gridViewBtn.classList.remove("active");
             });
         });
 

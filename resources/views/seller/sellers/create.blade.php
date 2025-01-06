@@ -60,7 +60,7 @@
 
                                 <!-- Sexe -->
                                 <select id="sexe" name="sexe" class="z-50 select-custom nice-select">
-                                    <option value="{{$sexe}}" selected> {{$sexe}} </option>
+                                    <option value="{{ $sexe }}" selected> {{ $sexe }} </option>
                                 </select>
                                 <x-input-error :messages="$errors->get('sexe')" class="mt-2" />
 

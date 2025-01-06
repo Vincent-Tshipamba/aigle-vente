@@ -73,9 +73,16 @@ class ShopController extends Controller
         return redirect()->route('shops.index')->with('success', 'Boutique créée avec succès!');
     }
 
+    public function edit(Shop $shop){
+        // Vérifier si le vendeur connecté possède la boutique
+        $seller = Auth::user()->seller;
 
+        if (!$seller || $shop->seller_id!== $seller->id) {
+            return response()->json(['error' => 'Accès non autorisé à cette boutique.'], 403);
+        }
 
-    // Mettre à jour une boutique si elle appartient au vendeur connecté
+        return view('seller.shops.edit', compact('shop'));
+    }
     public function update(Request $request, Shop $shop)
     {
         // Vérifier si le vendeur connecté possède la boutique
@@ -92,7 +99,7 @@ class ShopController extends Controller
         ]);
 
         $shop->update($validated);
-        return response()->json($shop);
+        return view('seller.shops.index')->with('success', 'Boutique Modifier avec succès!');
     }
 
     // Supprimer une boutique si elle appartient au vendeur connecté

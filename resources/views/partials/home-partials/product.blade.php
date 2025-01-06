@@ -43,7 +43,7 @@
                                                 $firstPhoto = $product->photos->first();
                                             @endphp
                                             @if ($firstPhoto)
-                                                <img loading="lazy" src="{{ asset($firstPhoto->image) }}"
+                                                <img loading="lazy" src="{{ asset('storage/' . $firstPhoto->image) }}"
                                                     alt="{{ $product->name }}">
                                                 <img class="product-thumb-secondary"
                                                     src="{{ asset('storage/' . $firstPhoto->image) }}" alt="">
@@ -232,7 +232,6 @@
             </div>
         </div>
 </section>
-
 
 <style>
     .tpproduct__thumb img {

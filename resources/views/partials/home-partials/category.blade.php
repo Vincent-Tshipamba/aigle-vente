@@ -30,4 +30,33 @@
         </div>
     </div>
 </section>
-<!-- category-area-end -->
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const carouselElement = document.querySelector('#post-carousel');
+        if (carouselElement) {
+            new Splide(carouselElement, {
+                type: 'loop',
+                perPage: 5,
+                perMove: 1,
+                autoplay: true,
+                interval: 3000,
+                breakpoints: {
+                    640: { // Mobile
+                        perPage: 1,
+                    },
+                    768: { // Tablette
+                        perPage: 2,
+                    },
+                    1024: { // Desktop
+                        perPage: 4,
+                    },
+                },
+            }).mount();
+        } else {
+            console.warn('L\'élément #post-carousel est introuvable.');
+        }
+    });
+</script>

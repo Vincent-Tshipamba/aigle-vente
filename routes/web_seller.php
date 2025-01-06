@@ -38,7 +38,8 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::delete('seller/shops/{shop:_id}', [ShopController::class, 'destroy'])->name('shops.destroy');
-    Route::post('seller/shops/{shop:_id}', [ShopController::class, 'update'])->name('shops.update');
+    Route::put('seller/shops/{shop:_id}/edit', [ShopController::class, 'update'])->name('shops.update');
+    Route::get('seller/shops/{shop:_id}/edit', [ShopController::class, 'edit'])->name('shops.edit');
     Route::get('/seller/shops', [ShopController::class, 'index'])->name('shops.index');
     Route::get('/seller/shops/create', [ShopController::class, 'create'])->name('shops.create');
     Route::post('seller/shops', [ShopController::class, 'store'])->name('shops.store');

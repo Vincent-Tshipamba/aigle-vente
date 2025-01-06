@@ -130,7 +130,7 @@
                 <tr>
                     <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white"> {{ $shop->name }} </td>
                     <td> {{ $shop->address }} </td>
-                    <td> {{ $shop->description }} </td>
+                    <td> {!! substr($shop->description,0,100)  !!} </td>
                     <td>
                         <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots{{ $key }}"
                             class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -152,7 +152,7 @@
                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Produits</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('shops.update', $shop->_id) }}"
+                                    <a href="{{ route('shops.edit', $shop->_id) }}"
                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Modifier</a>
                                 </li>
 

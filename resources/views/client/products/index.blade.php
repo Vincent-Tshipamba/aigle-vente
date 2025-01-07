@@ -1,5 +1,5 @@
 <x-app-layout>
-    @livewire('client-produits', ['wishlists' => $wishlists ?? null])
+    @livewire('client-produits', ['wishlists' => $wishlists ?? null, 'limit' => null, 'headers' => true])
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

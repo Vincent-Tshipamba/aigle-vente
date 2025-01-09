@@ -29,8 +29,9 @@
             </div>
         </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const sidebar = document.querySelector("aside");
         const maxSidebar = document.querySelector(".max")

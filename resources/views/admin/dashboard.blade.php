@@ -149,7 +149,8 @@
             </div>
         </div>
 
-        <div class=" grid grid-cols-1 md:grid-cols-2 gap-4 rounded-lg shadow-lg dark:shadow-lg dark:shadow-gray-500/20 backdrop-blur-xl bg-[#fcdab40a] dark:bg-gray-900 w-full">
+        <div
+            class=" grid grid-cols-1 md:grid-cols-2 gap-4 rounded-lg shadow-lg dark:shadow-lg dark:shadow-gray-500/20 backdrop-blur-xl bg-[#fcdab40a] dark:bg-gray-900 w-full">
             <div class=" w-full">
                 <div class=" m-4 ">
                     <canvas id="chartClientsSellers"></canvas>
@@ -162,7 +163,8 @@
             </div>
         </div>
     </section>
-    <section class="rounded-lg shadow-lg dark:shadow-lg dark:shadow-gray-500/20 backdrop-blur-xl bg-[#fcdab40a] dark:bg-gray-900">
+    <section
+        class="rounded-lg shadow-lg dark:shadow-lg dark:shadow-gray-500/20 backdrop-blur-xl bg-[#fcdab40a] dark:bg-gray-900">
         <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200 p-4">
             Dernières commandes enregistrées par le système
         </h3>
@@ -499,92 +501,96 @@
 
     <!-- Graphique des clients et des vendeurs -->
     <script>
-        const chartClientsSellersData = {
-            labels: ['Clients', 'Vendeurs'],
-            datasets: [{
-                label: 'Total',
-                data: [
-                    {{ $totalClients }},
-                    {{ $totalVendeurs }}
-                ],
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(227, 132, 7, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(227, 132, 7, 1)'
-                ],
-                borderWidth: 1
-            }]
-        };
+        document.addEventListener('DOMContentLoaded', function() {
+            const chartClientsSellersData = {
+                labels: ['Clients', 'Vendeurs'],
+                datasets: [{
+                    label: 'Total',
+                    data: [
+                        {{ $totalClients }},
+                        {{ $totalVendeurs }}
+                    ],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(227, 132, 7, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(227, 132, 7, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            };
 
-        const chartClientsSellersConfig = {
-            type: 'doughnut',
-            data: chartClientsSellersData,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'Total des Vendeurs et des Clients'
+            const chartClientsSellersConfig = {
+                type: 'doughnut',
+                data: chartClientsSellersData,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Total des Vendeurs et des Clients'
+                        }
                     }
-                }
-            },
-        };
+                },
+            };
 
-        const chartClientsSellers = new Chart(
-            document.getElementById('chartClientsSellers'),
-            chartClientsSellersConfig
-        );
+            const chartClientsSellers = new Chart(
+                document.getElementById('chartClientsSellers'),
+                chartClientsSellersConfig
+            );
+        })
     </script>
 
     <!-- Graphique des clients par genre -->
     <script>
-        const chartClientsByGenderData = {
-            labels: ['Hommes', 'Femmes'],
-            datasets: [{
-                label: 'Total',
-                data: [
-                    {{ $totalClientsMales }},
-                    {{ $totalClientsFemales }}
-                ],
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(227, 132, 7, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(227, 132, 7, 1)'
-                ],
-                borderWidth: 1
-            }]
-        };
+        document.addEventListener('DOMContentLoaded', function() {
+            const chartClientsByGenderData = {
+                labels: ['Hommes', 'Femmes'],
+                datasets: [{
+                    label: 'Total',
+                    data: [
+                        {{ $totalClientsMales }},
+                        {{ $totalClientsFemales }}
+                    ],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(227, 132, 7, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(227, 132, 7, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            };
 
-        const chartClientsByGenderConfig = {
-            type: 'doughnut',
-            data: chartClientsByGenderData,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'Total des clients par genre'
+            const chartClientsByGenderConfig = {
+                type: 'doughnut',
+                data: chartClientsByGenderData,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Total des clients par genre'
+                        }
                     }
-                }
-            },
-        };
+                },
+            };
 
-        const chartClientsByGender = new Chart(
-            document.getElementById('chartClientsByGender'),
-            chartClientsByGenderConfig
-        );
+            const chartClientsByGender = new Chart(
+                document.getElementById('chartClientsByGender'),
+                chartClientsByGenderConfig
+            );
+        })
     </script>
 
     <!-- Graphique des clients par période -->
@@ -636,7 +642,9 @@
             fetchChartData(yearSelect.value, monthSelect.value);
         });
 
-        // Initialiser avec l'année et le mois par défaut
-        fetchChartData(yearSelect.value, monthSelect.value);
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialiser avec l'année et le mois par défaut
+            fetchChartData(yearSelect.value, monthSelect.value);
+        })
     </script>
 @endsection

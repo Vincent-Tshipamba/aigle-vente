@@ -15,6 +15,9 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
     <!-- Styles / Scripts -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -35,6 +38,41 @@
     <link rel="stylesheet" href="{{ asset('css/spacing.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/loaders.css') }}">
+    <style>
+        .swiper - pagination - bullet {
+            background - color: #FF5500FF;
+            /* Couleur personnalisée */
+            width: 12 px;
+            height: 12 px;
+            opacity: 0.7;
+        }
+
+        .swiper - pagination - bullet - active {
+            background - color: # 2563 eb;
+            /* Couleur active */
+            opacity: 1;
+        }
+
+        /* Style personnalisé pour les flèches */
+        .swiper - button - prev,
+        .swiper - button - next {
+            width: 40 px;
+            height: 40 px;
+            color: #D8681DFF;
+
+        }
+
+        .swiper-button-prev::after,
+        .swiper-button-next::after {
+            font-size: 1.5rem;
+            /* Ajuste la taille des icônes */
+        }
+    </style>
+    <style>
+        .checkbox:checked+.check-icon {
+            display: flex;
+        }
+    </style>
     @livewireStyles
 </head>
 
@@ -62,296 +100,14 @@
     @endauth
 
     <main class="main-content">
-        <!-- slider-area-start -->
-        <section class="slider-area lazy-section" data-url="{{ route('home.slider') }}">
-            <div class="container">
-                <div class="row justify-content-xl-end">
-                    <!-- Section principale du slider -->
-                    <div class="col-xl-9 col-xxl-7 col-lg-9">
-                        <div class="tp-slider-area p-relative">
-                            <div class="swiper-container slider-active">
-                                <div class="swiper-wrapper">
-                                    <!-- Placeholder des slides -->
-                                    @for ($i = 0; $i < 9; $i++)
-                                        <div class="swiper-slide placeholder-slide h-full">
-                                            <div class="tp-slide-item">
-                                                <div class="tp-slide-item__content">
-                                                    <div class="tp-slide-item__sub-title-placeholder"></div>
-                                                    <div class="tp-slide-item__title-placeholder mb-25"></div>
-                                                    <div class="tp-slide-item__btn-placeholder"></div>
-                                                </div>
-                                                <div class="tp-slide-item__img-placeholder load" style="height: 420px">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endfor
-                                </div>
-                            </div>
-                            <div class="slider-pagination"></div>
-                        </div>
-                    </div>
-                    <!-- Section des bannières -->
-                    <div class="col-xl-3 col-xxl-3 col-lg-3">
-                        <div class="row">
-                            @for ($i = 0; $i < 2; $i++)
-                                <div class="col-lg-12 col-md-6">
-                                    <div class="tpslider-banner tp-slider-sm-banner mb-30 placeholder-banner">
-                                        <div class="tpslider-banner__img">
-                                            <div class="placeholder-image load"></div>
-                                            <div class="tpslider-banner__content">
-                                                <div class="placeholder-sub-title"></div>
-                                                <div class="placeholder-title"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endfor
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- slider-area-end -->
-
-        <!-- category-area-start -->
-        <section class="category-area pt-20 lazy-section" data-url="{{ route('home.category') }}">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="tpsection mb-40">
-                            <h4 class="tpsection__title">Top <span>Catégories</span></h4>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="shopslider-active swiper-container custom-row category-border justify-content-xl-between xl:gap-10">
-                    <div class="swiper-wrapper"> <!-- Placeholder Elements -->
-                        @for ($i = 0; $i < $categories->count(); $i++)
-                            <div class="tpcategory tpshopitem swiper-slide mb-40 placeholder">
-                                <div class="popup-image">
-                                    <div class="tpcategory__icon shimmer">
-                                        <div class="shimmer" style="width: 33px; height: 50px;"></div>
-                                        <span class="shimmer"
-                                            style="width: 20px; height: 20px; border-radius: 50%;"></span>
-                                    </div>
-                                    <div class="tpcategory__content">
-                                        <h5 class="tpcategory__title">
-                                            <div class="shimmer" style="width: 100px; height: 20px;"></div>
-                                        </h5>
-                                    </div>
-                                </div>
-                            </div>
-                        @endfor
-                    </div>
-                </div>
-            </div>
-        </section>
-        </section> 
-
-       
-        <!-- category-area-end -->
-
-        <!-- product-area-start -->
-        <section class="product-area pt-20 pb-70 lazy-section" data-url="{{ route('home.product') }}"
-            id="productSection">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-12">
-                        <div class="tpsection mb-40">
-                            <h4 class="tpsection__title">Produits <span> Populaires </span></h4>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-12">
-                        <div class="tpnavbar">
-                            <nav>
-                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <button class="nav-link active" id="nav-all-tab" data-bs-toggle="tab"
-                                        data-bs-target="#nav-all" type="button" role="tab"
-                                        aria-controls="nav-all" aria-selected="true">Tous</button>
-                                    <button class="nav-link" id="nav-popular-tab" data-bs-toggle="tab"
-                                        data-bs-target="#nav-popular" type="button" role="tab"
-                                        aria-controls="nav-popular" aria-selected="false">Populaires</button>
-                                    <button class="nav-link" id="nav-sale-tab" data-bs-toggle="tab"
-                                        data-bs-target="#nav-sale" type="button" role="tab"
-                                        aria-controls="nav-sale" aria-selected="false">En
-                                        Promotion</button>
-                                </div>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-content" id="nav-tabContent">
-                    <div id="product-container" class="w-full md:inset-0">
-                        @if (empty($products))
-                            <div class="p-4 text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300"
-                                role="alert">
-                                <span class="font-medium">Oups désolé !</span> Aucun produit disponible pour le moment.
-                            </div>
-                        @else
-                            <div
-                                class="row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-1 mx-auto">
-                                @for ($i = 0; $i < $products->count(); $i++)
-                                    <!-- Affiche 6 placeholders -->
-                                    <div class="col product">
-                                        <div class="tpproduct pb-15 mb-30">
-                                            <div class="tpproduct__thumb p-relative">
-                                                <div class="placeholder-shimmer"
-                                                    style="width: 100%; height: 375px; border-radius: 8px;"></div>
-
-                                                <div class="tpproduct__thumb-action">
-                                                    <span class="placeholder-shimmer"
-                                                        style="width: 20px; height: 20px; border-radius: 50%; margin-right: 10px;"></span>
-                                                    <span class="placeholder-shimmer"
-                                                        style="width: 20px; height: 20px; border-radius: 50%; margin-right: 10px;"></span>
-                                                    <span class="placeholder-shimmer"
-                                                        style="width: 20px; height: 20px; border-radius: 50%;"></span>
-                                                </div>
-                                            </div>
-                                            <div class="tpproduct__content">
-                                                <h3 class="tpproduct__title">
-                                                    <div class="placeholder-shimmer"
-                                                        style="width: 80%; height: 20px; border-radius: 4px;"></div>
-                                                </h3>
-                                                <p class="tpproduct__shop-name">
-                                                <div class="placeholder-shimmer"
-                                                    style="width: 60%; height: 15px; margin-top: 5px; border-radius: 4px;">
-                                                </div>
-                                                </p>
-                                                <p class="tpproduct__title">
-                                                <div class="placeholder-shimmer"
-                                                    style="width: 50%; height: 15px; margin-top: 5px; border-radius: 4px;">
-                                                </div>
-                                                </p>
-                                                <div class="tpproduct__priceinfo p-relative">
-                                                    <div class="placeholder-shimmer"
-                                                        style="width: 60%; height: 20px; margin-top: 10px; border-radius: 4px;">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endfor
-                            </div>
-                        @endif
-                    </div>
-
-                    <div class="flex justify-center mx-auto">
-                        <div class="placeholder-shimmer"
-                            style="width: 30%; height: 15px; margin-top: 10px; border-radius: 4px;">
-                        </div>
-                    </div>
-                </div>
-        </section>
-        <!-- product-area-end -->
+        @livewire('home-content', ['products' => $products, 'categories' => $categories])
 
         <!-- deal-product-area-start -->
-        <section class="dealproduct-area pb-95 lazy-section" data-url="{{ route('home.dealProduct') }}">
-            <div class="container">
-                <div class="theme-bg pt-40 pb-40">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12">
-                            <div class="tpdealproduct">
-                                <div class="tpdealproduct__thumb p-relative text-center">
-                                    <!-- Placeholder pour l'image -->
-                                    <div class="placeholder-shimmer"
-                                        style="width: 100%; height: 200px; border-radius: 8px;"></div>
-                                    <div class="tpdealproductd__offer">
-                                        <h5 class="tpdealproduct__offer-price placeholder-shimmer"
-                                            style="width: 50%; height: 20px; margin: 10px auto; border-radius: 4px;">
-                                        </h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-12">
-                            <div class="tpdealcontact pt-30">
-                                <div class="tpdealcontact__price mb-5">
-                                    <span class="placeholder-shimmer"
-                                        style="width: 30%; height: 20px; border-radius: 4px;"></span>
-                                    <del class="placeholder-shimmer"
-                                        style="width: 20%; height: 20px; margin-left: 10px; border-radius: 4px;"></del>
-                                </div>
-                                <div class="tpdealcontact__text mb-30">
-                                    <h4 class="tpdealcontact__title mb-10">
-                                        <div class="placeholder-shimmer"
-                                            style="width: 70%; height: 20px; border-radius: 4px;"></div>
-                                    </h4>
-                                    <p>
-                                    <div class="placeholder-shimmer"
-                                        style="width: 90%; height: 15px; margin-bottom: 5px; border-radius: 4px;">
-                                    </div>
-                                    <div class="placeholder-shimmer"
-                                        style="width: 80%; height: 15px; margin-bottom: 5px; border-radius: 4px;">
-                                    </div>
-                                    <div class="placeholder-shimmer"
-                                        style="width: 85%; height: 15px; border-radius: 4px;"></div>
-                                    </p>
-                                </div>
-                                <div class="tpdealcontact__progress mb-30">
-                                    <div class="progress">
-                                        <div class="placeholder-shimmer"
-                                            style="width: 75%; height: 10px; border-radius: 4px;"></div>
-                                    </div>
-                                </div>
-                                <div class="tpdealcontact__count">
-                                    <div class="placeholder-shimmer"
-                                        style="width: 50%; height: 20px; margin: 10px 0; border-radius: 4px;"></div>
-                                    <i class="placeholder-shimmer"
-                                        style="width: 40%; height: 15px; border-radius: 4px;"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        @include('partials.home-partials.deal-product')
         <!-- deal-product-area-end -->
 
         <!-- shop-area-start -->
-        <section class="shop-area pb-100 lazy-section" data-url="{{ route('home.shop') }}">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="placeholder-shimmer mx-auto mb-4" style="width: 18%; height: 10px"></div>
-                        <div class="tpsectionarea text-center mb-35">
-                            <h5 class="tpsectionarea__subtitle placeholder-shimmer"
-                                style="width: 30%; height: 30px; margin: 0 auto; border-radius: 4px;"></h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="shopareaitem">
-                    <div class="shopslider-active swiper-container">
-                        <div class="swiper-wrapper">
-                            <!-- Placeholder pour les images -->
-                            <div class="tpshopitem swiper-slide">
-                                <div class="placeholder-shimmer"
-                                    style="width: 100%; height: 200px; border-radius: 8px;"></div>
-                            </div>
-                            <div class="tpshopitem swiper-slide">
-                                <div class="placeholder-shimmer"
-                                    style="width: 100%; height: 200px; border-radius: 8px;"></div>
-                            </div>
-                            <div class="tpshopitem swiper-slide">
-                                <div class="placeholder-shimmer"
-                                    style="width: 100%; height: 200px; border-radius: 8px;"></div>
-                            </div>
-                            <div class="tpshopitem swiper-slide">
-                                <div class="placeholder-shimmer"
-                                    style="width: 100%; height: 200px; border-radius: 8px;"></div>
-                            </div>
-                            <div class="tpshopitem swiper-slide">
-                                <div class="placeholder-shimmer"
-                                    style="width: 100%; height: 200px; border-radius: 8px;"></div>
-                            </div>
-                            <div class="tpshopitem swiper-slide">
-                                <div class="placeholder-shimmer"
-                                    style="width: 100%; height: 200px; border-radius: 8px;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        @include('partials.home-partials.shop')
         <!-- shop-area-end -->
     </main>
 
@@ -359,83 +115,114 @@
     @include('partials.home-partials.footer')
     <!-- footer-area-end -->
 
+    <!-- JS here -->
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/waypoints.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/swiper-bundle.js') }}"></script>
+    <script src="{{ asset('js/slick.js') }}"></script>
+    <script src="{{ asset('js/magnific-popup.js') }}"></script>
+    <script src="{{ asset('js/nice-select.js') }}"></script>
+    <script src="{{ asset('js/counterup.js') }}"></script>
+    <script src="{{ asset('js/wow.js') }}"></script>
+    <script src="{{ asset('js/isotope-pkgd.js') }}"></script>
+    <script src="{{ asset('js/imagesloaded-pkgd.js') }}"></script>
+    <script src="{{ asset('js/countdown.js') }}"></script>
+    <script src="{{ asset('js/ajax-form.js') }}"></script>
+    <script src="{{ asset('js/meanmenu.js') }}"></script>
+    <script src="{{ asset('js/jquery.knob.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const lazySections = document.querySelectorAll('.lazy-section');
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const section = entry.target;
-                        const url = section.dataset.url;
-
-                        // Charger le contenu de la section
-                        fetch(url)
-                            .then(response => response.text())
-                            .then(html => {
-                                section.innerHTML = html; // Insère le contenu
-                                observer.unobserve(
-                                    section); // Arrête d'observer une fois chargé
-                                injectAssets();
-                            })
-                            .catch(error => console.error('Erreur de chargement :', error));
-                    }
-                });
-            });
-
-            lazySections.forEach(section => observer.observe(section));
-
-            function injectAssets() {
-                // Injecter les fichiers CSS
-                const cssFiles = [
-                    'css/bootstrap.min.css',
-                    'css/animate.css',
-                    'css/swiper-bundle.css',
-                    'css/slick.css',
-                    'css/nice-select.css',
-                    'css/fontawesome.min.css',
-                    'css/magnific-popup.css',
-                    'css/jquery-ui.css',
-                    'css/meanmenu.css',
-                    'css/spacing.css',
-                    'css/main.css',
-                    'css/loaders.css'
-                ];
-
-                cssFiles.forEach(file => {
-                    const link = document.createElement('link');
-                    link.rel = 'stylesheet';
-                    link.href = `{{ asset('${file}') }}`;
-                    document.head.appendChild(link);
-                });
-
-                // Injecter les fichiers JS
-                const jsFiles = [
-                    'js/jquery.js',
-                    'js/waypoints.js',
-                    'js/bootstrap.bundle.min.js',
-                    'js/swiper-bundle.js',
-                    'js/slick.js',
-                    'js/magnific-popup.js',
-                    'js/nice-select.js',
-                    'js/counterup.js',
-                    'js/wow.js',
-                    'js/isotope-pkgd.js',
-                    'js/imagesloaded-pkgd.js',
-                    'js/countdown.js',
-                    'js/ajax-form.js',
-                    'js/meanmenu.js',
-                    'js/jquery.knob.js',
-                    'js/main.js',
-                ];
-
-                jsFiles.forEach(file => {
-                    const script = document.createElement('script');
-                    script.src = `{{ asset('${file}') }}`;
-                    document.body.appendChild(script);
-                });
+        function showFilters() {
+            var fSection = document.getElementById("filterSection");
+            if (fSection.classList.contains("hidden")) {
+                fSection.classList.remove("hidden");
+                fSection.classList.add("block");
+            } else {
+                fSection.classList.add("hidden");
             }
+        }
+
+        function applyFilters() {
+            document
+                .querySelectorAll("input[type=checkbox]")
+                .forEach((el) => (el.checked = false));
+        }
+
+        function closeFilterSection() {
+            var fSection = document.getElementById("filterSection");
+            fSection.classList.add("hidden");
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('#slider > div');
+            let currentSlide = 0;
+
+            const showSlide = (index) => {
+                slides.forEach((slide, i) => {
+                    slide.style.opacity = i === index ? '1' : '0';
+                    slide.style.zIndex = i === index ? '1' : '0';
+                    slide.style.transition = 'opacity 1s ease-in-out';
+                });
+            };
+
+            const nextSlide = () => {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            };
+
+            // Initialisation
+            showSlide(currentSlide);
+
+            // Défilement automatique
+            setInterval(nextSlide, 3000); // Change toutes les 3 secondes
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialisation du Swiper avec les paramètres
+            const swiper = new Swiper('.swiper', {
+                spaceBetween: 1, // Espacement entre les slides // Affiche 7 slides à la fois
+                loop: true, // Pour rendre le slider infini
+                navigation: {
+                    nextEl: '.custom-next', // Bouton suivant
+                    prevEl: '.custom-prev', // Bouton précédent
+                },
+                breakpoints: {
+                    // Réduire le nombre de slides sur des écrans plus petits
+                    1024: {
+                        slidesPerView: 12,
+                    },
+                    768: {
+                        slidesPerView: 7,
+                    },
+                    480: {
+                        slidesPerView: 2,
+                    },
+                },
+            });
+        });
+
+        document.querySelectorAll('.image').forEach((element, index) => {
+            new Swiper(`.product-swiper-${index + 1}`, {
+                direction: 'horizontal',
+                loop: true,
+                slidesPerView: 1,
+
+                pagination: {
+                    el: `.swiper-pagination-${index + 1}`,
+                    clickable: true,
+                },
+
+                navigation: {
+                    nextEl: `.swiper-button-next-${index + 1}`,
+                    prevEl: `.swiper-button-prev-${index + 1}`,
+                },
+            });
         });
     </script>
     <script>
@@ -450,7 +237,7 @@
                 cancelButtonText: 'Annuler'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    document.getElementById('logout-form').submit();
+                    document.querySelector('.logout-form').submit();
                 }
             });
         }

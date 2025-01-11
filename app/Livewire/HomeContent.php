@@ -5,13 +5,11 @@ namespace App\Livewire;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\CategoryProduct;
-use Livewire\WithPagination;
 
-class ClientProduits extends Component
+class HomeContent extends Component
 {
-    use WithPagination;
+    public $products, $categories, $search = '';
 
-    public $search = '', $categories, $wishlists, $limit, $headers;
     protected $queryString = [
         'search' => ['except' => '']
     ];
@@ -20,21 +18,20 @@ class ClientProduits extends Component
         'categories' => []
     ];
 
-    public function updatedFilters()
+    public function updatingFilters()
     {
         $this->resetPage();
     }
 
-    public function updatedSearch()
+    public function updatingSearch()
     {
         $this->resetPage();
     }
 
-    public function mount($wishlists = null, $limit = null, $headers)
+    public function mount($products, $categories)
     {
-        $this->wishlists = $wishlists;
-        $this->headers = $headers;
-        $this->limit = $limit;
+        $this->products = $products;
+        $this->categories = $categories;
     }
 
     public function render()
@@ -42,7 +39,8 @@ class ClientProduits extends Component
         $this->categories = CategoryProduct::orderby('name', 'asc')->get();
         $this->filters['categories'] = array_filter($this->filters['categories']);
 
-        $query = Product::query()
+
+       $query = Product::query()
             ->where('name', 'like', "%{$this->search}%")
             ->orderBy('name', 'asc');
 
@@ -51,9 +49,8 @@ class ClientProduits extends Component
             $query->whereIn('category_product_id', array_keys($this->filters['categories']));
         }
 
-        return view('livewire.client-produits', [
-            'products' => $query->take($this->limit)->get(),
-            'headers' => $this->headers
+        return view('livewire.home-content', [
+            'products' => $query->get()
         ]);
     }
 }

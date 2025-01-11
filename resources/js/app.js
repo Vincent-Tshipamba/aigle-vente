@@ -8,4 +8,3 @@ import 'jquery-validation';
 
 window.$ = window.jQuery = $;
 window.Swal = Swal;
-

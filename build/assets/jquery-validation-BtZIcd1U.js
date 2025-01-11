@@ -1,4 +1,4 @@
-import{r as y}from"./jquery-B0i8i1Iu.js";var x={exports:{}};/*!
+import{r as y}from"./jquery-BIJjGqPl.js";var x={exports:{}};/*!
  * jQuery Validation Plugin v1.21.0
  *
  * https://jqueryvalidation.org/

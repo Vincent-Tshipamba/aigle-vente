@@ -1,5 +1,5 @@
 <div>
-    @if (request()->routeIs('products.index'))
+    @if ($headers)
         <!-- header-area-start -->
         @include('partials.header')
         <!-- header-area-end -->
@@ -132,15 +132,17 @@
                                 </div>
                             @endforeach
                         </div>
-                        <div class="justify-center">
-                            <div class="text-center">
-                                <button type="button" onclick="window.location.href='/products'"
-                                    class="rounded-full border text-white hover:font-bold bg-gray-400 hover:bg-[#040404] px-10 py-3 space-x-3">
-                                    <span>Voir tous les produits</span>
-                                    <i class="fal fa-long-arrow-right"></i>
-                                </button>
+                        @if (!request()->routeIs('products.index'))
+                            <div class="justify-center">
+                                <div class="text-center">
+                                    <button type="button" onclick="window.location.href='/products'"
+                                        class="rounded-full border text-white hover:font-bold bg-gray-400 hover:bg-[#040404] px-10 py-3 space-x-3">
+                                        <span>Voir tous les produits</span>
+                                        <i class="fal fa-long-arrow-right"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     @endif
                 </div>
             </div>

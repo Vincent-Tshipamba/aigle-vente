@@ -150,13 +150,13 @@
                         <div>
                             <p class="mb-4 text-lg leading-none tracking-tight text-gray-700 dark:text-white">
                                 ${cache_exists ? `
-                                                                                    <div class="flex items-center">
-                                                                                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> En ligne
-                                                                                    </div>
-                                                                                ` : `
-                                                                                    <p class="text-gray-500">
-                                                                                        <span id="diff_last_time">Hors ligne</span>
-                                                                                    </p>`
+                                                                                                    <div class="flex items-center">
+                                                                                                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> En ligne
+                                                                                                    </div>
+                                                                                                ` : `
+                                                                                                    <p class="text-gray-500">
+                                                                                                        <span id="diff_last_time">Hors ligne</span>
+                                                                                                    </p>`
                                 }
                             </p>
                         </div>
@@ -371,7 +371,7 @@
         }
     </script>
     <script>
-        $(document).ready(function() {
+        document.addEventListener('DOMContentLoaded', function() {
             if (document.getElementById("rolesTable") && typeof simpleDatatables.DataTable !== 'undefined') {
                 const dataTable = new simpleDatatables.DataTable("#rolesTable", {
                     searchable: false,
@@ -394,14 +394,14 @@
 
 
     <script>
-        $(document).ready(function() {
+        document.addEventListener('DOMContentLoaded', function() {
             getRolesAndPermissions();
             getUsersRoles();
         });
     </script>
 
     <script>
-        $('#newUserButton').click(function(e) {
+        document.querySelector('#newUserButton').addEventListener('click', function(e) {
             e.preventDefault();
 
             // Trigger SweetAlert with input
@@ -497,8 +497,7 @@
             });
         });
 
-
-        $('#newPermissionButton').click(function(e) {
+        document.querySelector('#newPermissionButton').addEventListener('click', function(e) {
             e.preventDefault();
 
             // Trigger SweetAlert with input
@@ -560,7 +559,7 @@
             });
         });
 
-        $('#newRoleButton').click(function(e) {
+        document.querySelector('#newRoleButton').addEventListener('click', function(e) {
             e.preventDefault();
 
             // Trigger SweetAlert with input
@@ -973,7 +972,7 @@
 
 
     <script>
-        $(document).ready(function() {
+        document.addEventListener('DOMContentLoaded', function(){
             $('#new-permission-form').on('submit', function(event) {
                 event.preventDefault();
 

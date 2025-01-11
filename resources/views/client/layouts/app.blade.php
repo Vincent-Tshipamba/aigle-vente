@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="{{ asset('img/orange.webp') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('img/logo/logo_sans_bg.png') }}" type="image/x-icon">
 
     <title>{{ $title ?? 'Dashboard Admin Aigle Vente' }}</title>
 
@@ -56,7 +56,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                 sun.classList.add("hidden")
                 moon.classList.remove("hidden")
             }
-        }
+        } 
 
         function openNav() {
             if (sidebar.classList.contains('-translate-x-48')) {

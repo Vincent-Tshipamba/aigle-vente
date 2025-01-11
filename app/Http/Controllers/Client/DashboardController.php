@@ -14,11 +14,15 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $client = Client::where('_id', Auth::user()->client->_id)->first();
-        $recentWishlistProducts = Wishlist::where('user_id', Auth::user()->id)->get();
-        $totalProductsInWishlist = 0;
+        if (Auth::user() && Auth::user()->client) {
+            $client = Client::where('_id', Auth::user()->client->_id)->first();
+            $recentWishlistProducts = Wishlist::where('user_id', Auth::user()->id)->get();
+            $totalProductsInWishlist = 0;
 
-        return view('client.dashboard', compact('totalProductsInWishlist', 'client', 'recentWishlistProducts'));
+            return view('client.dashboard', compact('totalProductsInWishlist', 'client', 'recentWishlistProducts'));
+        }
+
+        return redirect()->route('home');
     }
 
     public function getClientWishlistByPeriod(Request $request)

@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\ShopVisit;
 use Illuminate\Http\Request;
 use App\Models\StockMovement;
+use App\Models\CategoryProduct;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -235,6 +236,14 @@ class DashboardController extends Controller
 
         // Return a response, or empty array if no visits
         return response()->json($visits->isEmpty() ? [] : $visits);
+    }
+
+
+    public function welcome()
+    {
+        $products = Product::all();
+        $categories = CategoryProduct::all();
+        return view('welcome', compact('products', 'categories'));
     }
 
 }

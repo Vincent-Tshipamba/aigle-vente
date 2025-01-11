@@ -124,7 +124,7 @@
                         <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
                             <a href="{{ route('seller.shops.products.show', $product->_id) }}">
                                 @if ($firstPhoto)
-                                    <img src="{{ asset( $firstPhoto->image) }}" alt="{{ $product->name }}"
+                                    <img src="{{ asset($firstPhoto->image) }}" alt="{{ $product->name }}"
                                         class="h-80 w-72 object-cover rounded-t-xl" />
                                 @else
                                     <p>Aucune image disponible pour ce produit.</p>
@@ -213,7 +213,7 @@
                                         @endphp
 
                                         @if ($firstPhoto)
-                                            <img loading="lazy" src="{{ asset('storage/' . $firstPhoto->image) }}"
+                                            <img loading="lazy" src="{{ asset($firstPhoto->image) }}"
                                                 alt="Image de {{ $product->name }}" class="w-auto h-8 mr-3">
                                         @else
                                             <p>Aucune image disponible pour ce produit.</p>
@@ -223,7 +223,7 @@
                                     </th>
                                     <td class="px-4 py-2">
                                         <span
-                                            class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">{{ $product->name }}</span>
+                                            class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">{{ substr($product->name, 0, 50) }} ....</span>
                                     </td>
                                     <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         <div class="flex items-center">

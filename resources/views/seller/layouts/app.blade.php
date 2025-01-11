@@ -22,9 +22,43 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+<style>
+    .swiper - pagination - bullet {
+        background - color: #FF5500FF;
+        /* Couleur personnalisée */
+        width: 12 px;
+        height: 12 px;
+        opacity: 0.7;
+    }
+
+    .swiper - pagination - bullet - active {
+        background - color: # 2563 eb;
+        /* Couleur active */
+        opacity: 1;
+    }
+
+    /* Style personnalisé pour les flèches */
+    .swiper - button - prev,
+    .swiper - button - next {
+        width: 40 px;
+        height: 40 px;
+        color: #D8681DFF;
+
+    }
+
+    .swiper-button-prev::after,
+    .swiper-button-next::after {
+        font-size: 1.5rem;
+        /* Ajuste la taille des icônes */
+    }
+</style>
 
 <body class="body bg-gray-100 dark:bg-[#1E293B] text-black" x-data="{ page: 'ecommerce', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode'));
 $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"

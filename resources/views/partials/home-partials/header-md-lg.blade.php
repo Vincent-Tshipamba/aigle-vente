@@ -79,7 +79,7 @@
                                     </li>
                                     <li>
                                         <!-- Authentication -->
-                                        <form id="logout-form" method="POST" action="{{ route('logout') }}"
+                                        <form class="logout-form" method="POST" action="{{ route('logout') }}"
                                             style="display: none;">
                                             @csrf
                                         </form>
@@ -196,7 +196,7 @@
                                         </li>
                                         <li>
                                             <!-- Authentication -->
-                                            <form id="logout-form" method="POST" action="{{ route('logout') }}"
+                                            <form class="logout-form" method="POST" action="{{ route('logout') }}"
                                                 style="display: none;">
                                                 @csrf
                                             </form>

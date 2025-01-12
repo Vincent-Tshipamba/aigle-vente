@@ -28,6 +28,7 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 </head>
 <style>
     .swiper - pagination - bullet {
@@ -128,6 +129,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
             }
         }
     </script>
+    @livewireScripts
     @yield('script')
     @stack('scripts')
     @yield('modal')

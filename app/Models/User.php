@@ -78,4 +78,19 @@ class User extends Authenticatable
         return $this->avatar_url ?? null;
     }
 
+    public function hasConversationWith(User $user): bool
+    {
+        return $this->hasConversationWith($user);
+    }
+
+    public function canCreateChats(): bool
+    {
+        return true;
+    }
+    public function canCreateGroups(): bool
+    {
+        return true;
+    }
+
+
 }

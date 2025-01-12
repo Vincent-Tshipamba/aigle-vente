@@ -15,6 +15,7 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 </head>
 
 <body class="body bg-white dark:bg-[#1E293B] text-black" x-data="{ page: 'ecommerce', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode'));
@@ -56,7 +57,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                 sun.classList.add("hidden")
                 moon.classList.remove("hidden")
             }
-        } 
+        }
 
         function openNav() {
             if (sidebar.classList.contains('-translate-x-48')) {
@@ -86,6 +87,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
             }
         }
     </script>
+    @livewireScripts
     @yield('script')
     @stack('scripts')
 </body>

@@ -183,29 +183,35 @@
             setInterval(nextSlide, 3000); // Change toutes les 3 secondes
         });
 
+
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialisation du Swiper avec les paramètres
             const swiper = new Swiper('.swiper', {
-                spaceBetween: 1, // Espacement entre les slides // Affiche 7 slides à la fois
-                loop: true, // Pour rendre le slider infini
+                spaceBetween: 10,
+                loop: true,
                 navigation: {
-                    nextEl: '.custom-next', // Bouton suivant
-                    prevEl: '.custom-prev', // Bouton précédent
+                    nextEl: '.custom-next',
+                    prevEl: '.custom-prev',
                 },
                 breakpoints: {
-                    // Réduire le nombre de slides sur des écrans plus petits
                     1024: {
                         slidesPerView: 12,
+                        spaceBetween: 15,
                     },
                     768: {
                         slidesPerView: 7,
                     },
+                    640: {
+                        slidesPerView: 4,
+                    },
                     480: {
                         slidesPerView: 2,
+                        spaceBetween: 5,
                     },
-                },
+                }
             });
         });
+
+
 
         document.querySelectorAll('.image').forEach((element, index) => {
             new Swiper(`.product-swiper-${index + 1}`, {
@@ -457,9 +463,20 @@
         });
     </script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (window.innerWidth <= 640) { // Écran mobile (640px et moins)
+                document.querySelector(".custom-next").style.display = "none";
+                document.querySelector(".custom-prev").style.display = "none";
+            }
+        });
+    </script>
 
 
 
+
+
+    @yield('modal')
     @stack('script')
     @yield('script')
     @livewireScripts

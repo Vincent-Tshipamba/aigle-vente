@@ -23,3 +23,11 @@ Stack trace:
 Stack trace:
 #0 {main}
   thrown in /home/vuko7721/public_html/index.php on line 13
+[12-Jan-2025 08:19:44 UTC] PHP Deprecated:  Optional parameter $wishlists declared before required parameter $headers is implicitly treated as a required parameter in /home/vuko7721/public_html/app/Livewire/ClientProduits.php on line 33
+[12-Jan-2025 08:19:44 UTC] PHP Deprecated:  Optional parameter $limit declared before required parameter $headers is implicitly treated as a required parameter in /home/vuko7721/public_html/app/Livewire/ClientProduits.php on line 33
+[13-Jan-2025 02:09:41 UTC] PHP Deprecated:  Optional parameter $wishlists declared before required parameter $headers is implicitly treated as a required parameter in /home/vuko7721/public_html/app/Livewire/ClientProduits.php on line 33
+[13-Jan-2025 02:09:41 UTC] PHP Deprecated:  Optional parameter $limit declared before required parameter $headers is implicitly treated as a required parameter in /home/vuko7721/public_html/app/Livewire/ClientProduits.php on line 33
+[13-Jan-2025 02:57:56 UTC] PHP Deprecated:  Optional parameter $wishlists declared before required parameter $headers is implicitly treated as a required parameter in /home/vuko7721/public_html/app/Livewire/ClientProduits.php on line 33
+[13-Jan-2025 02:57:56 UTC] PHP Deprecated:  Optional parameter $limit declared before required parameter $headers is implicitly treated as a required parameter in /home/vuko7721/public_html/app/Livewire/ClientProduits.php on line 33
+[13-Jan-2025 06:32:59 UTC] PHP Deprecated:  Optional parameter $wishlists declared before required parameter $headers is implicitly treated as a required parameter in /home/vuko7721/public_html/app/Livewire/ClientProduits.php on line 33
+[13-Jan-2025 06:32:59 UTC] PHP Deprecated:  Optional parameter $limit declared before required parameter $headers is implicitly treated as a required parameter in /home/vuko7721/public_html/app/Livewire/ClientProduits.php on line 33

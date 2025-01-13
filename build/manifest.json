@@ -45,8 +45,8 @@
     "file": "assets/jsvectormap-C6FwNI3s.js",
     "name": "jsvectormap"
   },
-  "_laravel-echo-CB4N-i5d.js": {
-    "file": "assets/laravel-echo-CB4N-i5d.js",
+  "_laravel-echo-Cd4fqn7m.js": {
+    "file": "assets/laravel-echo-Cd4fqn7m.js",
     "name": "laravel-echo"
   },
   "_pusher-js-CKPruLDp.js": {
@@ -61,18 +61,18 @@
     "name": "sweetalert2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-C6mNgFwh.css",
+    "file": "assets/app-DttoLdIf.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-IXexQnzV.js",
+    "file": "assets/app-5LJJoFzI.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "imports": [
       "_axios-CCb-kr4I.js",
-      "_laravel-echo-CB4N-i5d.js",
+      "_laravel-echo-Cd4fqn7m.js",
       "_pusher-js-CKPruLDp.js",
       "_flowbite-vlFJrmiF.js",
       "_sweetalert2-D3pEHXw3.js",

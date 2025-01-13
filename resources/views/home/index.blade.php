@@ -460,6 +460,7 @@
 
 
 
+    @yield('modal')
     @stack('script')
     @yield('script')
     @livewireScripts

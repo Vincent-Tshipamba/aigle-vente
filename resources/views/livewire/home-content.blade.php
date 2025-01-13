@@ -14,10 +14,11 @@
             <div class="swiper-wrapper grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">
                 @foreach ($categories as $item)
                     <div class="swiper-slide">
-                        <a href="#" wire:click="filters.categories.{{ $item->id }}"
+                        <a href="#"
                             class="flex flex-col items-center text-center space-y-2 hover:scale-105">
                             <div class="p-2  rounded-full ">
-                                <img src="{{ $item->image }}" alt="{{ $item->name }}" class="w-8 h-8 max-w-full h-auto">
+                                <img src="{{ $item->image }}" alt="{{ $item->name }}"
+                                    class="w-8 h-8 max-w-full h-auto">
                             </div>
                             <span
                                 class="text-xs sm:text-sm font-medium text-gray-500 hover:text-gray-700">{{ $item->name }}</span>
@@ -65,7 +66,8 @@
         <!-- Colors Section -->
         <div>
             <div class="flex space-x-2 text-gray-800 dark:text-white">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M19 3H15C14.4696 3 13.9609 3.21071 13.5858 3.58579C13.2107 3.96086 13 4.46957 13 5V17C13 18.0609 13.4214 19.0783 14.1716 19.8284C14.9217 20.5786 15.9391 21 17 21C18.0609 21 19.0783 20.5786 19.8284 19.8284C20.5786 19.0783 21 18.0609 21 17V5C21 4.46957 20.7893 3.96086 20.4142 3.58579C20.0391 3.21071 19.5304 3 19 3Z"
                         stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -157,7 +159,8 @@
                     </div>
                 </div>
                 <div class="flex space-x-2 md:justify-center md:items-center items-center justify-start">
-                    <input class="w-4 h-4 mr-2" type="checkbox" id="Crocodile" name="Crocodile" value="Crocodile" />
+                    <input class="w-4 h-4 mr-2" type="checkbox" id="Crocodile" name="Crocodile"
+                        value="Crocodile" />
                     <div class="inline-block">
                         <div class="flex space-x-6 justify-center items-center">
                             <label class="mr-2 text-sm leading-3 dark:text-gray-300 font-normal text-gray-600"
@@ -252,13 +255,16 @@
                     <g opacity="0.8">
                         <path
                             d="M9 4H5C4.44772 4 4 4.44772 4 5V9C4 9.55228 4.44772 10 5 10H9C9.55228 10 10 9.55228 10 9V5C10 4.44772 9.55228 4 9 4Z"
-                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
                         <path
                             d="M9 14H5C4.44772 14 4 14.4477 4 15V19C4 19.5523 4.44772 20 5 20H9C9.55228 20 10 19.5523 10 19V15C10 14.4477 9.55228 14 9 14Z"
-                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
                         <path
                             d="M19 14H15C14.4477 14 14 14.4477 14 15V19C14 19.5523 14.4477 20 15 20H19C19.5523 20 20 19.5523 20 19V15C20 14.4477 19.5523 14 19 14Z"
-                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
                         <path d="M14 7H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
                         <path d="M17 4V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
@@ -302,49 +308,55 @@
     <!-- ✅ Grid Section - Starts Here 👇 -->
     <section id="Projects"
         class="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14  mb-5 my-20">
+        @if ($products && $products->count() == 0)
+            <div class="p-4 text-center justify-center w-[100%] mx-auto text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300"
+                role="alert">
+                <span class="font-medium">Oups désolé !</span> Aucun produit disponible pour le moment. Essayez de rafraichir la page s'il vous plait.
+            </div>
+        @else
+            @foreach ($products as $index => $product)
+                <div class="w-72 rounded-xl duration-500">
+                    <a href="#">
+                        <div class="image swiper-container product-swiper-{{ $index + 1 }}" loading="lazy">
+                            <div class="swiper-wrapper">
+                                @foreach ($product->photos as $item)
+                                    <div class="swiper-slide">
+                                        <img src="{{ asset($item->image) }}" alt="{{ $product->name }}"
+                                            class="h-80 w-72 object-cover rounded-xl hover:scale-105">
+                                    </div>
+                                @endforeach
+                            </div>
 
-        <!--   ✅ Product card 1 - Starts Here 👇 -->
-        @foreach ($products as $index => $product)
-            <div class="w-72 rounded-xl duration-500">
-                <a href="#">
-                    <div class="image swiper-container product-swiper-{{ $index + 1 }}" loading="lazy">
-                        <div class="swiper-wrapper">
-                            @foreach ($product->photos as $item)
-                                <div class="swiper-slide">
-                                    <img src="{{ asset($item->image) }}" alt="{{ $product->name }}"
-                                        class="h-80 w-72 object-cover rounded-xl hover:scale-105">
-                                </div>
-                            @endforeach
+                            <!-- Pagination -->
+                            <div class="swiper-pagination swiper-pagination-{{ $index + 1 }}"></div>
+
+                            <!-- Navigation -->
+                            <div class="swiper-button-prev swiper-button-prev-{{ $index + 1 }}"></div>
+                            <div class="swiper-button-next swiper-button-next-{{ $index + 1 }}"></div>
                         </div>
-
-                        <!-- Pagination -->
-                        <div class="swiper-pagination swiper-pagination-{{ $index + 1 }}"></div>
-
-                        <!-- Navigation -->
-                        <div class="swiper-button-prev swiper-button-prev-{{ $index + 1 }}"></div>
-                        <div class="swiper-button-next swiper-button-next-{{ $index + 1 }}"></div>
-                    </div>
-                </a>
-                <div class="px-4 py-3 w-72">
-                    <span class="text-gray-400 mr-3 uppercase text-xs">{{ $product->category_product->name }}</span>
-                    <p class="text-lg font-bold text-black truncate block capitalize">{{ $product->name }}</p>
-                    <div class="flex items-center">
-                        <p class="text-lg font-semibold text-black cursor-auto my-3">$149</p>
-                        <del>
-                            <p class="text-sm text-gray-600 cursor-auto ml-2">$199</p>
-                        </del>
-                        <div class="ml-auto">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                class="bi bi-bag-plus" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
-                                <path
-                                    d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
-                            </svg>
+                    </a>
+                    <div class="px-4 py-3 w-72">
+                        <span
+                            class="text-gray-400 mr-3 uppercase text-xs">{{ $product->category_product->name }}</span>
+                        <p class="text-lg font-bold text-black truncate block capitalize">{{ $product->name }}</p>
+                        <div class="flex items-center">
+                            <p class="text-lg font-semibold text-black cursor-auto my-3">$149</p>
+                            <del>
+                                <p class="text-sm text-gray-600 cursor-auto ml-2">$199</p>
+                            </del>
+                            <div class="ml-auto">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    fill="currentColor" class="bi bi-bag-plus" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
+                                    <path
+                                        d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
+                                </svg>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        @endif
     </section>
 </div>

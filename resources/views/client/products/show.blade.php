@@ -111,12 +111,7 @@
                         <div class="tpproduct-details__nav mb-30">
                             <ul class="nav nav-tabs pro-details-nav-btn" id="myTabs" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-links active" id="home-tab-1" data-bs-toggle="tab"
-                                        data-bs-target="#home-1" type="button" role="tab" aria-controls="home-1"
-                                        aria-selected="true">Description</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-links" id="information-tab" data-bs-toggle="tab"
+                                    <button class="nav-links active" id="information-tab" data-bs-toggle="tab"
                                         data-bs-target="#additional-information" type="button" role="tab"
                                         aria-controls="additional-information" aria-selected="false">
                                         Informations supplémentaires
@@ -130,12 +125,6 @@
                             </ul>
                         </div>
                         <div class="tab-content tp-content-tab" id="myTabContent-2">
-                            <div class="tab-para tab-pane fade show active" id="home-1" role="tabpanel"
-                                aria-labelledby="home-tab-1">
-                                <p class="mb-30">
-                                    {!! $product->description !!}
-                                </p>
-                            </div>
                             <div class="tab-pane fade" id="additional-information" role="tabpanel"
                                 aria-labelledby="information-tab">
                                 <div class="product__details-info table-responsive">

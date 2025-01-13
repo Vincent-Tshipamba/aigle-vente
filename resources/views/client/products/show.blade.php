@@ -122,7 +122,7 @@
                             <div class="tab-para tab-pane fade show active" id="home-1" role="tabpanel"
                                 aria-labelledby="home-tab-1">
                                 <p class="mb-30">
-                                    {{ $product->description }}
+                                    {!! $product->description !!}
                                 </p>
                             </div>
                             <div class="tab-pane fade" id="additional-information" role="tabpanel"

@@ -27,48 +27,23 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @else
+        <link rel="stylesheet" href="{{ asset('css/alternativecss.css') }}">
+    @endif
+
     @livewireStyles
 </head>
-<style>
-    .swiper - pagination - bullet {
-        background - color: #FF5500FF;
-        /* Couleur personnalisée */
-        width: 12 px;
-        height: 12 px;
-        opacity: 0.7;
-    }
 
-    .swiper - pagination - bullet - active {
-        background - color: # 2563 eb;
-        /* Couleur active */
-        opacity: 1;
-    }
-
-    /* Style personnalisé pour les flèches */
-    .swiper - button - prev,
-    .swiper - button - next {
-        width: 40 px;
-        height: 40 px;
-        color: #D8681DFF;
-
-    }
-
-    .swiper-button-prev::after,
-    .swiper-button-next::after {
-        font-size: 1.5rem;
-        /* Ajuste la taille des icônes */
-    }
-</style>
-
-<body class="body bg-gray-100 dark:bg-[#1E293B] text-black" x-data="{ page: 'ecommerce', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode'));
+<body class="body bg-white dark:bg-[#1E293B] text-black" x-data="{ page: 'ecommerce', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode'));
 $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
     :class="{ 'dark text-bodydark bg-boxdark-2': darkMode === true }">
     @include('preloader')
     <div class=" bg-gray-100 dark:bg-[#1E293B] h-screen">
         @include('seller.layouts.navigation')
-        <div class=" sm:ml-64">
-            <div class=" p-4  mt-14">
+        <div class="duration-500 ease-in-out transform contents h-screen ">
+            <div class=" dark:bg-[#1e293bf3] bg-white pt-20 px-2 md:px-5 pb-4 ml-12  backdrop-blur-2xl">
                 <!-- Page Content -->
                 <main>
                     @yield('content')
@@ -130,6 +105,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
         }
     </script>
     @livewireScripts
+
     @yield('script')
     @stack('scripts')
     @yield('modal')

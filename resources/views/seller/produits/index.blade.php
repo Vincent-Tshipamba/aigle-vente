@@ -107,7 +107,7 @@
         <!-- Vue Grille -->
         <div id="gridView">
             <div
-                class="w-full  grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
+                class="w-full  grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-6 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
                 @if (empty($products))
                     <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
                         role="alert">
@@ -311,7 +311,7 @@
                                                         de stock</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#"
+                                                    <a href="{{ route('seller.shops.products.edit', ['shop' => $shop->_id, 'product' => $product->_id]) }}"
                                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Modifier
                                                         Produits</a>
                                                 </li>

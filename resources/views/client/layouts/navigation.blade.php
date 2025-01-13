@@ -2,7 +2,7 @@
     class="fixed w-full z-30 flex bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none p-2 items-center justify-center h-16 px-10">
     <div
         class="flex items-center justify-center flex-none h-full ml-12 duration-500 ease-in-out transform logo text-gray-900 dark:text-white">
-        <a href="{{ route('seller.dashboard') }}" class="flex ms-2 md:me-24">
+        <a href="{{ route('home') }}" class="flex ms-2 md:me-24">
             <img loading="lazy" src="{{ asset('img\logo\logo_sans_bg.png') }}" class="h-8 me-3" alt="Logo de Aigle Vente" />
             <span class="self-center font-semibold text-gray-900 dark:text-white text-1xl sm:text-1xl whitespace-nowrap">
                 Aigle Vente

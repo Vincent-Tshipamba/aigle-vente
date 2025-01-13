@@ -398,7 +398,7 @@
                                 </div>
 
                                 <!-- Ajouter a la wishlist -->
-                                <svg data-tooltip-target="tooltip-wishlist"
+                                <svg data-tooltip-target="tooltip-wishlist" onclick="addToWishList(event, {{ $product->id }})"
                                     class="w-8 h-8 text-gray-800 dark:text-white hover:fill-[#e38407] hover:text-[#e38407] hover:cursor-pointer"
                                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                     height="24" fill="none" viewBox="0 0 24 24">

@@ -158,8 +158,7 @@ class ProductController extends Controller
                     // Crée un nom unique pour éviter les conflits
                     $imageName = uniqid() . '.' . $imageFile->getClientOriginalExtension();
 
-
-                    $path = $imageFile->move(public_path('products_images'), $imageName);
+                    $path = $imageFile->move(base_path('products_images'), $imageName);
 
                     // Enregistrez le chemin relatif dans la base de données
                     $product->photos()->create([
@@ -350,7 +349,7 @@ class ProductController extends Controller
 
             return redirect()->route('seller.shops.products.index', $product->shop->_id)
                 ->with('success', 'Demande de promotion envoyée avec succès !');
-   
+
         } catch (\Exception $e) {
             // Gestion des erreurs
             Log::error('Erreur lors de la demande de promotion : ' . $e->getMessage());

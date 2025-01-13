@@ -6,7 +6,8 @@
                 <div class="basis-1/6 flex-shrink-0">
                     <div>
                         <a href="{{ route('home') }}" class="flex items-center space-x-2">
-                            <img loading="lazy" src="{{ asset('img/logo/logo_sans_bg.png') }}" width="15%" alt="logo">
+                            <img loading="lazy" src="{{ asset('img/logo/logo_sans_bg.png') }}" width="25%"
+                                alt="logo">
                             <h1 class="lg:text-xl font-bold">Aigle Vente</h1>
                         </a>
                     </div>
@@ -19,9 +20,10 @@
                                     <a href="{{ route('home') }}">Accueil</a>
                                 </li>
                                 <li class="has-dropdown">
-                                    <a href="{{ route('products.index') }}">Produits</a>
+                                    <a href="javascript:;">Produits</a>
                                     <ul class="submenu">
                                         <li><a href="{{ route('products.index') }}">Produits</a></li>
+                                        <li><a href="{{ route('products.index') }}">Boutiques</a></li>
                                         <li><a href="{{ route('client.wishlist') }}">Liste de souhaits</a></li>
                                     </ul>
                                 </li>
@@ -34,6 +36,51 @@
                     <div class="header-meta-info d-flex align-items-center justify-content-between">
                         <div class="header-meta header-language flex items-center space-x-3">
                             @auth
+                                <!-- Chat Notification Area -->
+                                <button class="relative" id="dropdownButtonChatHeader-home"
+                                    data-dropdown-toggle="dropdownChatHeader-home">
+                                    <div class="relative bg-orange-50 p-2 rounded-lg">
+                                        <svg class="w-8 h-8 text-[#e38407] animate-wiggle" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 21 21">
+                                            <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M15.585 15.5H5.415A1.65 1.65 0 0 1 4 13a10.526 10.526 0 0 0 1.5-5.415V6.5a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v1.085c0 1.907.518 3.78 1.5 5.415a1.65 1.65 0 0 1-1.415 2.5zm1.915-11c-.267-.934-.6-1.6-1-2s-1.066-.733-2-1m-10.912 3c.209-.934.512-1.6.912-2s1.096-.733 2.088-1M13 17c-.667 1-1.5 1.5-2.5 1.5S8.667 18 8 17" />
+                                        </svg>
+                                        <div
+                                            class="px-1 py-0.5 bg-[#e38407] min-w-5 rounded-full text-center text-white text-xs absolute -top-2 -end-1 translate-x-1/4 text-nowrap">
+                                            <div
+                                                class="absolute top-0 start-0 rounded-full -z-10 animate-ping bg-[#e38407] w-full h-full">
+                                            </div>
+                                            3
+                                        </div>
+                                    </div>
+                                </button>
+
+                                <!-- Dropdown chat -->
+                                <div id="dropdownChatHeader-home"
+                                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-60 dark:bg-gray-700 dark:divide-gray-600">
+                                    <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                                        <div>{{ Auth::user()->name }}</div>
+                                        <div class="font-medium truncate">{{ Auth::user()->email }}</div>
+                                    </div>
+                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                                        aria-labelledby="dropdownChatHeader-home">
+                                        <li>
+                                            <a href="{{ route('profile.edit') }}"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                Paramètres du compte
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mon
+                                                panier</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- Chat Notification Area End -->
+
+                                <!-- User Dropdown Area -->
                                 <button id="dropdownUserAvatarButtonHeader-home"
                                     data-dropdown-toggle="dropdownAvatarHeader-home"
                                     class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
@@ -43,7 +90,6 @@
                                         alt="user photo">
                                 </button>
 
-                                <!-- Dropdown menu -->
                                 <div id="dropdownAvatarHeader-home"
                                     class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-60 dark:bg-gray-700 dark:divide-gray-600">
                                     <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
@@ -99,6 +145,8 @@
                                         </li>
                                     </ul>
                                 </div>
+                                <!-- User Dropdown Area end-->
+
                                 <div class="header-meta__social flex items-center ml-25">
                                     <button class="header-cart p-relative tp-cart-toggle">
                                         <i class="fal fa-heart"></i>

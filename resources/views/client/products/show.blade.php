@@ -7,7 +7,7 @@
                     <div class="flex flex-wrap -mx-4">
                         <!-- Product Images -->
                         <div class="w-full md:w-1/2 px-4 mb-8">
-                            <img src="{{ $product->photos->first()->image }}" alt="Product"
+                            <img src="{{ asset($product->photos->first()->image) }}" alt="{{ $product->name }}"
                                 class="w-full h-auto rounded-lg shadow-md mb-4" id="mainImage">
                             <div class="flex gap-4 py-4 justify-center overflow-x-auto">
                                 @foreach ($product->photos->take(4) as $photo)
@@ -69,7 +69,7 @@
                                 <span class="ml-2 text-gray-600">4.5 (120 reviews)</span>
                             </div>
                             <p class="text-gray-700 mb-6">
-                                {{ $product->description }}
+                                {!! $product->description !!}
                             </p>
                             <div class="tpproduct-details__content">
                                 <div class="tpproduct-details__count d-flex align-items-center flex-wrap mb-25">

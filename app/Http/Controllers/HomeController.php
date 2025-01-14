@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CategoryProduct;
 use App\Models\Product;
+use App\Models\Promotion;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     // private $rowperpage = 25;
-    
+
     public function home()
     {
         $totalProducts = Product::with('photos', 'shop.seller.user', 'shop.seller')->count();
@@ -27,6 +28,10 @@ class HomeController extends Controller
             return $product->promotions->isNotEmpty();
         });
 
+        $promotion = Promotion::where('status', 'active')
+            ->latest()
+            ->first();
+
         if (Auth::check()) {
             $wishlists = Wishlist::where('user_id', Auth::user()->id)->get();
             $totalAmount = DB::table('wishlists')
@@ -35,10 +40,10 @@ class HomeController extends Controller
                 ->sum('products.unit_price');
 
             // Retourner la vue avec les produits
-            return view('home.index', compact('products',  'totalProducts', 'categories', 'saleProducts', 'wishlists', 'totalAmount'));
+            return view('home.index', compact('products',  'totalProducts', 'categories', 'saleProducts', 'wishlists', 'totalAmount', 'promotion'));
         }
 
-        return view('home.index', compact('products', 'totalProducts', 'categories', 'saleProducts'));
+        return view('home.index', compact('products', 'totalProducts', 'categories', 'saleProducts', 'promotion'));
     }
 
     // public function getProducts(Request $request)

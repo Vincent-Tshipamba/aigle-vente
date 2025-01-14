@@ -76,7 +76,7 @@
                                 <span class="ml-2 text-gray-600">4.5 (120 reviews)</span>
                             </div>
                             <p class="text-gray-700 mb-6">
-                                {!! $product->description !!}
+                                {!! substr($product->description, 0, 800) !!} ...
                             </p>
                             <div class="tpproduct-details__content">
                                 <div class="tpproduct-details__count d-flex align-items-center flex-wrap mb-25">
@@ -88,12 +88,12 @@
                                                 class="fal fa-heart"></i></a>
                                     </div>
                                 </div>
-                                <div class="tpproduct-details__information tpproduct-details__tags">
+                                {{-- <div class="tpproduct-details__information tpproduct-details__tags">
                                     <p>Tags:</p>
                                     <span><a href="#">fashion,</a></span>
                                     <span><a href="#">t-shirts,</a></span>
                                     <span><a href="#">women</a></span>
-                                </div>
+                                </div> --}}
                                 <div class="tpproduct-details__information tpproduct-details__social">
                                     <p>Share:</p>
                                     <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -139,40 +139,40 @@
                                         <tbody>
                                             <tr>
                                                 <td class="add-info">Weight</td>
-                                                <td class="add-info-list"> 2 lbs</td>
+                                                <td class="add-info-list"> {{ $product->details->weight ?? 'none' }}</td>
                                             </tr>
                                             <tr>
                                                 <td class="add-info">Dimensions</td>
-                                                <td class="add-info-list"> 12 × 16 × 19 in</td>
+                                                <td class="add-info-list"> {{ $product->details->dimensions ?? 'none' }}</td>
                                             </tr>
                                             <tr>
-                                                <td class="add-info">Product</td>
-                                                <td class="add-info-list"> Purchase this product on rag-bone.com</td>
+                                                <td class="add-info">State</td>
+                                                <td class="add-info-list">{{ $product->state->name ?? 'none' }}</td>
                                             </tr>
                                             <tr>
                                                 <td class="add-info">Color</td>
-                                                <td class="add-info-list"> Gray, Black</td>
+                                                <td class="add-info-list"> {{ $product->details->color ?? 'none' }}</td>
                                             </tr>
                                             <tr>
                                                 <td class="add-info">Size</td>
-                                                <td class="add-info-list"> S, M, L, XL</td>
+                                                <td class="add-info-list"> {{ $product->details->size ?? 'none' }}</td>
                                             </tr>
                                             <tr>
                                                 <td class="add-info">Model</td>
-                                                <td class="add-info-list"> Model </td>
+                                                <td class="add-info-list"> {{ $product->details->model ?? 'none' }}</td>
                                             </tr>
                                             <tr>
                                                 <td class="add-info">Shipping</td>
-                                                <td class="add-info-list"> Standard shipping: $5,95L</td>
+                                                <td class="add-info-list"> {{ $product->details->shipping ?? 'none' }}</td>
                                             </tr>
                                             <tr>
                                                 <td class="add-info">Care Info</td>
-                                                <td class="add-info-list"> Machine Wash up to 40ºC/86ºF Gentle Cycle
+                                                <td class="add-info-list"> {{ $product->details->care ?? 'none' }}
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="add-info">Brand</td>
-                                                <td class="add-info-list"> Kazen</td>
+                                                <td class="add-info-list"> {{ $product->details->brand ?? 'none' }}</td>
                                             </tr>
                                         </tbody>
                                     </table>

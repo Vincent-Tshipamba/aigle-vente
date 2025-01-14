@@ -19,6 +19,6 @@ class ProductState extends Model
      */
     public function products()
     {
-        return $this->hasMany(Product::class, 'product_state_id');
+        return $this->hasMany(Product::class);
     }
 }

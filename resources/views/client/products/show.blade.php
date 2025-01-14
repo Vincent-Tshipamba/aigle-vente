@@ -7,16 +7,23 @@
                     <div class="flex flex-wrap -mx-4">
                         <!-- Product Images -->
                         <div class="w-full md:w-1/2 px-4 mb-8">
-                            <img src="{{ asset($product->photos->first()->image) }}" alt="{{ $product->name }}"
-                                class="w-full h-auto rounded-lg shadow-md mb-4" id="mainImage">
+                            <!-- Image principale avec taille fixe -->
+                            <div
+                                class="mx-auto w-[300px] h-[300px] xl:w-[450px] xl:h-[450px] 2xl:w-[500px] 2xl:h-[500px]">
+                                <img src="{{ asset($product->photos->first()->image) }}" alt="{{ $product->name }}"
+                                    class="w-full h-auto object-cover rounded-lg shadow-sm mb-4" id="mainImage">
+                            </div>
+
+                            <!-- Miniatures -->
                             <div class="flex gap-4 py-4 justify-center overflow-x-auto">
                                 @foreach ($product->photos->take(4) as $photo)
                                     <img src="{{ asset($photo->image) }}" alt="{{ $product->name }}"
-                                        class="size-16 sm:size-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
+                                        class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
                                         onclick="changeImage(this.src)">
                                 @endforeach
                             </div>
                         </div>
+
                         <div class="w-full md:w-1/2 px-4">
                             <h2 class="text-3xl font-bold mb-2">
                                 {{ $product->name }}
@@ -74,7 +81,7 @@
                             <div class="tpproduct-details__content">
                                 <div class="tpproduct-details__count d-flex align-items-center flex-wrap mb-25">
                                     <div class="tpproduct-details__cart">
-                                        <button>Contacter le vendeur</button>
+                                        <button onclick="contactSellerModal(event, {{ json_encode($product) }})">Contacter le vendeur</button>
                                     </div>
                                     <div class="tpproduct-details__wishlist ml-20">
                                         <a href="#" onclick="addToWishList(event, {{ $product->id }})"><i
@@ -111,12 +118,7 @@
                         <div class="tpproduct-details__nav mb-30">
                             <ul class="nav nav-tabs pro-details-nav-btn" id="myTabs" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-links active" id="home-tab-1" data-bs-toggle="tab"
-                                        data-bs-target="#home-1" type="button" role="tab" aria-controls="home-1"
-                                        aria-selected="true">Description</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-links" id="information-tab" data-bs-toggle="tab"
+                                    <button class="nav-links active" id="information-tab" data-bs-toggle="tab"
                                         data-bs-target="#additional-information" type="button" role="tab"
                                         aria-controls="additional-information" aria-selected="false">
                                         Informations supplémentaires
@@ -130,12 +132,6 @@
                             </ul>
                         </div>
                         <div class="tab-content tp-content-tab" id="myTabContent-2">
-                            <div class="tab-para tab-pane fade show active" id="home-1" role="tabpanel"
-                                aria-labelledby="home-tab-1">
-                                <p class="mb-30">
-                                    {!! $product->description !!}
-                                </p>
-                            </div>
                             <div class="tab-pane fade" id="additional-information" role="tabpanel"
                                 aria-labelledby="information-tab">
                                 <div class="product__details-info table-responsive">
@@ -436,6 +432,16 @@
                                                 ${{ $product->unit_price + 50 }}</p>
                                         </del>
                                         <div class="ml-auto flex space-x-2">
+                                            <!-- Contacter un vendeur -->
+                                            <svg onclick="contactSellerModal(event, {{ json_encode($product) }})"
+                                                class="w-8 h-8 text-gray-800 dark:text-white hover:fill-[#e38407] hover:text-[#e38407] hover:cursor-pointer"
+                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                height="24" fill="none" viewBox="0 0 24 24">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="M16 10.5h.01m-4.01 0h.01M8 10.5h.01M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-6.6a1 1 0 0 0-.69.275l-2.866 2.723A.5.5 0 0 1 8 18.635V17a1 1 0 0 0-1-1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" />
+                                            </svg>
+
                                             <!-- Ajouter a la wishlist -->
                                             <svg data-tooltip-target="tooltip-wishlist-{{ $index }}"
                                                 onclick="addToWishList(event, {{ $product->id }})"
@@ -469,6 +475,82 @@
         <script>
             function changeImage(src) {
                 document.getElementById('mainImage').src = src;
+            }
+
+            function contactSellerModal(event, product) {
+                event.preventDefault();
+
+                // Construire l'image principale du produit
+                const productImage =
+                    `<img src="${product.photos[0].image}" id="mainImage" alt="${product.name}" class="w-full h-auto object-cover rounded-sm shadow-md mb-4">`;
+
+                // Construire les images secondaires
+                let thumbnails = '';
+                product.photos.slice(0, 4).forEach(photo => {
+                    thumbnails += `<img src="${photo.image}" alt="${product.name}"
+        class="size-16 sm:size-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
+        onclick="changeImage('${photo.image}')">`;
+                });
+
+                const routeUrl = "{{ route('contact.seller', ['sellerId' => ':sellerId', 'productId' => ':productId']) }}";
+                const actionUrl = routeUrl
+                    .replace(':sellerId', product.shop.seller_id)
+                    .replace(':productId', product.id);
+
+                // Contenu du modal
+                const modalContent = `
+                    <div class="bg-white rounded-lg p-6 shadow-lg w-full">
+                        <h2 class="text-lg font-bold mb-4">Contacter le vendeur pour le produit ${product.name}</h2>
+
+                        <div class="flex flex-col lg:flex-row gap-4">
+                            <!-- Section des images -->
+                            <div class="lg:w-1/2">
+                                <div class="mb-4 mx-auto w-[300px] h-[300px] xl:w-[450px] xl:h-[450px]">${productImage}</div>
+                                <div class="flex gap-4 py-4 justify-center overflow-x-auto">${thumbnails}</div>
+                            </div>
+
+                            <!-- Section d'envoi de message -->
+                            <div class="lg:w-1/2 mb-12 mx-auto">
+                                <form action="${actionUrl}" method="POST">
+                                <textarea id="sellerMessage"
+                                    class="w-full p-3 mb-6 rounded-lg border focus:outline-none focus:ring focus:ring-[#e38407]"
+                                    rows="4" name="message"
+                                    placeholder="Écrivez votre message ici...">Bonjour M. (Mme), j'espère que vous allez bien. Est-ce que le(s) ou la ${product.name} est (sont) toujours disponible(s) ?</textarea>
+
+                                    <div class="flex flex-col items-center justify-center gap-5 mt-6 md:flex-row">
+                                        @csrf
+                                        <button type="submit" class="inline-block w-auto text-center min-w-[200px] px-6 py-4 text-white transition-all rounded-md shadow-xl sm:w-auto bg-gradient-to-r from-orange-600 to-[#e38407] hover:bg-gradient-to-b dark:shadow-blue-900 shadow-blue-200 hover:shadow-2xl hover:shadow-blue-400 hover:-tranneutral-y-px "
+                                            href="#" id="confirmMessageBtn">
+                                            Envoyer le message
+                                        </button>
+                                        <a class="inline-block w-auto text-center min-w-[200px] px-6 py-4 text-white transition-all bg-gray-700 dark:bg-white dark:text-gray-800 rounded-md shadow-xl sm:w-auto hover:bg-gray-900 hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-2xl hover:shadow-neutral-400 hover:-tranneutral-y-px"
+                                        href="#" id="cancelMessageBtn">Annuler
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Afficher la modal SweetAlert2
+                Swal.fire({
+                    html: modalContent,
+                    showConfirmButton: false,
+                    showCancelButton: false,
+                    customClass: {
+                        popup: 'w-full max-w-sm sm:max-w-md lg:max-w-xl xl:max-w-2xl'
+                    },
+                    didOpen: () => {
+                        const cancelButton = document.getElementById('cancelMessageBtn');
+
+                        // Cancel button event
+                        cancelButton.addEventListener('click', (event) => {
+                            event.preventDefault();
+                            Swal.close(); // Close the modal
+                        });
+                    },
+                })
             }
         </script>
     @endsection

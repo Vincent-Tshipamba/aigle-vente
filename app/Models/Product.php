@@ -21,7 +21,8 @@ class Product extends Model
         'category_product_id', // Assurez-vous d'utiliser le bon nom ici
         'shop_id',
         'description',
-        'is_active'
+        'is_active',
+        'product_state_id'
     ];
 
     protected static function boot()
@@ -80,7 +81,7 @@ class Product extends Model
 
     public function state()
     {
-        return $this->belongsTo(ProductState::class, 'product_state_id');
+        return $this->belongsTo(ProductState::class);
     }
 
     public function stockMovements(): HasMany

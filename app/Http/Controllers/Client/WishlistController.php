@@ -39,10 +39,14 @@ class WishlistController extends Controller
         }
     }
 
-    public function remove($id)
+    public function remove($id, Request $request)
     {
         $wishlist = Wishlist::findOrFail($id);
         $wishlist->delete();
+
+        if ($request->reload) {
+            return back()->with('success', 'Le produit a été retiré de votre liste des souhaits avec succès !');
+        }
 
         return response()->json(['message' => 'Le produit a été retiré de votre liste des souhaits avec succès !']);
     }

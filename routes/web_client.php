@@ -31,7 +31,8 @@ Route::middleware('userOnline')->group(function () {
     Route::get('/contact', function () {
         return view('contact');
     })->name('contact');
-    
+
+
     // Product and Shop Routes
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('/search', [ProductController::class, 'search'])->name('products.search');
@@ -64,4 +65,6 @@ Route::middleware(['auth', 'userOnline'])->group(function () {
     Route::post('/wishlist/add', [WishlistController::class, 'add'])->name('client.wishlist.add');
     Route::delete('/wishlist/remove/{id}', [WishlistController::class, 'remove'])->name('client.wishlist.remote');
     Route::get('/wishlist', [WishlistController::class, 'getUserWishlist'])->name('client.wishlist');
+
+    Route::post('contact/{sellerId}/{productId}', [ProductController::class, 'contactSeller'])->name('contact.seller');
 });

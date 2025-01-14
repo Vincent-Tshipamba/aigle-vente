@@ -136,6 +136,108 @@
     <script src="{{ asset('js/main.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if (session('error'))
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "error",
+                    title: "{{ session('error') }}"
+                });
+            @endif
+        })
+    </script>
+    <script>
+        function changeImage(src) {
+            document.getElementById('mainImage').src = src;
+        }
+    </script>
+    <script>
+        function contactSellerModal(event, product) {
+            event.preventDefault();
+
+            // Construire l'image principale du produit
+            const productImage =
+                `<img src="${product.photos[0].image}" id="mainImage" alt="${product.name}" class="w-full h-auto object-cover rounded-sm shadow-md mb-4">`;
+
+            // Construire les images secondaires
+            let thumbnails = '';
+            product.photos.slice(0, 4).forEach(photo => {
+                thumbnails += `<img src="${photo.image}" alt="${product.name}"
+        class="size-16 sm:size-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
+        onclick="changeImage('${photo.image}')">`;
+            });
+
+            const routeUrl = "{{ route('contact.seller', ['sellerId' => ':sellerId', 'productId' => ':productId']) }}";
+            const actionUrl = routeUrl
+                .replace(':sellerId', product.shop.seller.id)
+                .replace(':productId', product.id);
+
+            // Contenu du modal
+            const modalContent = `
+                    <div class="bg-white rounded-lg p-6 shadow-lg w-full">
+                        <h2 class="text-lg font-bold mb-4">Contacter le vendeur pour le produit ${product.name}</h2>
+
+                        <div class="flex flex-col lg:flex-row gap-4">
+                            <!-- Section des images -->
+                            <div class="lg:w-1/2">
+                                <div class="mb-4 mx-auto w-[300px] h-[300px] xl:w-[450px] xl:h-[450px]">${productImage}</div>
+                                <div class="flex gap-4 py-4 justify-center overflow-x-auto">${thumbnails}</div>
+                            </div>
+
+                            <!-- Section d'envoi de message -->
+                            <div class="lg:w-1/2 mb-12 mx-auto">
+                                <form action="${actionUrl}" method="POST">
+                                <textarea id="sellerMessage"
+                                    class="w-full p-3 mb-6 rounded-lg border focus:outline-none focus:ring focus:ring-[#e38407]"
+                                    rows="4" name="message"
+                                    placeholder="Écrivez votre message ici...">Bonjour M. (Mme) ${product.shop.seller.first_name} ${product.shop.seller.last_name}. J'espère que vous allez bien. Est-ce que le(s) ou la ${product.name} est (sont) toujours disponible(s) ?</textarea>
+
+                                    <div class="flex flex-col items-center justify-center gap-5 mt-6 md:flex-row">
+                                        @csrf
+                                        <button type="submit" class="inline-block w-auto text-center min-w-[200px] px-6 py-4 text-white transition-all rounded-md shadow-xl sm:w-auto bg-gradient-to-r from-orange-600 to-[#e38407] hover:bg-gradient-to-b dark:shadow-blue-900 shadow-blue-200 hover:shadow-2xl hover:shadow-blue-400 hover:-tranneutral-y-px "
+                                            href="#" id="confirmMessageBtn">
+                                            Envoyer le message
+                                        </button>
+                                        <a class="inline-block w-auto text-center min-w-[200px] px-6 py-4 text-white transition-all bg-gray-700 dark:bg-white dark:text-gray-800 rounded-md shadow-xl sm:w-auto hover:bg-gray-900 hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-2xl hover:shadow-neutral-400 hover:-tranneutral-y-px"
+                                        href="#" id="cancelMessageBtn">Annuler
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+            // Afficher la modal SweetAlert2
+            Swal.fire({
+                html: modalContent,
+                showConfirmButton: false,
+                showCancelButton: false,
+                customClass: {
+                    popup: 'w-full max-w-sm sm:max-w-md lg:max-w-xl xl:max-w-2xl'
+                },
+                didOpen: () => {
+                    const cancelButton = document.getElementById('cancelMessageBtn');
+
+                    // Cancel button event
+                    cancelButton.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        Swal.close(); // Close the modal
+                    });
+                },
+            })
+        }
+
         function showFilters() {
             var fSection = document.getElementById("filterSection");
             if (fSection.classList.contains("hidden")) {

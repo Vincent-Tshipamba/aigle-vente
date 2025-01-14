@@ -44,6 +44,24 @@ class ProductController extends Controller
         return view('client.products.index', compact('rowperpage', 'saleProducts', 'totalProducts', 'products', 'categories'));
     }
 
+    public function contactSeller($productId, $sellerId, Request $request)
+    {
+        $auth = auth()->user();
+        $product = Product::find($productId);
+        $seller = Seller::find($sellerId);
+
+        $userSeller = $seller->user;
+
+        if (!$userSeller) {
+            return back()->with('error', 'Le vendeur associé au produit '. $product->name . ' n\'a pas pu être trouvé.')->withInput();
+        }
+
+        $conversation = $auth->createConversationWith($userSeller);
+        $message = $auth->sendMessageTo($conversation, $request->message);
+
+        return redirect()->route('chat', $conversation->id);
+    }
+
     public function show($id)
     {
         $userId = Auth::id();

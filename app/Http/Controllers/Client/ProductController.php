@@ -50,11 +50,11 @@ class ProductController extends Controller
         $product = Product::find($productId);
         $seller = Seller::find($sellerId);
 
-        $userSeller = $seller->user;
-
-        if (!$userSeller) {
+        if (!$seller) {
             return back()->with('error', 'Le vendeur associé au produit '. $product->name . ' n\'a pas pu être trouvé.')->withInput();
         }
+
+        $userSeller = $seller->user;
 
         $conversation = $auth->createConversationWith($userSeller);
         $message = $auth->sendMessageTo($conversation, $request->message);

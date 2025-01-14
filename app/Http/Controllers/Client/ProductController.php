@@ -47,13 +47,13 @@ class ProductController extends Controller
     public function contactSeller($productId, $sellerId, Request $request)
     {
         $auth = auth()->user();
-        
+
         // Récupérer le produit
         $product = Product::find($productId);
         if (!$product) {
             return redirect()->back()->with('error', 'Désolé, le produit n\'est plus disponible malheureusement !');
         }
-    
+
         // Récupérer le vendeur
         $seller = Seller::find($sellerId);
         if (!$seller) {

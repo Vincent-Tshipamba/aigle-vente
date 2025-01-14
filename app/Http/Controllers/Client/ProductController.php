@@ -44,7 +44,7 @@ class ProductController extends Controller
         return view('client.products.index', compact('rowperpage', 'saleProducts', 'totalProducts', 'products', 'categories'));
     }
 
-    public function contactSeller($productId, $sellerId, Request $request)
+    public function contactSeller($sellerId, $productId, Request $request)
     {
         $auth = auth()->user();
 

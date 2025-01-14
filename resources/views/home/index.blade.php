@@ -187,10 +187,15 @@
         document.addEventListener('DOMContentLoaded', function() {
             const swiper = new Swiper('.swiper', {
                 spaceBetween: 10,
+                slidesPerView: 4,
                 loop: true,
                 navigation: {
                     nextEl: '.custom-next',
                     prevEl: '.custom-prev',
+                },
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
                 },
                 breakpoints: {
                     1024: {

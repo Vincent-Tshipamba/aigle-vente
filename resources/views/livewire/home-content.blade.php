@@ -1,5 +1,5 @@
 <div class="main-content container ab">
-    <div class="flex fixed top-[80px] left-0 right-0 z-50 bg-white p-4 justify-between items-center gap-4 shadow-sm px-20">
+    <div class="flex bg-white p-4 justify-between items-center gap-4 px-20">
         <!-- Bouton précédent -->
         <!-- Bouton précédent (masqué sur petits écrans) -->
         <div class="custom-next p-2 bg-gray-100 rounded-full w-8 h-8 hover:bg-gray-200 transition-all duration-300  hover:scale-125 drop-shadow-md sm:block hidden">
@@ -69,7 +69,7 @@
         </button>
     </div>
 
- 
+
 
     <!-- Filter Modal -->
     <div id="filterSection" tabindex="-1" aria-hidden="true"

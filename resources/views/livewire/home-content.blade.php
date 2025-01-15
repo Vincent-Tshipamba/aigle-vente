@@ -2,7 +2,8 @@
     <div class="flex bg-white p-4 justify-between items-center gap-4 px-20">
         <!-- Bouton précédent -->
         <!-- Bouton précédent (masqué sur petits écrans) -->
-        <div class="custom-next p-2 bg-gray-100 rounded-full w-8 h-8 hover:bg-gray-200 transition-all duration-300  hover:scale-125 drop-shadow-md sm:block hidden">
+        <div
+            class="custom-next p-2 bg-gray-100 rounded-full w-8 h-8 hover:bg-gray-200 transition-all duration-300  hover:scale-125 drop-shadow-md sm:block hidden">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -14,14 +15,23 @@
             <div class="swiper-wrapper grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">
                 @foreach ($categories as $item)
                     <div class="swiper-slide relative">
-                        <a href="#" onclick="document.getElementById('filter-{{$item->id}}').click();" class="flex flex-col items-center text-center space-y-2 hover:scale-105  ">
-                            <div class="p-2  rounded-full ">
-                                <img src="{{ $item->image }}" alt="{{ $item->name }}"
-                                    class="w-8 h-8 max-w-full">
+                        <a href="#" onclick="document.getElementById('filter-{{ $item->id }}').click();"
+                            class="flex flex-col items-center text-center space-y-2 hover:scale-105">
+                            <div class="p-2 rounded-full">
+                                <img src="{{ $item->image }}" alt="{{ $item->name }}" class="w-8 h-8 max-w-full">
                             </div>
-                            <span
-                                class="text-xs sm:text-sm font-medium text-gray-500 hover:text-gray-700">{{ $item->name }} <input type="checkbox" id="filter-{{$item->id}}" value="{{ $item->id }}" class="w-5 h-5 text-[#e38407]" /></span>
+                            <span id="category-{{ $item->id }}" class="text-xs sm:text-sm font-medium text-gray-500 hover:text-gray-700">
+                                {{ $item->name }}
+                                <input type="checkbox" id="filter-{{ $item->id }}"
+                                    onchange="filterProducts()" value="{{ $item->id }}"
+                                    class="w-5 h-5 hidden text-[#e38407]" />
+                            </span>
                         </a>
+                        <!-- Tab-like structure for selected categories -->
+                        <div id="tabs-{{ $item->id }}" class="hidden mt-2">
+                            <div class="bg-gray-500 w-full h-[2px] rounded-full flex items-center">
+                            </div>
+                        </div>
                     </div>
                 @endforeach
             </div>
@@ -68,21 +78,9 @@
         </button>
     </div>
 
-    {{-- @if(count($filters['categories']) > 0)
-        <div class="mt-2">
-            <div class="flex space-x-4">
-                @foreach ($filters['categories'] as $categoryId)
-                    @php
-                        $category = $categories->firstWhere('id', $categoryId);
-                    @endphp
-                    <div class="bg-blue-200 text-blue-800 px-4 py-2 rounded-full flex items-center">
-                        <span>{{ $category->name }}</span>
-                        <button wire:click="toggleCategory({{ $category->id }})" class="ml-2 text-red-600">x</button>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    @endif --}}
+    <div id="selected-categories" class="flex flex-wrap space-x-2 w-full mt-2">
+
+    </div>
 
     <!-- Filter Modal -->
     <div id="filterSection" tabindex="-1" aria-hidden="true"

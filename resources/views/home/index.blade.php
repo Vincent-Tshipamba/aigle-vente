@@ -185,7 +185,7 @@
 
             // Construire l'image principale du produit
             const productImage =
-                `<img src="${product.photos[0].image}" id="mainImage" alt="${product.name}" class="w-full h-auto object-cover rounded-sm shadow-md mb-4">`;
+                `<img src="${product.photos[0].image}" id="mainImage" alt="${product.name}" class="w-full h-full object-cover rounded-sm shadow-md mb-4">`;
 
             // Construire les images secondaires
             let thumbnails = '';
@@ -202,13 +202,13 @@
 
             // Contenu du modal
             const modalContent = `
-                    <div class="bg-white rounded-lg p-6 shadow-lg w-full">
+                    <div class="w-full">
                         <h2 class="text-lg font-bold mb-4">Contacter le vendeur pour le produit ${product.name}</h2>
 
-                        <div class="flex flex-col lg:flex-row gap-4">
+                        <div class="flex flex-col lg:flex-row gap-5">
                             <!-- Section des images -->
                             <div class="lg:w-1/2">
-                                <div class="mb-4 mx-auto w-[300px] h-[300px] xl:w-[450px] xl:h-[450px]">${productImage}</div>
+                                <div class="mb-4 mx-auto w-[150px] h-[150px] md:w-[200px] md:h-[200px] lg:w-[250px] lg:h-[250px] xl:w-[400px] xl:h-[400px]">${productImage}</div>
                                 <div class="flex gap-4 py-4 justify-center overflow-x-auto">${thumbnails}</div>
                             </div>
 
@@ -216,17 +216,17 @@
                             <div class="lg:w-1/2 mb-12 mx-auto">
                                 <form action="${actionUrl}" method="POST">
                                 <textarea id="sellerMessage"
-                                    class="w-full p-3 mb-6 rounded-lg border focus:outline-none focus:ring focus:ring-[#e38407]"
+                                    class="w-full p-3 mb-6 mx-auto rounded-lg border focus:outline-none focus:ring focus:ring-[#e38407]"
                                     rows="4" name="message"
                                     placeholder="Écrivez votre message ici...">Bonjour M. (Mme) ${product.shop.seller.first_name} ${product.shop.seller.last_name}. J'espère que vous allez bien. Est-ce que le(s) ou la ${product.name} est (sont) toujours disponible(s) ?</textarea>
 
-                                    <div class="flex flex-col items-center justify-center gap-5 mt-6 md:flex-row">
+                                    <div class="flex flex-col items-center justify-center gap-3 mt-6 lg:flex-row">
                                         @csrf
-                                        <button type="submit" class="inline-block w-auto text-center min-w-[200px] px-6 py-4 text-white transition-all rounded-md shadow-xl sm:w-auto bg-gradient-to-r from-orange-600 to-[#e38407] hover:bg-gradient-to-b dark:shadow-blue-900 shadow-blue-200 hover:shadow-2xl hover:shadow-blue-400 hover:-tranneutral-y-px "
+                                        <button type="submit" class="inline-block text-sm sm:text-md text-center min-w-[150px] 2xl:min-w-[200px] px-2 py-2 sm:px-0 sm:py-3 text-white transition-all rounded-md shadow-xl bg-gradient-to-r from-orange-600 to-[#e38407] hover:bg-gradient-to-b dark:shadow-blue-900 shadow-blue-200 hover:shadow-2xl hover:shadow-blue-400 hover:-tranneutral-y-px "
                                             href="#" id="confirmMessageBtn">
                                             Envoyer le message
                                         </button>
-                                        <a class="inline-block w-auto text-center min-w-[200px] px-6 py-4 text-white transition-all bg-gray-700 dark:bg-white dark:text-gray-800 rounded-md shadow-xl sm:w-auto hover:bg-gray-900 hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-2xl hover:shadow-neutral-400 hover:-tranneutral-y-px"
+                                        <a class="inline-block text-sm sm:text-md text-center min-w-[150px] 2xl:min-w-[200px] px-2 py-2 sm:px-0 sm:py-3 text-white transition-all bg-gray-700 dark:bg-white dark:text-gray-800 rounded-md shadow-xl hover:bg-gray-900 hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-2xl hover:shadow-neutral-400 hover:-tranneutral-y-px"
                                         href="#" id="cancelMessageBtn">Annuler
                                         </a>
                                     </div>
@@ -242,7 +242,7 @@
                 showConfirmButton: false,
                 showCancelButton: false,
                 customClass: {
-                    popup: 'w-full max-w-sm sm:max-w-md lg:max-w-xl xl:max-w-2xl'
+                    popup: 'w-full p-3 max-w-sm sm:max-w-md md:max-w-lg lg:max-w-3xl xl:max-w-4xl 2xl:max-w-6xl'
                 },
                 didOpen: () => {
                     const cancelButton = document.getElementById('cancelMessageBtn');
@@ -279,6 +279,65 @@
     </script>
 
     <script>
+        const categoryNames = @json($categories->pluck('name', 'id'));
+
+        function filterProducts() {
+            // Get all checked checkboxes
+            const selectedCategories = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+                .map(checkbox => checkbox.value);
+
+            // Send AJAX request to fetch products
+            fetch(`/products/filter`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}' // Include CSRF token for security
+                    },
+                    body: JSON.stringify({
+                        categories: selectedCategories
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Update the product list in the DOM
+                    const productsContainer = document.getElementById('Products');
+                    productsContainer.innerHTML = data.html; // Assuming your server returns the HTML for the products
+
+                    updateSelectedCategories(selectedCategories);
+
+                    initializeSwipersForCategories();
+                })
+                .catch(error => console.error('Error fetching products:', error));
+        }
+
+        function updateSelectedCategories(selectedCategories) {
+            const selectedCategoriesContainer = document.getElementById('selected-categories');
+            selectedCategoriesContainer.innerHTML = ''; // Clear previous categories
+
+            if (selectedCategories.length > 0) {
+                selectedCategories.forEach(categoryId => {
+                    //! Todo : Gerer l'affichage des categories selectionnees
+                    // exemple : ${categoryNames[categoryId]}
+                    const tab = document.getElementById(`tabs-${categoryId}`);
+                    const cat = document.getElementById(`category-${categoryId}`)
+                    $(cat).addClass('text-gray-800');
+                    if (tab) {
+                        tab.classList.remove('hidden'); // Show the tab for the selected category
+                    }
+                });
+            }
+        }
+
+        function removeCategory(categoryId) {
+            const checkbox = document.getElementById(`filter-${categoryId}`);
+            if (checkbox) {
+                checkbox.checked = false; // Uncheck the checkbox
+                filterProducts(); // Re-filter products
+            }
+        }
+    </script>
+
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
             const slides = document.querySelectorAll('#slider > div');
             let currentSlide = 0;
@@ -303,8 +362,11 @@
             setInterval(nextSlide, 3000); // Change toutes les 3 secondes
         });
 
-
         document.addEventListener('DOMContentLoaded', function() {
+            initializeSwipersForCategories();
+        });
+
+        function initializeSwipersForCategories() {
             const swiper = new Swiper('.swiper', {
                 spaceBetween: 10,
                 slidesPerView: 4,
@@ -334,9 +396,7 @@
                     },
                 }
             });
-        });
-
-
+        }
 
         document.querySelectorAll('.image').forEach((element, index) => {
             new Swiper(`.product-swiper-${index + 1}`, {
@@ -436,37 +496,15 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const searchInput = $('.search-input');
-            const container = $('.main-content');
-            const initialProducts = container.html();
+            const initialProducts = $('#Products').html();
 
             $('.search-input').on('keyup', function() {
                 const value = $(this).val().trim();
 
                 if (value === '') {
-                    container.html(initialProducts);
+                    $('#Products').html(initialProducts); // Restore the initial products
+                    initializeSwipers(); // Reinitialize Swipers for the initial products
                 } else {
-                    const searchResults = `
-                <section class="product-area pb-70" id="productSection">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6 col-12">
-                                <div class="tpsection mb-40">
-                                    <h4 class="tpsection__title">Produits <span> Populaires </span></h4>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-12">
-                            </div>
-                        </div>
-                        <div class="w-full md:inset-0 product-container">
-                            <div
-                                class="searchResultProduct row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-1 mx-auto">
-
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            `;
-
                     $.ajax({
                         type: "get",
                         url: "{{ route('products.search') }}",
@@ -476,21 +514,18 @@
                         },
                         dataType: "json",
                         success: function(response) {
-                            const html = response.html
-                            $('.main-content').html(searchResults)
+                            const html = response.html;
+                            $('#Products').html(html);
 
-                            const productContainer = $('.product-container');
                             if (html.trim() === '') {
-                                productContainer.html(`
-                            <div class="p-4 text-md text-gray-800 mx-auto text-center rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">
-                                <span class="font-medium">Oups désolé!</span> Aucun produit disponible correspondant à votre recherche. <br><br>
-                                <button onclick="window.location.href='/products'" class="footer-widget__fw-news-btn tpsecondary-btn">Voir le catalogue des produits disponibles<i
-                                                class="fal fa-long-arrow-right"></i></button>
+                                $('#Products').html(`
+                            <div class="p-4 text-center justify-center w-[100%] mx-auto text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">
+                                <span class="font-medium">Oups désolé !</span> Aucun produit disponible pour le moment. Essayez de rafraichir la page s'il vous plait.
                             </div>
                         `);
                             } else {
-                                $(".searchResultProduct").append(response.html).show()
-                                    .fadeIn()
+                                initializeSwipers
+                                    (); // Reinitialize Swipers for the new search results
                             }
                         },
                         error: function(xhr, status, error) {
@@ -500,91 +535,27 @@
                 }
             });
 
-            function fetchSearchProducts(rowperpage, total) {
-                var start = 0
-                var rowperpage = rowperpage
-                var totalProductsSearch = total
-                start = start + rowperpage
-
-                if (start <= totalProducts) {
-                    $.ajax({
-                        type: "get",
-                        url: "{{ route('getSearchProducts') }}",
-                        data: {
-                            start: start,
-                            _token: '{{ csrf_token() }}'
+            // Function to initialize Swipers
+            function initializeSwipers() {
+                document.querySelectorAll('.image').forEach((element, index) => {
+                    new Swiper(`.product-swiper-${index + 1}`, {
+                        direction: 'horizontal',
+                        loop: true,
+                        slidesPerView: 1,
+                        pagination: {
+                            el: `.swiper-pagination-${index + 1}`,
+                            clickable: true,
                         },
-                        dataType: "json",
-                        success: function(response) {
-                            const html = response.html
-                            $('.main-content').html(searchResults)
-
-                            const productContainer = $('.product-container');
-                            if (html.trim() === '') {
-                                productContainer.html(`
-                                <div class="p-4 text-md text-gray-800 mx-auto text-center rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">
-                                    <span class="font-medium">Oups désolé!</span> Aucun produit disponible correspondant à votre recherche. <br><br>
-                                    <button onclick="window.location.href='/products'" class="footer-widget__fw-news-btn tpsecondary-btn">Voir le catalogue des produits disponibles<i
-                                                    class="fal fa-long-arrow-right"></i></button>
-                                </div>
-                            `);
-                            } else {
-                                $(".searchResultProduct:last").after(response.html).show().fadeIn()
-                            }
+                        navigation: {
+                            nextEl: `.swiper-button-next-${index + 1}`,
+                            prevEl: `.swiper-button-prev-${index + 1}`,
                         },
-                        error: function(xhr, status, error) {
-                            console.error("Error fetching products:", error);
-                        }
                     });
-                }
+                });
             }
-        })
-    </script>
 
-    <script>
-        // Use a parent container that exists at all times or document if no specific parent
-        document.body.addEventListener('click', function(event) {
-            // Check if the clicked element has the class 'message-button'
-            if (event.target && event.target.classList.contains('message-button')) {
-                event.preventDefault(); // Prevent default link behavior
-
-                const button = event.target; // The clicked button
-                const sellerId = button.getAttribute('data-seller-id');
-                const productId = button.getAttribute('data-product-id');
-                const message = "Coucou ! Est-ce que le produit est toujours disponible?";
-
-                // Prepare message data
-                const formData = new FormData();
-                formData.append('seller_id', sellerId);
-                formData.append('product_id', productId);
-                formData.append('message', message);
-                formData.append('_token', document.querySelector('meta[name="csrf-token"]')
-                    .getAttribute('content')); // Fetch CSRF token dynamically
-
-                // Send AJAX request
-                fetch("{{ route('messages.send', ':seller_id') }}".replace(':seller_id', sellerId), {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: data.message,
-                                text: "{{ session('success') }}",
-                                toast: true,
-                                position: 'top-end',
-                                timer: 3000,
-                                showConfirmButton: false,
-                                timerProgressBar: true,
-                            });
-                        } else {
-                            alert("Échec de l'envoi du message.");
-                        }
-                    })
-                    .catch(error => console.error('Erreur:', error));
-            }
+            // Initial call to set up Swipers for the initial products
+            initializeSwipers();
         });
     </script>
 
@@ -596,10 +567,6 @@
             }
         });
     </script>
-
-
-
-
 
     @yield('modal')
     @stack('script')

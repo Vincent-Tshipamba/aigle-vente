@@ -45,6 +45,8 @@ Route::middleware('userOnline')->group(function () {
         Route::get('/shop/{_id}', [ShopController::class, 'show'])->name('shops.show');
     });
 
+    Route::post('/products/filter', [ProductController::class, 'filterProducts']);
+
 });
 
 // Routes for authenticated users

@@ -279,6 +279,65 @@
     </script>
 
     <script>
+        const categoryNames = @json($categories->pluck('name', 'id'));
+
+        function filterProducts() {
+            // Get all checked checkboxes
+            const selectedCategories = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+                .map(checkbox => checkbox.value);
+
+            // Send AJAX request to fetch products
+            fetch(`/products/filter`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}' // Include CSRF token for security
+                    },
+                    body: JSON.stringify({
+                        categories: selectedCategories
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Update the product list in the DOM
+                    const productsContainer = document.getElementById('Products');
+                    productsContainer.innerHTML = data.html; // Assuming your server returns the HTML for the products
+
+                    updateSelectedCategories(selectedCategories);
+
+                    initializeSwipersForCategories();
+                })
+                .catch(error => console.error('Error fetching products:', error));
+        }
+
+        function updateSelectedCategories(selectedCategories) {
+            const selectedCategoriesContainer = document.getElementById('selected-categories');
+            selectedCategoriesContainer.innerHTML = ''; // Clear previous categories
+
+            if (selectedCategories.length > 0) {
+                selectedCategories.forEach(categoryId => {
+                    //! Todo : Gerer l'affichage des categories selectionnees
+                    // exemple : ${categoryNames[categoryId]}
+                    const tab = document.getElementById(`tabs-${categoryId}`);
+                    const cat = document.getElementById(`category-${categoryId}`)
+                    $(cat).addClass('text-gray-800');
+                    if (tab) {
+                        tab.classList.remove('hidden'); // Show the tab for the selected category
+                    }
+                });
+            }
+        }
+
+        function removeCategory(categoryId) {
+            const checkbox = document.getElementById(`filter-${categoryId}`);
+            if (checkbox) {
+                checkbox.checked = false; // Uncheck the checkbox
+                filterProducts(); // Re-filter products
+            }
+        }
+    </script>
+
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
             const slides = document.querySelectorAll('#slider > div');
             let currentSlide = 0;
@@ -303,8 +362,11 @@
             setInterval(nextSlide, 3000); // Change toutes les 3 secondes
         });
 
-
         document.addEventListener('DOMContentLoaded', function() {
+            initializeSwipersForCategories();
+        });
+
+        function initializeSwipersForCategories() {
             const swiper = new Swiper('.swiper', {
                 spaceBetween: 10,
                 slidesPerView: 4,
@@ -334,9 +396,7 @@
                     },
                 }
             });
-        });
-
-
+        }
 
         document.querySelectorAll('.image').forEach((element, index) => {
             new Swiper(`.product-swiper-${index + 1}`, {
@@ -464,7 +524,8 @@
                             </div>
                         `);
                             } else {
-                                initializeSwipers(); // Reinitialize Swipers for the new search results
+                                initializeSwipers
+                                    (); // Reinitialize Swipers for the new search results
                             }
                         },
                         error: function(xhr, status, error) {

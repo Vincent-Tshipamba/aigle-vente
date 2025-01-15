@@ -11,10 +11,17 @@
                             <div class="tpcart__item">
                                 <div class="tpcart__img">
                                     <img loading="lazy"
-                                        src="{{ $wishlist->product->photos->first() ?? asset('img/product/home-one/product-1.jpg') }}"
+                                        src="{{ $wishlist->product->photos->first()->image }}"
                                         alt="">
                                     <div class="tpcart__del">
-                                        <a href="#"><i class="far fa-times-circle"></i></a>
+                                        <form action="{{ route('client.wishlist.remove', $wishlist->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="reload" value="true">
+                                            <button type="submit" href="">
+                                                <i class="far fa-times-circle"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                                 <div class="tpcart__content">

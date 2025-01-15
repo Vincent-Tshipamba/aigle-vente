@@ -18,12 +18,7 @@ class HomeContent extends Component
         'categories' => []
     ];
 
-    public function updatingFilters()
-    {
-        $this->resetPage();
-    }
-
-    public function updatingSearch()
+    public function search()
     {
         $this->resetPage();
     }
@@ -52,5 +47,14 @@ class HomeContent extends Component
         return view('livewire.home-content', [
             'products' => $query->get()
         ]);
+    }
+
+    public function toggleCategory($categoryId)
+    {
+        if (in_array($categoryId, $this->filters['categories'])) {
+            $this->filters['categories'] = array_diff($this->filters['categories'], [$categoryId]);
+        } else {
+            $this->filters['categories'][] = $categoryId;
+        }
     }
 }

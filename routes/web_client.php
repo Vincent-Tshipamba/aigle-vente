@@ -63,7 +63,7 @@ Route::middleware(['auth', 'userOnline'])->group(function () {
 
     // Wishlist Routes
     Route::post('/wishlist/add', [WishlistController::class, 'add'])->name('client.wishlist.add');
-    Route::delete('/wishlist/remove/{id}', [WishlistController::class, 'remove'])->name('client.wishlist.remote');
+    Route::delete('/wishlist/remove/{id}', [WishlistController::class, 'remove'])->name('client.wishlist.remove');
     Route::get('/wishlist', [WishlistController::class, 'getUserWishlist'])->name('client.wishlist');
 
     Route::post('contact/{sellerId}/{productId}', [ProductController::class, 'contactSeller'])->name('contact.seller');

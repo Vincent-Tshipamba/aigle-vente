@@ -81,7 +81,9 @@
                             <div class="tpproduct-details__content">
                                 <div class="tpproduct-details__count d-flex align-items-center flex-wrap mb-25">
                                     <div class="tpproduct-details__cart">
-                                        <button onclick="contactSellerModal(event, {{ json_encode($product) }})">Contacter le vendeur</button>
+                                        <button
+                                            onclick="contactSellerModal(event, {{ json_encode($product) }})">Contacter
+                                            le vendeur</button>
                                     </div>
                                     <div class="tpproduct-details__wishlist ml-20">
                                         <a href="#" onclick="addToWishList(event, {{ $product->id }})"><i
@@ -139,11 +141,13 @@
                                         <tbody>
                                             <tr>
                                                 <td class="add-info">Weight</td>
-                                                <td class="add-info-list"> {{ $product->details->weight ?? 'none' }}</td>
+                                                <td class="add-info-list"> {{ $product->details->weight ?? 'none' }}
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td class="add-info">Dimensions</td>
-                                                <td class="add-info-list"> {{ $product->details->dimensions ?? 'none' }}</td>
+                                                <td class="add-info-list">
+                                                    {{ $product->details->dimensions ?? 'none' }}</td>
                                             </tr>
                                             <tr>
                                                 <td class="add-info">State</td>
@@ -151,19 +155,23 @@
                                             </tr>
                                             <tr>
                                                 <td class="add-info">Color</td>
-                                                <td class="add-info-list"> {{ $product->details->color ?? 'none' }}</td>
+                                                <td class="add-info-list"> {{ $product->details->color ?? 'none' }}
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td class="add-info">Size</td>
-                                                <td class="add-info-list"> {{ $product->details->size ?? 'none' }}</td>
+                                                <td class="add-info-list"> {{ $product->details->size ?? 'none' }}
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td class="add-info">Model</td>
-                                                <td class="add-info-list"> {{ $product->details->model ?? 'none' }}</td>
+                                                <td class="add-info-list"> {{ $product->details->model ?? 'none' }}
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td class="add-info">Shipping</td>
-                                                <td class="add-info-list"> {{ $product->details->shipping ?? 'none' }}</td>
+                                                <td class="add-info-list"> {{ $product->details->shipping ?? 'none' }}
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td class="add-info">Care Info</td>
@@ -172,7 +180,8 @@
                                             </tr>
                                             <tr>
                                                 <td class="add-info">Brand</td>
-                                                <td class="add-info-list"> {{ $product->details->brand ?? 'none' }}</td>
+                                                <td class="add-info-list"> {{ $product->details->brand ?? 'none' }}
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -477,35 +486,39 @@
                 document.getElementById('mainImage').src = src;
             }
 
+            function changeImageInContactSellerModal(src) {
+                document.getElementById('mainImageInContactSellerModal').src = src;
+            }
+
             function contactSellerModal(event, product) {
                 event.preventDefault();
 
                 // Construire l'image principale du produit
                 const productImage =
-                    `<img src="${product.photos[0].image}" id="mainImage" alt="${product.name}" class="w-full h-auto object-cover rounded-sm shadow-md mb-4">`;
+                    `<img src="{{ asset('') }}${product.photos[0].image}" id="mainImageInContactSellerModal" alt="${product.name}" class="w-full h-full object-cover rounded-sm shadow-md mb-4">`;
 
                 // Construire les images secondaires
                 let thumbnails = '';
                 product.photos.slice(0, 4).forEach(photo => {
-                    thumbnails += `<img src="${photo.image}" alt="${product.name}"
+                    thumbnails += `<img src="{{ asset('') }}${photo.image}" alt="${product.name}"
         class="size-16 sm:size-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
-        onclick="changeImage('${photo.image}')">`;
+        onclick="changeImageInContactSellerModal('{{ asset('') }}${photo.image}')">`;
                 });
 
                 const routeUrl = "{{ route('contact.seller', ['sellerId' => ':sellerId', 'productId' => ':productId']) }}";
                 const actionUrl = routeUrl
-                    .replace(':sellerId', product.shop.seller_id)
+                    .replace(':sellerId', product.shop.seller.id)
                     .replace(':productId', product.id);
 
                 // Contenu du modal
                 const modalContent = `
-                    <div class="bg-white rounded-lg p-6 shadow-lg w-full">
+                    <div class="w-full">
                         <h2 class="text-lg font-bold mb-4">Contacter le vendeur pour le produit ${product.name}</h2>
 
-                        <div class="flex flex-col lg:flex-row gap-4">
+                        <div class="flex flex-col lg:flex-row gap-5">
                             <!-- Section des images -->
                             <div class="lg:w-1/2">
-                                <div class="mb-4 mx-auto w-[300px] h-[300px] xl:w-[450px] xl:h-[450px]">${productImage}</div>
+                                <div class="mb-4 mx-auto w-[150px] h-[150px] md:w-[200px] md:h-[200px] lg:w-[250px] lg:h-[250px] xl:w-[400px] xl:h-[400px]">${productImage}</div>
                                 <div class="flex gap-4 py-4 justify-center overflow-x-auto">${thumbnails}</div>
                             </div>
 
@@ -513,17 +526,17 @@
                             <div class="lg:w-1/2 mb-12 mx-auto">
                                 <form action="${actionUrl}" method="POST">
                                 <textarea id="sellerMessage"
-                                    class="w-full p-3 mb-6 rounded-lg border focus:outline-none focus:ring focus:ring-[#e38407]"
+                                    class="w-full p-3 mb-6 mx-auto rounded-lg border focus:outline-none focus:ring focus:ring-[#e38407]"
                                     rows="4" name="message"
-                                    placeholder="Écrivez votre message ici...">Bonjour M. (Mme), j'espère que vous allez bien. Est-ce que le(s) ou la ${product.name} est (sont) toujours disponible(s) ?</textarea>
+                                    placeholder="Écrivez votre message ici...">Bonjour M. (Mme) ${product.shop.seller.first_name} ${product.shop.seller.last_name}. J'espère que vous allez bien. Est-ce que le(s) ou la ${product.name} est (sont) toujours disponible(s) ?</textarea>
 
-                                    <div class="flex flex-col items-center justify-center gap-5 mt-6 md:flex-row">
+                                    <div class="flex flex-col items-center justify-center gap-3 mt-6 lg:flex-row">
                                         @csrf
-                                        <button type="submit" class="inline-block w-auto text-center min-w-[200px] px-6 py-4 text-white transition-all rounded-md shadow-xl sm:w-auto bg-gradient-to-r from-orange-600 to-[#e38407] hover:bg-gradient-to-b dark:shadow-blue-900 shadow-blue-200 hover:shadow-2xl hover:shadow-blue-400 hover:-tranneutral-y-px "
+                                        <button type="submit" class="inline-block text-sm sm:text-md text-center min-w-[150px] 2xl:min-w-[200px] px-2 py-2 sm:px-0 sm:py-3 text-white transition-all rounded-md shadow-xl bg-gradient-to-r from-orange-600 to-[#e38407] hover:bg-gradient-to-b dark:shadow-blue-900 shadow-blue-200 hover:shadow-2xl hover:shadow-blue-400 hover:-tranneutral-y-px "
                                             href="#" id="confirmMessageBtn">
                                             Envoyer le message
                                         </button>
-                                        <a class="inline-block w-auto text-center min-w-[200px] px-6 py-4 text-white transition-all bg-gray-700 dark:bg-white dark:text-gray-800 rounded-md shadow-xl sm:w-auto hover:bg-gray-900 hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-2xl hover:shadow-neutral-400 hover:-tranneutral-y-px"
+                                        <a class="inline-block text-sm sm:text-md text-center min-w-[150px] 2xl:min-w-[200px] px-2 py-2 sm:px-0 sm:py-3 text-white transition-all bg-gray-700 dark:bg-white dark:text-gray-800 rounded-md shadow-xl hover:bg-gray-900 hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-2xl hover:shadow-neutral-400 hover:-tranneutral-y-px"
                                         href="#" id="cancelMessageBtn">Annuler
                                         </a>
                                     </div>
@@ -539,7 +552,7 @@
                     showConfirmButton: false,
                     showCancelButton: false,
                     customClass: {
-                        popup: 'w-full max-w-sm sm:max-w-md lg:max-w-xl xl:max-w-2xl'
+                        popup: 'w-full p-3 max-w-sm sm:max-w-md md:max-w-lg lg:max-w-3xl xl:max-w-4xl 2xl:max-w-6xl'
                     },
                     didOpen: () => {
                         const cancelButton = document.getElementById('cancelMessageBtn');

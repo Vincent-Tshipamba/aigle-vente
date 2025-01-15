@@ -74,7 +74,7 @@ class ProductController extends Controller
         $product = Product::where('_id', $id)->with(['photos', 'stocks', 'shop.seller'])->firstOrFail();
         $otherProducts = Product::where('category_product_id', $product->category_product_id)
             ->where('_id', '!=', $product->_id)
-            ->with(['photos', 'stocks'])
+            ->with(['photos', 'stocks', 'shop.seller'])
             ->get();
 
         return view('client.products.show', compact('product', 'otherProducts'));

@@ -11,7 +11,7 @@
                             <div
                                 class="mx-auto w-[300px] h-[300px] xl:w-[450px] xl:h-[450px] 2xl:w-[500px] 2xl:h-[500px]">
                                 <img src="{{ asset($product->photos->first()->image) }}" alt="{{ $product->name }}"
-                                    class="w-full h-auto object-cover rounded-lg shadow-sm mb-4" id="mainImage">
+                                    class="w-full h-full object-cover rounded-lg shadow-sm mb-4" id="mainImage">
                             </div>
 
                             <!-- Miniatures -->

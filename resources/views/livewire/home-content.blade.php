@@ -9,19 +9,18 @@
             </svg>
         </div>
 
-
         <!-- Swiper avec grille responsive -->
         <div class="swiper w-full sm:w-auto">
             <div class="swiper-wrapper grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">
                 @foreach ($categories as $item)
-                    <div class="swiper-slide">
-                        <a href="#" class="flex flex-col items-center text-center space-y-2 hover:scale-105">
+                    <div class="swiper-slide relative">
+                        <a href="#" onclick="document.getElementById('filter-{{$item->id}}').click();" class="flex flex-col items-center text-center space-y-2 hover:scale-105  ">
                             <div class="p-2  rounded-full ">
                                 <img src="{{ $item->image }}" alt="{{ $item->name }}"
                                     class="w-8 h-8 max-w-full">
                             </div>
                             <span
-                                class="text-xs sm:text-sm font-medium text-gray-500 hover:text-gray-700">{{ $item->name }}</span>
+                                class="text-xs sm:text-sm font-medium text-gray-500 hover:text-gray-700">{{ $item->name }} <input type="checkbox" id="filter-{{$item->id}}" value="{{ $item->id }}" class="w-5 h-5 text-[#e38407]" /></span>
                         </a>
                     </div>
                 @endforeach
@@ -69,7 +68,21 @@
         </button>
     </div>
 
-
+    {{-- @if(count($filters['categories']) > 0)
+        <div class="mt-2">
+            <div class="flex space-x-4">
+                @foreach ($filters['categories'] as $categoryId)
+                    @php
+                        $category = $categories->firstWhere('id', $categoryId);
+                    @endphp
+                    <div class="bg-blue-200 text-blue-800 px-4 py-2 rounded-full flex items-center">
+                        <span>{{ $category->name }}</span>
+                        <button wire:click="toggleCategory({{ $category->id }})" class="ml-2 text-red-600">x</button>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    @endif --}}
 
     <!-- Filter Modal -->
     <div id="filterSection" tabindex="-1" aria-hidden="true"
@@ -147,12 +160,8 @@
         </div>
     </div>
 
-
-
-
-
     <!-- ✅ Grid Section - Starts Here 👇 -->
-    <section id="Projects"
+    <section id="Products"
         class="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14  mb-5 my-20">
         @if ($products && $products->count() == 0)
             <div class="p-4 text-center justify-center w-[100%] mx-auto text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300"

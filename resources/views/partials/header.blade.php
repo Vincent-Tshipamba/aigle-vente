@@ -15,9 +15,7 @@
                             <form action="#">
                                 <div class="mainmenu__search-bar p-relative w-full">
                                     <button class="mainmenu__search-icon"><i class="fal fa-search"></i></button>
-                                    <input @if (request()->routeIs('products.index')) wire:model.live="search" @endif
-                                        class="{{ !request()->routeIs('products.index') ? 'search-input' : '' }}"
-                                        type="text" placeholder="Rechercher des produits...">
+                                    <input class="search-input" type="text" placeholder="Rechercher des produits...">
                                 </div>
                             </form>
                         </div>
@@ -32,13 +30,8 @@
                                         <li>
                                             <a href="{{ route('home') }}">Accueil</a>
                                         </li>
-                                        <li class="has-dropdown">
-                                            <a href="javascript:;">Produits</a>
-                                            <ul class="submenu">
-                                                <li><a href="{{ route('products.index') }}">Produits</a></li>
-                                                <li><a href="{{ route('products.index') }}">Boutiques</a></li>
-                                                <li><a href="{{ route('client.wishlist') }}">Liste de souhaits</a></li>
-                                            </ul>
+                                        <li>
+                                            <a href="#">Boutiques</a>
                                         </li>
                                         <li><a href="{{ route('contact') }}">Contact</a></li>
                                     </ul>

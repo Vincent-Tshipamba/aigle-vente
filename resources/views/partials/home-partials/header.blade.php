@@ -19,13 +19,8 @@
                                 <li>
                                     <a href="{{ route('home') }}">Accueil</a>
                                 </li>
-                                <li class="has-dropdown">
-                                    <a href="javascript:;">Produits</a>
-                                    <ul class="submenu">
-                                        <li><a href="{{ route('products.index') }}">Produits</a></li>
-                                        <li><a href="{{ route('products.index') }}">Boutiques</a></li>
-                                        <li><a href="{{ route('client.wishlist') }}">Liste de souhaits</a></li>
-                                    </ul>
+                                <li>
+                                    <a href="#">Boutiques</a>
                                 </li>
                                 <li><a href="{{ route('contact') }}">Contact</a></li>
                             </ul>

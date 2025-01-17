@@ -43,19 +43,17 @@
     @include('partials.scroll-top')
     <!-- Scroll-top-end-->
 
-    @if (!request()->routeIs('products.index'))
-        <!-- header-area-start -->
-        @include('partials.header')
-        <!-- header-area-end -->
+    <!-- header-area-start -->
+    @include('partials.header')
+    <!-- header-area-end -->
 
-        <!-- header-xl-sticky-area -->
-        @include('partials.header-xl')
-        <!-- header-xl-sticky-end -->
+    <!-- header-xl-sticky-area -->
+    @include('partials.header-xl')
+    <!-- header-xl-sticky-end -->
 
-        <!-- header-md-lg-area -->
-        @include('partials.header-md-lg')
-        <!-- header-md-lg-area -->
-    @endif
+    <!-- header-md-lg-area -->
+    @include('partials.header-md-lg')
+    <!-- header-md-lg-area -->
 
     <!-- sidebar-menu-area -->
     @include('partials.sidebar-menu')

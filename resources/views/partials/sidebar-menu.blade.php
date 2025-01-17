@@ -43,7 +43,7 @@
         <a href="{{ route('login') }}"><i class="fal fa-user"></i> Connexion / Inscription</a>
     </div>
     <div class="tpsideinfo__wishlist-link">
-        <a href="wishlist.html" target="_parent"><i class="fal fa-heart"></i> Liste de Souhaits</a>
+        <a href="{{ route('client.wishlist') }}" target="_parent"><i class="fal fa-heart"></i> Liste de Souhaits</a>
     </div>
 </div>
 <div class="body-overlay"></div>

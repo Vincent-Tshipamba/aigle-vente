@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 class ProductController extends Controller
 {
     private $rowperpage = 15;
-    
+
     public function contactSeller($sellerId, $productId, Request $request)
     {
         $auth = auth()->user();
@@ -81,13 +81,7 @@ class ProductController extends Controller
 
         $html = '';
 
-        if ($products->count() == 0) {
-            $html .= '
-                <div class="p-4 text-center justify-center w-[100%] mx-auto text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">
-                    <span class="font-medium">Oups désolé !</span> Aucun produit disponible pour le moment. Essayez de rafraichir la page s\'il vous plait.
-                </div>
-            ';
-        } else {
+        if ($products->count() > 0) {
             foreach ($products as $index => $product) {
                 $html .= '
                     <div class="w-72 rounded-xl duration-500">

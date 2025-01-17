@@ -278,63 +278,80 @@
         }
     </script>
 
+    <!-- Script pour le filtrage des produits par categorie(s) et gestion de l'affichage des resultats -->
     <script>
         const categoryNames = @json($categories->pluck('name', 'id'));
+        const initialProductsContent = $('.productsParent').html();
 
-        function filterProducts() {
-            // Get all checked checkboxes
-            const selectedCategories = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
-                .map(checkbox => checkbox.value);
+        document.addEventListener('change', function(event) {
 
-            // Send AJAX request to fetch products
-            fetch(`/products/filter`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}' // Include CSRF token for security
-                    },
-                    body: JSON.stringify({
-                        categories: selectedCategories
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    // Update the product list in the DOM
-                    const productsContainer = document.getElementById('Products');
-                    productsContainer.innerHTML = data.html; // Assuming your server returns the HTML for the products
+            // Check if the target element has the specific class
+            if (event.target.classList.contains('category-checkbox')) {
+                const selectedCategories = Array.from(
+                    document.querySelectorAll('.category-checkbox:checked')
+                ).map(checkbox => checkbox.value);
 
-                    updateSelectedCategories(selectedCategories);
+                if (selectedCategories.length < 1) {
+                    $('.productsParent').html(initialProductsContent);
+                    document.querySelectorAll('[id^="tabs-"]').forEach(tab => tab.classList.add('hidden'));
+                    document.querySelectorAll('[id^="category-"]').forEach(cat => $(cat).removeClass(
+                        'text-black'));
+                    return;
+                }
 
-                    initializeSwipersForCategories();
-                })
-                .catch(error => console.error('Error fetching products:', error));
-        }
+                const allCategoryIds = Array.from(document.querySelectorAll('.category-checkbox'))
+                    .map(checkbox => checkbox.value);
 
-        function updateSelectedCategories(selectedCategories) {
-            const selectedCategoriesContainer = document.getElementById('selected-categories');
-            selectedCategoriesContainer.innerHTML = ''; // Clear previous categories
-
-            if (selectedCategories.length > 0) {
-                selectedCategories.forEach(categoryId => {
-                    //! Todo : Gerer l'affichage des categories selectionnees
-                    // exemple : ${categoryNames[categoryId]}
+                allCategoryIds.forEach(categoryId => {
                     const tab = document.getElementById(`tabs-${categoryId}`);
-                    const cat = document.getElementById(`category-${categoryId}`)
-                    $(cat).addClass('text-gray-800');
-                    if (tab) {
-                        tab.classList.remove('hidden'); // Show the tab for the selected category
-                    }
-                });
-            }
-        }
+                    const cat = document.getElementById(`category-${categoryId}`);
 
-        function removeCategory(categoryId) {
-            const checkbox = document.getElementById(`filter-${categoryId}`);
-            if (checkbox) {
-                checkbox.checked = false; // Uncheck the checkbox
-                filterProducts(); // Re-filter products
+                    if (selectedCategories.includes(categoryId)) {
+                        // If the category is selected, apply the active styles
+                        $(cat).addClass('text-black');
+                        $(tab).removeClass('hidden');
+                    } else {
+                        $(cat).removeClass('text-black');
+                        $(cat).addClass('text-gray-500');
+                        $(tab).addClass('hidden');
+                    }
+
+                });
+
+                fetch(`/products/filter`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        },
+                        body: JSON.stringify({
+                            categories: selectedCategories,
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.html.trim() === '') {
+                            document.querySelector('.productsParent').innerHTML = `
+                                <div class="flex flex-col gap-6 p-4 my-4 text-center text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300">
+                                    <div>
+                                        <span class="font-medium">Oups désolé !</span> Aucun produit correspondant à votre filtre n'a été trouvé.
+                                    </div>
+                                    <div>
+                                        <a href="{{ route('sellers.create') }}" class="px-6 py-2 bg-gray-800 text-gray-200 hover:text-white hover:bg-[#e38407] font-semibold rounded-md text-center transition-all duration-300">
+                                            Devenez donc le premier à vendre un produit de cette catégorie !
+                                        </a>
+                                    </div>
+                                </div>`;
+                        } else {
+                            document.querySelector('.productsParent').innerHTML = `
+                                <div class="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mb-5 my-20">
+                                    ${data.html}
+                                </div>`;
+                        }
+                    })
+                    .catch(error => console.error('Error fetching products:', error));
             }
-        }
+        });
     </script>
 
     <script>
@@ -496,13 +513,13 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const searchInput = $('.search-input');
-            const initialProducts = $('#Products').html();
+            const initialContent = $('.productsParent').html();
 
             $('.search-input').on('keyup', function() {
                 const value = $(this).val().trim();
 
                 if (value === '') {
-                    $('#Products').html(initialProducts); // Restore the initial products
+                    $('.productsParent').html(initialContent); // Restore the initial products
                     initializeSwipers(); // Reinitialize Swipers for the initial products
                 } else {
                     $.ajax({
@@ -515,15 +532,24 @@
                         dataType: "json",
                         success: function(response) {
                             const html = response.html;
-                            $('#Products').html(html);
 
                             if (html.trim() === '') {
-                                $('#Products').html(`
-                            <div class="p-4 text-center justify-center w-[100%] mx-auto text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">
-                                <span class="font-medium">Oups désolé !</span> Aucun produit disponible pour le moment. Essayez de rafraichir la page s'il vous plait.
-                            </div>
-                        `);
+                                $('.productsParent').html(`
+                                    <div class="p-4 my-4 flex flex-col gap-6 text-center justify-center w-full text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">
+                                        <div class="">
+                                            <span class="font-medium">Oups désolé !</span> Aucun produit correspondant à votre recherche n'est disponible pour le moment.
+                                        </div>
+                                        <div class="">
+                                            <a href="{{ route('sellers.create') }}" class="px-6 py-2 bg-gray-800 text-gray-200 hover:text-white hover:bg-[#e38407] font-semibold rounded-md text-center transition-all duration-300 whitespace-nowrap align-middle touch-manipulation shadow-md">Devenez donc le premier vendeur de ce produit !</a>
+                                        </div>
+                                    </div>
+                                `);
                             } else {
+                                $('.productsParent').html(`
+                                    <div class="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14  mb-5 my-20">
+                                        ${html}
+                                    </div>
+                                `);
                                 initializeSwipers
                                     (); // Reinitialize Swipers for the new search results
                             }

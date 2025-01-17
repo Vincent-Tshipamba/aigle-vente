@@ -182,29 +182,8 @@
 
                 if (value === '') {
                     container.html(initialProducts);
+                    initializeSwipers();
                 } else {
-                    const searchResults = `
-                <section class="product-area pb-70" id="productSection">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6 col-12">
-                                <div class="tpsection mb-40">
-                                    <h4 class="tpsection__title">Produits <span> Populaires </span></h4>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-12">
-                            </div>
-                        </div>
-                        <div class="w-full md:inset-0 product-container">
-                            <div
-                                class="searchResultProduct row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-1 mx-auto">
-
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            `;
-
                     $.ajax({
                         type: "get",
                         url: "{{ route('products.search') }}",
@@ -215,11 +194,14 @@
                         dataType: "json",
                         success: function(response) {
                             const html = response.html
-                            $('.main-content').html(searchResults)
+                            $('.main-content').html(`
+                                    <section class="container grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14  mb-5 my-20">
+                                        ${html}
+                                    </section>
+                            `)
 
-                            const productContainer = $('.product-container');
                             if (html.trim() === '') {
-                                productContainer.html(`
+                                $('.main-content').html(`
                             <div class="p-4 text-md text-gray-800 mx-auto text-center rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">
                                 <span class="font-medium">Oups désolé!</span> Aucun produit disponible correspondant à votre recherche. <br><br>
                                 <button onclick="window.location.href='/products'" class="footer-widget__fw-news-btn tpsecondary-btn">Voir le catalogue des produits disponibles<i
@@ -227,8 +209,7 @@
                             </div>
                         `);
                             } else {
-                                $(".searchResultProduct").append(response.html).show()
-                                    .fadeIn()
+                                initializeSwipers();
                             }
                         },
                         error: function(xhr, status, error) {
@@ -238,28 +219,26 @@
                 }
             });
 
-            function fetchSearchProducts(rowperpage = 15, total = null) {
-                var start = 0
-                start = start + rowperpage
-
-
-                if (start <= total) {
-                    $.ajax({
-                        type: "get",
-                        url: "{{ route('getSearchProducts') }}",
-                        data: {
-                            start: start,
-                            _token: '{{ csrf_token() }}'
+            // Function to initialize Swipers
+            function initializeSwipers() {
+                document.querySelectorAll('.image').forEach((element, index) => {
+                    new Swiper(`.product-swiper-${index + 1}`, {
+                        direction: 'horizontal',
+                        loop: true,
+                        slidesPerView: 1,
+                        pagination: {
+                            el: `.swiper-pagination-${index + 1}`,
+                            clickable: true,
                         },
-                        dataType: "json",
-                        success: function(response) {
-                            $(".searchResultProduct:last").after(response).show().fadeIn()
-
-                            checkWindowSize(response.rowperpage, response.totalSearchResults);
-                        }
+                        navigation: {
+                            nextEl: `.swiper-button-next-${index + 1}`,
+                            prevEl: `.swiper-button-prev-${index + 1}`,
+                        },
                     });
-                }
+                });
             }
+
+            initializeSwipers();
         });
     </script>
 

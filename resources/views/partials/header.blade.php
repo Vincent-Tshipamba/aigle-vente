@@ -15,7 +15,7 @@
                             <form action="#">
                                 <div class="mainmenu__search-bar p-relative w-full">
                                     <button class="mainmenu__search-icon"><i class="fal fa-search"></i></button>
-                                    <input class="search-input" type="text" placeholder="Rechercher des produits...">
+                                    <input class="search-input" type="text" placeholder="Rechercher un produit ou une boutique...">
                                 </div>
                             </form>
                         </div>

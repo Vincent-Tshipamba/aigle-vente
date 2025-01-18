@@ -16,6 +16,17 @@
                 <!-- Titre de la boutique -->
                 <div class=" bottom-0 left-0  p-4 rounded-b-lg w-full">
                     <h1 class="text-4xl font-bold text-gray-800">{{ $shop->name }}</h1>
+                    <div class="flex  items-start mb-4">
+                        <svg class="w-5 h-5 text-gray-500 mt-1" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <span class="ml-2 text-gray-600">{{ $shop->address }}</span>
+                    </div>
                     <p class="text-lg text-gray-300">{!! $shop->description !!}</p>
                 </div>
             </div>

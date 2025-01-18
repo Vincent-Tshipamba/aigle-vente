@@ -10,11 +10,7 @@
                                 <a href="{{ route('home') }}"><img loading="lazy"
                                         src="{{ asset('img/logo/logo_sans_bg.png') }}" alt="logo"></a>
                             </div>
-                            <div class="footer-content">
-                                <p>Design origami rose élégant, vue tridimensionnelle et décoration coexistent. <br>
-                                    Idéal pour ajouter une touche décorative à la décoration de n'importe quelle pièce.
-                                </p>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 col-sm-6">
@@ -59,7 +55,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-4">
+                    {{-- <div class="col-lg-3 col-md-4">
                         <div class="footer-widget footer-col-5 mb-40">
                             <h4 class="footer-widget__title mb-30">Recevoir la Newsletter</h4>
                             <p>Inscrivez-vous et obtenez 10% de réduction sur votre première commande !</p>
@@ -71,7 +67,7 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="footer-cta pb-20">
@@ -87,7 +83,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-6 col-lg-8 col-md-8 col-sm-6">
+                    {{-- <div class="col-xl-6 col-lg-8 col-md-8 col-sm-6">
                         <div class="footer-cta__source">
                             <div class="footer-cta__source-content">
                                 <h4 class="footer-cta__source-title">Télécharger l'App sur Mobile</h4>
@@ -100,7 +96,7 @@
                                         alt="app"></a>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

@@ -6,7 +6,7 @@
                 <div class="logo">
                     <a href="{{ route('home') }}" class="flex items-center space-x-2">
                         <img loading="lazy" src="{{ asset('img/logo/logo_sans_bg.png') }}" width="25%" alt="logo">
-                        <h1 class="text-xl font-bold animate__animated animate__slideInRight">Aigle Vente</h1>
+                        <h1 class="text-xl font-bold">Aigle Vente</h1>
                     </a>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                             <form action="#">
                                 <div class="search-info-5 p-relative">
                                     <button class="header-search-icon-5"><i class="fal fa-search"></i></button>
-                                    <input class="search-input" type="text" placeholder="Rechercher des produits...">
+                                    <input class="search-input" type="text" placeholder="Rechercher un produit ou une boutique...">
                                 </div>
                             </form>
                         </div>

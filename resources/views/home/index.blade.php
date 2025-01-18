@@ -295,7 +295,8 @@
                     $('.productsParent').html(initialProductsContent);
                     document.querySelectorAll('[id^="tabs-"]').forEach(tab => tab.classList.add('hidden'));
                     document.querySelectorAll('[id^="category-"]').forEach(cat => $(cat).removeClass(
-                        'text-black'));
+                        'text-black text-white underline'));
+                    initializeSwipers()
                     return;
                 }
 
@@ -305,15 +306,25 @@
                 allCategoryIds.forEach(categoryId => {
                     const tab = document.getElementById(`tabs-${categoryId}`);
                     const cat = document.getElementById(`category-${categoryId}`);
+                    const categoryElement = document.querySelector(`#category-${categoryId}`)
 
                     if (selectedCategories.includes(categoryId)) {
-                        // If the category is selected, apply the active styles
-                        $(cat).addClass('text-black');
-                        $(tab).removeClass('hidden');
+                        if (categoryElement.classList.contains(`categoryInSidebar-${categoryId}`)) {
+                            $(cat).addClass('text-white underline');
+                        } else {
+                            // If the category is selected, apply the active styles
+                            $(cat).addClass('text-black');
+                            $(tab).removeClass('hidden');
+                        }
                     } else {
-                        $(cat).removeClass('text-black');
-                        $(cat).addClass('text-gray-500');
-                        $(tab).addClass('hidden');
+                        if (categoryElement.classList.contains(`categoryInSidebar-${categoryId}`)) {
+                            $(cat).removeClass('text-white underline');
+                            $(cat).addClass('text-gray-500');
+                        } else {
+                            $(cat).removeClass('text-black');
+                            $(cat).addClass('text-gray-500');
+                            $(tab).addClass('hidden');
+                        }
                     }
 
                 });
@@ -337,8 +348,9 @@
                                         <span class="font-medium">Oups désolé !</span> Aucun produit correspondant à votre filtre n'a été trouvé.
                                     </div>
                                     <div>
-                                        <a href="{{ route('sellers.create') }}" class="px-6 py-2 bg-gray-800 text-gray-200 hover:text-white hover:bg-[#e38407] font-semibold rounded-md text-center transition-all duration-300">
-                                            Devenez donc le premier à vendre un produit de cette catégorie !
+                                        <a href="{{ route('sellers.create') }}"
+                                        class="inline-block px-6 py-2 w-full bg-gray-800 text-gray-200 hover:text-white hover:bg-[#e38407] font-semibold rounded-md text-center transition-all duration-300">
+                                        Devenez donc le premier à vendre un produit de cette catégorie !
                                         </a>
                                     </div>
                                 </div>`;
@@ -347,6 +359,7 @@
                                 <div class="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mb-5 my-20">
                                     ${data.html}
                                 </div>`;
+                            initializeSwipers()
                         }
                     })
                     .catch(error => console.error('Error fetching products:', error));
@@ -561,28 +574,28 @@
                 }
             });
 
-            // Function to initialize Swipers
-            function initializeSwipers() {
-                document.querySelectorAll('.image').forEach((element, index) => {
-                    new Swiper(`.product-swiper-${index + 1}`, {
-                        direction: 'horizontal',
-                        loop: true,
-                        slidesPerView: 1,
-                        pagination: {
-                            el: `.swiper-pagination-${index + 1}`,
-                            clickable: true,
-                        },
-                        navigation: {
-                            nextEl: `.swiper-button-next-${index + 1}`,
-                            prevEl: `.swiper-button-prev-${index + 1}`,
-                        },
-                    });
-                });
-            }
-
             // Initial call to set up Swipers for the initial products
             initializeSwipers();
         });
+
+        // Function to initialize Swipers
+        function initializeSwipers() {
+            document.querySelectorAll('.image').forEach((element, index) => {
+                new Swiper(`.product-swiper-${index + 1}`, {
+                    direction: 'horizontal',
+                    loop: true,
+                    slidesPerView: 1,
+                    pagination: {
+                        el: `.swiper-pagination-${index + 1}`,
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: `.swiper-button-next-${index + 1}`,
+                        prevEl: `.swiper-button-prev-${index + 1}`,
+                    },
+                });
+            });
+        }
     </script>
 
     <script>

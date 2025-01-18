@@ -222,21 +222,5 @@
             </div>
         </div>
     </div>
-    <div class="main-menu-area mt-20 d-none d-xl-block">
-        <div class="for-megamenu p-relative">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="header-search-bar">
-                        <form action="#">
-                            <div class="search-info p-relative">
-                                <button class="header-search-icon"><i class="fal fa-search"></i></button>
-                                <input class="search-input" type="text" placeholder="Rechercher des produits...">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </header>
 <!-- header-area-end -->

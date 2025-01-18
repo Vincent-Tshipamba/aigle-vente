@@ -15,12 +15,12 @@
                 </div>
             </div>
             <div class="col-lg-9 col-md-8">
-                <div class="header-meta-info d-flex align-items-center justify-content-between">
-                    <div class="header-search-bar">
+                <div class="header-meta-info d-flex align-items-center justify-end">
+                    <div class="header-search-bar header-search-bar-for-home-header hidden">
                         <form action="#">
                             <div class="search-info p-relative">
                                 <button class="header-search-icon"><i class="fal fa-search"></i></button>
-                                <input class="search-input" type="text" placeholder="Rechercher des produits...">
+                                <input class="search-input" type="text" placeholder="Rechercher un produit ou une boutique...">
                             </div>
                         </form>
                     </div>

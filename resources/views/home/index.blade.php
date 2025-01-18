@@ -296,6 +296,7 @@
                     document.querySelectorAll('[id^="tabs-"]').forEach(tab => tab.classList.add('hidden'));
                     document.querySelectorAll('[id^="category-"]').forEach(cat => $(cat).removeClass(
                         'text-black'));
+                    initializeSwipers()
                     return;
                 }
 
@@ -310,6 +311,7 @@
                         // If the category is selected, apply the active styles
                         $(cat).addClass('text-black');
                         $(tab).removeClass('hidden');
+
                     } else {
                         $(cat).removeClass('text-black');
                         $(cat).addClass('text-gray-500');
@@ -347,6 +349,7 @@
                                 <div class="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mb-5 my-20">
                                     ${data.html}
                                 </div>`;
+                            initializeSwipers()
                         }
                     })
                     .catch(error => console.error('Error fetching products:', error));
@@ -561,28 +564,28 @@
                 }
             });
 
-            // Function to initialize Swipers
-            function initializeSwipers() {
-                document.querySelectorAll('.image').forEach((element, index) => {
-                    new Swiper(`.product-swiper-${index + 1}`, {
-                        direction: 'horizontal',
-                        loop: true,
-                        slidesPerView: 1,
-                        pagination: {
-                            el: `.swiper-pagination-${index + 1}`,
-                            clickable: true,
-                        },
-                        navigation: {
-                            nextEl: `.swiper-button-next-${index + 1}`,
-                            prevEl: `.swiper-button-prev-${index + 1}`,
-                        },
-                    });
-                });
-            }
-
             // Initial call to set up Swipers for the initial products
             initializeSwipers();
         });
+
+        // Function to initialize Swipers
+        function initializeSwipers() {
+            document.querySelectorAll('.image').forEach((element, index) => {
+                new Swiper(`.product-swiper-${index + 1}`, {
+                    direction: 'horizontal',
+                    loop: true,
+                    slidesPerView: 1,
+                    pagination: {
+                        el: `.swiper-pagination-${index + 1}`,
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: `.swiper-button-next-${index + 1}`,
+                        prevEl: `.swiper-button-prev-${index + 1}`,
+                    },
+                });
+            });
+        }
     </script>
 
     <script>

@@ -35,7 +35,7 @@ class AppLayout extends Component
                 ->where('user_id', Auth::user()->id)
                 ->sum('products.unit_price');
 
-            return view('layouts.app', compact('products', 'rowperpage', 'totalProducts', 'saleProducts', 'wishlists', 'totalAmount'));
+            return view('layouts.app', compact('products', 'rowperpage', 'totalProducts', 'categories', 'saleProducts', 'wishlists', 'totalAmount'));
         }
 
         return view('layouts.app', compact('products', 'rowperpage', 'totalProducts', 'categories', 'saleProducts'));

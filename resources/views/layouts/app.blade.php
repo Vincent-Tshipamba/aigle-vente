@@ -170,6 +170,79 @@
     </script>
 
     <script>
+        const categoryNames = @json($categories->pluck('name', 'id'));
+        const initialContent = $('.main-content').html();
+
+        document.addEventListener('change', function(event) {
+
+            // Check if the target element has the specific class
+            if (event.target.classList.contains('category-checkbox')) {
+                const selectedCategories = Array.from(
+                    document.querySelectorAll('.category-checkbox:checked')
+                ).map(checkbox => checkbox.value);
+
+                if (selectedCategories.length < 1) {
+                    $('.main-content').html(initialContent);
+                    document.querySelectorAll('[id^="category-"]').forEach(cat => $(cat).removeClass(
+                        'text-white underline'));
+                    initializeSwipers()
+                    return;
+                }
+
+                const allCategoryIds = Array.from(document.querySelectorAll('.category-checkbox'))
+                    .map(checkbox => checkbox.value);
+
+                allCategoryIds.forEach(categoryId => {
+                    const cat = document.getElementById(`category-${categoryId}`);
+
+                    if (selectedCategories.includes(categoryId)) {
+                        // If the category is selected, apply the active styles
+                        $(cat).addClass('text-white underline');
+                    } else {
+                        $(cat).removeClass('text-white underline');
+                        $(cat).addClass('text-gray-500');
+                    }
+                });
+
+                fetch(`/products/filter`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        },
+                        body: JSON.stringify({
+                            categories: selectedCategories,
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.html.trim() === '') {
+                            document.querySelector('.main-content').innerHTML = `
+                                <div class="flex flex-col gap-6 p-4 my-4 text-center text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300">
+                                    <div>
+                                        <span class="font-medium">Oups désolé !</span> Aucun produit correspondant à votre filtre n'a été trouvé.
+                                    </div>
+                                    <div>
+                                        <a href="{{ route('sellers.create') }}"
+                                        class="inline-block px-6 py-2 w-full bg-gray-800 text-gray-200 hover:text-white hover:bg-[#e38407] font-semibold rounded-md text-center transition-all duration-300">
+                                        Devenez donc le premier à vendre un produit de cette catégorie !
+                                        </a>
+                                    </div>
+                                </div>`;
+                        } else {
+                            document.querySelector('.main-content').innerHTML = `
+                                <div class="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mb-5 my-20">
+                                    ${data.html}
+                                </div>`;
+                            initializeSwipers()
+                        }
+                    })
+                    .catch(error => console.error('Error fetching products:', error));
+            }
+        });
+    </script>
+
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             const searchInput = $('.search-input');
             const container = $('.main-content');

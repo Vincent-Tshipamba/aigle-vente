@@ -4,7 +4,7 @@
     <div class="tpsideinfo__search text-center pt-35">
         <span class="tpsideinfo__search-title mb-20">Que cherchez-vous ?</span>
         <form action="#">
-            <input class="search-input" type="text" placeholder="Rechercher des produits...">
+            <input class="search-input" type="text" placeholder="Rechercher un produit ou une boutique...">
             <button><i class="fal fa-search"></i></button>
         </form>
     </div>

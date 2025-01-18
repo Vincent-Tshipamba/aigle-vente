@@ -32,7 +32,7 @@
                             <form action="#">
                                 <div class="search-info-5 p-relative">
                                     <button class="header-search-icon-5"><i class="fal fa-search"></i></button>
-                                    <input class="search-input" type="text" placeholder="Rechercher des produits...">
+                                    <input class="search-input" type="text" placeholder="Rechercher un produit ou une boutique...">
                                 </div>
                             </form>
                         </div>

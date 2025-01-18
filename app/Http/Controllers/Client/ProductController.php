@@ -73,6 +73,9 @@ class ProductController extends Controller
     public function search(Request $request)
     {
         $products = Product::where('name', 'LIKE', '%' . $request->get('value') . '%')
+            ->orWhereHas('shop', function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' . $request->get('value') . '%');
+            })
             ->with('shop.seller')
             ->latest()
             ->get();

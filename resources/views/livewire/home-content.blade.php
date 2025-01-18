@@ -1,4 +1,14 @@
 <div class="main-content container ab">
+    <div class="row items-center justify-center xl:pt-4">
+        <div class="header-search-bar">
+            <form action="#">
+                <div class="search-info p-relative">
+                    <button class="header-search-icon"><i class="fal fa-search"></i></button>
+                    <input class="search-input" type="text" placeholder="Saisissez un nom de produit ou de boutique...">
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="flex bg-white p-4 justify-between items-center gap-4 px-20">
         <!-- Bouton précédent -->
         <!-- Bouton précédent (masqué sur petits écrans) -->

@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Client\ProductController;
 use App\Http\Controllers\Client\WishlistController;
 use App\Http\Controllers\Client\DashboardController;
+use App\Http\Controllers\Client\ShopController as ClientShopController;
 use App\Http\Controllers\HomeController; // Routes accessible to any online user
 
 Route::middleware('userOnline')->group(function () {
@@ -38,10 +39,13 @@ Route::middleware('userOnline')->group(function () {
     Route::get('/getProducts', [HomeController::class, 'getProducts'])->name('getProducts');
     Route::get('/getSearchProducts', [ProductController::class, 'getSearchProducts'])->name('getSearchProducts');
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('/shop/{_id}', [ShopController::class, 'show'])->name('shops.show');
+    Route::get('/shops',[ClientShopController::class,'index'])->name('shops.all');
 
 
     Route::middleware(['track.visits'])->group(function () {
-        Route::get('/shop/{_id}', [ShopController::class, 'show'])->name('shops.show');
+        Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+        
     });
 
     Route::post('/products/filter', [ProductController::class, 'filterProducts']);

@@ -20,7 +20,7 @@
                                     <a href="{{ route('home') }}">Accueil</a>
                                 </li>
                                 <li>
-                                    <a href="#">Boutiques</a>
+                                    <a href="{{route('shops.all')}}">Boutiques</a>
                                 </li>
                                 <li><a href="{{ route('contact') }}">Contact</a></li>
                             </ul>

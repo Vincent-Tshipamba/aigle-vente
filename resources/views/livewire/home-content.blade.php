@@ -89,14 +89,14 @@
     </div>
 
     <!-- Filter Modal -->
-    <div id="filterSection" tabindex="-1" aria-hidden="true"
+    <div id="filterSection" tabindex="-1" aria-hidden="true" 
         class="hidden fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
         <div class="relative w-full max-w-4xl bg-white rounded-lg shadow-lg dark:bg-gray-800">
             <!-- Header -->
             <div class="flex justify-between items-center p-5 border-b dark:border-gray-700">
-                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Filtrer les résultats</h3>
+                <h3 class="text-lg font-medium text-gray-900 dark:text-white" >Filtrer les résultats</h3>
                 <button type="button" class="text-gray-400 hover:text-gray-900 dark:hover:text-white"
-                    onclick="toggleModal('filterSection')">
+                    onclick="closeFilterSection()">
                     <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -199,7 +199,7 @@
                         <div class="px-4 py-3 w-72">
                             <span
                                 class="text-gray-400 mr-3 uppercase text-xs">{{ $product->category_product->name }}</span><br>
-                            <span class="text-gray-400 mr-3 text-xs">Boutique {{ $product->shop->name }}</span>
+                            <a href="{{ route('shops.show', $product->shop->_id) }}" class="text-gray-400 mr-3 text-xs">Boutique {{ $product->shop->name }}</a>
 
                             <p class="text-lg font-bold text-black truncate block capitalize">{{ $product->name }}</p>
                             <div class="flex items-center">

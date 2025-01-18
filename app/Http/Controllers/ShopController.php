@@ -39,7 +39,9 @@ class ShopController extends Controller
     public function show($id)
     {
         $shop = Shop::where('_id', $id)->first();
-        $products = Product::where('shop_id', $shop->id)->paginate(10);
+        $products = Product::where('shop_id', $shop->id)
+            ->with(['photos', 'shop.seller'])
+            ->paginate(10);
 
         return view('client.shops.show', compact('shop', 'products'));
     }
@@ -70,7 +72,7 @@ class ShopController extends Controller
             $imageFile = $request->file('image');
             $imageName = uniqid() . '.' . $imageFile->getClientOriginalExtension();
 
-            
+
             $imagePath = $imageFile->storeAs('public/shops_profile', $imageName);
         }
 

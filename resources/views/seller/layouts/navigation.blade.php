@@ -125,7 +125,7 @@
             <!-- Notification Menu Area --> --}}
 
             <!-- Chat Notification Area -->
-            <li class="relative" x-data="{ dropdownOpen: false, notifying: true }" @click.outside="dropdownOpen = false">
+            {{-- <li class="relative" x-data="{ dropdownOpen: false, notifying: true }" @click.outside="dropdownOpen = false">
                 <a class="relative flex h-8.5 w-8.5 items-center justify-center rounded-full border-[0.5px] border-stroke bg-gray hover:text-primary dark:border-strokedark dark:bg-meta-4 dark:text-white"
                     href="#" @click.prevent="dropdownOpen = ! dropdownOpen; notifying = false">
                     <span :class="!notifying && 'hidden'"
@@ -164,7 +164,7 @@
                     </ul>
                 </div>
                 <!-- Dropdown End -->
-            </li>
+            </li> --}}
             <!-- Chat Notification Area -->
         </ul>
 
@@ -336,7 +336,7 @@
                 <span>Boutiques</span>
             </a>
         </div>
-        <div
+        {{-- <div
             class="hover:ml-4 w-full hover:text-[#e38407] dark:hover:text-[#e38407]  p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
             <a href=""
                 class="hover:ml-4 justify-end pr-5   hover:text-[#e38407] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('clients.index') ? ' text-[#e38407]' : 'dark:text-white text-gray-700' }}">
@@ -350,10 +350,10 @@
                 </svg>
                 <span>Commande</span>
             </a>
-        </div>
+        </div> --}}
         <div
             class="hover:ml-4 w-full   hover:text-[#e38407] dark:hover:text-[#e38407]  p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
-            <a href="{{ route('message.index') }}"
+            <a href="{{ route('chats') }}"
                 class="hover:ml-4 justify-end pr-5   hover:text-[#e38407] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('activites.index') ? ' text-[#e38407]' : 'dark:text-white text-gray-700' }}">
                 <svg class="" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                     height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -397,7 +397,7 @@
         </a>
 
         <!-- Clients -->
-        <a href=""
+        {{-- <a href=""
             class="hover:ml-4 justify-end pr-5  hover:text-[#e38407] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('activites.index') ? ' text-[#e38407]' : 'dark:text-white text-gray-700' }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 14 14">
                 <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
@@ -407,9 +407,9 @@
                     <path d="M6.6 8.609a2.996 2.996 0 1 0-5.993 0v1.284h1.285l.428 3.424h2.568l.428-3.424H6.6z" />
                 </g>
             </svg>
-        </a>
+        </a> --}}
         <!-- Vendeurs -->
-        <a href="{{ route('message.index') }}"
+        <a href="{{ route('chats') }}"
             class="hover:ml-4 justify-end pr-5   hover:text-[#e38407] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('odcusers.index') ? ' text-[#e38407]' : 'dark:text-white text-gray-700' }}">
             <svg class="" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 fill="currentColor" viewBox="0 0 24 24">

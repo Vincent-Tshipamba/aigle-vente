@@ -4,7 +4,7 @@
         <div class="container">
             <div class="main-footer pb-15 mb-30">
                 <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="col-lg-2 col-md-4 col-sm-6">
                         <div class="footer-widget footer-col-1 mb-40">
                             <div class="footer-logo mb-30">
                                 <a href="{{ route('home') }}"><img loading="lazy"
@@ -34,7 +34,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="col-lg-2 col-md-4 col-sm-6">
                         <div class="footer-widget footer-col-4 mb-40">
                             <h4 class="footer-widget__title mb-30">Réseaux Sociaux</h4>
                             <div class="footer-widget__links">
@@ -50,17 +50,16 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="footer-widget mb-40">
-                    <h4 class="footer-widget__title mb-30">Recevoir la Newsletter</h4>
-                    <div class="footer-widget__newsletter">
-                        <form action="#">
-                            <div class="flex items-center space-x-2">
-                                <input type="email" placeholder="Entrez votre adresse email">
-                                <button class="-mt-2 footer-widget__fw-news-btn tpsecondary-btn">S'abonner<i
-                                        class="fal fa-long-arrow-right"></i></button>
-                            </div>
-                        </form>
+                    <div class="col-lg-4">
+                        <h4 class="footer-widget__title mb-30">Recevoir la Newsletter</h4>
+                        <div class="footer-widget__newsletter">
+                            <form action="#">
+                                <div class="flex flex-col xl:flex-row items-center space-x-2">
+                                    <input type="email" placeholder="Entrez votre adresse email">
+                                    <button class="-mt-2 footer-widget__fw-news-btn tpsecondary-btn">S'abonner</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

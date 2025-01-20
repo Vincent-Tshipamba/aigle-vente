@@ -67,6 +67,18 @@
 
     <main class="main-content">
         {{ $slot }}
+        @if (!Auth::check())
+            <div id="drawer-login"
+                class="fixed z-40 w-full overflow-y-auto bg-white border-t border-gray-200 rounded-t-lg dark:border-gray-700 dark:bg-gray-800 transition-transform top-10 bottom-0 left-0 right-0 translate-y-full"
+                tabindex="-1" aria-labelledby="drawer-login-label">
+                <div class="p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700"
+                    data-drawer-toggle="drawer-login">
+                    <span
+                        class="absolute w-8 h-1 -translate-x-1/2 bg-gray-300 rounded-lg top-3 left-1/2 dark:bg-gray-600"></span>
+                </div>
+                @livewire('auth.login')
+            </div>
+        @endif
     </main>
 
     @yield('footer')

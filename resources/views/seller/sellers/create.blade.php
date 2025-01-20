@@ -40,29 +40,39 @@
                                         identification claire et rapide dans notre système.
                                     </p>
                                 </div>
-                                <!-- First Name -->
-                                <div class="tptrack__id mb-10">
-                                    <div class="relative">
-                                        <input id="firstname" class="mt-1" type="text" name="first_name"
-                                            value="{{ $firstName }}" readonly placeholder="Votre prénom" required />
+                                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                                    <div class="tptrack__id mb-10">
+                                        <div class="relative">
+                                            <input id="firstname" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" type="text" name="first_name"
+                                                value="{{ $firstName }}" readonly placeholder="Votre prénom"
+                                                required />
+                                        </div>
+                                        <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
                                     </div>
-                                    <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
+
+                                    <!-- Last Name -->
+                                    <div class="tptrack__id mb-10">
+                                        <div class="relative">
+                                            <input id="lastname" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" type="text" name="last_name"
+                                                value="{{ $lastName }}" readonly placeholder="Votre nom" required />
+                                        </div>
+                                        <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
+                                    </div>
                                 </div>
 
-                                <!-- Last Name -->
-                                <div class="tptrack__id mb-10">
-                                    <div class="relative">
-                                        <input id="lastname" class="mt-1" type="text" name="last_name"
-                                            value="{{ $lastName }}" readonly placeholder="Votre nom" required />
-                                    </div>
-                                    <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
-                                </div>
 
                                 <!-- Sexe -->
-                                <select id="sexe" name="sexe" class="z-50 select-custom nice-select">
-                                    <option value="{{ $sexe }}" selected> {{ $sexe }} </option>
-                                </select>
-                                <x-input-error :messages="$errors->get('sexe')" class="mt-2" />
+                                <div class="tptrack__id mb-10">
+                                    <div class="relative">
+                                        <select id="sexe" name="sexe"
+                                            class=" select-custom nice-select mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ">
+                                            <option value="{{ $sexe }}" selected> {{ $sexe }} </option>
+                                        </select>
+                                    </div>
+
+                                    <x-input-error :messages="$errors->get('sexe')" class="mt-2" />
+                                </div>
+
 
                             </div>
 
@@ -90,7 +100,7 @@
                                 <!-- Téléphone -->
                                 <div class="tptrack__id mb-10">
                                     <div class="relative">
-                                        <input id="phone" class="mt-1" type="text" name="phone" required
+                                        <input id="phone" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" type="text" name="phone" required
                                             placeholder="Votre téléphone" />
                                     </div>
                                     <x-input-error :messages="$errors->get('phone')" class="mt-2" />
@@ -99,7 +109,7 @@
                                 <!-- Adresse -->
                                 <div class="tptrack__id mb-10">
                                     <div class="relative">
-                                        <input id="address" class="mt-1" type="text" name="address" required
+                                        <input id="address" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" type="text" name="address" required
                                             placeholder="Votre adresse" />
                                     </div>
                                     <x-input-error :messages="$errors->get('address')" class="mt-2" />
@@ -122,16 +132,12 @@
                                     </h3>
                                     <p class="mt-3 text-center  sm:mt-4 text-base text-gray-600 dark:text-gray-400">
                                         Dans cette étape, vous devez télécharger une photo de profil qui vous
-                                        représente. Cette image sera utilisée pour personnaliser votre profil et aider à
-                                        mieux vous identifier sur la plateforme. Veuillez vous assurer que l'image est
-                                        claire et professionnelle.
+                                        représente. 
                                     </p>
                                 </div>
                                 <!-- Photo -->
                                 <div class="mb-10">
-                                    {{-- <div class="relative">
-                                        <input id="picture" type="file" name="picture" class="mt-1" />
-                                    </div> --}}
+                                  
                                     <div class="mb-5 text-center">
                                         <div
                                             class="mx-auto w-32 h-32 mb-2 border rounded-full relative bg-gray-100 mb-4 shadow-inset">

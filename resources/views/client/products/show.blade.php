@@ -108,6 +108,8 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
     </section>
     <!-- product-area-end -->
 
@@ -399,7 +401,7 @@
                     </div>
                 </div>
             </div>
-            <div class="swiper-container related-product-active">
+            <div class="swiper-container">
                 <div class="swiper-wrapper">
                     @if ($otherProducts->count() > 0)
                         @foreach ($otherProducts->unique('_id') as $index => $product)

@@ -18,7 +18,7 @@
                                 <a href="{{ route('home') }}">Accueil</a>
                             </li>
                             <li>
-                                <a href="{{route('shops.all')}}">Boutiques</a>
+                                <a href="{{ route('shops.all') }}">Boutiques</a>
                             </li>
                             <li><a href="{{ route('contact') }}">Contact</a></li>
                         </ul>
@@ -32,7 +32,8 @@
                             <form action="#">
                                 <div class="search-info-5 p-relative">
                                     <button class="header-search-icon-5"><i class="fal fa-search"></i></button>
-                                    <input class="search-input" type="text" placeholder="Rechercher un produit ou une boutique...">
+                                    <input class="search-input" type="text"
+                                        placeholder="Rechercher un produit ou une boutique...">
                                 </div>
                             </form>
                         </div>
@@ -232,7 +233,11 @@
                             @endif
                         </div>
                     @else
-                        <a href="{{ route('login') }}"><i class="fal fa-user"></i></a>
+                        <a href="#" class="text-md text-black dark:text-gray-200" data-drawer-target="drawer-login" data-drawer-show="drawer-login"
+                            data-drawer-placement="bottom" data-drawer-edge="true"
+                            data-drawer-edge-offset="bottom-[60px]" aria-controls="drawer-login">
+                            <i class="fal fa-user"></i>
+                        </a>
                         <!-- Lien vers le formulaire de connexion -->
                     @endauth
                 </div>

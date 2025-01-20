@@ -20,7 +20,8 @@
                         <form action="#">
                             <div class="search-info p-relative">
                                 <button class="header-search-icon"><i class="fal fa-search"></i></button>
-                                <input class="search-input" type="text" placeholder="Rechercher un produit ou une boutique...">
+                                <input class="search-input" type="text"
+                                    placeholder="Rechercher un produit ou une boutique...">
                             </div>
                         </form>
                     </div>
@@ -219,7 +220,11 @@
                                 @endif
                             </div>
                         @else
-                            <a href="{{ route('login') }}"><i class="fal fa-user"></i></a>
+                            <a href="#" class="text-md text-black dark:text-gray-200" data-drawer-target="drawer-login" data-drawer-show="drawer-login"
+                                data-drawer-placement="bottom" data-drawer-edge="true"
+                                data-drawer-edge-offset="bottom-[60px]" aria-controls="drawer-login">
+                                <i class="fal fa-user"></i>
+                            </a>
                             <!-- Lien vers le formulaire de connexion -->
                         @endauth
                     </div>
@@ -439,8 +444,12 @@
                                     @endif
                                 </div>
                             @else
-                                <a href="{{ route('login') }}" class="text-md text-black dark:text-gray-200"><i
-                                        class="fal fa-user"></i></a>
+                                <a class="text-md text-black dark:text-gray-200" href="#"
+                                    data-drawer-target="drawer-login" data-drawer-show="drawer-login"
+                                    data-drawer-placement="bottom" data-drawer-edge="true"
+                                    data-drawer-edge-offset="bottom-[60px]" aria-controls="drawer-login">
+                                    <i class="fal fa-user"></i>
+                                </a>
                                 <!-- Lien vers le formulaire de connexion -->
                             @endauth
                         </div>

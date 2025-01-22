@@ -13,6 +13,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
+    @livewireStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -23,11 +24,13 @@
         function signUpForm() {
             return {
                 showPwd: false,
+                showPwdConf: false,
                 isLoading: false,
             };
         }
     </script>
-    @stack('scripts')
+    @livewireScripts
+    @yield('script')
 </body>
 
 </html>

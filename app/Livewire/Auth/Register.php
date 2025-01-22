@@ -34,6 +34,11 @@ class Register extends Component
         'firstname' => 'required|string|max:255',
         'lastname' => 'required|string|max:255',
         'sexe' => 'required|string',
+        'city' => 'nullable|string',
+        'country' => 'nullable|string',
+        'continent' => 'nullable|string',
+        'latitude' => 'nullable|string',
+        'longitude' => 'nullable|string'
     ];
 
     protected $messages = [
@@ -58,35 +63,56 @@ class Register extends Component
 
     public function register()
     {
-        dd($this->firstname, $this->country, $this->sexe, $this->latitude, $this->longitude);
+        Log::info('Valeurs avant validation', [
+            'city' => $this->city,
+            'country' => $this->country,
+            'continent' => $this->continent,
+            'latitude' => $this->latitude,
+            'longitude' => $this->longitude,
+        ]);
         $this->validate();
 
         try {
             $name = $this->firstname . '-' . $this->lastname;
 
-            $user = User::create([
-                'name' => $name,
-                'email' => $this->email,
-                'phone' => $this->phone,
-                'password' => Hash::make($this->password),
-            ]);
+            try {
+                $user = User::create([
+                    'name' => $name,
+                    'email' => $this->email,
+                    'phone' => $this->phone,
+                    'password' => Hash::make($this->password),
+                ]);
+                Log::info('User created successfully : ' . $user);
+            } catch (\Throwable $th) {
+                Log::error('Une erreur s\'est produite lors de l\'enregistrement de l\'utilisateur : ' . $th);
+            }
 
-            $location = Location::create([
-                'city' => $this->city,
-                'country' => $this->country,
-                'continent' => $this->continent,
-                'latitude' => $this->latitude,
-                'longitude' => $this->longitude,
-            ]);
+            try {
+                $location = Location::create([
+                    'city' => $this->city,
+                    'country' => $this->country,
+                    'continent' => $this->continent,
+                    'latitude' => $this->latitude,
+                    'longitude' => $this->longitude,
+                ]);
+                Log::info('Location added successfully : ' . $location);
+            } catch (\Throwable $th) {
+                Log::error('Une erreur s\'est produite lors de l\'enregistrement de la localisation du client : ' . $th);
+            }
 
-            $client = Client::create([
-                'first_name' => $this->firstname,
-                'last_name' => $this->lastname,
-                'sexe' => $this->sexe,
-                'location_id' => $location->id,
-                'user_id' => $user->id,
-                'phone' => $this->phone,
-            ]);
+            try {
+                $client = Client::create([
+                    'first_name' => $this->firstname,
+                    'last_name' => $this->lastname,
+                    'sexe' => $this->sexe,
+                    'location_id' => $location->id,
+                    'user_id' => $user->id,
+                    'phone' => $this->phone,
+                ]);
+                Log::info('Client registered successfully : ' . $client);
+            } catch (\Throwable $th) {
+                Log::error('Une erreur s\'est produite lors de l\'enregistrement du client : ' . $th);
+            }
 
             $role = Role::firstOrCreate(['name' => 'client']);
             $user->assignRole($role);

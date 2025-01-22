@@ -4,27 +4,6 @@
 
     @section('script')
         <script>
-            document.getElementById('register-form').addEventListener('submit', function(e) {
-                const sexe = document.getElementById('sexe');
-
-                if (!sexe.value) {
-                    e.preventDefault();
-                    $('.error-message').show();
-                }
-            });
-
-            function selectGender(event) {
-                if (event.target.value) {
-                    $('.gender-validation').show();
-                    $('.error-message').hide();
-                } else {
-                    $('.error-message').show();
-                    $('.gender-validation').hide();
-                }
-            }
-        </script>
-
-        <script>
             document.addEventListener('DOMContentLoaded', function() {
                 $("#register-form").validate({
                     rules: {
@@ -99,55 +78,84 @@
                         );
                     }
                 });
+
+            });
+
+            document.addEventListener('DOMContentLoaded', function() {
+                $('#registrationForm').on('submit', function(event) {
+                    event.preventDefault();
+
+                    const formData = new FormData(this);
+
+                    // Ajouter les colonnes de localisation au FormData
+                    formData.append('country', $('#country').val());
+                    formData.append('continent', $('#continent').val());
+                    formData.append('latitude', $('#latitude').val());
+                    formData.append('longitude', $('#longitude').val());
+
+                    fetch('https://api.geoapify.com/v1/ipinfo?&apiKey=d9b01610dc2b44f89ebf22942a004d66')
+                        .then(resp => resp.json())
+                        .then((userLocationData) => {
+                            if (userLocationData) {
+                                if (userLocationData.city.name) {
+                                    formData.append('city', userLocationData.city.name);
+                                }
+                                if (userLocationData.country) {
+                                    if (userLocationData.country.name_native) {
+                                        formData.append('country', userLocationData.country.name_native);
+                                    } else if (userLocationData.country.name) {
+                                        formData.append('country', userLocationData.country.name);
+                                    }
+                                }
+                                if (userLocationData.continent) {
+                                    formData.append('continent', userLocationData.continent.name);
+                                }
+                                if (userLocationData.location) {
+                                    if (userLocationData.location.latitude) {
+                                        formData.append('latitude', userLocationData.location.latitude)
+                                    }
+
+                                    if (userLocationData.location.longitude) {
+                                        formData.append('latitude', userLocationData.location.longitude)
+                                    }
+                                }
+                            }
+                        });
+
+                    $.ajax({
+                        url: this.action,
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        dataType: 'json',
+                        success: function(data) {
+                            window.location.href = "{{ route('home') }}";
+                        },
+                        error: function(jqXHR) {
+                            const errors = jqXHR.responseJSON.errors || {
+                                error: 'Une erreur est survenue.'
+                            };
+                            displayErrors(errors);
+                        }
+                    });
+                });
+
+                function displayErrors(errors) {
+                    // Clear previous errors
+                    $('.error-message').remove();
+
+                    $.each(errors, function(field, messages) {
+                        const errorMessages = Array.isArray(messages) ? messages : [messages];
+                        const inputField = $(`[name="${field}"]`);
+                        $.each(errorMessages, function(index, message) {
+                            const errorElement = $('<span>').addClass(
+                                'text-red-500 text-sm error-message').text(message);
+                            inputField.after(errorElement);
+                        });
+                    });
+                }
             });
         </script>
     @endsection
-    @push('scripts')
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                fetch('https://api.geoapify.com/v1/ipinfo?&apiKey=d9b01610dc2b44f89ebf22942a004d66')
-                    .then(resp => resp.json())
-                    .then((userLocationData) => {
-                        const city = $('#city');
-                        const country = $('#country');
-                        const continent = $('#continent');
-                        const latitude = $('#latitude');
-                        const longitude = $('#longitude');
-                        // console.log(
-                        //     userLocationData.city.name,
-                        //     userLocationData.country.name_native,
-                        //     userLocationData.continent.name,
-                        //     userLocationData.location.latitude,
-                        //     userLocationData.location.longitude
-                        // );
-
-
-                        if (userLocationData) {
-                            if (userLocationData.city.name) {
-                                city.val(userLocationData.city.name);
-                            }
-                            if (userLocationData.country) {
-                                if (userLocationData.country.name_native) {
-                                    country.val(userLocationData.country.name_native);
-                                } else if (userLocationData.country.name){
-                                    country.val(userLocationData.country.name)
-                                }
-                            }
-                            if (userLocationData.continent) {
-                                continent.val(userLocationData.continent.name);
-                            }
-                            if(userLocationData.location){
-                                if(userLocationData.location.latitude){
-                                    latitude.val(userLocationData.location.latitude);
-                                }
-
-                                if (userLocationData.location.longitude) {
-                                    longitude.val(userLocationData.location.longitude);
-                                }
-                            }
-                        }
-                    });
-            })
-        </script>
-    @endpush
 </x-guest-layout>

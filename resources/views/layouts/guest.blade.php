@@ -18,6 +18,16 @@
 
 <body class="font-sans text-gray-900 antialiased">
     {{ $slot }}
+
+    <script>
+        function signUpForm() {
+            return {
+                showPwd: false,
+                isLoading: false,
+            };
+        }
+    </script>
+    @stack('scripts')
 </body>
 
 </html>

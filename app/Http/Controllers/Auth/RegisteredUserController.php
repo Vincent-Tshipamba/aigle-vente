@@ -10,6 +10,7 @@ use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -43,7 +44,6 @@ class RegisteredUserController extends Controller
                 'sexe.string' => 'Le genre doit être une chaîne de caractères.',
                 'sexe.max' => 'Le genre ne peut pas dépasser 255 caractères.',
                 'password.required' => 'Le mot de passe est requis.',
-                'password.confirmed' => 'Les mots de passe ne correspondent pas.',
             ];
 
             $validated = $request->validate([
@@ -95,7 +95,7 @@ class RegisteredUserController extends Controller
             return redirect(route('home', absolute: false));
         } catch (\Throwable $e) {
             // Log the error for debugging
-            \Log::error('Erreur lors de l’enregistrement d’un utilisateur : ' . $e->getMessage());
+            Log::error('Erreur lors de l’enregistrement d’un utilisateur : ' . $e->getMessage());
 
             // Rediriger avec un message d’erreur pour l’utilisateur
             return back()->withErrors(['error' => 'Une erreur est survenue lors de l’enregistrement. Veuillez réessayer.']);

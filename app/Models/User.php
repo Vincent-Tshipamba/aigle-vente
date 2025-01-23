@@ -22,6 +22,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
         'password',
         'is_active',
         'last_activity',
@@ -32,7 +33,7 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    
+
 
     public function isOnline()
     {

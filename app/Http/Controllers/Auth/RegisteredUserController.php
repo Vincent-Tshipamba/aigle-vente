@@ -46,6 +46,7 @@ class RegisteredUserController extends Controller
                 'sexe.string' => 'Le genre doit être une chaîne de caractères.',
                 'sexe.max' => 'Le genre ne peut pas dépasser 255 caractères.',
                 'password.required' => 'Le mot de passe est requis.',
+                'password.confirmed' => 'Les mots de passe doivent correspondre'
             ];
 
             $validator = Validator::make($request->all(), [

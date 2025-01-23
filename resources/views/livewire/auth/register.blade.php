@@ -17,18 +17,18 @@
                 </p>
 
                 <!-- Formulaire -->
-                <form action="{{ route('register') }}" method="POST" class="space-y-5">
+                <form id="registrationForm" action="{{ route('register') }}" method="POST" class="space-y-5">
                     @csrf
                     <div class="grid grid-cols-2 gap-4">
                         <input type="text" name="firstname" placeholder="Prénom*"
-                            class="w-full px-4 py-3.5 text-lg rounded focus:outline-none focus:border-[#e38407] placeholder-gray-400"
+                            class="w-full px-4 py-3.5 text-lg rounded focus:outline-none border border-gray-300 focus:border-[#e38407] placeholder-gray-400"
                             required />
                         @error('firstname')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
 
                         <input type="text" name="lastname" placeholder="Nom*"
-                            class="w-full px-4 py-3.5 text-lg rounded focus:outline-none focus:border-[#e38407] placeholder-gray-400"
+                            class="w-full px-4 py-3.5 text-lg rounded focus:outline-none border border-gray-300 focus:border-[#e38407] placeholder-gray-400"
                             required />
                         @error('lastname')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -37,7 +37,7 @@
 
                     <div>
                         <input type="text" name="phone" placeholder="Numéro de téléphone*"
-                            class="w-full px-4 py-3.5 text-lg rounded focus:outline-none focus:border-[#e38407] placeholder-gray-400"
+                            class="w-full px-4 py-3.5 text-lg rounded focus:outline-none border border-gray-300 focus:border-[#e38407] placeholder-gray-400"
                             required />
                         @error('phone')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -46,7 +46,7 @@
 
                     <div>
                         <input type="email" name="email" placeholder="Email"
-                            class="w-full px-4 py-3.5 text-lg rounded focus:outline-none focus:border-[#e38407] placeholder-gray-400" />
+                            class="w-full px-4 py-3.5 text-lg rounded focus:outline-none border border-gray-300 focus:border-[#e38407] placeholder-gray-400" />
                         @error('email')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
@@ -54,7 +54,7 @@
 
                     <div class="relative">
                         <input :type="showPwd ? 'text' : 'password'" name="password" placeholder="Password*"
-                            class="w-full px-4 py-3.5 text-lg rounded focus:outline-none focus:border-rose-500 placeholder-gray-400" />
+                            class="w-full px-4 py-3.5 text-lg rounded focus:outline-none border border-gray-300 focus:border-rose-500 placeholder-gray-400" />
                         <button type="button" @click="showPwd = !showPwd"
                             class="absolute right-3 top-1/2 -translate-y-1/2">
                             <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,7 +70,7 @@
                     </div>
                     <div class="relative">
                         <input :type="showPwdConf ? 'text' : 'password'" name="password.confirmation" placeholder="Confirmez le mot de passe*"
-                            class="w-full px-4 py-3.5 text-lg rounded focus:outline-none focus:border-rose-500 placeholder-gray-400" />
+                            class="w-full px-4 py-3.5 text-lg rounded focus:outline-none border border-gray-300 focus:border-rose-500 placeholder-gray-400" />
                         <button type="button" @click="showPwdConf = !showPwdConf"
                             class="absolute right-3 top-1/2 -translate-y-1/2">
                             <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -85,12 +85,12 @@
                         @enderror
                     </div>
 
-                    <select name="sexe"
-                        class="w-full px-4 py-3.5 text-lg rounded focus:outline-none focus:border-[#e38407] text-gray-500 appearance-none bg-white">
+                    <select name="sexe" required
+                        class="w-full px-4 py-3.5 text-lg rounded focus:outline-none border border-gray-300 focus:border-[#e38407] text-gray-500 appearance-none bg-white">
                         <option value="">Genre*</option>
-                        <option value="male">Masculin</option>
-                        <option value="female">Féminin</option>
-                        <option value="unspecified">Ne pas spécifier</option>
+                        <option value="Masculin">Masculin</option>
+                        <option value="Féminin">Féminin</option>
+                        <option value="Ne pas spécifier">Ne pas spécifier</option>
                     </select>
                     @error('sexe')
                         <span class="text-red-500 text-sm">{{ $message }}</span>

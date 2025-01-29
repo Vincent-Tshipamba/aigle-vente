@@ -12,7 +12,6 @@ class Location extends Model
         '_id',
         'city',
         'country',
-        'state',
         'continent',
         'latitude',
         'longitude'

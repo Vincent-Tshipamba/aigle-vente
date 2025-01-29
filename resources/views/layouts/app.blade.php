@@ -67,6 +67,18 @@
 
     <main class="main-content">
         {{ $slot }}
+        @if (!Auth::check())
+            <div id="drawer-login"
+                class="fixed z-40 w-full overflow-y-auto bg-white border-t border-gray-200 rounded-t-lg dark:border-gray-700 dark:bg-gray-800 transition-transform top-10 bottom-0 left-0 right-0 translate-y-full"
+                tabindex="-1" aria-labelledby="drawer-login-label">
+                <div class="p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700"
+                    data-drawer-toggle="drawer-login">
+                    <span
+                        class="absolute w-8 h-1 -translate-x-1/2 bg-gray-300 rounded-lg top-3 left-1/2 dark:bg-gray-600"></span>
+                </div>
+                @livewire('auth.login')
+            </div>
+        @endif
     </main>
 
     @yield('footer')
@@ -106,6 +118,91 @@
                     document.getElementById('logout-form').submit();
                 }
             });
+        }
+    </script>
+    <script>
+        function changeImage(src) {
+            document.getElementById('mainImage').src = src;
+        }
+
+        function changeImageInContactSellerModal(src) {
+            document.getElementById('mainImageInContactSellerModal').src = src;
+        }
+
+        function contactSellerModal(event, product) {
+            event.preventDefault();
+
+            // Construire l'image principale du produit
+            const productImage =
+                `<img src="{{ asset('') }}${product.photos[0].image}" id="mainImageInContactSellerModal" alt="${product.name}" class="w-full h-full object-cover rounded-sm shadow-md mb-4">`;
+
+            // Construire les images secondaires
+            let thumbnails = '';
+            product.photos.slice(0, 4).forEach(photo => {
+                thumbnails += `<img src="{{ asset('') }}${photo.image}" alt="${product.name}"
+        class="size-16 sm:size-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
+        onclick="changeImageInContactSellerModal('{{ asset('') }}${photo.image}')">`;
+            });
+
+            const routeUrl = "{{ route('contact.seller', ['sellerId' => ':sellerId', 'productId' => ':productId']) }}";
+            const actionUrl = routeUrl
+                .replace(':sellerId', product.shop.seller.id)
+                .replace(':productId', product.id);
+
+            // Contenu du modal
+            const modalContent = `
+                    <div class="w-full">
+                        <h2 class="text-lg font-bold mb-4">Contacter le vendeur pour le produit ${product.name}</h2>
+
+                        <div class="flex flex-col lg:flex-row gap-5">
+                            <!-- Section des images -->
+                            <div class="lg:w-1/2">
+                                <div class="mb-4 mx-auto w-[150px] h-[150px] md:w-[200px] md:h-[200px] lg:w-[250px] lg:h-[250px] xl:w-[400px] xl:h-[400px]">${productImage}</div>
+                                <div class="flex gap-4 py-4 justify-center overflow-x-auto">${thumbnails}</div>
+                            </div>
+
+                            <!-- Section d'envoi de message -->
+                            <div class="lg:w-1/2 mb-12 mx-auto">
+                                <form action="${actionUrl}" method="POST">
+                                <textarea id="sellerMessage"
+                                    class="w-full p-3 mb-6 mx-auto rounded-lg border focus:outline-none focus:ring focus:ring-[#e38407]"
+                                    rows="4" name="message"
+                                    placeholder="Écrivez votre message ici...">Bonjour M. (Mme) ${product.shop.seller.first_name} ${product.shop.seller.last_name}. J'espère que vous allez bien. Est-ce que le(s) ou la ${product.name} est (sont) toujours disponible(s) ?</textarea>
+
+                                    <div class="flex flex-col items-center justify-center gap-3 mt-6 lg:flex-row">
+                                        @csrf
+                                        <button type="submit" class="inline-block text-sm sm:text-md text-center min-w-[150px] 2xl:min-w-[200px] px-2 py-2 sm:px-0 sm:py-3 text-white transition-all rounded-md shadow-xl bg-gradient-to-r from-orange-600 to-[#e38407] hover:bg-gradient-to-b dark:shadow-blue-900 shadow-blue-200 hover:shadow-2xl hover:shadow-blue-400 hover:-tranneutral-y-px "
+                                            href="#" id="confirmMessageBtn">
+                                            Envoyer le message
+                                        </button>
+                                        <a class="inline-block text-sm sm:text-md text-center min-w-[150px] 2xl:min-w-[200px] px-2 py-2 sm:px-0 sm:py-3 text-white transition-all bg-gray-700 dark:bg-white dark:text-gray-800 rounded-md shadow-xl hover:bg-gray-900 hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-2xl hover:shadow-neutral-400 hover:-tranneutral-y-px"
+                                        href="#" id="cancelMessageBtn">Annuler
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+            // Afficher la modal SweetAlert2
+            Swal.fire({
+                html: modalContent,
+                showConfirmButton: false,
+                showCancelButton: false,
+                customClass: {
+                    popup: 'w-full p-3 max-w-sm sm:max-w-md md:max-w-lg lg:max-w-3xl xl:max-w-4xl 2xl:max-w-6xl'
+                },
+                didOpen: () => {
+                    const cancelButton = document.getElementById('cancelMessageBtn');
+
+                    // Cancel button event
+                    cancelButton.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        Swal.close(); // Close the modal
+                    });
+                },
+            })
         }
     </script>
     <script>

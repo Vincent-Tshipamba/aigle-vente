@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Shop;
 use App\Models\User;
-use App\Models\Order;
 use App\Models\Seller;
 use App\Models\Message;
 use App\Models\Product;
@@ -41,10 +40,6 @@ class DashboardController extends Controller
         $clients = User::whereIn('id', $messages->pluck('sender_id')->merge($messages->pluck('receiver_id'))->unique())
             ->where('id', '!=', $userId)
             ->get();
-
-
-
-
 
         return view('seller.dashboard', compact(
             'totalProducts',
@@ -129,6 +124,7 @@ class DashboardController extends Controller
 
     public function getChartData(Request $request)
     {
+        $user = Auth::user();
         $period = $request->query('period', 'This Week');
         $startDate = now();
         $endDate = now();
@@ -142,55 +138,76 @@ class DashboardController extends Controller
             $endDate = now()->subWeek()->endOfWeek();
         }
 
-        // Compter le nombre de clients distincts ayant envoyé des messages
-        $clientCounts = Message::whereBetween('created_at', [$startDate, $endDate])
-            ->selectRaw('COUNT(DISTINCT sender_id) as total_clients, DATE(created_at) as message_date')
+        $conversationIds = DB::table('wire_participants')
+            ->where('participantable_id', $user->id)
+            ->where('participantable_type', get_class($user)) // Vérifier le type polymorphique
+            ->pluck('conversation_id');
+
+
+
+        // Récupérer les messages en fonction des dates et des conversations
+        $clientCounts = DB::table('wire_messages')
+            ->whereIn('conversation_id', $conversationIds)
+            ->where('sendable_id', '!=', $user->id) // Exclure les messages de l'utilisateur
+            ->whereBetween('created_at', [$startDate, $endDate]) // Filtrer par période
+            ->selectRaw('COUNT(DISTINCT sendable_id) as total_clients, DATE(created_at) as message_date')
             ->groupBy('message_date')
             ->orderBy('message_date')
             ->get();
 
-        // Préparer les données pour le graphique
-        $categories = $clientCounts->pluck('message_date'); // Jours dans la période
+
+
+
+        $categories = $clientCounts->pluck('message_date'); // Dates des messages
         $series = [
             [
                 'name' => 'Nombre de Clients',
-                'data' => $clientCounts->pluck('total_clients'), // Totaux journaliers
+                'data' => $clientCounts->pluck('total_clients'), // Nombre total de clients par jour
             ],
         ];
 
         return response()->json([
-            'categories' => $categories,
-            'series' => $series,
+            'categories' => $categories, // Catégories pour l'axe des X
+            'series' => $series, // Séries pour le graphique
         ]);
     }
+
 
     public function getChartDataLocation()
     {
         // Récupérer l'utilisateur connecté
-        $user = Auth::id(); // L'utilisateur connecté
-
+        $user = Auth::user(); 
+        
+        if (!$user) {
+            return response()->json(['error' => 'Utilisateur non connecté'], 401);
+        }
         // Récupérer les messages reçus par l'utilisateur connecté
-        $messages = Message::where('receiver_id', $user) // Messages reçus par l'utilisateur
-            ->with(['sender.client.location']) // Charger la localisation via les relations
+        $messages = DB::table('wire_messages')
+        ->join('wire_participants', 'wire_messages.conversation_id', '=', 'wire_participants.conversation_id')
+        ->join('clients', 'wire_messages.sendable_id', '=', 'clients.user_id')
+        ->join('locations', 'clients.location_id', '=', 'locations.id')
+        ->where('wire_participants.participantable_id', $user->id) 
+            ->where('wire_participants.participantable_type', get_class($user)) 
+            ->select(
+                'locations.country',
+                'locations.latitude',
+                'locations.longitude',
+                DB::raw('SUM(1) as message_count') 
+            )
+            ->groupBy('locations.country', 'locations.latitude', 'locations.longitude')
             ->get();
 
-        // Préparer les données pour la carte
-        $mapData = [];
+        
+        $mapData = $messages->map(function ($message) {
+            return [
+                'country' => $message->country,
+                'latitude' => $message->latitude,
+                'longitude' => $message->longitude,
+                'message_count' => $message->message_count,
+            ];
+        });
 
-        // Parcourir les messages et récupérer la localisation des clients
-        foreach ($messages as $message) {
-            $client = $message->sender->client;
-            if ($client && $client->location) {
-                $mapData[] = [
-                    'country' => $client->location->country,
-                    'latitude' => $client->location->latitude,
-                    'longitude' => $client->location->longitude,
-                    'message_count' => 1, // Chaque message représente un comptage de message
-                ];
-            }
-        }
-
-        // Vous pouvez maintenant retourner les données pour la carte
+        // Retourner les données pour la carte
         return response()->json($mapData);
     }
 
@@ -198,14 +215,13 @@ class DashboardController extends Controller
     {
         $userId = Auth::id();
 
-        // Récupérer le vendeur associé à cet utilisateur
         $seller = Seller::where('user_id', $userId)->first();
 
         if (!$seller) {
             return response()->json(['error' => 'Vendeur non trouvé'], 404);
         }
 
-        // ID du vendeur
+
         $sellerId = $seller->id;
         $shops = Shop::where('seller_id', $seller->id)->get();
         $shopIds = $shops->pluck('id');
@@ -245,5 +261,4 @@ class DashboardController extends Controller
         $categories = CategoryProduct::all();
         return view('welcome', compact('products', 'categories'));
     }
-
 }

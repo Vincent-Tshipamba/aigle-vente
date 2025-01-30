@@ -57,7 +57,7 @@
         </div>
 
         <!-- Bouton Filtre avec responsive -->
-        <button onclick="showFilters()"
+        <button data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation"
             class="border border-gray-800 bg-white text-gray-600 dark:hover:bg-gray-100 py-2 px-3 text-sm sm:text-base font-normal rounded-lg  items-center hover:bg-gray-200 transition-all duration-300  hover:scale-110 drop-shadow-md sm:flex hidden">
             <svg class="mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
@@ -88,81 +88,9 @@
         </button>
     </div>
 
-    <!-- Filter Modal -->
-    <div id="filterSection" tabindex="-1" aria-hidden="true" 
-        class="hidden fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
-        <div class="relative w-full max-w-4xl bg-white rounded-lg shadow-lg dark:bg-gray-800">
-            <!-- Header -->
-            <div class="flex justify-between items-center p-5 border-b dark:border-gray-700">
-                <h3 class="text-lg font-medium text-gray-900 dark:text-white" >Filtrer les résultats</h3>
-                <button type="button" class="text-gray-400 hover:text-gray-900 dark:hover:text-white"
-                    onclick="closeFilterSection()">
-                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
+     @include('partials.home-partials.filters')
 
-            <!-- Body -->
-            <div class="py-10 px-6 bg-gray-50 dark:bg-gray-800">
-                <!-- Colors Section -->
-                <section>
-                    <div class="flex space-x-2 text-gray-800 dark:text-white mb-6">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M19 3H15..." stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                        <p class="lg:text-2xl text-xl font-medium">Colors</p>
-                    </div>
-                    <div class="grid grid-cols-3 gap-y-8">
-                        <div class="flex items-center space-x-2">
-                            <div class="w-4 h-4 bg-white shadow rounded-full"></div>
-                            <p>White</p>
-                        </div>
-                        <!-- More color options -->
-                    </div>
-                </section>
-
-                <!-- Materials Section -->
-                <section class="mt-8">
-                    <div class="flex space-x-2 text-gray-800 dark:text-white mb-6">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9.5 16C13..." stroke="currentColor" stroke-width="1.5" />
-                        </svg>
-                        <p class="lg:text-2xl text-xl font-medium">Material</p>
-                    </div>
-                    <div class="grid grid-cols-3 gap-y-8">
-                        <div class="flex items-center space-x-2">
-                            <input type="checkbox" id="Leather" name="Leather" value="Leather" class="w-4 h-4" />
-                            <label for="Leather" class="text-sm font-normal text-gray-600">Leather</label>
-                        </div>
-                        <!-- More material options -->
-                    </div>
-                </section>
-
-                <!-- Submit Button -->
-                <div class="flex justify-end mt-6">
-                    <div class="hidden md:block absolute right-0 bottom-0 md:py-10 lg:px-20 md:px-6 py-9 px-4">
-                        <button onclick="applyFilters()"
-                            class="hover:bg-gray-700 dark:bg-white dark:text-gray-800 dark:hover:bg-gray-100 focus:ring focus:ring-offset-2 focus:ring-gray-800 text-base leading-4 font-medium py-4 px-10 text-white bg-gray-800">Apply
-                            Filter</button>
-                    </div>
-
-                    <!-- Apply Filter Button (Table or lower Screen) -->
-
-                    <div class="block md:hidden w-full mt-10">
-                        <button onclick="applyFilters()"
-                            class="w-full hover:bg-gray-700 dark:bg-white dark:text-gray-800 dark:hover:bg-gray-100 focus:ring focus:ring-offset-2 focus:ring-gray-800 text-base leading-4 font-medium py-4 px-10 text-white bg-gray-800">Apply
-                            Filter</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  
 
     <!-- ✅ Grid Section - Starts Here 👇 -->
     <section class="productsParent">
@@ -174,42 +102,42 @@
             </div>
         @else
             <div id="Products"
-                class="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14  mb-5 my-20">
+                class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 justify-items-center justify-center gap-4 mb-5 my-10">
                 @foreach ($products as $index => $product)
-                    <div class="w-72 rounded-xl duration-500">
+                    <div class="w-48 h-auto rounded-xl  p-2">
                         <a href="{{ route('products.show', $product->_id) }}">
                             <div class="image swiper-container product-swiper-{{ $index + 1 }}" loading="lazy">
                                 <div class="swiper-wrapper">
                                     @foreach ($product->photos as $item)
                                         <div class="swiper-slide">
                                             <img src="{{ asset($item->image) }}" alt="{{ $product->name }}"
-                                                class="h-80 w-72 object-cover rounded-xl hover:scale-105">
+                                                class="h-40 w-40 object-cover rounded-xl hover:scale-105">
                                         </div>
                                     @endforeach
                                 </div>
-
                                 <!-- Pagination -->
                                 <div class="swiper-pagination swiper-pagination-{{ $index + 1 }}"></div>
-
-                                <!-- Navigation -->
-                                <div class="swiper-button-prev swiper-button-prev-{{ $index + 1 }}"></div>
-                                <div class="swiper-button-next swiper-button-next-{{ $index + 1 }}"></div>
                             </div>
                         </a>
-                        <div class="px-4 py-3 w-72">
+                        <div class="px-4 py-3 w-48 hover:scale-105">
                             <span
                                 class="text-gray-400 mr-3 uppercase text-xs">{{ $product->category_product->name }}</span><br>
-                            <a href="{{ route('shops.show', $product->shop->_id) }}" class="text-gray-400 mr-3 text-xs">Boutique {{ $product->shop->name }}</a>
+                            <a href="{{ route('shops.show', $product->shop->_id) }}"
+                                class="text-gray-400 mr-3 text-xs">Boutique {{ $product->shop->name }}</a>
 
-                            <p class="text-lg font-bold text-black truncate block capitalize">{{ $product->name }}</p>
-                            <div class="flex items-center">
+                           <p class="text-lg font-bold text-black truncate block capitalize w-full overflow-hidden">{{ $product->name }}</p>
+
+
+                            <div class=" flex items-center">
                                 <p class="text-lg font-semibold text-black cursor-auto my-3">
-                                    ${{ $product->unit_price }}
-                                </p>
+                                    ${{ $product->unit_price }}</p>
                                 <del>
                                     <p class="text-sm text-gray-600 cursor-auto ml-2">${{ $product->unit_price + 50 }}
                                     </p>
                                 </del>
+                            </div>
+                            <div class=" items-center">
+
                                 <div class="ml-auto flex space-x-2">
                                     <!-- Contacter un vendeur -->
                                     <svg onclick="contactSellerModal(event, {{ json_encode($product) }})"

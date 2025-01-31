@@ -32,6 +32,10 @@ class HomeController extends Controller
             ->latest()
             ->first();
 
+        $promotions = Promotion::where('status', 'active')
+            ->latest()->get();
+         ;
+
         if (Auth::check()) {
             $wishlists = Wishlist::where('user_id', Auth::user()->id)->get();
             $totalAmount = DB::table('wishlists')
@@ -40,10 +44,10 @@ class HomeController extends Controller
                 ->sum('products.unit_price');
 
             // Retourner la vue avec les produits
-            return view('home.index', compact('products',  'totalProducts', 'categories', 'saleProducts', 'wishlists', 'totalAmount', 'promotion'));
+            return view('home.index', compact('products',  'totalProducts', 'categories', 'saleProducts', 'wishlists', 'totalAmount', 'promotion', 'promotions'));
         }
 
-        return view('home.index', compact('products', 'totalProducts', 'categories', 'saleProducts', 'promotion'));
+        return view('home.index', compact('products', 'totalProducts', 'categories', 'saleProducts', 'promotion', 'promotions'));
     }
 
     // public function getProducts(Request $request)

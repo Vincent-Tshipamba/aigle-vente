@@ -35,7 +35,7 @@
                             <div class="tpdealcontact__text mb-30">
                                 <h4 class="tpdealcontact__title mb-10">
                                     <a
-                                        href="shop-details.html">{{ $promotion->product->name ?? 'Pots Pliés Abstraits Pro2' }}</a>
+                                        href="{{ route('products.show', $promotion->product->_id) }}">{{ $promotion->product->name ?? 'Pots Pliés Abstraits Pro2' }}</a>
                                 </h4>
 
                                 <p>{!! substr($promotion->product->description, 0, 20) ?? 'Design élégant et décoration coexistent.' !!}</p>

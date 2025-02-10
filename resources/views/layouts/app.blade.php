@@ -280,7 +280,7 @@
 
                 if (selectedCategories.length < 1) {
                     $('.main-content').html(initialContent);
-                    document.querySelectorAll('[id^="category-"]').forEach(cat => $(cat).removeClass(
+                    document.querySelectorAll('[id^="categoryInSidebar-"]').forEach(cat => $(cat).removeClass(
                         'text-white underline'));
                     initializeSwipers()
                     return;
@@ -290,14 +290,14 @@
                     .map(checkbox => checkbox.value);
 
                 allCategoryIds.forEach(categoryId => {
-                    const cat = document.getElementById(`category-${categoryId}`);
+                    const categoryElement = document.getElementById(`category-${categoryId}`);
+                    const categoryInSidebarElement = document.getElementById(`categoryInSidebar-${categoryId}`);
 
                     if (selectedCategories.includes(categoryId)) {
-                        // If the category is selected, apply the active styles
-                        $(cat).addClass('text-white underline');
+                        $(categoryInSidebarElement).addClass('text-white underline');
                     } else {
-                        $(cat).removeClass('text-white underline');
-                        $(cat).addClass('text-gray-500');
+                        $(categoryInSidebarElement).removeClass('text-white underline');
+                        $(categoryInSidebarElement).addClass('text-gray-500');
                     }
                 });
 

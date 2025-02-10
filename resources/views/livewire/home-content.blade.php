@@ -39,7 +39,7 @@
                         </a>
                         <!-- Tab-like structure for selected categories -->
                         <div id="tabs-{{ $item->id }}" class="hidden mt-2">
-                            <div class="bg-gray-500 w-full h-[2px] rounded-full flex items-center">
+                            <div class="bg-gray-700 w-full h-[2px] rounded-full flex items-center">
                             </div>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
 
      @include('partials.home-partials.filters')
 
-  
+
 
     <!-- ✅ Grid Section - Starts Here 👇 -->
     <section class="productsParent">

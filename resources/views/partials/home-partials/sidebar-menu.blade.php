@@ -36,8 +36,8 @@
                                     class="flex flex-col items-center text-center space-y-2 hover:scale-105">
                                     <div class="flex items-center space-x-4">
                                         <img src="{{ $item->image }}" alt="{{ $item->name }}" class="w-8 h-8">
-                                        <span id="category-{{ $item->id }}"
-                                            class="categoryInSidebar-{{ $item->id }} text-xs sm:text-sm font-medium text-gray-500 hover:text-gray-700">
+                                        <span id="categoryInSidebar-{{ $item->id }}"
+                                            class="text-xs sm:text-sm font-medium text-gray-500 hover:text-gray-700">
                                             {{ $item->name }}
                                         </span>
                                     </div>

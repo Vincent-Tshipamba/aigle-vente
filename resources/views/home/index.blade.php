@@ -317,28 +317,20 @@
 
                 allCategoryIds.forEach(categoryId => {
                     const tab = document.getElementById(`tabs-${categoryId}`);
-                    const cat = document.getElementById(`category-${categoryId}`);
-                    const categoryElement = document.querySelector(`#category-${categoryId}`)
+                    const categoryElement = document.getElementById(`category-${categoryId}`);
+                    const categoryInSidebarElement = document.getElementById(`categoryInSidebar-${categoryId}`);
 
                     if (selectedCategories.includes(categoryId)) {
-                        if (categoryElement.classList.contains(`categoryInSidebar-${categoryId}`)) {
-                            $(cat).addClass('text-white underline');
-                        } else {
-                            // If the category is selected, apply the active styles
-                            $(cat).addClass('text-black');
-                            $(tab).removeClass('hidden');
-                        }
+                        $(categoryInSidebarElement).addClass('text-white underline');
+                        $(categoryElement).addClass('text-black');
+                        $(tab).removeClass('hidden');
                     } else {
-                        if (categoryElement.classList.contains(`categoryInSidebar-${categoryId}`)) {
-                            $(cat).removeClass('text-white underline');
-                            $(cat).addClass('text-gray-500');
-                        } else {
-                            $(cat).removeClass('text-black');
-                            $(cat).addClass('text-gray-500');
-                            $(tab).addClass('hidden');
-                        }
+                        $(categoryInSidebarElement).removeClass('text-white underline');
+                        $(categoryInSidebarElement).addClass('text-gray-500');
+                        $(categoryElement).removeClass('text-black');
+                        $(categoryElement).addClass('text-gray-500');
+                        $(tab).addClass('hidden');
                     }
-
                 });
 
                 fetch(`/products/filter`, {

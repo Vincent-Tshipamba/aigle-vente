@@ -9,7 +9,7 @@
                         </h1>
                         <div class="w-full flex-1 mt-8">
                             <div class="flex flex-col items-center">
-                                <button
+                                <button onclick="window.location.href='{{ route('socialite.redirect', 'google') }}'"
                                     class="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 lg:py-4 bg-[#ffe3bf] text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
                                     <div class="bg-white p-2 rounded-full">
                                         <svg class="w-4" viewBox="0 0 533.5 544.3">
@@ -32,7 +32,7 @@
                                     </span>
                                 </button>
 
-                                <button
+                                {{-- <button
                                     class="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 lg:py-4 bg-[#ffe3bf] text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline mt-5">
                                     <div class="bg-white p-1 rounded-full">
                                         <svg class="w-6" viewBox="0 0 24 24">
@@ -43,7 +43,7 @@
                                     <span class="ml-4 text-sm ">
                                         Se connecter avec Facebook
                                     </span>
-                                </button>
+                                </button> --}}
                             </div>
 
                             <div class="my-8 border-b text-center">

@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Throwable;
-use App\Models\User;
 use Illuminate\View\View;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Requests\Auth\LoginRequest;
-use Laravel\Socialite\Facades\Socialite;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -22,42 +18,6 @@ class AuthenticatedSessionController extends Controller
     public function create(): View
     {
         return view('auth.login');
-    }
-
-    public function redirect()
-    {
-        return Socialite::driver('google')->redirect();
-    }
-
-    public function callback()
-    {
-        try {
-            // Get the user information from Google
-            $user = Socialite::driver('google')->user();
-        } catch (Throwable $e) {
-            return redirect('home')->with('error', 'Google authentication failed.');
-        }
-
-        // Check if the user already exists in the database
-        $existingUser = User::where('email', $user->email)->first();
-
-        if ($existingUser) {
-            // Log the user in if they already exist
-            Auth::login($existingUser);
-        } else {
-            // Otherwise, create a new user and log them in
-            $newUser = User::updateOrCreate([
-                'email' => $user->email
-            ], [
-                'name' => $user->name,
-                'password' => bcrypt(Str::random(16)), // Set a random password
-                'email_verified_at' => now()
-            ]);
-            Auth::login($newUser);
-        }
-
-        // Redirect the user to the dashboard or any other secure page
-        return redirect('home');
     }
 
     /**

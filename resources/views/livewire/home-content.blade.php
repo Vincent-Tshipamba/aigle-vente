@@ -57,7 +57,8 @@
         </div>
 
         <!-- Bouton Filtre avec responsive -->
-        <button data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation"
+        <button data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation"
+            aria-controls="drawer-navigation"
             class="border border-gray-800 bg-white text-gray-600 dark:hover:bg-gray-100 py-2 px-3 text-sm sm:text-base font-normal rounded-lg  items-center hover:bg-gray-200 transition-all duration-300  hover:scale-110 drop-shadow-md sm:flex hidden">
             <svg class="mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
@@ -88,12 +89,47 @@
         </button>
     </div>
 
-     @include('partials.home-partials.filters')
+
+    @include('partials.home-partials.filters')
+
 
 
 
     <!-- ✅ Grid Section - Starts Here 👇 -->
     <section class="productsParent">
+        <div class=" absolute bottom-0 left-1/2 -translate-x-1/2 md:hidden mb-4 z-50">
+
+            <button data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation"
+                aria-controls="drawer-navigation"
+                class="border border-gray-800 relative bg-white text-gray-600 dark:hover:bg-gray-100 py-2 px-3 text-sm sm:text-base font-normal rounded-lg flex items-center hover:bg-gray-200 transition-all duration-300 hover:scale-110 drop-shadow-md">
+                <svg class="mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M6 12C7.10457 12 8 11.1046 8 10C8 8.89543 7.10457 8 6 8C4.89543 8 4 8.89543 4 10C4 11.1046 4.89543 12 6 12Z"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M6 4V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M6 12V20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path
+                        d="M12 18C13.1046 18 14 17.1046 14 16C14 14.8954 13.1046 14 12 14C10.8954 14 10 14.8954 10 16C10 17.1046 10.8954 18 12 18Z"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M12 4V14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M12 18V20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path
+                        d="M18 9C19.1046 9 20 8.10457 20 7C20 5.89543 19.1046 5 18 5C16.8954 5 16 5.89543 16 7C16 8.10457 16.8954 9 18 9Z"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M18 4V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M18 9V20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+
+                Filters
+            </button>
+        </div>
         @if ($products && $products->count() == 0)
             <div class="p-4 text-center justify-center w-[100%] mx-auto text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300"
                 role="alert">
@@ -112,6 +148,10 @@
                                         <div class="swiper-slide">
                                             <img src="{{ asset($item->image) }}" alt="{{ $product->name }}"
                                                 class="h-40 w-40 object-cover rounded-xl hover:scale-105">
+                                            <div
+                                                class="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
+                                                {{ $product->shop->name }}
+                                            </div>
                                         </div>
                                     @endforeach
                                 </div>
@@ -125,7 +165,8 @@
                             <a href="{{ route('shops.show', $product->shop->_id) }}"
                                 class="text-gray-400 mr-3 text-xs">Boutique {{ $product->shop->name }}</a>
 
-                           <p class="text-lg font-bold text-black truncate block capitalize w-full overflow-hidden">{{ $product->name }}</p>
+                            <p class="text-lg font-bold text-black truncate block capitalize w-full overflow-hidden">
+                                {{ $product->name }}</p>
 
 
                             <div class=" flex items-center">

@@ -140,7 +140,7 @@
                 <section class="w-full p-4 mt-4 border-gray-200 rounded-xl gap-12">
                     <div class="bg-white dark:bg-gray-900 shadow-lg dark:shadow-lg dark:shadow-gray-500/20 p-4 mb-4 rounded-lg border dark:border-gray-500 text-center">
                         <div class="flex justify-center">
-                            <img src="{{ asset('img/profil.jpeg') }}" alt="" class="w-28 h-28 rounded-full border border-gray-900 dark:border-gray-500 object-cover">
+                            <img loading="lazy" src="{{ asset('img/profil.jpeg') }}" alt="" class="w-28 h-28 rounded-full border border-gray-900 dark:border-gray-500 object-cover">
                         </div>
                         <div class="mb-4">
                             <h2 class="text-4xl mb-2 font-extrabold leading-none tracking-tight text-gray-700 md:text-5xl lg:text-5xl dark:text-white">${name}</h2>
@@ -150,13 +150,13 @@
                         <div>
                             <p class="mb-4 text-lg leading-none tracking-tight text-gray-700 dark:text-white">
                                 ${cache_exists ? `
-                                                                                <div class="flex items-center">
-                                                                                    <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> En ligne
-                                                                                </div>
-                                                                            ` : `
-                                                                                <p class="text-gray-500">
-                                                                                    <span id="diff_last_time">Hors ligne</span>
-                                                                                </p>`
+                                                                                                    <div class="flex items-center">
+                                                                                                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> En ligne
+                                                                                                    </div>
+                                                                                                ` : `
+                                                                                                    <p class="text-gray-500">
+                                                                                                        <span id="diff_last_time">Hors ligne</span>
+                                                                                                    </p>`
                                 }
                             </p>
                         </div>
@@ -371,7 +371,7 @@
         }
     </script>
     <script>
-        $(document).ready(function() {
+        document.addEventListener('DOMContentLoaded', function() {
             if (document.getElementById("rolesTable") && typeof simpleDatatables.DataTable !== 'undefined') {
                 const dataTable = new simpleDatatables.DataTable("#rolesTable", {
                     searchable: false,
@@ -394,14 +394,14 @@
 
 
     <script>
-        $(document).ready(function() {
+        document.addEventListener('DOMContentLoaded', function() {
             getRolesAndPermissions();
             getUsersRoles();
         });
     </script>
 
     <script>
-        $('#newUserButton').click(function(e) {
+        document.querySelector('#newUserButton').addEventListener('click', function(e) {
             e.preventDefault();
 
             // Trigger SweetAlert with input
@@ -497,8 +497,7 @@
             });
         });
 
-
-        $('#newPermissionButton').click(function(e) {
+        document.querySelector('#newPermissionButton').addEventListener('click', function(e) {
             e.preventDefault();
 
             // Trigger SweetAlert with input
@@ -560,7 +559,7 @@
             });
         });
 
-        $('#newRoleButton').click(function(e) {
+        document.querySelector('#newRoleButton').addEventListener('click', function(e) {
             e.preventDefault();
 
             // Trigger SweetAlert with input
@@ -973,7 +972,7 @@
 
 
     <script>
-        $(document).ready(function() {
+        document.addEventListener('DOMContentLoaded', function(){
             $('#new-permission-form').on('submit', function(event) {
                 event.preventDefault();
 

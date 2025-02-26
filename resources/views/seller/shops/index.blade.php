@@ -25,7 +25,7 @@
                 <!-- Modal header -->
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                        Create New Product
+                        Ajouter une boutique
                     </h3>
                     <button type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -39,7 +39,7 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <form class="p-4 md:p-5" action="{{ route('shops.store') }}" method="POST">
+                <form class="p-4 md:p-5" action="{{ route('shops.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="grid gap-4 mb-4 grid-cols-2">
                         <div class="col-span-2">
@@ -54,33 +54,45 @@
                         @enderror
 
                         <div class="col-span-2">
-                            <label for="adresse" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom
-                                de la boutique</label>
+                            <label for="address"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Adresse de la
+                                boutique</label>
                             <input type="text" id="address" name="address"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Type address" required="">
-                        </div>
-
-                        <div class="col-span-2">
-                            <select id="category" name="category_product_id"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                <option selected="">Select category</option>
-                                @foreach ($ShopCategories as $categorie)
-                                    <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
-                                @endforeach
-                            </select>
+                                placeholder="Adresse de la boutique" required="">
                         </div>
 
                         <div class="col-span-2">
                             <label for="description"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product
-                                Description</label>
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description de la
+                                boutique</label>
                             <textarea id="description" rows="4"
                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Write product description here"></textarea>
+                                placeholder="Écrire une description de la boutique ici"></textarea>
                         </div>
 
+                        <!-- Champ d'upload d'image -->
+                        <div class="col-span-2">
+                            <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image
+                                de la boutique</label>
+                            <input type="file" name="image" id="image" accept="image/*"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                onchange="previewImage(event)">
+                        </div>
+                        @error('image')
+                            <div class="text-red-500 text-sm">{{ $message }}</div>
+                        @enderror
+
+                        <!-- Zone pour afficher la prévisualisation de l'image -->
+                        <div class="col-span-2 mt-4">
+                            <label for="preview"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prévisualisation de
+                                l'image</label>
+                            <img id="preview" src="" alt="Prévisualisation de l'image"
+                                class="w-full h-auto hidden">
+                        </div>
                     </div>
+
                     <button type="submit"
                         class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -89,9 +101,12 @@
                                 d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                 clip-rule="evenodd"></path>
                         </svg>
-                        Add new product
+                        Ajouter
                     </button>
                 </form>
+
+
+
             </div>
         </div>
     </div>
@@ -130,7 +145,7 @@
                 <tr>
                     <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white"> {{ $shop->name }} </td>
                     <td> {{ $shop->address }} </td>
-                    <td> {{ $shop->description }} </td>
+                    <td> {!! substr($shop->description, 0, 100) !!} </td>
                     <td>
                         <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots{{ $key }}"
                             class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -152,14 +167,19 @@
                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Produits</a>
                                 </li>
                                 <li>
-                                    <a href="#"
+                                    <a href="{{ route('shops.edit', $shop->_id) }}"
                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Modifier</a>
                                 </li>
-                               
+
                             </ul>
                             <div class="py-2">
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Supprimer</a>
+                                <form action="{{ route('shops.destroy', $shop->_id) }}" method="POST"
+                                    class="delete-form">
+                                    @csrf
+                                    @method('delete')
+                                    <input type="submit" value="supprimer"
+                                        class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                </form>
                             </div>
                         </div>
                     </td>
@@ -178,6 +198,24 @@
                 searchable: true,
                 sortable: false
             });
+        }
+    </script>
+
+    <script>
+        function previewImage(event) {
+            const preview = document.getElementById('preview');
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.classList.remove('hidden'); // Affiche l'image
+                };
+
+                reader.readAsDataURL(file);
+            }
         }
     </script>
 
@@ -207,6 +245,30 @@
                 timerProgressBar: true,
             });
         @endif
+    </script>
+
+    <script>
+        document.querySelectorAll('.delete-form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault(); // Empêche l'envoi du formulaire
+                const form = this; // Référence au formulaire
+
+                Swal.fire({
+                    title: 'Êtes-vous sûr ?',
+                    text: "Vous ne pourrez pas revenir en arrière !",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Oui, supprimer !',
+                    cancelButtonText: 'Annuler'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit(); // Soumet le formulaire si l'utilisateur confirme
+                    }
+                });
+            });
+        });
     </script>
 @endsection
 @endsection

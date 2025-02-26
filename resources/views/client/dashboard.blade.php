@@ -1,108 +1,181 @@
 @extends('client.layouts.app')
 
 @section('content')
-    <div class=" mt-4">
-        <h1
-            class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-700 md:text-5xl lg:text-6xl dark:text-white">
-            Tableau de Bord
-        </h1>
-        <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl  dark:text-gray-400">
-            Supervision Complète : Discussions, Liste des souhaits, ...</p>
-    </div>
-
-    <section class="grid grid-cols-1 md:grid-cols-5 justify-items-center items-center gap-6 mx-auto w-full md:inset-0 h-[calc(100%-1rem)] max-h-full mb-8">
-        <div
-            class="col-span-2 mx-auto rounded-xl justify-items-center items-center border p-2 h-36 w-full shadow-lg dark:shadow-lg dark:shadow-gray-500/20 backdrop-blur-xl bg-cover bg-[#fcdab40a] dark:bg-gray-900 dark:hover:bg-gray-700 hover:bg-[#f8f0e7] hover:scale-105 transition duration-700 ease-in-out border-l-8 dark:border-[#cc832f] border-[#ff9822] hover:border-l-10">
-            <!-- Total des produits dans la wishlist -->
-            <a href="{{ route('client.wishlist') }}" class="">
-                <div>
-                    <div class=" flex gap-4 items-center mb-4">
-                        <svg class=" w-12 h-12 text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                            viewBox="0 0 24 24">
-                            <path fill-rule="evenodd"
-                                d="M12 6a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm-1.5 8a4 4 0 0 0-4 4 2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-3Zm6.82-3.096a5.51 5.51 0 0 0-2.797-6.293 3.5 3.5 0 1 1 2.796 6.292ZM19.5 18h.5a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-1.1a5.503 5.503 0 0 1-.471.762A5.998 5.998 0 0 1 19.5 18ZM4 7.5a3.5 3.5 0 0 1 5.477-2.889 5.5 5.5 0 0 0-2.796 6.293A3.501 3.501 0 0 1 4 7.5ZM7.1 12H6a4 4 0 0 0-4 4 2 2 0 0 0 2 2h.5a5.998 5.998 0 0 1 3.071-5.238A5.505 5.505 0 0 1 7.1 12Z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">
-                            Total des produits désirés
-                        </h3>
-                    </div>
-                    <div class="">
-                        <p class="text-4xl font-bold text-[#ff9822] dark:text-gray-400">
-                            {{ $totalProductsInWishlist }}
-                        </p>
-                    </div>
+    <section class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3 2xl:gap-7.5">
+        <a href="{{ route('client.wishlist') }}" class="">
+            <div
+                class="rounded-sm border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark dark:hover:bg-gray-700 hover:bg-[#f8f0e7] hover:scale-105 transition duration-700 ease-in-out">
+                <!-- Total des produits dans la wishlist -->
+                <div class="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
+                    <svg class=" text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                            d="M12 6a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm-1.5 8a4 4 0 0 0-4 4 2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-3Zm6.82-3.096a5.51 5.51 0 0 0-2.797-6.293 3.5 3.5 0 1 1 2.796 6.292ZM19.5 18h.5a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-1.1a5.503 5.503 0 0 1-.471.762A5.998 5.998 0 0 1 19.5 18ZM4 7.5a3.5 3.5 0 0 1 5.477-2.889 5.5 5.5 0 0 0-2.796 6.293A3.501 3.501 0 0 1 4 7.5ZM7.1 12H6a4 4 0 0 0-4 4 2 2 0 0 0 2 2h.5a5.998 5.998 0 0 1 3.071-5.238A5.505 5.505 0 0 1 7.1 12Z"
+                            clip-rule="evenodd" />
+                    </svg>
                 </div>
-            </a>
-        </div>
-        <div
-            class="col-span-3 bg-[#fcdab40a] dark:bg-gray-900 md:p-5 p-1 rounded-lg  w-full shadow-lg dark:shadow-lg dark:shadow-gray-500/20 ">
-            <div class=" flex justify-between items-center ">
-                <div class=" flex gap-4">
-                    <div>
-                        <a href="" class=" flex items-center">
-                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                viewBox="0 0 24 24">
-                                <path fill-rule="evenodd"
-                                    d="M11.403 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6.403a3.01 3.01 0 0 1-1.743-1.612l-3.025 3.025A3 3 0 1 1 9.99 9.768l3.025-3.025A3.01 3.01 0 0 1 11.403 5Z"
-                                    clip-rule="evenodd" />
-                                <path fill-rule="evenodd"
-                                    d="M13.232 4a1 1 0 0 1 1-1H20a1 1 0 0 1 1 1v5.768a1 1 0 1 1-2 0V6.414l-6.182 6.182a1 1 0 0 1-1.414-1.414L17.586 5h-3.354a1 1 0 0 1-1-1Z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-gray-800 lg:text-sm  dark:text-gray-200">Générer un rapport</span>
-                        </a>
-                    </div>
-                </div>
-                <div>
-                    <form class="max-w-sm mx-auto">
-                        <div class=" flex items-center gap-4">
-                            <div>
-                                <select id="year-select"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                </select>
-                            </div>
 
-                            <div>
-                                <select id="month-select"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                </select>
-                            </div>
-                        </div>
-                    </form>
+                <div class="mt-4 flex items-center justify-between">
+                    <h4 class="text-title-md font-bold text-black dark:text-white">
+                        {{ $totalProductsInWishlist }}
+                        <span class="text-sm font-medium ms-2">Total des produits désirés</span>
+                    </h4>
                 </div>
             </div>
-            <div class="max-h-72 max-w-full">
-                <canvas id="chartWishListByPeriod"></canvas>
+        </a>
+
+        <a href="{{ route('client.wishlist') }}" class="">
+            <div
+                class="rounded-sm border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark dark:hover:bg-gray-700 hover:bg-[#f8f0e7] hover:scale-105 transition duration-700 ease-in-out">
+                <!-- Total des produits dans la wishlist -->
+                <div class="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
+                    <svg class=" text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                            d="M12 6a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm-1.5 8a4 4 0 0 0-4 4 2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-3Zm6.82-3.096a5.51 5.51 0 0 0-2.797-6.293 3.5 3.5 0 1 1 2.796 6.292ZM19.5 18h.5a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-1.1a5.503 5.503 0 0 1-.471.762A5.998 5.998 0 0 1 19.5 18ZM4 7.5a3.5 3.5 0 0 1 5.477-2.889 5.5 5.5 0 0 0-2.796 6.293A3.501 3.501 0 0 1 4 7.5ZM7.1 12H6a4 4 0 0 0-4 4 2 2 0 0 0 2 2h.5a5.998 5.998 0 0 1 3.071-5.238A5.505 5.505 0 0 1 7.1 12Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </div>
+
+                <div class="mt-4 flex items-center justify-between">
+                    <h4 class="text-title-md font-bold text-black dark:text-white">
+                        {{ $totalProductsInWishlist }}
+                        <span class="text-sm font-medium ms-2">Total des vendeurs contactés</span>
+                    </h4>
+                </div>
+            </div>
+        </a>
+
+        <a href="{{ route('client.wishlist') }}" class="">
+            <div
+                class="rounded-sm border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark dark:hover:bg-gray-700 hover:bg-[#f8f0e7] hover:scale-105 transition duration-700 ease-in-out">
+                <!-- Total des produits dans la wishlist -->
+                <div class="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
+                    <svg class=" text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                            d="M12 6a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm-1.5 8a4 4 0 0 0-4 4 2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-3Zm6.82-3.096a5.51 5.51 0 0 0-2.797-6.293 3.5 3.5 0 1 1 2.796 6.292ZM19.5 18h.5a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-1.1a5.503 5.503 0 0 1-.471.762A5.998 5.998 0 0 1 19.5 18ZM4 7.5a3.5 3.5 0 0 1 5.477-2.889 5.5 5.5 0 0 0-2.796 6.293A3.501 3.501 0 0 1 4 7.5ZM7.1 12H6a4 4 0 0 0-4 4 2 2 0 0 0 2 2h.5a5.998 5.998 0 0 1 3.071-5.238A5.505 5.505 0 0 1 7.1 12Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </div>
+
+                <div class="mt-4 flex items-center justify-between">
+                    <h4 class="text-title-md font-bold text-black dark:text-white">
+                        {{ $totalProductsInWishlist }}
+                        <span class="text-sm font-medium ms-2">Total des achats finalisés</span>
+                    </h4>
+                </div>
+            </div>
+        </a>
+    </section>
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+        <!-- Wishlist Chart -->
+        <div
+            class="rounded-lg shadow-lg dark:shadow-lg dark:shadow-gray-500/20 backdrop-blur-xl bg-[#fcdab40a] dark:bg-gray-900">
+            <div
+                class="col-span-3 bg-[#fcdab40a] dark:bg-gray-900 md:p-5 p-1 rounded-lg w-full shadow-lg dark:shadow-lg dark:shadow-gray-500/20">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-4">
+                        <div>
+                            <a href="" class="flex items-center">
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd"
+                                        d="M11.403 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6.403a3.01 3.01 0 0 1-1.743-1.612l-3.025 3.025A3 3 0 1 1 9.99 9.768l3.025-3.025A3.01 3.01 0 0 1 11.403 5Z"
+                                        clip-rule="evenodd" />
+                                    <path fill-rule="evenodd"
+                                        d="M13.232 4a1 1 0 0 1 1-1H20a1 1 0 0 1-1 1v5.768a1 1 0 1 1-2 0V6.414l-6.182 6.182a1 1 0 0 1-1.414-1.414L17.586 5h-3.354a1 1 0 0 1-1-1Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-800 lg:text-sm dark:text-gray-200">Générer un rapport</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <form class="max-w-sm mx-auto">
+                            <div class="flex items-center gap-4">
+                                <div>
+                                    <select id="year-select-wishlist"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    </select>
+                                </div>
+                                <div>
+                                    <select id="month-select-wishlist"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="max-h-72 max-w-full">
+                    <div id="chartWishListByPeriod"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contacted Sellers Chart -->
+        <div
+            class="rounded-lg shadow-lg dark:shadow-lg dark:shadow-gray-500/20 backdrop-blur-xl bg-[#fcdab40a] dark:bg-gray-900">
+            <div
+                class="col-span-3 bg-[#fcdab40a] dark:bg-gray-900 md:p-5 p-1 rounded-lg w-full shadow-lg dark:shadow-lg dark:shadow-gray-500/20">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-4">
+                        <div>
+                            <a href="" class="flex items-center">
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd"
+                                        d="M11.403 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6.403a3.01 3.01 0 0 1-1.743-1.612l-3.025 3.025A3 3 0 1 1 9.99 9.768l3.025-3.025A3.01 3.01 0 0 1 11.403 5Z"
+                                        clip-rule="evenodd" />
+                                    <path fill-rule="evenodd"
+                                        d="M13.232 4a1 1 0 0 1 1-1H20a1 1 0 0 1-1 1v5.768a1 1 0 1 1-2 0V6.414l-6.182 6.182a1 1 0 0 1-1.414-1.414L17.586 5h-3.354a1 1 0 0 1-1-1Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-800 lg:text-sm dark:text-gray-200">Générer un rapport</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <form class="max-w-sm mx-auto">
+                            <div class="flex items-center gap-4">
+                                <div>
+                                    <select id="year-select-contacted-sellers"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    </select>
+                                </div>
+                                <div>
+                                    <select id="month-select-contacted-sellers"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="max-h-72 max-w-full">
+                    <div id="chartContactedSellersByPeriod"></div>
+                </div>
             </div>
         </div>
     </section>
+
     <section
-        class="rounded-lg shadow-lg dark:shadow-lg dark:shadow-gray-500/20 backdrop-blur-xl bg-[#fcdab40a] dark:bg-gray-900">
+        class="mt-3 rounded-lg shadow-lg dark:shadow-lg dark:shadow-gray-500/20 backdrop-blur-xl bg-[#fcdab40a] dark:bg-gray-900">
         <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200 p-4">
-            Dernières commandes enregistrées à mon compte
+            Derniers produits ajoutés dans la liste de mes souhaits
         </h3>
         <div class="card p-4">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table border="1" id="orders-table" class="table table-striped table-bordered">
+                    <table border="1" id="recent-wishlist-table" class="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th>
                                     <span class="flex items-center">
                                         #
-                                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                        </svg>
-                                    </span>
-                                </th>
-                                <th>
-                                    <span class="flex items-center">
-                                        Client
                                         <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -122,27 +195,7 @@
                                 </th>
                                 <th>
                                     <span class="flex items-center">
-                                        Quantité
-                                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                        </svg>
-                                    </span>
-                                </th>
-                                <th>
-                                    <span class="flex items-center">
                                         Prix
-                                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                        </svg>
-                                    </span>
-                                </th>
-                                <th>
-                                    <span class="flex items-center">
-                                        Total
                                         <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -173,45 +226,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($recentOrders as $key => $order)
+                            @foreach ($recentWishlistProducts->take(5) as $key => $wishlist)
                                 <tr
                                     class="hover:bg-[#f0e6d9] hover:scale-100 hover:cursor-pointer transition-all duration-300 ease-in-out">
                                     @php
                                         $total = 0;
                                     @endphp
                                     <td>{{ $key + 1 }}</td>
-                                    <td class="flex items-center px-6 py-4 hover:cursor-pointer hover:underline hover:text-[#e38407] hover:font-bold hover:scale-105 transition-all duration-300 ease-in-out"
-                                        onclick="window.location.href='{{ route('admin.users.show', $order->client->user->id) }}'">
-                                        <img class="w-10 h-10 rounded-full"
-                                            src="{{ $order->client->image ?? asset('img/profil.jpeg') }}" alt="">
-                                        <div class="ps-3">
-                                            <div class="text-base font-semibold">{{ $order->client->first_name }}
-                                                {{ $order->client->last_name }}</div>
-                                            <div class="font-normal text-gray-500">{{ $order->client->user->email }}</div>
-                                        </div>
-                                    </td>
                                     <td>
-                                        @foreach ($order->products as $product)
-                                            {{ $product->name }}<br>
-                                        @endforeach
+                                        {{ $wishlist->product->name }}
                                     </td>
+                                    <td>{{ $wishlist->product->unit_price }}</td>
                                     <td>
-                                        @foreach ($order->products as $product)
-                                            {{ $product->pivot->quantity }}<br>
-                                        @endforeach
+                                        @if ($wishlist->product->is_active)
+                                            <span class="text-green-600">Disponible</span>
+                                        @else
+                                            <span class="text-red-600">Non disponible</span>
+                                        @endif
                                     </td>
-                                    <td>
-                                        @foreach ($order->products as $product)
-                                            {{ $product->unit_price }}<br>
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @foreach ($order->products as $product)
-                                            {{ $product->pivot->quantity * $product->unit_price }}<br>
-                                        @endforeach
-                                    </td>
-                                    <td>{{ $order->status }}</td>
-                                    <td>{{ $order->created_at->format('d/m/Y') }}</td>
+                                    <td>{{ $wishlist->created_at->format('d/m/Y') }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -222,9 +255,11 @@
     </section>
 @endsection
 
-@section('script')
+@push('scripts')
+    @vite(['resources/js/charts-dashboard-client.js'])
+
     <script>
-        if (document.getElementById("orders-table") && typeof simpleDatatables.DataTable !== 'undefined') {
+        if (document.getElementById("recent-wishlist-table") && typeof simpleDatatables.DataTable !== 'undefined') {
             const exportCustomCSV = function(dataTable, userOptions = {}) {
                 // A modified CSV export that includes a row of minuses at the start and end.
                 const clonedUserOptions = {
@@ -267,7 +302,7 @@
 
                 return str
             }
-            const dataTable = new simpleDatatables.DataTable("#orders-table", {
+            const dataTable = new simpleDatatables.DataTable("#recent-wishlist-table", {
                 searchable: true,
                 sortable: true,
                 template: (options, dom) => "<div class='" + options.classes.top + "'>" +
@@ -369,102 +404,4 @@
             })
         }
     </script>
-    <script>
-        const currentYear = new Date().getFullYear();
-        const currentMonth = new Date().getMonth() + 1;
-        const startYear = 2022;
-        const yearSelect = document.getElementById('year-select');
-        const monthSelect = document.getElementById('month-select');
-
-        for (let year = startYear; year <= currentYear; year++) {
-            const option = document.createElement('option');
-            option.value = year;
-            option.text = year;
-            yearSelect.appendChild(option);
-        }
-
-        const months = [
-            'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
-            'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
-        ];
-
-        function updateMonths(selectedYear) {
-            monthSelect.innerHTML = '';
-            const allOption = document.createElement('option');
-            allOption.value = 'all';
-            allOption.text = 'Tous les mois';
-            monthSelect.appendChild(allOption);
-            const maxMonth = (selectedYear == currentYear) ? currentMonth : 12;
-
-
-            for (let i = 0; i < maxMonth; i++) {
-                const option = document.createElement('option');
-                option.value = i + 1;
-                option.text = months[i];
-                monthSelect.appendChild(option);
-            }
-        }
-
-        yearSelect.addEventListener('change', function() {
-            updateMonths(this.value);
-        });
-
-
-        yearSelect.value = currentYear;
-        updateMonths(currentYear);
-    </script>
-
-    <!-- Graphique des clients par période -->
-    <script>
-        let myChart;
-        $(document).ready(function() {
-            function fetchChartData(year, month) {
-                let url = `/client/api/orders?year=${year}`;
-                if (month !== "all") {
-                    url += `&month=${month}`;
-                }
-
-                fetch(url)
-                    .then(response => response.json())
-                    .then(data => {
-                        const dates = data.map(item => item.date);
-                        const aggregates = data.map(item => item.aggregate);
-
-                        // Mettre à jour le graphique avec les nouvelles données`
-                        if (myChart) {
-                            myChart.data.labels = dates;
-                            myChart.data.datasets[0].data = aggregates;
-                            myChart.update();
-                        } else {
-                            const chartWishlistByPeriod = document.getElementById('chartWishListByPeriod')
-                                .getContext('2d');
-                            myChart = new Chart(chartWishlistByPeriod, {
-                                type: 'bar',
-                                data: {
-                                    labels: dates,
-                                    datasets: [{
-                                        label: 'Période d\'ajout a la wishlist',
-                                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                        borderColor: 'rgba(54, 162, 235, 1)',
-                                        data: aggregates,
-                                    }]
-                                }
-                            });
-                        }
-                    })
-                    .catch(error => console.error('Erreur lors de la récupération des données :', error));
-            }
-            // Événements pour mettre à jour le graphique lors de la sélection de l'année ou du mois
-            yearSelect.addEventListener('change', function() {
-                fetchChartData(yearSelect.value, monthSelect.value);
-            });
-
-            monthSelect.addEventListener('change', function() {
-                fetchChartData(yearSelect.value, monthSelect.value);
-            });
-
-            // Initialiser avec l'année et le mois par défaut
-            fetchChartData(yearSelect.value, monthSelect.value);
-        });
-    </script>
-@endsection
+@endpush

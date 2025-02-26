@@ -4,7 +4,7 @@
     <div class="tpsideinfo__search text-center pt-35">
         <span class="tpsideinfo__search-title mb-20">Que cherchez-vous ?</span>
         <form action="#">
-            <input class="search-input" type="text" placeholder="Rechercher des produits...">
+            <input class="search-input" type="text" placeholder="Rechercher un produit ou une boutique...">
             <button><i class="fal fa-search"></i></button>
         </form>
     </div>
@@ -29,21 +29,80 @@
                 tabindex="0">
                 <div class="tpsidebar-categories">
                     <ul>
-                        <li><a href="shop.html">Meubles</a></li>
-                        <li><a href="shop.html">Bois</a></li>
-                        <li><a href="shop.html">Style de vie</a></li>
-                        <li><a href="shop-2.html">Shopping</a></li>
-                        <li><a href="track.html">Suivi Produit</a></li>
+                        @foreach ($categories as $item)
+                            <li>
+                                <a href="#" onclick="document.getElementById('filter-{{ $item->id }}').click();"
+                                    class="flex flex-col items-center text-center space-y-2 hover:scale-105">
+                                    <div class="flex items-center space-x-4">
+                                        <img src="{{ $item->image }}" alt="{{ $item->name }}" class="w-8 h-8">
+                                        <span id="categoryInSidebar-{{ $item->id }}"
+                                            class="text-xs sm:text-sm font-medium text-gray-500 hover:text-gray-700">
+                                            {{ $item->name }}
+                                        </span>
+                                    </div>
+                                    <input type="checkbox" id="filter-{{ $item->id }}" value="{{ $item->id }}"
+                                        class="category-checkbox w-5 h-5 text-[#e38407] hidden" />
+                                </a>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-    <div class="tpsideinfo__account-link">
-        <a href="{{ route('login') }}"><i class="fal fa-user"></i> Connexion / Inscription</a>
-    </div>
+    @auth
+        <ul>
+            <hr class="text-gray-400 bg-gray-400">
+            @if (Auth::user()->client)
+                <li>
+                    <a href="{{ route('client.dashboard') }}" class="text-white">
+                        Mon dashboard client
+                    </a>
+                </li>
+                <hr class="text-gray-400 bg-gray-400">
+            @endif
+
+            @if (Auth::user()->isSeller())
+                <li>
+                    <a href="{{ route('seller.dashboard') }}" class="text-white">
+                        Mon dashboard vendeur
+                    </a>
+                </li>
+                <hr class="text-gray-400 bg-gray-400">
+            @endif
+
+            @if (Auth::user()->hasRole('superadmin'))
+                <li>
+                    <a href="{{ route('admin.dashboard') }}" class="text-white">
+                        Mon dashboard administrateur
+                    </a>
+                </li>
+                <hr class="text-gray-400 bg-gray-400">
+            @endif
+            <li>
+                <a class="text-white" href="{{ route('chats') }}">Ouvrir le chat</a>
+            </li>
+            <hr class="text-gray-400 bg-gray-400">
+
+            <li>
+                <!-- Authentication -->
+                <form class="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
+                    @csrf
+                </form>
+                <a href="#" onclick="event.preventDefault(); confirmLogout();" class="text-white">
+                    <i class="fal fa-user"></i> {{ __('Me déconnecter') }}
+                </a>
+            </li>
+            <hr class="text-gray-400 bg-gray-400">
+        </ul>
+    @else
+        <div class="tpsideinfo__account-link">
+            <a href="{{ route('login') }}"><i class="fal fa-user"></i> Connexion / Inscription</a>
+        </div>
+    @endauth
     <div class="tpsideinfo__wishlist-link">
-        <a href="wishlist.html" target="_parent"><i class="fal fa-heart"></i> Liste de Souhaits</a>
+        <a href="{{ route('client.wishlist') }}" target="_parent"><i class="fal fa-heart"></i> Liste de
+            Souhaits</a>
     </div>
 </div>
 <div class="body-overlay"></div>

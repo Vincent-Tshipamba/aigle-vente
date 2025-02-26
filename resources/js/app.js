@@ -1,14 +1,10 @@
 import './bootstrap';
-import Alpine from 'alpinejs';
 import 'flowbite';
 import 'animate.css';
-import $ from 'jquery';
 import Swal from 'sweetalert2'
-import "./index";
 import "./textarea"
+import $ from 'jquery';
+import 'jquery-validation';
 
-
-window.Alpine = Alpine;
-
-Alpine.start();
-
+window.$ = window.jQuery = $;
+window.Swal = Swal;

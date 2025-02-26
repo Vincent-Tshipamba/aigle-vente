@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="{{ asset('img/orange.webp') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('img/logo/logo_sans_bg.png') }}" type="image/x-icon">
 
     <title>{{ $title ?? 'Dashboard Admin Aigle Vente' }}</title>
 
@@ -15,9 +15,12 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 </head>
 
-<body class="body bg-white dark:bg-[#1E293B] text-black">
+<body class="body bg-white dark:bg-[#1E293B] text-black" x-data="{ page: 'ecommerce', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode'));
+$watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
+    :class="{ 'dark text-bodydark bg-boxdark-2': darkMode === true }">
     <div class=" bg-gray-100 dark:bg-[#1E293B] ">
         @include('client.layouts.navigation')
         <div class="duration-500 ease-in-out transform content ">
@@ -29,9 +32,9 @@
             </div>
         </div>
     </div>
-    <script src="{{ Vite::asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
+    {{-- <script src="{{ Vite::asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ Vite::asset('node_modules/sweetalert2/dist/sweetalert2.min.js') }}"></script>
-    <script src="{{ Vite::asset('node_modules/chart.js/dist/chart.umd.js') }}"></script>
+    <script src="{{ Vite::asset('node_modules/chart.js/dist/chart.umd.js') }}"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script>
     <script>
         const sidebar = document.querySelector("aside");
@@ -84,7 +87,9 @@
             }
         }
     </script>
+    @livewireScripts
     @yield('script')
+    @stack('scripts')
 </body>
 
 </html>

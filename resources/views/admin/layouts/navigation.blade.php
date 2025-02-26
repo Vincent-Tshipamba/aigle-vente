@@ -2,7 +2,7 @@
     <div
         class="flex items-center justify-center flex-none h-full ml-12 duration-500 ease-in-out transform logo dark:text-white">
         <a href="{{ route('admin.dashboard') }}" class="flex ms-2 md:me-24">
-            <img src="{{ asset('img\logo\logo_sans_bg.png') }}" class="h-8 me-3" alt="Logo de Aigle Vente" />
+            <img loading="lazy" src="{{ asset('img\logo\logo_sans_bg.png') }}" class="h-8 me-3" alt="Logo de Aigle Vente" />
             <span class="self-center font-semibold text-white text-1xl sm:text-1xl whitespace-nowrap">
                 Aigle Vente
             </span>

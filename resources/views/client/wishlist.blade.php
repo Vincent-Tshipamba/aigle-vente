@@ -146,7 +146,7 @@
     <script>
         function removeFromWishlist(wish_id) {
             event.preventDefault()
-            var urlWishlistDestroy = "{{ route('client.wishlist.remote', ':wishlistId') }}".replace(':wishlistId', wish_id)
+            var urlWishlistDestroy = "{{ route('client.wishlist.remove', ':wishlistId') }}".replace(':wishlistId', wish_id)
 
             Swal.fire({
                 title: 'Wishlist',

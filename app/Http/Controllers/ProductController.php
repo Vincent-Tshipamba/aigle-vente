@@ -45,7 +45,7 @@ class ProductController extends Controller
             return response()->json(['error' => 'Produit introuvable.'], 404);
         }
 
-        $stocks = $product->stocks; // Accès au stock actuel
+        $stocks = $product->stocks;
         return view('seller.manage-stocks.index', compact('product', 'stocks'));
     }
 
@@ -63,7 +63,7 @@ class ProductController extends Controller
             $request->type,
             $request->quantity,
             $request->reason,
-            auth()->id(),
+            Auth::id(),
             $shop
         );
 
@@ -108,7 +108,7 @@ class ProductController extends Controller
                 'shipping' => 'nullable|string|max:255',
                 'care' => 'nullable|string|max:255',
                 'brand' => 'nullable|string|max:50',
-            ],);
+            ], );
 
             // Ajout de l'ID de la boutique
             $validated['shop_id'] = $shop->id;
@@ -130,7 +130,7 @@ class ProductController extends Controller
 
 
 
-            // Création des détails du produit
+
             $productDetail = ProductDetail::create([
                 'weight' => $validated['weight'] ?? null,
                 'dimensions' => $validated['dimensions'] ?? null,
@@ -153,17 +153,21 @@ class ProductController extends Controller
                 'quantity' => $validated['stock_quantity'],
             ]);
 
-            // Gestion des images
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $imageFile) {
-                    $path = $imageFile->store('images', 'public');
+                    // Crée un nom unique pour éviter les conflits
+                    $imageName = uniqid() . '.' . $imageFile->getClientOriginalExtension();
 
+                    $path = $imageFile->move(base_path('products_images'), $imageName);
+
+                    // Enregistrez le chemin relatif dans la base de données
                     $product->photos()->create([
-                        'image' => $path,
+                        'image' => 'products_images/' . $imageName,
                         'description' => 'Image pour ' . $product->name,
                     ]);
                 }
             }
+
 
             return redirect()->route('seller.shops.products.index', $product->shop->_id)
                 ->with('success', 'Produit créé avec succès !');
@@ -311,7 +315,7 @@ class ProductController extends Controller
         $product->delete();
 
 
-        return redirect()->route('seller.shops.products.index', $product->shop->id)->with('success', 'Produit supprimé avec succès !');
+        return redirect()->route('seller.shops.products.index', $product->shop->_id)->with('success', 'Produit supprimé avec succès !');
     }
 
     public function requestPromotion(Request $request, Product $product)
@@ -342,8 +346,10 @@ class ProductController extends Controller
                 'promotion_duration' => $validated['promotion_duration'],
                 'status' => 'pending', // Statut initial de la demande
             ]);
-            return redirect()->route('seller.shops.products.index')
+
+            return redirect()->route('seller.shops.products.index', $product->shop->_id)
                 ->with('success', 'Demande de promotion envoyée avec succès !');
+
         } catch (\Exception $e) {
             // Gestion des erreurs
             Log::error('Erreur lors de la demande de promotion : ' . $e->getMessage());

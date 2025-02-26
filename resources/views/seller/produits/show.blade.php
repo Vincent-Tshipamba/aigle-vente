@@ -1,6 +1,52 @@
 @extends('seller.layouts.app')
 
 @section('content')
+
+    <style>
+        table {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table td,
+        table th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        table tr:hover {
+            background-color: #ddd;
+        }
+
+        table th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+    </style>
+
+    <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <h2 class="text-title-md2 font-bold text-black dark:text-white">
+            Details
+        </h2>
+
+        <nav>
+            <ol class="flex items-center gap-2">
+                <li>
+                    <a class="font-medium" href="{{ route('seller.shops.products.index', $product->shop->_id) }}">Produits /</a>
+                </li>
+                <li class="text-primary">Detail</li>
+            </ol>
+        </nav>
+    </div>
+
     <section class="py-8 bg-white md:py-16 dark:bg-gray-900 antialiased">
         <div class="max-w-screen-xl px-4 mx-auto 2xl:px-0">
             <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
@@ -11,14 +57,14 @@
                     @endphp
 
                     <!-- Main image -->
-                    <img id="mainImage" class="w-full h-96 rounded-md mb-4" src="{{ asset('storage/' . $firstPhoto->image) }}"
-                        alt="{{ $product->name }}" />
+                    <img id="mainImage" class="w-full h-96 rounded-md mb-4"
+                        src="{{ asset($firstPhoto->image) }}" alt="{{ $product->name }}" />
 
                     <!-- Thumbnails -->
                     <div class="flex gap-2 mt-4">
                         @foreach ($product->photos as $photo)
-                            <img onclick="changeMainImage('{{ asset('storage/' . $photo->image) }}')"
-                                src="{{ asset('storage/' . $photo->image) }}" alt="{{ $product->name }}"
+                            <img onclick="changeMainImage('{{ asset($photo->image) }}')"
+                                src="{{ asset($photo->image) }}" alt="{{ $product->name }}"
                                 class="w-20 h-20 object-cover rounded-md cursor-pointer border border-gray-300 hover:border-primary-500 transition-all" />
                         @endforeach
                     </div>
@@ -71,24 +117,31 @@
                     </div>
 
                     <!-- Seller Information -->
-                    <div class="mt-6 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                        <h2 class="text-lg font-semibold text-gray-700 dark:text-white">Informations du vendeur</h2>
-                        {{-- <p class="text-sm text-gray-500 dark:text-gray-400">Nom : {{ $product->seller->first_name }}</p>
+
+                    <!-- Product Description -->
+
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+            <h2 class="text-lg font-semibold text-gray-700 dark:text-white">Informations du Produit {{ $product->name }}
+            </h2>
+            {{-- <p class="text-sm text-gray-500 dark:text-gray-400">Nom : {{ $product->seller->first_name }}</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">Note : {{ $product->seller->rating }} / 5</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">Ventes : {{ $product->seller->sales_count }} --}}
-                        </p>
-                        {{-- <a href="{{ route('seller.show', $product->seller->id) }}"
+            </p>
+            {{-- <a href="{{ route('seller.show', $product->seller->id) }}"
                             class="mt-2 inline-block text-primary-700 hover:underline dark:text-primary-500">
                             Voir le profil du vendeur
                         </a> --}}
-                    </div>
+        </div>
 
-                    <!-- Product Description -->
-                    <p class="my-6 text-gray-500 dark:text-gray-400">
-                        {{ $product->description }}
-                    </p>
-                </div>
-            </div>
+
+        <div>
+            <p class="my-6 text-gray-500 dark:text-gray-400">
+                {!! $product->description !!}
+            </p>
         </div>
     </section>
 
@@ -116,9 +169,8 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <form class="p-4 md:p-5"
-                    action="{{route('products.promotion',$product->id)}}"
-                    method="POST" enctype="multipart/form-data">
+                <form class="p-4 md:p-5" action="{{ route('products.promotion', $product->id) }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="grid gap-4 mb-4 grid-cols-2">
                         <div class="col-span-2">

@@ -794,7 +794,7 @@
 
                         <div id="image-preview" class="flex flex-wrap gap-4 mt-4">
                             @foreach ($product->photos as $photo)
-                                <img src="{{ asset('storage/' . $photo->image) }}" alt="Image du produit"
+                                <img loading="lazy" src="{{ asset('storage/' . $photo->image) }}" alt="Image du produit"
                                     class="w-20 h-20">
                             @endforeach
                         </div>

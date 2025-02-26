@@ -7,11 +7,11 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
 
-
+Route::get('/welcome', [DashboardController::class, 'welcome'])->name('welcome');
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/seller/shop/message', [MessageController::class,'index'])->name('message.index');
+    Route::get('/seller/shop/message', [MessageController::class, 'index'])->name('message.index');
     Route::post('/seller/shop/message/{seller_id}', [MessageController::class, 'store'])->name('message.store');
     Route::post('/seller/shop/message/{message}/mark-as-read', [MessageController::class, 'markAsRead'])->name('seller.shop.message.markAsRead');
     Route::post('/messages/send/{seller_id}', [MessageController::class, 'sendMessage'])->name('messages.send');
@@ -37,6 +37,9 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/products/{product}/images/{photoId}', [ProductController::class, 'deleteImage'])->name('product.deleteImage');
 
 
+    Route::delete('seller/shops/{shop:_id}', [ShopController::class, 'destroy'])->name('shops.destroy');
+    Route::put('seller/shops/{shop:_id}/edit', [ShopController::class, 'update'])->name('shops.update');
+    Route::get('seller/shops/{shop:_id}/edit', [ShopController::class, 'edit'])->name('shops.edit');
     Route::get('/seller/shops', [ShopController::class, 'index'])->name('shops.index');
     Route::get('/seller/shops/create', [ShopController::class, 'create'])->name('shops.create');
     Route::post('seller/shops', [ShopController::class, 'store'])->name('shops.store');

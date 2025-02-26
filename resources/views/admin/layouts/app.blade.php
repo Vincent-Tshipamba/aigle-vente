@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="{{ asset('img/orange.webp') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('img/logo/logo_sans_bg.png') }}" type="image/x-icon">
 
     <title>{{ $title ?? 'Dashboard Admin Aigle Vente' }}</title>
 
@@ -29,12 +29,9 @@
             </div>
         </div>
     </div>
-    <script src="{{ Vite::asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ Vite::asset('node_modules/flowbite/dist/flowbite.min.js') }}"></script>
-    <script src="{{ Vite::asset('node_modules/sweetalert2/dist/sweetalert2.min.js') }}"></script>
-    <script src="{{ Vite::asset('node_modules/chart.js/dist/chart.umd.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const sidebar = document.querySelector("aside");
         const maxSidebar = document.querySelector(".max")

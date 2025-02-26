@@ -13,6 +13,10 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <!-- Styles / Scripts -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
@@ -33,6 +37,43 @@
     <link rel="stylesheet" href="{{ asset('css/meanmenu.css') }}">
     <link rel="stylesheet" href="{{ asset('css/spacing.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/loaders.css') }}">
+    <style>
+        .swiper - pagination - bullet {
+            background - color: #FF5500FF;
+            /* Couleur personnalisée */
+            width: 12 px;
+            height: 12 px;
+            opacity: 0.7;
+        }
+
+        .swiper - pagination - bullet - active {
+            background - color: # 2563 eb;
+            /* Couleur active */
+            opacity: 1;
+        }
+
+        /* Style personnalisé pour les flèches */
+        .swiper - button - prev,
+        .swiper - button - next {
+            width: 40 px;
+            height: 40 px;
+            color: #D8681DFF;
+
+        }
+
+        .swiper-button-prev::after,
+        .swiper-button-next::after {
+            font-size: 1.5rem;
+            /* Ajuste la taille des icônes */
+        }
+    </style>
+    <style>
+        .checkbox:checked+.check-icon {
+            display: flex;
+        }
+    </style>
+    @livewireStyles
 </head>
 
 <body>
@@ -59,17 +100,20 @@
     @endauth
 
     <main class="main-content">
-        <!-- slider-area-start -->
-        @include('partials.home-partials.slider')
-        <!-- slider-area-end -->
+        @livewire('home-content', ['products' => $products, 'categories' => $categories])
 
-        <!-- category-area-start -->
-        @include('partials.home-partials.category')
-        <!-- category-area-end -->
-
-        <!-- product-area-start -->
-        @include('partials.home-partials.product')
-        <!-- product-area-end -->
+        @if (!Auth::check())
+            <div id="drawer-login"
+                class="fixed z-50 w-full overflow-y-auto bg-white border-t border-gray-200 rounded-t-lg dark:border-gray-700 dark:bg-gray-800 transition-transform top-10 bottom-0 left-0 right-0 translate-y-full"
+                tabindex="-1" aria-labelledby="drawer-login-label">
+                <div class="p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700"
+                    data-drawer-toggle="drawer-login">
+                    <span
+                        class="absolute w-8 h-1 -translate-x-1/2 bg-gray-300 rounded-lg top-3 left-1/2 dark:bg-gray-600"></span>
+                </div>
+                @livewire('auth.login')
+            </div>
+        @endif
 
         <!-- deal-product-area-start -->
         @include('partials.home-partials.deal-product')
@@ -85,6 +129,7 @@
     <!-- footer-area-end -->
 
     <!-- JS here -->
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/waypoints.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
@@ -101,9 +146,310 @@
     <script src="{{ asset('js/meanmenu.js') }}"></script>
     <script src="{{ asset('js/jquery.knob.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-    <script src="{{ Vite::asset('node_modules/flowbite/dist/flowbite.min.js') }}"></script>
-    <script src="{{ Vite::asset('node_modules/sweetalert2/dist/sweetalert2.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if (session('error'))
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "error",
+                    title: "{{ session('error') }}"
+                });
+            @endif
+
+            @if (session('success'))
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: "{{ session('success') }}"
+                });
+            @endif
+        })
+    </script>
+    <script>
+        function changeImage(src) {
+            document.getElementById('mainImage').src = src;
+        }
+    </script>
+    <script>
+        function contactSellerModal(event, product) {
+            event.preventDefault();
+
+            // Construire l'image principale du produit
+            const productImage =
+                `<img src="${product.photos[0].image}" id="mainImage" alt="${product.name}" class="w-full h-full object-cover rounded-sm shadow-md mb-4">`;
+
+            // Construire les images secondaires
+            let thumbnails = '';
+            product.photos.slice(0, 4).forEach(photo => {
+                thumbnails += `<img src="${photo.image}" alt="${product.name}"
+        class="size-16 sm:size-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
+        onclick="changeImage('${photo.image}')">`;
+            });
+
+            const routeUrl = "{{ route('contact.seller', ['sellerId' => ':sellerId', 'productId' => ':productId']) }}";
+            const actionUrl = routeUrl
+                .replace(':sellerId', product.shop.seller.id)
+                .replace(':productId', product.id);
+
+            // Contenu du modal
+            const modalContent = `
+                    <div class="w-full">
+                        <h2 class="text-lg font-bold mb-4">Contacter le vendeur pour le produit ${product.name}</h2>
+
+                        <div class="flex flex-col lg:flex-row gap-5">
+                            <!-- Section des images -->
+                            <div class="lg:w-1/2">
+                                <div class="mb-4 mx-auto w-[150px] h-[150px] md:w-[200px] md:h-[200px] lg:w-[250px] lg:h-[250px] xl:w-[400px] xl:h-[400px]">${productImage}</div>
+                                <div class="flex gap-4 py-4 justify-center overflow-x-auto">${thumbnails}</div>
+                            </div>
+
+                            <!-- Section d'envoi de message -->
+                            <div class="lg:w-1/2 mb-12 mx-auto">
+                                <form action="${actionUrl}" method="POST">
+                                <textarea id="sellerMessage"
+                                    class="w-full p-3 mb-6 mx-auto rounded-lg border focus:outline-none focus:ring focus:ring-[#e38407]"
+                                    rows="4" name="message"
+                                    placeholder="Écrivez votre message ici...">Bonjour M. (Mme) ${product.shop.seller.first_name} ${product.shop.seller.last_name}. J'espère que vous allez bien. Est-ce que le(s) ou la ${product.name} est (sont) toujours disponible(s) ?</textarea>
+
+                                    <div class="flex flex-col items-center justify-center gap-3 mt-6 lg:flex-row">
+                                        @csrf
+                                        <button type="submit" class="inline-block text-sm sm:text-md text-center min-w-[150px] 2xl:min-w-[200px] px-2 py-2 sm:px-0 sm:py-3 text-white transition-all rounded-md shadow-xl bg-gradient-to-r from-orange-600 to-[#e38407] hover:bg-gradient-to-b dark:shadow-blue-900 shadow-blue-200 hover:shadow-2xl hover:shadow-blue-400 hover:-tranneutral-y-px "
+                                            href="#" id="confirmMessageBtn">
+                                            Envoyer le message
+                                        </button>
+                                        <a class="inline-block text-sm sm:text-md text-center min-w-[150px] 2xl:min-w-[200px] px-2 py-2 sm:px-0 sm:py-3 text-white transition-all bg-gray-700 dark:bg-white dark:text-gray-800 rounded-md shadow-xl hover:bg-gray-900 hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-2xl hover:shadow-neutral-400 hover:-tranneutral-y-px"
+                                        href="#" id="cancelMessageBtn">Annuler
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+            // Afficher la modal SweetAlert2
+            Swal.fire({
+                html: modalContent,
+                showConfirmButton: false,
+                showCancelButton: false,
+                customClass: {
+                    popup: 'w-full p-3 max-w-sm sm:max-w-md md:max-w-lg lg:max-w-3xl xl:max-w-4xl 2xl:max-w-6xl'
+                },
+                didOpen: () => {
+                    const cancelButton = document.getElementById('cancelMessageBtn');
+
+                    // Cancel button event
+                    cancelButton.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        Swal.close(); // Close the modal
+                    });
+                },
+            })
+        }
+
+        function showFilters() {
+            var fSection = document.getElementById("filterSection");
+            if (fSection.classList.contains("hidden")) {
+                fSection.classList.remove("hidden");
+                fSection.classList.add("block");
+            } else {
+                fSection.classList.add("hidden");
+            }
+        }
+
+        function applyFilters() {
+            document
+                .querySelectorAll("input[type=checkbox]")
+                .forEach((el) => (el.checked = false));
+        }
+
+        function closeFilterSection() {
+            var fSection = document.getElementById("filterSection");
+            fSection.classList.add("hidden");
+        }
+    </script>
+
+    <!-- Script pour le filtrage des produits par categorie(s) et gestion de l'affichage des resultats -->
+    <script>
+        const categoryNames = @json($categories->pluck('name', 'id'));
+        const initialProductsContent = $('.productsParent').html();
+
+        document.addEventListener('change', function(event) {
+
+            // Check if the target element has the specific class
+            if (event.target.classList.contains('category-checkbox')) {
+                const selectedCategories = Array.from(
+                    document.querySelectorAll('.category-checkbox:checked')
+                ).map(checkbox => checkbox.value);
+
+                if (selectedCategories.length < 1) {
+                    $('.productsParent').html(initialProductsContent);
+                    document.querySelectorAll('[id^="tabs-"]').forEach(tab => tab.classList.add('hidden'));
+                    document.querySelectorAll('[id^="category-"]').forEach(cat => $(cat).removeClass(
+                        'text-black text-white underline'));
+                    initializeSwipers()
+                    return;
+                }
+
+                const allCategoryIds = Array.from(document.querySelectorAll('.category-checkbox'))
+                    .map(checkbox => checkbox.value);
+
+                allCategoryIds.forEach(categoryId => {
+                    const tab = document.getElementById(`tabs-${categoryId}`);
+                    const categoryElement = document.getElementById(`category-${categoryId}`);
+                    const categoryInSidebarElement = document.getElementById(`categoryInSidebar-${categoryId}`);
+
+                    if (selectedCategories.includes(categoryId)) {
+                        $(categoryInSidebarElement).addClass('text-white underline');
+                        $(categoryElement).addClass('text-black');
+                        $(tab).removeClass('hidden');
+                    } else {
+                        $(categoryInSidebarElement).removeClass('text-white underline');
+                        $(categoryInSidebarElement).addClass('text-gray-500');
+                        $(categoryElement).removeClass('text-black');
+                        $(categoryElement).addClass('text-gray-500');
+                        $(tab).addClass('hidden');
+                    }
+                });
+
+                fetch(`/products/filter`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        },
+                        body: JSON.stringify({
+                            categories: selectedCategories,
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.html.trim() === '') {
+                            document.querySelector('.productsParent').innerHTML = `
+                                <div class="flex flex-col gap-6 p-4 my-4 text-center text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300">
+                                    <div>
+                                        <span class="font-medium">Oups désolé !</span> Aucun produit correspondant à votre filtre n'a été trouvé.
+                                    </div>
+                                    <div>
+                                        <a href="{{ route('sellers.create') }}"
+                                        class="inline-block px-6 py-2 w-full bg-gray-800 text-gray-200 hover:text-white hover:bg-[#e38407] font-semibold rounded-md text-center transition-all duration-300">
+                                        Devenez donc le premier à vendre un produit de cette catégorie !
+                                        </a>
+                                    </div>
+                                </div>`;
+                        } else {
+                            document.querySelector('.productsParent').innerHTML = `
+                                <div class="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mb-5 my-20">
+                                    ${data.html}
+                                </div>`;
+                            initializeSwipers()
+                        }
+                    })
+                    .catch(error => console.error('Error fetching products:', error));
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('#slider > div');
+            let currentSlide = 0;
+
+            const showSlide = (index) => {
+                slides.forEach((slide, i) => {
+                    slide.style.opacity = i === index ? '1' : '0';
+                    slide.style.zIndex = i === index ? '1' : '0';
+                    slide.style.transition = 'opacity 1s ease-in-out';
+                });
+            };
+
+            const nextSlide = () => {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            };
+
+            // Initialisation
+            showSlide(currentSlide);
+
+            // Défilement automatique
+            setInterval(nextSlide, 3000); // Change toutes les 3 secondes
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSwipersForCategories();
+        });
+
+        function initializeSwipersForCategories() {
+            const swiper = new Swiper('.swiper', {
+                spaceBetween: 10,
+                slidesPerView: 4,
+                loop: true,
+                navigation: {
+                    nextEl: '.custom-next',
+                    prevEl: '.custom-prev',
+                },
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                breakpoints: {
+                    1024: {
+                        slidesPerView: 12,
+                        spaceBetween: 15,
+                    },
+                    768: {
+                        slidesPerView: 7,
+                    },
+                    640: {
+                        slidesPerView: 4,
+                    },
+                    480: {
+                        slidesPerView: 2,
+                        spaceBetween: 5,
+                    },
+                }
+            });
+        }
+
+        document.querySelectorAll('.image').forEach((element, index) => {
+            new Swiper(`.product-swiper-${index + 1}`, {
+                direction: 'horizontal',
+                loop: true,
+                slidesPerView: 1,
+
+                pagination: {
+                    el: `.swiper-pagination-${index + 1}`,
+                    clickable: true,
+                },
+
+                navigation: {
+                    nextEl: `.swiper-button-next-${index + 1}`,
+                    prevEl: `.swiper-button-prev-${index + 1}`,
+                },
+            });
+        });
+    </script>
     <script>
         function confirmLogout() {
             Swal.fire({
@@ -116,7 +462,7 @@
                 cancelButtonText: 'Annuler'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    document.getElementById('logout-form').submit();
+                    document.querySelector('.logout-form').submit();
                 }
             });
         }
@@ -124,158 +470,151 @@
     <script>
         function addToWishList(event, productId) {
             event.preventDefault();
-            let isAuthenticated = @auth true @else false @endauth;
-            if(isAuthenticated){
-                $.ajax({
-                    type: "post",
-                    url: "{{ route('client.wishlist.add') }}",
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        productId: productId
-                    },
-                    dataType: "json",
-                    success: function(response) {
-                        if (response.count) {
-                            $('.wishcount').text(response.count)
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: "top-end",
-                                showConfirmButton: false,
-                                timer: 3000,
-                                timerProgressBar: true,
-                                didOpen: (toast) => {
-                                    toast.onmouseenter = Swal.stopTimer;
-                                    toast.onmouseleave = Swal.resumeTimer;
-                                }
-                            });
-                            Toast.fire({
-                                icon: "success",
-                                title: response.success
-                            });
-                        }
-
-                        if (response.exists) {
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: "top-end",
-                                showConfirmButton: false,
-                                timer: 3000,
-                                timerProgressBar: true,
-                                didOpen: (toast) => {
-                                    toast.onmouseenter = Swal.stopTimer;
-                                    toast.onmouseleave = Swal.resumeTimer;
-                                }
-                            });
-                            Toast.fire({
-                                icon: "success",
-                                title: response.exists
-                            });
-                        }
-                    }
-                });
-            } else {
-                window.location.href="{{ route('login') }}"
-            }
-        }
-    </script>
-    <script>
-        $('.search-input').keypress(function(e) {
-            var value = $(this).val();
-            const searchResults = `
-                <section class="product-area pb-70" id="productSection">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6 col-12">
-                                <div class="tpsection mb-40">
-                                    <h4 class="tpsection__title">Produits <span> Populaires <img
-                                                src="{{ asset('img/icon/title-shape-01.jpg') }}" alt=""></span></h4>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-12">
-                            </div>
-                        </div>
-                        <div class="w-full md:inset-0 product-container">
-                            <div
-                                class="row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-1 mx-auto">
-                                <div class="col searchResultProduct">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            `;
-
+            let isAuthenticated = @auth true
+        @else
+            false
+        @endauth ;
+        if (isAuthenticated) {
             $.ajax({
-                type: "get",
-                url: "{{ route('products.search') }}",
+                type: "post",
+                url: "{{ route('client.wishlist.add') }}",
                 data: {
                     _token: "{{ csrf_token() }}",
-                    value: value
+                    productId: productId
                 },
                 dataType: "json",
                 success: function(response) {
-                    const html = response.html
-                    $('.main-content').html(searchResults)
-
-                    const productContainer = $('.product-container');
-                    if (html.trim() === '') {
-                        productContainer.html(`
-                            <div class="p-4 text-md text-gray-800 mx-auto text-center rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">
-                                <span class="font-medium">Oups désolé!</span> Aucun produit disponible correspondant à votre recherche. <br><br>
-                                <button onclick="window.location.href='/products'" class="footer-widget__fw-news-btn tpsecondary-btn">Voir le catalogue des produits disponibles<i
-                                                class="fal fa-long-arrow-right"></i></button>
-                            </div>
-                        `);
-                    } else {
-                        $(".searchResultProduct:last").after(response.html).show().fadeIn()
+                    if (response.count) {
+                        $('.wishcount').text(response.count)
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: "top-end",
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+                        Toast.fire({
+                            icon: "success",
+                            title: response.success
+                        });
                     }
-                },
-                error: function(xhr, status, error) {
-                    console.error("Error fetching products:", error);
+
+                    if (response.exists) {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: "top-end",
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+                        Toast.fire({
+                            icon: "success",
+                            title: response.exists
+                        });
+                    }
                 }
             });
-        });
-
-        function fetchSearchProducts(rowperpage, total) {
-            var start = 0
-            var rowperpage = rowperpage
-            var totalProductsSearch = total
-            start = start + rowperpage
-
-            if (start <= totalProducts) {
-                $.ajax({
-                    type: "get",
-                    url: "{{ route('getSearchProducts') }}",
-                    data: {
-                        start: start,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    dataType: "json",
-                    success: function(response) {
-                        const html = response.html
-                        $('.main-content').html(searchResults)
-
-                        const productContainer = $('.product-container');
-                        if (html.trim() === '') {
-                            productContainer.html(`
-                            <div class="p-4 text-md text-gray-800 mx-auto text-center rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">
-                                <span class="font-medium">Oups désolé!</span> Aucun produit disponible correspondant à votre recherche. <br><br>
-                                <button onclick="window.location.href='/products'" class="footer-widget__fw-news-btn tpsecondary-btn">Voir le catalogue des produits disponibles<i
-                                                class="fal fa-long-arrow-right"></i></button>
-                            </div>
-                        `);
-                        } else {
-                            $(".searchResultProduct:last").after(response.html).show().fadeIn()
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("Error fetching products:", error);
-                    }
-                });
-            }
+        } else {
+            window.location.href = "{{ route('login') }}"
+        }
         }
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = $('.search-input');
+            const initialContent = $('.productsParent').html();
+
+            $('.search-input').on('keyup', function() {
+                const value = $(this).val().trim();
+
+                if (value === '') {
+                    $('.productsParent').html(initialContent); // Restore the initial products
+                    initializeSwipers(); // Reinitialize Swipers for the initial products
+                } else {
+                    $.ajax({
+                        type: "get",
+                        url: "{{ route('products.search') }}",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            value: value
+                        },
+                        dataType: "json",
+                        success: function(response) {
+                            const html = response.html;
+
+                            if (html.trim() === '') {
+                                $('.productsParent').html(`
+                                    <div class="p-4 my-4 flex flex-col gap-6 text-center justify-center w-full text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">
+                                        <div class="">
+                                            <span class="font-medium">Oups désolé !</span> Aucun produit correspondant à votre recherche n'est disponible pour le moment.
+                                        </div>
+                                        <div class="">
+                                            <a href="{{ route('sellers.create') }}" class="px-6 py-2 bg-gray-800 text-gray-200 hover:text-white hover:bg-[#e38407] font-semibold rounded-md text-center transition-all duration-300 whitespace-nowrap align-middle touch-manipulation shadow-md">Devenez donc le premier vendeur de ce produit !</a>
+                                        </div>
+                                    </div>
+                                `);
+                            } else {
+                                $('.productsParent').html(`
+                                    <div class="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14  mb-5 my-20">
+                                        ${html}
+                                    </div>
+                                `);
+                                initializeSwipers
+                                    (); // Reinitialize Swipers for the new search results
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error fetching products:", error);
+                        }
+                    });
+                }
+            });
+
+            // Initial call to set up Swipers for the initial products
+            initializeSwipers();
+        });
+
+        // Function to initialize Swipers
+        function initializeSwipers() {
+            document.querySelectorAll('.image').forEach((element, index) => {
+                new Swiper(`.product-swiper-${index + 1}`, {
+                    direction: 'horizontal',
+                    loop: true,
+                    slidesPerView: 1,
+                    pagination: {
+                        el: `.swiper-pagination-${index + 1}`,
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: `.swiper-button-next-${index + 1}`,
+                        prevEl: `.swiper-button-prev-${index + 1}`,
+                    },
+                });
+            });
+        }
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (window.innerWidth <= 640) { // Écran mobile (640px et moins)
+                document.querySelector(".custom-next").style.display = "none";
+                document.querySelector(".custom-prev").style.display = "none";
+            }
+        });
+    </script>
+
+    @yield('modal')
+    @stack('script')
     @yield('script')
+    @livewireScripts
 </body>
 
 </html>

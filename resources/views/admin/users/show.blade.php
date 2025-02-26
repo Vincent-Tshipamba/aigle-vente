@@ -61,7 +61,8 @@
                     class="bg-white dark:bg-gray-900 shadow-lg dark:shadow-lg dark:shadow-gray-500/20 p-4 mb-4 rounded-lg border dark:border-gray-500 text-center">
                     <div class="">
                         <div class=" flex justify-center">
-                            <img src="{{ isset($user->client->image) ? $user->client->image : asset('img/profil.jpeg') }}"
+                            <img loading="lazy"
+                                src="{{ isset($user->client->image) ? $user->client->image : asset('img/profil.jpeg') }}"
                                 alt=""
                                 class=" w-28 h-28 rounded-full border border-gray-900 dark:border-gray-500 object-cover">
                         </div>
@@ -177,7 +178,8 @@
                                 </div>
                             </div>
                             <div class="">
-                                <img src="{{ isset($order->image) ? $order->image : asset('img/profil.jpeg') }}"
+                                <img loading="lazy"
+                                    src="{{ isset($order->image) ? $order->image : asset('img/profil.jpeg') }}"
                                     alt=""
                                     class=" w-28 rounded-full border border-gray-900 dark:border-gray-500 object-cover">
                             </div>
@@ -243,7 +245,8 @@
                     class="bg-white dark:bg-gray-900 shadow-lg dark:shadow-lg dark:shadow-gray-500/20 p-4 mb-4 rounded-lg border dark:border-gray-500 text-center">
                     <div class="">
                         <div class=" flex justify-center">
-                            <img src="{{ isset($user->seller->image) ? $user->seller->image : asset('img/profil.jpeg') }}"
+                            <img loading="lazy"
+                                src="{{ isset($user->seller->image) ? $user->seller->image : asset('img/profil.jpeg') }}"
                                 alt=""
                                 class=" w-28 h-28 rounded-full border border-gray-900 dark:border-gray-500 object-cover">
                         </div>
@@ -366,7 +369,8 @@
                                     </div>
                                 </div>
                                 <div class="">
-                                    <img src="{{ isset($shop->image) ? $shop->image : asset('img/profil.jpeg') }}"
+                                    <img loading="lazy"
+                                        src="{{ isset($shop->image) ? $shop->image : asset('img/profil.jpeg') }}"
                                         alt=""
                                         class=" w-28 rounded-full border border-gray-900 dark:border-gray-500 object-cover">
                                 </div>

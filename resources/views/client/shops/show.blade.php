@@ -1,384 +1,135 @@
 <x-app-layout>
-    <!-- product-area-start -->
-    <section class="product-area pt-80 pb-25">
-        <div class="container">
-            <div class="row flex mx-auto justify-center">
-                <div class="col-lg-4 col-md-12">
-                    <div class="tpproduct-details__nab pr-50 mb-40 h-96">
-                        <img class="w-full max-h-full"
-                            src="{{ $shop->image ?? asset('img/product/home-one/product-1.jpg') }}" alt="">
+
+    <div class="container mx-auto p-6">
+        <!-- Détails du Shop avec Photo -->
+        <div class=" rounded-lg p-6 mb-8">
+            <!-- Image de la boutique -->
+            <div class=" mb-6">
+                @if (empty($shop->image))
+                    <img src="https://timelinecovers.pro/facebook-cover/download/eagle-looking-at-your-profile-facebook-cover.jpg"
+                        alt="{{ $shop->name }}" class="rounded-lg w-full h-64 object-cover">
+                @else
+                    <img src="{{ asset($shop->image) }}" alt="{{ $shop->name }}"
+                        class="rounded-lg w-full h-64 object-cover">
+                @endif
+
+                <!-- Titre de la boutique -->
+                <div class=" bottom-0 left-0  p-4 rounded-b-lg w-full">
+                    <h1 class="text-4xl font-bold text-gray-800">{{ $shop->name }}</h1>
+                    <div class="flex  items-start mb-4">
+                        <svg class="w-5 h-5 text-gray-500 mt-1" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <span class="ml-2 text-gray-600">{{ $shop->address }}</span>
                     </div>
-                </div>
-                <div class="col-lg-8 col-md-12">
-                    <div class="tpproduct-details__content">
-                        <div class="tpproduct-details__tag-area d-flex align-items-center mb-5">
-                            <span class="tpproduct-details__tag"></span>
-                            <div class="tpproduct-details__tag-area d-flex align-items-center mb-5">
-                                <div class="tpproduct-details__rating">
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                </div>
-                                <a class="tpproduct-details__reviewers">10 Reviews</a>
-                            </div>
-                        </div>
-                        <div class="tpproduct-details__title-area d-flex align-items-center flex-wrap mb-5">
-                            <h3 class="tpproduct-details__title">{{ $shop->name }}</h3><br>
-                            <span
-                                class="tpproduct-details__stock">{{ $shop->is_active ? 'Disponible' : 'Indisponible' }}</span>
-                        </div>
-                        <div class="tpproduct-details mb-30">
-                            <span>Existe depuis le
-                                {{ $shop->created_at->locale('fr')->translatedFormat('d F Y') }}</span><br>
-                            <span>
-                                Siège à (au) {{ $shop->address }}
-                            </span>
-                        </div>
-                        <div class="tpproduct-details__count d-flex align-items-center flex-wrap mb-25">
-                            <div class="tpproduct-details__cart">
-                                <button>Contacter le proprietaire</button>
-                            </div>
-                        </div>
-                        <div class="tpproduct-details__information tpproduct-details__tags">
-                            <p>Tags:</p>
-                            <span><a href="#">fashion,</a></span>
-                            <span><a href="#">t-shirts,</a></span>
-                            <span><a href="#">women</a></span>
-                        </div>
-                        <div class="tpproduct-details__information tpproduct-details__social">
-                            <p>Share:</p>
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-behance"></i></a>
-                            <a href="#"><i class="fab fa-youtube"></i></a>
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                        </div>
-                    </div>
+                    <p class="text-lg text-gray-300">{!! $shop->description !!}</p>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- product-area-end -->
 
-    <!-- product-details-area-start -->
-    <div class="product-details-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="tpproduct-details__navtab mb-60">
-                        <div class="tpproduct-details__nav mb-30">
-                            <ul class="nav nav-tabs pro-details-nav-btn" id="myTabs" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-links active" id="home-tab-1" data-bs-toggle="tab"
-                                        data-bs-target="#home-1" type="button" role="tab" aria-controls="home-1"
-                                        aria-selected="true">Description</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-links" id="information-tab" data-bs-toggle="tab"
-                                        data-bs-target="#additional-information" type="button" role="tab"
-                                        aria-controls="additional-information" aria-selected="false">
-                                        Informations supplémentaires
-                                    </button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-links" id="reviews-tab" data-bs-toggle="tab"
-                                        data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews"
-                                        aria-selected="false">Notes et avis (2)</button>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="tab-content tp-content-tab" id="myTabContent-2">
-                            <div class="tab-para tab-pane fade show active" id="home-1" role="tabpanel"
-                                aria-labelledby="home-tab-1">
-                                <p class="mb-30">
-                                    {{ $shop->description }}
+        <!-- Produits -->
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Produits disponibles</h2>
+        <section class="productsParent">
+            @if ($products && $products->count() == 0)
+                <div class="p-4 text-center justify-center w-[100%] mx-auto text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300"
+                    role="alert">
+                    <span class="font-medium">Oups désolé !</span> Aucun produit disponible pour le moment. Essayez de
+                    rafraichir la page s'il vous plait.
+                </div>
+            @else
+                <div id="Products"
+                    class="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14  mb-5 my-20">
+                    @foreach ($products as $index => $product)
+                        <div class="w-72 rounded-xl duration-500">
+                            <a href="{{ route('products.show', $product->_id) }}">
+                                <div class="image swiper-container product-swiper-{{ $index + 1 }}" loading="lazy">
+                                    <div class="swiper-wrapper">
+                                        @foreach ($product->photos as $item)
+                                            <div class="swiper-slide">
+                                                <img src="{{ asset($item->image) }}" alt="{{ $product->name }}"
+                                                    class="h-80 w-72 object-cover rounded-xl hover:scale-105">
+                                            </div>
+                                        @endforeach
+                                    </div>
+
+                                    <!-- Pagination -->
+                                    <div class="swiper-pagination swiper-pagination-{{ $index + 1 }}"></div>
+
+                                    <!-- Navigation -->
+                                    <div class="swiper-button-prev swiper-button-prev-{{ $index + 1 }}"></div>
+                                    <div class="swiper-button-next swiper-button-next-{{ $index + 1 }}"></div>
+                                </div>
+                            </a>
+                            <div class="px-4 py-3 w-72">
+                                <span
+                                    class="text-gray-400 mr-3 uppercase text-xs">{{ $product->category_product->name }}</span><br>
+                                <span class="text-gray-400 mr-3 text-xs">Boutique {{ $product->shop->name }}</span>
+
+                                <p class="text-lg font-bold text-black truncate block capitalize">{{ $product->name }}
                                 </p>
-                            </div>
-                            <div class="tab-pane fade" id="additional-information" role="tabpanel"
-                                aria-labelledby="information-tab">
-                                <div class="product__details-info table-responsive">
-                                    <table class="table table-striped">
-                                        <tbody>
-                                            <tr>
-                                                <td class="add-info">Nom</td>
-                                                <td class="add-info-list">{{ $shop->name }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="add-info">Identité du vendeur</td>
-                                                <td class="add-info-list"> {{ $shop->seller->first_name }} {{ $shop->seller->last_name }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="add-info">Adresse de la boutique</td>
-                                                <td class="add-info-list">{{ $shop->address }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="add-info">Numéro de contact</td>
-                                                <td class="add-info-list"><a class="hover:text-[#e38407]" href="tel:{{ $shop->seller->phone }}">{{ $shop->seller->phone }}</a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-                                <div class="product-details-review">
-                                    <h3 class="tp-comments-title mb-35">
-                                        3 notes pour la boutique {{ $shop->name }}
-                                    </h3>
-                                    <div class="latest-comments mb-55">
-                                        <ul>
-                                            <li>
-                                                <div class="comments-box d-flex">
-                                                    <div class="comments-avatar mr-25">
-                                                        <img src="{{ $shop->image ?? asset('img/shop/reviewer-01.png') }}"
-                                                            alt="Image de la boutique">
-                                                    </div>
-                                                    <div class="comments-text">
-                                                        <div
-                                                            class="comments-top d-sm-flex align-items-start justify-content-between mb-5">
-                                                            <div class="avatar-name">
-                                                                <b>Siarhei Dzenisenka</b>
-                                                                <div class="comments-date mb-20">
-                                                                    <span>March 27, 2018 9:51 am</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="user-rating">
-                                                                <ul>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fal fa-star"></i></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <p class="m-0">This is cardigan is a comfortable warm
-                                                            classic
-                                                            piece. Great to layer with a light top and you can dress up
-                                                            or
-                                                            down given the jewel buttons. I'm 5'8” 128lbs a 34A and the
-                                                            Small fit fine.</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="comments-box d-flex">
-                                                    <div class="comments-avatar mr-25">
-                                                        <img src="{{ asset('img/shop/reviewer-02.png') }}"
-                                                            alt="">
-                                                    </div>
-                                                    <div class="comments-text">
-                                                        <div
-                                                            class="comments-top d-sm-flex align-items-start justify-content-between mb-5">
-                                                            <div class="avatar-name">
-                                                                <b>Tommy Jarvis </b>
-                                                                <div class="comments-date mb-20">
-                                                                    <span>March 27, 2018 9:51 am</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="user-rating">
-                                                                <ul>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fal fa-star"></i></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <p class="m-0">This is cardigan is a comfortable warm
-                                                            classic
-                                                            piece. Great to layer with a light top and you can dress up
-                                                            or
-                                                            down given the jewel buttons. I'm 5'8” 128lbs a 34A and the
-                                                            Small fit fine.</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="comments-box d-flex">
-                                                    <div class="comments-avatar mr-25">
-                                                        <img src="{{ asset('img/shop/reviewer-03.png') }}"
-                                                            alt="">
-                                                    </div>
-                                                    <div class="comments-text">
-                                                        <div
-                                                            class="comments-top d-sm-flex align-items-start justify-content-between mb-5">
-                                                            <div class="avatar-name">
-                                                                <b>Johnny Cash</b>
-                                                                <div class="comments-date mb-20">
-                                                                    <span>March 27, 2018 9:51 am</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="user-rating">
-                                                                <ul>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fal fa-star"></i></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <p class="m-0">This is cardigan is a comfortable warm
-                                                            classic
-                                                            piece. Great to layer with a light top and you can dress up
-                                                            or
-                                                            down given the jewel buttons. I'm 5'8” 128lbs a 34A and the
-                                                            Small fit fine.</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="product-details-comment">
-                                        <div class="comment-title mb-20">
-                                            <h3>Add a review</h3>
-                                            <p>Your email address will not be published. Required fields are marked*</p>
+                                <div class="flex items-center">
+                                    <p class="text-lg font-semibold text-black cursor-auto my-3">
+                                        ${{ $product->unit_price }}
+                                    </p>
+                                    <del>
+                                        <p class="text-sm text-gray-600 cursor-auto ml-2">
+                                            ${{ $product->unit_price + 50 }}
+                                        </p>
+                                    </del>
+                                    <div class="ml-auto flex space-x-2">
+                                        <!-- Contacter un vendeur -->
+                                        <svg onclick="contactSellerModal(event, {{ json_encode($product) }})"
+                                            data-tooltip-target="tooltip-contact-seller-{{ $index }}"
+                                            class="w-8 h-8 text-gray-800 dark:text-white hover:fill-[#e38407] hover:text-[#e38407] hover:cursor-pointer"
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M16 10.5h.01m-4.01 0h.01M8 10.5h.01M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-6.6a1 1 0 0 0-.69.275l-2.866 2.723A.5.5 0 0 1 8 18.635V17a1 1 0 0 0-1-1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" />
+                                        </svg>
+                                        <div id="tooltip-contact-seller-{{ $index }}" role="tooltip"
+                                            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                            Envoyer un message au vendeur
+                                            <div class="tooltip-arrow" data-popper-arrow></div>
                                         </div>
-                                        <div class="comment-rating mb-20 d-flex">
-                                            <span>Overall ratings</span>
-                                            <ul>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fal fa-star"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="comment-input-box">
-                                            <form action="#">
-                                                <div class="row">
-                                                    <div class="col-xxl-12">
-                                                        <div class="comment-input">
-                                                            <textarea placeholder="Your review..."></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xxl-6">
-                                                        <div class="comment-input">
-                                                            <input type="text" placeholder="Your Name*">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xxl-6">
-                                                        <div class="comment-input">
-                                                            <input type="email" placeholder="Your Email*">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xxl-12">
-                                                        <div class="comment-submit">
-                                                            <button type="submit"
-                                                                class="tp-btn pro-submit">Submit</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
+
+                                        <!-- Ajouter a la wishlist -->
+                                        <svg data-tooltip-target="tooltip-wishlist-{{ $index }}"
+                                            onclick="addToWishList(event, {{ $product->id }})"
+                                            class="w-8 h-8 text-gray-800 dark:text-white hover:fill-[#e38407] hover:text-[#e38407] hover:cursor-pointer"
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
+                                        </svg>
+                                        <div id="tooltip-wishlist-{{ $index }}" role="tooltip"
+                                            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                            Ajouter à ma wishlist
+                                            <div class="tooltip-arrow" data-popper-arrow></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
-            </div>
-        </div>
-    </div>
-    <!-- product-details-area-end -->
+            @endif
+        </section>
 
-    <!-- related-product-area-start -->
-    <div class="related-product-area pt-65 pb-50 related-product-border">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-sm-6">
-                    <div class="tpsection mb-40">
-                        <h4 class="tpsection__title">Produits de la boutique</h4>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="tprelated__arrow d-flex align-items-center justify-content-end mb-40">
-                        <div class="tprelated__prv"><i class="far fa-long-arrow-left"></i></div>
-                        <div class="tprelated__nxt"><i class="far fa-long-arrow-right"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="swiper-container related-product-active">
-                <div class="swiper-wrapper">
-                    @if ($products->count() > 0)
-                        @foreach ($products as $product)
-                            <div class="swiper-slide">
-                                <div class="tpproduct pb-15 mb-30">
-                                    <div class="tpproduct__thumb p-relative">
-                                        <a href="{{ route('products.show', $product->_id) }}">
-                                            <img src="{{ asset('img/product/home-one/product-1.jpg') }}"
-                                                alt="product-thumb">
-                                            <img class="product-thumb-secondary"
-                                                src="{{ asset('img/product/home-one/product-2.jpg') }}"
-                                                alt="">
-                                        </a>
-                                        <div class="tpproduct__thumb-action">
-                                            <a class="comphare" onclick="addToWishList(event, {{ $product->id }})" href="#"><i class="fal fa-heart"></i></a>
-                                            <a class="quckview" href="{{ route('products.show', $product->_id) }}"><i
-                                                    class="fal fa-eye"></i></a>
-                                            <a class="wishlist" href="wishlist.html"><i class="fal fa-heart"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="tpproduct__content">
-                                        <h3 class="tpproduct__title">
-                                            <a href="{{ route('products.show', $product->_id) }}">
-                                                {{ $product->name }}
-                                            </a><br>
-                                            <a href="javascript:;">
-                                                Boutique : {{ $product->shop->name }}
-                                            </a>
-                                        </h3>
-                                        <div class="tpproduct__priceinfo p-relative">
-                                            <div class="tpproduct__priceinfo-list">
-                                                <span>${{ $product->unit_price }}</span>
-                                            </div>
-                                            <div class="tpproduct__cart">
-                                                <a href="cart.html"><i class="fal fa-shopping-cart"></i>
-                                                    Ajouter à la liste des souhaits
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    @else
-                        {{ "Aucun produit enregistré pour l'instant dans la boutique." }}
-                    @endif
-                </div>
-            </div>
+        <!-- Pagination -->
+        <div class="mt-8">
+            {{ $products->links() }} <!-- Liens de pagination -->
         </div>
     </div>
-    <!-- related-product-area-end -->
+
+
+    <!-- footer-area-start -->
+    @include('partials.home-partials.footer')
+    <!-- footer-area-end -->
 </x-app-layout>

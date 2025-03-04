@@ -3,7 +3,7 @@
 @section('content')
     <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <h2 class="text-title-md2 font-bold text-black dark:text-white">
-            Creation 
+            Creation
         </h2>
 
         <nav>
@@ -119,7 +119,7 @@
                             <label class="mb-3 block text-sm font-medium text-black dark:text-white">
                                 Attach file
                             </label>
-                            <input type="file" name="images[]" id="images" multiple accept="image/*" required
+                            <input type="file" name="media[]" id="media" multiple accept="image/*,video/*" required
                                 class="w-full cursor-pointer rounded-lg border-[1.5px] border-stroke bg-transparent font-normal outline-none transition file:mr-5 file:border-collapse file:cursor-pointer file:border-0 file:border-r file:border-solid file:border-stroke file:bg-whiter file:px-5 file:py-3 file:hover:bg-primary file:hover:bg-opacity-10 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:file:border-form-strokedark dark:file:bg-white/30 dark:file:text-white dark:focus:border-primary" />
                         </div>
 
@@ -292,16 +292,16 @@
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const imageInput = document.getElementById('images');
+            const mediaInput = document.getElementById('media');
             const previewContainer = document.getElementById('image-preview');
 
             // Vérifiez si les éléments existent
-            if (!imageInput || !previewContainer) {
-                console.error("L'élément #images ou #image-preview est manquant dans le DOM.");
+            if (!mediaInput || !previewContainer) {
+                console.error("L'élément #media ou #image-preview est manquant dans le DOM.");
                 return;
             }
 
-            imageInput.addEventListener('change', function(event) {
+            mediaInput.addEventListener('change', function(event) {
                 const files = event.target.files;
                 previewContainer.innerHTML = ''; // Efface les aperçus existants
 
@@ -313,10 +313,19 @@
                         previewDiv.classList.add('relative', 'w-24', 'h-24', 'border',
                             'rounded', 'overflow-hidden');
 
-                        const img = document.createElement('img');
-                        img.src = e.target.result;
-                        img.alt = 'Selected Image';
-                        img.classList.add('object-cover', 'w-full', 'h-full');
+                        if (file.type.startsWith('image/')) {
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.alt = 'Selected Image';
+                            img.classList.add('object-cover', 'w-full', 'h-full');
+                            previewDiv.appendChild(img);
+                        } else if (file.type.startsWith('video/')) {
+                            const video = document.createElement('video');
+                            video.src = e.target.result;
+                            video.controls = true;
+                            video.classList.add('object-cover', 'w-full', 'h-full');
+                            previewDiv.appendChild(video);
+                        }
 
                         const closeButton = document.createElement('button');
                         closeButton.innerHTML = '&times;';
@@ -327,10 +336,9 @@
 
                         closeButton.onclick = () => {
                             previewDiv.remove();
-                            removeImage(index);
+                            removeMedia(index);
                         };
 
-                        previewDiv.appendChild(img);
                         previewDiv.appendChild(closeButton);
                         previewContainer.appendChild(previewDiv);
                     };
@@ -339,14 +347,14 @@
                 });
             });
 
-            function removeImage(index) {
+            function removeMedia(index) {
                 const dataTransfer = new DataTransfer();
 
-                Array.from(imageInput.files).forEach((file, i) => {
+                Array.from(mediaInput.files).forEach((file, i) => {
                     if (i !== index) dataTransfer.items.add(file);
                 });
 
-                imageInput.files = dataTransfer.files;
+                mediaInput.files = dataTransfer.files;
             }
         });
 

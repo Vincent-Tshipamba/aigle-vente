@@ -19,10 +19,11 @@ class HomeController extends Controller
         $totalProducts = Product::with('photos', 'shop.seller.user', 'shop.seller')->count();
 
         $products = Product::with('photos', 'shop.seller.user', 'shop.seller')
-            ->latest()
+        ->where('is_active',true)
+            ->inRandomOrder()
             ->get();
 
-        $categories = CategoryProduct::latest()->get();
+        $categories = CategoryProduct::inRandomOrder()->get();
 
         $saleProducts = $products->filter(function ($product) {
             return $product->promotions->isNotEmpty();

@@ -220,7 +220,8 @@
                                 @endif
                             </div>
                         @else
-                            <a href="#" class="text-md text-black dark:text-gray-200" data-drawer-target="drawer-login" data-drawer-show="drawer-login"
+                            <a href="#" class="text-md text-black dark:text-gray-200"
+                                data-drawer-target="drawer-login" data-drawer-show="drawer-login"
                                 data-drawer-placement="bottom" data-drawer-edge="true"
                                 data-drawer-edge-offset="bottom-[60px]" aria-controls="drawer-login">
                                 <i class="fal fa-user"></i>

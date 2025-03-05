@@ -24,7 +24,7 @@
                                     d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                             </svg>
                         </div>
-                        <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Product {{$shop->name}} </h2>
+                        <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Product {{ $shop->name }} </h2>
                     </div>
                     <p class="text-sm text-gray-600 dark:text-gray-400">
                         Gérez vos Produits, créez, modifiez et exportez facilement.
@@ -170,7 +170,7 @@
                 </div>
 
                 <!-- Create Activity Button -->
-                <a href="{{route('seller.shops.products.create', $shop->_id)}}"
+                <a href="{{ route('seller.shops.products.create', $shop->_id) }}"
                     class="inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg bg-orange-500 text-white hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-all duration-200">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -259,8 +259,13 @@
 
 
 @section('script')
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    @push('scripts')
+        @vite(['resources/js/seller/products/index.js'])
+    @endpush
     <script>
-     let host = window.location.origin;
+        let host = window.location.origin;
         document.addEventListener("DOMContentLoaded", () => {
             loadProducts(); // Charger au chargement de la page
 
@@ -297,7 +302,7 @@
                     tbody.innerHTML = "";
                     gridview.innerHTML = "";
 
-                    data.products.data.forEach(product =>  {
+                    data.products.data.forEach(product => {
                         let row = `
                 <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                     <td class="px-6 py-4">${product.id}</td>
@@ -306,38 +311,57 @@
                     <td class="px-6 py-4">${new Date(product.created_at).toLocaleDateString()}</td>
                     <td class="px-6 py-4">${product.is_active ? '<span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-green-900 dark:text-green-300">Publier</span>' : '<span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-red-900 dark:text-red-300">Non Publier</span>'}</td>
                     <td class="px-6 py-4">
-                       <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal${product._id}" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button"> 
-  <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
-    <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
-  </svg>
-</button>
+                       <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal${product.id}" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button"> 
+                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                            <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                        </svg>
+                        </button>
 
-<!-- Dropdown menu -->
-<div id="dropdownDotsHorizontal${product.id}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600">
-    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconHorizontalButton">
-      <li>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-      </li>
-      <li>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-      </li>
-      <li>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-      </li>
-    </ul>
-    <div class="py-2">
-      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Separated link</a>
-    </div>
-</div>
+                        <!-- Dropdown menu -->
+                        <div id="dropdownDotsHorizontal${product.id}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconHorizontalButton">
+                            <li>
+                                <a href="${host}/seller/shops/product/${product._id}/detail" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Voir</a>
+                            </li>
+                            <li>
+                                <a href="${host}/shops/${product.shop._id}/products/${product._id}/edit" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mofifier</a>
+                            </li>
+                             <li>
+                               
+                                 <form action="${host}/products/${product.id}/toggle-status" method="POST">
+                                    @csrf
+                                    <button type="submit" class="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600  text-left  ${product.is_active ? 'text-red-500' : 'text-green-500'} rounded"">
+                                         ${product.is_active ? 'Désactiver' : 'Activer'}
+                                    </button>
+                                </form>
+                            </li>
+                            <li>
+                                <a href="${host}/stocks/${product._id}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Eventaire</a>
+                            </li>
+                            </ul>
+
+                            <div class="py-2">
+                                <form action="${host}/seller/shops/${product.id}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce produit ?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="block text-left w-full px-4 py-2 text-sm text-red hover:bg-gray-100 dark:hover:bg-gray-600  dark:hover:text-white">
+                                        Supprimer
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
                     </td>
                 </tr>`;
                         tbody.innerHTML += row;
+                        let firstImage = product.photos.length > 0 ? product.photos[0].image : "default.jpg";
+                        console.log(firstImage);
 
                         let gridItem = `
                 <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden hover:scale-110">
                     <a href="${host}/seller/shops/product/${product._id}/detail" class="block">
                         <div class="relative">
-                            <img src="" alt="${product.name}" class="w-full h-48 object-cover">
+                            <img src="${host}/${firstImage}" alt="${product.name}" class="w-full h-48 object-cover">
                             <div class="absolute top-0 right-0 m-2">
                                 <span class="px-2 py-1 text-xs font-semibold text-white bg-orange-500 rounded-full">
                                     ${product.category_product?.name ?? "N/A"}
@@ -478,64 +502,64 @@
 
                             response.forEach(function(activite) {
                                 htmlContent += `
-        <div class="mb-3 transform transition-all hover:scale-[1.01]">
-            <a href="${host}/seller/shops/product/${activite._id}/detail"
-               class="flex items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-md transition-all">
+                <div class="mb-3 transform transition-all hover:scale-[1.01]">
+                    <a href="${host}/seller/shops/product/${activite._id}/detail"
+                    class="flex items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-md transition-all">
 
-                <!-- Image -->
-                <div class="flex-shrink-0 h-16 w-16 rounded-lg overflow-hidden">
-                    <img src="${activite.thumbnail_url || `${host}/img/placeholder-event.webp`}"
-                         alt="${activite.name}"
-                         class="h-full w-full object-cover">
-                </div>
-
-                <!-- Content -->
-                <div class="ml-4 flex-grow">
-                    <div class="flex items-center justify-between">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
-                            ${activite.name}
-                        </h3>
-                        <span class="px-2 py-1 text-xs font-medium text-orange-700 bg-orange-100 rounded-full dark:bg-orange-900 dark:text-orange-300">
-                            ${activite.category_product?.name || 'Non catégorisé'}
-                        </span>
-                    </div>
-
-                    <div class="mt-2 flex items-center text-sm text-gray-500 dark:text-gray-400">
-                        <div class="flex items-center mr-4">
-                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                            ${new Date(activite.created_at).toLocaleDateString('fr-FR', {
-                                day: 'numeric',
-                                month: 'short',
-                                year: 'numeric'
-                            })}
+                        <!-- Image -->
+                        <div class="flex-shrink-0 h-16 w-16 rounded-lg overflow-hidden">
+                            <img src="${activite.thumbnail_url || `${host}/img/placeholder-event.webp`}"
+                                alt="${activite.name}"
+                                class="h-full w-full object-cover">
                         </div>
 
-                        <div class="flex items-center">
-                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                            ${activite.is_active || 'Lieu non spécifié'}
-                        </div>
-                    </div>
-                </div>
+                        <!-- Content -->
+                        <div class="ml-4 flex-grow">
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
+                                    ${activite.name}
+                                </h3>
+                                <span class="px-2 py-1 text-xs font-medium text-orange-700 bg-orange-100 rounded-full dark:bg-orange-900 dark:text-orange-300">
+                                    ${activite.category_product?.name || 'Non catégorisé'}
+                                </span>
+                            </div>
 
-                <!-- Arrow -->
-                <div class="ml-4 flex-shrink-0">
-                    <svg class="w-6 h-6 text-gray-400 transition-transform group-hover:translate-x-1"
-                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M9 5l7 7-7 7" />
-                    </svg>
+                            <div class="mt-2 flex items-center text-sm text-gray-500 dark:text-gray-400">
+                                <div class="flex items-center mr-4">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                    ${new Date(activite.created_at).toLocaleDateString('fr-FR', {
+                                        day: 'numeric',
+                                        month: 'short',
+                                        year: 'numeric'
+                                    })}
+                                </div>
+
+                                <div class="flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                    ${activite.is_active || 'Lieu non spécifié'}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Arrow -->
+                        <div class="ml-4 flex-shrink-0">
+                            <svg class="w-6 h-6 text-gray-400 transition-transform group-hover:translate-x-1"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7" />
+                            </svg>
+                        </div>
+                    </a>
                 </div>
-            </a>
-        </div>
-    `;
+            `;
                             });
                             resultsContainer.html(htmlContent);
                         }

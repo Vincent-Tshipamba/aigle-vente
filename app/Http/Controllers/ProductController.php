@@ -49,11 +49,11 @@ class ProductController extends Controller
         return view('seller.produits.index', compact('products', 'categories', 'shop', 'stocks'));
     }
 
-    public function fetchProducts(Request $request)
+    public function fetchProducts(Shop $shop,Request $request)
     {
-        $query = Product::query()->with('category_product');
+        $query = Product::query()->with('category_product','stocks','shop','photos');
 
-        // Filtrer par catégorie
+        
         if ($request->has('category_id')) {
             $query->where('category_id', $request->category_id);
         }
@@ -63,7 +63,7 @@ class ProductController extends Controller
             $query->where('is_active', true);
         }
 
-        // Filtrer par produits récents (ex: derniers 30 jours)
+        
         if ($request->has('recent')) {
             $query->where('created_at', '>=', now()->subDays(30));
         }
@@ -74,6 +74,16 @@ class ProductController extends Controller
             'products' => $products
         ]);
     }
+
+    public function toggleStatus($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->is_active = !$product->is_active;
+        $product->save();
+
+        return redirect()->back()->with('success', 'Statut du produit mis à jour avec succès.');
+    }
+
 
     public function manageStockIndex($id)
     {
@@ -86,6 +96,8 @@ class ProductController extends Controller
         $stocks = $product->stocks;
         return view('seller.manage-stocks.index', compact('product', 'stocks'));
     }
+
+    
 
     public function manageStock(Request $request, Product $product)
     {
@@ -338,17 +350,15 @@ class ProductController extends Controller
 
         if (!$seller || !$seller->shops->contains($product->shop)) {
             return response()->json(['error' => 'Accès non autorisé à ce produit.'], 403);
-        }
+        }   
 
         // Suppression du produit et des relations associées
         $product->photos()->delete();
         $product->stocks()->delete();
         $product->delete();
 
-
-        return redirect()->route('seller.shops.products.index', $product->shop->_id)->with('success', 'Produit supprimé avec succès !');
+        return redirect()->back()->with('success', 'Produit supprimé avec succès !');
     }
-
     public function requestPromotion(Request $request, Product $product)
     {
         $seller = Auth::user()->seller;

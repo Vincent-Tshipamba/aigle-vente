@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Client\ProductController;
 use App\Http\Controllers\Client\WishlistController;
@@ -47,13 +48,14 @@ Route::middleware('userOnline')->group(function () {
         Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
         
     });
-
+    
+    Route::post('/reviews/{id}', [ReviewController::class, 'store'])->name('reviews.store')->middleware('auth');
     Route::post('/products/filter', [ProductController::class, 'filterProducts']);
 
 });
 
 // Routes for authenticated users
-Route::middleware(['auth', 'userOnline'])->group(function () {
+    Route::middleware(['auth', 'userOnline'])->group(function () {
     // Profile Routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

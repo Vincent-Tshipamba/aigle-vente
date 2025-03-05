@@ -43,37 +43,15 @@
                                 <span class="text-gray-500 line-through">${{ $product->unit_price + 10 }}</span>
                             </div>
                             <div class="flex items-center mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    class="size-6 text-yellow-500">
-                                    <path fill-rule="evenodd"
-                                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    class="size-6 text-yellow-500">
-                                    <path fill-rule="evenodd"
-                                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    class="size-6 text-yellow-500">
-                                    <path fill-rule="evenodd"
-                                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    class="size-6 text-yellow-500">
-                                    <path fill-rule="evenodd"
-                                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    class="size-6 text-yellow-500">
-                                    <path fill-rule="evenodd"
-                                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="ml-2 text-gray-600">4.5 (120 reviews)</span>
+                            
+                                @php
+                                    $avg = round($product->reviews->avg('rating'), 1);
+                                @endphp
+                                @for ($i = 1; $i <= 5; $i++)
+                                    <i class="{{ $i <= $avg ? 'fas' : 'fal' }} fa-star text-yellow-500"></i>
+                                @endfor
+                                
+                                <span class="ml-2 text-gray-600">({{ $avg }}/5)</span>
                             </div>
                             <p class="text-gray-700 mb-6">
                                 {!! substr($product->description, 0, 800) !!} ...
@@ -130,8 +108,8 @@
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-links" id="reviews-tab" data-bs-toggle="tab"
-                                        data-bs-target="#reviews" type="button" role="tab"
-                                        aria-controls="reviews" aria-selected="false">Notes et avis</button>
+                                        data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews"
+                                        aria-selected="false">Notes et avis</button>
                                 </li>
                             </ul>
                         </div>
@@ -189,194 +167,111 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                            <div class="tab-pane fade show active" id="reviews" role="tabpanel"
+                                aria-labelledby="reviews-tab">
                                 <div class="product-details-review">
-                                    <h3 class="tp-comments-title mb-35">3 avis pour {{ $product->name }}
+                                    <h3 class="tp-comments-title mb-35">
+                                        {{ $product->reviews->count() }} avis pour {{ $product->name }}
                                     </h3>
+
+                                    {{-- Section Affichage des Avis --}}
                                     <div class="latest-comments mb-55">
                                         <ul>
-                                            <li>
-                                                <div class="comments-box d-flex">
-                                                    <div class="comments-avatar mr-25">
-                                                        <img loading="lazy"
-                                                            src="{{ asset('img/shop/reviewer-01.png') }}"
-                                                            alt="">
-                                                    </div>
-                                                    <div class="comments-text">
-                                                        <div
-                                                            class="comments-top d-sm-flex align-items-start justify-content-between mb-5">
-                                                            <div class="avatar-name">
-                                                                <b>Siarhei Dzenisenka</b>
-                                                                <div class="comments-date mb-20">
-                                                                    <span>March 27, 2018 9:51 am</span>
+                                            @foreach ($product->reviews as $review)
+                                                <li>
+                                                    <div class="comments-box d-flex">
+                                                        <div class="comments-avatar mr-25">
+                                                            <img loading="lazy"
+                                                                src="{{ asset('img/shop/reviewer-01.png') }}"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="comments-text">
+                                                            <div
+                                                                class="comments-top d-sm-flex align-items-start justify-content-between mb-5">
+                                                                <div class="avatar-name">
+                                                                    <b>{{ $review->user->name }}</b>
+
+                                                                    <div class="comments-date mb-20">
+
+                                                                        <span>{{ $review->created_at->format('d M Y H:i') }}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="user-rating">
+                                                                    <ul>
+                                                                        @for ($i = 1; $i <= 5; $i++)
+                                                                            <li>
+                                                                                <i
+                                                                                    class="{{ $i <= $review->rating ? 'fas' : 'fal' }} fa-star"></i>
+                                                                            </li>
+                                                                        @endfor
+                                                                    </ul>
                                                                 </div>
                                                             </div>
-                                                            <div class="user-rating">
-                                                                <ul>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fal fa-star"></i></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
+                                                            <p class="m-0">{{ $review->comment }}</p>
                                                         </div>
-                                                        <p class="m-0">This is cardigan is a comfortable warm
-                                                            classic
-                                                            piece. Great to layer with a light top and you can dress up
-                                                            or
-                                                            down given the jewel buttons. I'm 5'8” 128lbs a 34A and the
-                                                            Small fit fine.</p>
                                                     </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="comments-box d-flex">
-                                                    <div class="comments-avatar mr-25">
-                                                        <img loading="lazy"
-                                                            src="{{ asset('img/shop/reviewer-02.png') }}"
-                                                            alt="">
-                                                    </div>
-                                                    <div class="comments-text">
-                                                        <div
-                                                            class="comments-top d-sm-flex align-items-start justify-content-between mb-5">
-                                                            <div class="avatar-name">
-                                                                <b>Tommy Jarvis </b>
-                                                                <div class="comments-date mb-20">
-                                                                    <span>March 27, 2018 9:51 am</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="user-rating">
-                                                                <ul>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fal fa-star"></i></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <p class="m-0">This is cardigan is a comfortable warm
-                                                            classic
-                                                            piece. Great to layer with a light top and you can dress up
-                                                            or
-                                                            down given the jewel buttons. I'm 5'8” 128lbs a 34A and the
-                                                            Small fit fine.</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="comments-box d-flex">
-                                                    <div class="comments-avatar mr-25">
-                                                        <img loading="lazy"
-                                                            src="{{ asset('img/shop/reviewer-03.png') }}"
-                                                            alt="">
-                                                    </div>
-                                                    <div class="comments-text">
-                                                        <div
-                                                            class="comments-top d-sm-flex align-items-start justify-content-between mb-5">
-                                                            <div class="avatar-name">
-                                                                <b>Johnny Cash</b>
-                                                                <div class="comments-date mb-20">
-                                                                    <span>March 27, 2018 9:51 am</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="user-rating">
-                                                                <ul>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="fal fa-star"></i></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <p class="m-0">This is cardigan is a comfortable warm
-                                                            classic
-                                                            piece. Great to layer with a light top and you can dress up
-                                                            or
-                                                            down given the jewel buttons. I'm 5'8” 128lbs a 34A and the
-                                                            Small fit fine.</p>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </div>
+
+                                    {{-- Note globale (calculée dynamiquement) --}}
+                                    <div class="comment-rating mb-20 d-flex">
+                                        <span>Note Globale : </span>
+                                        <div id="average-rating">
+                                            @php
+                                                $avg = round($product->reviews->avg('rating'), 1);
+                                            @endphp
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <i class="{{ $i <= $avg ? 'fas' : 'fal' }} fa-star"></i>
+                                            @endfor
+                                            <span>({{ $avg }}/5)</span>
+                                        </div>
+                                    </div>
+
+                                    {{-- Formulaire d'ajout d'un avis --}}
                                     <div class="product-details-comment">
                                         <div class="comment-title mb-20">
-                                            <h3>Add a review</h3>
-                                            <p>Your email address will not be published. Required fields are marked*</p>
+                                            <h3>Ajouter un avis</h3>
+                                            <p>Votre email ne sera pas publié. Les champs requis sont marqués *</p>
                                         </div>
-                                        <div class="comment-rating mb-20 d-flex">
-                                            <span>Overall ratings</span>
-                                            <ul>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fal fa-star"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="comment-input-box">
-                                            <form action="#">
+                                        <form id="review-form" action="{{ route('reviews.store', $product->id) }}"
+                                            method="POST">
+                                            @csrf
+                                            <div class="comment-rating mb-20 d-flex">
+                                                <span>Votre Note</span>
+                                                <ul id="star-rating">
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        <li data-value="{{ $i }}">
+                                                            <i class="fal fa-star"></i>
+                                                        </li>
+                                                    @endfor
+                                                </ul>
+                                                <input type="hidden" name="rating" id="rating-value">
+                                            </div>
+                                            <div class="comment-input-box">
                                                 <div class="row">
                                                     <div class="col-xxl-12">
                                                         <div class="comment-input">
-                                                            <textarea placeholder="Your review..."></textarea>
+                                                            <!-- Correction ici -->
+                                                            <textarea name="comment" placeholder="Votre avis..." required></textarea>
                                                         </div>
                                                     </div>
-                                                    <div class="col-xxl-6">
-                                                        <div class="comment-input">
-                                                            <input type="text" placeholder="Your Name*">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xxl-6">
-                                                        <div class="comment-input">
-                                                            <input type="email" placeholder="Your Email*">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xxl-12">
-                                                        <div class="comment-submit">
-                                                            <button type="submit"
-                                                                class="tp-btn pro-submit">Submit</button>
-                                                        </div>
+                                                    <div class="col-12">
+                                                        <button type="submit"
+                                                            class="tp-btn pro-submit">Soumettre</button>
                                                     </div>
                                                 </div>
-                                            </form>
-                                        </div>
+                                            </div>
+                                        </form>
+
                                     </div>
                                 </div>
                             </div>
+
+
+
+
                         </div>
                     </div>
                 </div>
@@ -481,4 +376,24 @@
         </div>
     </div>
     <!-- related-product-area-end -->
+
+    {{-- JavaScript pour les étoiles interactives --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const stars = document.querySelectorAll("#star-rating li");
+            const ratingValue = document.getElementById("rating-value");
+
+            stars.forEach(star => {
+                star.addEventListener("click", function() {
+                    const value = this.getAttribute("data-value");
+                    ratingValue.value = value;
+
+                    stars.forEach(s => s.querySelector("i").classList.replace("fas", "fal"));
+                    for (let i = 0; i < value; i++) {
+                        stars[i].querySelector("i").classList.replace("fal", "fas");
+                    }
+                });
+            });
+        });
+    </script>
 </x-app-layout>

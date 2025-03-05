@@ -19,6 +19,7 @@ class HomeController extends Controller
         $totalProducts = Product::with('photos', 'shop.seller.user', 'shop.seller')->count();
 
         $products = Product::with('photos', 'shop.seller.user', 'shop.seller')
+        ->where('is_active',true)
             ->inRandomOrder()
             ->get();
 

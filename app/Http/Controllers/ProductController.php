@@ -17,25 +17,73 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
 
-    public function index(Shop $shop)
+   public function index(Shop $shop, Request $request)
     {
         $userId = Auth::id();
-
-
         $seller = Seller::where('user_id', $userId)->first();
 
-        if (!$seller || !$seller->shops()->where('id', $shop->id)->exists()) {
+        if (!$seller || !$seller->shops()->where('_id', $shop->_id)->exists()) {
             return response()->json(['error' => 'Accès non autorisé à cette boutique.'], 403);
         }
 
-        $products = $shop->products()->paginate(10);
+        $query = $shop->products();
+
+        if ($request->has('filter')) {
+            if ($request->filter == 'is_active') {
+                $query->where('is_active', true);
+            } elseif ($request->filter == 'recent') {
+                $query->orderBy('created_at', 'desc');
+            }
+        }
+
+        $products = $query->paginate(10);
         $stocks = Stock::all();
+        $categories = CategoryProduct::all();
 
-        $categories = CategoryProduct::All();
-
+        if ($request->ajax()) {
+            return response()->json([
+                'products' => view('seller.produits.index', compact('products','stocks','categories','shop'))->render()
+            ]);
+        }
 
         return view('seller.produits.index', compact('products', 'categories', 'shop', 'stocks'));
     }
+
+    public function fetchProducts(Shop $shop,Request $request)
+    {
+        $query = Product::query()->with('category_product','stocks','shop','photos');
+
+        
+        if ($request->has('category_id')) {
+            $query->where('category_id', $request->category_id);
+        }
+
+        // Filtrer par produits actifs
+        if ($request->has('is_active')) {
+            $query->where('is_active', true);
+        }
+
+        
+        if ($request->has('recent')) {
+            $query->where('created_at', '>=', now()->subDays(30));
+        }
+
+        $products = $query->paginate(10);
+
+        return response()->json([
+            'products' => $products
+        ]);
+    }
+
+    public function toggleStatus($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->is_active = !$product->is_active;
+        $product->save();
+
+        return redirect()->back()->with('success', 'Statut du produit mis à jour avec succès.');
+    }
+
 
     public function manageStockIndex($id)
     {
@@ -48,6 +96,8 @@ class ProductController extends Controller
         $stocks = $product->stocks;
         return view('seller.manage-stocks.index', compact('product', 'stocks'));
     }
+
+    
 
     public function manageStock(Request $request, Product $product)
     {
@@ -86,9 +136,6 @@ class ProductController extends Controller
         $state = ProductState::all();
         return view('seller.produits.create', compact('categories', 'state', 'shop'));
     }
-
-
-
 
     public function store(Request $request, Shop $shop)
     {
@@ -180,8 +227,6 @@ class ProductController extends Controller
         }
     }
 
-
-
     public function show($id)
     {
         $userId = Auth::id();
@@ -219,7 +264,6 @@ class ProductController extends Controller
             'state' => $state
         ]);
     }
-
 
     public function update(Request $request, Shop $shop, Product $product)
     {
@@ -299,7 +343,6 @@ class ProductController extends Controller
         }
     }
 
-
     // Méthode de suppression d'un produit
     public function destroy(Product $product)
     {
@@ -307,17 +350,15 @@ class ProductController extends Controller
 
         if (!$seller || !$seller->shops->contains($product->shop)) {
             return response()->json(['error' => 'Accès non autorisé à ce produit.'], 403);
-        }
+        }   
 
         // Suppression du produit et des relations associées
         $product->photos()->delete();
         $product->stocks()->delete();
         $product->delete();
 
-
-        return redirect()->route('seller.shops.products.index', $product->shop->_id)->with('success', 'Produit supprimé avec succès !');
+        return redirect()->back()->with('success', 'Produit supprimé avec succès !');
     }
-
     public function requestPromotion(Request $request, Product $product)
     {
         $seller = Auth::user()->seller;
@@ -376,5 +417,19 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Une erreur est survenue lors de la suppression de l\'image.');
         }
+    }
+
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('search');
+        $activites = Product::where('name', 'LIKE', "%{$searchTerm}%")->with('category_product')
+            ->take(20)
+            ->latest()
+            ->get();
+
+
+
+
+        return response()->json($activites);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use FFMpeg\FFMpeg;
 use App\Models\Shop;
 use App\Models\Stock;
 use App\Models\Seller;
@@ -10,6 +11,9 @@ use App\Models\ProductState;
 use Illuminate\Http\Request;
 use App\Models\ProductDetail;
 use App\Models\CategoryProduct;
+use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Coordinate\Dimension;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -139,6 +143,8 @@ class ProductController extends Controller
 
     public function store(Request $request, Shop $shop)
     {
+
+        DB::beginTransaction();
         try {
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
@@ -146,7 +152,7 @@ class ProductController extends Controller
                 'price' => 'required|numeric',
                 'category_product_id' => 'required|exists:category_products,id',
                 'description' => 'nullable|string',
-                'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+                'media.*' => 'required|file|mimes:jpeg,png,jpg,gif,webp,mp4,mov,avi|max:20480',
                 'weight' => 'nullable|numeric',
                 'dimensions' => 'nullable|string|max:255',
                 'color' => 'nullable|string|max:50',
@@ -200,27 +206,50 @@ class ProductController extends Controller
                 'quantity' => $validated['stock_quantity'],
             ]);
 
-            if ($request->hasFile('images')) {
-                foreach ($request->file('images') as $imageFile) {
-                    // Crée un nom unique pour éviter les conflits
-                    $imageName = uniqid() . '.' . $imageFile->getClientOriginalExtension();
+            if ($request->hasFile('media')) {
+                foreach ($request->file('media') as $mediaFile) {
+                    $mediaName = uniqid() . '.' . $mediaFile->getClientOriginalExtension();
 
-                    $path = $imageFile->move(base_path('products_images'), $imageName);
-
-                    // Enregistrez le chemin relatif dans la base de données
+                    $path = $mediaFile->move(base_path('products_media'), $mediaName);
                     $product->photos()->create([
-                        'image' => 'products_images/' . $imageName,
-                        'description' => 'Image pour ' . $product->name,
+                        'image' => 'products_media/' . $mediaName,
+                        'description' => 'Media pour ' . $product->name,
                     ]);
+                     if (in_array($mediaFile->getClientOriginalExtension(), ['mp4', 'mov', 'avi'])) {
+                        $ffmpeg = FFMpeg::create([
+                            'ffmpeg.binaries'  => 'C:/ffmpeg/bin/ffmpeg.exe',  // ✅ Chemin correct
+                            'ffprobe.binaries' => 'C:/ffmpeg/bin/ffprobe.exe', // ✅ Chemin correct
+                            'timeout' => 3600,
+                            'threads' => 12,
+                        ]);     
+
+
+                        $video = $ffmpeg->open($path);
+                        $gifPath = base_path('products_media') . '/' . uniqid() . '.gif';
+
+                        $video->gif(TimeCode::fromSeconds(0), new Dimension(320, 240), 10)
+                            ->save($gifPath);
+
+                        // Enregistrez le chemin du GIF dans la base de données
+                        $product->photos()->create([
+                            'image' => 'products_media/' . basename($gifPath),
+                            'description' => 'GIF pour ' . $product->name,
+                        ]);
+                    }
+
                 }
             }
+
+            DB::commit();
 
 
             return redirect()->route('seller.shops.products.index', $product->shop->_id)
                 ->with('success', 'Produit créé avec succès !');
         } catch (\Illuminate\Validation\ValidationException $e) {
             Log::error('Erreurs de validation: ', $e->errors());
+            DB::rollBack();
             return redirect()->back()->withErrors($e->errors())->withInput();
+            
         } catch (\Exception $e) {
             Log::error('Erreur lors de la création du produit: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Une erreur est survenue lors de la création du produit : ' . $e->getMessage())->withInput();

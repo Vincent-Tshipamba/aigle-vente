@@ -18,7 +18,7 @@
                 <div class="space-y-1">
                     <div class="flex items-center gap-3">
                         <div class="p-2 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
-                            <svg class="w-6 h-6 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor"
+                            <svg class="w-6 h-6 text-[#e38407] dark:text-orange-400" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
@@ -171,7 +171,7 @@
 
                 <!-- Create Activity Button -->
                 <a href="{{ route('seller.shops.products.create', $shop->_id) }}"
-                    class="inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg bg-orange-500 text-white hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-all duration-200">
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg bg-[#e38407] text-white hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-all duration-200">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -354,7 +354,7 @@
                     </td>
                 </tr>`;
                         tbody.innerHTML += row;
-                        let firstImage = product.photos.length > 0 ? product.photos[0].image : "default.jpg";
+                        let firstImage = product.photos.length > 0 ? product.photos[0].image : "products_media/images.jpg";
                         console.log(firstImage);
 
                         let gridItem = `

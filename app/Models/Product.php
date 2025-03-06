@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Review;
 use Illuminate\Support\Str;
 use Database\Seeders\OrderSeeder;
 use Illuminate\Database\Eloquent\Model;
@@ -122,5 +123,16 @@ class Product extends Model
         $totalSold = $this->calculateTotalSold();
         return $totalSold * $this->unit_price;
     }
+
+    public function reviews()
+{
+    return $this->hasMany(Review::class);
+}
+
+public function averageRating()
+{
+    return $this->reviews()->avg('rating');
+}
+
 
 }

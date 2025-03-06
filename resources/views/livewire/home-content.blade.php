@@ -164,7 +164,15 @@
                                 class="text-gray-400 mr-3 uppercase text-xs">{{ $product->category_product->name }}</span><br>
                             <a href="{{ route('shops.show', $product->shop->_id) }}"
                                 class="text-gray-400 mr-3 text-xs">Boutique {{ $product->shop->name }}</a>
-
+                            <div id="average-rating">
+                                @php
+                                    $avg = round($product->reviews->avg('rating'), 1);
+                                @endphp
+                                @for ($i = 1; $i <= 5; $i++)
+                                    <i class="{{ $i <= $avg ? 'fas' : 'fal' }} fa-star text-[#e38407]"></i>
+                                @endfor
+                                <span>({{ $avg }}/5)</span>
+                            </div>
                             <p class="text-lg font-bold text-black truncate block capitalize w-full overflow-hidden">
                                 {{ $product->name }}</p>
 

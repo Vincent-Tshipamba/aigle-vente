@@ -90,7 +90,7 @@
     </div>
 
 
-    @include('partials.home-partials.filters')
+    @include('partials.home-partials.filters', ['categories' => $categories, 'products' => $products, 'localSellers' => $localSellers, 'internationalSellers' => $internationalSellers])
 
 
 

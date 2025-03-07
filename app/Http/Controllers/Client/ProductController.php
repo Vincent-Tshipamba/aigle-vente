@@ -39,7 +39,61 @@ class ProductController extends Controller
         return redirect()->route('chat', $conversation->id);
     }
 
-    public function filterProducts(Request $request)
+    public function filtersProducts(Request $request)
+    {
+        // Récupérer les filtres depuis la requête
+        $locations = $request->input('locations', []); // Localisation des vendeurs
+        $categories = $request->input('categories', []); // Catégories des produits
+        $minPrice = $request->input('min_price', 0); // Prix minimum
+        $maxPrice = $request->input('max_price', 1000); // Prix maximum
+
+        // Commencer la requête pour récupérer les produits
+        $query = Product::with('photos', 'shop.seller.user', 'shop.seller');
+
+        // Filtrer par prix, si des valeurs sont fournies
+        if ($minPrice || $maxPrice) {
+            $query->whereBetween('unit_price', [$minPrice, $maxPrice]);
+        }
+
+        // Filtrer par catégorie, si des catégories sont sélectionnées
+        if (!empty($categories)) {
+            $query->whereIn('category_product_id', $categories);
+        }
+
+        // Filtrer par localisation des vendeurs (si cette option est sélectionnée)
+        if (!empty($locations)) {
+            $query->join('shops', 'shops.id', '=', 'products.shop_id')
+                ->join('sellers', 'sellers.id', '=', 'shops.seller_id')
+                ->join('locations', 'locations.id', '=', 'sellers.location_id');
+
+            // Si les vendeurs locaux sont sélectionnés
+            if (in_array('localSellers', $locations)) {
+                $query->where(function ($query) {
+                    $query->where('locations.country', 'LIKE', '%République démocratique du Congo%')
+                        ->orWhere('locations.country', 'LIKE', '%Congo (la République démocratique du)%');
+                });
+            }
+
+            // Si les vendeurs internationaux sont sélectionnés
+            if (in_array('internationalSellers', $locations)) {
+                $query->where(function ($query) {
+                    $query->where('locations.country', '!=', 'République démocratique du Congo')
+                        ->where('locations.country', '!=', 'Congo (la République démocratique du)');
+                });
+            }
+        }
+
+        // Exécuter la requête et obtenir les résultats
+        $products = $query->get();
+
+        // Générer le HTML pour les produits filtrés
+        $html = view('partials.home-partials.product-filter-results', compact('products'))->render();
+
+        // Retourner la réponse JSON avec le HTML mis à jour
+        return response()->json(['html' => $html]);
+    }
+
+    public function filterProductsByCategory(Request $request)
     {
         $categories = $request->input('categories', []);
 
@@ -87,7 +141,7 @@ class ProductController extends Controller
         if ($products->count() > 0) {
             foreach ($products as $index => $product) {
                 $html .= '
-                    <div class="w-72 rounded-xl duration-500">
+                    <div class="rounded-xl w-72 duration-500">
                         <a href="' . route('products.show', $product->_id) . '">
                             <div class="image swiper-container product-swiper-' . ($index + 1) . '" loading="lazy">
                                 <div class="swiper-wrapper">';
@@ -95,7 +149,7 @@ class ProductController extends Controller
                 foreach ($product->photos as $item) {
                     $html .= '
                                     <div class="swiper-slide">
-                                        <img src="' . asset($item->image) . '" alt="' . $product->name . '" class="h-80 w-72 object-cover rounded-xl hover:scale-105">
+                                        <img src="' . asset($item->image) . '" alt="' . $product->name . '" class="rounded-xl w-72 h-80 object-cover hover:scale-105">
                                     </div>';
                 }
 
@@ -107,19 +161,19 @@ class ProductController extends Controller
                             </div>
                         </a>
                         <div class="px-4 py-3 w-72">
-                            <span class="text-gray-400 mr-3 uppercase text-xs">' . $product->category_product->name . '</span><br>
-                            <span class="text-gray-400 mr-3 text-xs">Boutique ' . $product->shop->name . '</span>
-                            <p class="text-lg font-bold text-black truncate block capitalize">' . $product->name . '</p>
+                            <span class="mr-3 text-gray-400 text-xs uppercase">' . $product->category_product->name . '</span><br>
+                            <span class="mr-3 text-gray-400 text-xs">Boutique ' . $product->shop->name . '</span>
+                            <p class="block font-bold text-black text-lg truncate capitalize">' . $product->name . '</p>
                             <div class="flex items-center">
-                                <p class="text-lg font-semibold text-black cursor-auto my-3">$' . $product->unit_price . '</p>
+                                <p class="my-3 font-semibold text-black text-lg cursor-auto">$' . $product->unit_price . '</p>
                                 <del>
-                                    <p class="text-sm text-gray-600 cursor-auto ml-2">$' . ($product->unit_price + 50) . '</p>
+                                    <p class="ml-2 text-gray-600 text-sm cursor-auto">$' . ($product->unit_price + 50) . '</p>
                                 </del>
-                                <div class="ml-auto flex space-x-2">
-                                    <svg onclick="contactSellerModal(event, ' . htmlspecialchars(json_encode($product), ENT_QUOTES) . ')" class="w-8 h-8 text-gray-800 dark:text-white hover:fill-[#e38407] hover:text-[#e38407] hover:cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <div class="flex space-x-2 ml-auto">
+                                    <svg onclick="contactSellerModal(event, ' . htmlspecialchars(json_encode($product), ENT_QUOTES) . ')" class="hover:fill-[#e38407] w-8 h-8 text-gray-800 hover:text-[#e38407] dark:text-white hover:cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 10.5h.01m-4.01 0h.01M8 10.5h.01M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-6.6a1 1 0 0 0-.69.275l-2.866 2.723A.5.5 0 0 1 8 18.635V17a1 1 0 0 0-1-1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/>
                                     </svg>
-                                    <svg onclick="addToWishList(event, ' . $product->id . ')" class="w-8 h-8 text-gray-800 dark:text-white hover:fill-[#e38407] hover:text-[#e38407] hover:cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <svg onclick="addToWishList(event, ' . $product->id . ')" class="hover:fill-[#e38407] w-8 h-8 text-gray-800 hover:text-[#e38407] dark:text-white hover:cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
                                     </svg>
                                 </div>
@@ -162,8 +216,8 @@ class ProductController extends Controller
 
             $html .= '
                 <div class="col product">
-                    <div class="tpproduct pb-15 mb-30">
-                        <div class="tpproduct__thumb p-relative">
+                    <div class="mb-30 pb-15 tpproduct">
+                        <div class="p-relative tpproduct__thumb">
                             <a href="' . route('products.show', $_id) . '">
                                 ' . ($image !== null ? '<img loading="lazy" src="' . asset($image) . '" alt="' . $name . '">' : '') . '
                             </a>
@@ -188,7 +242,7 @@ class ProductController extends Controller
                             <p class="tpproduct__title">Propriétaire
                                 ' . $seller_first_name . ' ' . $seller_last_name . '
                             </p>
-                            <div class="tpproduct__priceinfo p-relative">
+                            <div class="p-relative tpproduct__priceinfo">
                                 <div class="tpproduct__priceinfo-list">
                                     <span>' . number_format($unit_price, 2, ",", " ") . '
                                         $</span>

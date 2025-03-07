@@ -296,7 +296,6 @@
         const initialProductsContent = $('.productsParent').html();
 
         document.addEventListener('change', function(event) {
-
             // Check if the target element has the specific class
             if (event.target.classList.contains('category-checkbox')) {
                 const selectedCategories = Array.from(
@@ -333,7 +332,7 @@
                     }
                 });
 
-                fetch(`/products/filter`, {
+                fetch(`/products/category/filter`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -368,6 +367,73 @@
                     })
                     .catch(error => console.error('Error fetching products:', error));
             }
+        });
+    </script>
+
+    <!-- Filtrage general des produits -->
+    <script>
+        document.getElementById('apply-filters').addEventListener('click', function () {
+            // Collecter les filtres sélectionnés
+
+            // Récupérer les plages de prix
+            const minPrice = document.getElementById('min-price').value;
+            const maxPrice = document.getElementById('max-price').value;
+
+            // Récupérer les catégories sélectionnées
+            const categories = [];
+            document.querySelectorAll('.category-checkbox-in-filter-modal:checked').forEach(function (checkbox) {
+                categories.push(checkbox.value);
+            });
+
+            // Récupérer les localisations (vendeurs locaux et internationaux sélectionnés)
+            const locations = [];
+            document.querySelectorAll('.location-checkbox:checked').forEach(function (checkbox) {
+                locations.push(checkbox.value);
+            });
+
+            // Construire les données à envoyer via AJAX
+            const filters = {
+                min_price: minPrice,
+                max_price: maxPrice,
+                categories: categories,
+                locations: locations
+            };
+
+            // Envoi de la requête AJAX avec les filtres
+            fetch('/products/filter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify(filters)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.html.trim() === '') {
+                        document.querySelector('.productsParent').innerHTML = `
+                            <div class="flex flex-col gap-6 p-4 my-4 text-center text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300">
+                                <div>
+                                    <span class="font-medium">Oups désolé !</span> Aucun produit correspondant à votre filtre n'a été trouvé.
+                                </div>
+                                <div>
+                                    <a href="{{ route('sellers.create') }}"
+                                    class="inline-block px-6 py-2 w-full bg-gray-800 text-gray-200 hover:text-white hover:bg-[#e38407] font-semibold rounded-md text-center transition-all duration-300">
+                                    Devenez donc le premier à vendre un produit de cette catégorie !
+                                    </a>
+                                </div>
+                            </div>`;
+                    } else {
+                        document.querySelector('.productsParent').innerHTML = `
+                            <div class="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mb-5 my-20">
+                                ${data.html}
+                            </div>`;
+                        initializeSwipers()
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur lors du filtrage des produits :', error);
+                });
         });
     </script>
 

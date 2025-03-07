@@ -46,11 +46,13 @@ Route::middleware('userOnline')->group(function () {
 
     Route::middleware(['track.visits'])->group(function () {
         Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
-        
+
     });
-    
+
     Route::post('/reviews/{id}', [ReviewController::class, 'store'])->name('reviews.store')->middleware('auth');
-    Route::post('/products/filter', [ProductController::class, 'filterProducts']);
+    Route::post('/products/category/filter', [ProductController::class, 'filterProductsByCategory']);
+    Route::post('/products/filter', [ProductController::class, 'filtersProducts']);
+    Route::post('/products/seller-location/filter', [ProductController::class, 'sellerLocationFilter']);
 
 });
 

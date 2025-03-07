@@ -47,6 +47,10 @@ class ProductController extends Controller
         $minPrice = $request->input('min_price', 0); // Prix minimum
         $maxPrice = $request->input('max_price', 1000); // Prix maximum
 
+        if ($minPrice > $maxPrice) {
+            return response()->json(['error' => 'Le prix minimum ne peut pas être supérieur au prix maximum.'], 400);
+        }
+
         // Commencer la requête pour récupérer les produits
         $query = Product::with('photos', 'shop.seller.user', 'shop.seller');
 

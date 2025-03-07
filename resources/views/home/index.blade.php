@@ -379,6 +379,11 @@
             const minPrice = document.getElementById('min-price').value;
             const maxPrice = document.getElementById('max-price').value;
 
+            if (parseFloat(minPrice) > parseFloat(maxPrice)) {
+                alert("Le prix minimum ne peut pas être supérieur au prix maximum.");
+                return;
+            }
+
             // Récupérer les catégories sélectionnées
             const categories = [];
             document.querySelectorAll('.category-checkbox-in-filter-modal:checked').forEach(function (checkbox) {

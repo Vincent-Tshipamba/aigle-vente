@@ -49,7 +49,7 @@ return [
      * Toggle various chat features on or off.
      */
     'show_new_chat_modal_button' => true,
-    'show_new_group_modal_button' => true,
+    'show_new_group_modal_button' => false,
     'allow_chats_search' => true,
     'allow_media_attachments' => true,
     'allow_file_attachments' => true,
@@ -84,4 +84,8 @@ return [
         'file_max_upload_size' => 12288, // 12 MB
     ],
 
+    'notifications' => [
+        'enabled' => true,
+        'main_sw_script' => 'sw.js', // Relative to the public folder
+    ],
 ];

@@ -27,15 +27,15 @@
             <div class="inline-flex items-center rounded-md bg-whiter p-1.5 dark:bg-meta-4">
                 <button data-period="day"
                     class="period-btn rounded  px-3 py-1 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card  dark:text-white dark:hover:bg-boxdark active">
-                    Day
+                    Jours
                 </button>
                 <button data-period="week"
                     class="period-btn rounded px-3 py-1 text-xs font-medium text-black hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark">
-                    Week
+                    Semaine
                 </button>
                 <button data-period="month"
                     class="period-btn rounded px-3 py-1 text-xs font-medium text-black hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark">
-                    Month
+                    Mois
                 </button>
             </div>
 

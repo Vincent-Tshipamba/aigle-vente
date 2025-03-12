@@ -34,10 +34,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/api/shop/visitors', [DashboardController::class, 'getShopVisitors']);
     Route::get('/activites/search', [ProductController::class, 'search'])->name('product.search');
 
-    Route::delete('/products/{product}/images/{photoId}', [ProductController::class, 'deleteImage'])->name('product.deleteImage');
+    Route::delete('/products/{product}/images/{photoId}', action: [ProductController::class, 'deleteImage'])->name('product.deleteImage');
     Route::get('/products', [ProductController::class, 'fetchProducts'])->name('products.fetch');
     Route::post('/products/{id}/toggle-status', [ProductController::class, 'toggleStatus'])->name('products.toggleStatus');
-   
+
 
 
     Route::delete('seller/shops/{shop:_id}', [ShopController::class, 'destroy'])->name('shops.destroy');
@@ -46,6 +46,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/seller/shops', [ShopController::class, 'index'])->name('shops.index');
     Route::get('/seller/shops/create', [ShopController::class, 'create'])->name('shops.create');
     Route::post('seller/shops', [ShopController::class, 'store'])->name('shops.store');
+    Route::get('api/shop/search', [ShopController::class, 'search'])->name('shop.search');
 
 
     Route::get('/seller/dashboard', [DashboardController::class, 'index'])->name('seller.dashboard');

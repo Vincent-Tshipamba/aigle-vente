@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CategoryProduct;
 use App\Models\Shop;
 use App\Models\Seller;
 use App\Models\Product;
@@ -39,11 +40,14 @@ class ShopController extends Controller
     public function show($id)
     {
         $shop = Shop::where('_id', $id)->first();
+        $shops = Shop::inRandomOrder()
+        ->where('_id', '!=', $shop->_id)
+        ->get();
         $products = Product::where('shop_id', $shop->id)
             ->with(['photos', 'shop.seller'])
             ->paginate(10);
 
-        return view('client.shops.show', compact('shop', 'products'));
+        return view('client.shops.show', compact('shop', 'products','shops'));
     }
 
     public function store(Request $request)

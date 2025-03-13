@@ -76,7 +76,7 @@ class User extends Authenticatable
 
     public function getCoverUrlAttribute(): ?string
     {
-        return $this->avatar_url ?? null;
+        return $this->avatar_url ?? 'https://thumbs.dreamstime.com/b/ic-ne-de-profil-de-texte-d-attente-de-d%C3%A9faut-90197957.jpg';
     }
 
     public function hasConversationWith(User $user): bool
@@ -90,7 +90,7 @@ class User extends Authenticatable
     }
     public function canCreateGroups(): bool
     {
-        return true;
+        return false;
     }
 
 

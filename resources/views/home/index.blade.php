@@ -4,26 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <link rel="canonical" href="https://aiglevente.com/">
-    <meta name="description" content="à la hauteur de votre desire.">
-
-    <meta name="twitter:site" content="@preline">
-    <meta name="twitter:creator" content="@preline">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="à la hauteur de votre desire">
-    <meta name="twitter:description"
-        content="à la hauteur de votre desire.">
-    <meta name="twitter:image" content="{{ asset('img\logo\logo_sans_bg.png') }}">
-
-    <meta property="og:url" content="https://aiglevente.com/">
-    <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Aigle Vente">
-    <meta property="og:title" content="à la hauteur de votre desire.">
-    <meta property="og:description"
-        content="à la hauteur de votre desire.">
-    <meta property="og:image" content="{{ asset('img\logo\logo_sans_bg.png') }}">
+    <meta name="author" content="Vincent Tshipamba & Carlo Musongela">
+    <meta name="description" content="Aigle Vente est une plateforme de vente en ligne rapprochant les vendeurs et les acheteurs de produits de toutes sortes.">
     <link rel="shortcut icon" href="{{ asset('img\logo\logo_sans_bg.png') }}" type="image/x-icon">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -316,6 +298,7 @@
         const initialProductsContent = $('.productsParent').html();
 
         document.addEventListener('change', function(event) {
+            // Check if the target element has the specific class
             if (event.target.classList.contains('category-checkbox')) {
                 // Désélectionner toutes les autres cases à cocher
                 document.querySelectorAll('.category-checkbox').forEach(checkbox => {
@@ -337,7 +320,28 @@
                     return;
                 }
 
-                fetch(`/products/filter`, {
+                const allCategoryIds = Array.from(document.querySelectorAll('.category-checkbox'))
+                    .map(checkbox => checkbox.value);
+
+                allCategoryIds.forEach(categoryId => {
+                    const tab = document.getElementById(`tabs-${categoryId}`);
+                    const categoryElement = document.getElementById(`category-${categoryId}`);
+                    const categoryInSidebarElement = document.getElementById(`categoryInSidebar-${categoryId}`);
+
+                    if (selectedCategories.includes(categoryId)) {
+                        $(categoryInSidebarElement).addClass('text-white underline');
+                        $(categoryElement).addClass('text-black');
+                        $(tab).removeClass('hidden');
+                    } else {
+                        $(categoryInSidebarElement).removeClass('text-white underline');
+                        $(categoryInSidebarElement).addClass('text-gray-500');
+                        $(categoryElement).removeClass('text-black');
+                        $(categoryElement).addClass('text-gray-500');
+                        $(tab).addClass('hidden');
+                    }
+                });
+
+                fetch(`/products/category/filter`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -372,6 +376,78 @@
                     })
                     .catch(error => console.error('Error fetching products:', error));
             }
+        });
+    </script>
+
+    <!-- Filtrage general des produits -->
+    <script>
+        document.getElementById('apply-filters').addEventListener('click', function () {
+            // Collecter les filtres sélectionnés
+
+            // Récupérer les plages de prix
+            const minPrice = document.getElementById('min-price').value;
+            const maxPrice = document.getElementById('max-price').value;
+
+            if (parseFloat(minPrice) > parseFloat(maxPrice)) {
+                alert("Le prix minimum ne peut pas être supérieur au prix maximum.");
+                return;
+            }
+
+            // Récupérer les catégories sélectionnées
+            const categories = [];
+            document.querySelectorAll('.category-checkbox-in-filter-modal:checked').forEach(function (checkbox) {
+                categories.push(checkbox.value);
+            });
+
+            // Récupérer les localisations (vendeurs locaux et internationaux sélectionnés)
+            const locations = [];
+            document.querySelectorAll('.location-checkbox:checked').forEach(function (checkbox) {
+                locations.push(checkbox.value);
+            });
+
+            // Construire les données à envoyer via AJAX
+            const filters = {
+                min_price: minPrice,
+                max_price: maxPrice,
+                categories: categories,
+                locations: locations
+            };
+
+            // Envoi de la requête AJAX avec les filtres
+            fetch('/products/filter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify(filters)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.html.trim() === '') {
+                        document.querySelector('.productsParent').innerHTML = `
+                            <div class="flex flex-col gap-6 p-4 my-4 text-center text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300">
+                                <div>
+                                    <span class="font-medium">Oups désolé !</span> Aucun produit correspondant à votre filtre n'a été trouvé.
+                                </div>
+                                <div>
+                                    <a href="{{ route('sellers.create') }}"
+                                    class="inline-block px-6 py-2 w-full bg-gray-800 text-gray-200 hover:text-white hover:bg-[#e38407] font-semibold rounded-md text-center transition-all duration-300">
+                                    Devenez donc le premier à vendre un produit de cette catégorie !
+                                    </a>
+                                </div>
+                            </div>`;
+                    } else {
+                        document.querySelector('.productsParent').innerHTML = `
+                            <div class="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mb-5 my-20">
+                                ${data.html}
+                            </div>`;
+                        initializeSwipers()
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur lors du filtrage des produits :', error);
+                });
         });
     </script>
 

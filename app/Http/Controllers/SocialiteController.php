@@ -78,6 +78,7 @@ class SocialiteController extends Controller
             return redirect()->intended(route('home'));
         } catch (\Throwable $e) {
             Log::error('Erreur lors de l’enregistrement d’un utilisateur via ' . ($request->provider ?? 'inconnu') . ' : ' . $e->getMessage());
+            return redirect()->back()->with('error', "Une erreur s'est produite lors de la connexion au compte $request->provider.");
         }
     }
 

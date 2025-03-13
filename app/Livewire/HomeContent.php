@@ -4,11 +4,14 @@ namespace App\Livewire;
 
 use App\Models\Product;
 use Livewire\Component;
+use App\Models\Location;
 use App\Models\CategoryProduct;
+use Illuminate\Support\Facades\DB;
 
 class HomeContent extends Component
 {
     public $products, $categories, $search = '';
+    public $localSellers, $internationalSellers;
 
     protected $queryString = [
         'search' => ['except' => '']
@@ -31,11 +34,26 @@ class HomeContent extends Component
 
     public function render()
     {
-        $this->categories = CategoryProduct::orderby('name', 'asc')->get();
+        $this->categories = CategoryProduct::orderby('name', 'asc')
+            ->with('products')
+            ->get();
+
+        $this->localSellers = DB::table('sellers')
+            ->join('locations', 'locations.id', '=', 'sellers.location_id')
+            ->where('locations.country', 'LIKE', '%République démocratique du Congo%')
+            ->orWhere('locations.country', 'LIKE', '%Congo (la République démocratique du)%')
+            ->count();
+
+        $this->internationalSellers = DB::table('sellers')
+            ->join('locations', 'locations.id', '=', 'sellers.location_id')
+            ->where('locations.country', '!=', 'République démocratique du Congo')
+            ->where('locations.country', '!=', 'Congo (la République démocratique du)')
+            ->count();
+
         $this->filters['categories'] = array_filter($this->filters['categories']);
 
 
-       $query = Product::query()
+        $query = Product::query()
             ->where('name', 'like', "%{$this->search}%")
             ->orderBy('name', 'asc');
 

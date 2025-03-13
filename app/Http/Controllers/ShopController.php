@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CategoryProduct;
 use App\Models\Shop;
 use App\Models\Seller;
 use App\Models\Product;
@@ -39,11 +40,14 @@ class ShopController extends Controller
     public function show($id)
     {
         $shop = Shop::where('_id', $id)->first();
+        $shops = Shop::inRandomOrder()
+        ->where('_id', '!=', $shop->_id)
+        ->get();
         $products = Product::where('shop_id', $shop->id)
             ->with(['photos', 'shop.seller'])
             ->paginate(10);
 
-        return view('client.shops.show', compact('shop', 'products'));
+        return view('client.shops.show', compact('shop', 'products','shops'));
     }
 
     public function store(Request $request)
@@ -73,7 +77,7 @@ class ShopController extends Controller
             $imageName = uniqid() . '.' . $imageFile->getClientOriginalExtension();
 
 
-            $imagePath = $imageFile->storeAs('public/shops_profile', $imageName);
+            $imagePath = $imageFile->storeAs('shops_profile', $imageName);
         }
 
         // Créer une nouvelle boutique avec le 'seller_id' récupéré et l'image
@@ -125,11 +129,11 @@ class ShopController extends Controller
 
             // Supprimer l'ancienne image si elle existe
             if ($shop->image) {
-                Storage::delete('public/shops_profile/' . basename($shop->image));
+                Storage::delete('shops_profile/' . basename($shop->image));
             }
 
             // Enregistrer la nouvelle image
-            $imagePath = $imageFile->storeAs('public/shops_profile', $imageName);
+            $imagePath = $imageFile->storeAs('shops_profile', $imageName);
 
             // Ajouter le chemin de l'image au tableau des données validées
             $validated['image'] = $imagePath;
@@ -167,6 +171,37 @@ class ShopController extends Controller
         } catch (\Throwable $th) {
             return redirect()->back()->withErrors(['error' => 'Erreur lors de la suppression de la boutique.']);
         }
+    }
+
+    public function fetchShops(Request $request)
+    {
+        $query = Shop::query();
+
+        if ($request->has('recent')) {
+            $query->where('created_at', '>=', now()->subDays(30));
+        }
+
+        $products = $query->paginate(10);
+
+        return response()->json([
+            'products' => $products
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        try {
+             $searchTerm = $request->input('search');
+            $activites = Shop::where('name', 'LIKE', "%{$searchTerm}%")
+                    ->take(20)
+                    ->latest()
+                    ->get();
+
+        return response()->json($activites);
+        } catch (\Exception $e) {
+            return response()->json($e);
+        }
+
     }
 
 }

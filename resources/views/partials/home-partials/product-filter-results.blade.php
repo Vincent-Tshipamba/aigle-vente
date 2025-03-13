@@ -1,29 +1,50 @@
 @foreach ($products as $index => $product)
-    <div class="w-72 rounded-xl duration-500">
+    <div class="w-48 h-auto rounded-xl  p-2">
         <a href="{{ route('products.show', $product->_id) }}">
-            <div class="image swiper-container product-swiper-{{ $loop->index + 1 }}" loading="lazy">
+            <div class="image swiper-container product-swiper-{{ $index + 1 }}" loading="lazy">
                 <div class="swiper-wrapper">
                     @foreach ($product->photos as $item)
                         <div class="swiper-slide">
                             <img src="{{ asset($item->image) }}" alt="{{ $product->name }}"
-                                class="h-80 w-72 object-cover rounded-xl hover:scale-105">
+                                class="h-40 w-40 object-cover rounded-xl hover:scale-105">
+                            <div
+                                class="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
+                                {{ $product->shop->name }}
+                            </div>
                         </div>
                     @endforeach
                 </div>
-                <div class="swiper-pagination swiper-pagination-{{ $loop->index + 1 }}"></div>
-                <div class="swiper-button-prev swiper-button-prev-{{ $loop->index + 1 }}"></div>
-                <div class="swiper-button-next swiper-button-next-{{ $loop->index + 1 }}"></div>
+                <!-- Pagination -->
+                <div class="swiper-pagination swiper-pagination-{{ $index + 1 }}"></div>
             </div>
         </a>
-        <div class="px-4 py-3 w-72">
+        <div class="px-4 py-3 w-48 hover:scale-105">
             <span class="text-gray-400 mr-3 uppercase text-xs">{{ $product->category_product->name }}</span><br>
-            <span class="text-gray-400 mr-3 text-xs">Boutique {{ $product->shop->name }}</span>
-            <p class="text-lg font-bold text-black truncate block capitalize">{{ $product->name }}</p>
-            <div class="flex items-center">
-                <p class="text-lg font-semibold text-black cursor-auto my-3">${{ $product->unit_price }}</p>
+            <a href="{{ route('shops.show', $product->shop->_id) }}" class="text-gray-400 mr-3 text-xs">Boutique
+                {{ $product->shop->name }}</a>
+            <div id="average-rating">
+                @php
+                    $avg = round($product->reviews->avg('rating'), 1);
+                @endphp
+                @for ($i = 1; $i <= 5; $i++)
+                    <i class="{{ $i <= $avg ? 'fas' : 'fal' }} fa-star text-[#e38407]"></i>
+                @endfor
+                <span>({{ $avg }}/5)</span>
+            </div>
+            <p class="text-lg font-bold text-black truncate block capitalize w-full overflow-hidden">
+                {{ $product->name }}</p>
+
+
+            <div class=" flex items-center">
+                <p class="text-lg font-semibold text-black cursor-auto my-3">
+                    ${{ $product->unit_price }}</p>
                 <del>
-                    <p class="text-sm text-gray-600 cursor-auto ml-2">${{ $product->unit_price + 50 }}</p>
+                    <p class="text-sm text-gray-600 cursor-auto ml-2">${{ $product->unit_price + 50 }}
+                    </p>
                 </del>
+            </div>
+            <div class=" items-center">
+
                 <div class="ml-auto flex space-x-2">
                     <!-- Contacter un vendeur -->
                     <svg onclick="contactSellerModal(event, {{ json_encode($product) }})"

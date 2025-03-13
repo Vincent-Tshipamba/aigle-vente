@@ -5,8 +5,28 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Vincent Tshipamba & Carlo Musongela">
-    <meta name="description" content="Aigle Vente est une plateforme de vente en ligne rapprochant les vendeurs et les acheteurs de produits de toutes sortes.">
+    <meta name="description"
+        content="Aigle Vente est une plateforme de vente en ligne rapprochant les vendeurs et les acheteurs de produits de toutes sortes.">
     <link rel="shortcut icon" href="{{ asset('img\logo\logo_sans_bg.png') }}" type="image/x-icon">
+    <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://aiglevente.com/">
+    <meta name="description" content="à la hauteur de votre desire.">
+
+    <meta name="twitter:site" content="@aiglevente">
+    <meta name="twitter:creator" content="@aiglevente">
+    <meta name="twitter:card" content="à la hauteur de votre desire">
+    <meta name="twitter:title" content="à la hauteur de votre desire">
+    <meta name="twitter:description" content="à la hauteur de votre desire.">
+    <meta name="twitter:image" content="{{ asset('img\logo\logo_sans_bg.png') }}">
+
+    <meta property="og:url" content="https://aiglevente.com/">
+    <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Aigle Vente">
+    <meta property="og:title" content="à la hauteur de votre desire.">
+    <meta property="og:description" content="à la hauteur de votre desire.">
+    <meta property="og:image" content="{{ asset('img\logo\logo_sans_bg.png') }}">
+
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -118,11 +138,11 @@
         @endif
 
         <!-- deal-product-area-start -->
-        @include('partials.home-partials.deal-product')
+        {{-- @include('partials.home-partials.deal-product') --}}
         <!-- deal-product-area-end -->
 
         <!-- shop-area-start -->
-        @include('partials.home-partials.shop')
+        {{-- @include('partials.home-partials.shop') --}}
         <!-- shop-area-end -->
     </main>
 
@@ -131,7 +151,7 @@
     <!-- footer-area-end -->
 
     <!-- JS here -->
-    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/waypoints.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
@@ -148,7 +168,18 @@
     <script src="{{ asset('js/meanmenu.js') }}"></script>
     <script src="{{ asset('js/jquery.knob.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#Products').jscroll({
+                autoTrigger: true,
+                loadingHtml: '<div class="text-center p-4">Chargement...</div>',
+                padding: 50,
+                nextSelector: '.pagination a[rel="next"]',
+                contentSelector: '#Products'
+            });
+        });
+    </script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             @if (session('error'))
@@ -326,7 +357,8 @@
                 allCategoryIds.forEach(categoryId => {
                     const tab = document.getElementById(`tabs-${categoryId}`);
                     const categoryElement = document.getElementById(`category-${categoryId}`);
-                    const categoryInSidebarElement = document.getElementById(`categoryInSidebar-${categoryId}`);
+                    const categoryInSidebarElement = document.getElementById(
+                        `categoryInSidebar-${categoryId}`);
 
                     if (selectedCategories.includes(categoryId)) {
                         $(categoryInSidebarElement).addClass('text-white underline');
@@ -381,7 +413,7 @@
 
     <!-- Filtrage general des produits -->
     <script>
-        document.getElementById('apply-filters').addEventListener('click', function () {
+        document.getElementById('apply-filters').addEventListener('click', function() {
             // Collecter les filtres sélectionnés
 
             // Récupérer les plages de prix
@@ -395,13 +427,13 @@
 
             // Récupérer les catégories sélectionnées
             const categories = [];
-            document.querySelectorAll('.category-checkbox-in-filter-modal:checked').forEach(function (checkbox) {
+            document.querySelectorAll('.category-checkbox-in-filter-modal:checked').forEach(function(checkbox) {
                 categories.push(checkbox.value);
             });
 
             // Récupérer les localisations (vendeurs locaux et internationaux sélectionnés)
             const locations = [];
-            document.querySelectorAll('.location-checkbox:checked').forEach(function (checkbox) {
+            document.querySelectorAll('.location-checkbox:checked').forEach(function(checkbox) {
                 locations.push(checkbox.value);
             });
 
@@ -415,13 +447,13 @@
 
             // Envoi de la requête AJAX avec les filtres
             fetch('/products/filter', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                body: JSON.stringify(filters)
-            })
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify(filters)
+                })
                 .then(response => response.json())
                 .then(data => {
                     if (data.html.trim() === '') {

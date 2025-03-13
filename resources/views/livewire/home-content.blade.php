@@ -89,7 +89,12 @@
     </div>
 
 
-    @include('partials.home-partials.filters', ['categories' => $categories, 'products' => $products, 'localSellers' => $localSellers, 'internationalSellers' => $internationalSellers])
+    @include('partials.home-partials.filters', [
+        'categories' => $categories,
+        'products' => $products,
+        'localSellers' => $localSellers,
+        'internationalSellers' => $internationalSellers,
+    ])
 
 
 
@@ -104,6 +109,7 @@
                 rafraichir la page s'il vous plait.
             </div>
         @else
+
             <div id="Products"
                 class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 justify-items-center justify-center gap-4 mb-5 my-10">
                 @foreach ($products as $index => $product)
@@ -123,6 +129,9 @@
                                             </div>
                                         </div>
                                     @endforeach
+
+
+
                                 </div>
                                 <!-- Pagination -->
                                 <div class="swiper-pagination swiper-pagination-{{ $index + 1 }}"></div>
@@ -193,6 +202,8 @@
                         </div>
                     </div>
                 @endforeach
+
+                {{ $products->links() }}
             </div>
         @endif
 

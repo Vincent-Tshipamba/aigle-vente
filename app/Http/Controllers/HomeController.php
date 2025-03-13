@@ -21,7 +21,7 @@ class HomeController extends Controller
         $products = Product::with('photos', 'shop.seller.user', 'shop.seller')
         ->where('is_active',true)
             ->inRandomOrder()
-            ->get();
+            ->paginate(25);
 
         $categories = CategoryProduct::inRandomOrder()->get();
 

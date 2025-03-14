@@ -6,23 +6,21 @@
         <!-- Détails du Shop  -->
         <div class="relative rounded-lg bg-white ">
             <!-- Image de couverture -->
-            <div class="relative">
-                @if (empty($shop->image))
-                    <img src="https://timelinecovers.pro/facebook-cover/download/eagle-looking-at-your-profile-facebook-cover.jpg"
-                        alt="{{ $shop->name }}" class="w-full h-64 object-cover rounded-t-lg blur-md">
-                @else
-                    <img src="{{ asset($shop->image) }}" alt="{{ $shop->name }}"
-                        class="w-full h-64 object-cover rounded-t-lg blur-md">
-                @endif
+            <div class="">
+                <img src="{{ $shop->image ? asset($shop->image) : asset('images/default-shop.png') }}"
+                    alt="{{ $shop->name }}" class="w-full h-64 object-cover rounded-t-lg blur-sm">
             </div>
 
             <!-- Profil et Informations -->
             <div class="p-6 text-center">
-                <div class="flex justify-center items-center -mt-16">
-                    <img src="{{ asset($shop->logo ?? 'https://via.placeholder.com/100') }}"
-                        alt="Logo {{ $shop->name }}" class="w-24 h-24 rounded-full border-4 border-white shadow-lg">
+                <!-- Image de profil bien positionnée -->
+                <div class="relative flex justify-center">
+                    <img src="{{ $shop->image ? asset($shop->image) : asset('images/default-shop.png') }}"
+                        alt="Logo {{ $shop->name }}"
+                        class="w-24 h-24 rounded-full border-4 border-white shadow-lg absolute -top-12 z-10">
                 </div>
-                <h1 class="text-3xl font-bold text-gray-800 mt-2">{{ $shop->name }}</h1>
+
+                <h1 class="text-3xl font-bold text-gray-800 mt-14">{{ $shop->name }}</h1>
                 <p class="text-gray-600 text-lg">{{ $shop->address }}</p>
                 <p class="text-gray-600 mt-2">{!! $shop->description !!}</p>
 
@@ -47,38 +45,71 @@
             </div>
         </div>
 
+
         <!-- Catégories -->
-        @if (empty($shops))
-        @else
+        @if (!empty($shops))
             <h2 class="text-lg font-semibold text-gray-800 mb-4">Suggestion Boutique</h2>
-            <div class="flex gap-3 overflow-x-auto pb-4 snap-x snap-mandatory">
-                @foreach ($shops as $shop)
-                    <div
-                        class="w-40 h-44 bg-white rounded-lg shadow-sm hover:shadow-md transition transform hover:-translate-y-1 flex-shrink-0 snap-start p-2">
-                        <!-- Image de profil -->
-                        <div class="flex justify-center mt-2">
-                            <img src="{{ $shop->image ? asset('shops_profile/' . basename($shop->image)) : 'https://timelinecovers.pro/facebook-cover/download/eagle-looking-at-your-profile-facebook-cover.jpg' }}"
-                                alt="Image de {{ $shop->name }}"
-                                class="w-20 h-20 object-cover rounded-full border border-gray-200">
-                        </div>
+            <div class="swiper1 sm:w-auto">
+                <div class="swiper-wrapper grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">
+                    @foreach ($shops as $shop)
+                        <div
+                            class="w-full bg-white rounded-lg shadow-sm hover:shadow-md transition transform hover:-translate-y-1 flex-shrink-0 snap-start p-2 swiper-slide relative ">
 
-                        <!-- Nom de la boutique -->
-                        <div class="text-center mt-2">
-                            <h3 class="text-sm font-bold text-gray-800 truncate w-full">{{ $shop->name }}</h3>
-                        </div>
+                            <!-- Image de profil -->
+                            <div class="flex justify-center mt-2">
+                                <img src="{{ $shop->image ? asset($shop->image) : asset('images/default-shop.png') }}"
+                                    alt="Image de {{ $shop->name }}"
+                                    class="w-20 h-20 object-cover rounded-full border border-gray-200">
+                            </div>
 
-                        <!-- Bouton -->
-                        <div class="flex justify-center mt-2">
-                            <a href="{{ route('shops.show', $shop->_id) }}"
-                                class="bg-[#e38407] hover:bg-[#e38407e7] text-white text-xs font-semibold py-2 px-4 rounded-full">
-                                Visit Store
-                            </a>
+                            <!-- Nom de la boutique -->
+                            <div class="text-center mt-2">
+                                <h3 class="text-sm font-bold text-gray-800 truncate w-full">{{ $shop->name }}</h3>
+                            </div>
+
+                            <!-- Bouton -->
+                            <div class="flex justify-center mt-2">
+                                <a href="{{ route('shops.show', $shop->id) }}"
+                                    class="bg-[#e38407] hover:bg-[#e38407e7] text-white text-xs font-semibold py-2 px-4 rounded-full">
+                                    Visit Store
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
 
+            <!-- Swiper JS -->
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    new Swiper(".swiper1", {
+                        slidesPerView: "auto",
+                        // spaceBetween: 10,
+                        autoplay: {
+                            delay: 5000,
+                            disableOnInteraction: false,
+                        },
+                        breakpoints: {
+                            1024: {
+                                slidesPerView: 8,
+                                spaceBetween: 8,
+                            },
+                            768: {
+                                slidesPerView: 7,
+                            },
+                            640: {
+                                slidesPerView: 4,
+                            },
+                            480: {
+                                slidesPerView: 2,
+                                spaceBetween: 5,
+                            },
+                        }
+                    });
+                });
+            </script>
         @endif
+
 
 
         <!-- Produits -->
@@ -96,7 +127,7 @@
                                             class="h-40 w-40 object-cover rounded-xl hover:scale-105">
                                         <div
                                             class="absolute bottom-6 left-2  bg-opacity-50 text-white text-xs px-2 py-1">
-                                            <img src="{{ $product->shop->image ? asset('shops_profile/' . basename($product->shop->image)) : 'https://timelinecovers.pro/facebook-cover/download/eagle-looking-at-your-profile-facebook-cover.jpg' }}"
+                                            <img src="{{ $product->shop->image ? asset($shop->image) : asset('images/default-shop.png') }}"
                                                 alt="Image de {{ $product->shop->name }}"
                                                 class="w-10 h-10 object-cover rounded-full border border-gray-200 bg-opacity-50">
                                         </div>
@@ -175,7 +206,7 @@
         </div>
 
         <!-- Avis des clients -->
-        <h2 class="text-2xl font-semibold text-gray-800 mt-12 mb-4">Avis des clients</h2>
+        {{-- <h2 class="text-2xl font-semibold text-gray-800 mt-12 mb-4">Avis des clients</h2> --}}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {{-- @foreach ($reviews as $review)
                 <div class="bg-white shadow-md rounded-lg p-6">

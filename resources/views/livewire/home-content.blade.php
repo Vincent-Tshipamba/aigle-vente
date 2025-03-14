@@ -22,7 +22,7 @@
 
         <!-- Swiper avec grille responsive -->
         <div class="swiper w-full sm:w-auto">
-            <div class="swiper-wrapper grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">
+            <div class="swiper-wrapper">
                 @foreach ($categories as $item)
                     <div class="swiper-slide relative">
                         <a href="#" onclick="document.getElementById('filter-{{ $item->id }}').click();"
@@ -109,11 +109,10 @@
                 rafraichir la page s'il vous plait.
             </div>
         @else
-
             <div id="Products"
                 class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 justify-items-center justify-center gap-4 mb-5 my-10">
                 @foreach ($products as $index => $product)
-                    <div class="w-48 h-auto rounded-xl  p-2">
+                    <div class="w-48 h-auto rounded-xl  p-2" id="">
                         <a href="{{ route('products.show', $product->_id) }}">
                             <div class="image swiper-container product-swiper-{{ $index + 1 }}" loading="lazy">
                                 <div class="swiper-wrapper">
@@ -123,7 +122,7 @@
                                                 class="h-40 w-40 object-cover rounded-xl hover:scale-105">
                                             <div
                                                 class="absolute bottom-6 left-2  bg-opacity-50 text-white text-xs px-2 py-1">
-                                                <img src="{{ $product->shop->image ? asset('shops_profile/' . basename($product->shop->image)) : 'https://timelinecovers.pro/facebook-cover/download/eagle-looking-at-your-profile-facebook-cover.jpg' }}"
+                                                <img src="{{ $product->shop->image ?? asset('images/default-shop.png') }}"
                                                     alt="Image de {{ $product->shop->name }}"
                                                     class="w-10 h-10 object-cover rounded-full border border-gray-200 bg-opacity-50">
                                             </div>
@@ -202,11 +201,32 @@
                         </div>
                     </div>
                 @endforeach
+            </div>
 
-                {{ $products->links() }}
+            <div id="loadingPlaceholder"
+                class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 justify-items-center justify-center gap-4 mb-5 my-10">
+                @for ($i = 0; $i < 24; $i++)
+                    <div class="w-48 h-auto rounded-xl p-2 animate-pulse bg-white">
+                        <div class="h-40 w-40 bg-gray-300 rounded-xl"></div>
+                        <div class="px-4 py-3">
+                            <div class="w-2/3 h-4 bg-gray-300 rounded mb-2"></div>
+                            <div class="h-4 bg-gray-300 rounded w-3/4 mb-2"></div>
+                            <div class="h-4 bg-gray-300 rounded w-1/2 mb-2"></div>
+                            <div class="h-4 bg-gray-300 rounded w-full mb-2"></div>
+                            <div class="flex space-x-2">
+                                <div class="h-6 w-10 bg-gray-nn300 rounded"></div>
+                                <div class="h-6 w-14 bg-gray-300 rounded"></div>
+                            </div>
+                        </div>
+                    </div>
+                @endfor
             </div>
         @endif
 
 
+
+
     </section>
+
+
 </div>

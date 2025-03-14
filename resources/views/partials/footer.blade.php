@@ -1,7 +1,7 @@
 <!-- footer-area-start -->
 <footer>
     <div class="footer-area secondary-footer black-bg-2 pt-65">
-        <div class="container">
+        {{-- <div class="container">
             <div class="main-footer pb-15 mb-30">
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-6">
@@ -51,13 +51,12 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="footer-copyright black-bg-2">
             <div class="container mx-auto">
                 <div class="footer-copyright__content text-center">
                     <span>
-                        Copyright {{ date('Y') }} <a href="{{ route('home') }}">©AigleVente</a>. Tous droits
-                        réservés.
+                        All Rights Reserved &copy {{ date('Y') }} <a href="{{ route('home') }}">AigleVente</a>. Terms | Privacy | Security |
                     </span>
                 </div>
             </div>

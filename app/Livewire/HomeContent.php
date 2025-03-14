@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use App\Models\Product;
 use Livewire\Component;
-use App\Models\Location;
 use App\Models\CategoryProduct;
 use Illuminate\Support\Facades\DB;
 use Livewire\WithPagination;
@@ -57,8 +56,9 @@ class HomeContent extends Component
             $query->whereIn('category_product_id', array_keys($this->filters['categories']));
         }
 
+
         return view('livewire.home-content', [
-            'products' => $query->paginate(25) // Livewire supporte paginate ici
+            'products' => $query->paginate(30) // Livewire supporte paginate ici
         ]);
     }
 

@@ -14,14 +14,23 @@ class HomeController extends Controller
 {
     // private $rowperpage = 25;
 
-    public function home()
+    public function home(Request $request)
     {
         $totalProducts = Product::with('photos', 'shop.seller.user', 'shop.seller')->count();
 
         $products = Product::with('photos', 'shop.seller.user', 'shop.seller')
         ->where('is_active',true)
-            ->inRandomOrder()
-            ->paginate(25);
+            ->inRandomOrder();
+
+
+        if ($request->ajax()) {
+            $query = $products->paginate(30);
+            return response()->json([
+                'html' => view('components.product-card', ['products' => $query])->render()
+            ]);
+        }
+
+        $products = $products->paginate(30);
 
         $categories = CategoryProduct::inRandomOrder()->get();
 

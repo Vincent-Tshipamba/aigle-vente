@@ -39,7 +39,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/placeholder-loading/0.2.4/placeholder-loading.css"
+        integrity="sha512-Ab95Kd8jIB21+phDtNtVwVtlaAQzYbMnYSd+C35kthbDBmQ5k4VexVY6dCBprDyIt2ZuMbRnDRekziXNKtg/fQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Styles / Scripts -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -88,6 +91,10 @@
         .swiper-button-next::after {
             font-size: 1.5rem;
             /* Ajuste la taille des icônes */
+        }
+
+        #loadingPlaceholder {
+            display: none;
         }
     </style>
     <style>
@@ -152,6 +159,7 @@
 
     <!-- JS here -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/react-placeholder-loading@0.5.30/dist/index.min.js"></script> --}}
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/waypoints.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
@@ -169,16 +177,50 @@
     <script src="{{ asset('js/jquery.knob.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
     <script>
-        $(document).ready(function() {
-            $('#Products').jscroll({
-                autoTrigger: true,
-                loadingHtml: '<div class="text-center p-4">Chargement...</div>',
-                padding: 50,
-                nextSelector: '.pagination a[rel="next"]',
-                contentSelector: '#Products'
+        document.addEventListener("DOMContentLoaded", function() {
+            let page = 1;
+            // const loadMoreTrigger = document.getElementById("loadMoreTrigger");
+            const loadingPlaceholder = document.getElementById("loadingPlaceholder");
+
+            function loadMoreProducts() {
+                page++;
+                loadingPlaceholder.style.display = "grid"; // Afficher le loader
+
+                fetch(`?page=${page}`, {
+                        headers: {
+                            "X-Requested-With": "XMLHttpRequest"
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        setTimeout(() => { // ⏳ Ajoute un délai de 1.5s avant d'afficher les données
+                            if (data.html.trim().length > 0) {
+                                document.getElementById("Products").insertAdjacentHTML("beforeend", data
+                                    .html);
+                            } else {
+                                // loadMoreTrigger.remove();
+                            }
+                            loadingPlaceholder.style.display = "none"; // Masquer après le délai
+                        }, Math.floor(Math.random() * (3000 - 1000) +
+                        1000)); // ⏳ Délai aléatoire entre 1 et 3 secondes
+                    })
+                    .catch(error => {
+                        console.error("Erreur lors du chargement des produits :", error);
+                        setTimeout(() => {
+                            loadingPlaceholder.style.display =
+                            "none"; // Masquer le loader même en cas d'erreur
+                        }, 1500);
+                    });
+            }
+
+            window.addEventListener("scroll", function() {
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+                    loadMoreProducts();
+                }
             });
         });
     </script>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -713,7 +755,6 @@
             });
         }
     </script>
-
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             if (window.innerWidth <= 640) { // Écran mobile (640px et moins)

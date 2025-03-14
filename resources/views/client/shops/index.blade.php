@@ -9,9 +9,10 @@
                     class="max-w-xs bg-white rounded-lg shadow hover:shadow-lg transition transform hover:-translate-y-1">
                     <!-- Image de profil en cercle -->
                     <div class="flex justify-center mt-4">
-                        <img src="{{ $shop->image ? asset('shops_profile/' . basename($shop->image)) : 'https://timelinecovers.pro/facebook-cover/download/eagle-looking-at-your-profile-facebook-cover.jpg' }}"
+                        <img src="{{ $shop->image ?? asset('images/default-shop.png') }}"
                             alt="Image de {{ $shop->name }}"
                             class="w-24 h-24 object-cover rounded-full border border-gray-200">
+
                     </div>
 
                     <!-- Contenu de la carte -->

@@ -31,6 +31,7 @@
         "flowbite-typography": "^1.0.4",
         "jquery": "^3.7.1",
         "jquery-validation": "^1.21.0",
+        "jscroll": "^2.4.1",
         "jsvectormap": "^1.6.0",
         "simple-datatables": "^9.2.1",
         "socket.io": "^4.8.1",

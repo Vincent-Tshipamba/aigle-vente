@@ -176,7 +176,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                     </svg>
-                    Créer une activité
+                    Créer un Produits
                 </a>
             </div>
         </div>
@@ -261,15 +261,11 @@
 @section('script')
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
         integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
-    @push('scripts')
-        @vite(['resources/js/seller/products/index.js'])
-    @endpush
+
     <script>
         let host = window.location.origin;
         document.addEventListener("DOMContentLoaded", () => {
-            loadProducts(); // Charger au chargement de la page
-
-            // Ajouter un event listener pour les filtres
+            loadProducts(); 
             document.querySelectorAll(".filter-checkbox").forEach(checkbox => {
                 checkbox.addEventListener("change", () => {
                     applyFilters();
@@ -279,8 +275,6 @@
 
         function applyFilters() {
             let params = new URLSearchParams();
-
-            // Vérifie les cases cochées et ajoute les filtres à l'URL
             document.querySelectorAll(".filter-checkbox:checked").forEach(checkbox => {
                 params.append(checkbox.value, "1");
             });
@@ -311,7 +305,7 @@
                     <td class="px-6 py-4">${new Date(product.created_at).toLocaleDateString()}</td>
                     <td class="px-6 py-4">${product.is_active ? '<span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-green-900 dark:text-green-300">Publier</span>' : '<span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-red-900 dark:text-red-300">Non Publier</span>'}</td>
                     <td class="px-6 py-4">
-                       <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal${product.id}" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button"> 
+                       <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal${product.id}" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
                         <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
                             <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
                         </svg>
@@ -327,7 +321,7 @@
                                 <a href="${host}/shops/${product.shop._id}/products/${product._id}/edit" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mofifier</a>
                             </li>
                              <li>
-                               
+
                                  <form action="${host}/products/${product.id}/toggle-status" method="POST">
                                     @csrf
                                     <button type="submit" class="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600  text-left  ${product.is_active ? 'text-red-500' : 'text-green-500'} rounded"">
@@ -354,7 +348,8 @@
                     </td>
                 </tr>`;
                         tbody.innerHTML += row;
-                        let firstImage = product.photos.length > 0 ? product.photos[0].image : "products_media/images.jpg";
+                        let firstImage = product.photos.length > 0 ? product.photos[0].image :
+                            "products_media/images.jpg";
                         console.log(firstImage);
 
                         let gridItem = `

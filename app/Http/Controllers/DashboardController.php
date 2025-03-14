@@ -17,37 +17,54 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
     public function index()
-    {
+{
+    $userId = Auth::id();
 
-        $userId = Auth::id();
-
-        $seller = Seller::where('user_id', $userId)->first();
-        if (!$seller) {
-            return view('client.dashboard');
-        }
-
-        $shopIds = $seller->shops()->pluck('id');
-
-        $totalProducts = Product::whereIn('shop_id', $shopIds)->count();
-
-        $totalShops = $shopIds->count();
-        $messages = Message::where('sender_id', $userId)
-            ->orWhere('receiver_id', $userId)
-            ->with(['sender', 'receiver']) // Charger les relations avec les utilisateurs
-            ->orderBy('created_at', 'asc') // Trier par date de création
-            ->get();
-
-        $clients = User::whereIn('id', $messages->pluck('sender_id')->merge($messages->pluck('receiver_id'))->unique())
-            ->where('id', '!=', $userId)
-            ->get();
-
-        return view('seller.dashboard', compact(
-            'totalProducts',
-            'totalShops',
-            'clients'
-
-        ));
+    // Vérifier si l'utilisateur est un vendeur
+    $seller = Seller::where('user_id', $userId)->first();
+    if (!$seller) {
+        return view('client.dashboard');
     }
+
+    // Récupérer tous les IDs des shops liés au vendeur
+    $shopIds = $seller->shops()->pluck('id');
+
+    // Nombre total de produits dans ses boutiques
+    $totalProducts = Product::whereIn('shop_id', $shopIds)->count();
+
+    // Nombre total de boutiques
+    $totalShops = $shopIds->count();
+
+    // Récupérer les messages de l'utilisateur (envoyés et reçus)
+    $messages = Message::where('sender_id', $userId)
+        ->orWhere('receiver_id', $userId)
+        ->with(['sender', 'receiver'])
+        ->orderBy('created_at', 'asc')
+        ->get();
+
+    // Identifier les autres utilisateurs avec qui il a échangé des messages
+    $clients = User::whereIn('id', $messages->pluck('sender_id')->merge($messages->pluck('receiver_id'))->unique())
+        ->where('id', '!=', $userId)
+        ->get();
+
+    // Nombre de boutiques créées le mois précédent
+    $previousMonthShops = Shop::whereIn('id', $shopIds)
+        ->whereMonth('created_at', now()->subMonth()->month)
+        ->whereYear('created_at', now()->year)
+        ->count();
+
+    // Calcul du pourcentage de croissance ou déclin
+    $growthPercentage = $previousMonthShops > 0
+        ? (($totalShops - $previousMonthShops) / $previousMonthShops) * 100
+        : ($totalShops > 0 ? 100 : 0); // 100% si nouvelles boutiques, sinon 0%
+
+    return view('seller.dashboard', compact(
+        'totalProducts',
+        'totalShops',
+        'clients',
+        'growthPercentage'
+    ));
+}
 
 
 

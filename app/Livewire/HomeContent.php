@@ -4,13 +4,15 @@ namespace App\Livewire;
 
 use App\Models\Product;
 use Livewire\Component;
-use App\Models\Location;
 use App\Models\CategoryProduct;
 use Illuminate\Support\Facades\DB;
+use Livewire\WithPagination;
 
 class HomeContent extends Component
 {
-    public $products, $categories, $search = '';
+    use WithPagination; // Ajout pour gérer la pagination dans Livewire
+
+    public $categories, $search = '';
     public $localSellers, $internationalSellers;
 
     protected $queryString = [
@@ -23,20 +25,12 @@ class HomeContent extends Component
 
     public function search()
     {
-        $this->resetPage();
+        $this->resetPage(); // Reset pagination lorsque l'utilisateur recherche
     }
 
-    public function mount($products, $categories)
+    public function mount()
     {
-        $this->products = $products;
-        $this->categories = $categories;
-    }
-
-    public function render()
-    {
-        $this->categories = CategoryProduct::orderby('name', 'asc')
-            ->with('products')
-            ->get();
+        $this->categories = CategoryProduct::orderby('name', 'asc')->with('products')->get();
 
         $this->localSellers = DB::table('sellers')
             ->join('locations', 'locations.id', '=', 'sellers.location_id')
@@ -49,21 +43,22 @@ class HomeContent extends Component
             ->where('locations.country', '!=', 'République démocratique du Congo')
             ->where('locations.country', '!=', 'Congo (la République démocratique du)')
             ->count();
+    }
 
-        $this->filters['categories'] = array_filter($this->filters['categories']);
-
-
+    public function render()
+    {
         $query = Product::query()
+            ->where('is_active', true)
             ->where('name', 'like', "%{$this->search}%")
             ->orderBy('name', 'asc');
-
 
         if (!empty($this->filters['categories'])) {
             $query->whereIn('category_product_id', array_keys($this->filters['categories']));
         }
 
+
         return view('livewire.home-content', [
-            'products' => $query->get()
+            'products' => $query->paginate(30) // Livewire supporte paginate ici
         ]);
     }
 
@@ -74,5 +69,6 @@ class HomeContent extends Component
         } else {
             $this->filters['categories'][] = $categoryId;
         }
+        $this->resetPage(); // Recharger les résultats après filtrage
     }
 }

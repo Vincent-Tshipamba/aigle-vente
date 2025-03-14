@@ -3,15 +3,15 @@
   <div class="mb-4 justify-between gap-4 sm:flex">
     <div>
       <h4 class="text-xl font-bold text-black dark:text-white">
-        Profit this week
+        Bénéfice cette semaine
       </h4>
     </div>
     <div>
       <div class=" inline-block">
         <select id="periodSelect"
           class=" inline-flex appearance-none bg-transparent py-1 pl-3 pr-8 text-sm font-medium outline-none">
-          <option value="This Week">This Week</option>
-          <option value="Last Week">Last Week</option>
+          <option value="This Week">Cette semaine</option>
+          <option value="Last Week">La semaine dernière</option>
         </select>
      
       </div>

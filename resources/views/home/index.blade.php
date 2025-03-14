@@ -5,8 +5,28 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Vincent Tshipamba & Carlo Musongela">
-    <meta name="description" content="Aigle Vente est une plateforme de vente en ligne rapprochant les vendeurs et les acheteurs de produits de toutes sortes.">
+    <meta name="description"
+        content="Aigle Vente est une plateforme de vente en ligne rapprochant les vendeurs et les acheteurs de produits de toutes sortes.">
     <link rel="shortcut icon" href="{{ asset('img\logo\logo_sans_bg.png') }}" type="image/x-icon">
+    <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://aiglevente.com/">
+    <meta name="description" content="à la hauteur de votre desire.">
+
+    <meta name="twitter:site" content="@aiglevente">
+    <meta name="twitter:creator" content="@aiglevente">
+    <meta name="twitter:card" content="à la hauteur de votre desire">
+    <meta name="twitter:title" content="à la hauteur de votre desire">
+    <meta name="twitter:description" content="à la hauteur de votre desire.">
+    <meta name="twitter:image" content="{{ asset('img\logo\logo_sans_bg.png') }}">
+
+    <meta property="og:url" content="https://aiglevente.com/">
+    <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Aigle Vente">
+    <meta property="og:title" content="à la hauteur de votre desire.">
+    <meta property="og:description" content="à la hauteur de votre desire.">
+    <meta property="og:image" content="{{ asset('img\logo\logo_sans_bg.png') }}">
+
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -19,7 +39,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/placeholder-loading/0.2.4/placeholder-loading.css"
+        integrity="sha512-Ab95Kd8jIB21+phDtNtVwVtlaAQzYbMnYSd+C35kthbDBmQ5k4VexVY6dCBprDyIt2ZuMbRnDRekziXNKtg/fQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Styles / Scripts -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -68,6 +91,10 @@
         .swiper-button-next::after {
             font-size: 1.5rem;
             /* Ajuste la taille des icônes */
+        }
+
+        #loadingPlaceholder {
+            display: none;
         }
     </style>
     <style>
@@ -118,11 +145,11 @@
         @endif
 
         <!-- deal-product-area-start -->
-        @include('partials.home-partials.deal-product')
+        {{-- @include('partials.home-partials.deal-product') --}}
         <!-- deal-product-area-end -->
 
         <!-- shop-area-start -->
-        @include('partials.home-partials.shop')
+        {{-- @include('partials.home-partials.shop') --}}
         <!-- shop-area-end -->
     </main>
 
@@ -131,7 +158,8 @@
     <!-- footer-area-end -->
 
     <!-- JS here -->
-    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/react-placeholder-loading@0.5.30/dist/index.min.js"></script> --}}
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/waypoints.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
@@ -148,7 +176,52 @@
     <script src="{{ asset('js/meanmenu.js') }}"></script>
     <script src="{{ asset('js/jquery.knob.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let page = 1;
+            // const loadMoreTrigger = document.getElementById("loadMoreTrigger");
+            const loadingPlaceholder = document.getElementById("loadingPlaceholder");
+
+            function loadMoreProducts() {
+                page++;
+                loadingPlaceholder.style.display = "grid"; // Afficher le loader
+
+                fetch(`?page=${page}`, {
+                        headers: {
+                            "X-Requested-With": "XMLHttpRequest"
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        setTimeout(() => { // ⏳ Ajoute un délai de 1.5s avant d'afficher les données
+                            if (data.html.trim().length > 0) {
+                                document.getElementById("Products").insertAdjacentHTML("beforeend", data
+                                    .html);
+                            } else {
+                                // loadMoreTrigger.remove();
+                            }
+                            loadingPlaceholder.style.display = "none"; // Masquer après le délai
+                        }, Math.floor(Math.random() * (3000 - 1000) +
+                        1000)); // ⏳ Délai aléatoire entre 1 et 3 secondes
+                    })
+                    .catch(error => {
+                        console.error("Erreur lors du chargement des produits :", error);
+                        setTimeout(() => {
+                            loadingPlaceholder.style.display =
+                            "none"; // Masquer le loader même en cas d'erreur
+                        }, 1500);
+                    });
+            }
+
+            window.addEventListener("scroll", function() {
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+                    loadMoreProducts();
+                }
+            });
+        });
+    </script>
+
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             @if (session('error'))
@@ -300,6 +373,13 @@
         document.addEventListener('change', function(event) {
             // Check if the target element has the specific class
             if (event.target.classList.contains('category-checkbox')) {
+                // Désélectionner toutes les autres cases à cocher
+                document.querySelectorAll('.category-checkbox').forEach(checkbox => {
+                    if (checkbox !== event.target) {
+                        checkbox.checked = false;
+                    }
+                });
+
                 const selectedCategories = Array.from(
                     document.querySelectorAll('.category-checkbox:checked')
                 ).map(checkbox => checkbox.value);
@@ -309,7 +389,7 @@
                     document.querySelectorAll('[id^="tabs-"]').forEach(tab => tab.classList.add('hidden'));
                     document.querySelectorAll('[id^="category-"]').forEach(cat => $(cat).removeClass(
                         'text-black text-white underline'));
-                    initializeSwipers()
+                    initializeSwipers();
                     return;
                 }
 
@@ -319,7 +399,8 @@
                 allCategoryIds.forEach(categoryId => {
                     const tab = document.getElementById(`tabs-${categoryId}`);
                     const categoryElement = document.getElementById(`category-${categoryId}`);
-                    const categoryInSidebarElement = document.getElementById(`categoryInSidebar-${categoryId}`);
+                    const categoryInSidebarElement = document.getElementById(
+                        `categoryInSidebar-${categoryId}`);
 
                     if (selectedCategories.includes(categoryId)) {
                         $(categoryInSidebarElement).addClass('text-white underline');
@@ -348,23 +429,23 @@
                     .then(data => {
                         if (data.html.trim() === '') {
                             document.querySelector('.productsParent').innerHTML = `
-                                <div class="flex flex-col gap-6 p-4 my-4 text-center text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300">
-                                    <div>
-                                        <span class="font-medium">Oups désolé !</span> Aucun produit correspondant à votre filtre n'a été trouvé.
-                                    </div>
-                                    <div>
-                                        <a href="{{ route('sellers.create') }}"
-                                        class="inline-block px-6 py-2 w-full bg-gray-800 text-gray-200 hover:text-white hover:bg-[#e38407] font-semibold rounded-md text-center transition-all duration-300">
-                                        Devenez donc le premier à vendre un produit de cette catégorie !
-                                        </a>
-                                    </div>
-                                </div>`;
+                        <div class="flex flex-col gap-6 p-4 my-4 text-center text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300">
+                            <div>
+                                <span class="font-medium">Oups désolé !</span> Aucun produit correspondant à votre filtre n'a été trouvé.
+                            </div>
+                            <div>
+                                <a href="{{ route('sellers.create') }}"
+                                class="inline-block px-6 py-2 w-full bg-gray-800 text-gray-200 hover:text-white hover:bg-[#e38407] font-semibold rounded-md text-center transition-all duration-300">
+                                Devenez donc le premier à vendre un produit de cette catégorie !
+                                </a>
+                            </div>
+                        </div>`;
                         } else {
                             document.querySelector('.productsParent').innerHTML = `
-                                <div class="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mb-5 my-20">
-                                    ${data.html}
-                                </div>`;
-                            initializeSwipers()
+                        <div class="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mb-5 my-20">
+                            ${data.html}
+                        </div>`;
+                            initializeSwipers();
                         }
                     })
                     .catch(error => console.error('Error fetching products:', error));
@@ -374,7 +455,7 @@
 
     <!-- Filtrage general des produits -->
     <script>
-        document.getElementById('apply-filters').addEventListener('click', function () {
+        document.getElementById('apply-filters').addEventListener('click', function() {
             // Collecter les filtres sélectionnés
 
             // Récupérer les plages de prix
@@ -388,13 +469,13 @@
 
             // Récupérer les catégories sélectionnées
             const categories = [];
-            document.querySelectorAll('.category-checkbox-in-filter-modal:checked').forEach(function (checkbox) {
+            document.querySelectorAll('.category-checkbox-in-filter-modal:checked').forEach(function(checkbox) {
                 categories.push(checkbox.value);
             });
 
             // Récupérer les localisations (vendeurs locaux et internationaux sélectionnés)
             const locations = [];
-            document.querySelectorAll('.location-checkbox:checked').forEach(function (checkbox) {
+            document.querySelectorAll('.location-checkbox:checked').forEach(function(checkbox) {
                 locations.push(checkbox.value);
             });
 
@@ -408,13 +489,13 @@
 
             // Envoi de la requête AJAX avec les filtres
             fetch('/products/filter', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                body: JSON.stringify(filters)
-            })
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify(filters)
+                })
                 .then(response => response.json())
                 .then(data => {
                     if (data.html.trim() === '') {
@@ -674,7 +755,6 @@
             });
         }
     </script>
-
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             if (window.innerWidth <= 640) { // Écran mobile (640px et moins)

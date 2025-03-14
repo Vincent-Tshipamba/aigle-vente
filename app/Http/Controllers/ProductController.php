@@ -57,7 +57,7 @@ class ProductController extends Controller
     {
         $query = Product::query()->with('category_product','stocks','shop','photos');
 
-        
+
         if ($request->has('category_id')) {
             $query->where('category_id', $request->category_id);
         }
@@ -67,7 +67,7 @@ class ProductController extends Controller
             $query->where('is_active', true);
         }
 
-        
+
         if ($request->has('recent')) {
             $query->where('created_at', '>=', now()->subDays(30));
         }
@@ -101,7 +101,7 @@ class ProductController extends Controller
         return view('seller.manage-stocks.index', compact('product', 'stocks'));
     }
 
-    
+
 
     public function manageStock(Request $request, Product $product)
     {
@@ -221,7 +221,7 @@ class ProductController extends Controller
                             'ffprobe.binaries' => 'C:/ffmpeg/bin/ffprobe.exe', // ✅ Chemin correct
                             'timeout' => 3600,
                             'threads' => 12,
-                        ]);     
+                        ]);
 
 
                         $video = $ffmpeg->open($path);
@@ -249,7 +249,7 @@ class ProductController extends Controller
             Log::error('Erreurs de validation: ', $e->errors());
             DB::rollBack();
             return redirect()->back()->withErrors($e->errors())->withInput();
-            
+
         } catch (\Exception $e) {
             Log::error('Erreur lors de la création du produit: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Une erreur est survenue lors de la création du produit : ' . $e->getMessage())->withInput();
@@ -377,9 +377,9 @@ class ProductController extends Controller
     {
         $seller = Auth::user()->seller;
 
-        if (!$seller || !$seller->shops->contains($product->shop)) {
-            return response()->json(['error' => 'Accès non autorisé à ce produit.'], 403);
-        }   
+        // if (!$seller || !$seller->shops->contains($product->shop)) {
+        //     return response()->json(['error' => 'Accès non autorisé à ce produit.'], 403);
+        // }  
 
         // Suppression du produit et des relations associées
         $product->photos()->delete();

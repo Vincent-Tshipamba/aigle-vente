@@ -1,6 +1,6 @@
 <!-- footer-area-start -->
 <footer>
-    <div class="footer-area theme-bg pt-65">
+    {{-- <div class="footer-area theme-bg pt-65">
         <div class="container">
             <div class="main-footer pb-15 mb-30">
                 <div class="row">
@@ -64,17 +64,17 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="footer-copyright footer-bg">
         <div class="container">
             <div class="footer-copyright__content text-center">
                 <span>
-                    Copyright {{ date('Y') }} <a href="{{ route('home') }}">©AigleVente</a>. Tous droits
-                    réservés.
+                    All Rights Reserved &copy {{ date('Y') }} <a href="{{ route('home') }}">AigleVente</a>. Terms |
+                    Privacy | Security |
                 </span>
             </div>
         </div>
     </div>
-    </div>
+
 </footer>
 <!-- footer-area-end -->

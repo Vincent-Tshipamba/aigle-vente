@@ -1,5 +1,5 @@
 @foreach ($products as $index => $product)
-    <div class="w-48 h-auto rounded-xl  p-2">
+    <div class="w-48 h-auto rounded-xl  p-2" id="">
         <a href="{{ route('products.show', $product->_id) }}">
             <div class="image swiper-container product-swiper-{{ $index + 1 }}" loading="lazy">
                 <div class="swiper-wrapper">
@@ -7,12 +7,16 @@
                         <div class="swiper-slide">
                             <img src="{{ asset($item->image) }}" alt="{{ $product->name }}"
                                 class="h-40 w-40 object-cover rounded-xl hover:scale-105">
-                            <div
-                                class="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
-                                {{ $product->shop->name }}
+                            <div class="absolute bottom-6 left-2  bg-opacity-50 text-white text-xs px-2 py-1">
+                                <img src="{{ $product->shop->image ?? asset('images/default-shop.png') }}"
+                                    alt="Image de {{ $product->shop->name }}"
+                                    class="w-10 h-10 object-cover rounded-full border border-gray-200 bg-opacity-50">
                             </div>
                         </div>
                     @endforeach
+
+
+
                 </div>
                 <!-- Pagination -->
                 <div class="swiper-pagination swiper-pagination-{{ $index + 1 }}"></div>

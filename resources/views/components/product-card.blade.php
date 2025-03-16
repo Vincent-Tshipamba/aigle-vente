@@ -5,10 +5,22 @@
                 <div class="swiper-wrapper">
                     @foreach ($product->photos as $item)
                         <div class="swiper-slide">
-                            <img src="{{ asset($item->image) }}" alt="{{ $product->name }}"
-                                class="h-40 w-40 object-cover rounded-xl hover:scale-105">
+                            @php
+                                $fileExtension = pathinfo($item->image, PATHINFO_EXTENSION);
+                            @endphp
+                            @if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif', 'webp']))
+                                <!-- Affichage des images -->
+                                <img src="{{ asset($item->image) }}" alt="{{ $product->name }}"
+                                    class="h-40 w-40 object-cover rounded-xl hover:scale-105">
+                            @elseif (in_array($fileExtension, ['mp4', 'mov', 'avi', 'webm']))
+                                <!-- Affichage des vidéos -->
+                                <video class="h-40 w-40 object-cover rounded-xl hover:scale-105" controls autoplay>
+                                    <source src="{{ asset($item->image) }}" type="video/{{ $fileExtension }}">
+                                    Votre navigateur ne supporte pas la lecture de cette vidéo.
+                                </video>
+                            @endif
                             <div class="absolute bottom-6 left-2  bg-opacity-50 text-white text-xs px-2 py-1">
-                                <img src="{{ $product->shop->image ?? asset('images/default-shop.png') }}"
+                                <img src="{{ asset($product->shop->image) ?? asset('images/default-shop.png') }}"
                                     alt="Image de {{ $product->shop->name }}"
                                     class="w-10 h-10 object-cover rounded-full border border-gray-200 bg-opacity-50">
                             </div>

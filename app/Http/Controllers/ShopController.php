@@ -22,9 +22,6 @@ class ShopController extends Controller
         // Récupérer l'ID du vendeur correspondant
         $seller = Seller::where('user_id', $userId)->first();
 
-        if (!$seller) {
-            return response()->json(['error' => 'Vendeur non trouvé.'], 404);
-        }
 
         $shops = $seller->shops;
         $ShopCategories = ShopCategory::all();
@@ -77,10 +74,9 @@ class ShopController extends Controller
             $imageName = uniqid() . '.' . $imageFile->getClientOriginalExtension();
 
 
-            $imagePath = $imageFile->storeAs('shops_profile', $imageName);
+            $imagePath = $imageFile->public_path('shops_profile', $imageName);
         }
 
-        // Créer une nouvelle boutique avec le 'seller_id' récupéré et l'image
         $shop = Shop::create([
             'name' => $request->name,
             'address' => $request->address,
@@ -105,13 +101,12 @@ class ShopController extends Controller
 
         return view('seller.shops.edit', compact('shop'));
     }
-    public function update(Request $request, Shop $shop)
+   public function update(Request $request, Shop $shop)
     {
         // Vérifier si le vendeur connecté possède la boutique
         $seller = Auth::user()->seller;
-
-        if (!$seller || $shop->seller_id !== $seller->id) {
-            return response()->json(['error' => 'Accès non autorisé à cette boutique.'], 403);
+        if (!$seller || $seller->id !== $shop->seller_id) {
+            return redirect()->route('shops.index')->with('error', 'Vous n\'avez pas la permission de modifier cette boutique.');
         }
 
         // Validation des données mises à jour
@@ -119,7 +114,7 @@ class ShopController extends Controller
             'name' => 'nullable|string|max:255',
             'address' => 'nullable|string',
             'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validation de l'image
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         // Gestion de l'image si une nouvelle est fournie
@@ -127,16 +122,16 @@ class ShopController extends Controller
             $imageFile = $request->file('image');
             $imageName = uniqid() . '.' . $imageFile->getClientOriginalExtension();
 
-            // Supprimer l'ancienne image si elle existe
-            if ($shop->image) {
-                Storage::delete('shops_profile/' . basename($shop->image));
+            // Supprimer l'ancienne image si elle existe dans public/shops_profile
+            if ($shop->image && file_exists(public_path($shop->image))) {
+                unlink(public_path($shop->image));
             }
 
-            // Enregistrer la nouvelle image
-            $imagePath = $imageFile->storeAs('shops_profile', $imageName);
+            // Enregistrer la nouvelle image dans public/shops_profile
+            $imageFile->move(public_path('shops_profile'), $imageName);
 
-            // Ajouter le chemin de l'image au tableau des données validées
-            $validated['image'] = $imagePath;
+            // Définir le nouveau chemin relatif pour l'image
+            $validated['image'] = 'shops_profile/' . $imageName;
         }
 
         // Mise à jour de la boutique
@@ -145,6 +140,7 @@ class ShopController extends Controller
         // Redirection avec message de succès
         return redirect()->route('shops.index')->with('success', 'Boutique modifiée avec succès!');
     }
+
 
 
     // Supprimer une boutique si elle appartient au vendeur connecté

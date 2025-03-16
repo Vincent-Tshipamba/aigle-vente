@@ -7,19 +7,53 @@
                     <div class="flex flex-wrap -mx-4">
                         <!-- Product Images -->
                         <div class="w-full md:w-1/2 px-4 mb-8">
-                            <!-- Image principale avec taille fixe -->
+
+                            @php
+                                $photo = $product->photos->first();
+                                $fileExtension = $photo ? pathinfo($photo->image, PATHINFO_EXTENSION) : null;
+                                $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                                $videoExtensions = ['mp4', 'mov', 'avi', 'webm'];
+                            @endphp
+
                             <div
                                 class="mx-auto w-[300px] h-[300px] xl:w-[450px] xl:h-[450px] 2xl:w-[500px] 2xl:h-[500px]">
-                                <img src="{{ asset($product->photos->first()->image) }}" alt="{{ $product->name }}"
-                                    class="w-full h-full object-cover rounded-lg shadow-sm mb-4" id="mainImage">
+                                @if ($photo && in_array($fileExtension, $imageExtensions))
+                                    <img src="{{ asset($photo->image) }}" alt="{{ $product->name }}"
+                                        class="w-full h-full object-cover rounded-lg shadow-sm mb-4" id="mainImage">
+                                @elseif ($photo && in_array($fileExtension, $videoExtensions))
+                                    <video class="w-full h-full object-cover rounded-lg shadow-sm mb-4" controls>
+                                        <source src="{{ asset($photo->image) }}" type="video/{{ $fileExtension }}">
+                                        Votre navigateur ne supporte pas la lecture de cette vidéo.
+                                    </video>
+                                @else
+                                    <img src="{{ asset('images/default.png') }}" alt="Image non disponible"
+                                        class="w-full h-full object-cover rounded-lg shadow-sm mb-4">
+                                @endif
                             </div>
+
+
+
 
                             <!-- Miniatures -->
                             <div class="flex gap-4 py-4 justify-center overflow-x-auto">
                                 @foreach ($product->photos->take(4) as $photo)
-                                    <img src="{{ asset($photo->image) }}" alt="{{ $product->name }}"
-                                        class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
-                                        onclick="changeImage(this.src)">
+                                    @php
+                                        $fileExtension = pathinfo($photo->image, PATHINFO_EXTENSION);
+                                    @endphp
+
+                                    @if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif', 'webp']))
+                                        <img src="{{ asset($photo->image) }}" alt="{{ $product->name }}"
+                                            class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
+                                            onclick="changeImage(this.src)">
+                                    @elseif (in_array($fileExtension, ['mp4', 'mov', 'avi', 'webm']))
+                                        <video
+                                            class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
+                                            controls autoplay>
+                                            <source src="{{ asset($photo->image) }}" type="video/{{ $fileExtension }}"
+                                                onclick="changeImage(this.src)" autoplay>
+                                            Votre navigateur ne supporte pas la lecture de cette vidéo.
+                                        </video>
+                                    @endif
                                 @endforeach
                             </div>
                         </div>
@@ -43,14 +77,14 @@
                                 <span class="text-gray-500 line-through">${{ $product->unit_price + 10 }}</span>
                             </div>
                             <div class="flex items-center mb-4">
-                            
+
                                 @php
                                     $avg = round($product->reviews->avg('rating'), 1);
                                 @endphp
                                 @for ($i = 1; $i <= 5; $i++)
                                     <i class="{{ $i <= $avg ? 'fas' : 'fal' }} fa-star text-yellow-500"></i>
                                 @endfor
-                                
+
                                 <span class="ml-2 text-gray-600">({{ $avg }}/5)</span>
                             </div>
                             <p class="text-gray-700 mb-6">

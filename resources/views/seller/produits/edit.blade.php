@@ -10,7 +10,6 @@
 
     <form action="{{ route('seller.shops.products.update', ['shop' => $shop->id, 'product' => $product->id]) }}"
         method="POST" enctype="multipart/form-data">
-
         @csrf
         @method('PUT')
         <div class="grid grid-cols-1 gap-9 sm:grid-cols-2">
@@ -76,14 +75,14 @@
                     </div>
 
                     <div class="flex flex-col  px-6.5 py-2 pb-6.5">
-                        <div>
+                        {{-- <div>
                             <label class="mb-3 block text-sm font-medium text-black dark:text-white">
                                 Quantite
                             </label>
                             <input type="number" placeholder="2" min="1" name="stock_quantity" id="stock_quantity"
                                 value="{{ old('stock_quantity', $product->stocks->first()->quantity ?? 0) }}" required
                                 class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary" />
-                        </div>
+                        </div> --}}
 
 
                     </div>
@@ -794,7 +793,7 @@
 
                         <div id="image-preview" class="flex flex-wrap gap-4 mt-4">
                             @foreach ($product->photos as $photo)
-                                <img loading="lazy" src="{{ asset('storage/' . $photo->image) }}" alt="Image du produit"
+                                <img loading="lazy" src="{{ asset($photo->image) }}" alt="Image du produit"
                                     class="w-20 h-20">
                             @endforeach
                         </div>

@@ -259,7 +259,7 @@
         @foreach ($shops as $key => $shop)
             <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
                 <!-- Image de Profil -->
-                <img src="{{ $shop->image ?? asset('images/default-shop.png') }}" alt="Photo de {{ $shop->name }}"
+                <img src="{{ asset($shop->image )?? asset('images/default-shop.png') }}" alt="Photo de {{ $shop->name }}"
                     class="w-full h-40 object-cover">
 
                 <div class="p-4">

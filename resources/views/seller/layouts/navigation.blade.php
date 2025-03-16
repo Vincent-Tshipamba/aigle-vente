@@ -430,7 +430,7 @@
 </aside>
 
 
-<script>
+{{-- <script>
     document.addEventListener('DOMContentLoaded', function() {
         const dropdown = document.querySelector('[x-data]'); // L'élément qui contient le dropdown
 
@@ -476,4 +476,4 @@
                 .catch(error => console.error('Erreur lors de la récupération des messages:', error));
         });
     });
-</script>
+</script> --}}

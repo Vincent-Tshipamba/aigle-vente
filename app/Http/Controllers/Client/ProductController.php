@@ -128,69 +128,22 @@ class ProductController extends Controller
         return view('client.products.show', compact('product', 'otherProducts'));
     }
 
-    public function search(Request $request)
-    {
-        $products = Product::where('name', 'LIKE', '%' . $request->get('value') . '%')
-            ->orWhereHas('shop', function ($query) use ($request) {
-                $query->where('name', 'LIKE', '%' . $request->get('value') . '%');
-            })
-            ->with('shop.seller')
-            ->latest()
-            ->get();
+   public function search(Request $request)
+{
+    $products = Product::where('name', 'LIKE', '%' . $request->get('value') . '%')
+        ->orWhereHas('shop', function ($query) use ($request) {
+            $query->where('name', 'LIKE', '%' . $request->get('value') . '%');
+        })
+        ->with('shop.seller')
+        ->latest()
+        ->get();
 
-        $totalSearchResults = $products->count();
+    $totalSearchResults = $products->count();
 
-        $html = '';
+    $html = view('components.product-card', compact('products'))->render();
 
-        if ($products->count() > 0) {
-            foreach ($products as $index => $product) {
-                $html .= '
-                    <div class="rounded-xl w-72 duration-500">
-                        <a href="' . route('products.show', $product->_id) . '">
-                            <div class="image swiper-container product-swiper-' . ($index + 1) . '" loading="lazy">
-                                <div class="swiper-wrapper">';
-
-                foreach ($product->photos as $item) {
-                    $html .= '
-                                    <div class="swiper-slide">
-                                        <img src="' . asset($item->image) . '" alt="' . $product->name . '" class="rounded-xl w-72 h-80 object-cover hover:scale-105">
-                                    </div>';
-                }
-
-                $html .= '
-                                </div>
-                                <div class="swiper-pagination swiper-pagination-' . ($index + 1) . '"></div>
-                                <div class="swiper-button-prev swiper-button-prev-' . ($index + 1) . '"></div>
-                                <div class="swiper-button-next swiper-button-next-' . ($index + 1) . '"></div>
-                            </div>
-                        </a>
-                        <div class="px-4 py-3 w-72">
-                            <span class="mr-3 text-gray-400 text-xs uppercase">' . $product->category_product->name . '</span><br>
-                            <span class="mr-3 text-gray-400 text-xs">Boutique ' . $product->shop->name . '</span>
-                            <p class="block font-bold text-black text-lg truncate capitalize">' . $product->name . '</p>
-                            <div class="flex items-center">
-                                <p class="my-3 font-semibold text-black text-lg cursor-auto">$' . $product->unit_price . '</p>
-                                <del>
-                                    <p class="ml-2 text-gray-600 text-sm cursor-auto">$' . ($product->unit_price + 50) . '</p>
-                                </del>
-                                <div class="flex space-x-2 ml-auto">
-                                    <svg onclick="contactSellerModal(event, ' . htmlspecialchars(json_encode($product), ENT_QUOTES) . ')" class="hover:fill-[#e38407] w-8 h-8 text-gray-800 hover:text-[#e38407] dark:text-white hover:cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 10.5h.01m-4.01 0h.01M8 10.5h.01M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-6.6a1 1 0 0 0-.69.275l-2.866 2.723A.5.5 0 0 1 8 18.635V17a1 1 0 0 0-1-1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/>
-                                    </svg>
-                                    <svg onclick="addToWishList(event, ' . $product->id . ')" class="hover:fill-[#e38407] w-8 h-8 text-gray-800 hover:text-[#e38407] dark:text-white hover:cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                ';
-            }
-        }
-
-        // Return the view with the generated HTML
-        return response()->json(['html' => $html, 'rowperpage' => $this->rowperpage, 'totalSearchResults' => $totalSearchResults]);
-    }
+    return response()->json(['html' => $html, 'totalSearchResults' => $totalSearchResults]);
+}
 
     public function getSearchProducts(Request $request)
     {

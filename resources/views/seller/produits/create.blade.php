@@ -358,6 +358,29 @@
             }
         });
 
+        document.getElementById("media").addEventListener("change", function (event) {
+    let file = event.target.files[0];
+
+    if (!file) return;
+
+    // Vérification du type de fichier
+    let allowedTypes = ["image/jpeg", "image/png", "image/gif", "video/mp4", "video/webm"];
+    if (!allowedTypes.includes(file.type)) {
+        alert("Type de fichier non autorisé !");
+        return;
+    }
+
+    // Vérification de la taille (max 10MB)
+    let maxSize = 10 * 1024 * 1024; // 10MB
+    if (file.size > maxSize) {
+        alert("Fichier trop lourd !");
+        return;
+    }
+
+    console.log("Fichier valide :", file.name);
+});
+
+
 
         @if (session('success'))
             Swal.fire({
@@ -385,5 +408,6 @@
             });
         @endif
     </script>
+   
 @endsection
 @endsection

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use FFMpeg\FFMpeg;
+
 use App\Models\Shop;
 use App\Models\Stock;
 use App\Models\Seller;
@@ -11,47 +11,50 @@ use App\Models\ProductState;
 use Illuminate\Http\Request;
 use App\Models\ProductDetail;
 use App\Models\CategoryProduct;
-use FFMpeg\Coordinate\TimeCode;
-use FFMpeg\Coordinate\Dimension;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
 
    public function index(Shop $shop, Request $request)
-    {
-        $userId = Auth::id();
-        $seller = Seller::where('user_id', $userId)->first();
+{
+    $userId = Auth::id();
+    $seller = Seller::where('user_id', $userId)->first();
 
-        if (!$seller || !$seller->shops()->where('_id', $shop->_id)->exists()) {
-            return response()->json(['error' => 'Accès non autorisé à cette boutique.'], 403);
-        }
-
-        $query = $shop->products();
-
-        if ($request->has('filter')) {
-            if ($request->filter == 'is_active') {
-                $query->where('is_active', true);
-            } elseif ($request->filter == 'recent') {
-                $query->orderBy('created_at', 'desc');
-            }
-        }
-
-        $products = $query->paginate(10);
-        $stocks = Stock::all();
-        $categories = CategoryProduct::all();
-
-        if ($request->ajax()) {
-            return response()->json([
-                'products' => view('seller.produits.index', compact('products','stocks','categories','shop'))->render()
-            ]);
-        }
-
-        return view('seller.produits.index', compact('products', 'categories', 'shop', 'stocks'));
+    // Vérifier que la boutique appartient au vendeur connecté
+    if (!$seller || $shop->seller_id !== $seller->id) {
+        return abort(403, 'Accès interdit.');
     }
+
+    $query = Product::where('shop_id', $shop->id);
+
+    // Filtrage des produits
+    if ($request->has('filter')) {
+        if ($request->filter == 'is_active') {
+            $query->where('is_active', true);
+        } elseif ($request->filter == 'recent') {
+            $query->orderBy('created_at', 'desc');
+        }
+    }
+
+    $products = $query->paginate(10);
+    $stocks = Stock::whereIn('product_id', $products->pluck('id'))->get();
+    $categories = CategoryProduct::all();
+
+    // Gestion des requêtes AJAX
+    if ($request->ajax()) {
+        return response()->json([
+            'products' => view('seller.produits.index', compact('products', 'stocks', 'categories', 'shop'))->render()
+        ]);
+    }
+
+    return view('seller.produits.index', compact('products', 'categories', 'shop', 'stocks'));
+}
+
 
     public function fetchProducts(Shop $shop,Request $request)
     {
@@ -208,40 +211,20 @@ class ProductController extends Controller
 
             if ($request->hasFile('media')) {
                 foreach ($request->file('media') as $mediaFile) {
+                    // Générer un nom unique pour le fichier
                     $mediaName = uniqid() . '.' . $mediaFile->getClientOriginalExtension();
+                    $path = $mediaFile->move(public_path('products_media'), $mediaName);
 
-                    $path = $mediaFile->move(base_path('products_media'), $mediaName);
+                    // Sauvegarder le chemin correct dans la base de données
                     $product->photos()->create([
-                        'image' => 'products_media/' . $mediaName,
+                        'image' => 'products_media/'.$mediaName,
                         'description' => 'Media pour ' . $product->name,
                     ]);
-                     if (in_array($mediaFile->getClientOriginalExtension(), ['mp4', 'mov', 'avi'])) {
-                        $ffmpeg = FFMpeg::create([
-                            'ffmpeg.binaries'  => 'C:/ffmpeg/bin/ffmpeg.exe',  // ✅ Chemin correct
-                            'ffprobe.binaries' => 'C:/ffmpeg/bin/ffprobe.exe', // ✅ Chemin correct
-                            'timeout' => 3600,
-                            'threads' => 12,
-                        ]);
-
-
-                        $video = $ffmpeg->open($path);
-                        $gifPath = base_path('products_media') . '/' . uniqid() . '.gif';
-
-                        $video->gif(TimeCode::fromSeconds(0), new Dimension(320, 240), 10)
-                            ->save($gifPath);
-
-                        // Enregistrez le chemin du GIF dans la base de données
-                        $product->photos()->create([
-                            'image' => 'products_media/' . basename($gifPath),
-                            'description' => 'GIF pour ' . $product->name,
-                        ]);
-                    }
-
                 }
             }
 
-            DB::commit();
 
+            DB::commit();
 
             return redirect()->route('seller.shops.products.index', $product->shop->_id)
                 ->with('success', 'Produit créé avec succès !');
@@ -300,7 +283,6 @@ class ProductController extends Controller
             // Validation des données
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
-                'stock_quantity' => 'required|integer',
                 'price' => 'required|numeric',
                 'category_product_id' => 'required|exists:category_products,id',
                 'description' => 'nullable|string',
@@ -338,29 +320,30 @@ class ProductController extends Controller
             ]);
             $productDetail->save();
 
-            // Mise à jour du stock
-            $product->stocks()->updateOrCreate([], [
-                'quantity' => $validated['stock_quantity'],
-            ]);
 
-            // Gestion des images
+
+            /// Gestion des images
             if ($request->hasFile('images')) {
-                // Supprimer les anciennes images si nécessaire
+                // 🔴 Supprimer les anciennes images du dossier public/products_media/
                 foreach ($product->photos as $photo) {
-                    Storage::disk('public')->delete($photo->image);
-                    $photo->delete();
+                    $oldImagePath = public_path($photo->image);
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath); // Supprime physiquement le fichier
+                    }
+                    $photo->delete(); // Supprime l'entrée en base de données
                 }
 
-                // Ajouter les nouvelles images
+                // 🟢 Ajouter les nouvelles images
                 foreach ($request->file('images') as $imageFile) {
-                    $path = $imageFile->store('images', 'public');
+                    $imageName = uniqid() . '.' . $imageFile->getClientOriginalExtension();
+                    $path=$imageFile->move(public_path('products_media'), $imageName); // Déplace l'image dans public/products_media/
+
                     $product->photos()->create([
-                        'image' => $path,
+                        'image' => 'products_media/'. $imageName,
                         'description' => 'Image pour ' . $product->name,
                     ]);
                 }
             }
-
             return redirect()->route('seller.shops.products.index', $product->shop->_id)
                 ->with('success', 'Produit mis à jour avec succès !');
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -379,7 +362,7 @@ class ProductController extends Controller
 
         // if (!$seller || !$seller->shops->contains($product->shop)) {
         //     return response()->json(['error' => 'Accès non autorisé à ce produit.'], 403);
-        // }  
+        // }
 
         // Suppression du produit et des relations associées
         $product->photos()->delete();

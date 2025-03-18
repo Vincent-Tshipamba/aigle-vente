@@ -21,14 +21,10 @@ class ProductController extends Controller
 {
 
    public function index(Shop $shop, Request $request)
-{
+    {
     $userId = Auth::id();
     $seller = Seller::where('user_id', $userId)->first();
 
-    // Vérifier que la boutique appartient au vendeur connecté
-    if (!$seller || $shop->seller_id !== $seller->id) {
-        return abort(403, 'Accès interdit.');
-    }
 
     $query = Product::where('shop_id', $shop->id);
 
@@ -54,7 +50,6 @@ class ProductController extends Controller
 
     return view('seller.produits.index', compact('products', 'categories', 'shop', 'stocks'));
 }
-
 
     public function fetchProducts(Shop $shop,Request $request)
     {
@@ -90,8 +85,6 @@ class ProductController extends Controller
 
         return redirect()->back()->with('success', 'Statut du produit mis à jour avec succès.');
     }
-
-
     public function manageStockIndex($id)
     {
         $product = Product::where('_id', $id)->first();
@@ -103,8 +96,6 @@ class ProductController extends Controller
         $stocks = $product->stocks;
         return view('seller.manage-stocks.index', compact('product', 'stocks'));
     }
-
-
 
     public function manageStock(Request $request, Product $product)
     {
@@ -126,7 +117,6 @@ class ProductController extends Controller
 
         return redirect()->route('stocks.edit', $product->_id)->with('success', 'Stock updated successfully.');
     }
-
 
     public function create(Shop $shop)
     {
@@ -164,7 +154,25 @@ class ProductController extends Controller
                 'shipping' => 'nullable|string|max:255',
                 'care' => 'nullable|string|max:255',
                 'brand' => 'nullable|string|max:50',
-            ], );
+            ], [
+                'name.required' => 'Le nom du produit est obligatoire.',
+                'stock_quantity.required' => 'La quantité en stock est obligatoire.',
+                'price.required' => 'Le prix est obligatoire.',
+                'category_product_id.required' => 'La catégorie du produit est obligatoire.',
+                'category_product_id.exists' => 'La catégorie sélectionnée n\'existe pas.',
+                'media.*.required' => 'Le fichier média est obligatoire.',
+                'media.*.file' => 'Le fichier média doit être un fichier valide.',
+                'media.*.mimes' => 'Le fichier média doit être de type : jpeg, png, jpg, gif, webp, mp4, mov, avi.',
+                'media.*.max' => 'Le fichier média ne doit pas dépasser 7480 Ko.',
+                'weight.numeric' => 'Le poids doit être un nombre.',
+                'dimensions.max' => 'Les dimensions ne doivent pas dépasser 255 caractères.',
+                'color.max' => 'La couleur ne doit pas dépasser 50 caractères.',
+                'size.max' => 'La taille ne doit pas dépasser 50 caractères.',
+                'model.max' => 'Le modèle ne doit pas dépasser 50 caractères.',
+                'shipping.max' => 'Les informations de livraison ne doivent pas dépasser 255 caractères.',
+                'care.max' => 'Les informations d\'entretien ne doivent pas dépasser 255 caractères.',
+                'brand.max' => 'La marque ne doit pas dépasser 50 caractères.',
+            ]);
 
             // Ajout de l'ID de la boutique
             $validated['shop_id'] = $shop->id;
@@ -295,6 +303,22 @@ class ProductController extends Controller
                 'shipping' => 'nullable|string|max:255',
                 'care' => 'nullable|string|max:255',
                 'brand' => 'nullable|string|max:50',
+            ], [
+                'name.required' => 'Le nom du produit est obligatoire.',
+                'price.required' => 'Le prix est obligatoire.',
+                'category_product_id.required' => 'La catégorie du produit est obligatoire.',
+                'category_product_id.exists' => 'La catégorie sélectionnée n\'existe pas.',
+                'images.*.image' => 'Chaque fichier doit être une image.',
+                'images.*.mimes' => 'Chaque image doit être de type : jpeg, png, jpg, gif, webp.',
+                'images.*.max' => 'Chaque image ne doit pas dépasser 2048 Ko.',
+                'weight.numeric' => 'Le poids doit être un nombre.',
+                'dimensions.max' => 'Les dimensions ne doivent pas dépasser 255 caractères.',
+                'color.max' => 'La couleur ne doit pas dépasser 50 caractères.',
+                'size.max' => 'La taille ne doit pas dépasser 50 caractères.',
+                'model.max' => 'Le modèle ne doit pas dépasser 50 caractères.',
+                'shipping.max' => 'Les informations de livraison ne doivent pas dépasser 255 caractères.',
+                'care.max' => 'Les informations d\'entretien ne doivent pas dépasser 255 caractères.',
+                'brand.max' => 'La marque ne doit pas dépasser 50 caractères.',
             ]);
 
             // Mise à jour des informations principales du produit
@@ -320,11 +344,9 @@ class ProductController extends Controller
             ]);
             $productDetail->save();
 
-
-
-            /// Gestion des images
+            // Gestion des images
             if ($request->hasFile('images')) {
-                // 🔴 Supprimer les anciennes images du dossier public/products_media/
+                // Supprimer les anciennes images du dossier public/products_media/
                 foreach ($product->photos as $photo) {
                     $oldImagePath = public_path($photo->image);
                     if (file_exists($oldImagePath)) {
@@ -333,17 +355,18 @@ class ProductController extends Controller
                     $photo->delete(); // Supprime l'entrée en base de données
                 }
 
-                // 🟢 Ajouter les nouvelles images
+                // Ajouter les nouvelles images
                 foreach ($request->file('images') as $imageFile) {
                     $imageName = uniqid() . '.' . $imageFile->getClientOriginalExtension();
-                    $path=$imageFile->move(public_path('products_media'), $imageName); // Déplace l'image dans public/products_media/
+                    $path = $imageFile->move(public_path('products_media'), $imageName); // Déplace l'image dans public/products_media/
 
                     $product->photos()->create([
-                        'image' => 'products_media/'. $imageName,
+                        'image' => 'products_media/' . $imageName,
                         'description' => 'Image pour ' . $product->name,
                     ]);
                 }
             }
+
             return redirect()->route('seller.shops.products.index', $product->shop->_id)
                 ->with('success', 'Produit mis à jour avec succès !');
         } catch (\Illuminate\Validation\ValidationException $e) {

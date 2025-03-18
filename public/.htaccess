@@ -5,6 +5,16 @@
 
     RewriteEngine On
 
+    # ✅ Exclure l'API Python AVANT que Laravel ne prenne le contrôle
+    RewriteCond %{REQUEST_URI} ^/api_python/ [NC]
+    RewriteRule ^ - [L]
+
+    # Autoriser l'accès au dossier public/ et à son contenu
+    RewriteCond %{REQUEST_URI} ^/public/.*$ [OR]
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule .* - [L]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -14,7 +24,7 @@
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
-    # Send Requests To Front Controller...
+    # Envoyer tout le reste vers Laravel (index.php)
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]

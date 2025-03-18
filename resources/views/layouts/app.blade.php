@@ -5,8 +5,27 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Vincent Tshipamba & Carlo Musongela">
-    <meta name="description" content="Aigle Vente est une plateforme de vente en ligne rapprochant les vendeurs et les acheteurs de produits de toutes sortes.">
-    <link rel="shortcut icon" href="{{ asset('img/logo/logo_sans_bg.png') }}" type="image/x-icon">
+    <meta name="description"
+        content="Aigle Vente est une plateforme de vente en ligne rapprochant les vendeurs et les acheteurs de produits de toutes sortes.">
+    <link rel="shortcut icon" href="{{ asset('img\logo\logo_sans_bg.png') }}" type="image/x-icon">
+    <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://aiglevente.com/">
+    <meta name="description" content="à la hauteur de votre desire.">
+
+    <meta name="twitter:site" content="@aiglevente">
+    <meta name="twitter:creator" content="@aiglevente">
+    <meta name="twitter:card" content="à la hauteur de votre desire">
+    <meta name="twitter:title" content="à la hauteur de votre desire">
+    <meta name="twitter:description" content="à la hauteur de votre desire.">
+    <meta name="twitter:image" content="https://aiglevente.com/img/logo/logo_sans_bg.pn">
+
+    <meta property="og:url" content="https://aiglevente.com/">
+    <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Aigle Vente">
+    <meta property="og:title" content="à la hauteur de votre desire.">
+    <meta property="og:description" content="à la hauteur de votre desire.">
+    <meta property="og:image" content="https://aiglevente.com/img/logo/logo_sans_bg.png">
 
     <title>Aigle Vente</title>
 
@@ -293,7 +312,8 @@
 
                 allCategoryIds.forEach(categoryId => {
                     const categoryElement = document.getElementById(`category-${categoryId}`);
-                    const categoryInSidebarElement = document.getElementById(`categoryInSidebar-${categoryId}`);
+                    const categoryInSidebarElement = document.getElementById(
+                        `categoryInSidebar-${categoryId}`);
 
                     if (selectedCategories.includes(categoryId)) {
                         $(categoryInSidebarElement).addClass('text-white underline');

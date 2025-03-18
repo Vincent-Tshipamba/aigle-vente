@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\City;
 use App\Models\Seller;
+use App\Models\Social;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
+
 
 class SellerController extends Controller
 {
@@ -33,27 +32,34 @@ class SellerController extends Controller
     }
 
     // Créer un nouveau vendeur
-    public function store(Request $request)
+   public function store(Request $request)
     {
+
         try {
             $validated = $request->validate([
                 'phone' => 'required|string|max:20',
-                'sexe' => 'required|string|in:Masculin,Féminin',
                 'address' => 'required|string|max:255',
-                'picture' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+                'profile' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+                'facebook' => 'nullable|string|max:255',
+                'instagram' => 'nullable|string|max:255',
             ], [
-                'phone.required' => 'Le numéro de téléphone est requis.',
-                'sexe.in' => 'Le sexe doit être Masculin ou Féminin.',
-                'address.required' => 'L\'adresse est obligatoire.',
-                'picture.image' => 'Le fichier doit être une image.',
+                'phone.required' => 'Veuillez entrer un numéro de téléphone valide.',
+                'address.required' => 'Veuillez indiquer votre adresse complète.',
+                'profile.image' => 'Le fichier sélectionné doit être une image (JPEG, PNG, JPG, WebP).',
+                'profile.max' => 'La taille de l\'image ne doit pas dépasser 2 Mo.',
+                'facebook.max' => 'Le lien Facebook ne doit pas dépasser 255 caractères.',
+                'instagram.max' => 'Le lien Instagram ne doit pas dépasser 255 caractères.',
             ]);
 
-            $seller = new Seller($validated);
-            $seller->user_id = Auth::id();
+            $validated['user_id'] = Auth::id();
 
-            if ($request->hasFile('picture')) {
-                $path = $request->file('picture')->store('images/sellers', 'public');
-                $seller->picture = $path;
+            $seller = new Seller($validated);
+
+            if ($request->hasFile('profile')) {
+                $file = $request->file('profile');
+                $filename = uniqid() . '.' . $file->getClientOriginalName();
+                $path = $file->move(public_path('profileSeller'), $filename);
+                $seller->picture = 'profileSeller/' . $filename;
             }
 
             $userName = Auth::user()->name;
@@ -64,10 +70,20 @@ class SellerController extends Controller
                 $lastName = '';
             }
 
+            $user = Auth::user();
+            $sexe = $user->client->sexe;
+
             $seller->first_name = $firstName;
             $seller->last_name = $lastName;
+            $seller->sexe = $sexe;
 
             $seller->save();
+
+            Social::create([
+                'seller_id' => $seller->id,
+                'facebook' => $validated['facebook'] ?? null,
+                'instagram' => $validated['instagram'] ?? null,
+            ]);
 
             return redirect()->route('seller.dashboard')->with('success', 'Vendeur créé avec succès!');
         } catch (\Exception $e) {
@@ -88,4 +104,37 @@ class SellerController extends Controller
 
         return view('seller.sellers.profile', compact('seller'));
     }
+
+    public function updateProfilePicture(Request $request)
+{
+    $request->validate([
+        'profile' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+    ], [
+        'profile.required' => 'Veuillez sélectionner une image.',
+        'profile.image' => 'Le fichier sélectionné doit être une image (JPEG, PNG, JPG, WebP).',
+        'profile.max' => 'La taille de l\'image ne doit pas dépasser 2 Mo.',
+    ]);
+
+    $userId = Auth::id();
+    $seller = Seller::where('user_id', $userId)->first();
+
+    if (!$seller) {
+        return response()->json(['success' => false, 'message' => 'Vendeur introuvable.'], 404);
+    }
+
+    if ($request->hasFile('profile')) {
+        $file = $request->file('profile');
+        $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('profileSeller'), $filename);
+        $seller->picture = 'profileSeller/' . $filename;
+        $seller->save();
+    }
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Photo de profil mise à jour avec succès!',
+        'image_url' => asset('profileSeller/' . $filename)
+    ]);
+}
+
 }

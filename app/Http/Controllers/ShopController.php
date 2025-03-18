@@ -49,12 +49,12 @@ class ShopController extends Controller
 
     public function store(Request $request)
     {
-        // Validation des données de la boutique
+
         $request->validate([
             'name' => 'required|string|max:255',
             'address' => 'nullable|string',
             'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validation de l'image
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:7048', // Validation de l'image
         ]);
 
         // Récupérer l'utilisateur connecté
@@ -68,21 +68,19 @@ class ShopController extends Controller
         }
 
         // Gestion de l'image si elle existe
-        $imagePath = null;
+        $imageName = null;
         if ($request->hasFile('image')) {
             $imageFile = $request->file('image');
             $imageName = uniqid() . '.' . $imageFile->getClientOriginalExtension();
-
-
-            $imagePath = $imageFile->public_path('shops_profile', $imageName);
+            $imagePath = $imageFile->move(public_path('shops_profile'), $imageName);
         }
 
         $shop = Shop::create([
             'name' => $request->name,
             'address' => $request->address,
             'description' => $request->description,
-            'seller_id' => $seller->id,  // Utiliser l'ID du vendeur existant
-            'image' => $imagePath, // Enregistrer le chemin de l'image
+            'seller_id' => $seller->id, 
+            'image' => 'shops_profile/'.$imageName,
         ]);
 
         // Rediriger vers une page de confirmation ou la liste des boutiques
@@ -114,7 +112,7 @@ class ShopController extends Controller
             'name' => 'nullable|string|max:255',
             'address' => 'nullable|string',
             'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:7048',
         ]);
 
         // Gestion de l'image si une nouvelle est fournie

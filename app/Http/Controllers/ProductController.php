@@ -155,7 +155,7 @@ class ProductController extends Controller
                 'price' => 'required|numeric',
                 'category_product_id' => 'required|exists:category_products,id',
                 'description' => 'nullable|string',
-                'media.*' => 'required|file|mimes:jpeg,png,jpg,gif,webp,mp4,mov,avi|max:20480',
+                'media.*' => 'required|file|mimes:jpeg,png,jpg,gif,webp,mp4,mov,avi|max:7480',
                 'weight' => 'nullable|numeric',
                 'dimensions' => 'nullable|string|max:255',
                 'color' => 'nullable|string|max:50',

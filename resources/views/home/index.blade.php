@@ -17,7 +17,7 @@
     <meta name="twitter:card" content="à la hauteur de votre desire">
     <meta name="twitter:title" content="à la hauteur de votre desire">
     <meta name="twitter:description" content="à la hauteur de votre desire.">
-    <meta name="twitter:image" content="{{ asset('img\logo\logo_sans_bg.png') }}">
+    <meta name="twitter:image" content="https://aiglevente.com/img/logo/logo_sans_bg.pn">
 
     <meta property="og:url" content="https://aiglevente.com/">
     <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -25,7 +25,7 @@
     <meta property="og:site_name" content="Aigle Vente">
     <meta property="og:title" content="à la hauteur de votre desire.">
     <meta property="og:description" content="à la hauteur de votre desire.">
-    <meta property="og:image" content="{{ asset('img\logo\logo_sans_bg.png') }}">
+    <meta property="og:image" content="https://aiglevente.com/img/logo/logo_sans_bg.pn">
 
 
     <meta name="csrf-token" content="{{ csrf_token() }}">

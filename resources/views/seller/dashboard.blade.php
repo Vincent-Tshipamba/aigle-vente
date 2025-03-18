@@ -28,7 +28,7 @@
             animation: float 10s ease-in-out infinite;
         }
     </style>
-   
+
     @if ($totalShops == 0)
         <!-- Background Elements -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
@@ -53,7 +53,7 @@
                         produits et commencer à générer des ventes
                     </p>
 
-                    <a href="{{ route('shops.index') }}" 
+                    <a href="{{ route('shops.index') }}"
                         class="inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg bg-[#e38407] text-white hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-all duration-200">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -96,6 +96,84 @@
                 </div>
             </div>
         </div>
+
+        @if ($showProfilePicturePopup)
+            <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+            title: 'Mettez à jour votre photo de profil',
+            text: 'Veuillez ajouter une photo de profil pour compléter votre profil de vendeur.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Mettre à jour',
+            cancelButtonText: 'Plus tard',
+            html: `
+                <form id="profilePictureForm" class="flex flex-col items-center gap-4">
+                    @csrf
+                    <input type="file" id="profileInput" name="profile" accept="image/*" required class="border p-2 rounded-lg">
+                    <div class="w-32 h-32 flex items-center justify-center border border-dashed rounded-full overflow-hidden">
+                        <img id="previewImage" src="" alt="Aperçu" class="hidden w-full h-full object-cover">
+                    </div>
+                </form>
+            `,
+            didOpen: () => {
+                const input = document.getElementById('profileInput');
+                const preview = document.getElementById('previewImage');
+
+                input.addEventListener('change', function(event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            preview.src = e.target.result;
+                            preview.classList.remove('hidden');
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            },
+            preConfirm: () => {
+                return new Promise((resolve) => {
+                    const formData = new FormData();
+                    const fileInput = document.getElementById('profileInput').files[0];
+
+                    if (!fileInput) {
+                        Swal.showValidationMessage('Veuillez sélectionner une image.');
+                        resolve();
+                        return;
+                    }
+
+                    formData.append('profile', fileInput);
+                    formData.append('_token', "{{ csrf_token() }}");
+
+                    fetch("{{ route('seller.updateProfilePicture') }}", {
+                        method: "POST",
+                        body: formData,
+                        headers: {
+                            "X-Requested-With": "XMLHttpRequest"
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire("Succès", "Votre photo de profil a été mise à jour.", "success");
+                        } else {
+                            Swal.fire("Erreur", "Une erreur s'est produite.", "error");
+                        }
+                        resolve();
+                    })
+                    .catch(() => {
+                        Swal.fire("Erreur", "Impossible de mettre à jour la photo.", "error");
+                        resolve();
+                    });
+                });
+            }
+        });
+    });
+</script>
+
+
+        @endif
     @else
         <div class=" p-4 md:p-6 2xl:p-10">
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3 2xl:gap-7.5">

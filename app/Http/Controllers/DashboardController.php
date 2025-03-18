@@ -26,6 +26,8 @@ class DashboardController extends Controller
         return view('client.dashboard');
     }
 
+    $showProfilePicturePopup = !$seller->picture;
+
     // Récupérer tous les IDs des shops liés au vendeur
     $shopIds = $seller->shops()->pluck('id');
 
@@ -62,7 +64,7 @@ class DashboardController extends Controller
         'totalProducts',
         'totalShops',
         'clients',
-        'growthPercentage'
+        'growthPercentage','showProfilePicturePopup'
     ));
 }
 

@@ -20,40 +20,48 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
 
-   public function index(Shop $shop, Request $request)
+    public function index($id, Request $request)
     {
-    $userId = Auth::id();
-    $seller = Seller::where('user_id', $userId)->first();
+        $userId = Auth::id();
+        $seller = Seller::where('user_id', $userId)->first();
 
+        $shop = Shop::where('_id', $id)->first();
 
-    $query = Product::where('shop_id', $shop->id);
-
-    // Filtrage des produits
-    if ($request->has('filter')) {
-        if ($request->filter == 'is_active') {
-            $query->where('is_active', true);
-        } elseif ($request->filter == 'recent') {
-            $query->orderBy('created_at', 'desc');
+        if (!$shop) {
+            return redirect()->route('shops.index')->with('error', 'Boutique introuvable.');
         }
+
+        $query = Product::where('shop_id', $shop->id);
+
+        // Filtrage des produits
+        if ($request->has('filter')) {
+            if ($request->filter == 'is_active') {
+                $query->where('is_active', true);
+            } elseif ($request->filter == 'recent') {
+                $query->orderBy('created_at', 'desc');
+            }
+        }
+
+        $products = $query->paginate(10);
+        $stocks = Stock::whereIn('product_id', $products->pluck('id'))->get();
+        $categories = CategoryProduct::all();
+
+        // Gestion des requêtes AJAX
+        if ($request->ajax()) {
+            return response()->json([
+                'products' => view('seller.produits.index', compact('products', 'stocks', 'categories', 'shop'))->render()
+            ]);
+        }
+
+        return view('seller.produits.index', compact('products', 'categories', 'shop', 'stocks'));
     }
 
-    $products = $query->paginate(10);
-    $stocks = Stock::whereIn('product_id', $products->pluck('id'))->get();
-    $categories = CategoryProduct::all();
-
-    // Gestion des requêtes AJAX
-    if ($request->ajax()) {
-        return response()->json([
-            'products' => view('seller.produits.index', compact('products', 'stocks', 'categories', 'shop'))->render()
-        ]);
-    }
-
-    return view('seller.produits.index', compact('products', 'categories', 'shop', 'stocks'));
-}
-
-    public function fetchProducts(Shop $shop,Request $request)
+    public function fetchProducts($id,Request $request)
     {
-        $query = Product::query()->with('category_product','stocks','shop','photos');
+        $shop = Shop::where('_id', $id)->first();
+        $query = Product::query()
+            ->with(['category_product', 'stocks', 'shop', 'photos'])
+            ->where('shop_id', $shop->id);
 
 
         if ($request->has('category_id')) {
@@ -378,7 +386,6 @@ class ProductController extends Controller
         }
     }
 
-    // Méthode de suppression d'un produit
     public function destroy(Product $product)
     {
         $seller = Auth::user()->seller;

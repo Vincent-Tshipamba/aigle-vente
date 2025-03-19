@@ -175,9 +175,9 @@ class ShopController extends Controller
         // Vérifier si le vendeur connecté possède la boutique
         $seller = Auth::user()->seller;
 
-        if (!$seller || $shop->seller_id !== $seller->id) {
-            return response()->json(['error' => 'Accès non autorisé à cette boutique.'], 403);
-        }
+        // if (!$seller || $shop->seller_id !== $seller->id) {
+        //     return response()->json(['error' => 'Accès non autorisé à cette boutique.'], 403);
+        // }
 
         try {
             // Supprimer l'image associée si elle existe
@@ -190,7 +190,7 @@ class ShopController extends Controller
 
             // Rediriger avec un message de confirmation
             return redirect()->back()->with('success', 'Boutique supprimée avec succès.');
-        } catch (\Throwable $th) {
+        } catch (\Exception $th) {
             return redirect()->back()->withErrors(['error' => 'Erreur lors de la suppression de la boutique.']);
         }
     }

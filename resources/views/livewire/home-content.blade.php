@@ -127,11 +127,12 @@
                                                     class="h-40 w-40 object-cover rounded-xl hover:scale-105">
                                             @elseif (in_array($fileExtension, ['mp4', 'mov', 'avi', 'webm']))
                                                 <!-- Affichage des vidéos -->
-                                               <video class="h-40 w-40 object-cover rounded-xl hover:scale-105"
-    autoplay muted loop playsinline>
-    <source src="{{ asset($item->image) }}" type="video/{{ $fileExtension }}">
-    Votre navigateur ne supporte pas la lecture de cette vidéo.
-</video>
+                                                <video class="h-40 w-40 object-cover rounded-xl hover:scale-105"
+                                                    autoplay muted loop playsinline>
+                                                    <source src="{{ asset($item->image) }}"
+                                                        type="video/{{ $fileExtension }}">
+                                                    Votre navigateur ne supporte pas la lecture de cette vidéo.
+                                                </video>
                                             @endif
                                             <div
                                                 class="absolute bottom-6 left-2  bg-opacity-50 text-white text-xs px-2 py-1">

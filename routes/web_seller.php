@@ -35,7 +35,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/activites/search', [ProductController::class, 'search'])->name('product.search');
 
     Route::delete('/products/{product}/images/{photoId}', action: [ProductController::class, 'deleteImage'])->name('product.deleteImage');
-    Route::get('/products', [ProductController::class, 'fetchProducts'])->name('products.fetch');
+    Route::get('/products/{shop:_id}/shop', [ProductController::class, 'fetchProducts'])->name('products.fetch');
     Route::post('/products/{id}/toggle-status', [ProductController::class, 'toggleStatus'])->name('products.toggleStatus');
 
     Route::post('/seller/update-profile-picture', [SellerController::class, 'updateProfilePicture'])->name('seller.updateProfilePicture');

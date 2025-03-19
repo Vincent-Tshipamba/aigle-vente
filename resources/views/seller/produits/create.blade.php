@@ -305,7 +305,24 @@
                 const files = event.target.files;
                 previewContainer.innerHTML = ''; // Efface les aperçus existants
 
+                const maxSize = 10 * 1024 * 1024; // 10MB
+
                 Array.from(files).forEach((file, index) => {
+                    if (file.size > maxSize) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Erreur',
+                            text: 'La taille du fichier ' + file.name +
+                                ' dépasse la limite de 10MB.',
+                            toast: true,
+                            position: 'top-end',
+                            timer: 3000,
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                        });
+                        return;
+                    }
+
                     const fileReader = new FileReader();
 
                     fileReader.onload = function(e) {
@@ -358,27 +375,37 @@
             }
         });
 
-        document.getElementById("media").addEventListener("change", function (event) {
-    let file = event.target.files[0];
+        document.getElementById("media").addEventListener("change", function(event) {
+            let file = event.target.files[0];
 
-    if (!file) return;
+            if (!file) return;
 
-    // Vérification du type de fichier
-    let allowedTypes = ["image/jpeg", "image/png", "image/gif", "video/mp4", "video/webm"];
-    if (!allowedTypes.includes(file.type)) {
-        alert("Type de fichier non autorisé !");
-        return;
-    }
+            // Vérification du type de fichier
+            let allowedTypes = ["image/jpeg", "image/png", "image/gif", "video/mp4", "video/webm"];
+            if (!allowedTypes.includes(file.type)) {
+                 Swal.fire({
+                            icon: 'error',
+                            title: 'Erreur',
+                            text: 'Type de fichier ' + file.name +
+                                ' non autorisé !',
+                            toast: true,
+                            position: 'top-end',
+                            timer: 3000,
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                        });
+                return;
+            }
 
-    // Vérification de la taille (max 10MB)
-    let maxSize = 10 * 1024 * 1024; // 10MB
-    if (file.size > maxSize) {
-        alert("Fichier trop lourd !");
-        return;
-    }
+            // Vérification de la taille (max 10MB)
+            let maxSize = 10 * 1024 * 1024; // 10MB
+            if (file.size > maxSize) {
+                alert("Fichier trop lourd !");
+                return;
+            }
 
-    console.log("Fichier valide :", file.name);
-});
+            console.log("Fichier valide :", file.name);
+        });
 
 
 
@@ -408,6 +435,5 @@
             });
         @endif
     </script>
-   
 @endsection
 @endsection

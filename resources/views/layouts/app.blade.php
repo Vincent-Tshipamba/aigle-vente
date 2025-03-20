@@ -142,8 +142,24 @@
         }
     </script>
     <script>
-        function changeImage(src) {
-            document.getElementById('mainImage').src = src;
+        function changeMedia(src, type) {
+            const mainImage = document.getElementById('mainImage');
+            const mainVideo = document.getElementById('mainVideo');
+
+            if (type === 'image') {
+                if (mainVideo) {
+                    mainVideo.style.display = 'none';
+                }
+                mainImage.src = src;
+                mainImage.style.display = 'block';
+            } else if (type === 'video') {
+                if (mainImage) {
+                    mainImage.style.display = 'none';
+                }
+                mainVideo.querySelector('source').src = src;
+                mainVideo.load();
+                mainVideo.style.display = 'block';
+            }
         }
 
         function changeImageInContactSellerModal(src) {

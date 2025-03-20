@@ -9,6 +9,7 @@
             background: white;
             border-radius: 4px;
             color: #e38407;
+            @apply bg-white dark:bg-gray-800 border-radius-4 text-[#e38407];
         }
     </style>
 
@@ -283,7 +284,7 @@
         }
 
         function loadProducts(queryString = "") {
-            let url = "{{ route('products.fetch',$shop->_id) }}";
+            let url = "{{ route('products.fetch', $shop->_id) }}";
             if (queryString) {
                 url += "?" + queryString;
             }
@@ -352,33 +353,55 @@
                             "products_media/images.jpg";
                         console.log(firstImage);
 
+                        let firstMedia = product.photos.length > 0 ? product.photos[0].image :
+                            "products_media/images.jpg";
+                        let fileExtension = firstMedia.split('.').pop().toLowerCase();
+                        let imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                        let videoExtensions = ['mp4', 'mov', 'avi', 'webm'];
+
+                        let mediaElement = '';
+
+                        if (imageExtensions.includes(fileExtension)) {
+                            mediaElement =
+                                `<img src="${host}/${firstMedia}" alt="${product.name}" class="w-full h-48 object-cover">`;
+                        } else if (videoExtensions.includes(fileExtension)) {
+                            mediaElement = `
+                        <video class="w-full h-48 object-cover" autoplay muted loop playsinline>
+                            <source src="${host}/${firstMedia}" type="video/${fileExtension}">
+                            Votre navigateur ne supporte pas la lecture de cette vidéo.
+                        </video>`;
+                        } else {
+                            mediaElement =
+                                `<img src="${host}/products_media/images.jpg" alt="${product.name}" class="w-full h-48 object-cover">`;
+                        }
+
                         let gridItem = `
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden hover:scale-110">
-                    <a href="${host}/seller/shops/product/${product._id}/detail" class="block">
-                        <div class="relative">
-                            <img src="${host}/${firstImage}" alt="${product.name}" class="w-full h-48 object-cover">
-                            <div class="absolute top-0 right-0 m-2">
-                                <span class="px-2 py-1 text-xs font-semibold text-white bg-orange-500 rounded-full">
-                                    ${product.category_product?.name ?? "N/A"}
-                                </span>
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-2 line-clamp-2">
-                                ${product.name}
-                            </h3>
-                            <div class="flex items-center justify-between mt-3">
-                                <span class="text-sm text-gray-500 dark:text-gray-400">
-                                    <i class="far fa-calendar mr-1"></i>
-                                    ${new Date(product.created_at).toLocaleDateString()}
-                                </span>
-                            </div>
-                            <div class="flex items-center justify-between mt-4">
-                                ${product.is_active ? '<span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-green-900 dark:text-green-300">Publier</span>' : '<span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-red-900 dark:text-red-300">Non Publier</span>'}
-                            </div>
-                        </div>
-                    </a>
-                </div>`;
+                            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden hover:scale-110">
+                                <a href="${host}/seller/shops/product/${product._id}/detail" class="block">
+                                    <div class="relative">
+                                        ${mediaElement}
+                                        <div class="absolute top-0 right-0 m-2">
+                                            <span class="px-2 py-1 text-xs font-semibold text-white bg-orange-500 rounded-full">
+                                                ${product.category_product?.name ?? "N/A"}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="p-4">
+                                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-2 line-clamp-2">
+                                            ${product.name}
+                                        </h3>
+                                        <div class="flex items-center justify-between mt-3">
+                                            <span class="text-sm text-gray-500 dark:text-gray-400">
+                                                <i class="far fa-calendar mr-1"></i>
+                                                ${new Date(product.created_at).toLocaleDateString()}
+                                            </span>
+                                        </div>
+                                        <div class="flex items-center justify-between mt-4">
+                                            ${product.is_active ? '<span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-green-900 dark:text-green-300">Publier</span>' : '<span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-red-900 dark:text-red-300">Non Publier</span>'}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>`;
 
                         gridview.innerHTML += gridItem;
                     });

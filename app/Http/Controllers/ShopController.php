@@ -69,9 +69,7 @@ class ShopController extends Controller
             // Récupérer l'ID du vendeur correspondant
             $seller = Seller::where('user_id', $userId)->first();
 
-            if (!$seller) {
-                return redirect()->route('shops.create')->withErrors(['seller' => 'Le vendeur n\'existe pas.']);
-            }
+
 
             $shopCount = Shop::where('seller_id', $seller->id)->count();
 
@@ -86,6 +84,9 @@ class ShopController extends Controller
                 $imageName = uniqid() . '.' . $imageFile->getClientOriginalExtension();
                 $imagePath = $imageFile->move(public_path('shops_profile'), $imageName);
             }
+            
+
+         
 
             $shop = Shop::create([
                 'name' => $validated['name'],
@@ -172,20 +173,13 @@ class ShopController extends Controller
     // Supprimer une boutique si elle appartient au vendeur connecté
     public function destroy(Shop $shop)
     {
-        // Vérifier si le vendeur connecté possède la boutique
-        $seller = Auth::user()->seller;
-
-        // if (!$seller || $shop->seller_id !== $seller->id) {
-        //     return response()->json(['error' => 'Accès non autorisé à cette boutique.'], 403);
-        // }
 
         try {
             // Supprimer l'image associée si elle existe
-            if ($shop->image) {
-                Storage::delete('public/shops_profile/' . basename($shop->image));
+            if ($shop->image && file_exists(public_path($shop->image))) {
+                unlink(public_path($shop->image));
             }
 
-            // Supprimer la boutique
             $shop->delete();
 
             // Rediriger avec un message de confirmation

@@ -49,8 +49,8 @@
                 <div class="flex flex-wrap items-center gap-3">
 
 
-                <!-- Export Dropdown -->
-                {{-- <div class="relative inline-block">
+                    <!-- Export Dropdown -->
+                    {{-- <div class="relative inline-block">
                     <button id="dropdownBgHoverButton" data-dropdown-toggle="dropdownBgHover"
                         class="inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:bg-gray-600 transition-all duration-200">
                         <svg class="mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -107,19 +107,19 @@
                     </div>
                 </div> --}}
 
-                <!-- Create Activity Button -->
-                <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" type="button"
-                    class="inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg bg-[#e38407] text-white hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-all duration-200">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                    </svg>
-                    Ajoute une boutique
-                </button>
+                    <!-- Create Activity Button -->
+                    <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" type="button"
+                        class="inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg bg-[#e38407] text-white hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-all duration-200">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                        Ajoute une boutique
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 @section('modal')
     <!-- Main modal -->
@@ -149,58 +149,67 @@
                     @csrf
                     <div class="grid gap-4 mb-4 grid-cols-2">
                         <div class="col-span-2">
-                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom
-                                de la boutique</label>
+                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Nom de la boutique
+                            </label>
                             <input type="text" name="name" id="name"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Nom de la boutique" required="">
+                                placeholder="Nom de la boutique" required value="{{ old('name') }}">
+                            @error('name')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
-                        @error('name')
-                            <div class="text-red-500 text-sm">{{ $message }}</div>
-                        @enderror
 
                         <div class="col-span-2">
-                            <label for="address"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Adresse de la
-                                boutique</label>
+                            <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Adresse de la boutique
+                            </label>
                             <input type="text" id="address" name="address"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Adresse de la boutique" required="">
+                                placeholder="Adresse de la boutique" required value="{{ old('address') }}">
+                            @error('address')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="col-span-2">
-                            <label for="description"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description de la
-                                boutique</label>
-                            <textarea id="description" rows="4"
+                            <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Description de la boutique
+                            </label>
+                            <textarea id="description" rows="4" name="description"
                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Écrire une description de la boutique ici"></textarea>
+                                placeholder="Écrire une description de la boutique ici">{{ old('description') }}</textarea>
+                            @error('description')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <!-- Champ d'upload d'image -->
                         <div class="col-span-2">
-                            <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image
-                                de la boutique</label>
+                            <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Image de la boutique
+                            </label>
                             <input type="file" name="image" id="image" accept="image/*"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 onchange="previewImage(event)">
+                            @error('image')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
-                        @error('image')
-                            <div class="text-red-500 text-sm">{{ $message }}</div>
-                        @enderror
 
                         <!-- Zone pour afficher la prévisualisation de l'image -->
                         <div class="col-span-2 mt-4">
-                            <label for="preview"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prévisualisation de
-                                l'image</label>
+                            <label for="preview" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Prévisualisation de l'image
+                            </label>
                             <img id="preview" src="" alt="Prévisualisation de l'image"
                                 class="w-full h-auto hidden">
                         </div>
                     </div>
 
+
                     <button type="submit"
-                        class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        class="text-white inline-flex items-center bg-[#e38407] hover:bg-[#e38407] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -259,8 +268,8 @@
         @foreach ($shops as $key => $shop)
             <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
                 <!-- Image de Profil -->
-                <img src="{{ asset($shop->image )?? asset('images/default-shop.png') }}" alt="Photo de {{ $shop->name }}"
-                    class="w-full h-40 object-cover">
+                <img src="{{ asset($shop->image) ?? asset('images/default-shop.png') }}"
+                    alt="Photo de {{ $shop->name }}" class="w-full h-40 object-cover">
 
                 <div class="p-4">
                     <!-- Nom et Adresse -->
@@ -384,7 +393,7 @@
                 text: '{{ session('error') }}',
                 toast: true,
                 position: 'top-end',
-                timer: 3000,
+                timer: 7000,
                 showConfirmButton: false,
                 timerProgressBar: true,
             });

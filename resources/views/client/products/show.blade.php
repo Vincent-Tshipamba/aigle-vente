@@ -6,6 +6,7 @@
                 <div class="container mx-auto px-4 py-8">
                     <div class="flex flex-wrap -mx-4">
                         <!-- Product Images -->
+                        <!-- Partie principale -->
                         <div class="w-full md:w-1/2 px-4 mb-8">
 
                             @php
@@ -21,18 +22,16 @@
                                     <img src="{{ asset($photo->image) }}" alt="{{ $product->name }}"
                                         class="w-full h-full object-cover rounded-lg shadow-sm mb-4" id="mainImage">
                                 @elseif ($photo && in_array($fileExtension, $videoExtensions))
-                                    <video class="w-full h-full object-cover rounded-lg shadow-sm mb-4" controls>
+                                    <video class="w-full h-full object-cover rounded-lg shadow-sm mb-4" autoplay muted
+                                        loop playsinline id="mainVideo">
                                         <source src="{{ asset($photo->image) }}" type="video/{{ $fileExtension }}">
                                         Votre navigateur ne supporte pas la lecture de cette vidéo.
                                     </video>
                                 @else
                                     <img src="{{ asset('images/default.png') }}" alt="Image non disponible"
-                                        class="w-full h-full object-cover rounded-lg shadow-sm mb-4">
+                                        class="w-full h-full object-cover rounded-lg shadow-sm mb-4" id="mainImage">
                                 @endif
                             </div>
-
-
-
 
                             <!-- Miniatures -->
                             <div class="flex gap-4 py-4 justify-center overflow-x-auto">
@@ -44,19 +43,21 @@
                                     @if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif', 'webp']))
                                         <img src="{{ asset($photo->image) }}" alt="{{ $product->name }}"
                                             class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
-                                            onclick="changeImage(this.src)">
+                                            onclick="changeMedia(this.src, 'image')">
                                     @elseif (in_array($fileExtension, ['mp4', 'mov', 'avi', 'webm']))
                                         <video
                                             class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
-                                            controls autoplay>
+                                            autoplay muted loop playsinline>
                                             <source src="{{ asset($photo->image) }}" type="video/{{ $fileExtension }}"
-                                                onclick="changeImage(this.src)" autoplay>
+                                                onclick="changeMedia(this.src, 'video')" autoplay>
                                             Votre navigateur ne supporte pas la lecture de cette vidéo.
                                         </video>
                                     @endif
                                 @endforeach
                             </div>
                         </div>
+
+
 
                         <div class="w-full md:w-1/2 px-4">
                             <h2 class="text-3xl font-bold mb-2">

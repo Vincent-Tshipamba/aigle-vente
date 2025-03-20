@@ -19,7 +19,7 @@ class Product extends Model
         '_id',
         'name',
         'unit_price',
-        'category_product_id', // Assurez-vous d'utiliser le bon nom ici
+        'category_product_id',
         'shop_id',
         'description',
         'is_active',
@@ -92,13 +92,13 @@ class Product extends Model
 
     public function recordStockMovement(string $type, int $quantity, string $reason, int $performedBy,int $shop): void
     {
-        $this->stockMovements()->create([
+        $this->stockMovements()->create(attributes: [
             'product_id' => $this->id,
             'type' => $type,
             'quantity' => $quantity,
             'raison' => $reason,
             'performed_by' => $performedBy,
-            'shop_id' => $shop, 
+            'shop_id' => $shop,
         ]);
 
         $stock = $this->stocks()->firstOrCreate(['product_id' => $this->id]);

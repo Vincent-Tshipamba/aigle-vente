@@ -128,7 +128,7 @@
                                             @elseif (in_array($fileExtension, ['mp4', 'mov', 'avi', 'webm']))
                                                 <!-- Affichage des vidéos -->
                                                 <video class="h-40 w-40 object-cover rounded-xl hover:scale-105"
-                                                    controls autoplay>
+                                                    autoplay muted loop playsinline>
                                                     <source src="{{ asset($item->image) }}"
                                                         type="video/{{ $fileExtension }}">
                                                     Votre navigateur ne supporte pas la lecture de cette vidéo.

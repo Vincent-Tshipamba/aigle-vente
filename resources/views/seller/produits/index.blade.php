@@ -265,7 +265,7 @@
     <script>
         let host = window.location.origin;
         document.addEventListener("DOMContentLoaded", () => {
-            loadProducts(); 
+            loadProducts();
             document.querySelectorAll(".filter-checkbox").forEach(checkbox => {
                 checkbox.addEventListener("change", () => {
                     applyFilters();
@@ -283,7 +283,7 @@
         }
 
         function loadProducts(queryString = "") {
-            let url = "{{ route('products.fetch') }}";
+            let url = "{{ route('products.fetch',$shop->_id) }}";
             if (queryString) {
                 url += "?" + queryString;
             }

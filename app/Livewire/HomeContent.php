@@ -50,15 +50,14 @@ class HomeContent extends Component
         $query = Product::query()
             ->where('is_active', true)
             ->where('name', 'like', "%{$this->search}%")
-            ->orderBy('name', 'asc')
-            ->inRandomOrder();
+            ->inRandomOrder(); // Ajout de l'ordre aléatoire
 
         if (!empty($this->filters['categories'])) {
             $query->whereIn('category_product_id', array_keys($this->filters['categories']));
         }
 
         return view('livewire.home-content', [
-            'products' => $query->paginate(30) // Livewire supporte paginate ici
+            'products' => $query->paginate(30) // Ajout de la pagination
         ]);
     }
 

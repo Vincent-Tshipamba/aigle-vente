@@ -1813,8 +1813,4 @@
         </div>
     </section>
     <!-- brand-area-end -->
-
-    @section('footer')
-        @include('partials.home-partials.footer')
-    @endsection
 </x-app-layout>

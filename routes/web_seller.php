@@ -40,7 +40,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/seller/update-profile-picture', [SellerController::class, 'updateProfilePicture'])->name('seller.updateProfilePicture');
 
-    Route::delete('seller/shops/{shop:_id}', [ShopController::class, 'destroy'])->name('shops.destroy');
+    Route::delete('seller/shops/{shop:_id}/delete', [ShopController::class, 'destroy'])->name('shops.destroy');
     Route::put('seller/shops/{shop:_id}/edit', [ShopController::class, 'update'])->name('shops.update');
     Route::get('seller/shops/{shop:_id}/edit', [ShopController::class, 'edit'])->name('shops.edit');
     Route::get('/seller/shops', [ShopController::class, 'index'])->name('shops.index');

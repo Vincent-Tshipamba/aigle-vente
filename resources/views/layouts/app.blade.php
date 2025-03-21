@@ -102,7 +102,7 @@
         @endif
     </main>
 
-    @yield('footer')
+    @include('partials.home-partials.footer')
 
     <!-- JS here -->
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>

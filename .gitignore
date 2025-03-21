@@ -2,6 +2,9 @@
 /node_modules
 /public/build
 /public/Aigle vente
+/public/products_images
+/public/products_media
+/public/shops_profile
 /public/hot
 /public/storage
 /storage/*.key

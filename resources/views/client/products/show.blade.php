@@ -436,7 +436,7 @@
                     `<img id="mainMedia" class="w-full h-96 rounded-md mb-4" src="${mediaSrc}" alt="" />`;
             } else if (type === 'video') {
                 mainMedia.outerHTML =
-                    `<video id="mainVideo" class="w-full h-96 rounded-md mb-4" controls><source src="${mediaSrc}" type="video/mp4">Your browser does not support the video tag.</video>`;
+                    `<video id="mainVideo" class="w-full h-96 rounded-md mb-4" autoplay muted loop playsinline><source src="${mediaSrc}" type="video/mp4">Your browser does not support the video tag.</video>`;
             }
         }
     </script>

@@ -17,7 +17,7 @@
     <meta name="twitter:card" content="à la hauteur de votre desire">
     <meta name="twitter:title" content="à la hauteur de votre desire">
     <meta name="twitter:description" content="à la hauteur de votre desire.">
-    <meta name="twitter:image" content="https://aiglevente.com/img/logo/logo_sans_bg.pn">
+    <meta name="twitter:image" content="https://aiglevente.com/img/logo/logo_sans_bg.png">
 
     <meta property="og:url" content="https://aiglevente.com/">
     <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -142,25 +142,7 @@
         }
     </script>
     <script>
-        function changeMedia(src, type) {
-            const mainImage = document.getElementById('mainImage');
-            const mainVideo = document.getElementById('mainVideo');
 
-            if (type === 'image') {
-                if (mainVideo) {
-                    mainVideo.style.display = 'none';
-                }
-                mainImage.src = src;
-                mainImage.style.display = 'block';
-            } else if (type === 'video') {
-                if (mainImage) {
-                    mainImage.style.display = 'none';
-                }
-                mainVideo.querySelector('source').src = src;
-                mainVideo.load();
-                mainVideo.style.display = 'block';
-            }
-        }
 
         function changeImageInContactSellerModal(src) {
             document.getElementById('mainImageInContactSellerModal').src = src;

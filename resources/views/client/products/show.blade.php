@@ -20,16 +20,15 @@
                                 class="mx-auto w-[300px] h-[300px] xl:w-[450px] xl:h-[450px] 2xl:w-[500px] 2xl:h-[500px]">
                                 @if ($photo && in_array($fileExtension, $imageExtensions))
                                     <img src="{{ asset($photo->image) }}" alt="{{ $product->name }}"
-                                        class="w-full h-full object-cover rounded-lg shadow-sm mb-4" id="mainImage">
+                                        class="w-full h-full object-cover rounded-lg shadow-sm mb-4" id="mainMedia">
                                 @elseif ($photo && in_array($fileExtension, $videoExtensions))
-                                    <video class="w-full h-full object-cover rounded-lg shadow-sm mb-4" autoplay muted
-                                        loop playsinline id="mainVideo">
+                                    <video class="w-full h-full object-cover rounded-lg shadow-sm mb-4" autoplay muted loop playsinline id="mainVideo">
                                         <source src="{{ asset($photo->image) }}" type="video/{{ $fileExtension }}">
                                         Votre navigateur ne supporte pas la lecture de cette vidéo.
                                     </video>
                                 @else
                                     <img src="{{ asset('images/default.png') }}" alt="Image non disponible"
-                                        class="w-full h-full object-cover rounded-lg shadow-sm mb-4" id="mainImage">
+                                        class="w-full h-full object-cover rounded-lg shadow-sm mb-4" id="mainMedia">
                                 @endif
                             </div>
 
@@ -43,13 +42,12 @@
                                     @if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif', 'webp']))
                                         <img src="{{ asset($photo->image) }}" alt="{{ $product->name }}"
                                             class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
-                                            onclick="changeMedia(this.src, 'image')">
+                                            onclick="changeMainMedia('{{ asset($photo->image) }}', 'image')">
                                     @elseif (in_array($fileExtension, ['mp4', 'mov', 'avi', 'webm']))
                                         <video
                                             class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
-                                            autoplay muted loop playsinline>
-                                            <source src="{{ asset($photo->image) }}" type="video/{{ $fileExtension }}"
-                                                onclick="changeMedia(this.src, 'video')" autoplay>
+                                            autoplay muted loop playsinline onclick="changeMainMedia('{{ asset($photo->image) }}', 'video')">
+                                            <source src="{{ asset($photo->image) }}" type="video/{{ $fileExtension }}">
                                             Votre navigateur ne supporte pas la lecture de cette vidéo.
                                         </video>
                                     @endif
@@ -430,5 +428,16 @@
                 });
             });
         });
+
+        function changeMainMedia(mediaSrc, type) {
+            let mainMedia = document.getElementById("mainMedia") || document.getElementById("mainVideo");
+            if (type === 'image') {
+                mainMedia.outerHTML =
+                    `<img id="mainMedia" class="w-full h-96 rounded-md mb-4" src="${mediaSrc}" alt="" />`;
+            } else if (type === 'video') {
+                mainMedia.outerHTML =
+                    `<video id="mainVideo" class="w-full h-96 rounded-md mb-4" controls><source src="${mediaSrc}" type="video/mp4">Your browser does not support the video tag.</video>`;
+            }
+        }
     </script>
 </x-app-layout>

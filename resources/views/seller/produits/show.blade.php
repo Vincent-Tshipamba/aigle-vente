@@ -40,7 +40,8 @@
         <nav>
             <ol class="flex items-center gap-2">
                 <li>
-                    <a class="font-medium" href="{{ route('seller.shops.products.index', $product->shop->_id) }}">Produits /</a>
+                    <a class="font-medium" href="{{ route('seller.shops.products.index', $product->shop->_id) }}">Produits
+                        /</a>
                 </li>
                 <li class="text-primary">Detail</li>
             </ol>
@@ -53,19 +54,40 @@
                 <!-- Container for the main image and thumbnails -->
                 <div class="shrink-0 max-w-md lg:max-w-lg mx-auto">
                     @php
-                        $firstPhoto = $product->photos->first();
+                        $firstMedia = $product->photos->first();
+                        $firstMediaExtension = pathinfo($firstMedia->image, PATHINFO_EXTENSION);
                     @endphp
 
                     <!-- Main image -->
-                    <img id="mainImage" class="w-full h-96 rounded-md mb-4"
-                        src="{{ asset($firstPhoto->image) }}" alt="{{ $product->name }}" />
+
+                    @if (in_array($firstMediaExtension, ['jpg', 'jpeg', 'png', 'gif']))
+                        <img id="mainImage" class="w-full h-96 rounded-md mb-4" src="{{ asset($firstPhoto->image) }}"
+                            alt="{{ $product->name }}" />
+                    @elseif(in_array($firstMediaExtension, ['mp4', 'webm', 'ogg']))
+                        <video id="mainMedia" class="w-full h-96 rounded-md mb-4" autoplay muted loop playsinline>
+                            <source src="{{ asset($firstMedia->image) }}" type="video/{{ $firstMediaExtension }}">
+                            Your browser does not support the video tag.
+                        </video>
+                    @endif
+
 
                     <!-- Thumbnails -->
                     <div class="flex gap-2 mt-4">
                         @foreach ($product->photos as $photo)
-                            <img onclick="changeMainImage('{{ asset($photo->image) }}')"
-                                src="{{ asset($photo->image) }}" alt="{{ $product->name }}"
-                                class="w-20 h-20 object-cover rounded-md cursor-pointer border border-gray-300 hover:border-primary-500 transition-all" />
+                            @php
+                                $mediaExtension = pathinfo($photo->image, PATHINFO_EXTENSION);
+                            @endphp
+
+                            @if (in_array($mediaExtension, ['jpg', 'jpeg', 'png', 'gif']))
+                                <img onclick="changeMainMedia('{{ asset($photo->image) }}', 'image')"
+                                    src="{{ asset($photo->image) }}" alt="{{ $product->name }}"
+                                    class="w-20 h-20 object-cover rounded-md cursor-pointer border border-gray-300 hover:border-primary-500 transition-all" />
+                            @elseif (in_array($mediaExtension, ['mp4', 'webm', 'ogg']))
+                                <video onclick="changeMainMedia('{{ asset($photo->image) }}', 'video')"
+                                    class="w-20 h-20 object-cover rounded-md cursor-pointer border border-gray-300 hover:border-primary-500 transition-all" autoplay muted loop playsinline>
+                                    <source src="{{ asset($photo->image) }}" type="video/{{ $mediaExtension }}">
+                                </video>
+                            @endif
                         @endforeach
                     </div>
                 </div>
@@ -84,10 +106,10 @@
                         </p>
 
                         <!-- Promotion Request Button -->
-                        <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
+                        {{-- <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
                             class="ml-4 py-2 px-4 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 font-medium">
                             Demander une promotion
-                        </button>
+                        </button> --}}
                     </div>
 
                     <!-- Stock Quantity Display -->
@@ -145,7 +167,7 @@
         </div>
     </section>
 
-@section('modal')
+{{-- @section('modal')
     <!-- Main modal -->
     <div id="crud-modal" tabindex="-1" aria-hidden="true"
         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -198,13 +220,20 @@
             </div>
         </div>
     </div>
-@endsection
+@endsection --}}
 
 
 <!-- JavaScript Functions -->
 <script>
-    function changeMainImage(imageSrc) {
-        document.getElementById("mainImage").src = imageSrc;
+    function changeMainMedia(mediaSrc, type) {
+        const mainMedia = document.getElementById("mainMedia");
+        if (type === 'image') {
+            mainMedia.outerHTML =
+                `<img id="mainMedia" class="w-full h-96 rounded-md mb-4" src="${mediaSrc}" alt="{{ $product->name }}" />`;
+        } else if (type === 'video') {
+            mainMedia.outerHTML =
+                `<video id="mainMedia" class="w-full h-96 rounded-md mb-4" controls><source src="${mediaSrc}" type="video/mp4">Your browser does not support the video tag.</video>`;
+        }
     }
 
     function requestPromotion() {

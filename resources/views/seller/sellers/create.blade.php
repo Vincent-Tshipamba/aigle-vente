@@ -303,18 +303,41 @@
 
                             <template x-if="index === 2">
                                 <div>
-                                    <h3 class="...">Les lien de vos Réseaux Sociaux</h3>
+                                    <h3 class="text-lg font-semibold mb-4">Les liens de vos Réseaux Sociaux</h3>
+
+                                    <!-- Facebook -->
                                     <label class="block mb-2">Facebook</label>
                                     <input type="url" x-model="formData.facebook" @input="validateFacebookUrl"
-                                        class="w-full p-2 border rounded mb-4" name="facebook">
+                                        class="w-full p-2 border rounded mb-2" name="facebook" placeholder="https://facebook.com/Mcleroi01">
                                     <div x-show="facebookError" class="text-red-500 text-sm mt-1"
                                         x-text="facebookError"></div>
 
-                                    <label class="block mb-2">Instagram</label>
+                                    <!-- Aperçu Facebook -->
+                                    <template x-if="facebookUsername">
+                                        <div class="mt-2 flex items-center">
+                                            <img src="https://www.facebook.com/images/fb_icon_325x325.png"
+                                                class="w-6 h-6 mr-2">
+                                            <a :href="formData.facebook" target="_blank"
+                                                class="text-blue-600 hover:underline" x-text="facebookUsername"></a>
+                                        </div>
+                                    </template>
+
+                                    <!-- Instagram -->
+                                    <label class="block mb-2 mt-4">Instagram</label>
                                     <input type="url" x-model="formData.instagram" @input="validateInstagramUrl"
-                                        class="w-full p-2 border rounded mb-4" name="instagram">
+                                        class="w-full p-2 border rounded mb-2" name="instagram" placeholder="https://instagram.com/Mcleroi01">
                                     <div x-show="instagramError" class="text-red-500 text-sm mt-1"
                                         x-text="instagramError"></div>
+
+                                    <!-- Aperçu Instagram -->
+                                    <template x-if="instagramUsername">
+                                        <div class="mt-2 flex items-center">
+                                            <img src="https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png"
+                                                class="w-6 h-6 mr-2">
+                                            <a :href="formData.instagram" target="_blank"
+                                                class="text-pink-500 hover:underline" x-text="instagramUsername"></a>
+                                        </div>
+                                    </template>
                                 </div>
                             </template>
 
@@ -372,7 +395,8 @@
             function formStepper() {
                 return {
                     currentStep: 1,
-                    instagram: null,
+                    facebookUsername: null,
+                    instagramUsername: null,
                     facebookError: null,
                     instagramError: null,
                     steps: [{
@@ -426,7 +450,8 @@
                         const stepFields = {
                             1: ['name', 'last_name'],
                             2: ['address', 'phone'],
-                            3: ['facebook', 'instagram'],
+                            3: [],
+
                         };
 
                         const fields = stepFields[step] || [];
@@ -452,29 +477,64 @@
 
                     validateFacebookUrl() {
                         if (this.formData.facebook) {
-                            const facebookRegex = /^(https?:\/\/)?(www\.)?facebook\.com\/[a-zA-Z0-9\.]+\/?$/;
-                            if (!facebookRegex.test(this.formData.facebook)) {
-                                this.facebookError = 'Veuillez entrer un lien Facebook valide.';
-                            } else {
+                            let url = this.formData.facebook.trim();
+
+                            // Ajouter "https://" s'il est absent
+                            if (!/^https?:\/\//i.test(url)) {
+                                url = "https://" + url;
+                            }
+
+                            // Remplacer "www." par "https://"
+                            url = url.replace(/^(https?:\/\/)?www\./, "https://");
+
+                            // Vérifier et extraire le nom d'utilisateur
+                            const facebookRegex = /^https:\/\/facebook\.com\/([a-zA-Z0-9.]+)\/?$/;
+                            const match = url.match(facebookRegex);
+
+                            if (match) {
+                                this.formData.facebook = url; // Mettre à jour l'URL
+                                this.facebookUsername = match[1]; // Extraire le nom d'utilisateur
                                 this.facebookError = null;
+                            } else {
+                                this.facebookError = "Veuillez entrer un lien Facebook valide.";
+                                this.facebookUsername = null;
                             }
                         } else {
                             this.facebookError = null;
+                            this.facebookUsername = null;
                         }
                     },
 
                     validateInstagramUrl() {
                         if (this.formData.instagram) {
-                            const instagramRegex = /^(https?:\/\/)?(www\.)?instagram\.com\/[a-zA-Z0-9_\.]+\/?$/;
-                            if (!instagramRegex.test(this.formData.instagram)) {
-                                this.instagramError = 'Veuillez entrer un lien Instagram valide.';
-                            } else {
+                            let url = this.formData.instagram.trim();
+
+                            // Ajouter "https://" s'il est absent
+                            if (!/^https?:\/\//i.test(url)) {
+                                url = "https://" + url;
+                            }
+
+                            // Remplacer "www." par "https://"
+                            url = url.replace(/^(https?:\/\/)?www\./, "https://");
+
+                            // Vérifier et extraire le nom d'utilisateur
+                            const instagramRegex = /^https:\/\/instagram\.com\/([a-zA-Z0-9_.]+)\/?$/;
+                            const match = url.match(instagramRegex);
+
+                            if (match) {
+                                this.formData.instagram = url; // Mettre à jour l'URL
+                                this.instagramUsername = match[1]; // Extraire le nom d'utilisateur
                                 this.instagramError = null;
+                            } else {
+                                this.instagramError = "Veuillez entrer un lien Instagram valide.";
+                                this.instagramUsername = null;
                             }
                         } else {
                             this.instagramError = null;
+                            this.instagramUsername = null;
                         }
                     },
+
 
                 }
             }

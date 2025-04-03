@@ -160,13 +160,16 @@
                             @enderror
                         </div>
 
-                        <div class="col-span-2">
+                        <div class="col-span-2 auto-search-wrapper">
                             <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 Adresse de la boutique
                             </label>
-                            <input type="text" id="address" name="address"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Adresse de la boutique" required value="{{ old('address') }}">
+                            <div id="autocomplete"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            </div>
+                            <input type="hidden" id="address" name="address" required>
+                            <input type="hidden" id="latitude" name="latitude">
+                            <input type="hidden" id="longitude" name="longitude">
                             @error('address')
                                 <div class="text-red-500 text-sm">{{ $message }}</div>
                             @enderror
@@ -219,9 +222,6 @@
                         Ajouter
                     </button>
                 </form>
-
-
-
             </div>
         </div>
     </div>
@@ -342,8 +342,30 @@
 </div>
 
 @section('script')
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
-        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/@geoapify/geocoder-autocomplete@^1/dist/index.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const autocomplete = new autocomplete.GeocoderAutocomplete(
+                document.getElementById("autocomplete"),
+                "YOUR_GEOAPIFY_API_KEY", // Remplace par ta clé API Geoapify
+                {
+                    placeholder: "Adresse de la boutique",
+                    countryCodes: ["FR", "BE"]
+                }
+            );
+
+            autocomplete.on('select', (location) => {
+                if (location) {
+                    document.getElementById("address").value = location.properties.formatted;
+                    document.getElementById("latitude").value = location.properties.lat;
+                    document.getElementById("longitude").value = location.properties.lon;
+                }
+            });
+        });
+    </script>
+
 
     <script>
         if (document.getElementById("search-table") && typeof simpleDatatables.DataTable !== 'undefined') {

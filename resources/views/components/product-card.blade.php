@@ -28,8 +28,6 @@
                         </div>
                     @endforeach
 
-
-
                 </div>
                 <!-- Pagination -->
                 <div class="swiper-pagination swiper-pagination-{{ $index + 1 }}"></div>

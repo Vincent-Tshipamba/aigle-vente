@@ -7,7 +7,10 @@ use App\Models\Shop;
 
 class ShopController extends Controller{
     public function index(){
-        $shops = Shop::paginate(20);
+        $shops = Shop::with('seller')
+            ->where('is_active', true)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
         return view('client.shops.index',compact('shops'));
     }
 }

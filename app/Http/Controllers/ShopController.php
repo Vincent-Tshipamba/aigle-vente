@@ -134,12 +134,16 @@ class ShopController extends Controller
                 'name' => 'nullable|string|max:255',
                 'address' => 'nullable|string',
                 'description' => 'nullable|string',
+                'latitude' => 'nullable|numeric',
+                'longitude' => 'nullable|numeric',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:7048',
             ], [
                 'name.max' => 'Le nom de la boutique ne doit pas dépasser 255 caractères.',
                 'image.image' => 'Le fichier doit être une image.',
                 'image.mimes' => 'L\'image doit être de type : jpeg, png, jpg, gif, svg.',
                 'image.max' => 'L\'image ne doit pas dépasser 7048 Ko.',
+                'latitude.numeric' => 'La latitude doit être un nombre.',
+                'longitude.numeric' => 'La longitude doit être un nombre.',
             ]);
 
             // Gestion de l'image si une nouvelle est fournie

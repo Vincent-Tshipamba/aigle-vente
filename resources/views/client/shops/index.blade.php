@@ -1,4 +1,4 @@
-<!-- filepath: c:\Users\Mcleroi01\aigle-vente\resources\views\client\shops\index.blade.php -->
+
 <x-app-layout>
     <div class="container mx-auto my-4">
         <h2 class="text-2xl font-semibold text-gray-800 mb-4">Boutiques Disponibles</h2>
@@ -50,7 +50,7 @@
         </div>
 
         <!-- Vue de la carte -->
-        <div id="mapView" class="hidden h-96 transition-opacity duration-500"></div>
+        <div id="mapView" class="hidden h-screen transition-opacity duration-500"></div>
     </div>
 
     <!-- footer-area-start -->

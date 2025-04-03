@@ -21,6 +21,8 @@ class Shop extends Model
         'seller_id',
         'description',
         'image',
+        'latitude',
+        'longitude',
         'is_active'
     ];
 

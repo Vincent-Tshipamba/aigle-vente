@@ -160,14 +160,33 @@
                             @enderror
                         </div>
 
-                        <div class="col-span-2">
+                        <div class="col-span-2 auto-search-wrapper">
                             <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 Adresse de la boutique
                             </label>
+
+                            <div id="map" style="height: 300px;"></div> <!-- Carte ici -->
+
                             <input type="text" id="address" name="address"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Adresse de la boutique" required value="{{ old('address') }}">
+                                class="mt-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                required readonly>
+
+                            <input type="hidden" id="latitude" name="latitude" required>
+                            <input type="hidden" id="longitude" name="longitude" required>
+
                             @error('address')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-span-2">
+                            <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Description de la boutique
+                            </label>
+                            <input type="text" id="categories" name="address"
+                                class="mt-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                required >
+                            @error('description')
                                 <div class="text-red-500 text-sm">{{ $message }}</div>
                             @enderror
                         </div>
@@ -219,9 +238,6 @@
                         Ajouter
                     </button>
                 </form>
-
-
-
             </div>
         </div>
     </div>
@@ -342,8 +358,56 @@
 </div>
 
 @section('script')
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
-        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var map = L.map('map').setView([-4.4419, 15.2663], 13); // Kinshasa par défaut
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+
+            var marker = L.marker([-4.4419, 15.2663], {
+                draggable: true
+            }).addTo(map);
+
+            // Fonction pour obtenir l'adresse depuis les coordonnées via l'API Nominatim
+            function getAddressFromCoordinates(lat, lng) {
+                var url =
+                    `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&addressdetails=1`;
+
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+
+                        if (data && data.display_name) {
+                            // Mise à jour du champ adresse
+                            let address = data.display_name || "Adresse inconnue";
+                            document.getElementById("address").value = address;
+                        }
+                    })
+                    .catch(error => console.error('Erreur lors de la récupération de l\'adresse :', error));
+            }
+
+            // Mettre à jour l'adresse lorsque le marqueur est déplacé
+            marker.on('dragend', function() {
+                var lat = marker.getLatLng().lat;
+                var lng = marker.getLatLng().lng;
+                document.getElementById("latitude").value = lat;
+                document.getElementById("longitude").value = lng;
+                getAddressFromCoordinates(lat, lng);
+            });
+
+            // Mettre à jour l'adresse lorsque la carte est cliquée
+            map.on('click', function(e) {
+                var lat = e.latlng.lat;
+                var lng = e.latlng.lng;
+                marker.setLatLng([lat, lng]); // Déplace le marqueur
+                document.getElementById("latitude").value = lat;
+                document.getElementById("longitude").value = lng;
+                getAddressFromCoordinates(lat, lng); // Met à jour l'adresse
+            });
+        });
+    </script>
 
     <script>
         if (document.getElementById("search-table") && typeof simpleDatatables.DataTable !== 'undefined') {

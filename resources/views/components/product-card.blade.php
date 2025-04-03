@@ -28,8 +28,6 @@
                         </div>
                     @endforeach
 
-
-
                 </div>
                 <!-- Pagination -->
                 <div class="swiper-pagination swiper-pagination-{{ $index + 1 }}"></div>
@@ -54,9 +52,9 @@
 
             <div class=" flex items-center">
                 <p class="text-lg font-semibold text-black cursor-auto my-3">
-                    ${{ $product->unit_price }}</p>
+                    <b>CDF</b> {{ $product->unit_price }}</p>
                 <del>
-                    <p class="text-sm text-gray-600 cursor-auto ml-2">${{ $product->unit_price + 50 }}
+                    <p class="text-sm text-gray-600 cursor-auto ml-2"><b>CDF</b> {{ $product->unit_price + 50 }}
                     </p>
                 </del>
             </div>

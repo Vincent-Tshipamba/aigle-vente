@@ -37,14 +37,11 @@ class ShopController extends Controller
     public function show($id)
     {
         $shop = Shop::where('_id', $id)->first();
-        $shops = Shop::inRandomOrder()
-        ->where('_id', '!=', $shop->_id)
-        ->get();
         $products = Product::where('shop_id', $shop->id)
             ->with(['photos', 'shop.seller'])
             ->paginate(10);
 
-        return view('client.shops.show', compact('shop', 'products','shops'));
+        return view('client.shops.show', compact('shop', 'products'));
     }
 
     public function store(Request $request)
@@ -54,6 +51,8 @@ class ShopController extends Controller
                 'name' => 'required|string|max:255',
                 'address' => 'nullable|string',
                 'description' => 'nullable|string',
+                'latitude' => 'nullable|numeric',
+                'longitude' => 'nullable|numeric',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:7048', // Validation de l'image
             ], [
                 'name.required' => 'Le nom de la boutique est obligatoire.',
@@ -61,6 +60,8 @@ class ShopController extends Controller
                 'image.image' => 'Le fichier doit être une image.',
                 'image.mimes' => 'L\'image doit être de type : jpeg, png, jpg, gif, svg.',
                 'image.max' => 'L\'image ne doit pas dépasser 7048 Ko.',
+                'latitude.numeric' => 'La latitude doit être un nombre.',
+                'longitude.numeric' => 'La longitude doit être un nombre.',
             ]);
 
             // Récupérer l'utilisateur connecté
@@ -84,13 +85,15 @@ class ShopController extends Controller
                 $imageName = uniqid() . '.' . $imageFile->getClientOriginalExtension();
                 $imagePath = $imageFile->move(public_path('shops_profile'), $imageName);
             }
-            
 
-         
+
+
 
             $shop = Shop::create([
                 'name' => $validated['name'],
                 'address' => $validated['address'],
+                'latitude' => $validated['latitude'],
+                'longitude' => $validated['longitude'],
                 'description' => $validated['description'],
                 'seller_id' => $seller->id,
                 'image' => $imageName ? 'shops_profile/' . $imageName : null,
@@ -131,12 +134,16 @@ class ShopController extends Controller
                 'name' => 'nullable|string|max:255',
                 'address' => 'nullable|string',
                 'description' => 'nullable|string',
+                'latitude' => 'nullable|numeric',
+                'longitude' => 'nullable|numeric',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:7048',
             ], [
                 'name.max' => 'Le nom de la boutique ne doit pas dépasser 255 caractères.',
                 'image.image' => 'Le fichier doit être une image.',
                 'image.mimes' => 'L\'image doit être de type : jpeg, png, jpg, gif, svg.',
                 'image.max' => 'L\'image ne doit pas dépasser 7048 Ko.',
+                'latitude.numeric' => 'La latitude doit être un nombre.',
+                'longitude.numeric' => 'La longitude doit être un nombre.',
             ]);
 
             // Gestion de l'image si une nouvelle est fournie

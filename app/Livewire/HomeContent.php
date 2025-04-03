@@ -49,6 +49,7 @@ class HomeContent extends Component
     {
         $query = Product::query()
             ->where('is_active', true)
+            ->with(['photos', 'stocks', 'shop.seller'])
             ->where('name', 'like', "%{$this->search}%")
             ->inRandomOrder(); // Ajout de l'ordre aléatoire
 

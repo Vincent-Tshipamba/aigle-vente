@@ -51,6 +51,8 @@ class ShopController extends Controller
                 'name' => 'required|string|max:255',
                 'address' => 'nullable|string',
                 'description' => 'nullable|string',
+                'latitude' => 'nullable|numeric',
+                'longitude' => 'nullable|numeric',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:7048', // Validation de l'image
             ], [
                 'name.required' => 'Le nom de la boutique est obligatoire.',
@@ -58,6 +60,8 @@ class ShopController extends Controller
                 'image.image' => 'Le fichier doit être une image.',
                 'image.mimes' => 'L\'image doit être de type : jpeg, png, jpg, gif, svg.',
                 'image.max' => 'L\'image ne doit pas dépasser 7048 Ko.',
+                'latitude.numeric' => 'La latitude doit être un nombre.',
+                'longitude.numeric' => 'La longitude doit être un nombre.',
             ]);
 
             // Récupérer l'utilisateur connecté
@@ -88,6 +92,8 @@ class ShopController extends Controller
             $shop = Shop::create([
                 'name' => $validated['name'],
                 'address' => $validated['address'],
+                'latitude' => $validated['latitude'],
+                'longitude' => $validated['longitude'],
                 'description' => $validated['description'],
                 'seller_id' => $seller->id,
                 'image' => $imageName ? 'shops_profile/' . $imageName : null,

@@ -5,7 +5,8 @@
 
         <!-- Bouton pour basculer entre la vue en grille et la carte -->
         <div class="flex justify-end mb-4">
-            <button id="toggleView" class="bg-[#e38407] hover:bg-[#e38407e7] text-white text-sm font-semibold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105">
+            <button id="toggleView"
+                class="bg-[#e38407] hover:bg-[#e38407e7] text-white text-sm font-semibold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105">
                 Voir la Carte
             </button>
         </div>
@@ -13,7 +14,8 @@
         <!-- Vue en grille des boutiques -->
         <div id="gridView" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-opacity duration-500">
             @foreach ($shops as $shop)
-                <div class="max-w-xs bg-white rounded-lg shadow hover:shadow-lg transition transform hover:-translate-y-1">
+                <div
+                    class="max-w-xs bg-white rounded-lg shadow hover:shadow-lg transition transform hover:-translate-y-1">
                     <!-- Image de profil en cercle -->
                     <div class="flex justify-center mt-4">
                         <img src="{{ $shop->image ?? asset('images/default-shop.png') }}"
@@ -62,7 +64,7 @@
     <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             var toggleButton = document.getElementById('toggleView');
             var gridView = document.getElementById('gridView');
             var mapView = document.getElementById('mapView');
@@ -72,7 +74,7 @@
 
             // Obtenir la position de l'utilisateur
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
+                navigator.geolocation.getCurrentPosition(function(position) {
                     userLocation = [position.coords.latitude, position.coords.longitude];
                     if (map) {
                         userLocationMarker = L.marker(userLocation).addTo(map)
@@ -82,7 +84,7 @@
                 });
             }
 
-            toggleButton.addEventListener('click', function () {
+            toggleButton.addEventListener('click', function() {
                 if (gridView.classList.contains('hidden')) {
                     gridView.classList.remove('hidden');
                     mapView.classList.add('hidden');
@@ -101,8 +103,19 @@
                         var bounds = [];
                         @foreach ($shops as $shop)
                             @if ($shop->latitude && $shop->longitude)
-                                var marker = L.marker([{{ $shop->latitude }}, {{ $shop->longitude }}]).addTo(map);
-                                marker.bindPopup("<a href='{{ route('shops.show', $shop->_id) }}'>{{ $shop->name }}</a><br><button onclick='getRoute({{ $shop->latitude }}, {{ $shop->longitude }})'>Itinéraire</button>");
+                                var shopIcon = L.icon({
+                                    iconUrl: 'https://cdn-icons-png.flaticon.com/512/11084/11084893.png', // Remplacez par le chemin de votre icône
+                                    iconSize: [50, 50], // Taille de l'icône
+                                    iconAnchor: [16, 32], // Point d'ancrage de l'icône
+                                    popupAnchor: [0, -32] // Point d'ancrage du popup
+                                });
+
+                                var marker = L.marker([{{ $shop->latitude }}, {{ $shop->longitude }}], {
+                                    icon: shopIcon
+                                }).addTo(map);
+                                marker.bindPopup(
+                                    "<a href='{{ route('shops.show', $shop->_id) }}'>{{ $shop->name }}</a><br><button onclick='getRoute({{ $shop->latitude }}, {{ $shop->longitude }})'>Itinéraire</button>"
+                                    );
                                 bounds.push([{{ $shop->latitude }}, {{ $shop->longitude }}]);
                             @endif
                         @endforeach
@@ -120,7 +133,7 @@
                 }
             });
 
-            window.getRoute = function (lat, lng) {
+            window.getRoute = function(lat, lng) {
                 if (userLocation) {
                     L.Routing.control({
                         waypoints: [

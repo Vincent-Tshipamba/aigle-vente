@@ -247,10 +247,4 @@
             {{ $products->links() }}
         </div>
     </div>
-
-
-
-    <!-- footer-area-start -->
-    @include('partials.home-partials.footer')
-    <!-- footer-area-end -->
 </x-app-layout>

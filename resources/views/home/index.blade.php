@@ -202,13 +202,13 @@
                             }
                             loadingPlaceholder.style.display = "none"; // Masquer après le délai
                         }, Math.floor(Math.random() * (3000 - 1000) +
-                        1000)); // ⏳ Délai aléatoire entre 1 et 3 secondes
+                            1000)); // ⏳ Délai aléatoire entre 1 et 3 secondes
                     })
                     .catch(error => {
                         console.error("Erreur lors du chargement des produits :", error);
                         setTimeout(() => {
                             loadingPlaceholder.style.display =
-                            "none"; // Masquer le loader même en cas d'erreur
+                                "none"; // Masquer le loader même en cas d'erreur
                         }, 1500);
                     });
             }
@@ -269,18 +269,47 @@
     <script>
         function contactSellerModal(event, product) {
             event.preventDefault();
+            const host = window.location.origin;
+            let firstMedia = (product.photos?.length > 0 ? product.photos[0].image : "products_media/images.jpg") ||
+                "products_media/images.jpg";
+            let fileExtension = firstMedia.split('?')[0].split('.').pop().toLowerCase();
+            let imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+            let videoExtensions = ['mp4', 'mov', 'avi', 'webm'];
+
+            let mediaElement = '';
+            if (imageExtensions.includes(fileExtension)) {
+                mediaElement = `<img src="${host}/${firstMedia}" alt="${product.name}" class="w-full h-48 object-cover">`;
+            } else if (videoExtensions.includes(fileExtension)) {
+                mediaElement = `
+            <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+                <source src="${host}/${firstMedia}" type="video/${fileExtension}">
+                Votre navigateur ne supporte pas la lecture de cette vidéo.
+            </video>`;
+            } else {
+                mediaElement =
+                    `<img src="${host}/products_media/images.jpg" alt="${product.name}" class="w-full h-full object-cover">`;
+            }
 
             // Construire l'image principale du produit
-            const productImage =
-                `<img src="${product.photos[0].image}" id="mainImage" alt="${product.name}" class="w-full h-full object-cover rounded-sm shadow-md mb-4">`;
+            const productImage = mediaElement;
 
             // Construire les images secondaires
             let thumbnails = '';
             product.photos.slice(0, 4).forEach(photo => {
-                thumbnails += `<img src="${photo.image}" alt="${product.name}"
-        class="size-16 sm:size-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
-        onclick="changeImage('${photo.image}')">`;
+                let thumbFileExtension = photo.image.split('?')[0].split('.').pop().toLowerCase();
+                if (imageExtensions.includes(thumbFileExtension)) {
+                    thumbnails += `<img src="{{ asset('') }}${photo.image}" alt="${product.name}"
+                class="size-16 sm:size-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
+                onclick="changeImageInContactSellerModal('{{ asset('') }}${photo.image}')">`;
+                } else if (videoExtensions.includes(thumbFileExtension)) {
+                    thumbnails += `<video class="size-16 sm:size-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
+                onclick="changeImageInContactSellerModal('{{ asset('') }}${photo.image}')" autoplay muted loop playsinline>
+                <source src="{{ asset('') }}${photo.image}" type="video/${thumbFileExtension}">
+                Votre navigateur ne supporte pas la lecture de cette vidéo.
+            </video>`;
+                }
             });
+
 
             const routeUrl = "{{ route('contact.seller', ['sellerId' => ':sellerId', 'productId' => ':productId']) }}";
             const actionUrl = routeUrl
@@ -289,39 +318,36 @@
 
             // Contenu du modal
             const modalContent = `
-                    <div class="w-full">
-                        <h2 class="text-lg font-bold mb-4">Contacter le vendeur pour le produit ${product.name}</h2>
-
-                        <div class="flex flex-col lg:flex-row gap-5">
-                            <!-- Section des images -->
-                            <div class="lg:w-1/2">
-                                <div class="mb-4 mx-auto w-[150px] h-[150px] md:w-[200px] md:h-[200px] lg:w-[250px] lg:h-[250px] xl:w-[400px] xl:h-[400px]">${productImage}</div>
-                                <div class="flex gap-4 py-4 justify-center overflow-x-auto">${thumbnails}</div>
-                            </div>
-
-                            <!-- Section d'envoi de message -->
-                            <div class="lg:w-1/2 mb-12 mx-auto">
-                                <form action="${actionUrl}" method="POST">
-                                <textarea id="sellerMessage"
-                                    class="w-full p-3 mb-6 mx-auto rounded-lg border focus:outline-none focus:ring focus:ring-[#e38407]"
-                                    rows="4" name="message"
-                                    placeholder="Écrivez votre message ici...">Bonjour M. (Mme) ${product.shop.seller.first_name} ${product.shop.seller.last_name}. J'espère que vous allez bien. Est-ce que le(s) ou la ${product.name} est (sont) toujours disponible(s) ?</textarea>
-
-                                    <div class="flex flex-col items-center justify-center gap-3 mt-6 lg:flex-row">
-                                        @csrf
-                                        <button type="submit" class="inline-block text-sm sm:text-md text-center min-w-[150px] 2xl:min-w-[200px] px-2 py-2 sm:px-0 sm:py-3 text-white transition-all rounded-md shadow-xl bg-gradient-to-r from-orange-600 to-[#e38407] hover:bg-gradient-to-b dark:shadow-blue-900 shadow-blue-200 hover:shadow-2xl hover:shadow-blue-400 hover:-tranneutral-y-px "
-                                            href="#" id="confirmMessageBtn">
-                                            Envoyer le message
-                                        </button>
-                                        <a class="inline-block text-sm sm:text-md text-center min-w-[150px] 2xl:min-w-[200px] px-2 py-2 sm:px-0 sm:py-3 text-white transition-all bg-gray-700 dark:bg-white dark:text-gray-800 rounded-md shadow-xl hover:bg-gray-900 hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-2xl hover:shadow-neutral-400 hover:-tranneutral-y-px"
-                                        href="#" id="cancelMessageBtn">Annuler
-                                        </a>
-                                    </div>
-                                </form>
-                            </div>
+        <div class="w-full">
+            <h2 class="text-lg font-bold mb-4">Contacter le vendeur pour le produit ${product.name}</h2>
+            <div class="flex flex-col lg:flex-row gap-5">
+                <!-- Section des images -->
+                <div class="lg:w-1/2">
+                    <div class="mb-4 mx-auto w-[150px] h-[150px] md:w-[200px] md:h-[200px] lg:w-[250px] lg:h-[250px] xl:w-[400px] xl:h-[400px]">${productImage}</div>
+                    <div class="flex gap-4 py-4 justify-center overflow-x-auto">${thumbnails}</div>
+                </div>
+                <!-- Section d'envoi de message -->
+                <div class="lg:w-1/2 mb-12 mx-auto">
+                    <form action="${actionUrl}" method="POST">
+                        <textarea id="sellerMessage"
+                            class="w-full p-3 mb-6 mx-auto rounded-lg border focus:outline-none focus:ring focus:ring-[#e38407]"
+                            rows="4" name="message"
+                            placeholder="Écrivez votre message ici...">Bonjour M. (Mme) ${product.shop.seller.first_name} ${product.shop.seller.last_name}. J'espère que vous allez bien. Est-ce que le(s) ou la ${product.name} est (sont) toujours disponible(s) ?</textarea>
+                        <div class="flex flex-col items-center justify-center gap-3 mt-6 lg:flex-row">
+                            @csrf
+                            <button type="submit" class="inline-block text-sm sm:text-md text-center min-w-[150px] 2xl:min-w-[200px] px-2 py-2 sm:px-0 sm:py-3 text-white transition-all rounded-md shadow-xl bg-gradient-to-r from-orange-600 to-[#e38407] hover:bg-gradient-to-b dark:shadow-blue-900 shadow-blue-200 hover:shadow-2xl hover:shadow-blue-400 hover:-tranneutral-y-px "
+                                href="#" id="confirmMessageBtn">
+                                Envoyer le message
+                            </button>
+                            <a class="inline-block text-sm sm:text-md text-center min-w-[150px] 2xl:min-w-[200px] px-2 py-2 sm:px-0 sm:py-3 text-white transition-all bg-gray-700 dark:bg-white dark:text-gray-800 rounded-md shadow-xl hover:bg-gray-900 hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-2xl hover:shadow-neutral-400 hover:-tranneutral-y-px"
+                                href="#" id="cancelMessageBtn">Annuler
+                            </a>
                         </div>
-                    </div>
-                `;
+                    </form>
+                </div>
+            </div>
+        </div>
+    `;
 
             // Afficher la modal SweetAlert2
             Swal.fire({
@@ -333,14 +359,13 @@
                 },
                 didOpen: () => {
                     const cancelButton = document.getElementById('cancelMessageBtn');
-
                     // Cancel button event
                     cancelButton.addEventListener('click', (event) => {
                         event.preventDefault();
                         Swal.close(); // Close the modal
                     });
                 },
-            })
+            });
         }
 
         function showFilters() {

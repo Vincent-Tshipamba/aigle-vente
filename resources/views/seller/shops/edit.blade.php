@@ -29,11 +29,25 @@
                         required value="{{ old('name', $shop->name) }}">
                 </div>
 
-                <div class="mb-6">
-                    <label for="address" class="block text-lg font-medium text-gray-800 mb-1">Adresse</label>
+
+
+                <div class="col-span-2 auto-search-wrapper">
+                    <label for="address" class="block text-lg font-medium text-gray-800 mb-1">
+                        Adresse de la boutique
+                    </label>
+
+                    <div id="map" style="height: 300px;"></div> <!-- Carte ici -->
+
                     <input type="text" id="address" name="address"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#e38407]"
-                        required value="{{ old('address', $shop->address) }}">
+                        class="mt-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        required readonly value="{{ old('address', $shop->address) }}">
+
+                    <input type="hidden" id="latitude" name="latitude" required>
+                    <input type="hidden" id="longitude" name="longitude" required>
+
+                    @error('address')
+                        <div class="text-red-500 text-sm">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-4">
@@ -131,6 +145,67 @@
                 };
                 reader.readAsDataURL(event.target.files[0]);
             }
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // Récupérer les coordonnées actuelles de la boutique
+                var currentLat = {{ $shop->latitude ?? -4.4419 }};
+                var currentLng = {{ $shop->longitude ?? 15.2663 }};
+
+                // Initialiser la carte avec les coordonnées actuelles ou par défaut (Kinshasa)
+                var map = L.map('map').setView([currentLat, currentLng], 13);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; OpenStreetMap contributors'
+                }).addTo(map);
+
+                // Ajouter un marqueur draggable aux coordonnées actuelles
+                var marker = L.marker([currentLat, currentLng], {
+                    draggable: true
+                }).addTo(map);
+
+                // Fonction pour obtenir l'adresse depuis les coordonnées via l'API Nominatim
+                function getAddressFromCoordinates(lat, lng) {
+                    var url =
+                        `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&addressdetails=1`;
+
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data && data.display_name) {
+                                // Mise à jour du champ adresse
+                                let address = data.display_name || "Adresse inconnue";
+                                document.getElementById("address").value = address;
+                            }
+                        })
+                        .catch(error => console.error('Erreur lors de la récupération de l\'adresse :', error));
+                }
+
+                // Mettre à jour les champs latitude, longitude et adresse lorsque le marqueur est déplacé
+                marker.on('dragend', function() {
+                    var lat = marker.getLatLng().lat;
+                    var lng = marker.getLatLng().lng;
+                    document.getElementById("latitude").value = lat;
+                    document.getElementById("longitude").value = lng;
+                    getAddressFromCoordinates(lat, lng);
+                });
+
+                // Mettre à jour les champs latitude, longitude et adresse lorsque la carte est cliquée
+                map.on('click', function(e) {
+                    var lat = e.latlng.lat;
+                    var lng = e.latlng.lng;
+                    marker.setLatLng([lat, lng]); // Déplace le marqueur
+                    document.getElementById("latitude").value = lat;
+                    document.getElementById("longitude").value = lng;
+                    getAddressFromCoordinates(lat, lng); // Met à jour l'adresse
+                });
+
+                // Initialiser les champs latitude, longitude et adresse avec les valeurs actuelles
+                document.getElementById("latitude").value = currentLat;
+                document.getElementById("longitude").value = currentLng;
+                getAddressFromCoordinates(currentLat, currentLng);
+            });
         </script>
 
 

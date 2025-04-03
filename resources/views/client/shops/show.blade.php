@@ -117,22 +117,39 @@
         <div id="Products"
             class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 justify-items-center justify-center gap-4 mb-5 my-10">
             @foreach ($products as $index => $product)
-                <div class="w-48 h-auto rounded-xl  p-2">
+                <div class="w-48 h-auto rounded-xl  p-2" id="">
                     <a href="{{ route('products.show', $product->_id) }}">
                         <div class="image swiper-container product-swiper-{{ $index + 1 }}" loading="lazy">
                             <div class="swiper-wrapper">
                                 @foreach ($product->photos as $item)
                                     <div class="swiper-slide">
-                                        <img src="{{ asset($item->image) }}" alt="{{ $product->name }}"
-                                            class="h-40 w-40 object-cover rounded-xl hover:scale-105">
+                                        @php
+                                            $fileExtension = pathinfo($item->image, PATHINFO_EXTENSION);
+                                        @endphp
+                                        @if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif', 'webp']))
+                                            <!-- Affichage des images -->
+                                            <img src="{{ asset($item->image) }}" alt="{{ $product->name }}"
+                                                class="h-40 w-40 object-cover rounded-xl hover:scale-105">
+                                        @elseif (in_array($fileExtension, ['mp4', 'mov', 'avi', 'webm']))
+                                            <!-- Affichage des vidéos -->
+                                            <video class="h-40 w-40 object-cover rounded-xl hover:scale-105" autoplay
+                                                muted loop playsinline>
+                                                <source src="{{ asset($item->image) }}"
+                                                    type="video/{{ $fileExtension }}">
+                                                Votre navigateur ne supporte pas la lecture de cette vidéo.
+                                            </video>
+                                        @endif
                                         <div
                                             class="absolute bottom-6 left-2  bg-opacity-50 text-white text-xs px-2 py-1">
-                                            <img src="{{ $product->shop->image ? asset($shop->image) : asset('images/default-shop.png') }}"
+                                            <img src="{{ asset($product->shop->image) ?? asset('images/default-shop.png') }}"
                                                 alt="Image de {{ $product->shop->name }}"
                                                 class="w-10 h-10 object-cover rounded-full border border-gray-200 bg-opacity-50">
                                         </div>
                                     </div>
                                 @endforeach
+
+
+
                             </div>
                             <!-- Pagination -->
                             <div class="swiper-pagination swiper-pagination-{{ $index + 1 }}"></div>
@@ -142,7 +159,8 @@
                         <span
                             class="text-gray-400 mr-3 uppercase text-xs">{{ $product->category_product->name }}</span><br>
                         <a href="{{ route('shops.show', $product->shop->_id) }}"
-                            class="text-gray-400 mr-3 text-xs">Boutique {{ $product->shop->name }}</a>
+                            class="text-gray-400 mr-3 text-xs">Boutique
+                            {{ $product->shop->name }}</a>
                         <div id="average-rating">
                             @php
                                 $avg = round($product->reviews->avg('rating'), 1);
@@ -158,9 +176,11 @@
 
                         <div class=" flex items-center">
                             <p class="text-lg font-semibold text-black cursor-auto my-3">
-                                ${{ $product->unit_price }}</p>
+                                <b>CDF</b> {{ $product->unit_price }}
+                            </p>
                             <del>
-                                <p class="text-sm text-gray-600 cursor-auto ml-2">${{ $product->unit_price + 50 }}
+                                <p class="text-sm text-gray-600 cursor-auto ml-2"><b>CDF</b>
+                                    {{ $product->unit_price + 50 }}
                                 </p>
                             </del>
                         </div>

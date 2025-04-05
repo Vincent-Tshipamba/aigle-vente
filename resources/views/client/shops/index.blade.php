@@ -1,6 +1,5 @@
-
 <x-app-layout>
-    <div class="container mx-auto my-4">
+    <div class="container mx-auto my-4 main-content">
         <h2 class="text-2xl font-semibold text-gray-800 mb-4">Boutiques Disponibles</h2>
 
         <!-- Bouton pour basculer entre la vue en grille et la carte -->
@@ -11,43 +10,46 @@
             </button>
         </div>
 
-        <!-- Vue en grille des boutiques -->
-        <div id="gridView" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-opacity duration-500">
-            @foreach ($shops as $shop)
-                <div
-                    class="max-w-xs bg-white rounded-lg shadow hover:shadow-lg transition transform hover:-translate-y-1">
-                    <!-- Image de profil en cercle -->
-                    <div class="flex justify-center mt-4">
-                        <img src="{{ $shop->image ?? asset('images/default-shop.png') }}"
-                            alt="Image de {{ $shop->name }}"
-                            class="w-24 h-24 object-cover rounded-full border border-gray-200">
-                    </div>
-
-                    <!-- Contenu de la carte -->
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-800">{{ $shop->name }}</h3>
-                        <p class="text-gray-600 text-sm mt-1">
-                            {!! substr($shop->description, 0, 100) !!}
-                        </p>
-                        <div class="flex items-center justify-center mt-2">
-                            <svg class="w-4 h-4 text-gray-500 mr-1" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
-                                </path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
-                            <span class="text-gray-600 text-xs">{{ $shop->address }}</span>
+        <div class="shopParent">
+            <div id="gridView"
+                class="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-opacity duration-500 ">
+                @foreach ($shops as $shop)
+                    <div
+                        class="max-w-xs bg-white rounded-lg shadow hover:shadow-lg transition transform hover:-translate-y-1">
+                        <!-- Image de profil en cercle -->
+                        <div class="flex justify-center mt-4">
+                            <img src="{{ $shop->image ?? asset('images/default-shop.png') }}"
+                                alt="Image de {{ $shop->name }}"
+                                class="w-24 h-24 object-cover rounded-full border border-gray-200">
                         </div>
-                        <a href="{{ route('shops.show', $shop->_id) }}"
-                            class="mt-4 block bg-[#e38407] hover:bg-[#e38407e7] text-white text-sm font-semibold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105">
-                            Visit Store
-                        </a>
+
+                        <!-- Contenu de la carte -->
+                        <div class="p-4 text-center">
+                            <h3 class="text-lg font-bold text-gray-800">{{ $shop->name }}</h3>
+                            <p class="text-gray-600 text-sm mt-1">
+                                {!! substr($shop->description, 0, 100) !!}
+                            </p>
+                            <div class="flex items-center justify-center mt-2">
+                                <svg class="w-4 h-4 text-gray-500 mr-1" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                                <span class="text-gray-600 text-xs">{{ $shop->address }}</span>
+                            </div>
+                            <a href="{{ route('shops.show', $shop->_id) }}"
+                                class="mt-4 block bg-[#e38407] hover:bg-[#e38407e7] text-white text-sm font-semibold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105">
+                                Visit Store
+                            </a>
+                        </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
+
 
         <!-- Vue de la carte -->
         <div id="mapView" class="hidden h-screen transition-opacity duration-500"></div>
@@ -115,7 +117,7 @@
                                 }).addTo(map);
                                 marker.bindPopup(
                                     "<a href='{{ route('shops.show', $shop->_id) }}'>{{ $shop->name }}</a><br><button onclick='getRoute({{ $shop->latitude }}, {{ $shop->longitude }})'>Itinéraire</button>"
-                                    );
+                                );
                                 bounds.push([{{ $shop->latitude }}, {{ $shop->longitude }}]);
                             @endif
                         @endforeach
@@ -146,6 +148,73 @@
                     alert('Impossible d\'obtenir votre position.');
                 }
             };
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const $searchInput = $('.search-input');
+            const $productsParent = $('.shopParent');
+            const $categorySelect = $('#category-select');
+            const initialContent = $productsParent.html();
+            let selectedCategory = $('#category-select').val();
+
+            $('#category-select').on('change', function() {
+                selectedCategory = $(this).val();
+                $searchInput.trigger('keyup');
+
+
+            });
+
+
+            // Recherche dynamique
+            $searchInput.on('keyup', function() {
+                const value = $(this).val().trim();
+                const category = $('#category-select').val();
+
+                if (value === '') {
+                    $productsParent.html(initialContent);
+                    initializeSwipers();
+                } else {
+                    $.ajax({
+                        type: 'get',
+                        url: "{{ route('products.search') }}",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            value: value,
+                            category: category.toLowerCase()
+                        },
+                        dataType: "json",
+                        success: function(response) {
+                            const html = response.html;
+
+                            if (html.trim() === '') {
+                                $productsParent.html(`
+                        <div class="p-4 my-4 flex flex-col gap-6 text-center justify-center w-full text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300">
+                            <div><span class="font-medium">Oups désolé !</span> Aucun résultat trouvé pour cette catégorie.</div>
+                            <div>
+                                <a href="{{ route('sellers.create') }}" class="px-6 py-2 bg-gray-800 text-gray-200 hover:text-white hover:bg-[#e38407] font-semibold rounded-md transition-all duration-300">Devenez le premier vendeur !</a>
+                            </div>
+                        </div>
+                    `);
+                            } else {
+                                $productsParent.html(`
+                        <div class="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-6 my-10">
+                            ${html}
+                        </div>
+                    `);
+                                initializeSwipers();
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Erreur recherche :", error);
+                        }
+                    });
+                }
+            });
+
+
+            initializeSwipers();
         });
     </script>
 </x-app-layout>

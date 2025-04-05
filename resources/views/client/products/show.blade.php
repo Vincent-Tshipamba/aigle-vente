@@ -57,8 +57,6 @@
                             </div>
                         </div>
 
-
-
                         <div class="w-full md:w-1/2 px-4">
                             <h2 class="text-3xl font-bold mb-2">
                                 {{ $product->name }}

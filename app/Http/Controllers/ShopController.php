@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CategoryProduct;
 use App\Models\Shop;
 use App\Models\Seller;
 use App\Models\Product;
 use App\Models\ShopCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Redirect;
 
 class ShopController extends Controller
 {
@@ -85,9 +82,6 @@ class ShopController extends Controller
                 $imageName = uniqid() . '.' . $imageFile->getClientOriginalExtension();
                 $imagePath = $imageFile->move(public_path('shops_profile'), $imageName);
             }
-
-
-
 
             $shop = Shop::create([
                 'name' => $validated['name'],

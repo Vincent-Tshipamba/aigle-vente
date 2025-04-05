@@ -28,16 +28,30 @@
             <div class="col-xl-5 col-lg-5">
                 <div class="header-meta-info flex items-center justify-end space-x-3">
                     <div class="header-meta__search-5 ml-25">
-                        <div class="header-search-bar-5">
-                            <form action="#">
-                                <div class="search-info-5 p-relative">
-                                    <button class="header-search-icon-5"><i class="fal fa-search"></i></button>
-                                    <input class="search-input" type="text"
-                                        placeholder="Rechercher un produit ou une boutique...">
+                        <div class="">
+                            <form>
+                                <div class="flex w-full">
+                                    <label for="category-select"
+                                        class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Catégorie</label>
+
+                                    <!-- Select remplaçant le dropdown -->
+                                    <select id="category-select"
+                                        class="shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-gray-900 bg-gray-100 border border-e-0 border-gray-300 dark:border-gray-700 dark:text-white rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                                        <option value="product">Product</option>
+                                        <option value="boutique">Boutique</option>
+                                    </select>
+
+                                    <!-- Input de recherche -->
+                                    <div class=" w-full">
+                                        <input type="search" id="search-dropdown"
+                                            class="block search-input p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border border-gray-300 focus:ring-gray-100 focus:border-gray-100 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                                            placeholder="Search" required />
+                                    </div>
                                 </div>
                             </form>
                         </div>
                     </div>
+
                     @auth
                         <!-- Chat Notification Area -->
                         <button class="relative" id="dropdownButtonChatHeader-xl-home"

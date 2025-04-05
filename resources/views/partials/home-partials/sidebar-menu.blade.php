@@ -8,6 +8,7 @@
             <button><i class="fal fa-search"></i></button>
         </form>
     </div>
+
     <div class="tpsideinfo__nabtab">
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">

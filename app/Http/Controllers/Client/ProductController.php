@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Models\Shop;
 use App\Models\Seller;
 use App\Models\Product;
 use App\Models\Wishlist;
@@ -128,22 +129,36 @@ class ProductController extends Controller
         return view('client.products.show', compact('product', 'otherProducts'));
     }
 
-   public function search(Request $request)
-{
-    $products = Product::where('name', 'LIKE', '%' . $request->get('value') . '%')
-        ->orWhereHas('shop', function ($query) use ($request) {
-            $query->where('name', 'LIKE', '%' . $request->get('value') . '%');
-        })
-        ->with('shop.seller')
-        ->latest()
-        ->get();
+    public function search(Request $request)
+    {
 
-    $totalSearchResults = $products->count();
+        $type = $request->get('category');
 
-    $html = view('components.product-card', compact('products'))->render();
 
-    return response()->json(['html' => $html, 'totalSearchResults' => $totalSearchResults]);
-}
+
+        if ($type === 'product') {
+            $products = Product::where('name', 'LIKE', '%' . $request->get('value') . '%')
+            ->orWhereHas('shop', function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' . $request->get('value') . '%');
+            })
+            ->with('shop.seller')
+            ->latest()
+            ->get();
+
+            $totalSearchResults = $products->count();
+
+            $html = view('components.product-card', compact('products'))->render();
+        } else {
+            $shops = Shop::where('name', 'LIKE', '%' .$request->get('value') . '%')
+                ->orWhere('description', 'LIKE', '%' . $request->get('value') . '%')
+                ->latest()
+                ->get();
+
+            $html = view('components.shop-card', compact('shops'))->render();
+        }
+
+        return response()->json(['html' => $html]);
+    }
 
     public function getSearchProducts(Request $request)
     {

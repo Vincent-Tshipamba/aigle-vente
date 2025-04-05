@@ -407,73 +407,92 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const searchInput = $('.search-input');
-            const container = $('.main-content');
-            const initialProducts = container.html();
+            const $searchInput = $('.search-input');
+            const $productsParent = $('.productsParent');
+            const $categorySelect = $('#category-select');
+            const initialContent = $productsParent.html();
+            let selectedCategory = $('#category-select').val(); // valeur initiale
 
-            $('.search-input').on('keyup', function() {
+            $('#category-select').on('change', function() {
+                selectedCategory = $(this).val();
+                $searchInput.trigger('keyup');
+
+
+            });
+
+
+            // Recherche dynamique
+            $searchInput.on('keyup', function() {
                 const value = $(this).val().trim();
+                const category = $('#category-select').val(); // <- Utilise directement ici
+
+                console.log("Recherche :", value, " | Catégorie :", category);
 
                 if (value === '') {
-                    container.html(initialProducts);
+                    $productsParent.html(initialContent);
                     initializeSwipers();
                 } else {
                     $.ajax({
-                        type: "get",
+                        type: 'get',
                         url: "{{ route('products.search') }}",
                         data: {
                             _token: "{{ csrf_token() }}",
-                            value: value
+                            value: value,
+                            category: category.toLowerCase()
                         },
                         dataType: "json",
                         success: function(response) {
-                            const html = response.html
-                            $('.main-content').html(`
-                                    <section class="container grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14  mb-5 my-20">
-                                        ${html}
-                                    </section>
-                            `)
+                            const html = response.html;
 
                             if (html.trim() === '') {
-                                $('.main-content').html(`
-                            <div class="p-4 text-md text-gray-800 mx-auto text-center rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">
-                                <span class="font-medium">Oups désolé!</span> Aucun produit disponible correspondant à votre recherche. <br><br>
-                                <button onclick="window.location.href='/products'" class="footer-widget__fw-news-btn tpsecondary-btn">Voir le catalogue des produits disponibles<i
-                                                class="fal fa-long-arrow-right"></i></button>
+                                $productsParent.html(`
+                        <div class="p-4 my-4 flex flex-col gap-6 text-center justify-center w-full text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300">
+                            <div><span class="font-medium">Oups désolé !</span> Aucun résultat trouvé pour cette catégorie.</div>
+                            <div>
+                                <a href="{{ route('sellers.create') }}" class="px-6 py-2 bg-gray-800 text-gray-200 hover:text-white hover:bg-[#e38407] font-semibold rounded-md transition-all duration-300">Devenez le premier vendeur !</a>
                             </div>
-                        `);
+                        </div>
+                    `);
                             } else {
+                                $productsParent.html(`
+                        <div class="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-6 my-10">
+                            ${html}
+                        </div>
+                    `);
                                 initializeSwipers();
                             }
                         },
                         error: function(xhr, status, error) {
-                            console.error("Error fetching products:", error);
+                            console.error("Erreur recherche :", error);
                         }
                     });
                 }
             });
 
-            // Function to initialize Swipers
-            function initializeSwipers() {
-                document.querySelectorAll('.image').forEach((element, index) => {
-                    new Swiper(`.product-swiper-${index + 1}`, {
-                        direction: 'horizontal',
-                        loop: true,
-                        slidesPerView: 1,
-                        pagination: {
-                            el: `.swiper-pagination-${index + 1}`,
-                            clickable: true,
-                        },
-                        navigation: {
-                            nextEl: `.swiper-button-next-${index + 1}`,
-                            prevEl: `.swiper-button-prev-${index + 1}`,
-                        },
-                    });
-                });
-            }
 
             initializeSwipers();
         });
+
+
+
+        // Function to initialize Swipers
+        function initializeSwipers() {
+            document.querySelectorAll('.image').forEach((element, index) => {
+                new Swiper(`.product-swiper-${index + 1}`, {
+                    direction: 'horizontal',
+                    loop: true,
+                    slidesPerView: 1,
+                    pagination: {
+                        el: `.swiper-pagination-${index + 1}`,
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: `.swiper-button-next-${index + 1}`,
+                        prevEl: `.swiper-button-prev-${index + 1}`,
+                    },
+                });
+            });
+        }
     </script>
 
     @yield('script')

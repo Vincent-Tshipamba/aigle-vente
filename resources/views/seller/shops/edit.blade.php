@@ -29,9 +29,7 @@
                         required value="{{ old('name', $shop->name) }}">
                 </div>
 
-
-
-                <div class="col-span-2 auto-search-wrapper">
+                <div class="col-span-2 auto-search-wrapper mb-4">
                     <label for="address" class="block text-lg font-medium text-gray-800 mb-1">
                         Adresse de la boutique
                     </label>
@@ -48,6 +46,20 @@
                     @error('address')
                         <div class="text-red-500 text-sm">{{ $message }}</div>
                     @enderror
+                </div>
+
+                <div class="mb-4">
+                    <label for="categories" class="block text-lg font-medium text-gray-800 mb-1">Catégories de la
+                        boutique</label>
+                    <select name="categories[]" id="categories" multiple="multiple"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm js-example-basic-multiple">
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}"
+                                {{ in_array($category->id, $shopCategories) ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="mb-4">
@@ -100,113 +112,151 @@
 
         </div>
 
+        @push('scripts')
+            <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    if (document.getElementById('quill-editor-area')) {
+                        var editor = new Quill('#quill-editor', {
+                            modules: {
+                                toolbar: [
+                                    [{
+                                        'header': [1, 2, false]
+                                    }],
+                                    ['bold', 'italic', 'underline', 'strike'],
+                                    ['blockquote', 'code-block'],
+                                    [{
+                                        'list': 'ordered'
+                                    }, {
+                                        'list': 'bullet'
+                                    }],
+                                    ['link', 'image', 'video'],
+                                    ['clean']
+                                ]
+                            },
+                            theme: 'snow'
+                        });
+                        var quillEditor = document.getElementById('quill-editor-area');
+                        editor.on('text-change', function() {
+                            quillEditor.value = editor.root.innerHTML;
+                        });
+                        quillEditor.addEventListener('input', function() {
+                            editor.root.innerHTML = quillEditor.value;
+                        });
+                    }
+                });
+            </script>
 
-        <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                if (document.getElementById('quill-editor-area')) {
-                    var editor = new Quill('#quill-editor', {
-                        modules: {
-                            toolbar: [
-                                [{
-                                    'header': [1, 2, false]
-                                }],
-                                ['bold', 'italic', 'underline', 'strike'],
-                                ['blockquote', 'code-block'],
-                                [{
-                                    'list': 'ordered'
-                                }, {
-                                    'list': 'bullet'
-                                }],
-                                ['link', 'image', 'video'],
-                                ['clean']
-                            ]
-                        },
-                        theme: 'snow'
-                    });
-                    var quillEditor = document.getElementById('quill-editor-area');
-                    editor.on('text-change', function() {
-                        quillEditor.value = editor.root.innerHTML;
-                    });
-                    quillEditor.addEventListener('input', function() {
-                        editor.root.innerHTML = quillEditor.value;
-                    });
-                }
-            });
-        </script>
-
-        <script>
-            function previewImage(event) {
-                var reader = new FileReader();
-                reader.onload = function() {
-                    var preview = document.getElementById('image-preview');
-                    preview.src = reader.result;
-                    document.getElementById('image-preview-container').classList.remove('hidden');
-                };
-                reader.readAsDataURL(event.target.files[0]);
-            }
-        </script>
-
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                // Récupérer les coordonnées actuelles de la boutique
-                var currentLat = {{ $shop->latitude ?? -4.4419 }};
-                var currentLng = {{ $shop->longitude ?? 15.2663 }};
-
-                // Initialiser la carte avec les coordonnées actuelles ou par défaut (Kinshasa)
-                var map = L.map('map').setView([currentLat, currentLng], 13);
-
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; OpenStreetMap contributors'
-                }).addTo(map);
-
-                // Ajouter un marqueur draggable aux coordonnées actuelles
-                var marker = L.marker([currentLat, currentLng], {
-                    draggable: true
-                }).addTo(map);
-
-                // Fonction pour obtenir l'adresse depuis les coordonnées via l'API Nominatim
-                function getAddressFromCoordinates(lat, lng) {
-                    var url =
-                        `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&addressdetails=1`;
-
-                    fetch(url)
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data && data.display_name) {
-                                // Mise à jour du champ adresse
-                                let address = data.display_name || "Adresse inconnue";
-                                document.getElementById("address").value = address;
-                            }
-                        })
-                        .catch(error => console.error('Erreur lors de la récupération de l\'adresse :', error));
+            <script>
+                function previewImage(event) {
+                    var reader = new FileReader();
+                    reader.onload = function() {
+                        var preview = document.getElementById('image-preview');
+                        preview.src = reader.result;
+                        document.getElementById('image-preview-container').classList.remove('hidden');
+                    };
+                    reader.readAsDataURL(event.target.files[0]);
                 }
 
-                // Mettre à jour les champs latitude, longitude et adresse lorsque le marqueur est déplacé
-                marker.on('dragend', function() {
-                    var lat = marker.getLatLng().lat;
-                    var lng = marker.getLatLng().lng;
-                    document.getElementById("latitude").value = lat;
-                    document.getElementById("longitude").value = lng;
-                    getAddressFromCoordinates(lat, lng);
+                @if (session('success'))
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Succès',
+                        text: '{{ session('success') }}',
+                        toast: true,
+                        position: 'top-end',
+                        timer: 3000,
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                    });
+                @endif
+
+                @if (session('error'))
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erreur',
+                        text: '{{ session('error') }}',
+                        toast: true,
+                        position: 'top-end',
+                        timer: 7000,
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                    });
+                @endif
+            </script>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    // Récupérer les coordonnées actuelles de la boutique
+                    var currentLat = {{ $shop->latitude ?? -4.4419 }};
+                    var currentLng = {{ $shop->longitude ?? 15.2663 }};
+
+                    // Initialiser la carte avec les coordonnées actuelles ou par défaut (Kinshasa)
+                    var map = L.map('map').setView([currentLat, currentLng], 13);
+
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; OpenStreetMap contributors'
+                    }).addTo(map);
+
+                    // Ajouter un marqueur draggable aux coordonnées actuelles
+                    var marker = L.marker([currentLat, currentLng], {
+                        draggable: true
+                    }).addTo(map);
+
+                    // Fonction pour obtenir l'adresse depuis les coordonnées via l'API Nominatim
+                    function getAddressFromCoordinates(lat, lng) {
+                        var url =
+                            `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&addressdetails=1`;
+
+                        fetch(url)
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data && data.display_name) {
+                                    // Mise à jour du champ adresse
+                                    let address = data.display_name || "Adresse inconnue";
+                                    document.getElementById("address").value = address;
+                                }
+                            })
+                            .catch(error => console.error('Erreur lors de la récupération de l\'adresse :', error));
+                    }
+
+                    // Mettre à jour les champs latitude, longitude et adresse lorsque le marqueur est déplacé
+                    marker.on('dragend', function() {
+                        var lat = marker.getLatLng().lat;
+                        var lng = marker.getLatLng().lng;
+                        document.getElementById("latitude").value = lat;
+                        document.getElementById("longitude").value = lng;
+                        getAddressFromCoordinates(lat, lng);
+                    });
+
+                    // Mettre à jour les champs latitude, longitude et adresse lorsque la carte est cliquée
+                    map.on('click', function(e) {
+                        var lat = e.latlng.lat;
+                        var lng = e.latlng.lng;
+                        marker.setLatLng([lat, lng]); // Déplace le marqueur
+                        document.getElementById("latitude").value = lat;
+                        document.getElementById("longitude").value = lng;
+                        getAddressFromCoordinates(lat, lng); // Met à jour l'adresse
+                    });
+
+                    // Initialiser les champs latitude, longitude et adresse avec les valeurs actuelles
+                    document.getElementById("latitude").value = currentLat;
+                    document.getElementById("longitude").value = currentLng;
+                    getAddressFromCoordinates(currentLat, currentLng);
                 });
+            </script>
 
-                // Mettre à jour les champs latitude, longitude et adresse lorsque la carte est cliquée
-                map.on('click', function(e) {
-                    var lat = e.latlng.lat;
-                    var lng = e.latlng.lng;
-                    marker.setLatLng([lat, lng]); // Déplace le marqueur
-                    document.getElementById("latitude").value = lat;
-                    document.getElementById("longitude").value = lng;
-                    getAddressFromCoordinates(lat, lng); // Met à jour l'adresse
+            <script type="module">
+                document.addEventListener('DOMContentLoaded', function() {
+                    console.log("jQuery:", $.fn.jquery);
+                    console.log("Select2:", typeof $.fn.select2); // doit être "function"
+                    if (typeof $.fn.select2 === 'function') {
+                        $('.js-example-basic-multiple').select2();
+                    } else {
+                        console.error("Select2 n'est pas chargé !");
+                    }
                 });
-
-                // Initialiser les champs latitude, longitude et adresse avec les valeurs actuelles
-                document.getElementById("latitude").value = currentLat;
-                document.getElementById("longitude").value = currentLng;
-                getAddressFromCoordinates(currentLat, currentLng);
-            });
-        </script>
-
+            </script>
+        @endpush
 
     @endsection

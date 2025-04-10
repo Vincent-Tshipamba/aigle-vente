@@ -34,7 +34,7 @@
                     <div class="relative">
                         <input type="search" onclick="openModal()"
                             class="w-64 pl-10 pr-4 py-2 text-sm text-gray-700 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-200 dark:focus:ring-orange-900 dark:text-white transition-colors duration-200"
-                            placeholder="Rechercher des activités..." data-modal-target="search-activities"
+                            placeholder="Rechercher ..." data-modal-target="search-activities"
                             data-modal-toggle="search-activities" />
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -180,15 +180,16 @@
                         </div>
 
                         <div class="col-span-2">
-                            <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Description de la boutique
-                            </label>
-                            <input type="text" id="categories" name="address"
-                                class="mt-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                required>
-                            @error('description')
-                                <div class="text-red-500 text-sm">{{ $message }}</div>
-                            @enderror
+                            <label for="categories" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catégories de la
+                                boutique</label>
+                            <select name="categories[]" id="categories" multiple="multiple" style="width: 100%"
+                                class="mt-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 js-example-basic-multiple">
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="col-span-2">
@@ -225,7 +226,6 @@
                                 class="w-full h-auto hidden">
                         </div>
                     </div>
-
 
                     <button type="submit"
                         class="text-white inline-flex items-center bg-[#e38407] hover:bg-[#e38407] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -611,6 +611,18 @@
             const modal = document.getElementById('search-activities').classList.remove('hidden')
             const inputField = document.getElementById('search').focus()
         }
+    </script>
+
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("jQuery:", $.fn.jquery);
+            console.log("Select2:", typeof $.fn.select2); // doit être "function"
+            if (typeof $.fn.select2 === 'function') {
+                $('.js-example-basic-multiple').select2();
+            } else {
+                console.error("Select2 n'est pas chargé !");
+            }
+        });
     </script>
 @endsection
 @endsection

@@ -13,7 +13,7 @@
             </div>
             <div class="col-lg-11 col-md-10">
                 <div class="header-meta-info flex items-center justify-between space-x-3">
-                    <div class="header-search-bar">
+                    <div class="">
                         <form>
                             <div class="flex w-full">
                                 <label for="category-select"

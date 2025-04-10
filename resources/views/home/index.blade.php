@@ -96,12 +96,12 @@
         #loadingPlaceholder {
             display: none;
         }
-    </style>
-    <style>
+
         .checkbox:checked+.check-icon {
             display: flex;
         }
     </style>
+
     @livewireStyles
 </head>
 
@@ -769,6 +769,7 @@
                     });
                 }
             });
+
 
 
             initializeSwipers();

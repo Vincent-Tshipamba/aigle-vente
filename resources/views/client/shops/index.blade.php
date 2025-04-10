@@ -55,10 +55,7 @@
         <div id="mapView" class="hidden h-screen transition-opacity duration-500"></div>
     </div>
 
-    <!-- footer-area-start -->
-    @include('partials.home-partials.footer')
-    <!-- footer-area-end -->
-
+   
     <!-- Inclure les fichiers CSS et JS de Leaflet et Leaflet Routing Machine -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />

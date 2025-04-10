@@ -101,7 +101,7 @@ table {
 button,
 input,
 optgroup,
-select,
+
 textarea {
     font-family: inherit;
     font-feature-settings: inherit;
@@ -114,8 +114,8 @@ textarea {
     padding: 0
 }
 
-button,
-select {
+button
+ {
     text-transform: none
 }
 

@@ -51,4 +51,10 @@ class Shop extends Model
         return $this->belongsTo(ShopCategory::class);
     }
 
+    public function categories()
+{
+    return $this->belongsToMany(CategoryProduct::class, 'category_product_shop');
+}
+
+
 }

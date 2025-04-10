@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CategoryProduct;
 use App\Models\Shop;
 use App\Models\Seller;
 use App\Models\Product;
@@ -21,14 +22,24 @@ class ShopController extends Controller
 
 
         $shops = $seller->shops;
-        $ShopCategories = ShopCategory::all();
-        return view('seller.shops.index', compact('shops', 'ShopCategories'));
+        $categories = CategoryProduct::all();
+        return view('seller.shops.index', compact('shops', 'categories'));
     }
-
 
     public function create()
     {
-        return view('seller.shops.create');
+        $userId = Auth::id();
+
+        // Récupérer l'ID du vendeur correspondant
+        $seller = Seller::where('user_id', $userId)->first();
+
+        $shopCount = Shop::where('seller_id', $seller->id)->count();
+
+        if ($shopCount >= 3) {
+            return redirect()->route('shops.index')->withErrors(['error' => 'Vous ne pouvez pas créer plus de 3 boutiques.']);
+        }
+        $categories = CategoryProduct::all();
+        return view('seller.shops.create',compact('categories'));
     }
 
     public function show($id)
@@ -51,6 +62,8 @@ class ShopController extends Controller
                 'latitude' => 'nullable|numeric',
                 'longitude' => 'nullable|numeric',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:7048', // Validation de l'image
+                'categories' => 'required|array', // Validation des catégories
+                'categories.*' => 'exists:category_products,id',  // Vérifie que les catégories existent
             ], [
                 'name.required' => 'Le nom de la boutique est obligatoire.',
                 'name.max' => 'Le nom de la boutique ne doit pas dépasser 255 caractères.',
@@ -59,6 +72,8 @@ class ShopController extends Controller
                 'image.max' => 'L\'image ne doit pas dépasser 7048 Ko.',
                 'latitude.numeric' => 'La latitude doit être un nombre.',
                 'longitude.numeric' => 'La longitude doit être un nombre.',
+                'categories.required' => 'Vous devez sélectionner au moins une catégorie.',
+                'categories.*.exists' => 'Une ou plusieurs catégories sélectionnées n\'existent pas.',
             ]);
 
             // Récupérer l'utilisateur connecté
@@ -67,10 +82,8 @@ class ShopController extends Controller
             // Récupérer l'ID du vendeur correspondant
             $seller = Seller::where('user_id', $userId)->first();
 
-
-
+            // Vérifier si le vendeur peut créer une boutique
             $shopCount = Shop::where('seller_id', $seller->id)->count();
-
             if ($shopCount >= 3) {
                 return redirect()->route('shops.index')->withErrors(['error' => 'Vous ne pouvez pas créer plus de 3 boutiques.']);
             }
@@ -83,6 +96,7 @@ class ShopController extends Controller
                 $imagePath = $imageFile->move(public_path('shops_profile'), $imageName);
             }
 
+            // Création de la boutique
             $shop = Shop::create([
                 'name' => $validated['name'],
                 'address' => $validated['address'],
@@ -92,6 +106,9 @@ class ShopController extends Controller
                 'seller_id' => $seller->id,
                 'image' => $imageName ? 'shops_profile/' . $imageName : null,
             ]);
+
+            // Associer les catégories sélectionnées à la boutique
+            $shop->categories()->sync($validated['categories']);
 
             // Rediriger vers une page de confirmation ou la liste des boutiques
             return redirect()->route('shops.index')->with('success', 'Boutique créée avec succès!');
@@ -103,72 +120,85 @@ class ShopController extends Controller
     }
 
 
-    public function edit(Shop $shop)
+   public function edit(Shop $shop)
     {
-        // Vérifier si le vendeur connecté possède la boutique
         $seller = Auth::user()->seller;
 
         if (!$seller || $shop->seller_id !== $seller->id) {
             return response()->json(['error' => 'Accès non autorisé à cette boutique.'], 403);
         }
 
-        return view('seller.shops.edit', compact('shop'));
+        // Récupérer toutes les catégories disponibles
+        $categories = CategoryProduct::all();
+
+        // Renvoyer aussi les catégories déjà liées à la boutique
+        $shopCategories = $shop->categories->pluck('id')->toArray();
+
+        return view('seller.shops.edit', compact('shop', 'categories', 'shopCategories'));
     }
-   public function update(Request $request, Shop $shop)
-    {
-        try {
-            // Vérifier si le vendeur connecté possède la boutique
-            $seller = Auth::user()->seller;
-            if (!$seller || $seller->id !== $shop->seller_id) {
-                return redirect()->route('shops.index')->with('error', 'Vous n\'avez pas la permission de modifier cette boutique.');
-            }
 
-            // Validation des données mises à jour
-            $validated = $request->validate([
-                'name' => 'nullable|string|max:255',
-                'address' => 'nullable|string',
-                'description' => 'nullable|string',
-                'latitude' => 'nullable|numeric',
-                'longitude' => 'nullable|numeric',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:7048',
-            ], [
-                'name.max' => 'Le nom de la boutique ne doit pas dépasser 255 caractères.',
-                'image.image' => 'Le fichier doit être une image.',
-                'image.mimes' => 'L\'image doit être de type : jpeg, png, jpg, gif, svg.',
-                'image.max' => 'L\'image ne doit pas dépasser 7048 Ko.',
-                'latitude.numeric' => 'La latitude doit être un nombre.',
-                'longitude.numeric' => 'La longitude doit être un nombre.',
-            ]);
-
-            // Gestion de l'image si une nouvelle est fournie
-            if ($request->hasFile('image')) {
-                $imageFile = $request->file('image');
-                $imageName = uniqid() . '.' . $imageFile->getClientOriginalExtension();
-
-                // Supprimer l'ancienne image si elle existe dans public/shops_profile
-                if ($shop->image && file_exists(public_path($shop->image))) {
-                    unlink(public_path($shop->image));
-                }
-
-                // Enregistrer la nouvelle image dans public/shops_profile
-                $imageFile->move(public_path('shops_profile'), $imageName);
-
-                // Définir le nouveau chemin relatif pour l'image
-                $validated['image'] = 'shops_profile/' . $imageName;
-            }
-
-            // Mise à jour de la boutique
-            $shop->update($validated);
-
-            // Redirection avec message de succès
-            return redirect()->route('shops.index')->with('success', 'Boutique modifiée avec succès!');
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            return redirect()->back()->withErrors($e->errors())->withInput();
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Une erreur est survenue lors de la modification de la boutique : ' . $e->getMessage())->withInput();
+  public function update(Request $request, Shop $shop)
+{
+    try {
+        // Vérifier si le vendeur connecté possède la boutique
+        $seller = Auth::user()->seller;
+        if (!$seller || $seller->id !== $shop->seller_id) {
+            return redirect()->route('shops.index')->with('error', 'Vous n\'avez pas la permission de modifier cette boutique.');
         }
-    }
 
+        // Validation des données mises à jour
+        $validated = $request->validate([
+            'name' => 'nullable|string|max:255',
+            'address' => 'nullable|string',
+            'description' => 'nullable|string',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:7048',
+            'categories' => 'array|nullable',
+            'categories.*' => 'exists:category_products,id',  // Validation des catégories
+        ], [
+            'name.max' => 'Le nom de la boutique ne doit pas dépasser 255 caractères.',
+            'image.image' => 'Le fichier doit être une image.',
+            'image.mimes' => 'L\'image doit être de type : jpeg, png, jpg, gif, svg.',
+            'image.max' => 'L\'image ne doit pas dépasser 7048 Ko.',
+            'latitude.numeric' => 'La latitude doit être un nombre.',
+            'longitude.numeric' => 'La longitude doit être un nombre.',
+            'categories.*.exists' => 'Une ou plusieurs catégories sélectionnées n\'existent pas.',
+        ]);
+
+        // Gestion de l'image si une nouvelle est fournie
+        if ($request->hasFile('image')) {
+            $imageFile = $request->file('image');
+            $imageName = uniqid() . '.' . $imageFile->getClientOriginalExtension();
+
+            // Supprimer l'ancienne image si elle existe dans public/shops_profile
+            if ($shop->image && file_exists(public_path($shop->image))) {
+                unlink(public_path($shop->image));
+            }
+
+            // Enregistrer la nouvelle image dans public/shops_profile
+            $imageFile->move(public_path('shops_profile'), $imageName);
+
+            // Définir le nouveau chemin relatif pour l'image
+            $validated['image'] = 'shops_profile/' . $imageName;
+        }
+
+        // Mise à jour de la boutique
+        $shop->update($validated);
+
+        // Si des catégories sont envoyées, les lier à la boutique
+        if (isset($validated['categories'])) {
+            $shop->categories()->sync($validated['categories']);
+        }
+
+        // Redirection avec message de succès
+        return redirect()->route('shops.index')->with('success', 'Boutique modifiée avec succès!');
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        return redirect()->back()->withErrors($e->errors())->withInput();
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Une erreur est survenue lors de la modification de la boutique : ' . $e->getMessage())->withInput();
+    }
+}
 
 
     // Supprimer une boutique si elle appartient au vendeur connecté

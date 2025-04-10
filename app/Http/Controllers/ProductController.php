@@ -137,7 +137,13 @@ class ProductController extends Controller
         if (!$seller || !$seller->shops()->where('id', $shop->id)->exists()) {
             return response()->json(['error' => 'Accès non autorisé à cette boutique.'], 403);
         }
-        $categories = CategoryProduct::all();
+
+        if ($shop->categories->isEmpty()) {
+            return redirect()
+                ->route('shops.edit', $shop->_id)
+                ->with('error', "Veuillez d'abord ajouter des catégories à votre boutique avant d'ajouter un produit.");
+        }
+        $categories = $shop->categories;
         $state = ProductState::all();
         return view('seller.produits.create', compact('categories', 'state', 'shop'));
     }
@@ -283,7 +289,7 @@ class ProductController extends Controller
         }
 
         $product = Product::where('_id', $product->_id)->with(['photos', 'stocks'])->firstOrFail();
-        $categories = CategoryProduct::all();
+        $categories = $shop->categories;
         $state = ProductState::all();
         return view('seller.produits.edit', [
             'shop' => $shop,

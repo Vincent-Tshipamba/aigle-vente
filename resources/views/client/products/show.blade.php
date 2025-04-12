@@ -90,6 +90,15 @@
                             <p class="text-gray-700 mb-6">
                                 {!! substr($product->description, 0, 800) !!} ...
                             </p>
+
+                            <span>
+                                @if (!empty($product->details->color))
+                                    <span class="w-14 h-10  inline-block border"
+                                        style="background-color: {{ $product->details->color }};"></span>
+                                @else
+                                    <span>none</span>
+                                @endif
+                            </span>
                             <div class="tpproduct-details__content">
                                 <div class="tpproduct-details__count d-flex align-items-center flex-wrap mb-25">
                                     <div class="tpproduct-details__cart">
@@ -109,12 +118,27 @@
                                     <span><a href="#">women</a></span>
                                 </div> --}}
                                 <div class="tpproduct-details__information tpproduct-details__social">
-                                    <p>Share:</p>
-                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="#"><i class="fab fa-behance"></i></a>
-                                    <a href="#"><i class="fab fa-youtube"></i></a>
-                                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                                    <p>Partager :</p>
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::url()) }}"
+                                        target="_blank" rel="noopener noreferrer">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(Request::url()) }}&text={{ urlencode($product->name) }}"
+                                        target="_blank" rel="noopener noreferrer">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(Request::url()) }}&title={{ urlencode($product->name) }}"
+                                        target="_blank" rel="noopener noreferrer">
+                                        <i class="fab fa-linkedin"></i>
+                                    </a>
+                                    <a href="https://pinterest.com/pin/create/button/?url={{ urlencode(Request::url()) }}&description={{ urlencode($product->name) }}"
+                                        target="_blank" rel="noopener noreferrer">
+                                        <i class="fab fa-pinterest"></i>
+                                    </a>
+                                    <a href="mailto:?subject={{ urlencode($product->name) }}&body={{ urlencode(Request::url()) }}"
+                                        target="_blank" rel="noopener noreferrer">
+                                        <i class="fas fa-envelope"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -134,7 +158,12 @@
                         <div class="tpproduct-details__nav mb-30">
                             <ul class="nav nav-tabs pro-details-nav-btn" id="myTabs" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-links active" id="information-tab" data-bs-toggle="tab"
+                                    <button class="nav-links active" id="home-tab-1" data-bs-toggle="tab"
+                                        data-bs-target="#home-1" type="button" role="tab" aria-controls="home-1"
+                                        aria-selected="true">Description</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-links" id="information-tab" data-bs-toggle="tab"
                                         data-bs-target="#additional-information" type="button" role="tab"
                                         aria-controls="additional-information" aria-selected="false">
                                         Informations supplémentaires
@@ -142,19 +171,25 @@
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-links" id="reviews-tab" data-bs-toggle="tab"
-                                        data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews"
-                                        aria-selected="false">Notes et avis</button>
+                                        data-bs-target="#reviews" type="button" role="tab"
+                                        aria-controls="reviews" aria-selected="false">Notes et avis</button>
                                 </li>
                             </ul>
                         </div>
                         <div class="tab-content tp-content-tab" id="myTabContent-2">
+                            <div class="tab-para tab-pane fade show active" id="home-1" role="tabpanel"
+                                aria-labelledby="home-tab-1">
+                                <p class="mb-30">
+                                    {!! $product->description !!}
+                                </p>
+                            </div>
                             <div class="tab-pane fade" id="additional-information" role="tabpanel"
                                 aria-labelledby="information-tab">
                                 <div class="product__details-info table-responsive">
                                     <table class="table table-striped">
                                         <tbody>
                                             <tr>
-                                                <td class="add-info">Weight</td>
+                                                <td class="add-info">Poids</td>
                                                 <td class="add-info-list"> {{ $product->details->weight ?? 'none' }}
                                                 </td>
                                             </tr>
@@ -168,32 +203,40 @@
                                                 <td class="add-info-list">{{ $product->state->name ?? 'none' }}</td>
                                             </tr>
                                             <tr>
-                                                <td class="add-info">Color</td>
-                                                <td class="add-info-list"> {{ $product->details->color ?? 'none' }}
+                                                <td class="add-info">Couleur</td>
+                                                <td class="add-info-list flex items-center gap-2">
+                                                    @if (!empty($product->details->color))
+                                                        <span class="w-14 h-10  inline-block border"
+                                                            style="background-color: {{ $product->details->color }};"></span>
+                                                        <span>{{ $product->details->color }}</span>
+                                                    @else
+                                                        <span>none</span>
+                                                    @endif
                                                 </td>
                                             </tr>
+
                                             <tr>
-                                                <td class="add-info">Size</td>
+                                                <td class="add-info">Taille</td>
                                                 <td class="add-info-list"> {{ $product->details->size ?? 'none' }}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="add-info">Model</td>
+                                                <td class="add-info">Modèle</td>
                                                 <td class="add-info-list"> {{ $product->details->model ?? 'none' }}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="add-info">Shipping</td>
+                                                <td class="add-info">Expédition</td>
                                                 <td class="add-info-list"> {{ $product->details->shipping ?? 'none' }}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="add-info">Care Info</td>
+                                                <td class="add-info">Entretien</td>
                                                 <td class="add-info-list"> {{ $product->details->care ?? 'none' }}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="add-info">Brand</td>
+                                                <td class="add-info">Marque</td>
                                                 <td class="add-info-list"> {{ $product->details->brand ?? 'none' }}
                                                 </td>
                                             </tr>
@@ -201,8 +244,7 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="tab-pane fade show active" id="reviews" role="tabpanel"
-                                aria-labelledby="reviews-tab">
+                            <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
                                 <div class="product-details-review">
                                     <h3 class="tp-comments-title mb-35">
                                         {{ $product->reviews->count() }} avis pour {{ $product->name }}
@@ -215,9 +257,9 @@
                                                 <li>
                                                     <div class="comments-box d-flex">
                                                         <div class="comments-avatar mr-25">
-                                                            <img loading="lazy"
-                                                                src="{{ asset('img/shop/reviewer-01.png') }}"
-                                                                alt="">
+                                                            <img loading="lazy" class="rounded-full w-16 h-16"
+                                                                src="{{ $review->user->client->picture ? asset($review->user->client->picture) : asset('img/profil.jpeg') }}"
+                                                                alt="{{ $review->user->name }}">
                                                         </div>
                                                         <div class="comments-text">
                                                             <div
@@ -302,10 +344,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
-
                         </div>
                     </div>
                 </div>

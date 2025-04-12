@@ -769,7 +769,7 @@
                                 </div>
 
                                 <textarea id="wysiwyg-example" name="description"
-                                    class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400">{{ old('description', $product->description) }}</textarea>
+                                    class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400">{!! old('description', $product->description) !!}</textarea>
                             </div>
                         </div>
                     </div>
@@ -843,14 +843,16 @@
                     </div>
                     <div class="flex flex-col gap-5.5 p-6.5">
 
-                        <!-- Poids -->
+                        <!-- Poids (Slider) -->
                         <div>
                             <label for="weight" class="mb-3 block text-sm font-medium text-black dark:text-white">
-                                Poids
+                                Poids : <span id="weightValue">{{ old('weight', $product->details->weight ?? 1) }}
+                                    kg</span>
                             </label>
-                            <input type="number" id="weight" name="weight" placeholder="Poids (ex : 1kg)"
-                                value="{{ old('weight', $product->details->weight ?? '') }}" min="1"
-                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary" />
+                            <input type="range" id="weight" name="weight" min="1" max="100"
+                                step="0.5" value="{{ old('weight', $product->details->weight ?? 1) }}"
+                                oninput="document.getElementById('weightValue').innerText = this.value + ' kg'"
+                                class="w-full accent-primary transition duration-150 ease-in-out" />
                         </div>
 
                         <!-- Dimensions -->
@@ -859,9 +861,9 @@
                                 Dimensions
                             </label>
                             <input type="text" id="dimensions" name="dimensions"
+                                placeholder="Longueur x Largeur x Hauteur (ex : 10x20x30cm)"
                                 value="{{ old('dimensions', $product->details->dimensions ?? '') }}"
-                                placeholder="Dimensions (ex : 10x20x30cm)"
-                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary" />
+                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white" />
                         </div>
 
                         <!-- Couleur -->
@@ -869,9 +871,9 @@
                             <label for="color" class="mb-3 block text-sm font-medium text-black dark:text-white">
                                 Couleur
                             </label>
-                            <input type="text" id="color" name="color" placeholder="Couleur (ex : Rouge)"
-                                value="{{ old('color', $product->details->color ?? '') }}"
-                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary" />
+                            <input type="color" id="color" name="color"
+                                value="{{ old('color', $product->details->color ?? '#000000') }}"
+                                class="h-10 w-20 border-none cursor-pointer bg-transparent p-0" />
                         </div>
 
                         <!-- Taille -->
@@ -879,9 +881,15 @@
                             <label for="size" class="mb-3 block text-sm font-medium text-black dark:text-white">
                                 Taille
                             </label>
-                            <input type="number" id="size" name="size" placeholder="Taille (ex : M)"
-                                value="{{ old('size', $product->details->size ?? '') }}" min="1"
-                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary" />
+                            <select id="size" name="size" class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white">
+                                <option value="">Sélectionner la taille</option>
+                                @foreach (['XS', 'S', 'M', 'L', 'XL', 'XXL'] as $size)
+                                    <option value="{{ $size }}"
+                                        {{ old('size', $product->details->size ?? '') === $size ? 'selected' : '' }}>
+                                        {{ $size }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <!-- Modèle -->
@@ -889,9 +897,9 @@
                             <label for="model" class="mb-3 block text-sm font-medium text-black dark:text-white">
                                 Modèle
                             </label>
-                            <input type="text" id="model" name="model" placeholder="Modèle (ex : A1234)"
+                            <input type="text" id="model" name="model"
                                 value="{{ old('model', $product->details->model ?? '') }}"
-                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary" />
+                                placeholder="Modèle (ex : A1234)" class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white" />
                         </div>
 
                         <!-- Expédition -->
@@ -899,10 +907,15 @@
                             <label for="shipping" class="mb-3 block text-sm font-medium text-black dark:text-white">
                                 Expédition
                             </label>
-                            <input type="text" id="shipping" name="shipping"
-                                value="{{ old('shipping', $product->details->shipping ?? '') }}"
-                                placeholder="Expédition (ex : Standard)"
-                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary" />
+                            <select id="shipping" name="shipping" class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white">
+                                <option value="">Sélectionner le mode</option>
+                                @foreach (['standard', 'express', 'pickup', 'international'] as $shipping)
+                                    <option value="{{ $shipping }}"
+                                        {{ old('shipping', $product->details->shipping ?? '') === $shipping ? 'selected' : '' }}>
+                                        {{ ucfirst($shipping) }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <!-- Entretien -->
@@ -910,10 +923,20 @@
                             <label for="care" class="mb-3 block text-sm font-medium text-black dark:text-white">
                                 Entretien
                             </label>
-                            <input type="text" id="care" name="care"
-                                value="{{ old('care', $product->details->care ?? '') }}"
-                                placeholder="Entretien (ex : Nettoyage à sec)"
-                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary" />
+                            <select id="care" name="care" class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white">
+                                <option value="">Méthode d’entretien</option>
+                                @foreach ([
+            'machine' => 'Lavage en machine',
+            'main' => 'Lavage à la main',
+            'sec' => 'Nettoyage à sec',
+            'pas_recommandé' => 'Ne pas laver',
+        ] as $key => $label)
+                                    <option value="{{ $key }}"
+                                        {{ old('care', $product->details->care ?? '') === $key ? 'selected' : '' }}>
+                                        {{ $label }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <!-- Marque -->
@@ -921,17 +944,14 @@
                             <label for="brand" class="mb-3 block text-sm font-medium text-black dark:text-white">
                                 Marque
                             </label>
-                            <input type="text" id="brand" name="brand" placeholder="Marque (ex : Nike)"
+                            <input type="text" id="brand" name="brand"
                                 value="{{ old('brand', $product->details->brand ?? '') }}"
-                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary" />
+                                placeholder="Marque (ex : Nike)" class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white" />
                         </div>
 
                     </div>
+
                 </div>
-
-
-
-
             </div>
 
             <button type="submit"

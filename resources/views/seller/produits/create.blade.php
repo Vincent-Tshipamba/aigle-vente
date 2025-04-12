@@ -169,7 +169,7 @@
                             <input type="range" id="weight" name="weight" min="1" max="100" step="0.5"
                                 value="1"
                                 oninput="document.getElementById('weightValue').innerText = this.value + ' kg'"
-                                class="w-full accent-primary" />
+                                class="w-full accent-primary transition duration-150 ease-in-out" />
                         </div>
 
                         <!-- Dimensions -->

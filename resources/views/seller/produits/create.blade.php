@@ -155,23 +155,21 @@
             </div>
 
             <div class="flex flex-col gap-9">
-                <!-- Textarea Fields -->
                 <div class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
                     <div class="border-b border-stroke px-6.5 py-4 dark:border-strokedark">
-                        <h3 class="font-medium text-black dark:text-white">
-                            Details Produit
-                        </h3>
+                        <h3 class="font-medium text-black dark:text-white">Détails Produit</h3>
                     </div>
                     <div class="flex flex-col gap-5.5 p-6.5">
 
-                        <!-- Poids -->
+                        <!-- Poids (Slider) -->
                         <div>
                             <label for="weight" class="mb-3 block text-sm font-medium text-black dark:text-white">
-                                Poids
+                                Poids : <span id="weightValue">1 kg</span>
                             </label>
-                            <input type="number" id="weight" name="weight" placeholder="Poids (ex : 1kg)"
-                                min="1"
-                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary" />
+                            <input type="range" id="weight" name="weight" min="1" max="100" step="0.5"
+                                value="1"
+                                oninput="document.getElementById('weightValue').innerText = this.value + ' kg'"
+                                class="w-full accent-primary" />
                         </div>
 
                         <!-- Dimensions -->
@@ -180,8 +178,8 @@
                                 Dimensions
                             </label>
                             <input type="text" id="dimensions" name="dimensions"
-                                placeholder="Dimensions (ex : 10x20x30cm)"
-                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary" />
+                                placeholder="Longueur x Largeur x Hauteur (ex : 10x20x30cm)"
+                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white" />
                         </div>
 
                         <!-- Couleur -->
@@ -189,18 +187,25 @@
                             <label for="color" class="mb-3 block text-sm font-medium text-black dark:text-white">
                                 Couleur
                             </label>
-                            <input type="text" id="color" name="color" placeholder="Couleur (ex : Rouge)"
-                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary" />
+                            <input type="color" id="color" name="color"
+                                class="h-10 w-20 border-none cursor-pointer bg-transparent p-0" />
                         </div>
 
-                        <!-- Taille -->
+                        <!-- Taille (Select) -->
                         <div>
                             <label for="size" class="mb-3 block text-sm font-medium text-black dark:text-white">
                                 Taille
                             </label>
-                            <input type="number" id="size" name="size" placeholder="Taille (ex : M)"
-                                min="1"
-                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary" />
+                            <select id="size" name="size"
+                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black dark:text-white dark:border-form-strokedark dark:bg-form-input">
+                                <option value="">Sélectionner la taille</option>
+                                <option value="XS">XS</option>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
+                            </select>
                         </div>
 
                         <!-- Modèle -->
@@ -209,7 +214,7 @@
                                 Modèle
                             </label>
                             <input type="text" id="model" name="model" placeholder="Modèle (ex : A1234)"
-                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary" />
+                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white" />
                         </div>
 
                         <!-- Expédition -->
@@ -217,9 +222,14 @@
                             <label for="shipping" class="mb-3 block text-sm font-medium text-black dark:text-white">
                                 Expédition
                             </label>
-                            <input type="text" id="shipping" name="shipping"
-                                placeholder="Expédition (ex : Standard)"
-                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary" />
+                            <select id="shipping" name="shipping" class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white">
+                                <option value="">Sélectionner le mode</option>
+                                <option value="standard">Standard</option>
+                                <option value="express">Express</option>
+                                <option value="pickup">Point de retrait</option>
+                                <option value="international">International</option>
+                            </select>
+
                         </div>
 
                         <!-- Entretien -->
@@ -227,9 +237,13 @@
                             <label for="care" class="mb-3 block text-sm font-medium text-black dark:text-white">
                                 Entretien
                             </label>
-                            <input type="text" id="care" name="care"
-                                placeholder="Entretien (ex : Nettoyage à sec)"
-                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary" />
+                            <select id="care" name="care" class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white">
+                                <option value="">Méthode d’entretien</option>
+                                <option value="machine">Lavage en machine</option>
+                                <option value="main">Lavage à la main</option>
+                                <option value="sec">Nettoyage à sec</option>
+                                <option value="pas_recommandé">Ne pas laver</option>
+                            </select>
                         </div>
 
                         <!-- Marque -->
@@ -238,15 +252,11 @@
                                 Marque
                             </label>
                             <input type="text" id="brand" name="brand" placeholder="Marque (ex : Nike)"
-                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary" />
+                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white" />
                         </div>
 
                     </div>
                 </div>
-
-
-
-
             </div>
 
             <button type="submit"
@@ -383,17 +393,17 @@
             // Vérification du type de fichier
             let allowedTypes = ["image/jpeg", "image/png", "image/gif", "video/mp4", "video/webm"];
             if (!allowedTypes.includes(file.type)) {
-                 Swal.fire({
-                            icon: 'error',
-                            title: 'Erreur',
-                            text: 'Type de fichier ' + file.name +
-                                ' non autorisé !',
-                            toast: true,
-                            position: 'top-end',
-                            timer: 3000,
-                            showConfirmButton: false,
-                            timerProgressBar: true,
-                        });
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erreur',
+                    text: 'Type de fichier ' + file.name +
+                        ' non autorisé !',
+                    toast: true,
+                    position: 'top-end',
+                    timer: 3000,
+                    showConfirmButton: false,
+                    timerProgressBar: true,
+                });
                 return;
             }
 

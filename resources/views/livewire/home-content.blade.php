@@ -4,7 +4,7 @@
 
             <form>
                 <div class="flex w-full">
-                    <label for="category-select"
+                    {{-- <label for="category-select"
                         class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Catégorie</label>
 
                     <!-- Select remplaçant le dropdown -->
@@ -12,7 +12,7 @@
                         class="shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-gray-900 bg-gray-100 border border-e-0 border-gray-300 dark:border-gray-700 dark:text-white rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                         <option value="product">Product</option>
                         <option value="boutique">Boutique</option>
-                    </select>
+                    </select> --}}
 
                     <!-- Input de recherche -->
                     <div class=" w-full">

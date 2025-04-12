@@ -87,10 +87,6 @@
 
                                 <span class="ml-2 text-gray-600">({{ $avg }}/5)</span>
                             </div>
-                            <p class="text-gray-700 mb-6">
-                                {!! substr($product->description, 0, 800) !!} ...
-                            </p>
-
                             <span>
                                 @if (!empty($product->details->color))
                                     <span class="w-14 h-10  inline-block border"

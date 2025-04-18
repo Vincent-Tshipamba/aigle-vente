@@ -213,7 +213,7 @@
         </div>
 
         <!-- Orders -->
-        <div
+        {{-- <div
             class="hover:ml-4 w-full  hover:text-[#e38407] dark:hover:text-[#e38407]  p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
             <a href="{{ route('admin.orders.index') }}"
                 class="hover:ml-4 justify-end pr-5 hover:text-[#e38407] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('admin.orders.index') ? ' text-[#e38407] ' : 'text-white' }}">
@@ -226,7 +226,7 @@
 
                 <span>Commandes</span>
             </a>
-        </div>
+        </div> --}}
     </div>
     <!-- MINI SIDEBAR-->
     <div class="mini mt-20 flex flex-col space-y-2 w-full h-[calc(100vh)]">
@@ -302,7 +302,7 @@
         </a>
 
         <!-- Commandes -->
-        <a href="{{ route('admin.orders.index') }}"
+        {{-- <a href="{{ route('admin.orders.index') }}"
             class="hover:ml-4 justify-end pr-5   hover:text-[#e38407] dark:hover:text-[#e38407]  p-3 rounded-full transform ease-in-out duration-300 flex {{ request()->routeIs('admin.orders.index') ? ' text-[#e38407] ' : 'text-white' }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <g fill="none" stroke="currentColor">
@@ -310,6 +310,6 @@
                     <path stroke-linecap="round" d="M9 9h6m-6 4h6m-6 4h4" />
                 </g>
             </svg>
-        </a>
+        </a> --}}
     </div>
 </aside>

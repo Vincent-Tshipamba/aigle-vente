@@ -41,8 +41,8 @@
                             <label class="mb-3 block text-sm font-medium text-black dark:text-white">
                                 nom produit
                             </label>
-                            <input type="text" placeholder="Batterie Externe 20000mAh Power Bank" name="name"
-                                id="name" required
+                            <input type="text" value="{{ old('name') }}"
+                                placeholder="Batterie Externe 20000mAh Power Bank" name="name" id="name" required
                                 class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary" />
                         </div>
 
@@ -70,6 +70,7 @@
                                 Prix
                             </label>
                             <input type="number" placeholder="2" min="1" name="price" id="price" required
+                                value="{{ old('price') }}"
                                 class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary" />
                         </div>
 
@@ -82,7 +83,7 @@
                                 Quantite
                             </label>
                             <input type="number" placeholder="2" min="1" name="stock_quantity" id="stock_quantity"
-                                required
+                                value="{{ old('stock_quantity') }}" required
                                 class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary" />
                         </div>
 
@@ -119,7 +120,8 @@
                             <label class="mb-3 block text-sm font-medium text-black dark:text-white">
                                 Attach file
                             </label>
-                            <input type="file" name="media[]" id="media" multiple accept="image/*,video/*" required
+                            <input type="file" value="{{ old('media[]') }}" name="media[]" id="media" multiple
+                                accept="image/*,video/*" required
                                 class="w-full cursor-pointer rounded-lg border-[1.5px] border-stroke bg-transparent font-normal outline-none transition file:mr-5 file:border-collapse file:cursor-pointer file:border-0 file:border-r file:border-solid file:border-stroke file:bg-whiter file:px-5 file:py-3 file:hover:bg-primary file:hover:bg-opacity-10 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:file:border-form-strokedark dark:file:bg-white/30 dark:file:text-white dark:focus:border-primary" />
                         </div>
 
@@ -167,7 +169,7 @@
                                 Poids : <span id="weightValue">1 kg</span>
                             </label>
                             <input type="range" id="weight" name="weight" min="1" max="100" step="0.5"
-                                value="1"
+                               value="{{ old('weight') ?? 1 }}"
                                 oninput="document.getElementById('weightValue').innerText = this.value + ' kg'"
                                 class="w-full accent-primary transition duration-150 ease-in-out" />
                         </div>
@@ -177,7 +179,7 @@
                             <label for="dimensions" class="mb-3 block text-sm font-medium text-black dark:text-white">
                                 Dimensions
                             </label>
-                            <input type="text" id="dimensions" name="dimensions"
+                            <input type="text" id="dimensions" name="dimensions" value="{{ old('dimensions') }}"
                                 placeholder="Longueur x Largeur x Hauteur (ex : 10x20x30cm)"
                                 class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white" />
                         </div>
@@ -187,7 +189,7 @@
                             <label for="color" class="mb-3 block text-sm font-medium text-black dark:text-white">
                                 Couleur
                             </label>
-                            <input type="color" id="color" name="color"
+                            <input type="color" id="color" name="color" value="{{ old('color') }}"
                                 class="h-10 w-20 border-none cursor-pointer bg-transparent p-0" />
                         </div>
 
@@ -213,7 +215,7 @@
                             <label for="model" class="mb-3 block text-sm font-medium text-black dark:text-white">
                                 Modèle
                             </label>
-                            <input type="text" id="model" name="model" placeholder="Modèle (ex : A1234)"
+                            <input type="text" id="model" name="model" placeholder="Modèle (ex : A1234)" value="{{ old('model') }}"
                                 class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white" />
                         </div>
 
@@ -222,7 +224,8 @@
                             <label for="shipping" class="mb-3 block text-sm font-medium text-black dark:text-white">
                                 Expédition
                             </label>
-                            <select id="shipping" name="shipping" class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white">
+                            <select id="shipping" name="shipping"
+                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white">
                                 <option value="">Sélectionner le mode</option>
                                 <option value="standard">Standard</option>
                                 <option value="express">Express</option>
@@ -237,7 +240,8 @@
                             <label for="care" class="mb-3 block text-sm font-medium text-black dark:text-white">
                                 Entretien
                             </label>
-                            <select id="care" name="care" class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white">
+                            <select id="care" name="care"
+                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white">
                                 <option value="">Méthode d’entretien</option>
                                 <option value="machine">Lavage en machine</option>
                                 <option value="main">Lavage à la main</option>
@@ -251,7 +255,7 @@
                             <label for="brand" class="mb-3 block text-sm font-medium text-black dark:text-white">
                                 Marque
                             </label>
-                            <input type="text" id="brand" name="brand" placeholder="Marque (ex : Nike)"
+                            <input type="text" id="brand" name="brand" placeholder="Marque (ex : Nike)" value="{{ old('brand') }}"
                                 class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white" />
                         </div>
 

@@ -308,7 +308,8 @@
                                     <!-- Facebook -->
                                     <label class="block mb-2">Facebook</label>
                                     <input type="url" x-model="formData.facebook" @input="validateFacebookUrl"
-                                        class="w-full p-2 border rounded mb-2" name="facebook" placeholder="https://facebook.com/Mcleroi01">
+                                        class="w-full p-2 border rounded mb-2" name="facebook"
+                                        placeholder="https://facebook.com/Mcleroi01">
                                     <div x-show="facebookError" class="text-red-500 text-sm mt-1"
                                         x-text="facebookError"></div>
 
@@ -325,7 +326,8 @@
                                     <!-- Instagram -->
                                     <label class="block mb-2 mt-4">Instagram</label>
                                     <input type="url" x-model="formData.instagram" @input="validateInstagramUrl"
-                                        class="w-full p-2 border rounded mb-2" name="instagram" placeholder="https://instagram.com/Mcleroi01">
+                                        class="w-full p-2 border rounded mb-2" name="instagram"
+                                        placeholder="https://instagram.com/Mcleroi01">
                                     <div x-show="instagramError" class="text-red-500 text-sm mt-1"
                                         x-text="instagramError"></div>
 
@@ -336,6 +338,24 @@
                                                 class="w-6 h-6 mr-2">
                                             <a :href="formData.instagram" target="_blank"
                                                 class="text-pink-500 hover:underline" x-text="instagramUsername"></a>
+                                        </div>
+                                    </template>
+
+                                    <!-- TikTok -->
+                                    <label class="block mb-2 mt-4">TikTok</label>
+                                    <input type="url" x-model="formData.tiktok" @input="validateTikTokUrl"
+                                        class="w-full p-2 border rounded mb-2" name="tiktok"
+                                        placeholder="https://tiktok.com/@Mcleroi01">
+                                    <div x-show="tiktokError" class="text-red-500 text-sm mt-1" x-text="tiktokError">
+                                    </div>
+
+                                    <!-- Aperçu TikTok -->
+                                    <template x-if="tiktokUsername">
+                                        <div class="mt-2 flex items-center">
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/TikTok_logo.svg"
+                                                class="w-6 h-6 mr-2">
+                                            <a :href="formData.tiktok" target="_blank"
+                                                class="text-black hover:underline" x-text="tiktokUsername"></a>
                                         </div>
                                     </template>
                                 </div>
@@ -427,7 +447,7 @@
                         address: '',
                         facebook: null,
                         instagram: null,
-
+                        tiktok: null,
                     },
                     nextStep() {
                         if (this.isStepValid(this.currentStep)) {
@@ -535,7 +555,35 @@
                         }
                     },
 
+                    validateTikTokUrl() {
+                        if (this.formData.tiktok) {
+                            let url = this.formData.tiktok.trim();
 
+                            // Ajouter "https://" s'il est absent
+                            if (!/^https?:\/\//i.test(url)) {
+                                url = "https://" + url;
+                            }
+
+                            // Remplacer "www." par "https://"
+                            url = url.replace(/^(https?:\/\/)?www\./, "https://");
+
+                            // Vérifier et extraire le nom d'utilisateur
+                            const tiktokRegex = /^https:\/\/tiktok\.com\/@([a-zA-Z0-9_.]+)\/?$/;
+                            const match = url.match(tiktokRegex);
+
+                            if (match) {
+                                this.formData.tiktok = url; // Mettre à jour l'URL
+                                this.tiktokUsername = match[1]; // Extraire le nom d'utilisateur
+                                this.tiktokError = null;
+                            } else {
+                                this.tiktokError = "Veuillez entrer un lien TikTok valide.";
+                                this.tiktokUsername = null;
+                            }
+                        } else {
+                            this.tiktokError = null;
+                            this.tiktokUsername = null;
+                        }
+                    }
                 }
             }
 

@@ -45,11 +45,11 @@
                         <a href="#" onclick="document.getElementById('filter-{{ $item->id }}').click();"
                             class="flex flex-col items-center text-center space-y-2 hover:scale-105">
                             <div class="p-2 rounded-full">
-                                <img src="{{ $item->image }}" alt="{{ $item->name }}" class="w-8 h-8 max-w-full">
+                                <img src="{{ $item->image }}" alt="{{ $item->name }}" class="w-8 h-8 rounded-full max-w-full">
                             </div>
                             <span id="category-{{ $item->id }}"
                                 class="text-xs sm:text-sm font-medium text-gray-500 hover:text-gray-700">
-                                {{ $item->name }}
+                                {{ substr($item->name,0,15)  }}
                                 <input type="checkbox" id="filter-{{ $item->id }}" value="{{ $item->id }}"
                                     class="category-checkbox w-5 h-5 text-[#e38407] hidden" />
                             </span>

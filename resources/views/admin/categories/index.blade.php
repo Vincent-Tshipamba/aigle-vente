@@ -121,7 +121,7 @@
                                 <td>{{ $key + 1 }}</td>
                                 <td class="flex items-center px-6 py-4">
                                     <img class="w-10 h-10 rounded-full"
-                                        src="{{ $category->image ?? asset('img/profil.jpeg') }}" alt="">
+                                        src="{{ asset($category->image) ?? asset('img/profil.jpeg') }}" alt="">
                                     <div class="ps-3">
                                         <div class="text-base font-semibold">{{ $category->name }}</div>
                                     </div>
@@ -151,80 +151,117 @@
 
 @section('script')
     <script>
-        function category(title = 'Créer une catégorie', id = '', name = '', description = '', confirmButtonText =
-            'Ajouter une catégorie', action = "{{ route('admin.categories.store') }}", method = 'POST') {
+        function category(
+            title = 'Créer une catégorie',
+            id = '',
+            name = '',
+            description = '',
+            confirmButtonText = 'Ajouter une catégorie',
+            action = "{{ route('admin.categories.store') }}",
+            method = 'POST'
+        ) {
             event.preventDefault();
 
-            // Trigger SweetAlert with input
             Swal.fire({
                 title: title,
                 html: `
-                <form id="category-form" class="p-4 md:p-5" method="${method}" action="${action}">
-                    @csrf
-                    <div class="grid gap-4 mb-4 grid-cols-2 text-left">
-                        <div class="col-span-2 flex">
-                            <label for="name" class="block w-full mb-2 text-sm md:text-base font-medium text-black dark:text-white">Nom de la catégorie</label>
-                            <input type="text" name="name" id="name" class="border border-gray-300 text-gray-800 text-sm md:text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nom de la catégorie" required="" value="${name}">
-                        </div>
-                        <div class="col-span-2 flex">
-                            <label for="description" class="block w-full mb-2 text-sm md:text-base font-medium text-black dark:text-white">Description de la catégorie</label>
-                            <textarea name="description" rows="3" id="description" class="border border-gray-300 text-gray-800 text-sm md:text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Description de la catégorie">${description}</textarea>
-                        </div>
-                    </div>
-                </form>
-            `,
+       <form id="category-form" class="p-4 md:p-5" method="POST" action="${action}" enctype="multipart/form-data">
+            @csrf
+            ${method === 'PUT' ? '@method('PUT')' : ''}
+            <div class="grid gap-4 mb-4 grid-cols-2 text-left">
+                <div class="col-span-2">
+                    <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-white">Nom de la catégorie</label>
+                    <input type="text" name="name" id="name" class="border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:text-white" placeholder="Nom de la catégorie" required value="${name}">
+                </div>
+                <div class="col-span-2">
+                    <label for="description" class="block mb-2 text-sm font-medium text-black dark:text-white">Description</label>
+                    <textarea name="description" id="description" rows="3" class="border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:text-white" placeholder="Description">${description}</textarea>
+                </div>
+                <div class="col-span-2">
+                    <label for="image" class="block mb-2 text-sm font-medium text-black dark:text-white">Image de la catégorie ${id ? '(laisser vide pour ne pas modifier)' : '(max 500x500px)'}</label>
+                    <input type="file" name="image" id="image" accept="image/*" class="text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-orange-100 file:text-orange-700 hover:file:bg-orange-200" ${id ? '' : 'required'}>
+                    <img id="image-preview" src="" alt="Aperçu" class="mt-2 hidden w-32 h-32 object-cover rounded border border-gray-300">
+                </div>
+            </div>
+        </form>
+        `,
                 showCancelButton: true,
                 confirmButtonText: confirmButtonText,
                 cancelButtonText: 'Annuler',
-                allowOutsideClick: false, // Empêche de fermer en cliquant en dehors
+                allowOutsideClick: false,
+
                 preConfirm: () => {
-                    const formData = new FormData($('#category-form')[0]);
+                    return new Promise((resolve, reject) => {
+                        const form = $('#category-form')[0];
+                        const formData = new FormData(form);
+                        const name = formData.get('name');
+                        const image = form.image.files[0];
 
-                    // Vérifier si les champs sont vides
-                    const name = formData.get('name');
-                    const description = formData.get('description');
+                        if (!name) {
+                            Swal.showValidationMessage('Veuillez saisir un nom de catégorie.');
+                            return reject();
+                        }
 
-                    if (!name) {
-                        Swal.showValidationMessage(
-                            'Veuillez saisir un nom de catégorie.');
-                        return false;
-                    }
+                        // Si création (id vide) et aucune image → erreur
+                        if (!image && !id) {
+                            Swal.showValidationMessage('Veuillez ajouter une image.');
+                            return reject();
+                        }
 
-                    formData.append('_token',
-                        '{{ csrf_token() }}'); // Ajouter le token CSRF
-                    return {
-                        id: id,
-                        name: name,
-                        description: description,
-                        _token: formData.get('_token') // Inclure le token CSRF
-                    };
+                        if (image) {
+                            const img = new Image();
+                            const reader = new FileReader();
+
+                            reader.onload = function(e) {
+                                img.onload = function() {
+                                    if (img.width > 500 || img.height > 500) {
+                                        Swal.showValidationMessage(
+                                            `L’image est trop grande (${img.width}x${img.height}). Maximum : 500x500 pixels.`
+                                        );
+                                        return reject();
+                                    }
+
+                                    formData.append('_token', '{{ csrf_token() }}');
+                                    resolve(formData);
+                                };
+
+                                img.onerror = function() {
+                                    Swal.showValidationMessage('Image invalide.');
+                                    reject();
+                                };
+
+                                img.src = e.target.result;
+                            };
+
+                            reader.readAsDataURL(image);
+                        } else {
+                            formData.append('_token', '{{ csrf_token() }}');
+                            resolve(formData);
+                        }
+                    });
                 },
+
                 customClass: {
-                    popup: 'bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-lg shadow-lg', // Classes Tailwind pour le popup
-                    confirmButton: 'bg-[#e38407] hover:bg-[#e38407] text-white font-bold py-2 px-4 rounded', // Bouton de confirmation
-                    cancelButton: 'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded' // Bouton d'annulation
+                    popup: 'bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-lg shadow-lg',
+                    confirmButton: 'bg-[#e38407] hover:bg-[#e38407] text-white font-bold py-2 px-4 rounded',
+                    cancelButton: 'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded'
                 },
+
                 showClass: {
-                    popup: `
-                    animate__animated
-                    animate__fadeInUp
-                    animate__faster
-                    `
+                    popup: `animate__animated animate__fadeInUp animate__faster`
                 },
+
                 hideClass: {
-                    popup: `
-                    animate__animated
-                    animate__fadeOutDown
-                    animate__faster
-                    `
+                    popup: `animate__animated animate__fadeOutDown animate__faster`
                 }
             }).then((result) => {
-                if (result.isConfirmed) {
-                    // Faire la requête AJAX pour ajouter l'utilisateur
+                if (result.isConfirmed && result.value) {
                     $.ajax({
                         url: action,
                         method: method,
                         data: result.value,
+                        processData: false,
+                        contentType: false,
                         success: function(response) {
                             Swal.fire({
                                 title: 'Succès',
@@ -233,38 +270,18 @@
                                 timer: 2000,
                                 timerProgressBar: true,
                                 customClass: {
-                                    popup: 'bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-lg shadow-lg', // Classes Tailwind pour le popup
+                                    popup: 'bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-lg shadow-lg'
                                 }
-                            }).then(() => {
-                                if (result.isConfirmed) {
-                                    window.location.reload();
-                                } else {
-                                    window.location.reload();
-                                }
-                            });
+                            }).then(() => window.location.reload());
                         },
                         error: function(error) {
                             Swal.fire({
                                 title: 'Erreur',
                                 text: error.responseJSON?.message ||
-                                    'Une erreur est survenue lors de la création de la catégorie.',
+                                    'Une erreur est survenue lors de l’enregistrement de la catégorie.',
                                 icon: 'error',
-                                showClass: {
-                                    popup: `
-                                        animate__animated
-                                        animate__fadeInUp
-                                        animate__faster
-                                        `
-                                },
-                                hideClass: {
-                                    popup: `
-                                    animate__animated
-                                    animate__fadeOutDown
-                                    animate__faster
-                                    `
-                                },
                                 customClass: {
-                                    popup: 'bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-lg shadow-lg', // Classes Tailwind pour le popup
+                                    popup: 'bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-lg shadow-lg'
                                 }
                             });
                         }
@@ -273,50 +290,24 @@
             });
         }
 
-        function deleteCategory(categoryId, categoryName) {
-            event.preventDefault();
-            let url = "{{ route('admin.categories.destroy') }}";
-            Swal.fire({
-                title: 'Voulez-vous vraiment supprimer la catégorie ' + categoryName + ' ?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Oui, supprimer',
-                cancelButtonText: 'Non, annuler'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: "DELETE",
-                        url: url,
-                        data: {
-                            _token: "{{ csrf_token() }}",
-                            categoryId: categoryId
-                        },
-                        dataType: "json",
-                        success: function(response) {
-                            const toast = Swal.mixin({
-                                toast: true,
-                                position: 'top-end',
-                                progressBar: true,
-                                showConfirmButton: false,
-                                timer: 1000,
-                                timerProgressBar: true,
-                                didOpen: (toast) => {
-                                    toast.onmouseenter = Swal.stopTimer;
-                                    toast.onmouseleave = Swal.resumeTimer;
-                                }
-                            });
-                            toast.fire({
-                                icon: 'success',
-                                title: response.message
-                            }).then(() => {
-                                window.location.reload();
-                            });
-                        }
-                    });
-                }
-            })
-        }
+        // Aperçu de l'image
+        $(document).on('change', '#image', function(e) {
+            const file = e.target.files[0];
+            const preview = $('#image-preview');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.attr('src', e.target.result);
+                    preview.removeClass('hidden');
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.attr('src', '').addClass('hidden');
+            }
+        });
     </script>
+
     <script>
         if (document.getElementById("categories-table") && typeof simpleDatatables.DataTable !== 'undefined') {
             const exportCustomCSV = function(dataTable, userOptions = {}) {

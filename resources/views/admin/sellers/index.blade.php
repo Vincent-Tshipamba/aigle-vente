@@ -146,7 +146,7 @@
                                 <td class="flex items-center px-6 py-4 hover:cursor-pointer hover:underline hover:text-[#e38407] hover:font-bold hover:scale-105 transition-all duration-300 ease-in-out"
                                     onclick="window.location.href='{{ route('admin.users.show', $seller->user->id) }}'">
                                     <img class="w-10 h-10 rounded-full"
-                                        src="{{ $seller->image ?? asset('img/profil.jpeg') }}" alt="">
+                                        src="{{ asset($seller->image)  ?? asset('img/profil.jpeg') }}" alt="">
                                     <div class="ps-3">
                                         <div class="text-base font-semibold">{{ $seller->first_name }}
                                             {{ $seller->last_name }}</div>
@@ -156,7 +156,7 @@
                                 <td>{{ $seller->sexe }}</td>
                                 <td>{{ $seller->user->email }}</td>
                                 <td>{{ $seller->phone }}</td>
-                                <td>{{ $seller->location->city ?? '' }}</td>
+                                <td>{{ $seller->user->client->location->city ?? '' }}</td>
                                 <td>
                                     <label class="inline-flex items-center cursor-pointer">
                                         <input type="checkbox" value="" class="sr-only peer"

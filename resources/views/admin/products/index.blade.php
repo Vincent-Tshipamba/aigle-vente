@@ -130,7 +130,7 @@
                                         $firstPhoto = $product->photos->first();
                                     @endphp
                                     <img class="w-10 h-10 rounded-full"
-                                        src="{{ $firstPhoto->image ?? asset('img/profil.jpeg') }}" alt="">
+                                        src="{{ asset( $firstPhoto->image) ?? asset('img/profil.jpeg') }}" alt="">
                                     <div class="ps-3">
                                         {{ $product->name }}
                                     </div>
@@ -139,7 +139,7 @@
                                     class="hover:underline hover:text-[#e38407] hover:cursor-pointer hover:font-bold">
                                     {{ $product->category_product->name }}
                                 </td>
-                                <td>{{ substr($product->description, 0, 50) . '...' }}</td>
+                                <td>{!! substr($product->description, 0, 50) . '...' !!}</td>
                                 <td>{{ $product->unit_price }}</td>
                                 <td onclick="window.location.href='{{ route('admin.shops.show', $product->shop->id) }}'"
                                     class="hover:underline hover:text-[#e38407] hover:cursor-pointer hover:font-bold">

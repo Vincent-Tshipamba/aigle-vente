@@ -66,6 +66,11 @@ class User extends Authenticatable
 
     public function isSeller(): bool
     {
+        // Vérifie si l'utilisateur est un client avant de vérifier s'il est vendeur
+        if (!$this->client()->exists()) {
+            return false;
+        }
+
         return $this->seller()->exists();
     }
 

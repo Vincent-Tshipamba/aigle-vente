@@ -129,8 +129,7 @@
                                 <td>{{ $category->description }}</td>
                                 <td>{{ $category->products->count() }}</td>
                                 <td class="flex items-center gap-x-4">
-                                    <a href=""
-                                        onclick="category('Modifier une catégorie', {{ $category->id }}, '{{ $category->name }}', '{{ $category->description }}', 'Enregistrer les modifications', '{{ route('admin.categories.update', $category->id) }}', 'PUT')"
+                                    <a href="{{route('admin.categories.edit', $category->id)}}"
                                         class="text-blue-500 hover:text-blue-700 hover:underline hover:cursor-pointer transition-all duration-300 ease-in-out font-bold">
                                         Modifier
                                     </a>
@@ -165,97 +164,38 @@
             Swal.fire({
                 title: title,
                 html: `
-       <form id="category-form" class="p-4 md:p-5" method="POST" action="${action}" enctype="multipart/form-data">
-            @csrf
-            ${method === 'PUT' ? '@method('PUT')' : ''}
-            <div class="grid gap-4 mb-4 grid-cols-2 text-left">
-                <div class="col-span-2">
-                    <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-white">Nom de la catégorie</label>
-                    <input type="text" name="name" id="name" class="border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:text-white" placeholder="Nom de la catégorie" required value="${name}">
+            <form id="category-form" method="POST" action="${action}" enctype="multipart/form-data">
+                @csrf
+                ${method === 'PUT' ? '@method('PUT')' : ''}
+                <div class="mb-4">
+                    <label for="name" class="block text-sm font-medium">Nom de la catégorie</label>
+                    <input type="text" name="name" id="name" class="w-full p-2 border rounded" value="${name}" required>
                 </div>
-                <div class="col-span-2">
-                    <label for="description" class="block mb-2 text-sm font-medium text-black dark:text-white">Description</label>
-                    <textarea name="description" id="description" rows="3" class="border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:text-white" placeholder="Description">${description}</textarea>
+                <div class="mb-4">
+                    <label for="description" class="block text-sm font-medium">Description</label>
+                    <textarea name="description" id="description" class="w-full p-2 border rounded">${description}</textarea>
                 </div>
-                <div class="col-span-2">
-                    <label for="image" class="block mb-2 text-sm font-medium text-black dark:text-white">Image de la catégorie ${id ? '(laisser vide pour ne pas modifier)' : '(max 500x500px)'}</label>
-                    <input type="file" name="image" id="image" accept="image/*" class="text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-orange-100 file:text-orange-700 hover:file:bg-orange-200" ${id ? '' : 'required'}>
-                    <img id="image-preview" src="" alt="Aperçu" class="mt-2 hidden w-32 h-32 object-cover rounded border border-gray-300">
+                <div class="mb-4">
+                    <label for="image" class="block text-sm font-medium">Image ${id ? '(laisser vide pour ne pas modifier)' : ''}</label>
+                    <input type="file" name="image" id="image" accept="image/*" class="w-full p-2 border rounded">
                 </div>
-            </div>
-        </form>
+            </form>
         `,
                 showCancelButton: true,
                 confirmButtonText: confirmButtonText,
-                cancelButtonText: 'Annuler',
-                allowOutsideClick: false,
-
                 preConfirm: () => {
-                    return new Promise((resolve, reject) => {
-                        const form = $('#category-form')[0];
-                        const formData = new FormData(form);
-                        const name = formData.get('name');
-                        const image = form.image.files[0];
+                    const form = document.getElementById('category-form');
+                    const formData = new FormData(form);
 
-                        if (!name) {
-                            Swal.showValidationMessage('Veuillez saisir un nom de catégorie.');
-                            return reject();
-                        }
+                    if (!formData.get('name')) {
+                        Swal.showValidationMessage('Le nom de la catégorie est requis.');
+                        return false;
+                    }
 
-                        // Si création (id vide) et aucune image → erreur
-                        if (!image && !id) {
-                            Swal.showValidationMessage('Veuillez ajouter une image.');
-                            return reject();
-                        }
-
-                        if (image) {
-                            const img = new Image();
-                            const reader = new FileReader();
-
-                            reader.onload = function(e) {
-                                img.onload = function() {
-                                    if (img.width > 500 || img.height > 500) {
-                                        Swal.showValidationMessage(
-                                            `L’image est trop grande (${img.width}x${img.height}). Maximum : 500x500 pixels.`
-                                        );
-                                        return reject();
-                                    }
-
-                                    formData.append('_token', '{{ csrf_token() }}');
-                                    resolve(formData);
-                                };
-
-                                img.onerror = function() {
-                                    Swal.showValidationMessage('Image invalide.');
-                                    reject();
-                                };
-
-                                img.src = e.target.result;
-                            };
-
-                            reader.readAsDataURL(image);
-                        } else {
-                            formData.append('_token', '{{ csrf_token() }}');
-                            resolve(formData);
-                        }
-                    });
-                },
-
-                customClass: {
-                    popup: 'bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-lg shadow-lg',
-                    confirmButton: 'bg-[#e38407] hover:bg-[#e38407] text-white font-bold py-2 px-4 rounded',
-                    cancelButton: 'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded'
-                },
-
-                showClass: {
-                    popup: `animate__animated animate__fadeInUp animate__faster`
-                },
-
-                hideClass: {
-                    popup: `animate__animated animate__fadeOutDown animate__faster`
+                    return formData;
                 }
             }).then((result) => {
-                if (result.isConfirmed && result.value) {
+                if (result.isConfirmed) {
                     $.ajax({
                         url: action,
                         method: method,
@@ -263,27 +203,13 @@
                         processData: false,
                         contentType: false,
                         success: function(response) {
-                            Swal.fire({
-                                title: 'Succès',
-                                text: response.message,
-                                icon: 'success',
-                                timer: 2000,
-                                timerProgressBar: true,
-                                customClass: {
-                                    popup: 'bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-lg shadow-lg'
-                                }
-                            }).then(() => window.location.reload());
+                            Swal.fire('Succès', response.message, 'success').then(() => {
+                                window.location.reload();
+                            });
                         },
                         error: function(error) {
-                            Swal.fire({
-                                title: 'Erreur',
-                                text: error.responseJSON?.message ||
-                                    'Une erreur est survenue lors de l’enregistrement de la catégorie.',
-                                icon: 'error',
-                                customClass: {
-                                    popup: 'bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-lg shadow-lg'
-                                }
-                            });
+                            Swal.fire('Erreur', error.responseJSON?.message ||
+                                'Une erreur est survenue.', 'error');
                         }
                     });
                 }
@@ -306,6 +232,37 @@
                 preview.attr('src', '').addClass('hidden');
             }
         });
+
+        function deleteCategory(id, name) {
+            event.preventDefault();
+            Swal.fire({
+                title: `Supprimer la catégorie "${name}" ?`,
+                text: "Cette action est irréversible.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Oui, supprimer',
+                cancelButtonText: 'Annuler'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `/admin/categories/${id}`,
+                        method: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            Swal.fire('Supprimé', response.message, 'success').then(() => {
+                                window.location.reload();
+                            });
+                        },
+                        error: function(error) {
+                            Swal.fire('Erreur', error.responseJSON?.message ||
+                                'Une erreur est survenue.', 'error');
+                        }
+                    });
+                }
+            });
+        }
     </script>
 
     <script>
@@ -453,5 +410,32 @@
                 })
             })
         }
+
+
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Succès',
+                text: '{{ session('success') }}',
+                toast: true,
+                position: 'top-end',
+                timer: 3000,
+                showConfirmButton: false,
+                timerProgressBar: true,
+            });
+        @endif
+
+        @if (session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Erreur',
+                text: '{{ session('error') }}',
+                toast: true,
+                position: 'top-end',
+                timer: 3000,
+                showConfirmButton: false,
+                timerProgressBar: true,
+            });
+        @endif
     </script>
 @endsection

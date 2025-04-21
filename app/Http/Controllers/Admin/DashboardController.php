@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
 use App\Models\User;
-use App\Models\Order;
+use App\Models\Shop;
 use App\Models\Client;
 use App\Models\Seller;
 use App\Models\Product;
@@ -20,7 +20,7 @@ class DashboardController extends Controller
         $totalVendeurs = Seller::count();
         $totalClients = Client::count();
         $totalProduits = Product::count();
-        $totalCommandes = Order::count();
+        $totalCommandes = Shop::count();
 
         $totalClientsMales = DB::table('users')
             ->leftJoin('clients', 'users.id', '=', 'clients.user_id')
@@ -34,10 +34,10 @@ class DashboardController extends Controller
             ->first()
             ->total_females;
 
-        $recentOrders = Order::orderBy('created_at', 'desc')->with(['products', 'client'])->take(5)->get();
+         $shops = Shop::latest()->get();
 
 
-        return view('admin.dashboard', compact('totalUsers', 'totalVendeurs', 'totalClients', 'totalProduits', 'totalCommandes', 'totalClientsMales', 'totalClientsFemales', 'recentOrders'));
+        return view('admin.dashboard', compact('totalUsers', 'totalVendeurs', 'totalClients', 'totalProduits', 'totalCommandes', 'totalClientsMales', 'totalClientsFemales', 'shops'));
     }
 
     public function getClientsByPeriod(Request $request)

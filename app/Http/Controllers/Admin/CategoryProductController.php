@@ -57,8 +57,6 @@ class CategoryProductController extends Controller
         return response()->json(['message' => 'Catégorie créée avec succès']);
     }
 
-
-
     /**
      * Display the specified resource.
      */
@@ -70,55 +68,64 @@ class CategoryProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CategoryProduct $categoryProduct)
+    public function edit(CategoryProduct $category)
     {
         //
+         return view('admin.categories.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-   public function update(Request $request, CategoryProduct $categoryProduct)
-{
-    $categoryProduct = CategoryProduct::findOrFail($request->id);
+     public function update(Request $request, CategoryProduct $category)
+    {
+       
+        try {
+            // Validation des données
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'description' => 'nullable|string',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            ], [
+                'name.required' => 'Veuillez saisir un nom de catégorie.',
+                'image.image' => 'Le fichier doit être une image.',
+                'image.mimes' => 'Formats acceptés : jpeg, png, jpg, webp.',
+                'image.max' => 'L’image ne doit pas dépasser 2 Mo.',
+            ]);
 
-    $validated = $request->validate([
-        'name' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
-    ], [
-        'name.required' => 'Veuillez saisir un nom de catégorie.',
-        'image.image' => 'Le fichier doit être une image.',
-        'image.mimes' => 'Formats acceptés : jpeg, png, jpg, webp.',
-        'image.max' => 'L’image ne doit pas dépasser 2 Mo.',
-    ]);
+           
+            if ($request->hasFile('image')) {
+                
+                if ($category->image && file_exists(public_path($category->image))) {
+                    unlink(public_path($category->image));
+                }
 
-    // Si une nouvelle image est envoyée
-    if ($request->hasFile('image')) {
-        // Supprimer l'ancienne image si elle existe
-        if ($categoryProduct->image && file_exists(public_path($categoryProduct->image))) {
-            unlink(public_path($categoryProduct->image));
+                // Enregistrer la nouvelle image
+                $image = $request->file('image');
+                $imageName = uniqid() . '_' . time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('img/categories/'), $imageName);
+                $validated['image'] = 'img/categories/' . $imageName;
+            }
+
+            // Mise à jour des données
+            $category->update($validated);
+
+            // Réponse en cas de succès
+            return redirect()->route('admin.categories.index')->with('success', 'Catégorie mise à jour avec succès.');
+        } catch (\Exception $e) {
+          
+            return redirect()->back()->with('error', 'Une erreur est survenue : ' . $e->getMessage());
         }
-
-        $image = $request->file('image');
-        $imageName = uniqid() . '_' . time() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('img/categories/'), $imageName);
-        $validated['image'] = 'img/categories/' . $imageName;
     }
-
-    $categoryProduct->update($validated);
-
-    return response()->json(['message' => 'Catégorie modifiée avec succès']);
-}
 
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, CategoryProduct $categoryProduct)
+   public function destroy(CategoryProduct $category)
     {
-        $categoryProduct = CategoryProduct::find($request->categoryId);
-        $categoryProduct->delete();
+        $category->delete();
         return response()->json(['message' => 'Catégorie supprimée avec succès']);
     }
+
 }

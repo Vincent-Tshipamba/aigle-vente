@@ -186,7 +186,7 @@
                                 </th>
                                 <th>
                                     <span class="flex items-center">
-                                        Client
+                                        propriétaire
                                         <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -196,7 +196,7 @@
                                 </th>
                                 <th>
                                     <span class="flex items-center">
-                                        Produit
+                                        Categorie Boutique
                                         <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -206,7 +206,7 @@
                                 </th>
                                 <th>
                                     <span class="flex items-center">
-                                        Quantité
+                                        Total Produits
                                         <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -214,9 +214,10 @@
                                         </svg>
                                     </span>
                                 </th>
+                                
                                 <th>
                                     <span class="flex items-center">
-                                        Prix
+                                        
                                         <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -224,26 +225,7 @@
                                         </svg>
                                     </span>
                                 </th>
-                                <th>
-                                    <span class="flex items-center">
-                                        Total
-                                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                        </svg>
-                                    </span>
-                                </th>
-                                <th>
-                                    <span class="flex items-center">
-                                        Statut
-                                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                        </svg>
-                                    </span>
-                                </th>
+                               
                                 <th>
                                     <span class="flex items-center">
                                         Date
@@ -257,7 +239,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($recentOrders as $key => $order)
+                            @foreach ($shops as $key => $shop)
                                 <tr
                                     class="hover:bg-[#f0e6d9] hover:scale-100 hover:cursor-pointer transition-all duration-300 ease-in-out">
                                     @php
@@ -265,37 +247,27 @@
                                     @endphp
                                     <td>{{ $key + 1 }}</td>
                                     <td class="flex items-center px-6 py-4 hover:cursor-pointer hover:underline hover:text-[#e38407] hover:font-bold hover:scale-105 transition-all duration-300 ease-in-out"
-                                        onclick="window.location.href='{{ route('admin.users.show', $order->client->user->id) }}'">
+                                        onclick="window.location.href='{{ route('admin.users.show', $shop->seller->user->id) }}'">
                                         <img class="w-10 h-10 rounded-full"
-                                            src="{{ $order->client->image ?? asset('img/profil.jpeg') }}" alt="">
+                                            src="{{ asset($shop->image) ?? asset('img/profil.jpeg') }}" alt="">
                                         <div class="ps-3">
-                                            <div class="text-base font-semibold">{{ $order->client->first_name }}
-                                                {{ $order->client->last_name }}</div>
-                                            <div class="font-normal text-gray-500">{{ $order->client->user->email }}</div>
+                                            <div class="text-base font-semibold">{{ $shop->seller->first_name }}
+                                                {{ $shop->seller->last_name }}</div>
+
                                         </div>
                                     </td>
+                                    
                                     <td>
-                                        @foreach ($order->products as $product)
-                                            {{ $product->name }}<br>
+                                        @foreach ($shop->categories as $item)
+                                            <span
+                                                class="inline-flex items-center px-2 py-1 text-xs font-medium text-gray-800 bg-[#f8f0e7] rounded-full dark:bg-gray-700 dark:text-gray-300">
+                                                {{ $item->name }},
+                                            </span>
                                         @endforeach
                                     </td>
-                                    <td>
-                                        @foreach ($order->products as $product)
-                                            {{ $product->pivot->quantity }}<br>
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @foreach ($order->products as $product)
-                                            {{ $product->unit_price }}<br>
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @foreach ($order->products as $product)
-                                            {{ $product->pivot->quantity * $product->unit_price }}<br>
-                                        @endforeach
-                                    </td>
-                                    <td>{{ $order->status }}</td>
-                                    <td>{{ $order->created_at->format('d/m/Y') }}</td>
+                                    <td>{{ count($shop->products)  }}</td>
+                                    <td>{{ $shop->status }}</td>
+                                    <td>{{ $shop->created_at->format('d/m/Y') }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

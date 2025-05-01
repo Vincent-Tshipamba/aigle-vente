@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('socials', function (Blueprint $table) {
-              $table->id();
+            $table->id();
             $table->foreignId('seller_id')->constrained('sellers')->onDelete('cascade');
             $table->string('facebook')->nullable();
             $table->string('instagram')->nullable();
-             $table->timestamps();
+            $table->timestamps();
         });
     }
 

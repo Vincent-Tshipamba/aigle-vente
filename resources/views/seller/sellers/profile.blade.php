@@ -23,7 +23,7 @@
             <img loading="lazy"
                 src="https://timelinecovers.pro/facebook-cover/download/eagle-looking-at-your-profile-facebook-cover.jpg"
                 alt="profile cover" class="h-full w-full rounded-tl-sm rounded-tr-sm object-cover object-center" />
-            <div class="absolute bottom-1 right-1 z-10 xsm:bottom-4 xsm:right-4">
+            {{-- <div class="absolute bottom-1 right-1 z-10 xsm:bottom-4 xsm:right-4">
                 <label for="cover"
                     class="flex cursor-pointer items-center justify-center gap-2 rounded bg-primary px-2 py-1 text-sm font-medium text-white hover:bg-opacity-80 xsm:px-4">
                     <input type="file" name="cover" id="cover" class="sr-only" />
@@ -37,7 +37,7 @@
                     </span>
                     <span>Edit</span>
                 </label>
-            </div>
+            </div> --}}
         </div>
         <div class="px-4 pb-6 text-center lg:pb-8 xl:pb-11.5">
             <div
@@ -47,27 +47,27 @@
                         {{ strtoupper(substr($seller->first_name, 0, 1)) }}
                     </div>
                 @else
-                   <div class="relative drop-shadow-2">
-    <img loading="lazy" src="{{ asset($seller->picture) }}" alt="{{ $seller->full_name }}"
-        class="rounded-full w-32 h-32 object-cover" id="profile-picture" />
-    <button type="button" id="change_profil" onclick="changeProfile(event)"
-        class="absolute bottom-0 right-0 flex h-8.5 w-8.5 cursor-pointer items-center justify-center rounded-full bg-primary text-white hover:bg-opacity-90 sm:bottom-2 sm:right-2">
-        <svg class="fill-current" width="14" height="14" viewBox="0 0 14 14" fill="none" 
-            xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M4.76464 1.42638C4.87283 1.2641 5.05496 1.16663 5.25 1.16663H8.75C8.94504 1.16663 9.12717 1.2641 9.23536 1.42638L10.2289 2.91663H12.25C12.7141 2.91663 13.1592 3.101 13.4874 3.42919C13.8156 3.75738 14 4.2025 14 4.66663V11.0833C14 11.5474 13.8156 11.9925 13.4874 12.3207C13.1592 12.6489 12.7141 12.8333 12.25 12.8333H1.75C1.28587 12.8333 0.840752 12.6489 0.512563 12.3207C0.184375 11.9925 0 11.5474 0 11.0833V4.66663C0 4.2025 0.184374 3.75738 0.512563 3.42919C0.840752 3.101 1.28587 2.91663 1.75 2.91663H3.77114L4.76464 1.42638ZM5.56219 2.33329L4.5687 3.82353C4.46051 3.98582 4.27837 4.08329 4.08333 4.08329H1.75C1.59529 4.08329 1.44692 4.14475 1.33752 4.25415C1.22812 4.36354 1.16667 4.51192 1.16667 4.66663V11.0833C1.16667 11.238 1.22812 11.3864 1.33752 11.4958C1.44692 11.6052 1.59529 11.6666 1.75 11.6666H12.25C12.4047 11.6666 12.5531 11.6052 12.6625 11.4958C12.7719 11.3864 12.8333 11.238 12.8333 11.0833V4.66663C12.8333 4.51192 12.7719 4.36354 12.6625 4.25415C12.5531 4.14475 12.4047 4.08329 12.25 4.08329H9.91667C9.72163 4.08329 9.53949 3.98582 9.4313 3.82353L8.43781 2.33329H5.56219Z"
-                fill="white" />
-        </svg>
-    </button>
-</div>
+                    <div class="relative drop-shadow-2">
+                        <img loading="lazy" src="{{ asset($seller->picture) }}" alt="{{ $seller->full_name }}"
+                            class="rounded-full w-32 h-32 object-cover" id="profile-picture" />
+                        <button type="button" id="change_profil" onclick="changeProfile(event)"
+                            class="absolute bottom-0 right-0 flex h-8.5 w-8.5 cursor-pointer items-center justify-center rounded-full bg-primary text-white hover:bg-opacity-90 sm:bottom-2 sm:right-2">
+                            <svg class="fill-current" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M4.76464 1.42638C4.87283 1.2641 5.05496 1.16663 5.25 1.16663H8.75C8.94504 1.16663 9.12717 1.2641 9.23536 1.42638L10.2289 2.91663H12.25C12.7141 2.91663 13.1592 3.101 13.4874 3.42919C13.8156 3.75738 14 4.2025 14 4.66663V11.0833C14 11.5474 13.8156 11.9925 13.4874 12.3207C13.1592 12.6489 12.7141 12.8333 12.25 12.8333H1.75C1.28587 12.8333 0.840752 12.6489 0.512563 12.3207C0.184375 11.9925 0 11.5474 0 11.0833V4.66663C0 4.2025 0.184374 3.75738 0.512563 3.42919C0.840752 3.101 1.28587 2.91663 1.75 2.91663H3.77114L4.76464 1.42638ZM5.56219 2.33329L4.5687 3.82353C4.46051 3.98582 4.27837 4.08329 4.08333 4.08329H1.75C1.59529 4.08329 1.44692 4.14475 1.33752 4.25415C1.22812 4.36354 1.16667 4.51192 1.16667 4.66663V11.0833C1.16667 11.238 1.22812 11.3864 1.33752 11.4958C1.44692 11.6052 1.59529 11.6666 1.75 11.6666H12.25C12.4047 11.6666 12.5531 11.6052 12.6625 11.4958C12.7719 11.3864 12.8333 11.238 12.8333 11.0833V4.66663C12.8333 4.51192 12.7719 4.36354 12.6625 4.25415C12.5531 4.14475 12.4047 4.08329 12.25 4.08329H9.91667C9.72163 4.08329 9.53949 3.98582 9.4313 3.82353L8.43781 2.33329H5.56219Z"
+                                    fill="white" />
+                            </svg>
+                        </button>
+                    </div>
 
 
-   <script>
-function changeProfile(event){
-    event.preventDefault();
-    Swal.fire({
-        title: 'Mettez à jour votre photo de profil',
-        html: `
+                    <script>
+                        function changeProfile(event) {
+                            event.preventDefault();
+                            Swal.fire({
+                                title: 'Mettez à jour votre photo de profil',
+                                html: `
             <form id="profilePictureForm" class="flex flex-col items-center gap-4">
                 <input type="file" id="profileInput" name="profile" accept="image/*" required class="border p-2 rounded-lg">
                 <div class="w-32 h-32 flex items-center justify-center border border-dashed rounded-full overflow-hidden">
@@ -75,83 +75,88 @@ function changeProfile(event){
                 </div>
             </form>
         `,
-        showCancelButton: true,
-        confirmButtonText: 'Mettre à jour',
-        preConfirm: () => {
-            return new Promise((resolve) => {
-                const inputFile = document.getElementById('profileInput').files[0];
+                                showCancelButton: true,
+                                confirmButtonText: 'Mettre à jour',
+                                preConfirm: () => {
+                                    return new Promise((resolve) => {
+                                        const inputFile = document.getElementById('profileInput').files[0];
 
-                if (!inputFile) {
-                    Swal.showValidationMessage('Veuillez sélectionner une image.');
-                    resolve();
-                    return;
-                }
+                                        if (!inputFile) {
+                                            Swal.showValidationMessage('Veuillez sélectionner une image.');
+                                            resolve();
+                                            return;
+                                        }
 
-                // Vérification du type et de la taille de l'image
-                const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-                if (!allowedTypes.includes(inputFile.type)) {
-                    Swal.showValidationMessage('Format invalide. Veuillez choisir une image JPG ou PNG.');
-                    resolve();
-                    return;
-                }
+                                        // Vérification du type et de la taille de l'image
+                                        const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+                                        if (!allowedTypes.includes(inputFile.type)) {
+                                            Swal.showValidationMessage(
+                                                'Format invalide. Veuillez choisir une image JPG ou PNG.');
+                                            resolve();
+                                            return;
+                                        }
 
-                if (inputFile.size > 2 * 1024 * 1024) {
-                    Swal.showValidationMessage('L\'image ne doit pas dépasser 2 Mo.');
-                    resolve();
-                    return;
-                }
+                                        if (inputFile.size > 2 * 1024 * 1024) {
+                                            Swal.showValidationMessage('L\'image ne doit pas dépasser 2 Mo.');
+                                            resolve();
+                                            return;
+                                        }
 
-                // Indicateur de chargement
-                Swal.fire({
-                    title: 'Mise à jour...',
-                    allowOutsideClick: false,
-                    didOpen: () => {
-                        Swal.showLoading();
-                    }
-                });
+                                        // Indicateur de chargement
+                                        Swal.fire({
+                                            title: 'Mise à jour...',
+                                            allowOutsideClick: false,
+                                            didOpen: () => {
+                                                Swal.showLoading();
+                                            }
+                                        });
 
-                const formData = new FormData();
-                formData.append('profile', inputFile);
-                formData.append('_token', "{{ csrf_token() }}");
+                                        const formData = new FormData();
+                                        formData.append('profile', inputFile);
+                                        formData.append('_token', "{{ csrf_token() }}");
 
-                fetch("{{ route('seller.updateProfilePicture') }}", {
-                    method: "POST",
-                    body: formData,
-                    headers: { "X-Requested-With": "XMLHttpRequest" }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        Swal.fire("Succès", "Votre photo de profil a été mise à jour.", "success");
-                        document.getElementById('profile-picture').src = data.imageUrl;
-                    } else {
-                        Swal.fire("Erreur", data.message || "Une erreur s'est produite.", "error");
-                    }
-                    resolve();
-                })
-                .catch(() => {
-                    Swal.fire("Erreur", "Impossible de mettre à jour la photo.", "error");
-                    resolve();
-                });
-            });
-        }
-    });
+                                        fetch("{{ route('seller.updateProfilePicture') }}", {
+                                                method: "POST",
+                                                body: formData,
+                                                headers: {
+                                                    "X-Requested-With": "XMLHttpRequest"
+                                                }
+                                            })
+                                            .then(response => response.json())
+                                            .then(data => {
+                                                if (data.success) {
+                                                    Swal.fire("Succès", "Votre photo de profil a été mise à jour.",
+                                                        "success");
+                                                    document.getElementById('profile-picture').src = data.imageUrl;
+                                                } else {
+                                                    Swal.fire("Erreur", data.message ||
+                                                        "Une erreur s'est produite.", "error");
+                                                }
+                                                resolve();
+                                            })
+                                            .catch(() => {
+                                                Swal.fire("Erreur", "Impossible de mettre à jour la photo.",
+                                                    "error");
+                                                resolve();
+                                            });
+                                    });
+                                }
+                            });
 
-    document.getElementById('profileInput').addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const preview = document.getElementById('previewImage');
-                preview.src = e.target.result;
-                preview.classList.remove('hidden');
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-}
-</script>
-
+                            document.getElementById('profileInput').addEventListener('change', function(event) {
+                                const file = event.target.files[0];
+                                if (file) {
+                                    const reader = new FileReader();
+                                    reader.onload = function(e) {
+                                        const preview = document.getElementById('previewImage');
+                                        preview.src = e.target.result;
+                                        preview.classList.remove('hidden');
+                                    };
+                                    reader.readAsDataURL(file);
+                                }
+                            });
+                        }
+                    </script>
                 @endif
 
             </div>
@@ -195,14 +200,33 @@ function changeProfile(event){
                         Reseaux Sociaux
                     </h4>
                     <div class="flex justify-center space-x-4">
-                        <a href="{{ $seller->facebook }}" class="text-blue-600 hover:text-blue-800">
-                            <i class="fab fa-facebook-f"></i>
+                        <a href="{{ $seller->social->facebook }}" class="text-blue-600 hover:text-blue-800">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd"
+                                    d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+
                         </a>
-                        <a href="{{ $seller->twitter }}" class="text-blue-400 hover:text-blue-600">
-                            <i class="fab fa-twitter"></i>
+                        <a href="{{ $seller->social->instagram }}" class="text-blue-400 hover:text-blue-600">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path fill="currentColor" fill-rule="evenodd"
+                                    d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+
+
                         </a>
-                        <a href="{{ $seller->linkedin }}" class="text-blue-700 hover:text-blue-900">
-                            <i class="fab fa-linkedin-in"></i>
+                        <a href="{{ $seller->social->tiktok }}" class="text-blue-700 hover:text-blue-900">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision"
+                                text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd"
+                                clip-rule="evenodd" viewBox="0 0 449.45 515.38">
+                                <path fill-rule="nonzero"
+                                    d="M382.31 103.3c-27.76-18.1-47.79-47.07-54.04-80.82-1.35-7.29-2.1-14.8-2.1-22.48h-88.6l-.15 355.09c-1.48 39.77-34.21 71.68-74.33 71.68-12.47 0-24.21-3.11-34.55-8.56-23.71-12.47-39.94-37.32-39.94-65.91 0-41.07 33.42-74.49 74.48-74.49 7.67 0 15.02 1.27 21.97 3.44V190.8c-7.2-.99-14.51-1.59-21.97-1.59C73.16 189.21 0 262.36 0 352.3c0 55.17 27.56 104 69.63 133.52 26.48 18.61 58.71 29.56 93.46 29.56 89.93 0 163.08-73.16 163.08-163.08V172.23c34.75 24.94 77.33 39.64 123.28 39.64v-88.61c-24.75 0-47.8-7.35-67.14-19.96z" />
+                            </svg>
                         </a>
                     </div>
                 </div>

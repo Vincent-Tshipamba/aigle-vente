@@ -81,4 +81,9 @@ class Seller extends Model
     {
         return $this->belongsTo(Location::class);
     }
+
+     public function social()
+    {
+        return $this->hasOne(Social::class);
+    }
 }

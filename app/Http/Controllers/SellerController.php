@@ -38,6 +38,7 @@ class SellerController extends Controller
                 'profile' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
                 'facebook' => 'nullable|string|max:255',
                 'instagram' => 'nullable|string|max:255',
+                'tiktok' => 'nullable|string|max:255',
             ], [
                 'phone.required' => 'Veuillez entrer un numéro de téléphone valide.',
                 'address.required' => 'Veuillez indiquer votre adresse complète.',
@@ -45,6 +46,7 @@ class SellerController extends Controller
                 'profile.max' => 'La taille de l\'image ne doit pas dépasser 2 Mo.',
                 'facebook.max' => 'Le lien Facebook ne doit pas dépasser 255 caractères.',
                 'instagram.max' => 'Le lien Instagram ne doit pas dépasser 255 caractères.',
+                'tiktok.max' => 'Le lien TikTok ne doit pas dépasser 255 caractères.',
             ]);
 
             $validated['user_id'] = Auth::id();
@@ -79,6 +81,7 @@ class SellerController extends Controller
                 'seller_id' => $seller->id,
                 'facebook' => $validated['facebook'] ?? null,
                 'instagram' => $validated['instagram'] ?? null,
+                'tiktok' => $validated['tiktok'] ?? null,
             ]);
 
             return redirect()->route('seller.dashboard')->with('success', 'Vendeur créé avec succès!');

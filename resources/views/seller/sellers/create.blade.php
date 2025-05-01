@@ -305,59 +305,26 @@
                                 <div>
                                     <h3 class="text-lg font-semibold mb-4">Les liens de vos Réseaux Sociaux</h3>
 
-                                    <!-- Facebook -->
-                                    <label class="block mb-2">Facebook</label>
-                                    <input type="url" x-model="formData.facebook" @input="validateFacebookUrl"
-                                        class="w-full p-2 border rounded mb-2" name="facebook"
-                                        placeholder="https://facebook.com/Mcleroi01">
-                                    <div x-show="facebookError" class="text-red-500 text-sm mt-1"
-                                        x-text="facebookError"></div>
 
-                                    <!-- Aperçu Facebook -->
-                                    <template x-if="facebookUsername">
-                                        <div class="mt-2 flex items-center">
-                                            <img src="https://www.facebook.com/images/fb_icon_325x325.png"
-                                                class="w-6 h-6 mr-2">
-                                            <a :href="formData.facebook" target="_blank"
-                                                class="text-blue-600 hover:underline" x-text="facebookUsername"></a>
-                                        </div>
-                                    </template>
+                                        <label class="block mb-2">Facebook</label>
+                                        <input type="url" x-model="formData.facebook"
+                                            class="w-full p-2 border rounded mb-2" name="facebook"
+                                            placeholder="https://facebook.com/Mcleroi01">
 
-                                    <!-- Instagram -->
-                                    <label class="block mb-2 mt-4">Instagram</label>
-                                    <input type="url" x-model="formData.instagram" @input="validateInstagramUrl"
-                                        class="w-full p-2 border rounded mb-2" name="instagram"
-                                        placeholder="https://instagram.com/Mcleroi01">
-                                    <div x-show="instagramError" class="text-red-500 text-sm mt-1"
-                                        x-text="instagramError"></div>
 
-                                    <!-- Aperçu Instagram -->
-                                    <template x-if="instagramUsername">
-                                        <div class="mt-2 flex items-center">
-                                            <img src="https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png"
-                                                class="w-6 h-6 mr-2">
-                                            <a :href="formData.instagram" target="_blank"
-                                                class="text-pink-500 hover:underline" x-text="instagramUsername"></a>
-                                        </div>
-                                    </template>
 
-                                    <!-- TikTok -->
-                                    <label class="block mb-2 mt-4">TikTok</label>
-                                    <input type="url" x-model="formData.tiktok" @input="validateTikTokUrl"
-                                        class="w-full p-2 border rounded mb-2" name="tiktok"
-                                        placeholder="https://tiktok.com/@Mcleroi01">
-                                    <div x-show="tiktokError" class="text-red-500 text-sm mt-1" x-text="tiktokError">
-                                    </div>
+                                        <!-- Instagram -->
+                                        <label class="block mb-2 mt-4">Instagram</label>
+                                        <input type="url" x-model="formData.instagram"
+                                            class="w-full p-2 border rounded mb-2" name="instagram"
+                                            placeholder="https://instagram.com/Mcleroi01">
 
-                                    <!-- Aperçu TikTok -->
-                                    <template x-if="tiktokUsername">
-                                        <div class="mt-2 flex items-center">
-                                            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/TikTok_logo.svg"
-                                                class="w-6 h-6 mr-2">
-                                            <a :href="formData.tiktok" target="_blank"
-                                                class="text-black hover:underline" x-text="tiktokUsername"></a>
-                                        </div>
-                                    </template>
+
+
+                                        <label class="block mb-2 mt-4">TikTok</label>
+                                        <input type="url" x-model="formData.tiktok"
+                                            class="w-full p-2 border rounded mb-2" name="tiktok"
+                                            placeholder="https://tiktok.com/@Mcleroi01">
                                 </div>
                             </template>
 
@@ -478,12 +445,6 @@
                         let isValid = fields.every(field => {
                             return this.formData[field] && this.formData[field].trim() !== '';
                         });
-
-                        if (step === 3 && isValid) {
-                            this.validateFacebookUrl();
-                            this.validateInstagramUrl();
-                            isValid = !this.facebookError && !this.instagramError;
-                        }
 
                         return isValid;
                     },

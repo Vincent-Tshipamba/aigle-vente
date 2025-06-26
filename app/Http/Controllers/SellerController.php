@@ -18,13 +18,16 @@ class SellerController extends Controller
             if (Seller::where('user_id', Auth::id())->exists()) {
                 return redirect()->route('seller.dashboard');
             }
-            [$firstName, $lastName] = explode('-', $user->name);
+            $nameParts = explode('-', $user->name);
+$firstName = $nameParts[0] ?? '';
+$lastName = $nameParts[1] ?? '';            
+
 
             $sexe = $user->client->sexe;
 
             return view('seller.sellers.create', compact('lastName', 'firstName', 'sexe'));
         } catch (\Exception $e) {
-            return redirect()->route('seller.dashboard')->with('error', $e->getMessage());
+            return redirect()->route('home')->with('error', 'Erreur lors de la création du compte vendeur.');
         }
     }
 

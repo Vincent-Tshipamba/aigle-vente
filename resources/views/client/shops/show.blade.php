@@ -26,22 +26,55 @@
 
                 <!-- Boutons de partage et contact -->
                 <div class="flex justify-center space-x-4 mt-4">
+                    <!-- Facebook -->
                     <a href="https://www.facebook.com/sharer/sharer.php?u={{ url()->current() }}" target="_blank"
                         class="text-blue-600 hover:text-blue-800">
                         <i class="fab fa-facebook-square text-2xl"></i>
                     </a>
+
+                    <!-- Twitter -->
                     <a href="https://twitter.com/intent/tweet?url={{ url()->current() }}&text=Découvrez cette boutique: {{ $shop->name }}"
                         target="_blank" class="text-blue-400 hover:text-blue-600">
-                        <i class="fab fa-twitter-x"></i>
+                        <i class="fab fa-twitter text-2xl"></i>
                     </a>
+
+                    <!-- WhatsApp -->
                     <a href="https://api.whatsapp.com/send?text=Découvrez cette boutique: {{ url()->current() }}"
                         target="_blank" class="text-green-500 hover:text-green-700">
                         <i class="fab fa-whatsapp text-2xl"></i>
                     </a>
-                    <a href="mailto:contact@shop.com" class="text-gray-600 hover:text-gray-800">
+
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/?url={{ url()->current() }}" target="_blank"
+                        class="text-pink-500 hover:text-pink-700">
+                        <i class="fab fa-instagram text-2xl"></i>
+                    </a>
+
+                    <!-- TikTok -->
+                    <a href="https://www.tiktok.com/share?url={{ url()->current() }}" target="_blank"
+                        class="text-black hover:text-gray-700">
+                        <i class="fab fa-tiktok text-2xl"></i>
+                    </a>
+
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ url()->current() }}"
+                        target="_blank" class="text-blue-700 hover:text-blue-900">
+                        <i class="fab fa-linkedin text-2xl"></i>
+                    </a>
+
+                    <!-- Pinterest -->
+                    <a href="https://pinterest.com/pin/create/button/?url={{ url()->current() }}&media={{ $shop->image ?? '' }}&description=Découvrez cette boutique: {{ $shop->name }}"
+                        target="_blank" class="text-red-600 hover:text-red-800">
+                        <i class="fab fa-pinterest text-2xl"></i>
+                    </a>
+
+                    <!-- Email -->
+                    <a href="mailto:?subject=Découvrez cette boutique&body={{ url()->current() }}"
+                        class="text-gray-600 hover:text-gray-800">
                         <i class="fas fa-envelope text-2xl"></i>
                     </a>
                 </div>
+
             </div>
         </div>
 
@@ -207,8 +240,8 @@
                                 <svg data-tooltip-target="tooltip-wishlist-{{ $index }}"
                                     onclick="addToWishList(event, {{ $product->id }})"
                                     class="w-8 h-8 text-gray-800 dark:text-white hover:fill-[#e38407] hover:text-[#e38407] hover:cursor-pointer"
-                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    fill="none" viewBox="0 0 24 24">
+                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                    height="24" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                         stroke-width="2"
                                         d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />

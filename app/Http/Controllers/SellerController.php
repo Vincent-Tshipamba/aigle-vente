@@ -20,10 +20,10 @@ class SellerController extends Controller
             }
             $nameParts = explode('-', $user->name);
 $firstName = $nameParts[0] ?? '';
-$lastName = $nameParts[1] ?? '';            
+$lastName = $nameParts[1] ?? '';
 
 
-$sexe = $user->client->sexe ?? 'Masculin';
+$sexe = $user->client->sexe ?? null;
 
             return view('seller.sellers.create', compact('lastName', 'firstName', 'sexe'));
         } catch (\Exception $e) {
@@ -33,66 +33,74 @@ $sexe = $user->client->sexe ?? 'Masculin';
 
     // Créer un nouveau vendeur
     public function store(Request $request)
-    {
-        try {
-            $validated = $request->validate([
-                'phone' => 'required|string|max:20',
-                'address' => 'required|string|max:255',
-                'profile' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
-                'facebook' => 'nullable|string|max:255',
-                'instagram' => 'nullable|string|max:255',
-                'tiktok' => 'nullable|string|max:255',
-            ], [
-                'phone.required' => 'Veuillez entrer un numéro de téléphone valide.',
-                'address.required' => 'Veuillez indiquer votre adresse complète.',
-                'profile.image' => 'Le fichier sélectionné doit être une image (JPEG, PNG, JPG, WebP).',
-                'profile.max' => 'La taille de l\'image ne doit pas dépasser 2 Mo.',
-                'facebook.max' => 'Le lien Facebook ne doit pas dépasser 255 caractères.',
-                'instagram.max' => 'Le lien Instagram ne doit pas dépasser 255 caractères.',
-                'tiktok.max' => 'Le lien TikTok ne doit pas dépasser 255 caractères.',
-            ]);
+{
+    try {
+        $validated = $request->validate([
+            'phone' => 'required|string|max:20',
+            'address' => 'required|string|max:255',
+            'profile' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'facebook' => 'nullable|string|max:255',
+            'instagram' => 'nullable|string|max:255',
+            'tiktok' => 'nullable|string|max:255',
+        ], [
+            'phone.required' => 'Veuillez entrer un numéro de téléphone valide.',
+            'address.required' => 'Veuillez indiquer votre adresse complète.',
+            'profile.image' => 'Le fichier sélectionné doit être une image (JPEG, PNG, JPG, WebP).',
+            'profile.max' => 'La taille de l\'image ne doit pas dépasser 2 Mo.',
+            'facebook.max' => 'Le lien Facebook ne doit pas dépasser 255 caractères.',
+            'instagram.max' => 'Le lien Instagram ne doit pas dépasser 255 caractères.',
+            'tiktok.max' => 'Le lien TikTok ne doit pas dépasser 255 caractères.',
+        ]);
 
-            $validated['user_id'] = Auth::id();
+        $validated['user_id'] = Auth::id();
+        $seller = new Seller($validated);
 
-            $seller = new Seller($validated);
-
-            if ($request->hasFile('profile')) {
-                $file = $request->file('profile');
-                $filename = uniqid() . '.' . $file->getClientOriginalName();
-                $path = $file->move(public_path('profileSeller'), $filename);
-                $seller->picture = 'profileSeller/' . $filename;
-            }
-
-            $userName = Auth::user()->name;
-            if (strpos($userName, '-') !== false) {
-                [$firstName, $lastName] = explode('-', $userName);
-            } else {
-                $firstName = $userName;
-                $lastName = '';
-            }
-
-            $user = Auth::user();
-            $sexe = $user->client->sexe;
-
-            $seller->first_name = $firstName;
-            $seller->last_name = $lastName;
-            $seller->sexe = $sexe;
-
-            $seller->save();
-
-            Social::create([
-                'seller_id' => $seller->id,
-                'facebook' => $validated['facebook'] ?? null,
-                'instagram' => $validated['instagram'] ?? null,
-                'tiktok' => $validated['tiktok'] ?? null,
-            ]);
-
-            return redirect()->route('seller.dashboard')->with('success', 'Vendeur créé avec succès!');
-        } catch (\Exception $e) {
-            Log::error('Erreur lors de la création du vendeur : ' . $e->getMessage());
-            return back()->withErrors(['error' => 'Une erreur s\'est produite. Veuillez réessayer plus tard.'])->withInput();
+        if ($request->hasFile('profile')) {
+            $file = $request->file('profile');
+            $filename = uniqid() . '.' . $file->getClientOriginalName();
+            $file->move(public_path('profileSeller'), $filename);
+            $seller->picture = 'profileSeller/' . $filename;
         }
+
+        $user = Auth::user();
+
+        // Gestion du prénom / nom
+        $userName = $user->name;
+        if (strpos($userName, '-') !== false) {
+            [$firstName, $lastName] = explode('-', $userName);
+        } else {
+            $firstName = $userName;
+            $lastName = '';
+        }
+
+        // ✅ Sécurise et valide le sexe
+        $allowedSexes = ['Masculin', 'Féminin'];
+        $sexe = optional($user->client)->sexe;
+
+        if (!in_array($sexe, $allowedSexes)) {
+            $sexe = null; // ou 'Masculin' par défaut
+        }
+
+        $seller->first_name = $firstName;
+        $seller->last_name = $lastName;
+        $seller->sexe = $sexe;
+
+        $seller->save();
+
+        Social::create([
+            'seller_id' => $seller->id,
+            'facebook' => $validated['facebook'] ?? null,
+            'instagram' => $validated['instagram'] ?? null,
+            'tiktok' => $validated['tiktok'] ?? null,
+        ]);
+
+        return redirect()->route('seller.dashboard')->with('success', 'Vendeur créé avec succès!');
+    } catch (\Exception $e) {
+        Log::error('Erreur lors de la création du vendeur : ' . $e->getMessage());
+        return back()->withErrors(['error' => 'Une erreur s\'est produite. Veuillez réessayer plus tard.'])->withInput();
     }
+}
+
 
     public function profile()
     {

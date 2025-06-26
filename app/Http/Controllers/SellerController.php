@@ -23,7 +23,7 @@ $firstName = $nameParts[0] ?? '';
 $lastName = $nameParts[1] ?? '';            
 
 
-            $sexe = $user->client->sexe;
+$sexe = $user->client->sexe ?? null;
 
             return view('seller.sellers.create', compact('lastName', 'firstName', 'sexe'));
         } catch (\Exception $e) {

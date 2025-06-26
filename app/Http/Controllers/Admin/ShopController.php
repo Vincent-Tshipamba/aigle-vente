@@ -41,14 +41,25 @@ class ShopController extends Controller
         return response()->json($orders);
     }
 
-    public function changeShopStatus(Request $request)
-    {
-        $shop = Shop::find($request->shopId);
-        $isActive = $request->isActive == 'true' ? true : false;
-        $shop->is_active = $isActive;
-        $shop->save();
-        return response()->json(['message' => 'Status de la boutique mis à jour avec succès']);
+   public function changeShopStatus(Request $request)
+{
+    $shop = Shop::find($request->shopId);
+
+    if (!$shop) {
+        return response()->json(['message' => 'Boutique introuvable'], 404);
     }
+
+    // Mise à jour du statut de la boutique
+    $isActive = $request->isActive == 'true' ? true : false;
+    $shop->is_active = $isActive;
+    $shop->save();
+
+    // Mise à jour du statut des produits liés
+    $shop->products()->update(['is_active' => $isActive]);
+
+    return response()->json(['message' => 'Status de la boutique et des produits mis à jour avec succès']);
+}
+
 
     public function show(Shop $shop)
     {
